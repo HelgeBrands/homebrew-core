@@ -9,7 +9,7 @@ class Epicsbase < Formula
   depends_on "perl"
   depends_on "readline"
   stable do
-   patch :p0, <<-EOS.undent
+   patch :p0, <<~EOS.undent
     diff --git a/configure/os/CONFIG.darwinCommon.darwinCommon b/configure/os/CONFIG.darwinCommon.darwinCommon
     index 2c12b2fbb..5e39270cf 100644
     --- a/configure/os/CONFIG.darwinCommon.darwinCommon
