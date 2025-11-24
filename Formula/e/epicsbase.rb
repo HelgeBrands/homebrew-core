@@ -2,15 +2,15 @@ class Epicsbase < Formula
   desc "Experimental Physics and Industrial Control System"
   homepage "https://epics-controls.org/"
   url "https://github.com/epics-base/epics-base.git",
-  tag: "R7.0.9"
+  revision: "86154953f57b1796e7cb81bbc807eae120b9e840"
   license "EPICS"
+  depends_on "perl"
   depends_on "pkg-config" => :build
   depends_on "readline"
-  depends_on "perl"
   def install
     # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
     ENV["EPICS_HOST_ARCH"] = `./startup/EpicsHostArch`.strip
-    hostarch = `./startup/EpicsHostArch`.strip   
+    hostarch = `./startup/EpicsHostArch`.strip
     puts "EPICS_HOST_ARCH = #{hostarch}"
     ENV["EPICS_BASE"] = buildpath
     # Optional: Anpassung der Konfigurationsdateien
@@ -18,7 +18,7 @@ class Epicsbase < Formula
     system "make"
     # Installation: einfach alles kopieren
     prefix.install Dir["*"]
-    
+
     bin.install_symlink "#{prefix}/bin/#{hostarch}/caget" => "caget"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/caput" => "caput"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/catime" => "catime"
@@ -36,7 +36,7 @@ class Epicsbase < Formula
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softIocPVA"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
-   
+
   end
 
   def caveats
