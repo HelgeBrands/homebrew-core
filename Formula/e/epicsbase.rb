@@ -1,10 +1,10 @@
 class Epicsbase < Formula
-  desc		"Experimental Physics and Industrial Control System"
-  homepage	"https://epics-controls.org/"
-  url		"https://github.com/epics-base/epics-base.git",
-  tag:		"R7.0.9",
-  revision: 	"86154953f57b1796e7cb81bbc807eae120b9e840"
-  license	"EPICS"
+  desc "Experimental Physics and Industrial Control System"
+  homepage "https://epics-controls.org/"
+  url "https://github.com/epics-base/epics-base.git",
+     tag: "R7.0.9",
+     revision: "86154953f57b1796e7cb81bbc807eae120b9e840"
+  license "EPICS"
   depends_on "pkg-config" => :build
   depends_on "perl"
   depends_on "readline"
