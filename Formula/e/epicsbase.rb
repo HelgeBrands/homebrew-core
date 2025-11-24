@@ -1,0 +1,73 @@
+class Epicsbase < Formula
+  desc "EPICS Base - Experimental Physics and Industrial Control System"
+  homepage "https://epics-controls.org/"
+  url "https://github.com/epics-base/epics-base.git",
+  tag:      "R7.0.9"
+  license "EPICS"
+
+
+
+
+  depends_on "pkg-config" => :build
+  depends_on "readline"
+  depends_on "perl"
+
+  def install
+
+    # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
+    ENV["EPICS_HOST_ARCH"] = `./startup/EpicsHostArch`.strip
+    hostarch = `./startup/EpicsHostArch`.strip   
+ 
+    puts "EPICS_HOST_ARCH = #{hostarch}"
+
+    ENV["EPICS_BASE"] = buildpath
+
+    # Optional: Anpassung der Konfigurationsdateien
+    inreplace "configure/CONFIG_SITE", /#?INSTALL_LOCATION=.*/, "INSTALL_LOCATION=#{prefix}"
+    
+
+    system "make"
+
+    # Installation: einfach alles kopieren
+    prefix.install Dir["*"]
+    
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/caget" => "caget"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/caput" => "caput"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/catime" => "catime"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/cainfo" => "cainfo"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/caEventRate" => "caEventRate"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/camonitor" => "camonitor"
+
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvget" => "pvget"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvput" => "pvput"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvinfo" => "pvinfo"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvlist" => "pvlist"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvmonitor" => "pvmonitor"
+
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softIoc"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softIocPVA"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
+   
+  end
+
+  def caveats
+    <<~EOS
+      EPICS Base wurde installiert.
+
+      Um EPICS korrekt zu verwenden, füge dies zu deiner Shell-Konfiguration hinzu:
+
+        export EPICS_BASE=#{opt_prefix}
+        export EPICS_HOST_ARCH=$(#{opt_prefix}/startup/EpicsHostArch)
+
+    EOS
+  end
+
+  test do
+    # einfacher Test, ob z.B. caput installiert ist
+    assert_predicate bin/"caput", :exist?
+    assert_predicate bin/"caEventRate", :exist?
+    assert_predicate bin/"pvput", :exist?
+    assert_predicate bin/"softiocpva", :exist?
+  end
+end
