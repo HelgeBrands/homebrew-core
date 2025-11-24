@@ -1,33 +1,21 @@
 class Epicsbase < Formula
-  desc "EPICS Base - Experimental Physics and Industrial Control System"
+  desc "Experimental Physics and Industrial Control System"
   homepage "https://epics-controls.org/"
   url "https://github.com/epics-base/epics-base.git",
-  tag:      "R7.0.9"
+  tag: "R7.0.9"
   license "EPICS"
-
-
-
-
   depends_on "pkg-config" => :build
   depends_on "readline"
   depends_on "perl"
-
   def install
-
     # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
     ENV["EPICS_HOST_ARCH"] = `./startup/EpicsHostArch`.strip
     hostarch = `./startup/EpicsHostArch`.strip   
- 
     puts "EPICS_HOST_ARCH = #{hostarch}"
-
     ENV["EPICS_BASE"] = buildpath
-
     # Optional: Anpassung der Konfigurationsdateien
     inreplace "configure/CONFIG_SITE", /#?INSTALL_LOCATION=.*/, "INSTALL_LOCATION=#{prefix}"
-    
-
     system "make"
-
     # Installation: einfach alles kopieren
     prefix.install Dir["*"]
     
@@ -65,9 +53,9 @@ class Epicsbase < Formula
 
   test do
     # einfacher Test, ob z.B. caput installiert ist
-    assert_predicate bin/"caput", :exist?
-    assert_predicate bin/"caEventRate", :exist?
-    assert_predicate bin/"pvput", :exist?
-    assert_predicate bin/"softiocpva", :exist?
+    assert_path_exists "#{prefix}/bin/#{hostarch}/caput", :exist?
+    assert_path_exists "#{prefix}/bin/#{hostarch}/pvput", :exist?
+    assert_path_exists "#{prefix}/bin/#{hostarch}/softIoc", :exist?
+    assert_path_exists "#{prefix}/bin/#{hostarch}/softIocPVA", :exist?
   end
 end
