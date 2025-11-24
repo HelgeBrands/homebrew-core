@@ -1,12 +1,12 @@
 class Epicsbase < Formula
-  desc "Experimental Physics and Industrial Control System"
-  homepage "https://epics-controls.org/"
-  url "https://github.com/epics-base/epics-base.git",
-  tag: "R7.0.9",
-  revision: "86154953f57b1796e7cb81bbc807eae120b9e840"
-  license "EPICS"
-  depends_on "perl"
+  desc		"Experimental Physics and Industrial Control System"
+  homepage	"https://epics-controls.org/"
+  url		"https://github.com/epics-base/epics-base.git",
+  tag:		"R7.0.9",
+  revision: 	"86154953f57b1796e7cb81bbc807eae120b9e840"
+  license	"EPICS"
   depends_on "pkg-config" => :build
+  depends_on "perl"
   depends_on "readline"
   def install
     # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
@@ -37,7 +37,6 @@ class Epicsbase < Formula
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softIocPVA"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
-
   end
 
   def caveats
