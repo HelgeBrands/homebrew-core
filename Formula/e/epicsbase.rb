@@ -8,12 +8,9 @@ class Epicsbase < Formula
   depends_on "pkg-config" => :build
   depends_on "perl"
   depends_on "readline"
-  stable do
-    patch do
-      url "https://github.com/HelgeBrands/homebrew-core/raw/refs/heads/main/Patches/epicsbase/fix-build.diff"
-      sha256 ""
-    end
-
+  patch do
+    url "https://github.com/HelgeBrands/homebrew-core/raw/refs/heads/main/Patches/epicsbase/fix-build.diff"
+    sha256 "a8946e2221cf694943b18b89a789bfbbc27a887dc33962da1d91b24019f0179b"
   end
   def install
     # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
