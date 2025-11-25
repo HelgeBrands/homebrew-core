@@ -9,21 +9,11 @@ class Epicsbase < Formula
   depends_on "perl"
   depends_on "readline"
   stable do
-   patch :p0, <<~EOS
-    diff --git a/configure/os/CONFIG.darwinCommon.darwinCommon b/configure/os/CONFIG.darwinCommon.darwinCommon
-    index 2c12b2fbb..5e39270cf 100644
-    --- a/configure/os/CONFIG.darwinCommon.darwinCommon
-    +++ b/configure/os/CONFIG.darwinCommon.darwinCommon
-    @@ -60,7 +60,7 @@ GNU = NO
-    #
-    # Darwin shared libraries
-    #
-    -SHRLIB_LDFLAGS = -dynamiclib -flat_namespace \
-    +SHRLIB_LDFLAGS = -dynamiclib \
-       -install_name $(abspath $(INSTALL_LIB))/$@ \
-       $(addprefix -compatibility_version , $(SHRLIB_VERSION)) \
-       $(addprefix -current_version , $(SHRLIB_VERSION))
-   EOS
+    patch do
+      url "https://github.com/HelgeBrands/homebrew-core/raw/refs/heads/main/Patches/epicsbase/fix-build.diff"
+      sha256 ""
+    end
+
   end
   def install
     # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
