@@ -10,7 +10,7 @@ class Epicsbase < Formula
   depends_on "readline"
   patch do
     url "https://github.com/HelgeBrands/homebrew-core/raw/refs/heads/main/Patches/epicsbase/fix-build.diff"
-    sha256 "a8946e2221cf694943b18b89a789bfbbc27a887dc33962da1d91b24019f0179b"
+    sha256 "b988e750302893a206ed01e854dec0df04b4a23707a92bdc9f4096e0936c9b2d"
   end
   def install
     # EPICS erwartet, dass diese Umgebungsvariablen gesetzt sind
