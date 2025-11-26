@@ -128,7 +128,7 @@ class Caqtdm < Formula
       system ("echo #{commanddata} >> #{designer_path}")
       system ("echo 'export QT_PLUGIN_PATH=#{prefix}/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
       
-      calldesigner = "#{Formula["qttools"].opt_bin}/Designer"
+      calldesigner = "#{Formula["qttools"].libexec}/Designer.app/Contents/MacOS/Designer"
       system ("echo 'exec \"#{calldesigner}\" \"$@\"' >> #{designer_path}")
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
