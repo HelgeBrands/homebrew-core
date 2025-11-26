@@ -124,10 +124,10 @@ class Caqtdm < Formula
 
       designer_path = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer"
       system ("echo '#!/bin/bash' > #{designer_path}")
-      commanddata = "'export DYLD_LIBRARY_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/Frameworks '"
+      commanddata = "'export DYLD_LIBRARY_PATH=#{prefix}/caQtDM.app/Contents/Frameworks '"
       system ("echo #{commanddata} >> #{designer_path}")
-      system ("echo 'export QT_PLUGIN_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
-      system ("echo 'exec \"/opt/homebrew/Cellar/qttools/6.9.3/libexec/Designer.app/Contents/MacOS/Designer\" \"$@\"' >> #{designer_path}")
+      system ("echo 'export QT_PLUGIN_PATH=#{prefix}/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
+      system ("echo 'exec \"designer\" \"$@\"' >> #{designer_path}")
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
