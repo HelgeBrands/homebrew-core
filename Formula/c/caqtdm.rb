@@ -122,10 +122,12 @@ class Caqtdm < Formula
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
 
-      system ("echo '#!/bin/bash' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-      system ("echo 'export DYLD_LIBRARY_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/Frameworks ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-      system ("echo 'export QT_PLUGIN_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/PlugIns ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-      system ("echo 'exec \"/opt/homebrew/Cellar/qttools/6.9.3/libexec/Designer.app/Contents/MacOS/Designer\" \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      designer_path = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer"
+      system ("echo '#!/bin/bash' > #{designer_path}")
+      commanddata = "'export DYLD_LIBRARY_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/Frameworks '"
+      system ("echo #{commanddata} >> #{designer_path}")
+      system ("echo 'export QT_PLUGIN_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
+      system ("echo 'exec \"/opt/homebrew/Cellar/qttools/6.9.3/libexec/Designer.app/Contents/MacOS/Designer\" \"$@\"' >> #{designer_path}")
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
