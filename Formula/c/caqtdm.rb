@@ -1,20 +1,20 @@
 class Caqtdm < Formula
-  desc "caQtDM offers a collection of special widgets in order to display and control control system data in various ways"
+  desc "Channel Access Qt Display Manager"
   homepage "https://github.com/caqtdm/caqtdm"
   url "https://github.com/caqtdm/caqtdm/archive/refs/tags/V4.5.0.tar.gz"
   sha256 "153a3d7355a6f6412343b0e2cb876a3dafee06c97e3f1fdcb849320134ee6d1e"
-
-  head "https://github.com/caqtdm/caqtdm.git" , branch: "Development"
-
   license "GPLv3"
-
-  depends_on "qt"
+  head "https://github.com/caqtdm/caqtdm.git", branch: "Development"
+  
   depends_on "qtbase"  => :build
+  depends_on "qt"
+  depends_on "qtimageformats"
+  depends_on "qtnetworkauth"
   depends_on "qt5compat"
   depends_on "qtpositioning"
   depends_on "qtserialbus"
-  depends_on "qtimageformats"
-  depends_on "qtnetworkauth"
+  
+  
   depends_on "qwt"
   depends_on "epicsbase"
 
@@ -32,16 +32,16 @@ class Caqtdm < Formula
     ENV["CAQTDM_GPS"] = "1"
     ENV["PRODUCT_BUNDLE_IDENTIFIER"] = "ch.psi.caqtdm"
     ENV["QTDIR"] = Formula["qt"].opt_prefix
-    ENV["QTHOME"] = Formula["qt"].opt_prefix	
+    ENV["QTHOME"] = Formula["qt"].opt_prefix
     ENV["QWTHOME"] = Formula["qwt"].opt_prefix
     ENV["CAQTDM_COLLECT"] = "#{prefix}"
     ENV["QTCONTROLS_LIBS"] = "#{prefix}"
     ENV["QWTVERSION"] = "6.1"
     ENV["QWTLIBNAME"] = "qwt"
     ENV["QWTLIB"] = Formula["qwt"].opt_prefix
-    ENV["QWTLIB"] += "/lib" 
-    ENV["QWTINCLUDE"] = Formula["qwt"].opt_prefix 
-    ENV["QWTINCLUDE"] += "/lib/qwt.framework/Headers" 
+    ENV["QWTLIB"] += "/lib"
+    ENV["QWTINCLUDE"] = Formula["qwt"].opt_prefix
+    ENV["QWTINCLUDE"] += "/lib/qwt.framework/Headers"
     
     puts ">> Detected QWTLIB: #{ENV["QWTLIB"]}"
     puts ">> Detected QWTINCLUDE: #{ENV["QWTINCLUDE"]}"
