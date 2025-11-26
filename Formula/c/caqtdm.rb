@@ -62,11 +62,15 @@ class Caqtdm < Formula
      plugins =  "#{prefix}/caQtDM.app/Contents/PlugIns/controlsystems"
      design =  "#{prefix}/caQtDM.app/Contents/PlugIns/designer"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", app_bin
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", app_bin
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+            "@rpath/libcaQtDM_Lib.dylib", app_bin
+     system "install_name_tool", "-change", "libqtcontrols.dylib",
+            "@rpath/libqtcontrols.dylib", app_bin
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics3_plugin.dylib"
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics4_plugin.dylib"
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics3_plugin.dylib"
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics4_plugin.dylib"
 
      
      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
@@ -78,15 +82,21 @@ class Caqtdm < Formula
      system "install_name_tool", "-change", "libqtcontrols.dylib", 
             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"      
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libdemo_plugin.dylib"
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
+            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libdemo_plugin.dylib"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libenvironment_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", "#{plugins}/libenvironment_plugin.dylib"
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libenvironment_plugin.dylib"
+     system "install_name_tool", "-change", "libqtcontrols.dylib",
+            "@rpath/libqtcontrols.dylib", "#{plugins}/libenvironment_plugin.dylib"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libmodbus_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", "#{plugins}/libmodbus_plugin.dylib"
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
+            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libmodbus_plugin.dylib"
+     system "install_name_tool", "-change", "libqtcontrols.dylib",
+            "@rpath/libqtcontrols.dylib", "#{plugins}/libmodbus_plugin.dylib"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libgps_plugin.dylib"
+     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
+            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libgps_plugin.dylib"
 
      system "install_name_tool", "-change", "@loader_path/libqtcontrols.dylib", 
             "#{frameworks}/libqtcontrols.dylib" , "#{frameworks}/libcaQtDM_Lib.dylib"
@@ -96,23 +106,18 @@ class Caqtdm < Formula
      system "install_name_tool", "-change", "@loader_path/libedlParser.dylib", 
             "#{frameworks}/libedlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
 
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_controllers_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_graphics_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_monitors_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_utilities_plugin.dylib"
-
-     
-     
-     # system ("echo '[PATH]' > #{prefix}/caQtDM.app/Contents/Resources/qt.conf")
-     # system ("echo 'Prefix=#{prefix}/caQtDM.app/Contents' >> #{prefix}/caQtDM.app/Contents/Resources/qt.conf")
-     # system ("echo 'Plugins=#{prefix}/caQtDM.app/Contents/PlugIns' >> #{prefix}/caQtDM.app/Contents/Resources/qt.conf")
-     # system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/qt.conf")
+     system "install_name_tool", "-change", "libqtcontrols.dylib", 
+            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_controllers_plugin.dylib"
+     system "install_name_tool", "-change", "libqtcontrols.dylib", 
+            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_graphics_plugin.dylib"
+     system "install_name_tool", "-change", "libqtcontrols.dylib", 
+            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_monitors_plugin.dylib"
+     system "install_name_tool", "-change", "libqtcontrols.dylib", 
+            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_utilities_plugin.dylib"
 
      system ("defaults write #{prefix}/caQtDM.app/Contents/Info LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")     
      system ("defaults write #{prefix}/caQtDM.app/Contents/Info CFBundleIdentifier -string ch.psi.caQtDM")     
 
-
-     # bin.install_symlink prefix/"caQtDM.app/Contents/MacOS/caQtDM" => "caqtdm"
      system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
      system ("echo 'open -n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
      system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
@@ -125,23 +130,14 @@ class Caqtdm < Formula
      system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
      system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
-
-
      bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm" => "caqtdm"
      bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
      bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
-
-     
-
-
     end
-
-
-
   end
 
   test do
     # Optional: Ein einfacher Test, ob das Binary da ist
-    assert_predicate bin/"caQtDM.app", :exist?
+    assert_path_exists bin/"caQtDM.app", :exist?
   end
 end
