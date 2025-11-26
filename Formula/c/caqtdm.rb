@@ -131,7 +131,12 @@ class Caqtdm < Formula
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
+
+      lib.install_symlink prefix/"caQtDM.app/Contents/libqtcontrols.dylib"=> "libqtcontrols.dylib"
+      lib.install_symlink prefix/"caQtDM.app/Contents/libcaQtDM_Lib.dylib"=> "libcaQtDM_Lib.dylib"
+
       bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm" => "caqtdm"
+      bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm_designer" => "caqtdm_designer"
       bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
       bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
     end
