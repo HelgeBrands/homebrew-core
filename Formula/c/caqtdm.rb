@@ -7,14 +7,13 @@ class Caqtdm < Formula
   head "https://github.com/caqtdm/caqtdm.git", branch: "Development"
 
   depends_on "qtbase"  => :build
+  depends_on "epicsbase" 
   depends_on "qt"
+  depends_on "qt5compat"
   depends_on "qtimageformats"
-  depends_on "qt5compat" 
   depends_on "qtnetworkauth"
   depends_on "qtpositioning"
   depends_on "qtserialbus"
-
-  depends_on "epicsbase"  
   depends_on "qwt"
 
 
@@ -53,86 +52,86 @@ class Caqtdm < Formula
     compiler = ENV.compiler.to_s.match?("clang") ? "clang" : "g++"
 
     #system "qmake", "PREFIX=#{prefix} release -spec #{os}-#{compiler}"
-    system Formula["qtbase"].bin/"qmake", "all.pro"
+    system Formula["qtbase"].bin/"qmake", "all.pro", "PREFIX=#{prefix} release -spec #{os}-#{compiler}"
     system "make"
     system "make", "install"
-    on_macos do
-     app_bin = "#{prefix}/caQtDM.app/Contents/MacOS/caQtDM"
-     frameworks = "#{prefix}/caQtDM.app/Contents/Frameworks"
-     plugins =  "#{prefix}/caQtDM.app/Contents/PlugIns/controlsystems"
-     design =  "#{prefix}/caQtDM.app/Contents/PlugIns/designer"
+    if OS.mac?
+      app_bin = "#{prefix}/caQtDM.app/Contents/MacOS/caQtDM"
+      frameworks = "#{prefix}/caQtDM.app/Contents/Frameworks"
+      plugins =  "#{prefix}/caQtDM.app/Contents/PlugIns/controlsystems"
+      design =  "#{prefix}/caQtDM.app/Contents/PlugIns/designer"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-            "@rpath/libcaQtDM_Lib.dylib", app_bin
-     system "install_name_tool", "-change", "libqtcontrols.dylib",
-            "@rpath/libqtcontrols.dylib", app_bin
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", app_bin
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", app_bin
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics3_plugin.dylib"
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics4_plugin.dylib"
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics3_plugin.dylib"
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics4_plugin.dylib"
 
      
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveSF_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", 
-            "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveSF_plugin.dylib"      
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", 
-            "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"      
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveSF_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveSF_plugin.dylib"      
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"      
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libdemo_plugin.dylib"
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libdemo_plugin.dylib"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libenvironment_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib",
-            "@rpath/libqtcontrols.dylib", "#{plugins}/libenvironment_plugin.dylib"
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libenvironment_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{plugins}/libenvironment_plugin.dylib"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libmodbus_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib",
-            "@rpath/libqtcontrols.dylib", "#{plugins}/libmodbus_plugin.dylib"
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libmodbus_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{plugins}/libmodbus_plugin.dylib"
 
-     system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
-            "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libgps_plugin.dylib"
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
+             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libgps_plugin.dylib"
 
-     system "install_name_tool", "-change", "@loader_path/libqtcontrols.dylib", 
-            "#{frameworks}/libqtcontrols.dylib" , "#{frameworks}/libcaQtDM_Lib.dylib"
+      system "install_name_tool", "-change", "@loader_path/libqtcontrols.dylib",
+             "#{frameworks}/libqtcontrols.dylib" , "#{frameworks}/libcaQtDM_Lib.dylib"
 
-     system "install_name_tool", "-change", "@loader_path/libadlParser.dylib", 
-            "#{frameworks}/libadlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
-     system "install_name_tool", "-change", "@loader_path/libedlParser.dylib", 
-            "#{frameworks}/libedlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
+      system "install_name_tool", "-change", "@loader_path/libadlParser.dylib",
+             "#{frameworks}/libadlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
+      system "install_name_tool", "-change", "@loader_path/libedlParser.dylib",
+             "#{frameworks}/libedlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
 
-     system "install_name_tool", "-change", "libqtcontrols.dylib", 
-            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_controllers_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", 
-            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_graphics_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", 
-            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_monitors_plugin.dylib"
-     system "install_name_tool", "-change", "libqtcontrols.dylib", 
-            "@rpath/libqtcontrols.dylib" , "#{design}/libqtcontrols_utilities_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_controllers_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_graphics_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_monitors_plugin.dylib"
+      system "install_name_tool", "-change", "libqtcontrols.dylib",
+             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_utilities_plugin.dylib"
 
-     system ("defaults write #{prefix}/caQtDM.app/Contents/Info LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")     
-     system ("defaults write #{prefix}/caQtDM.app/Contents/Info CFBundleIdentifier -string ch.psi.caQtDM")     
+      system ("defaults write #{prefix}/caQtDM.app/Contents/Info LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")
+      system ("defaults write #{prefix}/caQtDM.app/Contents/Info CFBundleIdentifier -string ch.psi.caQtDM")
 
-     system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
-     system ("echo 'open -n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
-     system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
-     system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
+      system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
+      system ("echo 'open -n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
+      system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
+      system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
 
-     system ("echo '#!/bin/bash' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-     system ("echo 'export DYLD_LIBRARY_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/Frameworks ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-     system ("echo 'export QT_PLUGIN_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/PlugIns ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-     system ("echo 'exec \"/opt/homebrew/Cellar/qttools/6.9.3/libexec/Designer.app/Contents/MacOS/Designer\" \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-     system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-     system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("echo '#!/bin/bash' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("echo 'export DYLD_LIBRARY_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/Frameworks ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("echo 'export QT_PLUGIN_PATH=/opt/homebrew/Cellar/caqtdm/HEAD-829c0d4/caQtDM.app/Contents/PlugIns ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("echo 'exec \"/opt/homebrew/Cellar/qttools/6.9.3/libexec/Designer.app/Contents/MacOS/Designer\" \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
-     bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm" => "caqtdm"
-     bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
-     bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
+      bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm" => "caqtdm"
+      bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
+      bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
     end
   end
 
