@@ -75,11 +75,11 @@ class Caqtdm < Formula
       system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
              "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveSF_plugin.dylib"
       system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveSF_plugin.dylib"      
+             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveSF_plugin.dylib"
       system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
              "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"
       system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"      
+             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"
 
       system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
              "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libdemo_plugin.dylib"
@@ -94,16 +94,16 @@ class Caqtdm < Formula
       system "install_name_tool", "-change", "libqtcontrols.dylib",
              "@rpath/libqtcontrols.dylib", "#{plugins}/libmodbus_plugin.dylib"
 
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib", 
+      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
              "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libgps_plugin.dylib"
 
       system "install_name_tool", "-change", "@loader_path/libqtcontrols.dylib",
-             "#{frameworks}/libqtcontrols.dylib" , "#{frameworks}/libcaQtDM_Lib.dylib"
+             "#{frameworks}/libqtcontrols.dylib", "#{frameworks}/libcaQtDM_Lib.dylib"
 
       system "install_name_tool", "-change", "@loader_path/libadlParser.dylib",
              "#{frameworks}/libadlParser.dylib" , "#{frameworks}/libqtcontrols.dylib"
       system "install_name_tool", "-change", "@loader_path/libedlParser.dylib",
-             "#{frameworks}/libedlParser.dylib" , "#{frameworks}/libqtcontrols.dylib"
+             "#{frameworks}/libedlParser.dylib", "#{frameworks}/libqtcontrols.dylib"
 
       system "install_name_tool", "-change", "libqtcontrols.dylib",
              "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_controllers_plugin.dylib"
@@ -114,8 +114,9 @@ class Caqtdm < Formula
       system "install_name_tool", "-change", "libqtcontrols.dylib",
              "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_utilities_plugin.dylib"
 
-      system ("defaults write #{prefix}/caQtDM.app/Contents/Info LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")
-      system ("defaults write #{prefix}/caQtDM.app/Contents/Info CFBundleIdentifier -string ch.psi.caQtDM")
+      write_default="defaults write #{prefix}/caQtDM.app/Contents/Info"
+      system ("#{write_default} LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")
+      system ("#{write_default} CFBundleIdentifier -string ch.psi.caQtDM")
 
       system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
 
