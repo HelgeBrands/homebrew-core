@@ -101,9 +101,9 @@ class Caqtdm < Formula
              "#{frameworks}/libqtcontrols.dylib" , "#{frameworks}/libcaQtDM_Lib.dylib"
 
       system "install_name_tool", "-change", "@loader_path/libadlParser.dylib",
-             "#{frameworks}/libadlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
+             "#{frameworks}/libadlParser.dylib" , "#{frameworks}/libqtcontrols.dylib"
       system "install_name_tool", "-change", "@loader_path/libedlParser.dylib",
-             "#{frameworks}/libedlParser.dylib" , "#{frameworks}/libqtcontrols.dylib" 
+             "#{frameworks}/libedlParser.dylib" , "#{frameworks}/libqtcontrols.dylib"
 
       system "install_name_tool", "-change", "libqtcontrols.dylib",
              "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_controllers_plugin.dylib"
@@ -118,21 +118,22 @@ class Caqtdm < Formula
       system ("defaults write #{prefix}/caQtDM.app/Contents/Info CFBundleIdentifier -string ch.psi.caQtDM")
 
       system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
-      system ("echo 'open -n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args \"$@\"' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
-      system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
-      system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
+
+      caqtdm_resource = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm"
+      system ("echo 'open -n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args \"$@\"' >> #{caqtdm_resource}")
+      system ("echo ' ' >> #{caqtdm_resource}")
+      system ("chmod 755 #{caqtdm_resource}")
 
       designer_path = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer"
       system ("echo '#!/bin/bash' > #{designer_path}")
       commanddata = "'export DYLD_LIBRARY_PATH=#{prefix}/caQtDM.app/Contents/Frameworks '"
       system ("echo #{commanddata} >> #{designer_path}")
       system ("echo 'export QT_PLUGIN_PATH=#{prefix}/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
-      
+
       calldesigner = "#{Formula["qttools"].libexec}/Designer.app/Contents/MacOS/Designer"
       system ("echo 'exec \"#{calldesigner}\" \"$@\"' >> #{designer_path}")
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-
 
       lib.install_symlink prefix/"caQtDM.app/Contents/libqtcontrols.dylib"=> "libqtcontrols.dylib"
       lib.install_symlink prefix/"caQtDM.app/Contents/libcaQtDM_Lib.dylib"=> "libcaQtDM_Lib.dylib"
