@@ -120,7 +120,8 @@ class Caqtdm < Formula
       system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
 
       caqtdm_resource = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm"
-      system ("echo 'open -n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args \"$@\"' >> #{caqtdm_resource}")
+      stdout_caqtdm = "-n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args "
+      system ("echo 'open #{stdout_caqtdm} \"$@\"' >> #{caqtdm_resource}")
       system ("echo ' ' >> #{caqtdm_resource}")
       system ("chmod 755 #{caqtdm_resource}")
 
