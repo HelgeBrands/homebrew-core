@@ -16,8 +16,10 @@ class Caqtdm < Formula
   depends_on "qtserialbus"
   depends_on "qwt"
 
+  
 
   def install
+    require "macho"
 
     ENV["QTDIR"] = Formula["qt"].opt_prefix
     ENV.append_path "PATH", Formula["qt"].opt_bin
@@ -57,62 +59,71 @@ class Caqtdm < Formula
     system "make", "install"
     if OS.mac?
       app_bin = "#{prefix}/caQtDM.app/Contents/MacOS/caQtDM"
+
       frameworks = "#{prefix}/caQtDM.app/Contents/Frameworks"
       plugins =  "#{prefix}/caQtDM.app/Contents/PlugIns/controlsystems"
       design =  "#{prefix}/caQtDM.app/Contents/PlugIns/designer"
+ 
+      lib_caQtDM_Lib = "#{frameworks}/libcaQtDM_Lib.dylib"
+      lib_qtcontrols = "#{frameworks}/libqtcontrols.dylib"
 
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", app_bin
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", app_bin
+      plugin_epics3 = "#{plugins}/libepics3_plugin.dylib"
+      plugin_epics4 = "#{plugins}/libepics4_plugin.dylib"
+      plugin_sf = "#{plugins}/libarchiveSF_plugin.dylib"
+      plugin_http = "#{plugins}/libarchiveHTTP_plugin.dylib"
+      plugin_demo = "#{plugins}/libdemo_plugin.dylib"
+      plugin_env = "#{plugins}/libenvironment_plugin.dylib"
+      plugin_gps =  "#{plugins}/libgps_plugin.dylib"
+      plugin_modbus = "#{plugins}/libmodbus_plugin.dylib"
+      
+      MachO::Tools.change_install_name(app_bin, "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+      MachO::Tools.change_install_name(app_bin, "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+ 
+      MachO::Tools.change_install_name(plugin_epics3,
+                                       "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+      MachO::Tools.change_install_name(plugin_epics4,
+                                       "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+#
+      MachO::Tools.change_install_name(plugin_sf,
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name(plugin_sf,
+                                       "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+                                       
+      MachO::Tools.change_install_name(plugin_http,
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name(plugin_http,
+                                       "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
 
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics3_plugin.dylib"
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libepics4_plugin.dylib"
+      MachO::Tools.change_install_name(plugin_demo,
+                                       "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+      MachO::Tools.change_install_name(plugin_modbus,
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name(plugin_modbus,
+                                       "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
 
-     
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveSF_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveSF_plugin.dylib"
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{plugins}/libarchiveHTTP_plugin.dylib"
+                                       
+                                       
+      MachO::Tools.change_install_name(plugin_env,
+                                 "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name(plugin_env,
+                                 "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+      
+      MachO::Tools.change_install_name(plugin_gps,
+                                 "libcaQtDM_Lib.dylib", "@rpath/libcaQtDM_Lib.dylib", strict: false) do end
+      
+      MachO::Tools.change_install_name(lib_qtcontrols,
+                                       "libadlParser.dylib", "#{frameworks}/libadlParser.dylib", strict: false) do end
+      MachO::Tools.change_install_name(lib_qtcontrols,
+                                       "libedlParser.dylib", "#{frameworks}/libedlParser.dylib", strict: false) do end
 
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libdemo_plugin.dylib"
-
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libenvironment_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{plugins}/libenvironment_plugin.dylib"
-
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libmodbus_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{plugins}/libmodbus_plugin.dylib"
-
-      system "install_name_tool", "-change", "libcaQtDM_Lib.dylib",
-             "@rpath/libcaQtDM_Lib.dylib", "#{plugins}/libgps_plugin.dylib"
-
-      system "install_name_tool", "-change", "@loader_path/libqtcontrols.dylib",
-             "#{frameworks}/libqtcontrols.dylib", "#{frameworks}/libcaQtDM_Lib.dylib"
-
-      system "install_name_tool", "-change", "@loader_path/libadlParser.dylib",
-             "#{frameworks}/libadlParser.dylib" , "#{frameworks}/libqtcontrols.dylib"
-      system "install_name_tool", "-change", "@loader_path/libedlParser.dylib",
-             "#{frameworks}/libedlParser.dylib", "#{frameworks}/libqtcontrols.dylib"
-
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_controllers_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_graphics_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_monitors_plugin.dylib"
-      system "install_name_tool", "-change", "libqtcontrols.dylib",
-             "@rpath/libqtcontrols.dylib", "#{design}/libqtcontrols_utilities_plugin.dylib"
+      MachO::Tools.change_install_name("#{design}/libqtcontrols_controllers_plugin.dylib",
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name("#{design}/libqtcontrols_graphics_plugin.dylib",
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name("#{design}/libqtcontrols_monitors_plugin.dylib",
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
+      MachO::Tools.change_install_name( "#{design}/libqtcontrols_utilities_plugin.dylib",
+                                       "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false) do end
 
       write_default="defaults write #{prefix}/caQtDM.app/Contents/Info"
       system ("#{write_default} LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")
@@ -137,6 +148,8 @@ class Caqtdm < Formula
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
+      system "codesign", "--force", "--sign", "-", app_bin
+      
       lib.install_symlink prefix/"caQtDM.app/Contents/libqtcontrols.dylib"=> "libqtcontrols.dylib"
       lib.install_symlink prefix/"caQtDM.app/Contents/libcaQtDM_Lib.dylib"=> "libcaQtDM_Lib.dylib"
 
