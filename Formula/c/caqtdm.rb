@@ -148,7 +148,7 @@ class Caqtdm < Formula
       system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
       system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
-      system "codesign", "--force", "--sign", "-", "-vvv", "--deep" app_bin
+      system "codesign", "--force", "--sign", "-", "-vvv", "--deep", app_bin
       
       lib.install_symlink prefix/"caQtDM.app/Contents/libqtcontrols.dylib"=> "libqtcontrols.dylib"
       lib.install_symlink prefix/"caQtDM.app/Contents/libcaQtDM_Lib.dylib"=> "libcaQtDM_Lib.dylib"
