@@ -15,7 +15,7 @@ class Caqtdm < Formula
   depends_on "qtpositioning"
   depends_on "qtserialbus"
   depends_on "qwt"
-
+  depends_on "python"
   
 
   def install
@@ -43,10 +43,26 @@ class Caqtdm < Formula
     ENV["QWTLIB"] += "/lib"
     ENV["QWTINCLUDE"] = Formula["qwt"].opt_prefix
     ENV["QWTINCLUDE"] += "/lib/qwt.framework/Headers"
-
+    
+    ENV["PYTHONVERSION"] = Formula["python"].version.major.to_s
+    ENV["PYTHONVERSION"] += "."
+    ENV["PYTHONVERSION"] += Formula["python"].version.minor.to_s
+    ENV["PYTHONLIB"] = Formula["python"].opt_prefix
+    ENV["PYTHONLIB"] += "/Frameworks/Python.framework/Versions/"
+    ENV["PYTHONLIB"] += "#{ENV["PYTHONVERSION"]}"
+    ENV["PYTHONLIB"] += "/lib/"
+    ENV["PYTHONINCLUDE"] = Formula["python"].opt_prefix
+    ENV["PYTHONINCLUDE"] += "/Frameworks/Python.framework/Versions/"
+    ENV["PYTHONINCLUDE"] += "#{ENV["PYTHONVERSION"]}"
+    ENV["PYTHONINCLUDE"] += "/include"
+    
     puts ">> Detected QWTLIB: #{ENV["QWTLIB"]}"
     puts ">> Detected QWTINCLUDE: #{ENV["QWTINCLUDE"]}"
     puts ">> Detected qwt: #{Formula["qwt"].opt_prefix}"
+    
+    puts ">> Detected PYTHONVERSION: #{ENV["PYTHONVERSION"]} "
+    puts ">> Detected PYTHONLIB: #{ENV["PYTHONLIB"]} "
+    puts ">> Detected PYTHONINCLUDE: #{ENV["PYTHONINCLUDE"]} "
 
     ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
 
