@@ -54,7 +54,8 @@ class Caqtdm < Formula
     ENV["PYTHONINCLUDE"] = Formula["python"].opt_prefix
     ENV["PYTHONINCLUDE"] += "/Frameworks/Python.framework/Versions/"
     ENV["PYTHONINCLUDE"] += "#{ENV["PYTHONVERSION"]}"
-    ENV["PYTHONINCLUDE"] += "/include"
+    ENV["PYTHONINCLUDE"] += "/include/python"
+    ENV["PYTHONINCLUDE"] += "#{ENV["PYTHONVERSION"]}"
     
     puts ">> Detected QWTLIB: #{ENV["QWTLIB"]}"
     puts ">> Detected QWTINCLUDE: #{ENV["QWTINCLUDE"]}"
