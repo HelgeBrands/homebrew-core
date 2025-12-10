@@ -1,8 +1,8 @@
 class BalenaCli < Formula
   desc "Command-line tool for interacting with the balenaCloud and balena API"
   homepage "https://docs.balena.io/reference/balena-cli/latest/"
-  url "https://registry.npmjs.org/balena-cli/-/balena-cli-23.2.0.tgz"
-  sha256 "ce0c0207d1465eb0e38f6583940c002d1d2caa565f7b8f5bafa321a192eff6fe"
+  url "https://registry.npmjs.org/balena-cli/-/balena-cli-23.2.8.tgz"
+  sha256 "7d0e6b7209cb0c88754df397c14fa9e7e742687fcb7ed406c6c7710a278a6862"
   license "Apache-2.0"
 
   livecheck do
@@ -13,12 +13,12 @@ class BalenaCli < Formula
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "ed6fefe866cca01db8fa2235d9c9ced076e9b3562455010ce6d20e772a8edb96"
-    sha256                               arm64_sequoia: "c9c51f2aa5c103699b8b0c35fe06bd2faa3ebef73f5e5527c6f7a7c997b7f921"
-    sha256                               arm64_sonoma:  "cd94940edb7392900cbe021e364ce7d3551be1b34d97f8f9793ee583fabc168a"
-    sha256                               sonoma:        "00c8de91e076ab1f3c0bfc98fe1c0983684a713bed31401c9c3e5c22831fca19"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ef6fbb6999117953434740f3768651be2ded8527eb474d7cf88db38f82db328d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e8d74ae2df0180da16578b4917ff80371960e934a15edfb0f3737dac359fcf54"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2d5d6aefbff0f0394a5cde3c3afee72acf4dfcc43242c2beda7cebc830915e4d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fc110aa9b8ced9530ad882f74fe4508c9e47ff5d7979f3ef93365ea34bd58635"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "fc110aa9b8ced9530ad882f74fe4508c9e47ff5d7979f3ef93365ea34bd58635"
+    sha256 cellar: :any_skip_relocation, sonoma:        "199c5a9bd3adf736e543d1a3c0c3739306287066216ff73b97a9e03c69e2d77b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "32f82db8b43cdd18b679b6560638a95842afbb766b5d0c9d9f7c1222ccb3e04f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a4e6029d29f07a12b16e5ae686d3b1c07784b434612366603c6888a3dd652992"
   end
 
   # align with upstream, https://github.com/balena-io/balena-cli/blob/master/.github/actions/publish/action.yml#L21
@@ -49,7 +49,6 @@ class BalenaCli < Formula
                   end
                 end
 
-    rm_r(node_modules/"lzma-native/build")
     rm_r(node_modules/"usb") if OS.linux?
 
     # Replace universal binaries with native slices

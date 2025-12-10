@@ -1,18 +1,18 @@
 class Dagu < Formula
   desc "Lightweight and powerful workflow engine"
   homepage "https://dagu.cloud"
-  url "https://github.com/dagu-org/dagu/archive/refs/tags/v1.24.8.tar.gz"
-  sha256 "30a25a4743a4cb828327e6deec4420071bece1ff7e8302563901bdb4c7e00eef"
+  url "https://github.com/dagu-org/dagu/archive/refs/tags/v1.25.1.tar.gz"
+  sha256 "138a8407d3bddb8fb4411aa46ff883da1ccbf3ef1fb2feb1bb1cfae271fd5799"
   license "GPL-3.0-only"
   head "https://github.com/dagu-org/dagu.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bde9c99da6bab04d72cafa668a7c5a6de917a8dbf0a56e4aae617fb6bb23ddaf"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2ac42c3f75cebecb30c2c4433cc213d1efb6a9e2696e1b7f63b7e0d35e9f7b92"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "49a57f6fdf8fe26fee5380932d1101a3e86837d2f816acefbdcc8c60d300729b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "af877698494455dab442127bee90af7076a388debe95d7682bf38e28505afe2c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7afbcf9fc526bdd4c88536d76d52a539f6321e7f7d1514145262801b5e9d1e92"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f1eeb2e5a9caabce64423b4e344b563e28c4bf42aa0dcd87d5fc61b722e3f6df"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c4945c4c6786200716e24f4d6bdf22514bbc41a2e6b52d196b08d800d766bd78"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7b64dd601ae3aaf1050bde211abf20da9288350ce0f13d84033e45ede76b9c43"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "30dc0ad0efc2ff3389f344ea0ca48b6177f25b53f54addab5aed406e49237f3a"
+    sha256 cellar: :any_skip_relocation, sonoma:        "01e0ded2ea8bb9f69f7d2f55c3cc2726c4e3ec7eaaf2072e4edc24e7fd42e4af"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "66f30ef6f7457575fe991acb166be23215384f16d07726a9995efdfed4748b33"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "95adfef7905bc3c67c34a9d43b9765dcb856a57f508aa4c927173da478f3e34e"
   end
 
   depends_on "go" => :build

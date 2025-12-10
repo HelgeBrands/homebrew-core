@@ -3,19 +3,18 @@ class SphinxDoc < Formula
 
   desc "Tool to create intelligent and beautiful documentation"
   homepage "https://www.sphinx-doc.org/"
-  url "https://files.pythonhosted.org/packages/38/ad/4360e50ed56cb483667b8e6dadf2d3fda62359593faabbe749a27c4eaca6/sphinx-8.2.3.tar.gz"
-  sha256 "398ad29dee7f63a75888314e9424d40f52ce5a6a87ae88e7071e80af296ec348"
+  url "https://files.pythonhosted.org/packages/42/50/a8c6ccc36d5eacdfd7913ddccd15a9cee03ecafc5ee2bc40e1f168d85022/sphinx-9.0.4.tar.gz"
+  sha256 "594ef59d042972abbc581d8baa577404abe4e6c3b04ef61bd7fc2acbd51f3fa3"
   license "BSD-2-Clause"
-  revision 3
+  revision 1
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4524efce03eab7048486ee1b3593ec0bb9d2f13a4c60ab7e502ea6fa70be12da"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "176bb0d81624eb2442006571f5725b44726a78d7b3441cf242cfb2d42ec9dcbd"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "104cf1bbfb9b6faa7e6ca209086daf3fd6ba4531f3a1d9ed2dc5a5af56cc698e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4e4525cae3d7223204f9dde2a2c92a063c5bd47ca775f0081a073157a6a03d7e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "685e7018008efa394609b9e59b51056a3c6055420e4e39f8a0d0544c88330e96"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9674f74c1b2c831f5d2ddaa2544eb4c1fd5867d010ee0a7e614101e399ab578f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d9410b6ecc454ddaee91602e86a5a8e340e90b0ca38830ce76b6414065a9fb28"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fffe5188d30ce3d3c07e3711b04f51951916c5bba17acd9df2ffcf33f4fd1f42"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "794e49527973898c2ad00454dd57d527b11da70c21693b2ef7e1b2eba94025b9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "aaeffb85d441d9a563135865fc216245d019014e68f1e802750a616dfb7c32e9"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "266c7081100b172351d3baf0ac441d68ab90e3d1ee15924bca0b8afd8e196870"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b83208d90115a22ec19013070451d3ade6c7a695c8f0c7c9dc559b09a71eddc9"
   end
 
   depends_on "certifi"
@@ -35,18 +34,18 @@ class SphinxDoc < Formula
   end
 
   resource "charset-normalizer" do
-    url "https://files.pythonhosted.org/packages/83/2d/5fd176ceb9b2fc619e63405525573493ca23441330fcdaee6bef9460e924/charset_normalizer-3.4.3.tar.gz"
-    sha256 "6fce4b8500244f6fcb71465d4a4930d132ba9ab8e71a7859e6a5d59851068d14"
+    url "https://files.pythonhosted.org/packages/13/69/33ddede1939fdd074bce5434295f38fae7136463422fe4fd3e0e89b98062/charset_normalizer-3.4.4.tar.gz"
+    sha256 "94537985111c35f28720e43603b8e7b43a6ecfb2ce1d3058bbe955b73404e21a"
   end
 
   resource "docutils" do
-    url "https://files.pythonhosted.org/packages/ae/ed/aefcc8cd0ba62a0560c3c18c33925362d46c6075480bfa4df87b28e169a9/docutils-0.21.2.tar.gz"
-    sha256 "3a6b18732edf182daa3cd12775bbb338cf5691468f91eeeb109deff6ebfa986f"
+    url "https://files.pythonhosted.org/packages/d9/02/111134bfeb6e6c7ac4c74594e39a59f6c0195dc4846afbeac3cba60f1927/docutils-0.22.3.tar.gz"
+    sha256 "21486ae730e4ca9f622677b1412b879af1791efcfba517e4c6f60be543fc8cdd"
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/f1/70/7703c29685631f5a7590aa73f1f1d3fa9a380e654b86af429e0934a32f7d/idna-3.10.tar.gz"
-    sha256 "12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9"
+    url "https://files.pythonhosted.org/packages/6f/6d/0703ccc57f3a7233505399edb88de3cbd678da106337b9fcde432b65ed60/idna-3.11.tar.gz"
+    sha256 "795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902"
   end
 
   resource "imagesize" do
@@ -65,8 +64,8 @@ class SphinxDoc < Formula
   end
 
   resource "numpydoc" do
-    url "https://files.pythonhosted.org/packages/2f/19/7721093e25804cc82c7c1cdab0cce6b9343451828fc2ce249cee10646db5/numpydoc-1.9.0.tar.gz"
-    sha256 "5fec64908fe041acc4b3afc2a32c49aab1540cf581876f5563d68bb129e27c5b"
+    url "https://files.pythonhosted.org/packages/e9/3c/dfccc9e7dee357fb2aa13c3890d952a370dd0ed071e0f7ed62ed0df567c1/numpydoc-1.10.0.tar.gz"
+    sha256 "3f7970f6eee30912260a6b31ac72bba2432830cd6722569ec17ee8d3ef5ffa01"
   end
 
   resource "packaging" do
@@ -84,9 +83,9 @@ class SphinxDoc < Formula
     sha256 "dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf"
   end
 
-  resource "roman-numerals-py" do
-    url "https://files.pythonhosted.org/packages/30/76/48fd56d17c5bdbdf65609abbc67288728a98ed4c02919428d4f52d23b24b/roman_numerals_py-3.1.0.tar.gz"
-    sha256 "be4bf804f083a4ce001b5eb7e3c0862479d10f94c936f6c4e5f250aa5ff5bd2d"
+  resource "roman-numerals" do
+    url "https://files.pythonhosted.org/packages/57/5b/1bcda2c6a8acec5b310dd70f732400827b96f05d815834f0f112b91b3539/roman_numerals-3.1.0.tar.gz"
+    sha256 "384e36fc1e8d4bd361bdb3672841faae7a345b3f708aae9895d074c878332551"
   end
 
   resource "snowballstemmer" do
@@ -125,8 +124,8 @@ class SphinxDoc < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   def install

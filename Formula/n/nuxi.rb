@@ -1,13 +1,13 @@
 class Nuxi < Formula
   desc "Nuxt CLI (nuxi) for creating and managing Nuxt projects"
   homepage "https://github.com/nuxt/cli"
-  url "https://registry.npmjs.org/nuxi/-/nuxi-3.30.0.tgz"
-  sha256 "210145c695b60cfa6698aeafc9c98161b4c7c45222be62bccc13afec6a410a94"
+  url "https://registry.npmjs.org/nuxi/-/nuxi-3.31.2.tgz"
+  sha256 "c3afd3b0b1dc360d25081914b4acd939dceac0d93a87180d7d8acc7056245dd9"
   license "MIT"
   head "https://github.com/nuxt/cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "c80ea8b75bb5e1eaea79cbd67e256d59453a9e655d9b8c2ed83ed342ae8d544f"
+    sha256 cellar: :any_skip_relocation, all: "aa2df290446a90e8c364b8a1fc82c04cbb03fd88fc5ea5933e0ce0f6d3bc0dd2"
   end
 
   depends_on "node"
@@ -26,7 +26,7 @@ class Nuxi < Formula
     ENV["CI"] = "1"
     target = testpath/"nuxi-tmp"
     output = shell_output(
-      "#{bin}/nuxt init . --cwd #{target} -f --no-install --packageManager npm --gitInit -M --preferOffline",
+      "#{bin}/nuxt init . --cwd #{target} -f --template=minimal --gitInit --packageManager=npm --preferOffline",
     )
     assert_predicate target, :directory?
     assert_predicate target/".git", :directory?

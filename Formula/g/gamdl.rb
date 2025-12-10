@@ -3,17 +3,17 @@ class Gamdl < Formula
 
   desc "Python CLI app for downloading Apple Music songs, music videos and post videos"
   homepage "https://github.com/glomatico/gamdl"
-  url "https://files.pythonhosted.org/packages/ec/38/6550ada4217e5583b27495e50504b12b8a8a326362cb6d241b669bd3ee0f/gamdl-2.7.5.tar.gz"
-  sha256 "40c32c64de2bf1c2db592a2c2a001d18ac21150088c9358f375e06fa3d0b29c2"
+  url "https://files.pythonhosted.org/packages/e5/e1/d5712c3fbc84c495f3d86d061379f6202818d6072fb71cc6029cc1e3a172/gamdl-2.8.1.tar.gz"
+  sha256 "53d448a3025ac1a6d1ceec3a33448865112cc3ea8936af691cda78a34d6b3609"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c75b3c03a2926b306835fe498fd5c148e0ba46ca1b7a23455ec0ac741da5ce70"
-    sha256 cellar: :any,                 arm64_sequoia: "351f27503cdc422db29484af0d8b78af4939bc025d95d75381174b9d21eba3f6"
-    sha256 cellar: :any,                 arm64_sonoma:  "4dc9121060ae896ea64ca39c1cbc927fc02ba022f82552a8f663296ef4b9517d"
-    sha256 cellar: :any,                 sonoma:        "083356e5df4425645f3a55c7928067ddbf57a9d38fe2296fb7f5210203d67a6c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "11e54aab76fed35f62e89f39eb823d84a7f954f6093dd1afc299f690a620f1a7"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ff18001d3b8289bd2aac8391d186e19a057eed0460a8e28b0b21a9e124888fd5"
+    sha256 cellar: :any,                 arm64_tahoe:   "6f410d64f8cb2fc7897f585294d16141998296245a58ab2d143946a0120a71fa"
+    sha256 cellar: :any,                 arm64_sequoia: "abb279eb9fa246f55b72e149702b2bfd0151ce5b9b579bfbf7d32846ec0a132d"
+    sha256 cellar: :any,                 arm64_sonoma:  "6e96836c5019f69ff654b95d1f70472ec427503853e5c2454e524ff2f5103f2e"
+    sha256 cellar: :any,                 sonoma:        "65e4a36a7cb46cb3682d15b52bdc09d7fb0f35b240656239aaf6124d85359ed8"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "37160e541df58340527df049b39626bf1f896e99ec681d0e20810a358add65c9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "be20be8a15bae8d317978522ccb45bcb734dd7af405f06c4fa7a1b449eeda85a"
   end
 
   depends_on "certifi" => :no_linkage
@@ -27,8 +27,8 @@ class Gamdl < Formula
   # Issue ref: https://github.com/devine-dl/pywidevine/issues/55
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/c6/78/7d432127c41b50bccba979505f272c16cbcadcc33645d5fa3a738110ae75/anyio-4.11.0.tar.gz"
-    sha256 "82a8d0b81e318cc5ce71a5f1f8b5c4e63619620b63141ef8c995fa0db95a57c4"
+    url "https://files.pythonhosted.org/packages/16/ce/8a777047513153587e5434fd752e89334ac33e379aa3497db860eeb60377/anyio-4.12.0.tar.gz"
+    sha256 "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
   end
 
   resource "async-lru" do
@@ -42,8 +42,8 @@ class Gamdl < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
   end
 
   resource "construct" do
@@ -97,8 +97,8 @@ class Gamdl < Formula
   end
 
   resource "protobuf" do
-    url "https://files.pythonhosted.org/packages/19/ff/64a6c8f420818bb873713988ca5492cba3a7946be57e027ac63495157d97/protobuf-6.33.0.tar.gz"
-    sha256 "140303d5c8d2037730c548f8c7b93b20bb1dc301be280c378b82b8894589c954"
+    url "https://files.pythonhosted.org/packages/34/44/e49ecff446afeec9d1a66d6bbf9adc21e3c7cea7803a920ca3773379d4f6/protobuf-6.33.2.tar.gz"
+    sha256 "56dc370c91fbb8ac85bc13582c9e373569668a290aa2e66a590c2a0d35ddb9e4"
   end
 
   resource "pycryptodome" do
@@ -126,19 +126,14 @@ class Gamdl < Formula
     sha256 "dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf"
   end
 
-  resource "sniffio" do
-    url "https://files.pythonhosted.org/packages/a2/87/a6771e1546d97e7e041b6ae58d80074f81b7d5121207425c964ddf5cfdbd/sniffio-1.3.1.tar.gz"
-    sha256 "f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"
-  end
-
   resource "unidecode" do
     url "https://files.pythonhosted.org/packages/94/7d/a8a765761bbc0c836e397a2e48d498305a865b70a8600fd7a942e85dcf63/Unidecode-1.4.0.tar.gz"
     sha256 "ce35985008338b676573023acc382d62c264f307c8f7963733405add37ea2b23"
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/5e/1d/0f3a93cca1ac5e8287842ed4eebbd0f7a991315089b1a0b01c7788aa7b63/urllib3-2.6.1.tar.gz"
+    sha256 "5379eb6e1aba4088bae84f8242960017ec8d8e3decf30480b3a1abdaa9671a3f"
   end
 
   resource "wcwidth" do
@@ -147,8 +142,8 @@ class Gamdl < Formula
   end
 
   resource "yt-dlp" do
-    url "https://files.pythonhosted.org/packages/cf/41/53ad8c6e74d6627bd598dfbb8ad7c19d5405e438210ad0bbaf1b288387e7/yt_dlp-2025.11.12.tar.gz"
-    sha256 "5f0795a6b8fc57a5c23332d67d6c6acf819a0b46b91a6324bae29414fa97f052"
+    url "https://files.pythonhosted.org/packages/14/77/db924ebbd99d0b2b571c184cb08ed232cf4906c6f9b76eed763cd2c84170/yt_dlp-2025.12.8.tar.gz"
+    sha256 "b773c81bb6b71cb2c111cfb859f453c7a71cf2ef44eff234ff155877184c3e4f"
   end
 
   def install

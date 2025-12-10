@@ -1,18 +1,18 @@
 class Xleak < Formula
   desc "Terminal Excel viewer with an interactive TUI"
   homepage "https://github.com/bgreenwell/xleak"
-  url "https://github.com/bgreenwell/xleak/archive/refs/tags/v0.1.0.tar.gz"
-  sha256 "f5d95817d3729ed47f45afa499e7de7209cb41a5bc44fc1a9d121b14d9838191"
+  url "https://github.com/bgreenwell/xleak/archive/refs/tags/v0.2.5.tar.gz"
+  sha256 "190a0458a3c61c49c22b97046f8ae6f8ead1c74aa213777c575b8c4ee634f029"
   license "MIT"
   head "https://github.com/bgreenwell/xleak.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "098c3d52ad1df85f462d4d47762da98f786c8e80718a49522421a9d0535c9edd"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9ee2f3a9ab68024db618d712051a6e31f5efe12e05ad8f1d3da05b08b7f858ef"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f6ae0b90ab3c11cca515d62da5c9673fd9c75bb3c1f9817b8c540a2061846c61"
-    sha256 cellar: :any_skip_relocation, sonoma:        "a410e53c5523c979c993a3d476160c96cdd8578fb2c022cf9da3ec793f8036ba"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "762f06c25fea18d688b8a351bcaf5aa6ac52957a8197244066dcd599ce67dc7e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "32c13f804048bd868354d9af5bc5f6737abe83bb8415245ed63da535e03fecd9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3bc979de348ff1ec6be5242e9a8463e54e424a97ed7edcfa4c0f94e843708e64"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "893e86d3d5f99517b31573fb0ac0cd2f415a639578105391ab2a2d7bc2b25db2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a75c0adea7fa0ba82415e90224757ee356e4a0d24e3a27569d9a8fbdd059ed17"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d38c9643c3ec5123ee32e4c7df475882fa9dcdfe70e338571229065f4445cd73"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "508d6a9bf70e935b1b7d6a12fe94a9a240c0529cb00c39673a154725deef1aa9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "18ec2991f6222a7a083d933ead2ba84537da49c1827fbe5498a871a103cade11"
   end
 
   depends_on "rust" => :build

@@ -1,29 +1,27 @@
 class Marksman < Formula
   desc "Language Server Protocol for Markdown"
   homepage "https://github.com/artempyanykh/marksman"
-  url "https://github.com/artempyanykh/marksman/archive/refs/tags/2024-12-18.tar.gz"
-  sha256 "7392822c196e6bef68fc1cef3a873aac79b27bf95478c2419ea4761651a6a957"
+  url "https://github.com/artempyanykh/marksman/archive/refs/tags/2025-11-30.tar.gz"
+  sha256 "b7d6346097823e0903f66d5557a5f895225e9d948fc9574dd81723d1f5b013bc"
   license "MIT"
   head "https://github.com/artempyanykh/marksman.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5b83867b8710098430e910c9c1370d23b34e1dd416eaf427a32960a80815d064"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b9d34d209ff066fc670ef526ef4e1921698345ce643eeeb8e2d5dfff80bffbfc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "abb4ee028058af4d4f464c83157d3f49783c96f2917fd671bdff11a8dcc3c6bd"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "bea0c8d782eb874e6a3f92dc47884e1e71afaba9741a6c705ef5790c5aadae1c"
-    sha256 cellar: :any_skip_relocation, ventura:       "5d4e38cbf29fea160804f0181cd6a000a877aad5b74222a0fc8f4be2aff1b452"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "490ef5bbb1269f76d14f8945e37f92b66adc1b3a8ee72d681b1f722484a7f659"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "50abec82ec280c5c3c35c770fe08bceeafc3bb20ba8e474843b15a49272907ff"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "03cfd0f546f5d6cb5c09dcb6531dd6632ab02e59c49a974dca2151186fb7a773"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "4caa148f860c111a6c8d71c1364159cded39104678ffb63ca7de8502ac81e5a7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "35ae8b8458a966cd56bb18e8f428a0be772f8dd9e42cf80b4a09ea3e19314c11"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c9ecbc072ec56430af3c6c2a2a3c40f67b2819f492d85bef57155cc40450a3bb"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2714f6157b405c734b619fcc7cb2eddc28a3c58a5d3fda3c801728496dc1a9c4"
   end
 
-  depends_on "dotnet@8"
+  depends_on "dotnet"
 
   uses_from_macos "zlib"
 
   def install
     ENV["DOTNET_CLI_TELEMETRY_OPTOUT"] = "true"
 
-    dotnet = Formula["dotnet@8"]
+    dotnet = Formula["dotnet"]
     args = %W[
       --configuration Release
       --framework net#{dotnet.version.major_minor}

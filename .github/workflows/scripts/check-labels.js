@@ -19,6 +19,8 @@ module.exports = async ({github, context, core}, formulae_detect, dependent_test
       console.log('No CI-syntax-only label found. Running tests job.')
     }
 
+    core.setOutput('nodejs', !syntax_only && label_names.includes('nodejs'))
+
     core.setOutput('syntax-only', syntax_only)
     if (syntax_only) {
       return
@@ -73,11 +75,11 @@ module.exports = async ({github, context, core}, formulae_detect, dependent_test
     const test_bot_dependents_args = ["--only-formulae-dependents", "--junit"]
 
     if (label_names.includes(`CI-test-bot-no-concurrent-downloads`)) {
-      console.log(`CI-test-bot-no-concurrent-downloads label found. Not passing --concurrent-downloads to brew test-bot.`)
+      console.log(`CI-test-bot-no-concurrent-downloads label found. Running with HOMEBREW_DOWNLOAD_CONCURRENCY=1`)
+      core.setOutput('download-concurrency', '1')
     } else {
-      console.log(`No CI-test-bot-no-concurrent-downloads label found. Passing --concurrent-downloads to brew test-bot.`)
-      test_bot_formulae_args.push('--concurrent-downloads')
-      test_bot_dependents_args.push('--concurrent-downloads')
+      console.log(`No CI-test-bot-no-concurrent-downloads label found. Running with HOMEBREW_DOWNLOAD_CONCURRENCY=auto`)
+      core.setOutput('download-concurrency', 'auto')
     }
 
     if (label_names.includes(`CI-test-bot-fail-fast${deps_suffix}`)) {

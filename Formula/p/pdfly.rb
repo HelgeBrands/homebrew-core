@@ -6,11 +6,10 @@ class Pdfly < Formula
   url "https://files.pythonhosted.org/packages/48/ae/70f161c80b3f39d8fe4ff784c78045225820d10375c81c2097c0e85ac0fc/pdfly-0.5.1.tar.gz"
   sha256 "636e9736ca3296ed69ad7e14d997813ea5a662ba7a86c77d155e343494dcc3d7"
   license "BSD-3-Clause"
-  revision 1
+  revision 4
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "4bc96cb59886346f6f85cf41f806013428bc15ffdb15f4e4432237d2e4572363"
+    sha256 cellar: :any_skip_relocation, all: "3e7eb4d370639db333cd96ee1eddfad5f8a5f67566e1d0754110b3629a351160"
   end
 
   depends_on "pkgconf" => :build
@@ -34,8 +33,8 @@ class Pdfly < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
   end
 
   resource "defusedxml" do
@@ -44,13 +43,13 @@ class Pdfly < Formula
   end
 
   resource "endesive" do
-    url "https://files.pythonhosted.org/packages/11/c9/3f9a0e3784fd611be5880787eff1e9b084f0f13d2dcae50ad1c1f66b771c/endesive-2.19.1-py3-none-any.whl"
-    sha256 "d434012bf3bf1c26f3dd156e9ad425f5ccd2e426b82b26f6474e6c6a9b5ae36f"
+    url "https://files.pythonhosted.org/packages/d0/af/4722abf8cf92ffdb4a60d5bcc4e1f33bd420b8853586493b1c9ab74d8f38/endesive-2.19.2-py3-none-any.whl"
+    sha256 "4a209419c384249f96b517642159595fd656bedcb56a532a9ed967e825caccdc"
   end
 
   resource "fonttools" do
-    url "https://files.pythonhosted.org/packages/4b/42/97a13e47a1e51a5a7142475bbcf5107fe3a68fc34aef331c897d5fb98ad0/fonttools-4.60.1.tar.gz"
-    sha256 "ef00af0439ebfee806b25f24c8f92109157ff3fac5731dc7867957812e87b8d9"
+    url "https://files.pythonhosted.org/packages/33/f9/0e84d593c0e12244150280a630999835a64f2852276161b62a0f98318de0/fonttools-4.61.0.tar.gz"
+    sha256 "ec520a1f0c7758d7a858a00f090c1745f6cde6a7c5e76fb70ea4044a15f712e7"
   end
 
   resource "fpdf2" do
@@ -79,8 +78,8 @@ class Pdfly < Formula
   end
 
   resource "pypdf" do
-    url "https://files.pythonhosted.org/packages/13/3d/b6ead84ee437444f96862beb68f9796da8c199793bed08e9397b77579f23/pypdf-6.1.3.tar.gz"
-    sha256 "8d420d1e79dc1743f31a57707cabb6dcd5b17e8b9a302af64b30202c5700ab9d"
+    url "https://files.pythonhosted.org/packages/f3/01/f7510cc6124f494cfbec2e8d3c2e1a20d4f6c18622b0c03a3a70e968bacb/pypdf-6.4.0.tar.gz"
+    sha256 "4769d471f8ddc3341193ecc5d6560fa44cf8cd0abfabf21af4e195cc0c224072"
   end
 
   resource "requests" do
@@ -104,8 +103,8 @@ class Pdfly < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   def install

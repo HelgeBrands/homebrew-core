@@ -1,18 +1,18 @@
 class Gonzo < Formula
   desc "Log analysis TUI"
   homepage "https://gonzo.controltheory.com/"
-  url "https://github.com/control-theory/gonzo/archive/refs/tags/v0.2.1.tar.gz"
-  sha256 "c8a0c7d3c27049f80b725c723fa08369624615820f2a57889ec36b1156118bf0"
+  url "https://github.com/control-theory/gonzo/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "f06376ec4574a44fe5609ba65faf28c54602768aaa77cefb4d7bcfe681b73719"
   license "MIT"
   head "https://github.com/control-theory/gonzo.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b27c6ede4bfc32378d89db887fb8fd6e47b23bd31513b4dc54e8574c1a694d89"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b27c6ede4bfc32378d89db887fb8fd6e47b23bd31513b4dc54e8574c1a694d89"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b27c6ede4bfc32378d89db887fb8fd6e47b23bd31513b4dc54e8574c1a694d89"
-    sha256 cellar: :any_skip_relocation, sonoma:        "f02d2159775ea21c2dd83381fbb8e8149f34b6d3c2184ee2f235261d1a2d87db"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6957bf38027fd01c026d2f6da450cefb5f9290255f5388a3f9c657bd7f988fdf"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b7e8e2a0b5a9aa4e3af9ddeb85ec001a9ec556849e11b4db808b96d24ca417f6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1afb94f08a77b0f7116ee8a191b51ff28611e9af3add31535e0b56e908a209e3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1afb94f08a77b0f7116ee8a191b51ff28611e9af3add31535e0b56e908a209e3"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1afb94f08a77b0f7116ee8a191b51ff28611e9af3add31535e0b56e908a209e3"
+    sha256 cellar: :any_skip_relocation, sonoma:        "04e4935f80635c060c068a49f52c4b864bc836943c8a785b1f92ee3b72bb9155"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e43f64f1f4d624ee2439ea47f1c4c12de7de62b5a9783646fb7a5c8f3d3024a6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ece50899c584432930d48ef376a6fb450bd9fad9df6ba46958d8b8f3ef8e4755"
   end
 
   depends_on "go" => :build

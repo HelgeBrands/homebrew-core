@@ -1,17 +1,17 @@
 class McpServerKubernetes < Formula
   desc "MCP Server for kubernetes management commands"
   homepage "https://github.com/Flux159/mcp-server-kubernetes"
-  url "https://registry.npmjs.org/mcp-server-kubernetes/-/mcp-server-kubernetes-2.9.7.tgz"
-  sha256 "7755b41cc279f9bab9cd2d581d0e48e9cdfb454c2a94396c968ba15adbe753c7"
+  url "https://registry.npmjs.org/mcp-server-kubernetes/-/mcp-server-kubernetes-3.0.1.tgz"
+  sha256 "b85f48ce42e980d0dfb48a971ba7f56c646ac70df63deaf5d15b138868b84b66"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "bf4b9cf145e0643198d3f694c9b0fd7b2ba46b70edba9a358acb83f3b7358eef"
-    sha256 cellar: :any,                 arm64_sequoia: "7d67c7647ad7cb0b498e61f39cc43b6fe33988682673a9735e888607e48ac8fb"
-    sha256 cellar: :any,                 arm64_sonoma:  "7d67c7647ad7cb0b498e61f39cc43b6fe33988682673a9735e888607e48ac8fb"
-    sha256 cellar: :any,                 sonoma:        "289d52feecadfa9052a8fe0b1e6f31b9f63cdbdaa982fbf0fe671aa96f02265c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "580ddd18ae60fe788469123cf3edff4aa8ae183d0d8aca7ba6fc8672eb1cd961"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "01dd81e6503e4cabf564f06364968b53fa51d503f0a585511f8cb8e6da86d572"
+    sha256 cellar: :any,                 arm64_tahoe:   "c5a7cda742e27865eac9c251ea6893875d538270a6f58f1b5f90ed18eb073ed2"
+    sha256 cellar: :any,                 arm64_sequoia: "1640d4eb5023441235aea8211ded706e20bdde07ce3816ba5428fab34212d8a6"
+    sha256 cellar: :any,                 arm64_sonoma:  "1640d4eb5023441235aea8211ded706e20bdde07ce3816ba5428fab34212d8a6"
+    sha256 cellar: :any,                 sonoma:        "ebbbe7bb74acbc7be2dd53ef463b9d76b8dad6d35cbf4d92a59edf64e9fdd088"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "974d82c9f97ebef8de1d75f14d6bf40d1caf15c74f82ca79cb22af4d154d96ae"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "08ae58f36aabfffa45e6e6dc63cff5d30b0db38faea76292be98e1a6fa84996b"
   end
 
   depends_on "node"

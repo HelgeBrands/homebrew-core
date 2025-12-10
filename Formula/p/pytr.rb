@@ -3,18 +3,18 @@ class Pytr < Formula
 
   desc "Use TradeRepublic in terminal and mass download all documents"
   homepage "https://github.com/pytr-org/pytr"
-  url "https://files.pythonhosted.org/packages/c3/ae/4e19a7477f65d432421a001af03d70e2caafb4f7398d791b28bd8d47a892/pytr-0.4.3.tar.gz"
-  sha256 "efd6f11506e2be93d7c0e0e4fe4feaf9cb6b466beb76ba2ef03c6197d3ab719d"
+  url "https://files.pythonhosted.org/packages/a2/64/25ce842142742a5dfbb3505674ebed72d6ea21bca06bc1d059877b85fa26/pytr-0.4.4.tar.gz"
+  sha256 "21e5f26da56ecc4ebd713dd294dcd08b008352973f3440728136263203417108"
   license "MIT"
+  revision 1
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ce4afa2775d6b3801e1ddbd689da1afcb7a0a5eba86fc861fee2fef6941d63aa"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c246d51a03a047b132bc9ad7eb76d5c7b32990157d263455f2de1d16867268a4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5340a8c3a09673d014cb6d70b25cd672644afc1af225de34f44179d9fb231ff6"
-    sha256 cellar: :any_skip_relocation, sonoma:        "dfb75231d784e3c3355874cd04f7fa2d8234d61c19f115b6eb0d4009085fb187"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e7dca9ec90ace62ea5dd60fed9a42fd62269e051c9965eadbb7c220b0696b2e9"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "088a05e597cfd7e65a61503d74057a564ec8528c1f639e4a1c3e6221d364d251"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ae8f409d7a7176f24388323bd1c7417b50f20a14f206289ad744dcdf5aaf040a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aebd819a6efefb708da0787f4356bd1992f8f877bb16746b17bc209bb1f79221"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b8add44a27b414a2376a220a30c29b6c442b7daffff1f1871389c807580c921f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "7316e1c8764651f4489ec505854e149efdfee97baf1f5bb93b951a040d9130f3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a8ea4be5bc2f5ba740bfeb913c95a7d7f6292f0ccf37d59a3c648c052679f106"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4a6b5e2a8e1a0d54dccce7ad3f939cc2370294cfcf189806ffa280e7ad3e41f7"
   end
 
   depends_on "certifi" => :no_linkage
@@ -28,8 +28,8 @@ class Pytr < Formula
   end
 
   resource "charset-normalizer" do
-    url "https://files.pythonhosted.org/packages/83/2d/5fd176ceb9b2fc619e63405525573493ca23441330fcdaee6bef9460e924/charset_normalizer-3.4.3.tar.gz"
-    sha256 "6fce4b8500244f6fcb71465d4a4930d132ba9ab8e71a7859e6a5d59851068d14"
+    url "https://files.pythonhosted.org/packages/13/69/33ddede1939fdd074bce5434295f38fae7136463422fe4fd3e0e89b98062/charset_normalizer-3.4.4.tar.gz"
+    sha256 "94537985111c35f28720e43603b8e7b43a6ecfb2ce1d3058bbe955b73404e21a"
   end
 
   resource "coloredlogs" do
@@ -78,8 +78,8 @@ class Pytr < Formula
   end
 
   resource "shtab" do
-    url "https://files.pythonhosted.org/packages/5a/3e/837067b970c1d2ffa936c72f384a63fdec4e186b74da781e921354a94024/shtab-1.7.2.tar.gz"
-    sha256 "8c16673ade76a2d42417f03e57acf239bfb5968e842204c17990cae357d07d6f"
+    url "https://files.pythonhosted.org/packages/b0/7a/7f131b6082d8b592c32e4312d0a6da3d0b28b8f0d305ddd93e49c9d89929/shtab-1.8.0.tar.gz"
+    sha256 "75f16d42178882b7f7126a0c2cb3c848daed2f4f5a276dd1ded75921cc4d073a"
   end
 
   resource "six" do
@@ -88,8 +88,8 @@ class Pytr < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   resource "websockets" do

@@ -1,23 +1,18 @@
 class Tmuxinator < Formula
   desc "Manage complex tmux sessions easily"
   homepage "https://github.com/tmuxinator/tmuxinator"
-  url "https://github.com/tmuxinator/tmuxinator/archive/refs/tags/v3.3.5.tar.gz"
-  sha256 "56dc5ca39d11bad38f7fb602ce412a0f564dc0757765ad105a2cccbe84fcd2ca"
+  url "https://github.com/tmuxinator/tmuxinator/archive/refs/tags/v3.3.7.tar.gz"
+  sha256 "556756c17b8740af0d0bb3af58f3205ff25d00d515dbe6fc378653a28d14c4d8"
   license "MIT"
   head "https://github.com/tmuxinator/tmuxinator.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "6b6e4ff4d810440e7512b14545f3f2ae267114342ef1133b537c181e0de8a636"
+    sha256 cellar: :any_skip_relocation, all: "a9ff335a312a7cc07ec67c66da6d1295300d9ce304d66773664a1a24790c687b"
   end
 
   depends_on "ruby"
   depends_on "tmux"
   depends_on "tmuxinator-completion"
-
-  resource "xdg" do
-    url "https://rubygems.org/downloads/xdg-2.2.5.gem"
-    sha256 "f3a5f799363852695e457bb7379ac6c4e3e8cb3a51ce6b449ab47fbb1523b913"
-  end
 
   resource "thor" do
     url "https://rubygems.org/downloads/thor-1.4.0.gem"
@@ -41,10 +36,6 @@ class Tmuxinator < Formula
     system "gem", "install", "--ignore-dependencies", "tmuxinator-#{version}.gem"
     bin.install libexec/"bin/tmuxinator"
     bin.env_script_all_files(libexec/"bin", GEM_HOME: ENV["GEM_HOME"])
-
-    # Make sure tmuxinator checks HOMEBREW_PREFIX for data files. Also ensures uniform bottles.
-    inreplace_files = libexec.glob("gems/xdg-*/lib/xdg/base_dir{,/extended}.rb")
-    inreplace inreplace_files, "/usr/local", HOMEBREW_PREFIX
   end
 
   test do
@@ -54,7 +45,7 @@ class Tmuxinator < Formula
     commands = shell_output("#{bin}/tmuxinator commands")
     commands_list = %w[
       commands completions copy debug delete doctor
-      edit implode local list new open start stop
+      edit help implode local list new open start stop
       stop_all version
     ]
 

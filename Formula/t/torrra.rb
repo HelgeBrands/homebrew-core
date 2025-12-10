@@ -3,8 +3,8 @@ class Torrra < Formula
 
   desc "Find and download torrents without leaving your CLI"
   homepage "https://torrra.readthedocs.io/en/latest/"
-  url "https://files.pythonhosted.org/packages/5c/f1/4a976ef7440eb8689fd0ce25c64478c8bd057f34b2363b9717606c0a61d3/torrra-1.3.5.tar.gz"
-  sha256 "57ff46c4af441ac0a8b600355856d020134859b82ecf3098f3a9eec38ed899da"
+  url "https://files.pythonhosted.org/packages/54/51/a26e9f02d4e9c12cca16fb44154aa8f9601f46005ee97b97a8795c64192c/torrra-2.0.4.tar.gz"
+  sha256 "f8394495215193c4b3a8281684a9ca3f99ccf17b3c3eae486d7d56d3f15fadb1"
   license "MIT"
   head "https://github.com/stabldev/torrra.git", branch: "main"
 
@@ -14,7 +14,7 @@ class Torrra < Formula
   no_autobump! because: "`update-python-resources` cannot determine dependencies"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "ad60430c701f202f3116a5a61d642dd30a933e712789c5e110016c9097c4fb91"
+    sha256 cellar: :any_skip_relocation, all: "7de18c3d2832adcbce5d6d7a118ff123ca6a76b1ddb82d399568b53bd99d98e9"
   end
 
   depends_on "rust" => :build # for uv-build backend
@@ -25,8 +25,8 @@ class Torrra < Formula
   pypi_packages exclude_packages: %w[certifi libtorrent libtorrent-windows-dll]
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/c6/78/7d432127c41b50bccba979505f272c16cbcadcc33645d5fa3a738110ae75/anyio-4.11.0.tar.gz"
-    sha256 "82a8d0b81e318cc5ce71a5f1f8b5c4e63619620b63141ef8c995fa0db95a57c4"
+    url "https://files.pythonhosted.org/packages/16/ce/8a777047513153587e5434fd752e89334ac33e379aa3497db860eeb60377/anyio-4.12.0.tar.gz"
+    sha256 "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
   end
 
   resource "click" do
@@ -94,14 +94,9 @@ class Torrra < Formula
     sha256 "73ff50c7c0c1c77c8243079283f4edb376f0f6442433aecb8ce7e6d0b92d1fe4"
   end
 
-  resource "sniffio" do
-    url "https://files.pythonhosted.org/packages/a2/87/a6771e1546d97e7e041b6ae58d80074f81b7d5121207425c964ddf5cfdbd/sniffio-1.3.1.tar.gz"
-    sha256 "f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"
-  end
-
   resource "textual" do
-    url "https://files.pythonhosted.org/packages/f6/2f/f0b408f227edca21d1996c1cd0b65309f0cbff44264aa40aded3ff9ce2e1/textual-6.6.0.tar.gz"
-    sha256 "53345166d6b0f9fd028ed0217d73b8f47c3a26679a18ba3b67616dcacb470eec"
+    url "https://files.pythonhosted.org/packages/ab/00/9520327698acb6d8ae120b311ef1901840d55a6c41580e377f36261daf7a/textual-6.7.1.tar.gz"
+    sha256 "2a5acb0ab316a7ba9e74b0a291fab8933d681d7cf6f4e1eeb45c39a731b094cf"
   end
 
   resource "tomli-w" do
@@ -131,6 +126,6 @@ class Torrra < Formula
     assert_match version.to_s, shell_output("#{bin}/torrra --version")
 
     output = shell_output("#{bin}/torrra config list")
-    assert_match "general.remember_last_path=true", output.downcase
+    assert_match "general.download_in_external_client=false", output.downcase
   end
 end

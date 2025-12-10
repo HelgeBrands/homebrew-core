@@ -1,17 +1,17 @@
 class VercelCli < Formula
   desc "Command-line interface for Vercel"
   homepage "https://vercel.com/home"
-  url "https://registry.npmjs.org/vercel/-/vercel-48.10.10.tgz"
-  sha256 "922dce3df4d064fafaaea12a342448d9d2e9e1f5800752f56c7bcacf7841efa1"
+  url "https://registry.npmjs.org/vercel/-/vercel-49.1.2.tgz"
+  sha256 "5bb8e6ce4e3007ab365982d34a8809d58be77fa06deb23cf135c6528a3c23e14"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "73ed61e9d0052ef16c8468202af555b11650a3e70487a36751be61589fbfa1a5"
-    sha256 cellar: :any,                 arm64_sequoia: "47c186bf4824e4c77a063a0459d3fcfeee65f0b40c18fc5c8d43cabb2833a5a3"
-    sha256 cellar: :any,                 arm64_sonoma:  "47c186bf4824e4c77a063a0459d3fcfeee65f0b40c18fc5c8d43cabb2833a5a3"
-    sha256 cellar: :any,                 sonoma:        "115af58b9c08eec8b38bb9e6e2943169e6f48e0a9c6d0d3156ee84a23e71f661"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2d2fe2031c03db9bba367ff6a7c23d2160b031f5b54d793ddda25d95f49387c1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ac8957db6e830480f9791f474926740f09c5ac8c2e6bab14589ef2e882b7fffa"
+    sha256 cellar: :any,                 arm64_tahoe:   "c0c9d2d4f9ef1c8f52dc5f2d6816280307307e42f3500071c281c204e24006d8"
+    sha256 cellar: :any,                 arm64_sequoia: "5c39365899b31789d84bc3e0a834274022f3ea1ec566c5c7b64be8c712a9e72d"
+    sha256 cellar: :any,                 arm64_sonoma:  "5c39365899b31789d84bc3e0a834274022f3ea1ec566c5c7b64be8c712a9e72d"
+    sha256 cellar: :any,                 sonoma:        "3ae9bc1677d99aaf0478a724bdfb7e051b63c13b8f7757a3ba97bec94c3f0abd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f5e3fedfe62e04e905c0deed728103a6e4231e11a8590b857d2ad9e2aea4fd04"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "34a564bb305031c75ed3b8644277b8c407cfb8519102addfedab51aaa98cf9d3"
   end
 
   depends_on "node"
@@ -28,6 +28,8 @@ class VercelCli < Formula
     node_modules = libexec/"lib/node_modules/vercel/node_modules"
     node_modules.glob("deasync/bin/*")
                 .each { |dir| rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}" }
+
+    deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
   end
 
   test do

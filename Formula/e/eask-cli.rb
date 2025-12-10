@@ -1,12 +1,12 @@
 class EaskCli < Formula
   desc "CLI for building, running, testing, and managing your Emacs Lisp dependencies"
   homepage "https://emacs-eask.github.io/"
-  url "https://registry.npmjs.org/@emacs-eask/cli/-/cli-0.11.8.tgz"
-  sha256 "201d03d1002e9c95ab99600cf7c1b270f5ece49c268eefe70a8c8587215ea430"
+  url "https://registry.npmjs.org/@emacs-eask/cli/-/cli-0.12.0.tgz"
+  sha256 "7e028bf7c052381ed51e1f533df601bd1e12dd540cffec22b0430f0e74720d31"
   license "GPL-3.0-or-later"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "114bcb646455c13c9fdd47692e1758718d302b9c5698a6a1c40772e38760a243"
+    sha256 cellar: :any_skip_relocation, all: "49885acc90be56fa98bfc33b0fb708066a39377c489cbb15330f720790b5d71a"
   end
 
   depends_on "node"

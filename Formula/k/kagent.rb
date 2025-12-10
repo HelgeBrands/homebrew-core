@@ -1,18 +1,18 @@
 class Kagent < Formula
   desc "Kubernetes native framework for building AI agents"
   homepage "https://kagent.dev"
-  url "https://github.com/kagent-dev/kagent/archive/refs/tags/v0.7.4.tar.gz"
-  sha256 "8400dd140b0966ce952d79fdd6ea8372d5d6971ff651fbf8b7e6cbb751b0397c"
+  url "https://github.com/kagent-dev/kagent/archive/refs/tags/v0.7.6.tar.gz"
+  sha256 "c6d1edb05e85c6d353d9ba099f4324b11d7430c4f9789260593a7061bdfa9e00"
   license "Apache-2.0"
   head "https://github.com/kagent-dev/kagent.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2b15d1a7d809a50282247c0836d67c2d2118b5dea716dd9d34bd2e5642be657e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2b15d1a7d809a50282247c0836d67c2d2118b5dea716dd9d34bd2e5642be657e"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2b15d1a7d809a50282247c0836d67c2d2118b5dea716dd9d34bd2e5642be657e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "cb89976df3c6e90974e539af61a150b88505530524131b076f02d67fda0f9b3b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5734fbd03ded1f0c28b9d7fd65ad93bde141c20f4a221d0540e198a86cf02696"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9f520c292e5911386213f4c05b60a1dcf0838c4c67fba4eaae6666010729b945"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ff6e9341a631a1990f82b496171a966bfd0ba54beb25131eff7f11754861c1f1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ff6e9341a631a1990f82b496171a966bfd0ba54beb25131eff7f11754861c1f1"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ff6e9341a631a1990f82b496171a966bfd0ba54beb25131eff7f11754861c1f1"
+    sha256 cellar: :any_skip_relocation, sonoma:        "346ee8e16c477ea001cf233d45289afd5aa3cb493d1acf07324560ee0fe950ea"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "9679e68390dbf8ff508b6d9b2ebf1f7f2574ecc2f6bc2cbd8f5e2efde5f46a79"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "54edd855db56e62ad7786ead17d8761ec1fc0d46957070d96195fe88093dc228"
   end
 
   depends_on "go" => :build
@@ -46,7 +46,7 @@ class Kagent < Formula
     cd "dice" do
       pid = spawn bin/"kagent", "run", "--config", testpath/"config.yaml", err: "test.log"
       sleep 3
-      assert_match "Error: failed to start docker-compose", File.read("test.log")
+      assert_match "failed to start docker-compose", File.read("test.log")
     ensure
       Process.kill "TERM", pid
       Process.wait pid

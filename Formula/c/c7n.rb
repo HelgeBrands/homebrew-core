@@ -3,9 +3,10 @@ class C7n < Formula
 
   desc "Rules engine for cloud security, cost optimization, and governance"
   homepage "https://github.com/cloud-custodian/cloud-custodian"
-  url "https://github.com/cloud-custodian/cloud-custodian/archive/refs/tags/0.9.47.0.tar.gz"
-  sha256 "99af3f22ea8204e336d3f3f1c5ab13bf1d17fe3773147df01383f4825fc060e9"
+  url "https://github.com/cloud-custodian/cloud-custodian/archive/refs/tags/0.9.48.0.tar.gz"
+  sha256 "44c5ca2da22ef9f1ce0550729acd2d4d55e1c96ced95c3978fc75ebfcf6c6775"
   license "Apache-2.0"
+  revision 1
 
   livecheck do
     url :stable
@@ -13,13 +14,12 @@ class C7n < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "3badbef6e1d7551575d0c96a3c7a0ba242d3ef4e42183e347152cbdc8c7bf204"
-    sha256 cellar: :any,                 arm64_sequoia: "6d9621adac20088702a85744df01c3da71642bfad35b232e1a1768b88339e0d1"
-    sha256 cellar: :any,                 arm64_sonoma:  "26bbffa87085f66c5c95afa5efbca7ea8bddf7d73c539df9d2196b9382d3f166"
-    sha256 cellar: :any,                 sonoma:        "ec7e3e73fe4d55fc17f29a8fcf5c52017ff2d1d9d9cd7614eff23fa8d6d4f803"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ab5d8d979e14aa39ebe4174ae23e31588220bacc6482b6637760e8db2834d39e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "69b24e2464b2eebfb4acde37e2564bf70a1c0b00891e17ebb0492359b19cc31d"
+    sha256 cellar: :any,                 arm64_tahoe:   "1583cde0e32902a5b509315879f32ce67e7a7862b6df3066fcfc30991ce31a8f"
+    sha256 cellar: :any,                 arm64_sequoia: "2202d9e5a4321c9266ac24ebb01fa2807c32e98b476e4ddae8e45e60f4908f57"
+    sha256 cellar: :any,                 arm64_sonoma:  "6e021c83bcafff381df531f5a15bd3788bf523133168854ba1ee14f44eec6bb9"
+    sha256 cellar: :any,                 sonoma:        "d0382085fb900e4b11a8d2b3594bb1606fb2884757c8741671e62168321c35b3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5b3db42fda265e17bde7f4e004d8df930633e0c5ee2c3af3f0ca90ce085e6333"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fdb1966adcdfacf76aba5609aff7aa55d9635642e164250419bb6f14c7779247"
   end
 
   depends_on "cryptography" => :no_linkage
@@ -30,8 +30,8 @@ class C7n < Formula
   pypi_packages exclude_packages: ["cryptography", "rpds-py"]
 
   resource "argcomplete" do
-    url "https://files.pythonhosted.org/packages/16/0f/861e168fc813c56a78b35f3c30d91c6757d1fd185af1110f1aec784b35d0/argcomplete-3.6.2.tar.gz"
-    sha256 "d0519b1bc867f5f4f4713c41ad0aba73a4a5f007449716b16f385f2166dc6adf"
+    url "https://files.pythonhosted.org/packages/38/61/0b9ae6399dd4a58d8c1b1dc5a27d6f2808023d0b5dd3104bb99f45a33ff6/argcomplete-3.6.3.tar.gz"
+    sha256 "62e8ed4fd6a45864acc8235409461b72c9a28ee785a2011cc5eb78318786c89c"
   end
 
   resource "attrs" do
@@ -40,13 +40,13 @@ class C7n < Formula
   end
 
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/5c/89/36c09108d8d35e6f722cdc9ff169f003c7458657ecf04c3a375dca973ccb/boto3-1.40.54.tar.gz"
-    sha256 "5f7dbf8539d26e0ee973baea49d0db8c1ee57707a785c5a23307241fdba04327"
+    url "https://files.pythonhosted.org/packages/f3/31/246916eec4fc5ff7bebf7e75caf47ee4d72b37d4120b6943e3460956e618/boto3-1.42.4.tar.gz"
+    sha256 "65f0d98a3786ec729ba9b5f70448895b2d1d1f27949aa7af5cb4f39da341bbc4"
   end
 
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/d1/c8/8c7509d7fa26de03d21673f18a1edc1ac98198ba261a2b943774ed4f1c44/botocore-1.40.54.tar.gz"
-    sha256 "808232d9fcbf2c295b6e7cd1897119ee2fb97e756edfb313aa6d27ba0b281c66"
+    url "https://files.pythonhosted.org/packages/5c/b7/dec048c124619b2702b5236c5fc9d8e5b0a87013529e9245dc49aaaf31ff/botocore-1.42.4.tar.gz"
+    sha256 "d4816023492b987a804f693c2d76fb751fdc8755d49933106d69e2489c4c0f98"
   end
 
   resource "jmespath" do
@@ -80,8 +80,8 @@ class C7n < Formula
   end
 
   resource "s3transfer" do
-    url "https://files.pythonhosted.org/packages/62/74/8d69dcb7a9efe8baa2046891735e5dfe433ad558ae23d9e3c14c633d1d58/s3transfer-0.14.0.tar.gz"
-    sha256 "eff12264e7c8b4985074ccce27a3b38a485bb7f7422cc8046fee9be4983e4125"
+    url "https://files.pythonhosted.org/packages/05/04/74127fc843314818edfa81b5540e26dd537353b123a4edc563109d8f17dd/s3transfer-0.16.0.tar.gz"
+    sha256 "8e990f13268025792229cd52fa10cb7163744bf56e719e0b9cb925ab79abf920"
   end
 
   resource "six" do
@@ -95,8 +95,8 @@ class C7n < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   def install

@@ -1,8 +1,8 @@
 class Shimmy < Formula
   desc "Small local inference server with OpenAI-compatible GGUF endpoints"
   homepage "https://github.com/Michael-A-Kuykendall/shimmy"
-  url "https://github.com/Michael-A-Kuykendall/shimmy/archive/refs/tags/v1.7.4.tar.gz"
-  sha256 "227fe3708502745fa7dfde6234efe66752b8e1d2bfa6f8ba4f30095dcf73a23a"
+  url "https://github.com/Michael-A-Kuykendall/shimmy/archive/refs/tags/v1.8.2.tar.gz"
+  sha256 "63bb34811121e89b2dbe65c047a509926415121cb384ba11e221442f3e536c9a"
   license "MIT"
   head "https://github.com/Michael-A-Kuykendall/shimmy.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Shimmy < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7bf66dd6124256be6ad78ccd6203ce25b12d0d29a99b5bb131c06653afc929a6"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5d5c3cbc8095122f5e22b8ed3f62500a8acc88f8ff2ec7b6779f1b2ac3a937d9"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8889f2539085581723daa90e59d775de53957aebbf0e3d835f96f597cbe2fafa"
-    sha256 cellar: :any_skip_relocation, sonoma:        "15d8116445f9f6337475915e0d8fb98d8b1bd61326c085e90d90d7eb90015578"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e9a798d1875d03bc8acc68aa2b9635a5e8ddbf5f326ae995c79cd421daef27e4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "78f7c0be3ac47f5e99db726d947dd8327eaf20aaf982f1e100be50e87f986b82"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4b8fe569afdbec2e052e7795b09df251bb6d7209836907bbcf6e1fd90c09579a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "19c0c01b0ca19597f8de7e109981db9dee55e1f5facccd1f7fdbb45fb9c6a7f5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c4334aa624b4075d70e9f122a8be1dc65d0c62b608f5784a066a5e7e9e40b1b7"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f2d2197658f5eff1a826b6456be1c02b7f36ad26bd596d841174c82d53e790f6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "cfcfd590261a62cafa2076f71e96c7605bbbd1c8a925fdb10ef665d0e99a22f8"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "680b5e4cdd31ca49743f76250f86d1906e3d7a77b500e7c45a72e5c8910c162a"
   end
 
   depends_on "cmake" => :build # for llama-cpp-sys-2

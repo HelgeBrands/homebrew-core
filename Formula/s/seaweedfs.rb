@@ -2,8 +2,8 @@ class Seaweedfs < Formula
   desc "Fast distributed storage system"
   homepage "https://github.com/seaweedfs/seaweedfs"
   url "https://github.com/seaweedfs/seaweedfs.git",
-      tag:      "4.00",
-      revision: "20a2e672d2847c4a2a53ff9676d08ce91600536c"
+      tag:      "4.02",
+      revision: "805950b401f9bf52424a6788c239d42dc6e1c666"
   license "Apache-2.0"
   head "https://github.com/seaweedfs/seaweedfs.git", branch: "master"
 
@@ -13,12 +13,12 @@ class Seaweedfs < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7a9ad92e8a1101404cd13396ba179de66d34a203fbca1ef9e83b35e3a6adfec1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2f1851fe52094b5d049c7f492ed4a1e6d76ac91e1fec61c0d866999af77aca52"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f52d09f328b1085672b9419c8b39f95a81293efa4cd05e8e6ca200949f78d171"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0dd0e28d7a8161470b6e2b316ed3815ceabc840cb2458bc2cd7996b84124af94"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e0d31e1a5ee5983069fb6b1a8c2bbe8cfc95ea6f1bdd78e0775202c24b934b22"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5abe9df4ce15e71d5fe592cee55c120c09700704d4d3962d2bf5b83fb4115edf"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2f4c294cee865daf6368ada1a13e410cf3bfa4aac67ec25679fcd7fa50f5f415"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5d3f223e2ad96f998b5d0f76ee4d46abbadc6d60c653ceb84a9c435f07df0eae"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ee44b17d9d1143c06f7962eaf1bf5943a13c57048d002dfb84110a3d6fe392a4"
+    sha256 cellar: :any_skip_relocation, sonoma:        "738c7033abbaacd513d32ce7c064ab6f6045cdeb4eb847c71c73e770f4d8b997"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "82244263b5a5dfe1e0f4553bbe27c1a8139638386036508f9a6337608ae98989"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cae0cdd8d9e184fdc034f621db90ce99102bae84c48c9bc0ae6dc02bf54a08b2"
   end
 
   depends_on "go" => :build

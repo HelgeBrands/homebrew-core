@@ -3,19 +3,19 @@ class KeeperCommander < Formula
 
   desc "Command-line and SDK interface to Keeper Password Manager"
   homepage "https://docs.keeper.io/en/privileged-access-manager/commander-cli/overview"
-  url "https://files.pythonhosted.org/packages/ac/98/1c2c2d6dafb28ed3a9e29265df758a2ce3a0a34a796adee4ab88cc98dd00/keepercommander-17.1.14.tar.gz"
-  sha256 "451142edb7dba83382d5db6100cd0a78b4f2c0d46e5ab2c8f1a7813f7573916e"
+  url "https://files.pythonhosted.org/packages/50/ee/6043e0900d68bacc13fd9f41ec30660d48592be4509c47a1bb3108189cc9/keepercommander-17.1.18.tar.gz"
+  sha256 "dfd57d4468dccf4d0b6f726b9431110ec76f99a12e873d66b7a275365d6abd50"
   license "MIT"
+  revision 1
   head "https://github.com/Keeper-Security/Commander.git", branch: "master"
 
   bottle do
-    rebuild 3
-    sha256 cellar: :any,                 arm64_tahoe:   "4bfe4a8394c840defc6ff95c795140b953e7258f714290f76508b15ae9db73ca"
-    sha256 cellar: :any,                 arm64_sequoia: "da58a91857d20c22e7c26a7618097c84ef1d483b3b7fc7d514aa1fe69de20df6"
-    sha256 cellar: :any,                 arm64_sonoma:  "3744fc4031f8091f894db9784019f8c561af0f5a4a521c4fb450434acdaa2c46"
-    sha256 cellar: :any,                 sonoma:        "9199166bc266271c107c97c16e412c61b0f2a61fa94817b0147a45d8bc6954ed"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1992d9462f917ebef334678fc7804138939d3a8eee80852bf4c59abf971b0a17"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7513d48c872c9421b241bae9160121e8dc16a44b4213c579429072150b6e788a"
+    sha256 cellar: :any,                 arm64_tahoe:   "78f52046b8e9b19cfcb1f6c38b597be51327d3ba312347604e113852743e3fbf"
+    sha256 cellar: :any,                 arm64_sequoia: "fcee27fede91d0b564cd3307970bd1f88f08ae50a59c7a973410cb67d48f8ebe"
+    sha256 cellar: :any,                 arm64_sonoma:  "0e9c36ce7dfadb5e80c5910046494e106cf6cb2cd72769ddcf8d1e3f2e4b5f27"
+    sha256 cellar: :any,                 sonoma:        "089082e0dce011cda027a9e0e0e293b25c34889e9f03c3c2edf7ef320cda14cd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "759aaafce2cb367f89565036cfa139758e996f81de63e60bc24560be16299e1c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e2bac137c45cb4aed14b250a4e379e20e38aa8cd0a548d4167c43d8edc67c24f"
   end
 
   depends_on "pkgconf" => :build
@@ -101,13 +101,13 @@ class KeeperCommander < Formula
   end
 
   resource "flask-limiter" do
-    url "https://files.pythonhosted.org/packages/e4/53/13ccac4772f7efd58e4b8308e2b8bfaef3a45a4420ec43966f2dbff904c8/flask_limiter-4.0.0.tar.gz"
-    sha256 "536a8df0bb2033f415a2212e19a3b7ddfea38585ac5a2444e1cfa986a697847c"
+    url "https://files.pythonhosted.org/packages/d1/bf/7dd8a2bafd35e3256dd834f8128ee77164fbdb5769036fe9dc88b71e5a08/flask_limiter-4.1.0.tar.gz"
+    sha256 "7be4a8a3fd226f6bce1e633bdac4af16b0d231b6e186f1a6783aa319eb8730ae"
   end
 
   resource "fonttools" do
-    url "https://files.pythonhosted.org/packages/4b/42/97a13e47a1e51a5a7142475bbcf5107fe3a68fc34aef331c897d5fb98ad0/fonttools-4.60.1.tar.gz"
-    sha256 "ef00af0439ebfee806b25f24c8f92109157ff3fac5731dc7867957812e87b8d9"
+    url "https://files.pythonhosted.org/packages/33/f9/0e84d593c0e12244150280a630999835a64f2852276161b62a0f98318de0/fonttools-4.61.0.tar.gz"
+    sha256 "ec520a1f0c7758d7a858a00f090c1745f6cde6a7c5e76fb70ea4044a15f712e7"
   end
 
   resource "fpdf2" do
@@ -136,8 +136,8 @@ class KeeperCommander < Formula
   end
 
   resource "keeper-pam-webrtc-rs" do
-    url "https://files.pythonhosted.org/packages/17/cb/578235f3fe045da38623cb999d981270f9bc8f7c045fae3b6d1a5134644e/keeper_pam_webrtc_rs-1.1.6.tar.gz"
-    sha256 "30fb4a9389ff0060412bc7dfa153fc868f6d2eb3a31b151a0b65d9fa4673eaaf"
+    url "https://files.pythonhosted.org/packages/62/88/3527218f3b2013279ee340fa824cfd6f99241edbb49e4c288a97f917c1e9/keeper_pam_webrtc_rs-1.1.9.tar.gz"
+    sha256 "d4fdedbea7f414a27e9fdfb71017a636d5c34b3d61d17a9a7cbd25369fa3bbe2"
   end
 
   resource "keeper-secrets-manager-core" do
@@ -150,19 +150,9 @@ class KeeperCommander < Formula
     sha256 "807fac75755e73912e894fdd61e2838de574c5721876a19f7ab454ae1fffb4b5"
   end
 
-  resource "markdown-it-py" do
-    url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
-    sha256 "cb0a2b4aa34f932c007117b194e945bd74e0ec24133ceb5bac59009cda1cb9f3"
-  end
-
   resource "markupsafe" do
     url "https://files.pythonhosted.org/packages/7e/99/7690b6d4034fffd95959cbe0c02de8deb3098cc577c67bb6a24fe5d7caa7/markupsafe-3.0.3.tar.gz"
     sha256 "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698"
-  end
-
-  resource "mdurl" do
-    url "https://files.pythonhosted.org/packages/d6/54/cfe61301667036ec958cb99bd3efefba235e65cdeb9c84d24a8293ba1d90/mdurl-0.1.2.tar.gz"
-    sha256 "bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"
   end
 
   resource "ordered-set" do
@@ -181,8 +171,8 @@ class KeeperCommander < Formula
   end
 
   resource "protobuf" do
-    url "https://files.pythonhosted.org/packages/0a/03/a1440979a3f74f16cab3b75b0da1a1a7f922d56a8ddea96092391998edc0/protobuf-6.33.1.tar.gz"
-    sha256 "97f65757e8d09870de6fd973aeddb92f85435607235d20b2dfed93405d00c85b"
+    url "https://files.pythonhosted.org/packages/34/44/e49ecff446afeec9d1a66d6bbf9adc21e3c7cea7803a920ca3773379d4f6/protobuf-6.33.2.tar.gz"
+    sha256 "56dc370c91fbb8ac85bc13582c9e373569668a290aa2e66a590c2a0d35ddb9e4"
   end
 
   resource "psutil" do
@@ -193,11 +183,6 @@ class KeeperCommander < Formula
   resource "pycryptodomex" do
     url "https://files.pythonhosted.org/packages/c9/85/e24bf90972a30b0fcd16c73009add1d7d7cd9140c2498a68252028899e41/pycryptodomex-3.23.0.tar.gz"
     sha256 "71909758f010c82bc99b0abf4ea12012c98962fbf0583c2164f8b84533c2e4da"
-  end
-
-  resource "pygments" do
-    url "https://files.pythonhosted.org/packages/b0/77/a5b8c569bf593b0140bde72ea885a803b82086995367bf2037de0159d924/pygments-2.19.2.tar.gz"
-    sha256 "636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887"
   end
 
   resource "pyngrok" do
@@ -245,19 +230,14 @@ class KeeperCommander < Formula
     sha256 "dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf"
   end
 
-  resource "rich" do
-    url "https://files.pythonhosted.org/packages/fb/d2/8920e102050a0de7bfabeb4c4614a49248cf8d5d7a8d01885fbb24dc767a/rich-14.2.0.tar.gz"
-    sha256 "73ff50c7c0c1c77c8243079283f4edb376f0f6442433aecb8ce7e6d0b92d1fe4"
-  end
-
   resource "tabulate" do
     url "https://files.pythonhosted.org/packages/ec/fe/802052aecb21e3797b8f7902564ab6ea0d60ff8ca23952079064155d1ae1/tabulate-0.9.0.tar.gz"
     sha256 "0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c"
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   resource "wcwidth" do
@@ -271,8 +251,8 @@ class KeeperCommander < Formula
   end
 
   resource "werkzeug" do
-    url "https://files.pythonhosted.org/packages/9f/69/83029f1f6300c5fb2471d621ab06f6ec6b3324685a2ce0f9777fd4a8b71e/werkzeug-3.1.3.tar.gz"
-    sha256 "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
+    url "https://files.pythonhosted.org/packages/45/ea/b0f8eeb287f8df9066e56e831c7824ac6bab645dd6c7a8f4b2d767944f9b/werkzeug-3.1.4.tar.gz"
+    sha256 "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
   end
 
   resource "wrapt" do

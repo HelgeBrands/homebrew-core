@@ -1,17 +1,17 @@
 class Vite < Formula
   desc "Next generation frontend tooling. It's fast!"
   homepage "https://vitejs.dev/"
-  url "https://registry.npmjs.org/vite/-/vite-7.2.4.tgz"
-  sha256 "29b8291a529e29c88603eda24bfa91803019952e96b279021723ecfc9166dc2b"
+  url "https://registry.npmjs.org/vite/-/vite-7.2.7.tgz"
+  sha256 "817bdb4d08a49a2602e1432317028fd2c1b391ac4913efc8c72c927ac35301a4"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1c816dc2fff7bbccc9fc847ea93326c8f926046712e14e79b527aff305fd3efe"
-    sha256 cellar: :any,                 arm64_sequoia: "79d69aabc6037847c1c0cc229d7505895a95e2f994ee69692537176bdab29227"
-    sha256 cellar: :any,                 arm64_sonoma:  "79d69aabc6037847c1c0cc229d7505895a95e2f994ee69692537176bdab29227"
-    sha256 cellar: :any,                 sonoma:        "c8b3c9216443e37cc2e79c4092422d55e1129697c804c7c6cc4c77e68ed6aacb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "86c3bd848b076b2bfa406c12bfb0afa4fdfc96abf877c9042a92ec37bf52c64f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8d11136d94f43bfb271b4c426accd5b7eae20847203d19d372e96ac0bf011764"
+    sha256 cellar: :any,                 arm64_tahoe:   "08779b73e16abb43eb6955ee7902c00784f692181c2dd67b2999576a1e9a659c"
+    sha256 cellar: :any,                 arm64_sequoia: "5d7c7983bb7702dab7e3c386f9ba4f472497ef57b12d58c51a0bf8bcb17d2597"
+    sha256 cellar: :any,                 arm64_sonoma:  "5d7c7983bb7702dab7e3c386f9ba4f472497ef57b12d58c51a0bf8bcb17d2597"
+    sha256 cellar: :any,                 sonoma:        "3960d0fde96109a5da7634efb54445d6b1aa1a9a6feef889ec6eec50beae0165"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b50bb566c20f8f5c1fcb96922d3fd828af73a2e19403020624a6d3b199dc2adf"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a9b9e835485e4b9135c740a440dcac3f89721199d62da2f6bfa1afa6e55b20d1"
   end
 
   depends_on "node"
@@ -19,6 +19,9 @@ class Vite < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    node_modules = libexec/"lib/node_modules/vite/node_modules"
+    deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
   end
 
   test do

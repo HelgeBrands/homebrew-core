@@ -3,19 +3,19 @@ class PolicySentry < Formula
 
   desc "Generate locked-down AWS IAM Policies"
   homepage "https://policy-sentry.readthedocs.io/en/latest/"
-  url "https://files.pythonhosted.org/packages/2c/62/5ef0720302fff4a3b194c99ee7c6570a7b8086589588f2d5aab352deee35/policy_sentry-0.14.1.tar.gz"
-  sha256 "dda37098a5e8038c5d8a0e6b4e644736cd3cfec167b53007604dd92f8a20ea97"
+  url "https://files.pythonhosted.org/packages/2d/84/fc0594aead9d0bae80251f1415c0c76b053d7abeb2fd9a69a3993d88f6ec/policy_sentry-0.15.1.tar.gz"
+  sha256 "5ab684b1a26970e33e7e8cb028eec93f1483616fb483c1c09568858a42983a30"
   license "MIT"
+  revision 1
   head "https://github.com/salesforce/policy_sentry.git", branch: "master"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "074c4f24407743d54fe65753e32551173039fe70238ef9e292f820051f9911a0"
-    sha256 cellar: :any,                 arm64_sequoia: "b7bb0431dcc36eabe84332acf12e394fa800c83fdf1e715db1bf7a4d47576e09"
-    sha256 cellar: :any,                 arm64_sonoma:  "3ea133ab0ab3b812fa6ab471717a6a1d17bce667ccff44dd77f3f7416cc259e8"
-    sha256 cellar: :any,                 sonoma:        "bd2b002cb6d4ff8331a42ac75149b4bfe350982ca6ab7c93d50b5f09a6baeb9b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cf0144de03e26e755cc384c6d2e4c2f46879aaa8c015d8db37293c02edd56845"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3c123cbc2db34118ccbcb47142f16fbccfe30d57bfb6d802a163bb513c1f4839"
+    sha256 cellar: :any,                 arm64_tahoe:   "526785fe1e35be9d254a5d797caa2089e67460f4636c1456d1522e355760d555"
+    sha256 cellar: :any,                 arm64_sequoia: "001baac2fdea5e5db96469a5b809a6493b8adfbbd46dbc64945c663448bf80aa"
+    sha256 cellar: :any,                 arm64_sonoma:  "9f591c4f58bd24b78133d6cd4b00b062c0b12ffa1a6d4ca20a5ede158388aeb0"
+    sha256 cellar: :any,                 sonoma:        "4bc59826d36d4a9d8b9455a21fc8324163e12b0a11c804357f7084fb43e7c051"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3466acb291b03aa3a8cbabb3b421ee2139acedf11c0aeb1133fb9de287059917"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6af049b7e8a8dae29436b4e34716af07b160bd9254107ef40471b98a1d54f881"
   end
 
   depends_on "rust" => :build # for orjson
@@ -26,18 +26,18 @@ class PolicySentry < Formula
   pypi_packages exclude_packages: "certifi"
 
   resource "beautifulsoup4" do
-    url "https://files.pythonhosted.org/packages/77/e9/df2358efd7659577435e2177bfa69cba6c33216681af51a707193dec162a/beautifulsoup4-4.14.2.tar.gz"
-    sha256 "2a98ab9f944a11acee9cc848508ec28d9228abfd522ef0fad6a02a72e0ded69e"
+    url "https://files.pythonhosted.org/packages/c3/b0/1c6a16426d389813b48d95e26898aff79abbde42ad353958ad95cc8c9b21/beautifulsoup4-4.14.3.tar.gz"
+    sha256 "6292b1c5186d356bba669ef9f7f051757099565ad9ada5dd630bd9de5fa7fb86"
   end
 
   resource "charset-normalizer" do
-    url "https://files.pythonhosted.org/packages/83/2d/5fd176ceb9b2fc619e63405525573493ca23441330fcdaee6bef9460e924/charset_normalizer-3.4.3.tar.gz"
-    sha256 "6fce4b8500244f6fcb71465d4a4930d132ba9ab8e71a7859e6a5d59851068d14"
+    url "https://files.pythonhosted.org/packages/13/69/33ddede1939fdd074bce5434295f38fae7136463422fe4fd3e0e89b98062/charset_normalizer-3.4.4.tar.gz"
+    sha256 "94537985111c35f28720e43603b8e7b43a6ecfb2ce1d3058bbe955b73404e21a"
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
   end
 
   resource "idna" do
@@ -46,8 +46,8 @@ class PolicySentry < Formula
   end
 
   resource "orjson" do
-    url "https://files.pythonhosted.org/packages/be/4d/8df5f83256a809c22c4d6792ce8d43bb503be0fb7a8e4da9025754b09658/orjson-3.11.3.tar.gz"
-    sha256 "1c0603b1d2ffcd43a411d64797a19556ef76958aef1c182f22dc30860152a98a"
+    url "https://files.pythonhosted.org/packages/c6/fe/ed708782d6709cc60eb4c2d8a361a440661f74134675c72990f2c48c785f/orjson-3.11.4.tar.gz"
+    sha256 "39485f4ab4c9b30a3943cfe99e1a213c4776fb69e8abd68f66b83d5a0b0fdc6d"
   end
 
   resource "pyyaml" do
@@ -76,8 +76,8 @@ class PolicySentry < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   def install

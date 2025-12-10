@@ -1,10 +1,9 @@
 class PythonAT313 < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
-  url "https://www.python.org/ftp/python/3.13.9/Python-3.13.9.tgz"
-  sha256 "c4c066af19c98fb7835d473bebd7e23be84f6e9874d47db9e39a68ee5d0ce35c"
+  url "https://www.python.org/ftp/python/3.13.11/Python-3.13.11.tgz"
+  sha256 "03cfedbe06ce21bc44ce09245e091a77f2fee9ec9be5c52069048a181300b202"
   license "Python-2.0"
-  revision 1
 
   livecheck do
     url "https://www.python.org/ftp/python/"
@@ -12,14 +11,14 @@ class PythonAT313 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "03eb2d172710c86df3dd45c640b0a3e404646deaff9dd36e9cc6584f73797043"
-    sha256 arm64_sequoia: "1e69017b62b04ec5ed8369bd6ea90d0f483187b9e111afdf1c853f22feba0b65"
-    sha256 arm64_sonoma:  "eb694b873eaca9e05e721f22da66b1a0484230e8c5c0c0b43fe0663bc8c303d4"
-    sha256 tahoe:         "77ec038bd37c453589fb715054f4652b53437d484abf94d7e88f7f56d9c5a6aa"
-    sha256 sequoia:       "6960c0f0121d539c9035dff825a97666f41c59f3ea7e4044a71cb3aa50182b12"
-    sha256 sonoma:        "4142735df04ef4c8a87339869b6e5687aa4a2285934cea5d226bfdc63d426c73"
-    sha256 arm64_linux:   "f05a221a15372591c82888863d9bf1a272d180dc5275273b3ed27c5be533481a"
-    sha256 x86_64_linux:  "eb3a1f2e5c3b653e6de402b701f20fb7a9f80ffc98afb9c235f36436cc59ac78"
+    sha256 arm64_tahoe:   "c8b54ab4e20ee5f4b43b1cec2d4299997e310b839df16e9948f6a7f0123cef8a"
+    sha256 arm64_sequoia: "a322cf89659a0152e524435eaf0dcfe9692da889595028da40d0f1609224e648"
+    sha256 arm64_sonoma:  "f1472e8e354592aa785c65573f980fcf061dbc70e1682112c777d7d3ababfd15"
+    sha256 tahoe:         "8dadbb32681ebc3d00f9e5b09ea2e389fe9a0409219e6818bc4d4d1059d70141"
+    sha256 sequoia:       "f46f3eb3beb77ca48eb1abc00366877fa8a7443bb0ce7e95f3b325a8278f23dd"
+    sha256 sonoma:        "b3713ee4dfe45f2a8ed894f72d4d05bfa1365c2e737f4a5e23ccba3ff406ba61"
+    sha256 arm64_linux:   "f4ee9a5fdceb97d5cd112de344af83d2c7eb37a763a928e38e6588a76157a9af"
+    sha256 x86_64_linux:  "8c0ce49f7f3b8c6d70516eb44581b48f169326836b0c12be2bb400d31265b84d"
   end
 
   depends_on "pkgconf" => :build
@@ -264,6 +263,9 @@ class PythonAT313 < Formula
     inreplace lib_cellar/"ensurepip/__init__.py" do |s|
       s.gsub!(/_PIP_VERSION = .*/, "_PIP_VERSION = \"#{resource("pip").version}\"")
     end
+
+    # Ensure that our new pip wheel is globally readable.
+    chmod "ugo+r", lib_cellar.glob("ensurepip/_bundled/pip-*.whl")
 
     # Install unversioned (and for an altinstall, major-versioned) symlinks in libexec/bin.
     {

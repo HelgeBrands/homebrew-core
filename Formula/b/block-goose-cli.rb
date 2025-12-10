@@ -1,8 +1,8 @@
 class BlockGooseCli < Formula
   desc "Open source, extensible AI agent that goes beyond code suggestions"
   homepage "https://block.github.io/goose/"
-  url "https://github.com/block/goose/archive/refs/tags/v1.15.0.tar.gz"
-  sha256 "b0b167351756036bbda740358a97ae3714f54afce6c89b995869568580bfb65b"
+  url "https://github.com/block/goose/archive/refs/tags/v1.16.0.tar.gz"
+  sha256 "306e6068d0da6dae875cad3929ca0ce91e2aea98d4ba9b4f23f1286b47df4b41"
   license "Apache-2.0"
   head "https://github.com/block/goose.git", branch: "main"
 
@@ -12,12 +12,12 @@ class BlockGooseCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ae51b5dc8b916cb7cca9a25bd4fd95e5b4e267e4053b33b767e752ef281a3c2e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "23407a70749018f1e1721f1422b3d20ae5946c57e7a6af695388996e7403ebed"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b8945fdbb98bc2a0300e2270f60866d706326fe47db20a458215b34f6c60d25a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e153988cffc49091badf9e201d76a56d971668b3a743cc56ff1194c434190414"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b350d6b8dc403230ef58342001d4eb82f1b311dbf24379e25e21c4e61d41ad29"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e2fbd544f127f8b9235239955f75063448e9047b884bc30695c03072494f46d5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3d369984ca17acc91c933ec0aa442654f88b3f78c11ed07aa39e21c5e955bfc9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "db6217336f27ee9a34d3bbf654c7f453e9d4ae000e9cd7b601a4a24c8b5fd157"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a048abae592f71ba97384109860f94a81913a381fe45c67c51737e1c555387ca"
+    sha256 cellar: :any_skip_relocation, sonoma:        "651d655669e77ca5c045f02d0716617b38aac3c1a42bbbcd1021353c8097c831"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "fc9920c1eacd7f18f3be7675a18ef012e8877dd5c8e13a1ce1640e205017c3fe"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9558fe86462f17790d5dca87205510d2777c4a781b7f4295c23d035d87c47a4c"
   end
 
   depends_on "pkgconf" => :build

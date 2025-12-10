@@ -2,20 +2,19 @@ class Odin < Formula
   desc "Programming language with focus on simplicity, performance and modern systems"
   homepage "https://odin-lang.org/"
   url "https://github.com/odin-lang/Odin.git",
-      tag:      "dev-2025-11",
-      revision: "e5153a937b95f4583dfac2c22d010a764bf2f1a8"
-  version "2025-11"
+      tag:      "dev-2025-12a",
+      revision: "6ef91e26588fb3985eaa521c86d2ce2dcb2eabf1"
+  version "2025-12a"
   license "Zlib"
   head "https://github.com/odin-lang/Odin.git", branch: "master"
 
   bottle do
-    rebuild 1
-    sha256                               arm64_tahoe:   "6bfac98579f9dedc3fd0f40c73d074d5028c0bb4859b6ed9d71dbdad9df46262"
-    sha256                               arm64_sequoia: "fc43e69b5e55b359f20b32815d896a1b8a2dec0c5a2a3bff08efe03c5c03c82e"
-    sha256                               arm64_sonoma:  "7b16efcc957e78d3203a1309393d74c618a79cdb616188559d0f6cad4ed1bc62"
-    sha256 cellar: :any,                 sonoma:        "39a6b3c08bf78c58b5fa899ca541c594bb7f40b4712bbd350deda14b1d6ee0aa"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c0915ad33d2aa08cdd6f2e770cc68d99aa0ab154c944457e5028a1e8ad939474"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9d283b98ba08ba659a3140e1f5145dfb7640ed9e1ef0f7d13b16c440fd1f5f04"
+    sha256                               arm64_tahoe:   "44596f2d6f25fed8a99f2287059346eb9068867586a010d50ee7d427b8083d41"
+    sha256                               arm64_sequoia: "39480c8e09a6a15c25ab02a5764c42e5c125f4b21998483ed6e7b1fbd74d5b0e"
+    sha256                               arm64_sonoma:  "1cf13f1a11d8bfb35aa84554d5de58cf948846c8c5b99dfccc33e082c8cf8b17"
+    sha256 cellar: :any,                 sonoma:        "745a3344c84e551aeb02d0119dc45f4c00f5075d0e9e3c8496d411b4d1542e34"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "461935fa9aaba786339c2bd6c1daa174ff7c5ce734bbaf628d8e4b7db97c70ba"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "71353c00bd07488b6c4fdb71c1ba086ef11682686b29316eaffd3d13713b42a4"
   end
 
   depends_on "glfw" => :no_linkage

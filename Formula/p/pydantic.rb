@@ -3,17 +3,19 @@ class Pydantic < Formula
 
   desc "Data validation using Python type hints"
   homepage "https://github.com/pydantic/pydantic"
-  url "https://files.pythonhosted.org/packages/96/ad/a17bc283d7d81837c061c49e3eaa27a45991759a1b7eae1031921c6bd924/pydantic-2.12.4.tar.gz"
-  sha256 "0f8cb9555000a4b5b617f66bfd2566264c4984b27589d3b845685983e8ea85ac"
+  url "https://files.pythonhosted.org/packages/69/44/36f1a6e523abc58ae5f928898e4aca2e0ea509b5aa6f6f392a5d882be928/pydantic-2.12.5.tar.gz"
+  sha256 "4d351024c75c0f085a9febbb665ce8c0c6ec5d30e903bdb6394b7ede26aebb49"
   license "MIT"
+  version_scheme 1
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "072d1fb04d90cb1c85737e299f5dfa81a17b4753e1c5ec4c8757400218a5a56b"
-    sha256 cellar: :any,                 arm64_sequoia: "1e6b7462653aff4092b3dbaa986d8341e0372ec5a0000d755deb5ba0ce14f6a4"
-    sha256 cellar: :any,                 arm64_sonoma:  "a81ed5785760069cf140b134af256535aaeac6b85968b25e2efea30c6128bb18"
-    sha256 cellar: :any,                 sonoma:        "12157cdfacdefb620f44603884f82f20611e1692912eff93a700e7e7fd1e0681"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3a9ba62930ba831f126a5d9e2995131e9b8013cb4227d1384df52ee80a6b843b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cff0b840cf632666cfbe22f7f45f8ea1ac2939e972748f5296af3a88018fa24b"
+    rebuild 1
+    sha256 cellar: :any,                 arm64_tahoe:   "f82763979e85555515c17cace1a3e82142da86aafbe470a913cff495da4082e5"
+    sha256 cellar: :any,                 arm64_sequoia: "1df91d297946b63d060e975586f5704049ff91cee099d6074536ab6d8b913400"
+    sha256 cellar: :any,                 arm64_sonoma:  "932a64cd7677c6e78af8d23436fd5c6445971132e36990d9f17da237f836301e"
+    sha256 cellar: :any,                 sonoma:        "6ca77c977ee829d61282d6fd0d894e9a23d0ff3654d4825f92e6ab672fc34e39"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b252c084afdb03e9871ca69e7969ad5a5120e49ac916414d5ebd0fc63f02c54d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a6ec6ef0299e0e75a011da81902dc8e1da5b3798d010d56e51710537ecd248a8"
   end
 
   depends_on "maturin" => :build

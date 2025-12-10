@@ -1,20 +1,18 @@
 class Falco < Formula
   desc "VCL parser and linter optimized for Fastly"
   homepage "https://github.com/ysugimoto/falco"
-  url "https://github.com/ysugimoto/falco/archive/refs/tags/v1.20.0.tar.gz"
-  sha256 "1b92d86ff014fca05e56d3522362ec4947ed3743f4efcd7041d4fdda69d0703b"
+  url "https://github.com/ysugimoto/falco/archive/refs/tags/v1.21.1.tar.gz"
+  sha256 "695da1dae232b9cf6e88a9327d3cc11de58b20617343ea4f73d40487dc4b3d30"
   license "MIT"
   head "https://github.com/ysugimoto/falco.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "834b0d1bbd198697edcae2996331006421d600edb55d4561101166f314993159"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2121dc08b2cc2e6c793eba15ee0a2f5c47738ffe5868a46f81375a8cd51ceff4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2121dc08b2cc2e6c793eba15ee0a2f5c47738ffe5868a46f81375a8cd51ceff4"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "2121dc08b2cc2e6c793eba15ee0a2f5c47738ffe5868a46f81375a8cd51ceff4"
-    sha256 cellar: :any_skip_relocation, sonoma:        "36e7f914791e3c758460a2f4c42460205e0b139c66923deade23828e04a4da11"
-    sha256 cellar: :any_skip_relocation, ventura:       "36e7f914791e3c758460a2f4c42460205e0b139c66923deade23828e04a4da11"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "70a9c03da84efad552e916ba1ee82c3e55ba233f0346395f29b20f74258963f3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e23061f82fc96e1c79362b91044a743e4f965fe51d52ef8ff82610a9631c1864"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "76e03d5d01b74636743f3152b9080f791e92796175439b869c5a610d76ff72d6"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "76e03d5d01b74636743f3152b9080f791e92796175439b869c5a610d76ff72d6"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "76e03d5d01b74636743f3152b9080f791e92796175439b869c5a610d76ff72d6"
+    sha256 cellar: :any_skip_relocation, sonoma:        "5e4a6cb8f4b6b63a9250a0a72ea90dbef7952774b6c29f02a73f38f6fd9dea6c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f9b24ffb96cc2957470e68bfb3e22d1e352e645431a887f42b3602748c3affa0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "056048e380c09f31c0c1352f8b51961f917ab2daa69d625b41063e83ed1cb72a"
   end
 
   depends_on "go" => :build

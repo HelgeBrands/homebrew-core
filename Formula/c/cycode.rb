@@ -3,18 +3,18 @@ class Cycode < Formula
 
   desc "Boost security in your dev lifecycle via SAST, SCA, Secrets & IaC scanning"
   homepage "https://github.com/cycodehq/cycode-cli"
-  url "https://files.pythonhosted.org/packages/2d/38/f9844048d071b8ed0728290148e817350a84d27855af4b566c721177fe34/cycode-3.7.0.tar.gz"
-  sha256 "461eb350722c2721d93bd18fbabb92f7e6dd1bd508e74f23f0cce8ef326a6c6f"
+  url "https://files.pythonhosted.org/packages/2c/a3/a79eec77d26ce5946e67d2bce46fc497e6bdc4e093e4560f6f7cfb6b0a73/cycode-3.8.0.tar.gz"
+  sha256 "e995e2b9272a31f1990a5d08f622a03a5d49ff374a09ba8e1be4d990fc8ba018"
   license "MIT"
   head "https://github.com/cycodehq/cycode-cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "02170f93725667f1f48dc5cb2d07a061398145414baf84f72425e99f82996598"
-    sha256 cellar: :any,                 arm64_sequoia: "c54415e0159fd4aa24a3667694bc580e21f50891ddcdb64ba9061802133c2ec0"
-    sha256 cellar: :any,                 arm64_sonoma:  "8285a1fc69baa82de8246b8e5df44fb03eb081eaa955e3e712e70c4a48e47f9b"
-    sha256 cellar: :any,                 sonoma:        "d18b73eab1ee7a4427c444e39d928464709589062a616a8f0994ab6c11fa29e7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "40a302b572d896ab3d1bb709b32e19759d11701e36a29797346fa0fe4b11f9d7"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "227cec9343dfb8066899e2727b45353cf0459fc808f184d8f69ea1553c6c91f3"
+    sha256 cellar: :any,                 arm64_tahoe:   "8aaa58a93a9e1b1004cbae6b5a370a1bd8ce42f22fec806c3fc24b2f98cb636b"
+    sha256 cellar: :any,                 arm64_sequoia: "9fc99b7bfa8dd57d8591b44d7d68504a95f80c307293b6dcace8e95062062bb0"
+    sha256 cellar: :any,                 arm64_sonoma:  "d75325ccc45081c77b803507cad1f808f46f1ac79ef231f8c201ebc4bf1da824"
+    sha256 cellar: :any,                 sonoma:        "75d5d000448d70940ba4675da1bb09f5b02a07b765470d3d5d917095879b3ca0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "98808b5cc2f4d256b4a75ef8b3acc0da11094b7334158d87460313a31b23abd7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9f1298ac0bf609862698a3a5627d006b83c468e49ace917c341b834049b507e4"
   end
 
   depends_on "certifi" => :no_linkage
@@ -27,8 +27,8 @@ class Cycode < Formula
   pypi_packages exclude_packages: %w[certifi cryptography pydantic rpds-py]
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/c6/78/7d432127c41b50bccba979505f272c16cbcadcc33645d5fa3a738110ae75/anyio-4.11.0.tar.gz"
-    sha256 "82a8d0b81e318cc5ce71a5f1f8b5c4e63619620b63141ef8c995fa0db95a57c4"
+    url "https://files.pythonhosted.org/packages/16/ce/8a777047513153587e5434fd752e89334ac33e379aa3497db860eeb60377/anyio-4.12.0.tar.gz"
+    sha256 "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
   end
 
   resource "arrow" do
@@ -122,8 +122,8 @@ class Cycode < Formula
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/15/bb/147bf5d47b8d6f3fb315204cd2f567b1ad85511acd8d59e85cccf7cce65c/mcp-1.21.2.tar.gz"
-    sha256 "b6497b7f7a77aabe263931a3335956dfd45fe8b1e2168931e455914ba1a7f4c9"
+    url "https://files.pythonhosted.org/packages/25/1a/9c8a5362e3448d585081d6c7aa95898a64e0ac59d3e26169ae6c3ca5feaf/mcp-1.23.0.tar.gz"
+    sha256 "84e0c29316d0a8cf0affd196fd000487ac512aa3f771b63b2ea864e22961772b"
   end
 
   resource "mdurl" do
@@ -197,8 +197,8 @@ class Cycode < Formula
   end
 
   resource "sentry-sdk" do
-    url "https://files.pythonhosted.org/packages/61/89/1561b3dc8e28bf7978d031893297e89be266f53650c87bb14a29406a9791/sentry_sdk-2.45.0.tar.gz"
-    sha256 "e9bbfe69d5f6742f48bad22452beffb525bbc5b797d817c7f1b1f7d210cdd271"
+    url "https://files.pythonhosted.org/packages/7c/d7/c140a5837649e2bf2ec758494fde1d9a016c76777eab64e75ef38d685bbb/sentry_sdk-2.46.0.tar.gz"
+    sha256 "91821a23460725734b7741523021601593f35731808afc0bb2ba46c27b8acd91"
   end
 
   resource "shellingham" do
@@ -214,11 +214,6 @@ class Cycode < Formula
   resource "smmap" do
     url "https://files.pythonhosted.org/packages/44/cd/a040c4b3119bbe532e5b0732286f805445375489fceaec1f48306068ee3b/smmap-5.0.2.tar.gz"
     sha256 "26ea65a03958fa0c8a1c7e8c7a58fdc77221b8910f6be2131affade476898ad5"
-  end
-
-  resource "sniffio" do
-    url "https://files.pythonhosted.org/packages/a2/87/a6771e1546d97e7e041b6ae58d80074f81b7d5121207425c964ddf5cfdbd/sniffio-1.3.1.tar.gz"
-    sha256 "f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"
   end
 
   resource "sse-starlette" do

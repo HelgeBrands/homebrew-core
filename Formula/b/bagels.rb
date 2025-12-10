@@ -6,16 +6,15 @@ class Bagels < Formula
   url "https://files.pythonhosted.org/packages/6e/04/e19a99e357221cb41e1e2f0352172e282ac8195fa2418b776345497fb260/bagels-0.3.12.tar.gz"
   sha256 "c3ebd4a727ddd62450528676a1ce3e475f92bd36edfed5f9c0b110bb24592608"
   license "GPL-3.0-or-later"
-  revision 1
+  revision 3
 
   bottle do
-    rebuild 3
-    sha256 cellar: :any,                 arm64_tahoe:   "8e2cdadd38072d4e5258a346a722da948aa875ce8d6aa60107fc750e40ad61cb"
-    sha256 cellar: :any,                 arm64_sequoia: "c4e99f1e6aa1d83dda7fd2778d082a3db78ac122a3d0156309674c653f3ff604"
-    sha256 cellar: :any,                 arm64_sonoma:  "07525b64dd8be5ee542d93491275ec2b6038344635cc638aeb3df39c3f7f1848"
-    sha256 cellar: :any,                 sonoma:        "0eb1afe306eced8df894ca208c9b91a47d5957db78e23f16072724dca32da61d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "83cf7d7196ba33ad42c716743e45b4d2354b897c991de8c79e29bef91c956414"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dfa6a3e7fdc68ebf43bc01453f407ee6e865aed83de945703652c51fef38ce8c"
+    sha256 cellar: :any,                 arm64_tahoe:   "1ebb32b309920cb764da62b033d5bccbfa09dfa11c5581cc8597ac89986f7244"
+    sha256 cellar: :any,                 arm64_sequoia: "9a8b026ca9cac5a530c2b4e551656ac9610a7e919ea41282ed377f5b6ff66805"
+    sha256 cellar: :any,                 arm64_sonoma:  "f71c2e720a443ff29d0bc7a419e3b32a3dba2502033b4be10ade3f4ff1f68465"
+    sha256 cellar: :any,                 sonoma:        "e5d88f4c44909050077f58b307a054f4aca77e8b390886a52ee6c583b46e1cf0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2ef7eee832173106939e6508b115b52fe3b7221ba24b30c8d1210dd71ade85a3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "924afaa7c9c818cbfd8aa36ad09b22b5edbffeadf4a76062695b163a113c6a25"
   end
 
   depends_on "certifi" => :no_linkage
@@ -62,8 +61,8 @@ class Bagels < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
   end
 
   resource "click-default-group" do
@@ -132,8 +131,8 @@ class Bagels < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/61/33/9611380c2bdb1225fdef633e2a9610622310fed35ab11dac9620972ee088/platformdirs-4.5.0.tar.gz"
-    sha256 "70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312"
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "plotext" do
@@ -197,13 +196,13 @@ class Bagels < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   resource "werkzeug" do
-    url "https://files.pythonhosted.org/packages/9f/69/83029f1f6300c5fb2471d621ab06f6ec6b3324685a2ce0f9777fd4a8b71e/werkzeug-3.1.3.tar.gz"
-    sha256 "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
+    url "https://files.pythonhosted.org/packages/45/ea/b0f8eeb287f8df9066e56e831c7824ac6bab645dd6c7a8f4b2d767944f9b/werkzeug-3.1.4.tar.gz"
+    sha256 "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
   end
 
   resource "xdg-base-dirs" do

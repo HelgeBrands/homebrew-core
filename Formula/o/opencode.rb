@@ -1,20 +1,21 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
   homepage "https://opencode.ai"
-  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.0.107.tgz"
-  sha256 "590e4ad65b21b94db31fb091477554e199ca9195cd15b8597dd2f5dcbd8b0eca"
+  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.0.141.tgz"
+  sha256 "2efa1906eb3b9ad56f4a7c5d24614b993a31084be7448f7263805445434225ea"
   license "MIT"
 
   bottle do
-    sha256                               arm64_tahoe:   "fcd32395f8f535698ba57937b2e33e6d41607c7aacfb124a96f7700e5320722c"
-    sha256                               arm64_sequoia: "fcd32395f8f535698ba57937b2e33e6d41607c7aacfb124a96f7700e5320722c"
-    sha256                               arm64_sonoma:  "fcd32395f8f535698ba57937b2e33e6d41607c7aacfb124a96f7700e5320722c"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0270b3a6e696ca3a3c7a81f2df911ceaf29b6a09fe6bbf42b590a3c8dd77f958"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "33a8a1b22fe72151f531422f336b74def88840bf6dac22aaa74f48a5b91d9b45"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f236a77bfc297962c7d60245e315a689abc54d23ba5e225a23da35712987629e"
+    sha256                               arm64_tahoe:   "6e17e7b3eebd7bcab78cbc67ecc1ad0732ba3e452facaacc3e68f64806048aa2"
+    sha256                               arm64_sequoia: "6e17e7b3eebd7bcab78cbc67ecc1ad0732ba3e452facaacc3e68f64806048aa2"
+    sha256                               arm64_sonoma:  "6e17e7b3eebd7bcab78cbc67ecc1ad0732ba3e452facaacc3e68f64806048aa2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c323a61e266173bcf2c154a44877dfe2ef4bb1b1d02dccafbee0e62a97fff901"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "20bc51fa0e1c95b67eedd39c350b03b30582594d28cb8c2221c88475000e08d9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a63328911e6f2efbce93b51fbdb7514da88e11bc871cbcf84ae3980b0f40a5a3"
   end
 
   depends_on "node"
+  depends_on "ripgrep"
 
   def install
     system "npm", "install", *std_npm_args

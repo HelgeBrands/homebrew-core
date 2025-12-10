@@ -1,8 +1,8 @@
 class Bitrise < Formula
   desc "Command-line automation tool"
   homepage "https://github.com/bitrise-io/bitrise"
-  url "https://github.com/bitrise-io/bitrise/archive/refs/tags/v2.34.7.tar.gz"
-  sha256 "c6e44b16307e2e3e1595d39372fc9b921acf8803f86153d3acab2f5c478fd0eb"
+  url "https://github.com/bitrise-io/bitrise/archive/refs/tags/v2.35.3.tar.gz"
+  sha256 "9af5bf6bfa9444e859385278b423d5b990adeef0fbd304bfd7e0ec2119d6e237"
   license "MIT"
   head "https://github.com/bitrise-io/bitrise.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Bitrise < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4985ee39a2471fe5b19fed2de9ea18de9fa7724d0fea58cd5c1d605abb92484f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "4985ee39a2471fe5b19fed2de9ea18de9fa7724d0fea58cd5c1d605abb92484f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4985ee39a2471fe5b19fed2de9ea18de9fa7724d0fea58cd5c1d605abb92484f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "a216cba49a7a8f8d296b8dba271fc219d9eaa6970ff0be9e61628a111987bbf8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2ab292a80933bbe2c48a88814f1ebe5a08ae59c9f7c35a4082464ffc3aeea806"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "70d1c0c1aa65b9f60108e906b1585e0f443aef3b4649c7b1ac4e671b409bad50"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "619a028026e2c0e1a7988e2a16a5af0b3f5d394534c045dc11d42cd9ea18a5df"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "619a028026e2c0e1a7988e2a16a5af0b3f5d394534c045dc11d42cd9ea18a5df"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "619a028026e2c0e1a7988e2a16a5af0b3f5d394534c045dc11d42cd9ea18a5df"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e9af948435369e6dbacf57a653cc744d462462894fab4b63acc2eb887648b18b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c1f8f5b179d78782f7f239f1e9abb43e4dce6cad785a6ebea1432487f7314dbf"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b2039a92015026aa0cb0b7901e85a6c0fbef6e03f2eb559d36573898657b4403"
   end
 
   depends_on "go" => :build
@@ -31,7 +31,7 @@ class Bitrise < Formula
       -X github.com/bitrise-io/bitrise/version.Commit=#{tap.user}
     ]
 
-    system "go", "build", *std_go_args(ldflags: ldflags)
+    system "go", "build", *std_go_args(ldflags:)
   end
 
   test do

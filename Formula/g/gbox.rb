@@ -1,17 +1,18 @@
 class Gbox < Formula
   desc "Provides environments for AI Agents to operate computer and mobile devices"
   homepage "https://gbox.ai"
-  url "https://github.com/babelcloud/gbox/releases/download/v0.1.16/gbox-v0.1.16.tar.gz"
-  sha256 "f59cc1df62c2ed77a0bf61d41ab8c85190e3458e527dec47d94ca2bef975fdc5"
+  url "https://github.com/babelcloud/gbox/releases/download/v0.1.17/gbox-v0.1.17.tar.gz"
+  sha256 "48355c7859f009a16147af23a8646f77399a74bab3a36fb591281160a8c576a2"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "54c6f3ef399a960a81e4618e7134988a885c4757045fce4fdd1ba3453f31293b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "81a3c1c2f4f15324cdba10c82f4c8ca333bd515239a962d35ff88dd011d9549f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7f3b406339e6d08d280938622f7e57d51dd7a8555a20cf1d561dfbefa1556e5c"
-    sha256 cellar: :any_skip_relocation, sonoma:        "a8e85690c4c259a8a18a3cfcfb242c8bc9525fac6368b712a09e5cadcd8df6e7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "778f2d944130f467850047d3452460dcd2619e350fafb56ea96eeeede75aad27"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9c191a589088c5272c72358c6d1f2e93f0db9429541e48e108e8295551df2710"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f399daa6aae8a063190ac9a538d27602155807be54656de90f2fbb86925fc660"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "479ed25fd38584e2210bb465ca4ca05e84a5b3d48929afd4d3894524d00d66a5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bf2ff6e59adeef83fda1b5eddd0c81913b2a59dfff192f5c86715b895ee02ba2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "07359e14d74e1b687703087601323dc9d353d41f48db17c1e104b43342658887"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "df3fe03b62172d08ad7f3f26b6e4269af312077348633302b3ce4402c494545b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c3293249ed91dd941e505dacb1aabfdf8ce90be3d9fea86790ccdc3b24c65970"
   end
 
   depends_on "go" => :build
@@ -19,7 +20,7 @@ class Gbox < Formula
   depends_on "frpc"
   depends_on "yq"
 
-  uses_from_macos "jq"
+  uses_from_macos "jq", since: :sequoia
 
   def install
     system "make", "install", "prefix=#{prefix}", "VERSION=#{version}", "COMMIT_ID=#{File.read("COMMIT")}", "BUILD_TIME=#{time.iso8601}"

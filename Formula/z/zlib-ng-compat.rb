@@ -1,10 +1,10 @@
 class ZlibNgCompat < Formula
   desc "Zlib replacement with optimizations for next generation systems"
   homepage "https://github.com/zlib-ng/zlib-ng"
-  url "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.2.5.tar.gz"
-  mirror "http://fresh-center.net/linux/misc/zlib-ng-2.2.5.tar.gz"
-  mirror "http://fresh-center.net/linux/misc/legacy/zlib-ng-2.2.5.tar.gz"
-  sha256 "5b3b022489f3ced82384f06db1e13ba148cbce38c7941e424d6cb414416acd18"
+  url "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.3.2.tar.gz"
+  mirror "http://fresh-center.net/linux/misc/zlib-ng-2.3.2.tar.gz"
+  mirror "http://fresh-center.net/linux/misc/legacy/zlib-ng-2.3.2.tar.gz"
+  sha256 "6a0561b50b8f5f6434a6a9e667a67026f2b2064a1ffa959c6b2dae320161c2a8"
   license "Zlib"
   head "https://github.com/zlib-ng/zlib-ng.git", branch: "develop"
 
@@ -13,13 +13,12 @@ class ZlibNgCompat < Formula
   end
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any,                 arm64_tahoe:   "26b7b200c89a18067105f0dae14ffffe20283ef7a0f48032ec8bd7c0e28cdf89"
-    sha256 cellar: :any,                 arm64_sequoia: "a0527abe9725436d79275302cb33392d18667008582ae462cddb531622eda868"
-    sha256 cellar: :any,                 arm64_sonoma:  "e03cedd3457eb46c54ab51d971b9a3f4baef060dd4f7da60c65f2146fb464852"
-    sha256 cellar: :any,                 sonoma:        "42db7cf7e9a6e8fa9d6f38cf93f537a32663c932dd3063529466f5cb9a5278bc"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "769bb1465997f0586b5f0b2082e01a1e9fa817a3c09434d0367eb70b99f45422"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8b6cc9b9d780d119cd7932104cd55df405e7cc09cd9fb2c9125f2156842f3bca"
+    sha256 cellar: :any,                 arm64_tahoe:   "bbd2413a1db5b7bf43173f56725888855c386f5962e09a3201703749200ccb94"
+    sha256 cellar: :any,                 arm64_sequoia: "b80ea1d2d7872c63508587b9287937383e8e63dbc2b41dade567959101c8346e"
+    sha256 cellar: :any,                 arm64_sonoma:  "5a51f5527fe50e5116dd07a8e6c3f5a04966bdee14651d03f8bf8272a61051e5"
+    sha256 cellar: :any,                 sonoma:        "551ef75024022cc811df70b832831db2be57bfd25ad394b1d9e979ad994057d4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c87bb51d56eb46e83dc2f2e7b607ec178b1d032a9a228a83c1fdf8c670aa3d6f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "11cd052934fead732f6084ff17507850c65447842f8b96467c4f0bf114e4e2b0"
   end
 
   keg_only :shadowed_by_macos, "macOS provides zlib"

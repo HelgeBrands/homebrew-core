@@ -3,39 +3,45 @@ class Buku < Formula
 
   desc "Powerful command-line bookmark manager"
   homepage "https://github.com/jarun/buku"
-  url "https://files.pythonhosted.org/packages/a0/74/a3ecd735d75fc452fa4c6a995141cda20937e21d30ae9810d70ed159f58d/buku-5.0.tar.gz"
-  sha256 "895a86b099adfe420c1925f333ce6cb00b851a6f11bcc7e42fb125fa81cae8b2"
+  # TODO: Revert back to PyPI url on next version bump
+  url "https://github.com/jarun/buku/archive/refs/tags/v5.1.tar.gz"
+  sha256 "0f1a3e15f882fe9a0f8e550abae7388d3cb81d4718a1b4309dcf4363633cb7b1"
   license "GPL-3.0-or-later"
-  revision 2
   head "https://github.com/jarun/buku.git", branch: "master"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1a1f1557ab3d6578e9589b8e28fc2477ab3ec5fc3224bb5c7f9f81fc69e830b3"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1f94f9b0dc834181746d00e206d9fc50d4f330602acc33d7ea9b9eadcbec0c11"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2cc3e4e855f52937e2afcfa149e41eeb3dc313e9f54bbb997bf6b312e0957838"
-    sha256 cellar: :any_skip_relocation, sonoma:        "d0fa70a3343c56a5c94ae4c0f22d24346e281fa56c3bbdfd1504942a28464319"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8bd708874bf13051728a3c67e18dfb804860024005b049cfd57a15c13a5da4d0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3faf4630b940657022c532f496614567061a255234b18fb397530aa5acf36ef3"
+    sha256 cellar: :any,                 arm64_tahoe:   "da47799d5257c924e9e64b09a35d37e8495b0be883be4453d06050f341649187"
+    sha256 cellar: :any,                 arm64_sequoia: "fe32036e212bd3dee51c5e419cd0a4dd5f6eecaead62508882b0b03c0064661c"
+    sha256 cellar: :any,                 arm64_sonoma:  "7ce1e2cab18d9fc25fc31ac01d384d6a5d7dc2ce39613d408f4f8c3ea7c3db56"
+    sha256 cellar: :any,                 sonoma:        "0dd901b36f3a3b2abd4c04bf97274e0097be31946e5c85b2d1e3012ef0296464"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "22392d5a3158932650d76548080476649790aa7cfa02596c8a40645978a8bfab"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3f243cb9536f3da984a35dad5630a4fcea4f3f073bcf435b1fceb5d0511e991f"
   end
 
   depends_on "certifi" => :no_linkage
   depends_on "cryptography" => :no_linkage
+  depends_on "libyaml"
   depends_on "python@3.14"
+  depends_on "rpds-py"
 
   uses_from_macos "libffi"
 
   pypi_packages package_name:     "buku[server]",
-                exclude_packages: ["certifi", "cryptography"]
+                exclude_packages: ["certifi", "cryptography", "rpds-py"]
 
   resource "arrow" do
-    url "https://files.pythonhosted.org/packages/2e/00/0f6e8fcdb23ea632c866620cc872729ff43ed91d284c866b515c6342b173/arrow-1.3.0.tar.gz"
-    sha256 "d4540617648cb5f895730f1ad8c82a65f2dad0166f57b75f3ca54759c4d67a85"
+    url "https://files.pythonhosted.org/packages/b9/33/032cdc44182491aa708d06a68b62434140d8c50820a087fac7af37703357/arrow-1.4.0.tar.gz"
+    sha256 "ed0cc050e98001b8779e84d461b0098c4ac597e88704a655582b21d116e526d7"
+  end
+
+  resource "attrs" do
+    url "https://files.pythonhosted.org/packages/6b/5c/685e6633917e101e5dcb62b9dd76946cbb57c26e133bae9e0cd36033c0a9/attrs-25.4.0.tar.gz"
+    sha256 "16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11"
   end
 
   resource "beautifulsoup4" do
-    url "https://files.pythonhosted.org/packages/77/e9/df2358efd7659577435e2177bfa69cba6c33216681af51a707193dec162a/beautifulsoup4-4.14.2.tar.gz"
-    sha256 "2a98ab9f944a11acee9cc848508ec28d9228abfd522ef0fad6a02a72e0ded69e"
+    url "https://files.pythonhosted.org/packages/c3/b0/1c6a16426d389813b48d95e26898aff79abbde42ad353958ad95cc8c9b21/beautifulsoup4-4.14.3.tar.gz"
+    sha256 "6292b1c5186d356bba669ef9f7f051757099565ad9ada5dd630bd9de5fa7fb86"
   end
 
   resource "blinker" do
@@ -44,8 +50,13 @@ class Buku < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
+  end
+
+  resource "flasgger" do
+    url "https://files.pythonhosted.org/packages/8a/e4/05e80adeadc39f171b51bd29b24a6d9838127f3aaa1b07c1501e662a8cee/flasgger-0.9.7.1.tar.gz"
+    sha256 "ca098e10bfbb12f047acc6299cc70a33851943a746e550d86e65e60d4df245fb"
   end
 
   resource "flask" do
@@ -54,8 +65,8 @@ class Buku < Formula
   end
 
   resource "flask-admin" do
-    url "https://files.pythonhosted.org/packages/be/4d/7cad383a93e3e1dd9378f1fcf05ddc532c6d921fb30c19ce8f8583630f24/Flask-Admin-1.6.1.tar.gz"
-    sha256 "24cae2af832b6a611a01d7dc35f42d266c1d6c75a426b869d8cb241b78233369"
+    url "https://files.pythonhosted.org/packages/cc/b7/78a1534b4fe1a40bccf79e8e274e1ace6ee1678c804e4c178b1c96e6c8d6/flask_admin-2.0.2.tar.gz"
+    sha256 "1d06aec7efee957972b43f6b08a0bd08d5f4cf9a337d4ece2f17c98abc2a214e"
   end
 
   resource "flask-paginate" do
@@ -90,14 +101,44 @@ class Buku < Formula
     sha256 "0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d"
   end
 
+  resource "jsonschema" do
+    url "https://files.pythonhosted.org/packages/74/69/f7185de793a29082a9f3c7728268ffb31cb5095131a9c139a74078e27336/jsonschema-4.25.1.tar.gz"
+    sha256 "e4a9655ce0da0c0b67a085847e00a3a51449e1157f4f75e9fb5aa545e122eb85"
+  end
+
+  resource "jsonschema-specifications" do
+    url "https://files.pythonhosted.org/packages/19/74/a633ee74eb36c44aa6d1095e7cc5569bebf04342ee146178e2d36600708b/jsonschema_specifications-2025.9.1.tar.gz"
+    sha256 "b540987f239e745613c7a9176f3edb72b832a4ac465cf02712288397832b5e8d"
+  end
+
   resource "markupsafe" do
     url "https://files.pythonhosted.org/packages/7e/99/7690b6d4034fffd95959cbe0c02de8deb3098cc577c67bb6a24fe5d7caa7/markupsafe-3.0.3.tar.gz"
     sha256 "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698"
   end
 
+  resource "mistune" do
+    url "https://files.pythonhosted.org/packages/d7/02/a7fb8b21d4d55ac93cdcde9d3638da5dd0ebdd3a4fed76c7725e10b81cbe/mistune-3.1.4.tar.gz"
+    sha256 "b5a7f801d389f724ec702840c11d8fc48f2b33519102fc7ee739e8177b672164"
+  end
+
+  resource "packaging" do
+    url "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz"
+    sha256 "d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"
+  end
+
   resource "python-dateutil" do
     url "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz"
     sha256 "37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3"
+  end
+
+  resource "pyyaml" do
+    url "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz"
+    sha256 "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"
+  end
+
+  resource "referencing" do
+    url "https://files.pythonhosted.org/packages/22/f5/df4e9027acead3ecc63e50fe1e36aca1523e1719559c499951bb4b53188f/referencing-0.37.0.tar.gz"
+    sha256 "44aefc3142c5b842538163acb373e24cce6632bd54bdb01b21ad5863489f50d8"
   end
 
   resource "six" do
@@ -110,19 +151,19 @@ class Buku < Formula
     sha256 "e2dd4a40a628cb5f28f6d4b0db8800b8f581b65bb380b97de22ba5ca8d72572f"
   end
 
-  resource "types-python-dateutil" do
-    url "https://files.pythonhosted.org/packages/fc/83/24ed25dd0c6277a1a170c180ad9eef5879ecc9a4745b58d7905a4588c80d/types_python_dateutil-2.9.0.20251008.tar.gz"
-    sha256 "c3826289c170c93ebd8360c3485311187df740166dbab9dd3b792e69f2bc1f9c"
-  end
-
   resource "typing-extensions" do
     url "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz"
     sha256 "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"
   end
 
+  resource "tzdata" do
+    url "https://files.pythonhosted.org/packages/95/32/1a225d6164441be760d75c2c42e2780dc0873fe382da3e98a2e1e48361e5/tzdata-2025.2.tar.gz"
+    sha256 "b60a638fcc0daffadf82fe0f57e53d06bdec2f36c4df66280ae79bce6bd6f2b9"
+  end
+
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/5e/1d/0f3a93cca1ac5e8287842ed4eebbd0f7a991315089b1a0b01c7788aa7b63/urllib3-2.6.1.tar.gz"
+    sha256 "5379eb6e1aba4088bae84f8242960017ec8d8e3decf30480b3a1abdaa9671a3f"
   end
 
   resource "webencodings" do
@@ -131,8 +172,8 @@ class Buku < Formula
   end
 
   resource "werkzeug" do
-    url "https://files.pythonhosted.org/packages/9f/69/83029f1f6300c5fb2471d621ab06f6ec6b3324685a2ce0f9777fd4a8b71e/werkzeug-3.1.3.tar.gz"
-    sha256 "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
+    url "https://files.pythonhosted.org/packages/45/ea/b0f8eeb287f8df9066e56e831c7824ac6bab645dd6c7a8f4b2d767944f9b/werkzeug-3.1.4.tar.gz"
+    sha256 "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
   end
 
   resource "wtforms" do
@@ -140,9 +181,18 @@ class Buku < Formula
     sha256 "df3e6b70f3192e92623128123ec8dca3067df9cfadd43d59681e210cfb8d4682"
   end
 
+  # Fix type error and missing apidocs: https://github.com/jarun/buku/pull/883
+  patch do
+    url "https://github.com/jarun/buku/commit/291fa9a0e4cafe9ca2261940394de12c2d5403a9.patch?full_index=1"
+    sha256 "ba678c0814589954817da53907399736c1d2e989a875a0957fc8ef8bad706164"
+  end
+  patch do
+    url "https://github.com/jarun/buku/commit/ea0a44a1c20821bd925a3557efabb8905db4337b.patch?full_index=1"
+    sha256 "76fea0fcbaec25376722f598a8dd12012245a650c37f867e27f19dcfa8e43963"
+  end
+
   def install
     virtualenv_install_with_resources
-    man1.install "buku.1"
     bash_completion.install "auto-completion/bash/buku-completion.bash" => "buku"
     fish_completion.install "auto-completion/fish/buku.fish"
     zsh_completion.install "auto-completion/zsh/_buku"
@@ -231,7 +281,7 @@ class Buku < Formula
     pid = fork do
       $stdout.reopen(File::NULL)
       $stderr.reopen(File::NULL)
-      exec "#{bin}/bukuserver", "run", "--host", "127.0.0.1", "--port", port.to_s
+      exec bin/"bukuserver", "run", "--host", "127.0.0.1", "--port", port.to_s
     end
 
     begin

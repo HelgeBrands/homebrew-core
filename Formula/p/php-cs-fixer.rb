@@ -1,28 +1,33 @@
 class PhpCsFixer < Formula
   desc "Tool to automatically fix PHP coding standards issues"
   homepage "https://cs.symfony.com/"
-  # Bump to PHP 8.5 on the next release, if possible.
-  url "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v3.90.0/php-cs-fixer.phar"
-  sha256 "43fd63116dd8937ac609bc13cf008c6bb9f174619e3452c25e364ce1255cbae9"
+  url "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v3.91.3/php-cs-fixer.phar"
+  sha256 "22f348bdbc313f93ea11094132d516aa921325287056dcca6ace73d48610761f"
   license "MIT"
-  revision 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "6d5dc14814e7a17201cc776722e8d2e89d7b20f489fa4741883e6e4b0c419a90"
+    sha256 cellar: :any_skip_relocation, all: "50585d12e4a32142dbe2e1a81b1bc28336cf16353ef461d0bd67f69c8178a18f"
   end
 
-  depends_on "php@8.4"
+  depends_on "php"
 
   def install
     libexec.install "php-cs-fixer.phar"
 
     (bin/"php-cs-fixer").write <<~PHP
-      #!#{Formula["php@8.4"].opt_bin}/php
+      #!#{Formula["php"].opt_bin}/php
       <?php require '#{libexec}/php-cs-fixer.phar';
     PHP
   end
 
   test do
+    (testpath/"composer.json").write <<~JSON
+      {
+        "require": {
+          "php": ">=8.0"
+        }
+      }
+    JSON
     (testpath/"test.php").write <<~PHP
       <?php $this->foo(   'homebrew rox'   );
     PHP
@@ -30,6 +35,20 @@ class PhpCsFixer < Formula
       <?php
 
       $this->foo('homebrew rox');
+    PHP
+
+    (testpath/".php-cs-fixer.dist.php").write <<~PHP
+      <?php
+
+      $finder = PhpCsFixer\\Finder::create()
+          ->in(__DIR__);
+
+      return (new PhpCsFixer\\Config())
+          ->setRiskyAllowed(false)
+          ->setRules([
+              '@PSR12' => true,
+          ])
+          ->setFinder($finder);
     PHP
 
     system bin/"php-cs-fixer", "fix", "test.php"

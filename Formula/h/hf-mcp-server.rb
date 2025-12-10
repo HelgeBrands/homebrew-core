@@ -1,17 +1,17 @@
 class HfMcpServer < Formula
   desc "MCP Server for Hugging Face"
   homepage "https://github.com/evalstate/hf-mcp-server"
-  url "https://registry.npmjs.org/@llmindset/hf-mcp-server/-/hf-mcp-server-0.2.46.tgz"
-  sha256 "68547c57b323218f923eba9f1ad17ed8f8ce4bdfad5059c17ff5f9416846d8a6"
+  url "https://registry.npmjs.org/@llmindset/hf-mcp-server/-/hf-mcp-server-0.2.57.tgz"
+  sha256 "aa22e8e00caf74442d69489b40cbdd74d5d51da6faa7b4f4c3a55a6c714cacca"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "62d1d8a494e53d21437963544e9a0c5c71747b74c1804f83b3e13c0f29e3b76f"
-    sha256 cellar: :any,                 arm64_sequoia: "6dd2336f70c8be766101bf5cfd2b682f3d54de77c86ea1f40e1ec7185a1fce80"
-    sha256 cellar: :any,                 arm64_sonoma:  "6dd2336f70c8be766101bf5cfd2b682f3d54de77c86ea1f40e1ec7185a1fce80"
-    sha256 cellar: :any,                 sonoma:        "16af807ce13855c8090c0b0a66a727b8d3207aeeb3733caf5dacc6ce77ea3095"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a7dccd90895e24900888e937fab35c19fdacec1e54d9e3d96bf1d5e134307f51"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0a6f945fb764d6d3ce03954d9a116ad2378bb33519c5fd2a27a69562b76093ca"
+    sha256 cellar: :any,                 arm64_tahoe:   "4654d7fa7af78bd9d90d65e7b12ea3aad3534ac65335d349e2a3402dcf9035a8"
+    sha256 cellar: :any,                 arm64_sequoia: "171b0038bef722d0a30abcfe1193dbccb3f338ef73e21c00ad8ca35e4d1a2783"
+    sha256 cellar: :any,                 arm64_sonoma:  "171b0038bef722d0a30abcfe1193dbccb3f338ef73e21c00ad8ca35e4d1a2783"
+    sha256 cellar: :any,                 sonoma:        "c3e71d8df583e6eba43a7b3a90e8cfc0b120996e7a5a7ce71e8439acd6916089"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3f5d7c81b448aa0d90d1bde1081a1e696c15afb4a24d9e77a73d4d042ce1434c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9a36af0af8fe0eadbba5e908f14b98db1018793fcff1779cfddd32cab0c88bf6"
   end
 
   depends_on "node"
@@ -19,6 +19,9 @@ class HfMcpServer < Formula
   def install
     system "npm", "install", *std_npm_args
     bin.install_symlink Dir["#{libexec}/bin/*"]
+
+    node_modules = libexec/"lib/node_modules/@llmindset/hf-mcp-server/node_modules"
+    deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
   end
 
   test do
@@ -28,7 +31,7 @@ class HfMcpServer < Formula
     output_log = testpath/"output.log"
     pid = spawn bin/"hf-mcp-server", [:out, :err] => output_log.to_s
     sleep 5
-    sleep 8 if OS.mac? && Hardware::CPU.intel?
+    sleep 15 if OS.mac? && Hardware::CPU.intel?
     assert_match "Failed to authenticate with Hugging Face API", output_log.read
   ensure
     Process.kill("TERM", pid)

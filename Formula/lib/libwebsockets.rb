@@ -1,8 +1,8 @@
 class Libwebsockets < Formula
   desc "C websockets server library"
   homepage "https://github.com/warmcat/libwebsockets"
-  url "https://github.com/warmcat/libwebsockets/archive/refs/tags/v4.4.1.tar.gz"
-  sha256 "472e6cfa77b6f80ff2cc176bc59f6cb2856df7e30e8f31afcbd1fc94ffd2f828"
+  url "https://github.com/warmcat/libwebsockets/archive/refs/tags/v4.5.2.tar.gz"
+  sha256 "04244efb7a6438c8c6bfc79b21214db5950f72c9cf57e980af57ca321aae87b2"
   license "MIT"
   head "https://github.com/warmcat/libwebsockets.git", branch: "main"
 
@@ -12,22 +12,18 @@ class Libwebsockets < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "adbf1ec53f5f714f712585230bf75174e101dd37d5d686a45c0f7bf73b20ffba"
-    sha256 arm64_sequoia: "a965ebcaafd65f76997b7ba363fae823e4089d618f7f0e0719d84567e580f0cf"
-    sha256 arm64_sonoma:  "48c33f1b7e2127ef3588f2ed4c7f1e16e7c4686820e5f4d90b301fc704fe68cf"
-    sha256 arm64_ventura: "81b4a1cf2409e603b8e7ac69101aa5902d56e6b9aa61599ace0671a5449e5924"
-    sha256 sonoma:        "403c3c806530d591e624efe2c43d47d866691924c91ce504778e33cfb3e4d225"
-    sha256 ventura:       "1298fe6e7b79a02b4f46b5142d69c2a7bf5de7e1489684de289decdc6fea7c7e"
-    sha256 arm64_linux:   "02496926fb45830667526c76a081b91947c56fccbd653c434ec91f29b3ac0734"
-    sha256 x86_64_linux:  "1c9dcc51d83f208d195dea7723cace36d0365fbb686db4cce8863ebf3df7bb21"
+    sha256 arm64_tahoe:   "cc2560edbfebc0dca5c9981e9b60b790d7393f9d67d64cca14a70c9b81020ff2"
+    sha256 arm64_sequoia: "293904c11a66fe605eeb07f52d4392a1a103003a29d3fc840ae2d4b31952b22e"
+    sha256 arm64_sonoma:  "d240c2004fdbfc02e5d57821d01bcaf943f0ae747540a0d8e502200cfa906411"
+    sha256 sonoma:        "5bfd9b7dcce167f85c69c21b76234a9ecdfa6646bf421693ebe80428127c8ec6"
+    sha256 arm64_linux:   "a7590730928baf546d2622432d3cc528bc51865423c05b7eb6ab363cfeba3e39"
+    sha256 x86_64_linux:  "305a4004dfe35c97a5feb707b50fdf2445efb7240fab48856c62aeac9d872fd5"
   end
 
   depends_on "cmake" => :build
   depends_on "libevent"
   depends_on "libuv"
   depends_on "openssl@3"
-
-  uses_from_macos "zlib"
 
   def install
     system "cmake", "-S", ".", "-B", "build",

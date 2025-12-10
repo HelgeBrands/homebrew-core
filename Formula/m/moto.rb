@@ -3,18 +3,18 @@ class Moto < Formula
 
   desc "Mock AWS services"
   homepage "http://getmoto.org/"
-  url "https://files.pythonhosted.org/packages/fa/bc/569983c0ccc80d2d3de0197ac2abb6b8a502872b485d09d2606c833a0d22/moto-5.1.17.tar.gz"
-  sha256 "31b832de25846529963bcb273448240cae34b9cbaff0bdae15f75c716c08a5f8"
+  url "https://files.pythonhosted.org/packages/e3/6a/a73bef67261bfab55714390f07c7df97531d00cea730b7c0ace4d0ad7669/moto-5.1.18.tar.gz"
+  sha256 "45298ef7b88561b839f6fe3e9da2a6e2ecd10283c7bf3daf43a07a97465885f9"
   license "Apache-2.0"
+  revision 1
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "38c84483a645d5748e9accdb80e05ab4a3e81c2d7fe3dcd6dccd1e562e936640"
-    sha256 cellar: :any,                 arm64_sequoia: "02345137fd460a70ed62ffc6f1a9f411adc4035a8e671a30ec15457b72e85c85"
-    sha256 cellar: :any,                 arm64_sonoma:  "7c985d134b999b028f9c2566fbcf626ece5d5d7e86a2fcb99a409eb29fc7d0fc"
-    sha256 cellar: :any,                 sonoma:        "aad3d67029f1ffb8c07d77f4aabd33ba380caff53dce2f8314300ec78d36df08"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d175df0f29ed134d741dfd3f25eeb19cb9e64cab336dfd1b5ab4b0e604dbf55b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3881630ae0ef92aa8fa50e97365104f60d56986f8640cd0ee9e56c228c143312"
+    sha256 cellar: :any,                 arm64_tahoe:   "1bfb81047e6708b0f6022eb6d497d14bdcc537cb26d00ad68ed1152ff26f5ad3"
+    sha256 cellar: :any,                 arm64_sequoia: "ef71203411e114aa019d449ccff3387a432b58f1d38e5d326472646ba2b71304"
+    sha256 cellar: :any,                 arm64_sonoma:  "e3fc84ba8f49d26580ec066f95a3cc2a64d90b1ad72aeea0043259c83df08bc0"
+    sha256 cellar: :any,                 sonoma:        "2b1e929e4137a6583b4fe32b1bd54bc6ed5f30408f11d17b1251d50fb93ea9eb"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4dfe0defcf1ed9bc5f2c82524e4be74d77712a1396c0b88020d98405c774570e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5bba19d502b3ff8a9aeaa235ecf9662fe55788411d7480ce4bd25a4e082fc8ce"
   end
 
   depends_on "certifi" => :no_linkage
@@ -38,8 +38,8 @@ class Moto < Formula
   end
 
   resource "aws-sam-translator" do
-    url "https://files.pythonhosted.org/packages/e8/7f/db344c656949fa286ff8a14ff2c64355b6ca0cb6ebaf260678041acb8d9c/aws_sam_translator-1.101.0.tar.gz"
-    sha256 "234c1ca29d47f2cd276858371d4a646bc5cdb0de1e07724721d9358d6de005aa"
+    url "https://files.pythonhosted.org/packages/84/7e/f6bcee1f5ae7032ac66a4f1bd42bef7810504484c36004d22e81484adb0f/aws_sam_translator-1.105.0.tar.gz"
+    sha256 "472829abf114e7c47112d88f9b3c27585e9c9b44f9d090d1ab9bc4d235bc12b7"
   end
 
   resource "aws-xray-sdk" do
@@ -53,18 +53,18 @@ class Moto < Formula
   end
 
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/8f/2c/0a6e49612ef9868382ef76292da2dd1dee7c74a0f1ec95323e76f6e2ef4b/boto3-1.40.75.tar.gz"
-    sha256 "a5219a2f397f8616462d7908e696c281f120aa2d8458280ff24f7ddeb2108faf"
+    url "https://files.pythonhosted.org/packages/f3/31/246916eec4fc5ff7bebf7e75caf47ee4d72b37d4120b6943e3460956e618/boto3-1.42.4.tar.gz"
+    sha256 "65f0d98a3786ec729ba9b5f70448895b2d1d1f27949aa7af5cb4f39da341bbc4"
   end
 
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/d7/11/a6a07cbe12e0161063f2dac82bb7a8f48f649b394863315cd6f3149b82ac/botocore-1.40.75.tar.gz"
-    sha256 "bf8b067209fee5a9738800d41852e113b8ebdb01bd7f1e8b4541d55ecdbdb8f3"
+    url "https://files.pythonhosted.org/packages/5c/b7/dec048c124619b2702b5236c5fc9d8e5b0a87013529e9245dc49aaaf31ff/botocore-1.42.4.tar.gz"
+    sha256 "d4816023492b987a804f693c2d76fb751fdc8755d49933106d69e2489c4c0f98"
   end
 
   resource "cfn-lint" do
-    url "https://files.pythonhosted.org/packages/07/32/9355c1309345622aaee6e997e1417dcd2382e05c14e09c49584c4fbe83a7/cfn_lint-1.40.4.tar.gz"
-    sha256 "7c8bcf3cf5f2cf8d96fd30fdee1115bfc2480a4c619afc8bce36d551fbb228e1"
+    url "https://files.pythonhosted.org/packages/c9/fb/8b244211d1af184b0d2d653a7552b1538187e3a9e5ff7222e70f4035d6de/cfn_lint-1.42.0.tar.gz"
+    sha256 "0bd373d34451e396c14a95be03fe4bcba8d2c00b2a4c61697a04deaa79ab67ed"
   end
 
   resource "charset-normalizer" do
@@ -118,8 +118,8 @@ class Moto < Formula
   end
 
   resource "joserfc" do
-    url "https://files.pythonhosted.org/packages/79/88/69505be49b52ac808b290c25ac3796142bcf4349de79adb0175ece83427c/joserfc-1.4.2.tar.gz"
-    sha256 "1b4cebf769eeb8105d2e3433cae49e7217c83e4abf8493e91e7d0f0ad3579fdd"
+    url "https://files.pythonhosted.org/packages/ec/b4/d49b4ec64feb3332f9255a1deefd8b6ffcbe6c332c205fa86eb33cf48c3a/joserfc-1.5.0.tar.gz"
+    sha256 "4e88d757cf08ec1d370561a15dd6dda8452ad4e335066a9aeb1b426bffe91c56"
   end
 
   resource "jsonpatch" do
@@ -173,8 +173,8 @@ class Moto < Formula
   end
 
   resource "networkx" do
-    url "https://files.pythonhosted.org/packages/6c/4f/ccdb8ad3a38e583f214547fd2f7ff1fc160c43a75af88e6aec213404b96a/networkx-3.5.tar.gz"
-    sha256 "d4c6f9cf81f52d69230866796b82afbccdec3db7ae4fbd1b65ea750feed50037"
+    url "https://files.pythonhosted.org/packages/e8/fc/7b6fd4d22c8c4dc5704430140d8b3f520531d4fe7328b8f8d03f5a7950e8/networkx-3.6.tar.gz"
+    sha256 "285276002ad1f7f7da0f7b42f004bcba70d381e936559166363707fdad3d72ad"
   end
 
   resource "openapi-schema-validator" do
@@ -243,8 +243,8 @@ class Moto < Formula
   end
 
   resource "s3transfer" do
-    url "https://files.pythonhosted.org/packages/62/74/8d69dcb7a9efe8baa2046891735e5dfe433ad558ae23d9e3c14c633d1d58/s3transfer-0.14.0.tar.gz"
-    sha256 "eff12264e7c8b4985074ccce27a3b38a485bb7f7422cc8046fee9be4983e4125"
+    url "https://files.pythonhosted.org/packages/05/04/74127fc843314818edfa81b5540e26dd537353b123a4edc563109d8f17dd/s3transfer-0.16.0.tar.gz"
+    sha256 "8e990f13268025792229cd52fa10cb7163744bf56e719e0b9cb925ab79abf920"
   end
 
   resource "setuptools" do
@@ -263,13 +263,13 @@ class Moto < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   resource "werkzeug" do
-    url "https://files.pythonhosted.org/packages/9f/69/83029f1f6300c5fb2471d621ab06f6ec6b3324685a2ce0f9777fd4a8b71e/werkzeug-3.1.3.tar.gz"
-    sha256 "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"
+    url "https://files.pythonhosted.org/packages/45/ea/b0f8eeb287f8df9066e56e831c7824ac6bab645dd6c7a8f4b2d767944f9b/werkzeug-3.1.4.tar.gz"
+    sha256 "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
   end
 
   resource "wrapt" do

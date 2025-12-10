@@ -1,8 +1,8 @@
 class CaCertificates < Formula
   desc "Mozilla CA certificate store"
   homepage "https://curl.se/docs/caextract.html"
-  url "https://curl.se/ca/cacert-2025-11-04.pem"
-  sha256 "8ac40bdd3d3e151a6b4078d2b2029796e8f843e3f86fbf2adbc4dd9f05e79def"
+  url "https://curl.se/ca/cacert-2025-12-02.pem"
+  sha256 "f1407d974c5ed87d544bd931a278232e13925177e239fca370619aba63c757b4"
   license "MPL-2.0"
 
   livecheck do
@@ -11,8 +11,7 @@ class CaCertificates < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "c414336ff5220d77124debb496c8d86ffa1bbc5946309ee2d9d26645db300b96"
+    sha256 cellar: :any_skip_relocation, all: "dd8e78402d2feff017ecf5dd9b8a7f3edea2310631323f24b093ebc85727dd21"
   end
 
   def install
@@ -147,8 +146,14 @@ class CaCertificates < Formula
     rm(pkgetc/"cert.pem", force: true)
     pkgetc.mkpath
 
-    system_ca_certificates = Pathname.new("/etc/ssl/certs/ca-certificates.crt")
-    return if !system_ca_certificates.exist? || !system_ca_certificates.readable?
+    ca_certificate_paths = [
+      "/etc/ssl/certs/ca-certificates.crt", # Debian/Ubuntu, Alpine Linux, Arch Linux
+      "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem", # RHEL/CentOS/Fedora, Amazon Linux
+      "/etc/ssl/ca-bundle.pem", # SUSE/openSUSE
+    ]
+    system_ca_certificates = ca_certificate_paths.map { |p| Pathname.new(p) }
+                                                 .find { |pn| pn.file? && pn.readable? }
+    return unless system_ca_certificates
 
     # Integrate system certificates if OpenSSL is available
     unless which("openssl")
@@ -171,7 +176,7 @@ class CaCertificates < Formula
     load_certificates_from_file(pkgshare/"cacert.pem", trusted_certificates, fingerprints, "Mozilla")
 
     (pkgetc/"cert.pem").atomic_write(trusted_certificates.join("\n") << "\n")
-    ohai "CA certificates have been bootstrapped from the system CA store."
+    ohai "CA certificates have been bootstrapped from the system CA store at #{system_ca_certificates}"
   ensure
     # Ensure a PEM file always exists, even if the method exits early or fails
     cp pkgshare/"cacert.pem", pkgetc/"cert.pem" unless (pkgetc/"cert.pem").exist?
@@ -187,10 +192,12 @@ class CaCertificates < Formula
     on_linux do
       <<~EOS
         CA certificates have been bootstrapped from both the Mozilla CA store and the system CA store at
+        one of the following locations, depending on your distro:
 
-          /etc/ssl/certs/ca-certificates.crt
+          /etc/ssl/certs/ca-certificates.crt                 # Debian/Ubuntu, Alpine Linux, Arch Linux
+          /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem  # RHEL/CentOS/Fedora, Amazon Linux
+          /etc/ssl/ca-bundle.pem                             # SUSE/openSUSE
 
-        if this path exists and is readable.
       EOS
     end
   end

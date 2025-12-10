@@ -6,15 +6,16 @@ class Gptme < Formula
   url "https://files.pythonhosted.org/packages/cf/48/95c9aa7ab0c6144de90fb56394720c570af139a453d1c5e2729c61df8780/gptme-0.30.0.tar.gz"
   sha256 "02406e255091fc116b1bad4b8c5ec1d79f306045a354d9cb3d5a15797097b161"
   license "MIT"
+  revision 2
   head "https://github.com/ErikBjare/gptme.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ad56a3d23c904a24cae36af8cda0ba8fed7c80df2290638c8b20a27335b0d8c3"
-    sha256 cellar: :any,                 arm64_sequoia: "0172cf8e3b6cdf690131bc12096c4013b132b49933c004f5df4b5cecaeb946d0"
-    sha256 cellar: :any,                 arm64_sonoma:  "d4bf51be9d58073ede79eaa12a5192b2d09c021ea5ce7a8cc147153ad28c0d27"
-    sha256 cellar: :any,                 sonoma:        "4039b1b7610ce2cb18608be16dd9f5165587b55c12f20cddc82ddb64a3e761c8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "21892b08514c85a4b993f270532a095a172abe254d8c3375c2d0c1f1beef667c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7846d6f25bf0f39bf4210fa1e6fb6afa7a060538ace5d815dfe65826268ef94b"
+    sha256 cellar: :any,                 arm64_tahoe:   "f633e471c8f17d6447f6e210b53ea64c09cbeaefc97a226b9b8a23985ab19812"
+    sha256 cellar: :any,                 arm64_sequoia: "238eafc2c6f217c047d7d9aca0517a5c338dc6e79bf655792181abc9cd285a48"
+    sha256 cellar: :any,                 arm64_sonoma:  "546007286bb8210f8f99f3638fd1e985f1013381f06c8b661fc491518cf96747"
+    sha256 cellar: :any,                 sonoma:        "24e11f52044ff5aad9fa4ba5df924ddf20887ca26f6e13fa9138ec91f35ec887"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2763608b30edf24b653f0c2ef6c596cfe599c403acdd79a6a937152714064024"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "26dc8c03f4c59047c26f33c38bcad806fd8fcd20d43fc55dfaea4388923113b4"
   end
 
   depends_on "rust" => :build # for jitter
@@ -37,8 +38,8 @@ class Gptme < Formula
   end
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/c6/78/7d432127c41b50bccba979505f272c16cbcadcc33645d5fa3a738110ae75/anyio-4.11.0.tar.gz"
-    sha256 "82a8d0b81e318cc5ce71a5f1f8b5c4e63619620b63141ef8c995fa0db95a57c4"
+    url "https://files.pythonhosted.org/packages/16/ce/8a777047513153587e5434fd752e89334ac33e379aa3497db860eeb60377/anyio-4.12.0.tar.gz"
+    sha256 "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
   end
 
   resource "asttokens" do
@@ -162,8 +163,8 @@ class Gptme < Formula
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/15/bb/147bf5d47b8d6f3fb315204cd2f567b1ad85511acd8d59e85cccf7cce65c/mcp-1.21.2.tar.gz"
-    sha256 "b6497b7f7a77aabe263931a3335956dfd45fe8b1e2168931e455914ba1a7f4c9"
+    url "https://files.pythonhosted.org/packages/12/42/10c0c09ca27aceacd8c428956cfabdd67e3d328fe55c4abc16589285d294/mcp-1.23.1.tar.gz"
+    sha256 "7403e053e8e2283b1e6ae631423cb54736933fea70b32422152e6064556cd298"
   end
 
   resource "mdurl" do
@@ -197,8 +198,8 @@ class Gptme < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/61/33/9611380c2bdb1225fdef633e2a9610622310fed35ab11dac9620972ee088/platformdirs-4.5.0.tar.gz"
-    sha256 "70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312"
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "prompt-toolkit" do
@@ -327,8 +328,8 @@ class Gptme < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   resource "uvicorn" do

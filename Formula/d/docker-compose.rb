@@ -1,8 +1,8 @@
 class DockerCompose < Formula
   desc "Isolated development environments using Docker"
   homepage "https://docs.docker.com/compose/"
-  url "https://github.com/docker/compose/archive/refs/tags/v2.40.3.tar.gz"
-  sha256 "5ee988a7d9e00ffa2d166a50f4cda0e13622f2220f1ffa6aff353f33cf40e37e"
+  url "https://github.com/docker/compose/archive/refs/tags/v5.0.0.tar.gz"
+  sha256 "2c50b805cbb35c7257b54e739aa71c5d7aa5da3a8b2da5c5bb8f145c3bf02e96"
   license "Apache-2.0"
   head "https://github.com/docker/compose.git", branch: "main"
 
@@ -15,12 +15,13 @@ class DockerCompose < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c9017800aea3aa49b70c81d2f08d07335230cb0b83063399729d5dc6ffff3f00"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d3a36647584ffa366fe33f2324141bdbff61ae0e06f110f3a19d73eb58eb0038"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2dea1febb33e0321aefd77cf61330ebb5281347c644fa2a019d4c0ce2f2ae3f0"
-    sha256 cellar: :any_skip_relocation, sonoma:        "37041bf182286e9a019f7bcab31108b2383d9e0f8e1b2bfe476d2e9d5e030917"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0910ffe609f50d5e6d391c9f780a1f70391c0a6099b4cdcc8e4bf5ce7dd6cc03"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cd2e5c1b224cb9696bfd1655bca04e15efda00369a5f6f40b15bb32e998abf18"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "400aafadab847faf30e287194dda351313b109573d02fe56d0cdbe2078271375"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a75c7301ddf479d13cb4c9df0fc6867b6985ffa9c6fc7c9941e4975631ab660e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "45bd444e96b25bc62cb7b46721c6feb578cd9e0a8fe0ee24bd273cfa566bbb1e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "78392813c8da161f21af93be917f9bb7fe1ae4b826a71f16990a7aa44760ecda"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e86d832c6af45571593ac30a4fb33b1d198f0422adaa36c6abbc29977c0b522f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "df56d8cad29bb32dc871eb4a9b1cd1de1a02e0c4eed4bdefbccb3b4b1aa29a07"
   end
 
   depends_on "go" => :build
@@ -31,7 +32,7 @@ class DockerCompose < Formula
     ENV["CGO_ENABLED"] = OS.mac? ? "1" : "0"
     ldflags = %W[
       -s -w
-      -X github.com/docker/compose/v2/internal.Version=#{version}
+      -X github.com/docker/compose/v#{version.major}/internal.Version=#{version}
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd"
 
@@ -50,5 +51,6 @@ class DockerCompose < Formula
   test do
     output = shell_output("#{bin}/docker-compose up 2>&1", 1)
     assert_match "no configuration file provided", output
+    assert_match version.to_s, shell_output("#{bin}/docker-compose version")
   end
 end

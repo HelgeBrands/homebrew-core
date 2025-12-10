@@ -1,13 +1,13 @@
 class SonarScanner < Formula
   desc "Launcher to analyze a project with SonarQube"
   homepage "https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/"
-  url "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.3.0.5189.zip"
-  sha256 "a251d0793cb6bd889e4fd30299bb5dc4e07433e57133b16fc227aca98f8d2c2d"
+  url "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-8.0.1.6346.zip"
+  sha256 "8fbfb1eb546b734a60fc3e537108f06e389a8ca124fbab3a16236a8a51edcc15"
   license "LGPL-3.0-or-later"
   head "https://github.com/SonarSource/sonar-scanner-cli.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "e6413293bda6b5cede7be37c8a86087c7bf4ca90d57fc045d1f16c441c6f939e"
+    sha256 cellar: :any_skip_relocation, all: "74918eb4cfe5982943894284e8e6b40b38af09c4f91c014cff0506c0e6530b1d"
   end
 
   depends_on "openjdk"

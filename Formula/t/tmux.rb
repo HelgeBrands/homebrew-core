@@ -1,8 +1,8 @@
 class Tmux < Formula
   desc "Terminal multiplexer"
   homepage "https://tmux.github.io/"
-  url "https://github.com/tmux/tmux/releases/download/3.5a/tmux-3.5a.tar.gz"
-  sha256 "16216bd0877170dfcc64157085ba9013610b12b082548c7c9542cc0103198951"
+  url "https://github.com/tmux/tmux/releases/download/3.6a/tmux-3.6a.tar.gz"
+  sha256 "b6d8d9c76585db8ef5fa00d4931902fa4b8cbe8166f528f44fc403961a3f3759"
   license "ISC"
 
   livecheck do
@@ -11,17 +11,13 @@ class Tmux < Formula
     strategy :github_latest
   end
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9e191356b2a932e1e0e640219344a21ab61eb68fe24256d80281d7d037838867"
-    sha256 cellar: :any,                 arm64_sequoia: "5e371680cf27c72d30e70f57087bef3fadb408e1881a58839137625c10919f64"
-    sha256 cellar: :any,                 arm64_sonoma:  "58e253aca23e3deb4b6e171419047cba7283a51cba51962351f5e51661d53437"
-    sha256 cellar: :any,                 arm64_ventura: "7cfc60d84d3ec0ba61580633d7add6ffc0eeaa07ec27ceb2380fe434530c90bb"
-    sha256 cellar: :any,                 sonoma:        "2e10a69a7d9828300ef1ec19f139c6d7eef7522d451e8812073460c4ba61ac28"
-    sha256 cellar: :any,                 ventura:       "7d823e8b277d302563902e25b9e75594ad46f1996f9e53e5bb70d89c910bf092"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6f1e10dbf08da58ff7e32cab75871cef72777a6d3f82e27a315ac0e292169db4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f8f77441d2c3db824f04268e62e1db8f240cbff682b12b40a77f5f3ae12f5a94"
+    sha256 cellar: :any,                 arm64_tahoe:   "36b24a92e268147bca7ef3e5df3a88affa06512d573e75f1cd1da28e724f4afd"
+    sha256 cellar: :any,                 arm64_sequoia: "9897a0d7b7e0159c1d09818d76e0ab88cc3fcdba8abd2bbbf349f84827ac87df"
+    sha256 cellar: :any,                 arm64_sonoma:  "089dc1f0f166cf72315528890052d4b9bc17cccce023a0449962a11098484300"
+    sha256 cellar: :any,                 sonoma:        "b0ca1f90384e487d2316bdcaef59ba4fdf63cb04fa561d424605f86935599563"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d4d439bc36e2d3814323f14242249fb16b17bef657878ab2d407b3769822f55e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b6b495ea4851f445eb947c60eb0fadaf87f872a0959b49b34303297d654bf81c"
   end
 
   head do

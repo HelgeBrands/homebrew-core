@@ -1,18 +1,18 @@
 class GrafanaAlloy < Formula
   desc "OpenTelemetry Collector distribution with programmable pipelines"
   homepage "https://grafana.com/oss/alloy-opentelemetry-collector/"
-  url "https://github.com/grafana/alloy/archive/refs/tags/v1.11.3.tar.gz"
-  sha256 "7655e363041181d003216b59d8ab67bb09fd2fa1a7c72c4a40b93f16c53db068"
+  url "https://github.com/grafana/alloy/archive/refs/tags/v1.12.0.tar.gz"
+  sha256 "ace8f5d443b34ad02fe0263755c60edd61fb5da60e0e32ebd6397237f5b33957"
   license "Apache-2.0"
   head "https://github.com/grafana/alloy.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c5c77419597b19bbc760fd3aa57ed1df894b437dcccc19b131390c6a63860df9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f6af4bbe3529d3b022cf71db558f24430dd785178ba5432b5294c0ac4e76cbcf"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "af3b9676ddc921271ac04555eafafeb434958d49fa9d8587ace4b4ab70ae0ec5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1fedc50869c59a987793db1ef19bb695a0a03dfc7767c6a9eea43ea5090a3dd4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7ee790615443ef88cf5d359e7eb5594b2b57a882766a99da250c234ac9b51c32"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dcc900e5ac70d3ea48b2863a7a7cbd8be850f155508dbb1832dbf3f172be45e9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "23c588c85b34368337067f1e6bc251058a50ecbe15c674a632bf0e4be6d3504b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "89509efcdf87f1218b7ba5c9f776cdccd4321cd44e27b0ea05415b9e21ea4493"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ad428da17c408cdad226d7783f01a6f7a8e87c928e74443e37ff96e303fb87d0"
+    sha256 cellar: :any_skip_relocation, sonoma:        "33e0a9021a33177c680b5ecabe06b5e0c169b7a9ec3460e1a2a482418c8df97e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d7d69478a1a1cc664dffd75e5fd135dce69a125ca7cd871eb25977fb2fdbb8b5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b666ce8811f600e0a0b4809e7de0ec500738b0a22958ebdcde078bfb0ca4e263"
   end
 
   depends_on "go" => :build
@@ -53,9 +53,6 @@ class GrafanaAlloy < Formula
     system "go", "build", *std_go_args(ldflags:, tags:, output: bin/"alloy")
 
     generate_completions_from_executable(bin/"alloy", "completion")
-  end
-
-  def post_install
     pkgetc.mkpath
   end
 

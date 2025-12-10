@@ -3,13 +3,14 @@ class MailDeduplicate < Formula
 
   desc "CLI to deduplicate mails from mail boxes"
   homepage "https://kdeldycke.github.io/mail-deduplicate/"
-  url "https://files.pythonhosted.org/packages/a1/e1/2e54daf7750bf86205cbb9ddde0e7ba33617949d256ecc44cac6e28e156f/mail_deduplicate-8.0.0.tar.gz"
-  sha256 "d58e019571be73a08015c4bf404b0a52fdc5fd85765726808343dba5963241d7"
+  url "https://files.pythonhosted.org/packages/0c/0c/0e83bc1a549394b6c372caa8e6e5859020d23f470362d02276f1d2d56645/mail_deduplicate-8.1.2.tar.gz"
+  sha256 "30ed948490f35f47da27829f239c20068a936010d78e198da44b69f1d65c3d1e"
   license "GPL-2.0-or-later"
+  revision 1
   head "https://github.com/kdeldycke/mail-deduplicate.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "c9c3f476fca7d42f97da1b23ffa292b93dc779c6f97928b11bdf99479ede827d"
+    sha256 cellar: :any_skip_relocation, all: "831b5ba6e78c566751519449d4f13b9469f77c61cb04204ba90ebbf33f56476f"
   end
 
   depends_on "certifi" => :no_linkage
@@ -44,8 +45,8 @@ class MailDeduplicate < Formula
   end
 
   resource "click-extra" do
-    url "https://files.pythonhosted.org/packages/58/ba/bc8d94417e8d8fa77376ab285d4a7273b3517bfbd2fb319ae0c17f097c03/click_extra-7.1.0.tar.gz"
-    sha256 "8ff1c921caed8c560f407b6fe6a5b0e002911e67434c8b4d5bc658123cd9a0c2"
+    url "https://files.pythonhosted.org/packages/54/33/de5fb9b1d65b443c3a09c30832d00807a3ea69a1732833cb589d8aa38e91/click_extra-7.3.0.tar.gz"
+    sha256 "1de0c01161dc23d15466364f2595f3f917e5dd696b36e81982fa57745dbd3b8f"
   end
 
   resource "cloup" do
@@ -99,8 +100,8 @@ class MailDeduplicate < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/15/22/9ee70a2574a4f4599c47dd506532914ce044817c7752a79b6a51286319bc/urllib3-2.5.0.tar.gz"
-    sha256 "3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"
+    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
+    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
   end
 
   resource "wcmatch" do

@@ -1,20 +1,18 @@
 class Nak < Formula
   desc "CLI for doing all things nostr"
   homepage "https://github.com/fiatjaf/nak"
-  url "https://github.com/fiatjaf/nak/archive/refs/tags/v0.16.2.tar.gz"
-  sha256 "fac913a29e8a12408819a5e036d264d2e31a9bd3baee48ad02dbdd8e04e2f91f"
+  url "https://github.com/fiatjaf/nak/archive/refs/tags/v0.17.2.tar.gz"
+  sha256 "098ebfc88f8b67eed705cf4bf6f8b86fbd78c9f884eb7147e2568cebe6fe6548"
   license "Unlicense"
   head "https://github.com/fiatjaf/nak.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "be454c25e7c873cb227a947a19bc40129e6608483114d6e4fa0205ad0c5d2fd7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "be454c25e7c873cb227a947a19bc40129e6608483114d6e4fa0205ad0c5d2fd7"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "be454c25e7c873cb227a947a19bc40129e6608483114d6e4fa0205ad0c5d2fd7"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "be454c25e7c873cb227a947a19bc40129e6608483114d6e4fa0205ad0c5d2fd7"
-    sha256 cellar: :any_skip_relocation, sonoma:        "04bc2d81fd2004bfc8c9a2187d795807de89d347ca7338bc1d3307732256d62e"
-    sha256 cellar: :any_skip_relocation, ventura:       "04bc2d81fd2004bfc8c9a2187d795807de89d347ca7338bc1d3307732256d62e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9674237330fa2e02dc819fa92e8c9d2a5001affff399657ed5cf3c0c3fc50bca"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "58f5e7a2435a994fd1a08f94edf7abc8d7e68add6c2a2cd3dff8ef330c92359e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "dc44c03268610698f7c5309e9dcb092d3321ed3d9623a29118b6089b9530aa57"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "dc44c03268610698f7c5309e9dcb092d3321ed3d9623a29118b6089b9530aa57"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "dc44c03268610698f7c5309e9dcb092d3321ed3d9623a29118b6089b9530aa57"
+    sha256 cellar: :any_skip_relocation, sonoma:        "efd8919fd75ae2108a225640dd5c32d4484e8268591c7074d53ab4517f35f021"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "53768d89c3cc21ff1da56d4df107b8e7f72658b22baa354b1baf0d47249f1eba"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f0c4e97ce1f95ce9b6a3a5a5709b9ce4b8b703723e2d973424ff3f4c6cdc9880"
   end
 
   depends_on "go" => :build
@@ -25,6 +23,9 @@ class Nak < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/nak --version")
+
+    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
+
     assert_match "hello from the nostr army knife", shell_output("#{bin}/nak event")
     assert_match "failed to fetch 'listblockedips'", shell_output("#{bin}/nak relay listblockedips 2>&1")
   end

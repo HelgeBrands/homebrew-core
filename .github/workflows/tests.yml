@@ -16,7 +16,6 @@ env:
   HOMEBREW_TEST_BOT_ANALYTICS: 1
   HOMEBREW_ENFORCE_SBOM: 1
   HOMEBREW_NO_BUILD_ERROR_ISSUES: 1
-  HOMEBREW_ARM64_TESTING: 1
   GH_REPO: ${{github.repository}}
   GH_NO_UPDATE_NOTIFIER: 1
   GH_PROMPT_DISABLED: 1
@@ -143,8 +142,9 @@ jobs:
       long-timeout: ${{ steps.check-labels.outputs.long-timeout }}
       test-bot-formulae-args: ${{ steps.check-labels.outputs.test-bot-formulae-args }}
       test-bot-dependents-args: ${{ steps.check-labels.outputs.test-bot-dependents-args }}
+      download-concurrency: ${{ steps.check-labels.outputs.download-concurrency }}
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
 
@@ -240,6 +240,7 @@ jobs:
             --deleted-formulae="$DELETED_FORMULAE" \
             <<<"$TEST_BOT_FORMULAE_ARGS"
         env:
+          HOMEBREW_DOWNLOAD_CONCURRENCY: ${{ needs.setup_tests.outputs.download-concurrency }}
           TEST_BOT_FORMULAE_ARGS: ${{ needs.setup_tests.outputs.test-bot-formulae-args }}
           TESTING_FORMULAE: ${{ needs.formulae_detect.outputs.testing_formulae }}
           ADDED_FORMULAE: ${{ needs.formulae_detect.outputs.added_formulae }}
@@ -269,8 +270,9 @@ jobs:
       long-timeout: ${{ steps.check-labels.outputs.long-timeout }}
       test-bot-formulae-args: ${{ steps.check-labels.outputs.test-bot-formulae-args }}
       test-bot-dependents-args: ${{ steps.check-labels.outputs.test-bot-dependents-args }}
+      download-concurrency: ${{ steps.check-labels.outputs.download-concurrency }}
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           persist-credentials: false
 
@@ -372,6 +374,7 @@ jobs:
             --tested-formulae="$TESTED_FORMULAE" \
             <<<"$TEST_BOT_DEPENDENTS_ARGS"
         env:
+          HOMEBREW_DOWNLOAD_CONCURRENCY: ${{ needs.setup_dep_tests.outputs.download-concurrency }}
           TEST_BOT_DEPENDENTS_ARGS: ${{ needs.setup_dep_tests.outputs.test-bot-dependents-args }}
           TESTED_FORMULAE: ${{ needs.formulae_detect.outputs.testing_formulae }}
         working-directory: ${{ env.BOTTLES_DIR }}

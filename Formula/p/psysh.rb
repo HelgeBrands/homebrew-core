@@ -1,12 +1,12 @@
 class Psysh < Formula
   desc "Runtime developer console, interactive debugger and REPL for PHP"
   homepage "https://psysh.org/"
-  url "https://github.com/bobthecow/psysh/releases/download/v0.12.14/psysh-v0.12.14.tar.gz"
-  sha256 "e384531884739d79dec8f1c7efaeff68e2124eee0ffc6547f27e8f049068b56a"
+  url "https://github.com/bobthecow/psysh/releases/download/v0.12.16/psysh-v0.12.16.tar.gz"
+  sha256 "1113adfa64de1a3dea1872add2fd29fd502eca3003b43e61ad9c1f541273f61c"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "9daf51688dcb0b101cb606195fc789ec24baa35de1a7bb4e093b66e5553ae435"
+    sha256 cellar: :any_skip_relocation, all: "daaa58e4f1a42578e479d9131e5c7417f72c59414345c929833969d401ac4643"
   end
 
   depends_on "php"

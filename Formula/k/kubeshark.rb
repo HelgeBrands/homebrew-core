@@ -1,8 +1,8 @@
 class Kubeshark < Formula
   desc "API Traffic Analyzer providing real-time visibility into Kubernetes network"
   homepage "https://www.kubeshark.co/"
-  url "https://github.com/kubeshark/kubeshark/archive/refs/tags/v52.9.0.tar.gz"
-  sha256 "2318a65e1bfbdbd26903e76c97ca5dc6a93ccbd97f4bd1e87a25e2900fe1e750"
+  url "https://github.com/kubeshark/kubeshark/archive/refs/tags/v52.10.3.tar.gz"
+  sha256 "df50ec7334cec28373a8ebd229de3dec8a7bca67a105fd55c7ccce98dca7a9fb"
   license "Apache-2.0"
   head "https://github.com/kubeshark/kubeshark.git", branch: "master"
 
@@ -15,12 +15,12 @@ class Kubeshark < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9e07f0d37b2e286f4e224887e1e7a7b3303523a67f7680f8a656309dff6d510c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8912fc8cdfbac8dd0ece8e7a0d4ecf6b4aa76860e1a563ce5db1523b0effadb0"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bf82e4b4164988e286baa4b253ceb3ec0d47c0f3e2414daf30524cfb21cbe314"
-    sha256 cellar: :any_skip_relocation, sonoma:        "62f8b2901b274884d29763e853dd3f9a1838d206567551852bb2d2955cc532cb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1221afa50134b597909e4fff54ce7205c692e0cbd6b13d3a9917717bfc93a6f8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fd47ee599faaba45ba0ab2aa20504a98053fa6f06e82ed1d31d97ba4023d8b3d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e34ed3c83e169a8d4a6865da0ee087b45a51384f56467223110e7c9d554b30da"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9eb0da8d4524d9bb756411694c43cb6328d0894e1b484da65e790909952ebe71"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "60d19678e1f7576063e1975dc53c5e81056087651c1ce765b123e595215ec8c1"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9defa2402504b99343a8424e79b281010e7ec987c7419759a62b957a15a17646"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2839d2d895555e3ef0d456c5cff61641c658b37a4197727976e93f616cf8851f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6c641c16f86d79a6d3479c7c5e18ed1e08d8aef56f199e4966a24cfaccdff5b9"
   end
 
   depends_on "go" => :build

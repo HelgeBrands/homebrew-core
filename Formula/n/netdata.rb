@@ -1,8 +1,8 @@
 class Netdata < Formula
   desc "Diagnose infrastructure problems with metrics, visualizations & alarms"
   homepage "https://www.netdata.cloud/"
-  url "https://github.com/netdata/netdata/releases/download/v2.8.1/netdata-v2.8.1.tar.gz"
-  sha256 "373b61241d5cc80addeb0cc6c9f434abf363333081056a7d7ba6ea1f46ba6f06"
+  url "https://github.com/netdata/netdata/releases/download/v2.8.2/netdata-v2.8.2.tar.gz"
+  sha256 "5c26c8db259607f39d55e7a2ab337523fe603846c442532cf948335eba408b9a"
   license "GPL-3.0-or-later"
 
   livecheck do
@@ -12,12 +12,12 @@ class Netdata < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "05be59919a0beaaf04aa2d5a43595bec2625690e7cc851efc320871cf83fcb2d"
-    sha256 arm64_sequoia: "e22380494efab3c6001fb93bf12113234d9de68e2d94bc2c542662070b985b27"
-    sha256 arm64_sonoma:  "c3894cd1facd88cbc0f273b5a0358ba0777ea1727c6377a369e230c836fe967e"
-    sha256 sonoma:        "7e1678b04f4bd8657f722299aacbe09e91f285d887320cc12fa3fd8469c3ddbe"
-    sha256 arm64_linux:   "02b5ea13d984a0a204a73b81059687d5c58256a07daacb08d5ec9aa1be639c6c"
-    sha256 x86_64_linux:  "54a766ddb3571de5e22949e949bfc6e3330a2469e1ecbc6253d9d0b501162361"
+    sha256 arm64_tahoe:   "9cc74a6b198ccbf1216e5d0259971a2ff24748cba118ba829d7985a1f7bd769a"
+    sha256 arm64_sequoia: "194ecc8201790f4090ff623e284658aa5596c8b35f0c3c45c94365ac45784881"
+    sha256 arm64_sonoma:  "445cd5274f2248e5c254567532dfafcd216b92b89dd7258775d962b386059ffb"
+    sha256 sonoma:        "3d5d401d06b5484fcb013f5702d6d20f0a499a2db2a7470d0ace568eb84898d4"
+    sha256 arm64_linux:   "c674819ea2f2827e719801a5e4dec0d7848ac3c7c33a5759f18f63ed41ab7377"
+    sha256 x86_64_linux:  "48afaec96f3dd67bdfdae7e794f56779d2004d5919617b94633047dab3babab4"
   end
 
   depends_on "cmake" => :build
@@ -50,7 +50,6 @@ class Netdata < Formula
     depends_on "libmnl"
     depends_on "systemd"
     depends_on "util-linux"
-    depends_on "zstd"
   end
 
   def install
@@ -88,9 +87,7 @@ class Netdata < Formula
     system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
-  end
 
-  def post_install
     (var/"cache/netdata/unittest-dbengine/dbengine").mkpath
     (var/"lib/netdata/registry").mkpath
     (var/"lib/netdata/lock").mkpath

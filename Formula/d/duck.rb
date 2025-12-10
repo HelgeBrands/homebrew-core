@@ -1,8 +1,8 @@
 class Duck < Formula
   desc "Command-line interface for Cyberduck (a multi-protocol file transfer tool)"
   homepage "https://duck.sh/"
-  url "https://dist.duck.sh/duck-src-9.2.4.43667.tar.gz"
-  sha256 "690e6248638f9fea903345de96e3c6b63754ba8f510ba74397ecd487a6a84637"
+  url "https://dist.duck.sh/duck-src-9.3.1.44136.tar.gz"
+  sha256 "2e66b897600ddc36f8fef601ecd63896aaad8d054ca329cf22c0771f964a5063"
   license "GPL-3.0-only"
   head "https://github.com/iterate-ch/cyberduck.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Duck < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1812459174a458a88e6b19e74c98e470d11ca66a3e8fe51b9ef940f27144c18a"
-    sha256 cellar: :any,                 arm64_sequoia: "90fd52cfbb685bb5236647ba95172aa0f4ae71b179e49517852f1b197ecfd954"
-    sha256 cellar: :any,                 arm64_sonoma:  "db28ad374157b347461e56beb371b6917644b636b0eb5bd043297349a35dd244"
-    sha256 cellar: :any,                 sonoma:        "7990688542beca48a2069f8535a94baffb2fc00b67161d36672a9cd6a2b902a8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8344a1a60e28940500f00371debeea7dcb1400aa507dea307df788fea9af2eef"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c68e9347fa707f0fb54c437e40094a12a3d794af865c90ec5f95f3a244dadbe4"
+    sha256 cellar: :any,                 arm64_tahoe:   "8ba9f59303d71b4f2f393bd823c23d2529fd369a3fa6cc9edb5d0bc371a1bbab"
+    sha256 cellar: :any,                 arm64_sequoia: "0decd70b857a4baad1fcf31f4a46e94fec07b52dd5797bf2ba47c53d61f647ac"
+    sha256 cellar: :any,                 arm64_sonoma:  "63c4af95815912b489edfe6d0dac484fddd84790af54ac844a05d42ae716bb91"
+    sha256 cellar: :any,                 sonoma:        "62e7f5e719118279273ec662b45cb2f956881fd27ff7c3d6a4724b366bc80b2f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7fb00fbdc18166b43d419a076969e2b5b33e723e14400716f957fb709b44b7f7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "73f3aee32182acaceb5fef838838a883b0c1f814d6836b35a478b03fcb344ba1"
   end
 
   depends_on "ant" => :build
@@ -47,8 +47,8 @@ class Duck < Formula
   conflicts_with "duckscript", because: "both install `duck` binaries"
 
   resource "jna" do
-    url "https://github.com/java-native-access/jna/archive/refs/tags/5.17.0.tar.gz"
-    sha256 "fe35d85e63ea998ec08f1beaa0162b1e7f233e9e82b8f43ba500a0a824874158"
+    url "https://github.com/java-native-access/jna/archive/refs/tags/5.18.1.tar.gz"
+    sha256 "9af4d468a8b94def8c08761780766e919a0806d636b4c2ac55be0afe94cb8bb9"
   end
 
   resource "rococoa" do

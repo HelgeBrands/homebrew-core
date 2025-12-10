@@ -1,10 +1,10 @@
 class Pdal < Formula
   desc "Point data abstraction library"
-  homepage "https://www.pdal.io/"
-  url "https://github.com/PDAL/PDAL/releases/download/2.9.2/PDAL-2.9.2-src.tar.bz2"
-  sha256 "a74bbc7f4e4f709ed589dbbb851926a63c391c974e3fc40a4c3ff34f7923021b"
+  homepage "https://pdal.org/"
+  url "https://github.com/PDAL/PDAL/releases/download/2.9.3/PDAL-2.9.3-src.tar.bz2"
+  sha256 "22e90c8b9653e2bd0eb24efbe071b6c281e972145b47c0ccfdc329d73c188d9c"
   license "BSD-3-Clause"
-  revision 4
+  revision 1
   head "https://github.com/PDAL/PDAL.git", branch: "master"
 
   livecheck do
@@ -13,12 +13,12 @@ class Pdal < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "98585021c9f28998c8f4b02acd0afaa95333a511202f354f274926a2302877ad"
-    sha256 cellar: :any,                 arm64_sequoia: "0dbb4e6defdfa477c47ae908bc91c74a92d642099becec3ffffc1dcf39e79695"
-    sha256 cellar: :any,                 arm64_sonoma:  "af547fbe07505536962385a3cc3cd7ed6f70a076f955ce84623b6b9e4b57e68f"
-    sha256 cellar: :any,                 sonoma:        "a568c83c7018724799519460f5875d1f5e55514ba22bc9418cf32198f409d064"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e1b5aa61874acac22d42f16cd83f52605fd79daab8a091cd96439e0640f71972"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9498a5989a17a565b0fe4c4f364434b47aaff4bd16e8d030ecacb623a456560e"
+    sha256 cellar: :any,                 arm64_tahoe:   "fd9574824b61bfaeb03e419f2f8419ecac5dad68e26d9d4e1265e6269ae2fdd5"
+    sha256 cellar: :any,                 arm64_sequoia: "9cf2120d17fca9e35c805e00855fc160f83053f5b8d36618960c93361669fb3a"
+    sha256 cellar: :any,                 arm64_sonoma:  "22281c24d53bb3204a454b039c92c0689530be0734f51aa1606299e4c8363d88"
+    sha256 cellar: :any,                 sonoma:        "a488265cc57f828e1965cbcf716bd82cc8c9ca3da1c057d9a8aa8e9d55a47c65"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8031c642131f178ef0d5a5c9a7d47ef63322e2f75fe110a1d2e9abfff6b647ca"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f79ecc846531cf0002193d1c2951749670bf939eccc5a51f49f74f59db400d72"
   end
 
   depends_on "cmake" => :build
