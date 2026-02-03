@@ -1,8 +1,8 @@
 class ArduinoCli < Formula
   desc "Arduino command-line interface"
   homepage "https://arduino.github.io/arduino-cli/latest/"
-  url "https://github.com/arduino/arduino-cli/archive/refs/tags/v1.4.0.tar.gz"
-  sha256 "142d48462387c0bcd900e7969892b974d26bcfa9e42674bf9e9c4da2919ca857"
+  url "https://github.com/arduino/arduino-cli/archive/refs/tags/v1.4.1.tar.gz"
+  sha256 "5a07d1848a5e2e6fbf49aef0ba6794aa865c8b31d74ffed979eb382810725bdd"
   license "GPL-3.0-only"
   head "https://github.com/arduino/arduino-cli.git", branch: "master"
 
@@ -12,12 +12,12 @@ class ArduinoCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a72f04aef01813435ee9cbca07c7d2d77a7d451e7befb690e083f31bd7f1b962"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0b947a38b69776a2afaa433f34df51a6f92544da9a34f7cb8403a17705dd1d30"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f960adf27555ab8019cc51bf60cd1aa362120892aa3934d389a84855730c7d37"
-    sha256 cellar: :any_skip_relocation, sonoma:        "61c3877965ae2940c164ea9935dad87556d156ba46674aacbefc85cc501137c0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "dd00da57f9f0c6f3dfe9f120ee1bd03f77888ddb1f6f323f211cefd83178b037"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5d11a9dfedd0d0754ebc2a20f8a3f4a45e88d22ce40660d75313152e87c5434d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e3fb3772bda59c80c8df9667f9833cdb22ddaf8364afdf02923e7a28c61d840a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3b6a3d27acd32f5d1b92779d26edd0390013e26e8b79806404234e32c3b55abe"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7d7745e133d19aff9b40b05e144ee91718e1c8790a0914bfefccffba669556b1"
+    sha256 cellar: :any_skip_relocation, sonoma:        "0a64e1f20e2b364c10d5a9050f065f54f0e8a9fb8720517dc27fc429797235e3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4a9103d4b4426cd3d211019b6c784e70a3c059157d0a078f37239fb536352c74"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e66db01f8d9a8b69b0f1bf669c1b81ba151eaa99604f2103d2a7eeea4db0d6a1"
   end
 
   depends_on "go" => :build
@@ -31,7 +31,7 @@ class ArduinoCli < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"arduino-cli", "completion")
+    generate_completions_from_executable(bin/"arduino-cli", shell_parameter_format: :cobra)
   end
 
   test do

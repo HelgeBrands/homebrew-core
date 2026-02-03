@@ -1,8 +1,8 @@
 class Tarantool < Formula
   desc "In-memory database and Lua application server"
   homepage "https://tarantool.org/"
-  url "https://download.tarantool.org/tarantool/src/tarantool-3.5.1.tar.gz"
-  sha256 "a48e5734a6714223ce6719cbef94832c5b92d784ea265dca305195aa05f799ab"
+  url "https://download.tarantool.org/tarantool/src/tarantool-3.6.1.tar.gz"
+  sha256 "2dd50c09b6fcb541b543d9c9d8eb7f09ddc4462627d1df073ff8da8b91fee078"
   license "BSD-2-Clause"
   version_scheme 1
   head "https://github.com/tarantool/tarantool.git", branch: "master"
@@ -15,12 +15,12 @@ class Tarantool < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "4b2e725a461b753f134a008389380a54f799016ea64922d934568ce7163b6597"
-    sha256 cellar: :any,                 arm64_sequoia: "7720805abfcc25e3b0ab85ee21c7348f5f442bc524c62bcde3c3f88825ef0734"
-    sha256 cellar: :any,                 arm64_sonoma:  "ad6d9ea2b6aa5c514676f76e35a34e336d03305236b07b4e9db9f99863bcb13f"
-    sha256 cellar: :any,                 sonoma:        "bb51bcaa26a6dd9aeec3a7260d35addfa9ec0ac4c88cf07a89980c5a613e8c34"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1849546cd213cc0f10b266917d65275fd6bb9f21788190ee7727c0d01b75afe0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0d6f59fd0dc93fb8656c7d254cbaaae03c63ff47125a0aaae8f14d52bbac300f"
+    sha256 cellar: :any,                 arm64_tahoe:   "9f8b37daab5c827d4faf0662adde670764d6bc3d50d967408ba1ec540c7c384b"
+    sha256 cellar: :any,                 arm64_sequoia: "31ffaeb90022fdc701d19bda4ea4d8da22732878f265a9018473fc91ee548e1e"
+    sha256 cellar: :any,                 arm64_sonoma:  "5980e133b0568279b45006ed286a0596a474f70687a32e29bebc2b825e90cb48"
+    sha256 cellar: :any,                 sonoma:        "8a9397a5c1f411ba3e1fd447c577d815fc80e25ddc987dce6e60abfeea0fd146"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "23a46520d8850b3393a28f7de94f4a966fbf92c171fa22fe2430cdfc8ea14770"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a474d4214693c38e05d44d6a49a07b5f5ce82dbda47f6e1893eed33d4552dfce"
   end
 
   depends_on "cmake" => :build
@@ -78,6 +78,6 @@ class Tarantool < Formula
       end
       os.exit(0)
     LUA
-    system bin/"tarantool", "#{testpath}/test.lua"
+    system bin/"tarantool", testpath/"test.lua"
   end
 end

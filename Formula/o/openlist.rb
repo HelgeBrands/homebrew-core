@@ -1,17 +1,17 @@
 class Openlist < Formula
   desc "New AList fork addressing anti-trust issues"
   homepage "https://doc.oplist.org/"
-  url "https://github.com/OpenListTeam/OpenList/archive/refs/tags/v4.1.8.tar.gz"
-  sha256 "8ba861db0ad29e60fcfb4544ff3744dfa235ab1744ea0c998e1c6f80a630996d"
+  url "https://github.com/OpenListTeam/OpenList/archive/refs/tags/v4.1.10.tar.gz"
+  sha256 "0e85b2e9f97c819a79a054c2de1f505b0b0d78e1c8ce6783e12da85ea519840c"
   license "AGPL-3.0-only"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a2f7268bdf7cc74cd2b6d5106c24b624e4d74fa0a6be4d05268baa9420c9fa6f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "609304072300fe7808cf53fc7634a3e79b84ea59187f78d3965f100e91f34dd8"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "74fd740af36b85ad14ab0841807d951f32704037d9bc665478ee691f76eb959d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b70b096997004034dcd47a1dbbd65fbc096ca30da8cf40e30bf23c9b3b8488ac"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c25d06885c7072e80be39c156a15701772eb822edf2c395319d91888147fba12"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "12eb6b166e988e5f857008ba66f81c9bdea3e90f53b1990ea50ed3362efc98f2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "435f540dd5c76ee03b1315c8d84efeff51edc21b3f31df2e841226008087d4f4"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "04ec41f119be7b46da4d489a9e3539eb0a252b27069ee1a30c079c209277f5a2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6f965acb6b8a592fb30b1f02af83dfafd01a88094deec520b39f4e4b6aadf3f6"
+    sha256 cellar: :any_skip_relocation, sonoma:        "397b95f8f40afa663ee0746faa0a6f12208c41d78841aae4ba0661359cb63820"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1bcbdc6e59f842b464d23478193e73c77bac6d117f8c9d0b8297ddc3a96354b4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "26b013899c56ef2e1c85b47cddc7eeaf543d2f9170a56ad96b802e06f0d0d8fa"
   end
 
   depends_on "go" => :build
@@ -23,8 +23,8 @@ class Openlist < Formula
   end
 
   resource "frontend" do
-    url "https://github.com/OpenListTeam/OpenList-Frontend/archive/refs/tags/v4.1.8.tar.gz"
-    sha256 "83ed50798f3a58b5ae0a00b469860cb19a7644bc701591cbd34e99fe4b5600af"
+    url "https://github.com/OpenListTeam/OpenList-Frontend/archive/refs/tags/v4.1.10.tar.gz"
+    sha256 "30f92e70b8ba99344833f9da99eedc5803459a74236ee5dd3ab275160fe7dd4b"
 
     livecheck do
       formula :parent
@@ -32,8 +32,8 @@ class Openlist < Formula
   end
 
   resource "i18n" do
-    url "https://github.com/OpenListTeam/OpenList-Frontend/releases/download/v4.1.8/i18n.tar.gz"
-    sha256 "7ff3a9106ac6af3bb46f785f55104bae9ac01880d8c235cf1cd2dfc8295381c1"
+    url "https://github.com/OpenListTeam/OpenList-Frontend/releases/download/v4.1.10/i18n.tar.gz"
+    sha256 "f25ee76ed4d1e270afb2fe0c7d24477ed52a584f0bcc4173acd8fe93524f1d40"
 
     livecheck do
       formula :parent

@@ -1,8 +1,8 @@
 class Rv < Formula
   desc "Ruby version manager"
   homepage "https://github.com/spinel-coop/rv"
-  url "https://github.com/spinel-coop/rv/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "3fe6617b49cba218ae6133f1bdf64008bac88ddbf94c13d24014716ea65012fc"
+  url "https://github.com/spinel-coop/rv/archive/refs/tags/v0.4.3.tar.gz"
+  sha256 "17f6a3ee9383236993a7f43201ac55642e863b959426b4980bab669ceb7f4174"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/spinel-coop/rv.git", branch: "main"
 
@@ -12,21 +12,18 @@ class Rv < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "14394352ae5c65a041f36ee617235e394033805a33000e7260d794f101f87523"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fbee92e6a0834f12e6286ca2f35b35aa3a4681dafd22c284147061cf94d78da3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "773ac5241967d429db677c1cb36bf7346603ef1620e6f3e65a60c678bcff629b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "729a2a3b54be62f3f17428872c4fdb508822aea80374a179c5e4816731c92007"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8b969f0f49262ad22a506f104486d6438222ce1e5b534d586359b21348e91a3d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "08441d39160ee98939516df3cc6840f65b89746d00b1c33e35528d7f0ac963e9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "84f0e681b9d37b0677e8c04eb039d74c7d96ccbfc6078cec17fd9cc362aafd9e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0e4ab615cd57b240b2b578d3fc24fded5fbddf4ed28051d568c31ae0021977f7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "61735c434d247a79d431a9b39e00e9d145510fabd159b13b08a0ccbb933947b2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a18dc149176da5e2e9ae86840c0f825c89d0dc9a13d1792df7c99a7dabb90fda"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f2fe1fd4f18a9d165192ab3e227f6bd3e65a54956961a5ab8f660a53acde8cbc"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dc62da14aa7c7677f9ff61dce1fc42d075eb06a41644f5bee2a9cd1c62140985"
   end
 
-  depends_on "pkgconf" => :build
   depends_on "rust" => :build
   depends_on macos: :sonoma
 
-  on_linux do
-    depends_on "openssl@3"
-  end
+  conflicts_with "rv-r", because: "both install `rv` binary"
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/rv")
@@ -35,10 +32,7 @@ class Rv < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/rv --version")
-
     assert_match "No Ruby installations found.", shell_output("#{bin}/rv ruby list --installed-only 2>&1")
-
-    system bin/"rv", "ruby", "install", "3.4.5"
     assert_match "Homebrew", shell_output("#{bin}/rv ruby run 3.4.5 -- -e 'puts \"Homebrew\"'")
   end
 end

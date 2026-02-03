@@ -1,20 +1,23 @@
 class Sdl3Image < Formula
   desc "Library for loading images as SDL surfaces and textures"
   homepage "https://github.com/libsdl-org/SDL_image"
-  url "https://github.com/libsdl-org/SDL_image/releases/download/release-3.2.4/SDL3_image-3.2.4.tar.gz"
-  sha256 "a725bd6d04261fdda0dd8d950659e1dc15a8065d025275ef460d32ae7dcfc182"
+  url "https://github.com/libsdl-org/SDL_image/releases/download/release-3.4.0/SDL3_image-3.4.0.tar.gz"
+  sha256 "2ceb75eab4235c2c7e93dafc3ef3268ad368ca5de40892bf8cffdd510f29d9d8"
   license "Zlib"
   head "https://github.com/libsdl-org/SDL_image.git", branch: "main"
 
+  livecheck do
+    url :stable
+    regex(/^(?:release[._-])?v?(3(?:\.\d+)+)$/i)
+  end
+
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "e05b526d9b2985d155391c14c123e2a744357539340c7dcf930c73790637e255"
-    sha256 cellar: :any,                 arm64_sequoia: "784b36fb3b932e3001d88f6bef9922b70ed8f39a24262dbce396224d15bab222"
-    sha256 cellar: :any,                 arm64_sonoma:  "40e186a16a24afb506bce144f202e557360eac08062f03af5f5b1ebcb68ddac0"
-    sha256 cellar: :any,                 arm64_ventura: "e573dabef0b0281c03906bdca0dad06fbfeed385562e9b77b0d89e1dc0152f66"
-    sha256 cellar: :any,                 sonoma:        "36d6f234b606db2282c7ed6cb1f747a48f20f12478895f802054a9ff26f5fc5d"
-    sha256 cellar: :any,                 ventura:       "4dbafe776dd24e700747ff4d1cae8211d4ad35d7ca0eca0438e73b523d2d1030"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "87a8097636da45ac5c760b9a733f6b02a5e1ad10cd0f6f2130c9f0e1be5ce9af"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f36d6a7393c7b4da3cc884be73b8652e8d0bc93e337f246203c0daec81c293d1"
+    sha256 cellar: :any,                 arm64_tahoe:   "747ea7edb3b3be0c4b68e2d7a5596ff506aecc5c747f23d707c8096bf76d1823"
+    sha256 cellar: :any,                 arm64_sequoia: "8fb4937c21da8ae59022692ecb8a98cb9ea78edcd07c24d58c9aefb479f4487c"
+    sha256 cellar: :any,                 arm64_sonoma:  "f0ca74255314552aeb66991fedd4653879e9a5c274a95e95ff3221865683df49"
+    sha256 cellar: :any,                 sonoma:        "ade19831bd658d85858ba693fa23863ed07d6a889a2cb7202610137671da8e2f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3a426057a80eed6a63bf4c1ade0126fd2c4cf5b3c40a50a89163fc14dd7aef80"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "20ea7ba27dcefae4c2f4d6d20e272faaa299d6c2407965d148d2ddc81c18277f"
   end
 
   depends_on "cmake" => :build

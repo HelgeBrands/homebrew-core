@@ -1,20 +1,17 @@
 class Sq < Formula
   desc "Data wrangler with jq-like query language"
   homepage "https://sq.io"
-  url "https://github.com/neilotoole/sq/archive/refs/tags/v0.48.5.tar.gz"
-  sha256 "4ed9cef836e66174b6e01c8d410cd393aeae7f7069a428a7ab2adcd1e282cf68"
+  url "https://github.com/neilotoole/sq/archive/refs/tags/v0.48.12.tar.gz"
+  sha256 "8675003f7b83004d536834f7d75eda98859b49e53864eb96bbb1f658b0b18ff6"
   license "MIT"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4e7e26f4d83f7829d91c329688d051d834e8a8af95b2c020d67793a5eb87e236"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7f7d17fcc389a770e377f4c1decb25b033b40ed0f3054982f4fcb73ffaa32f32"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9ab356e5d43c53e4afbd823d3ed7205b148273fc79ed08e36428bc8b42a50de9"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "d2d2280b04a8a8b9cdd5ed35dd5686301c9708e580001948012b68ca5377cba7"
-    sha256 cellar: :any_skip_relocation, sonoma:        "66320e44d65e85d579904c7f4dd8823a8fe9ec18a59e7e24b38fae78565656ad"
-    sha256 cellar: :any_skip_relocation, ventura:       "5b7ab78293193479047eafccfce81247ea02d73905bff3ee35a637ac76f241c9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8e5e69f47d93f1c7eabd2d38fae687102066278536e9f12dc130e437a7158294"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "436b94f41c3c115501602d3a4bacae43e6b0697dba66e4801527ad5d0b867b42"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "95689f16e812bac6c80573ecc475ce1ca695f8cfe38a243e7d5adeb2f7a037c2"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "16553cf15e1c1729de5623462854c11de803555419c07d69deb79ea310ce3bef"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5d7dd9c888c1b7d8d1dbcac181492210ddb6a465cd621f0e11f7c1adcbff176b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d05ba5bb32d00bcd5d2d21d55ecd2eab44fdffe6ea75a32d52c8cbf81591913f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "95b0ba7e49b88c882bbad53f17bf1cc28ba6f3c14657832e03a0be5c65a8bc8c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "919944a1e9fc0b09adbbeadf69a8c39ed04bda55805f5a96a87d1c4408f8bcb0"
   end
 
   depends_on "go" => :build
@@ -24,6 +21,8 @@ class Sq < Formula
   conflicts_with "squirrel-lang", because: "both install `sq` binaries"
 
   def install
+    ENV["CGO_ENABLED"] = "1" if OS.linux? && Hardware::CPU.arm?
+
     pkg = "github.com/neilotoole/sq/cli/buildinfo"
     ldflags = %W[
       -s -w
@@ -36,7 +35,8 @@ class Sq < Formula
       sqlite_json sqlite_math_functions
     ]
     system "go", "build", *std_go_args(ldflags:, tags:)
-    generate_completions_from_executable(bin/"sq", "completion")
+
+    generate_completions_from_executable(bin/"sq", shell_parameter_format: :cobra)
     (man1/"sq.1").write Utils.safe_popen_read(bin/"sq", "man")
   end
 

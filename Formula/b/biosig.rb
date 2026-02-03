@@ -1,9 +1,10 @@
 class Biosig < Formula
   desc "Tools for biomedical signal processing and data conversion"
   homepage "https://biosig.sourceforge.net/"
-  url "https://downloads.sourceforge.net/project/biosig/BioSig%20for%20C_C%2B%2B/src/biosig-3.9.0.src.tar.xz"
-  sha256 "e5b353a1500e6f80150e1236919aef9679410a2337ee81ed056b3f306b25611e"
+  url "https://downloads.sourceforge.net/project/biosig/BioSig%20for%20C_C%2B%2B/src/biosig-3.9.2.src.tar.xz"
+  sha256 "3f988b0923b323d2d25d642f0f749fbfa59194a9fc18c86e224d5caaa2399c5e"
   license "GPL-3.0-or-later"
+  revision 1
 
   livecheck do
     url :stable
@@ -11,14 +12,12 @@ class Biosig < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "70d70680271747ac17d076fc94b26449cca89b8c5f3c361488857a9e56dac07a"
-    sha256 cellar: :any,                 arm64_sequoia: "152be2d169a73dbd8afcbb4e5060d547f7a0d439ed64626c6ccc969974d94e18"
-    sha256 cellar: :any,                 arm64_sonoma:  "4d28f7a3f4ce3494c4557958c730b07bd08b19b8dbb056f7282f8e5fc396d918"
-    sha256 cellar: :any,                 arm64_ventura: "738017ce88f7c9d43596aeeddc99ce04c6a6896ab02922da8c056ea24f3d0e6b"
-    sha256 cellar: :any,                 sonoma:        "b410b16cdff030dfe233751c39c6523d5a841bd35bdd2e9cd153582b881d3f96"
-    sha256 cellar: :any,                 ventura:       "0f235a6d5036c54a44fe76c5dd3b3cb321805ea72663b3abd1565674a3bd5856"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8bfe8bd446b18c50e95f60a1685c4ff47f1c7b3c0686799be786e2fd4b9ebb3d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "85ab1e23f4ec3552398ee860ee360c73eea317bc9e8881b90e1f9cc9d9069f02"
+    sha256 cellar: :any,                 arm64_tahoe:   "536bd0bebdfe171b1718a62f71a9cbcc9b0902bab358bf092068de7364d1df2b"
+    sha256 cellar: :any,                 arm64_sequoia: "36cd242652a84be67c67aa717b759b79bd1faeff1efdaf037e1316d4ed76e25e"
+    sha256 cellar: :any,                 arm64_sonoma:  "a869c607c6a9d2deed89898cf141c6b9acf2032beb6604a3f4bb856826d55dfe"
+    sha256 cellar: :any,                 sonoma:        "c8e6725f93f9e357fdb18a7d11690c0ffcff94cb139bb5aacad70ac470d82a32"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3589bd379b3a383937a8c6a4adcb567c116474d6d3200e050082179f985a0b78"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "292bca266bc8e2287c1b906a59180ac09d971fc0e9a141f9d42abe346a43cd8a"
   end
 
   depends_on "gawk" => :build

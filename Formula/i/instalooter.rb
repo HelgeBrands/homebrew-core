@@ -6,21 +6,17 @@ class Instalooter < Formula
   url "https://files.pythonhosted.org/packages/30/13/907e6aaba6280e1001080ab47e750068ffc5fb7174203985b3c9d678e3f2/instalooter-2.4.4.tar.gz"
   sha256 "fb9b4a948702361a161cc42e58857e3a6c9dafd9e22568b07bc0d0b09c3c34a9"
   license "GPL-3.0-or-later"
-  revision 14
+  revision 15
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "50d75e25afec7336088d8b88f1b5cec4a397451e8d61da048de4f0bdc694d68c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "50d75e25afec7336088d8b88f1b5cec4a397451e8d61da048de4f0bdc694d68c"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "50d75e25afec7336088d8b88f1b5cec4a397451e8d61da048de4f0bdc694d68c"
-    sha256 cellar: :any_skip_relocation, sonoma:        "af3d2b5811fb8eaec6504318825fd346d07d207efa2e17984e52a6c5e39ecc9b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "af3d2b5811fb8eaec6504318825fd346d07d207efa2e17984e52a6c5e39ecc9b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "af3d2b5811fb8eaec6504318825fd346d07d207efa2e17984e52a6c5e39ecc9b"
+    sha256 cellar: :any_skip_relocation, all: "088c426ea8b0ca8b5da21f7b37d65897fdfc1dee860c319c080ea1bfebb400d9"
   end
 
   depends_on "certifi" => :no_linkage
   depends_on "python@3.14"
 
-  pypi_packages exclude_packages: "certifi"
+  pypi_packages exclude_packages: "certifi",
+                extra_packages:   "platformdirs"
 
   resource "appdirs" do
     url "https://files.pythonhosted.org/packages/d7/d8/05696357e0311f5b5c316d7b95f46c669dd9c15aaeecbb48c7d0aeb88c40/appdirs-1.4.4.tar.gz"
@@ -57,6 +53,11 @@ class Instalooter < Formula
     sha256 "795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902"
   end
 
+  resource "platformdirs" do
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
+  end
+
   resource "python-dateutil" do
     url "https://files.pythonhosted.org/packages/66/c0/0c8b6ad9f17a802ee498c46e004a0eb49bc148f2fd230864601a86dcf6db/python-dateutil-2.9.0.post0.tar.gz"
     sha256 "37dd54208da7e1cd875388217d5e00ebd4179249f90fb72437e91a35459a0ad3"
@@ -88,8 +89,8 @@ class Instalooter < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "verboselogs" do
@@ -98,7 +99,11 @@ class Instalooter < Formula
   end
 
   def install
-    virtualenv_install_with_resources
+    venv = virtualenv_install_with_resources
+
+    # Replace vendored platformdirs with latest version for easier relocation
+    # https://github.com/pypa/setuptools/pull/5076
+    venv.site_packages.glob("setuptools/_vendor/platformdirs*").map(&:rmtree)
   end
 
   test do

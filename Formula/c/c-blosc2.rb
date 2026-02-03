@@ -1,18 +1,18 @@
 class CBlosc2 < Formula
   desc "Fast, compressed, persistent binary data store library for C"
   homepage "https://www.blosc.org"
-  url "https://github.com/Blosc/c-blosc2/archive/refs/tags/v2.21.3.tar.gz"
-  sha256 "4ac2e8b7413624662767b4348626f54ad621d6fbd315d0ba8be32a6ebaa21d41"
+  url "https://github.com/Blosc/c-blosc2/archive/refs/tags/v2.23.0.tar.gz"
+  sha256 "125e0ac2fac3d81239c1de036cb335bc8eca86b19216e97e0b23de3283d3274b"
   license "BSD-3-Clause"
   head "https://github.com/Blosc/c-blosc2.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "0285d84023efb6e0407e5094bce81f03e2c2b73edf38e92b4aa2db279eb0b927"
-    sha256 cellar: :any,                 arm64_sequoia: "8804b8809228eafa8d06c4b3acfe77b108fa63ce6f4df82a4ac03fd86016e454"
-    sha256 cellar: :any,                 arm64_sonoma:  "c4061219864a47d710ac2d063cd7b25064949460bc7fdbdc46177626c2260a8c"
-    sha256 cellar: :any,                 sonoma:        "0219fcdd5a1fe61c51d8604ed233283410edd60f2196a901a7a1dea2e29d5101"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1d431a804e2c29bd36335d6d7b3f77b90b33228e8e02b6abaaeb136ea67b282d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "70e777acc2ab3502e45149d7d429866a617627b1b309b5883c38467d3319fe40"
+    sha256 cellar: :any,                 arm64_tahoe:   "7178230cfd6749dd6ee7481c33ec6caac7fc57d9c089b884aa550917b37caf80"
+    sha256 cellar: :any,                 arm64_sequoia: "b44e42f3fd7aed3a5fa21818b844fb53344b7e984c82cf61637ddda43e15ca18"
+    sha256 cellar: :any,                 arm64_sonoma:  "0d0107db587b44594e608ed422686529f76f842a3c468c38d1e8584fd284daca"
+    sha256 cellar: :any,                 sonoma:        "3e4eae5fb8da844700b5f4a59a0b39981ac4aa09db4e76e4d67a9d6cb768e9b9"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1c8c9bbff32662e8e10cc0d6f434bf199be08e6b5a7a4f6f094b8b97e4414835"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6cc5fd46626a5cbbfc8b26e2124b2998cde30f4de6fa0d1378abb6af0e82864f"
   end
 
   depends_on "cmake" => :build
@@ -28,9 +28,7 @@ class CBlosc2 < Formula
   def install
     ENV.llvm_clang if OS.mac? && DevelopmentTools.clang_build_version <= 1400
 
-    internal_complibs = buildpath.glob("internal-complibs/{lz4,zlib,zstd}-*")
-    odie "Failed to find vendored sources for removal!" if internal_complibs.count != 3
-    rm_r internal_complibs
+    rm_r("internal-complibs")
 
     args = %w[
       -DBUILD_TESTS=OFF

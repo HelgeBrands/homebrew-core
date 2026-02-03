@@ -1,19 +1,19 @@
 class Fizz < Formula
   desc "C++14 implementation of the TLS-1.3 standard"
   homepage "https://github.com/facebookincubator/fizz"
-  url "https://github.com/facebookincubator/fizz/releases/download/v2025.11.10.00/fizz-v2025.11.10.00.tar.gz"
-  sha256 "21ad7e064215f5f4e4ae9fbdf2cefe7cdde50db483eee996efd4efd00ccb0658"
+  url "https://github.com/facebookincubator/fizz/archive/refs/tags/v2026.01.12.00.tar.gz"
+  sha256 "b7ae5196273553ee2d04830120830c1f1604b9e96d78db9b58c2ef2b753580d2"
   license "BSD-3-Clause"
   revision 1
   head "https://github.com/facebookincubator/fizz.git", branch: "main"
 
   bottle do
-    sha256                               arm64_tahoe:   "2c143fe39438e88b1e60d98f02d1ca8f0cd10461e57e4223b99e513cf5557230"
-    sha256                               arm64_sequoia: "69fa02adfce85d88ef8457b0059595e12d23fc2a8eb85cb3dff6dd86f9095dd7"
-    sha256                               arm64_sonoma:  "74594482d430034fe81e3b0412c818b7ed4fb966bc7600988c600c76f2814acc"
-    sha256 cellar: :any,                 sonoma:        "833761626be6ff2ab30d2af2d5755b3d07df95fd3df17372f57b74820bf512f9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3d157eefc4a425c62d1f120c0a29a98e95a3c0bbf4d9051e8b6bd1d608b71b73"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a7ce127cf362271357227b3e6076a6943b585b16706c44cae5ea580f233a5b05"
+    sha256                               arm64_tahoe:   "c66e257fbcba22b2c8567b0f2a9a8f0ccf9afd3abfb04388bd682a24dce6a968"
+    sha256                               arm64_sequoia: "d453c679787fd9367c42a51fd6fcddf7d6bf83de07696f39f4aa0475308450c4"
+    sha256                               arm64_sonoma:  "f569da922c87248f1f5a412467036a56810fb7a9a4640be0e25691cb68ceb501"
+    sha256 cellar: :any,                 sonoma:        "e4a634e71dff1e425864a3c93eaa82e56a2c728234cfdf2455d69ad27386d8a2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6c693ec93c2286da478a288bafbe7c12dcbadf25501b32fee0610b90c5d1bd91"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "20f42adcb5e65dcb6eac2467ed906aee57c20d167adc130ae3344b4f1aa50f68"
   end
 
   depends_on "cmake" => [:build, :test]

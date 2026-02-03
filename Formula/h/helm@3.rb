@@ -2,8 +2,8 @@ class HelmAT3 < Formula
   desc "Kubernetes package manager"
   homepage "https://helm.sh/"
   url "https://github.com/helm/helm.git",
-      tag:      "v3.19.2",
-      revision: "8766e718a0119851f10ddbe4577593a45fadf544"
+      tag:      "v3.20.0",
+      revision: "b2e4314fa0f229a1de7b4c981273f61d69ee5a59"
   license "Apache-2.0"
 
   livecheck do
@@ -12,12 +12,12 @@ class HelmAT3 < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e8873a2f317dbcfbe2d5514e16c6e0dfddf1d55fd4bf3955dbd6ef692aadd5e9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "afe38f14296cc3ffa4bcd35a142641c7d3043293662dd42cc0ad405b3ab104c4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "70321d70be984eebc9f35c8b5c3b55f0dcba18197feecdd0a9c0eea0ffb4a4e0"
-    sha256 cellar: :any_skip_relocation, sonoma:        "2853045bfdcf7b3ee2929270ed5ec574d3ff8aa079db55d8f06ca0386018dbc8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "bf0fd686f862717ec932c9ca8190c9cd3c390c3b9ca184b90d1ed41fc7b01ca8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d1e298e142a0a7379a9f0896b5094f90060322275c7e045ec51897a84ef07534"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2339539c5abb0f6b591fd785c835448a74a5ff8de81843f2467b5e3d8228e7ee"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a270381448f0c0f6a851b1c2c93df12c93359ec815cb46716c03c1c1311c8a80"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e64c0cb0f3e132d18147f5c99e4522384049a44c18de32bda70d2e3beb7f539a"
+    sha256 cellar: :any_skip_relocation, sonoma:        "32aab9cccea7e889bcb269cffdf0aaccfbad501407b7ba6e53fd9ae4b8a8c881"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3725770e2c7547599e1884fd6c19f57ed4b1ae08a21345ee7c9cc7a5b757e825"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "32b818e1be7060d7cdd2ca1a8d8046b88dddabc31813719998a8170dbb5db1da"
   end
 
   keg_only :versioned_formula
@@ -33,7 +33,7 @@ class HelmAT3 < Formula
       man1.install Dir["*"]
     end
 
-    generate_completions_from_executable(bin/"helm", "completion")
+    generate_completions_from_executable(bin/"helm", shell_parameter_format: :cobra)
   end
 
   test do

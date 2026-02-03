@@ -3,28 +3,22 @@ class Regipy < Formula
 
   desc "Offline registry hive parsing tool"
   homepage "https://github.com/mkorman90/regipy"
-  url "https://files.pythonhosted.org/packages/9a/15/27bdafd21f4cb822ac0520487bea7b822a0f299a0f2a3083c855d00653e7/regipy-5.2.0.tar.gz"
-  sha256 "cf1e977625e9dcf6fe4facb0cffa21ce6300bf585dee6d451e5f03b26fc61336"
+  url "https://files.pythonhosted.org/packages/ba/80/dd0a588b1762c9e1016f96ae59e3c984269cbcc94ca7b63a3d097bb96416/regipy-6.2.1.tar.gz"
+  sha256 "4e09623cdeb23ba4ad9bd73a0f107c9c60aab2fe9a5dea0ba48c71af1e070dfd"
   license "MIT"
   head "https://github.com/mkorman90/regipy.git", branch: "master"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "b6591127d16324553044e990c10e49207fc76cc0ef6eb43a155f940ab9f69e7d"
+    sha256 cellar: :any_skip_relocation, all: "8ec1159e08804b9ee54ad2a19973f0f8f609aac806c07b9f6ad3fb1880311638"
   end
 
   depends_on "python@3.14"
 
   pypi_packages package_name: "regipy[cli]"
 
-  resource "attrs" do
-    url "https://files.pythonhosted.org/packages/6b/5c/685e6633917e101e5dcb62b9dd76946cbb57c26e133bae9e0cd36033c0a9/attrs-25.4.0.tar.gz"
-    sha256 "16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11"
-  end
-
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
   end
 
   resource "construct" do
@@ -49,6 +43,14 @@ class Regipy < Formula
 
   def install
     virtualenv_install_with_resources
+
+    cmds = %w[
+      regipy-parse-header regipy-dump regipy-plugins-run
+      regipy-plugins-list regipy-diff regipy-process-transaction-logs
+    ]
+    cmds.each do |cmd|
+      generate_completions_from_executable(bin/cmd, shell_parameter_format: :click)
+    end
   end
 
   test do

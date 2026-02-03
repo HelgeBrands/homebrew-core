@@ -1,28 +1,27 @@
 class Ingress2gateway < Formula
   desc "Convert Kubernetes Ingress resources to Kubernetes Gateway API resources"
   homepage "https://github.com/kubernetes-sigs/ingress2gateway"
-  url "https://github.com/kubernetes-sigs/ingress2gateway/archive/refs/tags/v0.4.0.tar.gz"
-  sha256 "7c511e4c309b62d01ce2128643922637f0ca77524bab2c4c6811bebbb43ff119"
+  url "https://github.com/kubernetes-sigs/ingress2gateway/archive/refs/tags/v0.5.0.tar.gz"
+  sha256 "6afffb36873af934f1499d68ea73d432bb711a3025e8f3f5ab330162798ce871"
   license "Apache-2.0"
   head "https://github.com/kubernetes-sigs/ingress2gateway.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9a9fc448e0894b03fd683ea68688b23f0e2488393e648c887f5fd1fdeb4be956"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "804894e94d5995db30d5c70e8ae93fadb64d95488792ad588f01508178f7c6ab"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4fe29eb341d887273844fbbb2ac25d7016ea1c035200bcad34cef8ac3e27a905"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "6eef8e59f45e555634acea8f44f91845d3e52c57a807aeeabf5ec4f114c3b75b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b532ae021e34552d352eed71e599c80dae9d6037dba5153b433ce30d0b2b73d8"
-    sha256 cellar: :any_skip_relocation, ventura:       "c23960ce300c4aa2ea510e24e7c480eb510cc2dfc9365109f0a2d6c7f130b1a8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c26492ccbce780760a7ddf26595463229e745b7cba5d453d48fa71692842e909"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3a76215216004e804caad4063551e07f7ccba6cf55f44d7e5f97cbc6678f34ef"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "19f1d9a3652f55e3469d0a6b6fdcc5a59e62fdb0591797e6c541e347535fd6ad"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "19f1d9a3652f55e3469d0a6b6fdcc5a59e62fdb0591797e6c541e347535fd6ad"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "19f1d9a3652f55e3469d0a6b6fdcc5a59e62fdb0591797e6c541e347535fd6ad"
+    sha256 cellar: :any_skip_relocation, sonoma:        "fda5b0dea1e86df82a07f08cc65f37e5ce8089b92e608272406a3b0551c21f6f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "31a12392fde4047e27597340d74968a952054c0a0316b82e165cd04e80ea049a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "837f74795b0f866473130c6aae03f2b829ea23b17fcc5d51eef45394912db239"
   end
 
   depends_on "go" => :build
 
   def install
-    system "go", "build", *std_go_args(ldflags: "-s -w")
+    ldflags = "-s -w -X github.com/kubernetes-sigs/ingress2gateway/pkg/i2gw.Version=#{version}"
+    system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"ingress2gateway", "completion")
+    generate_completions_from_executable(bin/"ingress2gateway", shell_parameter_format: :cobra)
   end
 
   test do
@@ -65,7 +64,6 @@ class Ingress2gateway < Formula
       metadata:
         annotations:
           gateway.networking.k8s.io/generator: ingress2gateway-#{version}
-        creationTimestamp: null
         name: nginx
         namespace: bar
       spec:
@@ -91,7 +89,6 @@ class Ingress2gateway < Formula
       metadata:
         annotations:
           gateway.networking.k8s.io/generator: ingress2gateway-#{version}
-        creationTimestamp: null
         name: foo-foo-bar
         namespace: bar
       spec:

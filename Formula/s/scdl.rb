@@ -3,14 +3,13 @@ class Scdl < Formula
 
   desc "Command-line tool to download music from SoundCloud"
   homepage "https://github.com/scdl-org/scdl"
-  url "https://files.pythonhosted.org/packages/28/c0/ba64efcd76edf786b1fcc0b15bb32936363213b116ce90c30bc93d56794d/scdl-3.0.0.tar.gz"
-  sha256 "efc34697df19ee9ced0e4d8425ba1aa93846d035821137a6ef3b3ebb4bed1232"
+  url "https://files.pythonhosted.org/packages/1f/0f/48fbebdf53bb5a82a55a424aef30d929bbe4a2fa01804339b690393e05e7/scdl-3.0.3.tar.gz"
+  sha256 "087220a10d5a30388f4a7c9b927af8f6d0ddcb7d0c3fd154788e947df7b15ce3"
   license "GPL-2.0-only"
-  revision 1
   head "https://github.com/scdl-org/scdl.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "5d697031528a616adfc9b11ab89764818f583a50954d8111a8a5759db41bce6c"
+    sha256 cellar: :any_skip_relocation, all: "2731d2c780fd12b4a5d8886b630ddd7cdedc8e1f98124997bbc4c6fabab81e8b"
   end
 
   depends_on "certifi" => :no_linkage
@@ -60,18 +59,18 @@ class Scdl < Formula
   end
 
   resource "soundcloud-v2" do
-    url "https://files.pythonhosted.org/packages/3b/bb/ba779b3cb9597ddf88bb7b31bd6d2a984f972ee3a8f198d32935540058a7/soundcloud-v2-1.6.0.tar.gz"
-    sha256 "462513146c0ffc9ec729c1c616f4f72b0dcd33f81478c64207f265f072e78243"
+    url "https://files.pythonhosted.org/packages/a0/a3/5df894f113268c456d3e1ad94a8530ff5a39931a81449507f4627d67dcde/soundcloud_v2-1.6.1.tar.gz"
+    sha256 "b6646e7883a9986a92bdfb6caded9ca65453899f90517e47ecf82d21ca0ae627"
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "yt-dlp" do
-    url "https://files.pythonhosted.org/packages/cf/41/53ad8c6e74d6627bd598dfbb8ad7c19d5405e438210ad0bbaf1b288387e7/yt_dlp-2025.11.12.tar.gz"
-    sha256 "5f0795a6b8fc57a5c23332d67d6c6acf819a0b46b91a6324bae29414fa97f052"
+    url "https://files.pythonhosted.org/packages/14/77/db924ebbd99d0b2b571c184cb08ed232cf4906c6f9b76eed763cd2c84170/yt_dlp-2025.12.8.tar.gz"
+    sha256 "b773c81bb6b71cb2c111cfb859f453c7a71cf2ef44eff234ff155877184c3e4f"
   end
 
   def install

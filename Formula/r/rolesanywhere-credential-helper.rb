@@ -1,18 +1,18 @@
 class RolesanywhereCredentialHelper < Formula
   desc "Manages getting temporary security credentials from IAM Roles Anywhere"
   homepage "https://github.com/aws/rolesanywhere-credential-helper"
-  url "https://github.com/aws/rolesanywhere-credential-helper/archive/refs/tags/v1.7.2.tar.gz"
-  sha256 "e8e0e207ff9d649fb5a0e67367f7a47dbdcf0c705507520f1e9a1f4a990c9ef1"
+  url "https://github.com/aws/rolesanywhere-credential-helper/archive/refs/tags/v1.7.3.tar.gz"
+  sha256 "6508325ade41862753cdaf06d864b48007a9d44172c0a2edc6e0779e82d2b807"
   license "Apache-2.0"
   head "https://github.com/aws/rolesanywhere-credential-helper.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "de5ea641698ec89a74c7ce057e2bef80b1427c0d26d1058ce54d00ab4fd5c549"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e37c4830b4c6848c672a2d1de863b455c8ae06f063d45d7979a880c4edfcd55b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b5778077a2403d9ad9383a1ee1376427b346e3ffe21eacdaded83c476893e2a0"
-    sha256 cellar: :any_skip_relocation, sonoma:        "24a24b4e443d6ee9de3e5602358998d400ecc986ca42ae4c830eda5c17900a28"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "320846c98ce5c8d7fe6793f8b376927598aff3f837d49dc0a7f026e2e06bf8ad"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1e35e0f91605ce14cffddde134fc9808d7099b3363acb2f5cbd9f63269fdde8d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0d3b3c38b08b5d78fc33cee3bc6597914927608ea219d589c78886077aaeece8"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "da88f341991385ba7f2441091c2855973248e352c98ef3d4dcdad7e9d901853a"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c8c40974f17790dc43798cc59dec6e70a6a7c440eeaa009152e9cfefe60f3377"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a183744e8c07cfeb36ad296b065053a6928e93e6ff2353dd92b4e4b64ab0ec68"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e8e10c1b0e5ffe0ac19a8974dcf283a2e2b7297761e9511545050bea263e31e4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dfdeabac994c1b551601e18288cb3744fb30eeb99408acb0be641187a05a9add"
   end
 
   depends_on "go" => :build
@@ -23,7 +23,7 @@ class RolesanywhereCredentialHelper < Formula
     ldflags = "-s -w -X github.com/aws/rolesanywhere-credential-helper/cmd.Version=#{version}"
     system "go", "build", *std_go_args(ldflags:, output: bin/"aws_signing_helper")
 
-    generate_completions_from_executable(bin/"aws_signing_helper", "completion")
+    generate_completions_from_executable(bin/"aws_signing_helper", shell_parameter_format: :cobra)
   end
 
   test do

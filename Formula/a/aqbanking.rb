@@ -1,8 +1,8 @@
 class Aqbanking < Formula
   desc "Generic online banking interface"
   homepage "https://www.aquamaniac.de/rdm/projects/aqbanking"
-  url "https://www.aquamaniac.de/rdm/attachments/download/634/aqbanking-6.8.2.tar.gz"
-  sha256 "10b14c92d76ff13652e00b5c496001601f0d9465c5acb1b1b682d451022406ec"
+  url "https://www.aquamaniac.de/rdm/attachments/download/652/aqbanking-6.9.1.tar.gz"
+  sha256 "fc94a2bebfbb4fc26b98dc93c8fa36a8026298cd7995f79821c480db35587f6b"
   license "GPL-2.0-or-later"
 
   livecheck do
@@ -13,12 +13,12 @@ class Aqbanking < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 arm64_tahoe:   "105e245881c755ad3ef896386a4dd5848e885aa71d814df4b147357636911449"
-    sha256 arm64_sequoia: "73b04298da2aa314f4af06362dd9178c651cdae20d28ab9a57c66c75507c5ff0"
-    sha256 arm64_sonoma:  "977857fbf46e5a53deae8c5b0f2ed348aeabd96c85e2725fcc8a1db0479b2a32"
-    sha256 sonoma:        "15935add475443421f337d3537d47c703e08511225e45becab23a544425d9831"
-    sha256 arm64_linux:   "9d7a8785eb0bd17d44c64a62613bec6e629a6bfc1df753db5542c54487bd5d9a"
-    sha256 x86_64_linux:  "ad51bb9ffe448056610987e47d07d09edc9d3119d043639d5599327315574b24"
+    sha256 arm64_tahoe:   "19192ff6c5a8ac4413f2f75f78b98d1014f0cfd548edfd5055e3a92690b88bf8"
+    sha256 arm64_sequoia: "e53568cfc60410c68468acdfc0ad57c15f94377b2fb43d0c334a9816452e7fea"
+    sha256 arm64_sonoma:  "b84fbbc035d6ac794d35d3d83e45491aaa908bc9fdf488376034ba3fea3e9a08"
+    sha256 sonoma:        "ce6ca356971ac73b29a5e814e378d5d1cdcd223c5be2cbc74e78e6b4c995fd44"
+    sha256 arm64_linux:   "d936623795fc53d502ac4028d767059eea1eaae97cf00a67c653fc73f30f804c"
+    sha256 x86_64_linux:  "176286ab56ebc76fceffda0f57a8ab01990cc7dae19e3ad36b1a7ed675a422eb"
   end
 
   depends_on "gmp"

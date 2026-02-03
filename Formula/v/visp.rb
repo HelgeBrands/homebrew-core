@@ -1,25 +1,23 @@
 class Visp < Formula
   desc "Visual Servoing Platform library"
   homepage "https://visp.inria.fr/"
-  url "https://visp-doc.inria.fr/download/releases/visp-3.6.0.tar.gz"
-  sha256 "eec93f56b89fd7c0d472b019e01c3fe03a09eda47f3903c38dc53a27cbfae532"
+  url "https://visp-doc.inria.fr/download/releases/visp-3.7.0.tar.gz"
+  sha256 "997f247f3702c83f0a8a6dc2f72ff98cfe3a5dcbd82f7c9f01d37ccd3b8ea97a"
   license "GPL-2.0-or-later"
-  revision 19
+  revision 2
 
   livecheck do
     url "https://visp.inria.fr/download/"
     regex(/href=.*?visp[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "7efeb3c73ba6c90938f8df5cc15ad7e996cdaace2c7694056989536607b89e65"
-    sha256 cellar: :any,                 arm64_sequoia: "def3fe5709f81618936e77b2323f0accb57724ce33346dfefff79356ca663973"
-    sha256 cellar: :any,                 arm64_sonoma:  "a428e82264b87d1065860037c8e0d3a91b60c0d023314e8f3518bef3f2f39a27"
-    sha256 cellar: :any,                 sonoma:        "5b28a9211a9171ae48bb9e4ed235ca0e84e046ead0b5519fa9c64b34b4192ed7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b00e634ae5fa2b84cc6300c3bc89d6602e2dfa8cddcd7fc79158d4d86402ab36"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "227d11044d1fd82fddc407d2c63c8f4a121c33cbe81609442ab50ab2f6b2c7ae"
+    sha256 cellar: :any,                 arm64_tahoe:   "3fec437aae90a97f0522c5e4e7e1e9b870fb8ee16e5b381893af75dd8dfbf7d4"
+    sha256 cellar: :any,                 arm64_sequoia: "d6f628826fe0c579c5ee89f318a96e24f0c10e1a253164a116c262989e745d0b"
+    sha256 cellar: :any,                 arm64_sonoma:  "25634f93bb991904b24ca4af48b212f5b802f74a026accae0db0df720c72aca7"
+    sha256 cellar: :any,                 sonoma:        "ab3cb84ab7e73621b01bce370d20ac1cf748dc500ae400d872f2ffba270707c6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "49537cb6c0be7530ebceb68d29ddd7c58709af155a8c6e94fc83fe0d0cf74346"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7d06a60a9b2493d2034967bb6d833d208447b5593fb192156a940d4c0a0323cc"
   end
 
   depends_on "cmake" => [:build, :test]
@@ -52,37 +50,6 @@ class Visp < Formula
 
   on_linux do
     depends_on "libnsl"
-  end
-
-  # Backport fix for recent Apple Clang
-  patch do
-    url "https://github.com/lagadic/visp/commit/8c1461661f99a5db31c89ede9946d2b0244f8123.patch?full_index=1"
-    sha256 "1e0126c731bf14dfe915088a4205a16ec0b6d5f2ea57d0e84f2f69b8e86b144f"
-  end
-  patch do
-    url "https://github.com/lagadic/visp/commit/e41aa4881e0d58c182f0c140cc003b37afb99d39.patch?full_index=1"
-    sha256 "c0dd6678f1b39473da885f7519daf16018e20209c66cdd04f660a968f6fadbba"
-  end
-
-  # Backport fix for VTK include directories detection
-  patch do
-    url "https://github.com/lagadic/visp/commit/44d06319430c4933127e8dc31094259d92c63c2e.patch?full_index=1"
-    sha256 "a474659656764ca7b98d7ab7bad162cd9d36c50018d3033eb59806d2ac309850"
-  end
-  patch do
-    url "https://github.com/lagadic/visp/commit/09c900480c5b9d3b2d97244fe3b109e48f8e2d27.patch?full_index=1"
-    sha256 "417c3fa88cd5718e48e970ddd590ccaaafbe01db328dee79390fb931afa67da9"
-  end
-  patch do
-    url "https://github.com/lagadic/visp/commit/d6aebe3af2700c95c17c75aafb4f25d478a8f853.patch?full_index=1"
-    sha256 "740cb92ff79a368475af7979ff6ac4c443f90808bd02dd841aec3428cdbc95ed"
-  end
-
-  # One usage of OpenCV Universal Intrinsics API altered starting from 4.9.0
-  # TODO: Remove this patch in the next release
-  patch do
-    url "https://github.com/lagadic/visp/commit/ebfa2602faca0f40db2dd1cc0cfb72cd8177640c.patch?full_index=1"
-    sha256 "7fac428ca4fee039a84770e9c7877c43e28945038ff21233da74f3ae159703e0"
   end
 
   def install
@@ -133,6 +100,7 @@ class Visp < Formula
                          "-DZBAR_INCLUDE_DIRS=#{Formula["zbar"].opt_include}",
                          "-DZBAR_LIBRARIES=#{Formula["zbar"].opt_lib/shared_library("libzbar")}",
                          "-DUSE_ZLIB=ON",
+                         "-DUSE_MAVSDK=OFF",
                          *std_cmake_args
 
     # Replace generated references to OpenCV's Cellar path
@@ -151,7 +119,7 @@ class Visp < Formula
     system "cmake", "--install", "."
 
     # Make sure software built against visp don't reference opencv's cellar path either
-    inreplace [lib/"pkgconfig/visp.pc", lib/"cmake/visp/VISPConfig.cmake", lib/"cmake/visp/VISPModules.cmake"],
+    inreplace [lib/"pkgconfig/visp.pc", lib/"cmake/visp/VISPConfig.cmake"],
               opencv.prefix.realpath, opencv.opt_prefix
   end
 

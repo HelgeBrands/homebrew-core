@@ -1,18 +1,18 @@
 class Fnox < Formula
   desc "Fort Knox for your secrets - flexible secret management tool"
   homepage "https://fnox.jdx.dev/"
-  url "https://github.com/jdx/fnox/archive/refs/tags/v1.7.0.tar.gz"
-  sha256 "359449f43698806a94f380566c0341de73ccd72bfa0dfdb8b5587174b51ffeb3"
+  url "https://github.com/jdx/fnox/archive/refs/tags/v1.11.0.tar.gz"
+  sha256 "0e9960825c02b39e1a021f5dc5a3dd9cfab48b6e24a2351ea09ff5a129059666"
   license "MIT"
   head "https://github.com/jdx/fnox.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "88a988d433a265ecb127db880eb6c2b0072f1cc8dbc87e51ab3c325753b041fc"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0d799c9caf50f740a89e29981a12181fb0160f59b036186a1b2486e63a571468"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "724d39de63fc3e95c34e15f039ce9e3791f5b79edd7d99c233f3e9508a85aee2"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3a4633e816c203ed1bd29cad0d9f3fc461efd48a3ff14954ae2ea322b51157d1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "abf9a83542323f88540b2c8245541a9f3b0d2dddf4fa4422fcfd006f9a16ca7c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fd23e3a5670819caba5947d0a60ed80e8893a752e43dd2b235734eac1fedb1df"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f96e48260445b86314651a97993599f77e43c58f3a3b6c7567117df611bb8162"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "54b7900c8ade7ef45038134c4d1af3a2c0b57ef46d391576db99ba6b302e00a4"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5876e4b7e39046fa6c5804a3cefa2abf9ea2b2b23689f4740c4104590d554b62"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f498af512531f4380b9bd89e50f993994273984df394df3441588b256e589d78"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7a2e29c06e84a5e05fa75bad99aae0995c3b2f71e83ea68205370014ff851ac9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cd739189e9a354ccc2198d503a681f81516d2f25132cf19719290318b4bb0dc7"
   end
 
   depends_on "pkgconf" => :build

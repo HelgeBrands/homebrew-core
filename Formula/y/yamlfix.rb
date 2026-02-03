@@ -3,28 +3,24 @@ class Yamlfix < Formula
 
   desc "Simple and configurable YAML formatter that keeps comments"
   homepage "https://lyz-code.github.io/yamlfix/"
-  url "https://files.pythonhosted.org/packages/e8/5f/cea9f9a9027f3f7ac6b5345e654255518013e94d5c3146746a139be5c865/yamlfix-1.19.0.tar.gz"
-  sha256 "22f95ed2a5b88f46f06cf7922c616b6706d3596f23a0553138796ab909e5fa96"
+  url "https://files.pythonhosted.org/packages/93/1d/b60d4411ff495de9b7598cc041e29c661e8e2f9d476a8a09bad1f54c1bce/yamlfix-1.19.1.tar.gz"
+  sha256 "05f6add13959637564f278e9237f6e201ff75e061a0a4cb9fc06fa95c3001a22"
   license "GPL-3.0-or-later"
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2d3a68e877b5a09ed4ea835daa1b6d9f3e374565c7f56428b2a7777f8abbcf44"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2d3a68e877b5a09ed4ea835daa1b6d9f3e374565c7f56428b2a7777f8abbcf44"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2d3a68e877b5a09ed4ea835daa1b6d9f3e374565c7f56428b2a7777f8abbcf44"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e34ad4aa38e4286df238735c8c4cd9767797d7865eee70a7004e41765141818c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e34ad4aa38e4286df238735c8c4cd9767797d7865eee70a7004e41765141818c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e34ad4aa38e4286df238735c8c4cd9767797d7865eee70a7004e41765141818c"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, all: "21f1565a958b7183f6b308236158b321ddc558e5cef2b4c2055f0020f98d9606"
   end
 
   depends_on "pydantic" => :no_linkage
   depends_on "python@3.14"
 
-  pypi_packages exclude_packages: "pydantic"
+  pypi_packages exclude_packages: "pydantic",
+                extra_packages:   "platformdirs"
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/46/61/de6cd827efad202d7057d93e0fed9294b96952e188f7384832791c7b2254/click-8.3.0.tar.gz"
-    sha256 "e7b8232224eba16f4ebe410c25ced9f7875cb5f3263ffc93cc3e8da705e229c4"
+    url "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz"
+    sha256 "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a"
   end
 
   resource "distro" do
@@ -53,8 +49,8 @@ class Yamlfix < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/61/33/9611380c2bdb1225fdef633e2a9610622310fed35ab11dac9620972ee088/platformdirs-4.5.0.tar.gz"
-    sha256 "70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312"
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "pygments" do
@@ -83,12 +79,18 @@ class Yamlfix < Formula
   end
 
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/8f/28/7c85c8032b91dbe79725b6f17d2fffc595dff06a35c7a30a37bef73a1ab4/typer-0.20.0.tar.gz"
-    sha256 "1aaf6494031793e4876fb0bacfa6a912b551cf43c1e63c800df8b1a866720c37"
+    url "https://files.pythonhosted.org/packages/6d/c1/933d30fd7a123ed981e2a1eedafceab63cb379db0402e438a13bc51bbb15/typer-0.20.1.tar.gz"
+    sha256 "68585eb1b01203689c4199bc440d6be616f0851e9f0eb41e4a778845c5a0fd5b"
   end
 
   def install
-    virtualenv_install_with_resources
+    venv = virtualenv_install_with_resources
+
+    # Replace vendored platformdirs with latest version for easier relocation
+    # https://github.com/pypa/setuptools/pull/5076
+    venv.site_packages.glob("setuptools/_vendor/platformdirs*").map(&:rmtree)
+
+    generate_completions_from_executable(bin/"yamlfix", shell_parameter_format: :click)
   end
 
   test do

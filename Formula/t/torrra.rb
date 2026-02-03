@@ -3,8 +3,8 @@ class Torrra < Formula
 
   desc "Find and download torrents without leaving your CLI"
   homepage "https://torrra.readthedocs.io/en/latest/"
-  url "https://files.pythonhosted.org/packages/54/51/a26e9f02d4e9c12cca16fb44154aa8f9601f46005ee97b97a8795c64192c/torrra-2.0.4.tar.gz"
-  sha256 "f8394495215193c4b3a8281684a9ca3f99ccf17b3c3eae486d7d56d3f15fadb1"
+  url "https://files.pythonhosted.org/packages/78/dc/55d1767e99119e09ec98fddb648e7773fe02c621e2a02607b1c19db181e4/torrra-2.0.6.tar.gz"
+  sha256 "37956d9ac7dec31941931c6bfda232777b5724df56c2a8d093a1cc12cbd94f8f"
   license "MIT"
   head "https://github.com/stabldev/torrra.git", branch: "main"
 
@@ -14,7 +14,7 @@ class Torrra < Formula
   no_autobump! because: "`update-python-resources` cannot determine dependencies"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "7de18c3d2832adcbce5d6d7a118ff123ca6a76b1ddb82d399568b53bd99d98e9"
+    sha256 cellar: :any_skip_relocation, all: "538ec7ea6e1c68d5fc1cde18a144eac8918ac2fddb91a83e708c14aee1feebaf"
   end
 
   depends_on "rust" => :build # for uv-build backend
@@ -80,8 +80,8 @@ class Torrra < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/61/33/9611380c2bdb1225fdef633e2a9610622310fed35ab11dac9620972ee088/platformdirs-4.5.0.tar.gz"
-    sha256 "70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312"
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "pygments" do
@@ -95,8 +95,8 @@ class Torrra < Formula
   end
 
   resource "textual" do
-    url "https://files.pythonhosted.org/packages/ab/00/9520327698acb6d8ae120b311ef1901840d55a6c41580e377f36261daf7a/textual-6.7.1.tar.gz"
-    sha256 "2a5acb0ab316a7ba9e74b0a291fab8933d681d7cf6f4e1eeb45c39a731b094cf"
+    url "https://files.pythonhosted.org/packages/d4/9c/ebc9ca1f95366bef4c0e8360f4a77400d47a79aeecc08747de1990ef8bdc/textual-7.0.0.tar.gz"
+    sha256 "617638a2be74fb7507aff3ea6ec9374148be02e5a7bb1d02396d1d557b66c0a9"
   end
 
   resource "tomli-w" do
@@ -120,6 +120,8 @@ class Torrra < Formula
     ENV["SOURCE_DATE_EPOCH"] = "1451574000"
 
     virtualenv_install_with_resources
+
+    generate_completions_from_executable(bin/"torrra", shell_parameter_format: :click)
   end
 
   test do

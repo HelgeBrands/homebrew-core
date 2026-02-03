@@ -9,19 +9,22 @@ class PyqtBuilder < Formula
   head "https://github.com/Python-PyQt/PyQt-builder.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "07ab06eaad9e2b670a52a0e57317557df1c72c9771a11120b8294d9f85a8d42b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "07ab06eaad9e2b670a52a0e57317557df1c72c9771a11120b8294d9f85a8d42b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "07ab06eaad9e2b670a52a0e57317557df1c72c9771a11120b8294d9f85a8d42b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "cfb6e43b07a4ef29e83828b189082444da152310ceaa37ce7e53be2283700828"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cfb6e43b07a4ef29e83828b189082444da152310ceaa37ce7e53be2283700828"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cfb6e43b07a4ef29e83828b189082444da152310ceaa37ce7e53be2283700828"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, all: "a9cedbc925b2eb0084510ec10953c83495eb8240477a8c70855bdf72dcbb2cd4"
   end
 
   depends_on "python@3.14"
 
+  pypi_packages extra_packages: "platformdirs"
+
   resource "packaging" do
     url "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz"
     sha256 "d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"
+  end
+
+  resource "platformdirs" do
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "setuptools" do
@@ -30,8 +33,8 @@ class PyqtBuilder < Formula
   end
 
   resource "sip" do
-    url "https://files.pythonhosted.org/packages/a7/8a/869417bc2ea45a29bc6ed4ee82757e472f0c7490cf5b7ddb82b70806bce4/sip-6.14.0.tar.gz"
-    sha256 "20c086aba387707b34cf47fd96d1a978d01e2b95807e86f8aaa960081f163b28"
+    url "https://files.pythonhosted.org/packages/8e/3d/4245885c0480230d4bc389c6165c841546bf43c1e780fd77995caf5ad7b8/sip-6.15.1.tar.gz"
+    sha256 "dc2e58c1798a74e1b31c28e837339822fe8fa55288ae30e8986eb28100ebca5a"
   end
 
   def python3
@@ -44,6 +47,10 @@ class PyqtBuilder < Formula
     # Modify the path sip-install writes in scripts as we install into a
     # virtualenv but expect dependents to run with path to Python formula
     inreplace venv.site_packages/"sipbuild/builder.py", /\bsys\.executable\b/, "\"#{which(python3)}\""
+
+    # Replace vendored platformdirs with latest version for easier relocation
+    # https://github.com/pypa/setuptools/pull/5076
+    venv.site_packages.glob("setuptools/_vendor/platformdirs*").map(&:rmtree)
   end
 
   test do

@@ -1,24 +1,26 @@
 class TechnitiumLibrary < Formula
   desc "Library for technitium .net based applications"
   homepage "https://technitium.com"
-  url "https://github.com/TechnitiumSoftware/TechnitiumLibrary/archive/refs/tags/dns-server-v14.2.0.tar.gz"
-  sha256 "a87df80bccedb78af89c5fae022288475c1ade7723ae5c8cc9a43b545371db07"
+  # Try upgrade to latest `dotnet` on version bump
+  url "https://github.com/TechnitiumSoftware/TechnitiumLibrary/archive/refs/tags/dns-server-v14.3.0.tar.gz"
+  sha256 "fd0b37e7906f95679f279c8704e5e197d853771f24c169f4702562a7f26ab254"
   license "GPL-3.0-only"
+  revision 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "481cd1c6882f4e7faab4ea30bfe6d9c4572d029a3082bafed7eb2e1f26244179"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1b5fd36d027ad733344843614d31194e126807f9966433f3c5498fea185bbdb4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "294a3d23e359c562077075409fa93e7cdb70ee5db34fb3e11eb1cc5e9c0071cc"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0c7f7b355ecb321f1ad455ccaaf0962b8f19573d78f96ff12459a98d284d9fac"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d679b1115d042f8c202f47fd6a0dfa97fb2decae3e57ceca0a5a53b56e01ffd2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "03ac8d281987c3d5dec0fc64f3563e3a383e958012d7d73ba6fb9aef6e310f43"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3c4bd9c7a761862794902799382ee773ceac4a83dbb20dbd4e961a7c5ca14cbf"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "69fc28f1a681f9764d1824809b0cea3f3c5fbad39499e85a5686fc9345f502c2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "cbf6a1094b1888bd698833c335dc298b0829f55cd6590da4e9a5dd99d98097a3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "50049dcaf0f433dece95d5a3317be951011f130f5d59c29a94fbb49448cd80d9"
   end
 
-  depends_on "dotnet"
+  depends_on "dotnet@9"
 
   def install
     ENV["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1"
 
-    dotnet = Formula["dotnet"]
+    dotnet = Formula["dotnet@9"]
     args = %W[
       --configuration Release
       --framework net#{dotnet.version.major_minor}
@@ -33,7 +35,7 @@ class TechnitiumLibrary < Formula
   end
 
   test do
-    dotnet = Formula["dotnet"]
+    dotnet = Formula["dotnet@9"]
     target_framework = "net#{dotnet.version.major_minor}"
 
     (testpath/"test.cs").write <<~CSHARP

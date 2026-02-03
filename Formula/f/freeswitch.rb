@@ -2,14 +2,14 @@ class Freeswitch < Formula
   desc "Telephony platform to route various communication protocols"
   homepage "https://freeswitch.org"
   license "MPL-1.1"
+  head "https://github.com/signalwire/freeswitch.git", branch: "master"
 
   stable do
-    # TODO: Switch to `pcre2` on next release
+    # TODO: switch to tarball on next release and make autoconf/automake/libtool HEAD-only.
+    # url "https://files.freeswitch.org/releases/freeswitch/freeswitch-1.10.12.-release.tar.gz"
     url "https://github.com/signalwire/freeswitch.git",
         tag:      "v1.10.12",
         revision: "a88d069d6ffb74df797bcaf001f7e63181c07a09"
-
-    depends_on "pcre"
 
     # Backport support for FFmpeg 7.1
     patch do
@@ -28,6 +28,39 @@ class Freeswitch < Formula
       url "https://github.com/signalwire/freeswitch/commit/066b92c5894b07a4879a26a9f6a1cdcf59e016ea.patch?full_index=1"
       sha256 "e3b17c6d3f8b084b981398fc913b260c7b3085c1baa6842cf702ba10b1c8b4c5"
     end
+
+    # Backport commits to cleanly apply PCRE 2 patches
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/a52671333386cfbdb6490d36354f1eff3a1cd2e5.patch?full_index=1"
+      sha256 "aceb5b2fb81fcad786a7982c04d7ae383dbb369fbbcd91c0a4874d506fe85afb"
+    end
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/bd0d0db878a9a26e6ef471218b850d39eae725b5.patch?full_index=1"
+      sha256 "861939d709b0364b8147dff2add1543df03b4e2d0745019bfbe331644e40e8b8"
+    end
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/12b47fe7f91b93ba9cec90676e62c6239a097c98.patch?full_index=1"
+      sha256 "25e34c76deec2b38c77327040766c95c725e142958bd8c1024e9307e3fd3b326"
+    end
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/68e587d7cf9f8df5b0c748f94185a00ad2a37238.patch?full_index=1"
+      sha256 "125406e097b1ab9b904d6863819cd632f82bacffc88d8b4a6868c2984ab229ca"
+    end
+    patch :DATA # https://github.com/signalwire/freeswitch/commit/3a53566eab5793c8c2daf9e44e10d8a4a572aa69
+
+    # Backport support for PCRE 2
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/65bc7c14bf1a9c3e61cbb0e5a611d2014b5b09b9.patch?full_index=1"
+      sha256 "1b9d44620218028649793afd4a3036a557bd51cf0c7c85ca0085a26f55c53d58"
+    end
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/909247067bd55a08db84bad2a00960bf822f1141.patch?full_index=1"
+      sha256 "9a5231f273328c7676605057f7fd5fe4c922f94b40553104c2909ada64fb1861"
+    end
+    patch do
+      url "https://github.com/signalwire/freeswitch/commit/02549c10d9155d0f71f36289aeeddc9c73a4d46e.patch?full_index=1"
+      sha256 "db74f0803c3f8433a50e9811671440608d7bcbe82d0a67a4bac9bc7ad7215f19"
+    end
   end
 
   livecheck do
@@ -36,34 +69,25 @@ class Freeswitch < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_tahoe:   "2be965616dac434ef38893c57df9f86db4fb0069b05f00cf924553c9d02055a8"
-    sha256 arm64_sequoia: "65ff95422df2c3a7c1841198606b083b359d41f76ae59fcca89c0e48d72161a7"
-    sha256 arm64_sonoma:  "fd47ef79d42a6f6d0ad13777d79e672b021e9af8f7305da7e508b9ac06e3b602"
-    sha256 arm64_ventura: "a5f39a0499abc9f2b854cc43dfd014a689d089b343fdabb9da48caa7399b9b58"
-    sha256 sonoma:        "a9e87e89a6705c491da23b45e5b1982b46d1095bebc3a02a9e4804d1335b0c8a"
-    sha256 ventura:       "f51506a3db00f7a54f2b45cf7f8a5899ab72cfeaef741444dc2c30ae5f32d1e5"
-    sha256 arm64_linux:   "c0b4bad733698341a05e57d2576c85a96b6300b0fa1e12f6eadffaaf7beaeec4"
-    sha256 x86_64_linux:  "741228a2280f5223db7851a8807e71b0101c6a7afd35c04d10541c4dc83d0e6b"
-  end
-
-  head do
-    url "https://github.com/signalwire/freeswitch.git", branch: "master"
-
-    depends_on "pcre2"
+    rebuild 4
+    sha256 arm64_tahoe:   "9cb8409408cc01cc8e19a512f9eda755f265a04f206a73d8e4f1603fb83f6952"
+    sha256 arm64_sequoia: "26ad3b1d0473455bc8de23fb19319039bba987ccd691cf6f056a4bd2f287fc03"
+    sha256 arm64_sonoma:  "e10676bb9b427165069892057a399218500dba99b5f8ab6830ef425cb88d6dfe"
+    sha256 sonoma:        "86246d29684a3845246c201c54ab73c3b521b7a9cbd690cd98e649f4efc38b47"
+    sha256 arm64_linux:   "7ac4e295edcb214731c6f0acbf463e44828b33e2ebd773dbc78611cac146f75b"
+    sha256 x86_64_linux:  "c38b84dcd8b19b037354c7924ed564b942b517f1634844075b2e37d307aaf1d0"
   end
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
-  depends_on "cmake" => :build
   depends_on "libtool" => :build
   depends_on "pkgconf" => :build
-  depends_on "yasm" => :build
 
   depends_on "ffmpeg@7"
   depends_on "freetype"
   depends_on "jpeg-turbo"
   depends_on "ldns"
+  depends_on "libks"
   depends_on "libpng"
   depends_on "libpq"
   depends_on "libsndfile"
@@ -72,18 +96,23 @@ class Freeswitch < Formula
   depends_on "opencore-amr"
   depends_on "openssl@3"
   depends_on "opus"
+  depends_on "pcre2"
+  depends_on "signalwire-client-c"
   depends_on "sofia-sip"
   depends_on "speex"
   depends_on "speexdsp"
   depends_on "sqlite"
-  depends_on "util-linux"
 
   uses_from_macos "curl"
   uses_from_macos "libedit"
-  uses_from_macos "libxcrypt"
-  uses_from_macos "zlib"
 
-  # https://github.com/Homebrew/homebrew/issues/42865
+  on_linux do
+    depends_on "util-linux"
+  end
+
+  on_intel do
+    depends_on "yasm" => :build
+  end
 
   #----------------------- Begin sound file resources -------------------------
   sounds_url_base = "https://files.freeswitch.org/releases/sounds"
@@ -96,6 +125,11 @@ class Freeswitch < Formula
     url "#{sounds_url_base}/freeswitch-sounds-music-8000-#{moh_version}.tar.gz"
     version moh_version
     sha256 "2491dcb92a69c629b03ea070d2483908a52e2c530dd77791f49a45a4d70aaa07"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/signalwire/freeswitch/refs/tags/v#{LATEST_VERSION}/build/moh_version.txt"
+      regex(/^v?(\d+(?:\.\d+)+)$/i)
+    end
   end
   resource "sounds-music-16000" do
     url "#{sounds_url_base}/freeswitch-sounds-music-16000-#{moh_version}.tar.gz"
@@ -121,6 +155,11 @@ class Freeswitch < Formula
     url "#{sounds_url_base}/freeswitch-sounds-en-us-callie-8000-#{sounds_en_version}.tar.gz"
     version sounds_en_version
     sha256 "24a2baad88696169950c84cafc236124b2bfa63114c7c8ac7d330fd980c8db05"
+
+    livecheck do
+      url "https://raw.githubusercontent.com/signalwire/freeswitch/refs/tags/v#{LATEST_VERSION}/build/sounds_version.txt"
+      regex(/^en-us-callie v?(\d+(?:\.\d+)+)$/i)
+    end
   end
   resource "sounds-en-us-callie-16000" do
     url "#{sounds_url_base}/freeswitch-sounds-en-us-callie-16000-#{sounds_en_version}.tar.gz"
@@ -141,66 +180,31 @@ class Freeswitch < Formula
   #------------------------ End sound file resources --------------------------
 
   # There's no tags for now https://github.com/freeswitch/spandsp/issues/13
+  # Using same source tarball as upstream's `signalwire/signalwire/spandsp` formula:
+  # https://github.com/signalwire/homebrew-signalwire/blob/master/Formula/spandsp.rb
   resource "spandsp" do
-    url "https://github.com/freeswitch/spandsp.git",
-        revision: "67d2455efe02e7ff0d897f3fd5636fed4d54549e"
-  end
+    url "https://files.freeswitch.org/downloads/libs/spandsp-3.0.0-0d2e6ac65e.tar.gz"
+    version "3.0.0-0d2e6ac65e"
+    sha256 "29c728fab504eb83aa01eb4172315c2795c8be6ef9094005f21bd1e3463f5f2f"
 
-  resource "libks" do
-    url "https://github.com/signalwire/libks.git",
-        tag:      "v2.0.6",
-        revision: "3bc8dd0524a865becdd98c3806735eb306fe0a73"
+    livecheck do
+      url "https://raw.githubusercontent.com/signalwire/homebrew-signalwire/refs/heads/master/Formula/spandsp.rb"
+      regex(/url ".*?spandsp[._-]v?(\d+(?:\.\d+)+-\h+)\.t/i)
+    end
 
-    # Fix compile with newer Clang, https://github.com/signalwire/libks/issues/217
-    patch :DATA if DevelopmentTools.clang_build_version >= 1500
-  end
-
-  resource "signalwire-c" do
-    url "https://github.com/signalwire/signalwire-c.git",
-        tag:      "v2.0.0",
-        revision: "c432105788424d1ddb7c59aacd49e9bfa3c5e917"
+    # Fix -flat_namespace being used on Big Sur and later.
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/libtool/configure-big_sur.diff"
+      sha256 "35acd6aebc19843f1a2b3a63e880baceb0f5278ab1ace661e57a502d9d78c93c"
+    end
   end
 
   def install
     resource("spandsp").stage do
-      system "./bootstrap.sh"
-      system "./configure", "--disable-silent-rules", *std_configure_args(prefix: libexec/"spandsp")
-      system "make"
-      ENV.deparallelize { system "make", "install" }
-
-      ENV.append_path "PKG_CONFIG_PATH", libexec/"spandsp/lib/pkgconfig"
+      system "./configure", "--disable-silent-rules", *std_configure_args(prefix: libexec)
+      system "make", "install"
+      ENV.append_path "PKG_CONFIG_PATH", libexec/"lib/pkgconfig"
     end
-
-    resource("libks").stage do
-      system "cmake", ".", *std_cmake_args(install_prefix: libexec/"libks")
-      system "cmake", "--build", "."
-      system "cmake", "--install", "."
-
-      ENV.append_path "PKG_CONFIG_PATH", libexec/"libks/lib/pkgconfig"
-      ENV.append "CFLAGS", "-I#{libexec}/libks/include"
-
-      # Add RPATH to libks2.pc so libks2.so can be found by freeswitch modules.
-      inreplace libexec/"libks/lib/pkgconfig/libks2.pc",
-                "-L${libdir}",
-                "-Wl,-rpath,${libdir} -L${libdir}"
-    end
-
-    resource("signalwire-c").stage do
-      ENV["CMAKE_POLICY_VERSION_MINIMUM"] = "3.5"
-      system "cmake", ".", *std_cmake_args(install_prefix: libexec/"signalwire-c")
-      system "cmake", "--build", "."
-      system "cmake", "--install", "."
-
-      ENV.append_path "PKG_CONFIG_PATH", libexec/"signalwire-c/lib/pkgconfig"
-
-      # Add RPATH to signalwire_client2.pc so libsignalwire_client2.so
-      # can be found by freeswitch modules.
-      inreplace libexec/"signalwire-c/lib/pkgconfig/signalwire_client2.pc",
-                "-L${libdir}",
-                "-Wl,-rpath,${libdir} -L${libdir}"
-    end
-
-    system "./bootstrap.sh", "-j"
 
     args = %W[
       --enable-shared
@@ -210,11 +214,7 @@ class Freeswitch < Formula
     # Fails on ARM: https://github.com/signalwire/freeswitch/issues/1450
     args << "--disable-libvpx" if Hardware::CPU.arm?
 
-    ENV.append_to_cflags "-D_ANSI_SOURCE" if OS.linux?
-
-    # Fix compile with newer Clang
-    ENV.append_to_cflags "-Wno-implicit-function-declaration" if DevelopmentTools.clang_build_version >= 1403
-
+    system "./bootstrap.sh", "-j" # TODO: if build.head?
     system "./configure", *args, *std_configure_args
     system "make", "all"
     system "make", "install"
@@ -247,23 +247,18 @@ class Freeswitch < Formula
 end
 
 __END__
-diff --git a/cmake/ksutil.cmake b/cmake/ksutil.cmake
-index a82c639..df04a70 100644
---- a/cmake/ksutil.cmake
-+++ b/cmake/ksutil.cmake
-@@ -103,6 +103,7 @@ macro(ksutil_setup_platform)
- 		add_compile_options("$<$<CONFIG:Release>:-Wno-parentheses>")
- 		add_compile_options("$<$<CONFIG:Release>:-Wno-pointer-sign>")
- 		add_compile_options("$<$<CONFIG:Release>:-Wno-switch>")
-+		add_compile_options("$<$<CONFIG:Release>:-Wno-int-conversion>")
+diff --git a/build/Makefile.centos6 b/build/Makefile.centos6
+index 327c2e6454c..24b4ac39a63 100644
+--- a/build/Makefile.centos6
++++ b/build/Makefile.centos6
+@@ -6,8 +6,8 @@
+ # in that same directory.
+ #
+ #
+-RPMS=git gcc-c++ autoconf automake libtool wget python ncurses-devel zlib-devel libjpeg-devel openssl-devel e2fsprogs-devel sqlite-devel libcurl-devel pcre-devel speex-devel ldns-devel libedit-devel
+-DEBS=git build-essential automake autoconf 'libtool-bin|libtool' wget python uuid-dev zlib1g-dev 'libjpeg8-dev|libjpeg62-turbo-dev' libncurses5-dev libssl-dev libpcre3-dev libcurl4-openssl-dev libldns-dev libedit-dev libspeexdsp-dev  libspeexdsp-dev libsqlite3-dev perl libgdbm-dev libdb-dev bison libvlc-dev pkg-config
++RPMS=git gcc-c++ autoconf automake libtool wget ncurses-devel zlib-devel libjpeg-devel openssl-devel e2fsprogs-devel sqlite-devel libcurl-devel pcre-devel speex-devel ldns-devel libedit-devel
++DEBS=git build-essential automake autoconf 'libtool-bin|libtool' wget uuid-dev zlib1g-dev 'libjpeg8-dev|libjpeg62-turbo-dev' libncurses5-dev libssl-dev libpcre3-dev libcurl4-openssl-dev libldns-dev libedit-dev libspeexdsp-dev  libspeexdsp-dev libsqlite3-dev perl libgdbm-dev libdb-dev bison libvlc-dev pkg-config
  
- 		add_compile_options("$<$<CONFIG:Debug>:-O0>")
- 		add_compile_options("$<$<CONFIG:Debug>:-g>")
-@@ -110,6 +111,7 @@ macro(ksutil_setup_platform)
- 		add_compile_options("$<$<CONFIG:Debug>:-Wno-parentheses>")
- 		add_compile_options("$<$<CONFIG:Debug>:-Wno-pointer-sign>")
- 		add_compile_options("$<$<CONFIG:Debug>:-Wno-switch>")
-+		add_compile_options("$<$<CONFIG:Debug>:-Wno-int-conversion>")
- 
- 		set(CMAKE_POSITION_INDEPENDENT_CODE YES)
- 		add_definitions("-DKS_PLAT_MAC=1")
+ freeswitch: deps has-git freeswitch.git/Makefile
+ 	cd freeswitch.git && make

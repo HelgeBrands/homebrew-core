@@ -2,24 +2,27 @@ class WgpuNative < Formula
   desc "Native WebGPU implementation based on wgpu-core"
   homepage "https://github.com/gfx-rs/wgpu-native"
   url "https://github.com/gfx-rs/wgpu-native.git",
-      tag:      "v27.0.2.0",
-      revision: "74f8c24c903b6352d09f1928c56962ce06f77a4d"
+      tag:      "v27.0.4.0",
+      revision: "768f15f6ace8e4ec8e8720d5732b29e0b34250a8"
   license "Apache-2.0"
   head "https://github.com/gfx-rs/wgpu-native.git", branch: "trunk"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "cc3cc51cefc8f7e27d4c3f7b590cb424c9fb45955ebba0e95dcd3f885efd8d3f"
-    sha256 cellar: :any,                 arm64_sequoia: "6583720163db34f650f9fe5ec6030a176b3bc416c8f426ed86ee266e6ae9f74e"
-    sha256 cellar: :any,                 arm64_sonoma:  "143cfac873e263e3842b6d76ec3a28c317eef445e11843e738d769c840ba5d38"
-    sha256 cellar: :any,                 sonoma:        "c24675a336757b536c01bab7e763fa3af001f9354e2a622dfab4d9a8c673cfe2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ac6f17226a9bc9fa18bbb9bfedf8653bdc1f97121eabaf4575bf969264c6d900"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ff6832fbda2bdacd4f36411bd4007b9c19b600b60011e0a0fd0da0487174dbfa"
+    sha256 cellar: :any,                 arm64_tahoe:   "5d9096aa62a2380a8701a99199129341f38709c4f5e024eff9300947490716ee"
+    sha256 cellar: :any,                 arm64_sequoia: "458c08a381bf1d928149688a4c923e030c26a6e7c377392e892fd22fd5c4a05f"
+    sha256 cellar: :any,                 arm64_sonoma:  "c50a895c5a9f4953f348460ca915e18e1c1d93068f947f816f7d497ec7c3f105"
+    sha256 cellar: :any,                 sonoma:        "00bb5a82177c270587d840fed5f9dcffd31d1280251874bb1b57dce3af47dbc8"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ae9f023013f655e09b7de422b427efda141a69a2d7e3f86c38215858b505eab6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6859115c5a86f4d7e2e4298de573f68b340d22e68edc2e1b9128b1c85d671092"
   end
 
   depends_on "rust" => :build
   depends_on "cmake" => :test
-  depends_on "ninja" => :test
   uses_from_macos "llvm" => :build
+
+  on_linux do
+    depends_on "mesa" => :test
+  end
 
   def install
     ENV["LIBCLANG_PATH"] = Formula["llvm"].opt_lib.to_s if OS.linux?
@@ -41,13 +44,11 @@ class WgpuNative < Formula
   end
 
   test do
-    system "cmake", "-G", "Ninja",
-           "-S", pkgshare/"examples",
-           "-B", "build",
-           "-DCMAKE_BUILD_TYPE=Release"
+    system "cmake", "-S", pkgshare/"examples", "-B", "build", "-DCMAKE_BUILD_TYPE=Release"
     system "cmake", "--build", "build", "--target", "compute"
-    # Running the built example fails in CI.
-    return if ENV["HOMEBREW_GITHUB_ACTIONS"] && (OS.linux? || Hardware::CPU.intel?)
+
+    # Running the built example fails in Intel macOS CI.
+    return if ENV["HOMEBREW_GITHUB_ACTIONS"] && OS.mac? && Hardware::CPU.intel?
 
     cp pkgshare/"examples/compute/shader.wgsl", "."
     assert_match "times: [0, 1, 7, 2]", shell_output("./build/compute/compute")

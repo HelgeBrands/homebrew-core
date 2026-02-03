@@ -1,29 +1,27 @@
 class Groestlcoin < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://www.groestlcoin.org/groestlcoin-core-wallet/"
-  url "https://github.com/Groestlcoin/groestlcoin/releases/download/v29.0/groestlcoin-29.0.tar.gz"
-  sha256 "48298150c83e38ca0b9b449c99fd1c18118849397e09261312a052517f504746"
+  url "https://github.com/Groestlcoin/groestlcoin/releases/download/v30.2/groestlcoin-30.2.tar.gz"
+  sha256 "0428a5c7b36185770248ffe5a41ca7bc7a6ce0d6f11216e624287827d8cd29bc"
   license "MIT"
   head "https://github.com/groestlcoin/groestlcoin.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "f1a940185d12a1a8558837b49f25e1d06015460f9e3ad833d3c1e4bf87ad3678"
-    sha256 cellar: :any, arm64_sequoia: "d92c1efe5b438c2356e7745b77ae3ebff9744f7ed1648e02d451f2461f40b1ab"
-    sha256 cellar: :any, arm64_sonoma:  "12d1897dd611a2e0aa1bfec5eda253f83b6d30596e4043cb851b34c45d5d245e"
-    sha256 cellar: :any, arm64_ventura: "02ef7614ec36e639fd496e025406afc07f69ccb03ac6ce08405610613552c294"
-    sha256 cellar: :any, sonoma:        "6f7e45dd7b0e76124fcf9474e14f21697fc101671077cadf0bf49102a517f7c7"
-    sha256 cellar: :any, ventura:       "dd046071e97a46de8e018c131c5b25df2ed84ca5d9b4187bbfffc536614e4bc8"
-    sha256               arm64_linux:   "39ade609f64538c50e5198695a39713a3a0f959117047f311ed92c62aaa50c17"
-    sha256               x86_64_linux:  "aad63fcebed9b80267c3e5525a7ebfb0a9c4ff7529239bf51502da9396ac0a6a"
+    rebuild 1
+    sha256 cellar: :any,                 arm64_tahoe:   "6aa0bd53c58c831218844d0fce81d6b60897016cfe45bf3429615ea28348e6a2"
+    sha256 cellar: :any,                 arm64_sequoia: "7734a222a560c2aee711a526aca17a29d2104732ddaf21c8707fba4434f6c5f0"
+    sha256 cellar: :any,                 arm64_sonoma:  "7de24e5a98825313bb396be429b6bb58ad27ff8bf2996e61b116b097ccdb9857"
+    sha256 cellar: :any,                 sonoma:        "799c9dd04f84871cf1c2777706d2be2858879903e92cb2f63b2d305035717fce"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b1ec350575f6ad960a018cebb12b13dca0a2218dcf3ffe024e5ed5682ddb535b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a5b69b073e54f7d505985f1a3d6946410d6db15496a4a6e4ebd7c2dd59cf3e28"
   end
 
   depends_on "boost" => :build
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
-  depends_on "berkeley-db@5"
+  depends_on "capnp"
   depends_on "libevent"
   depends_on macos: :big_sur
-  depends_on "miniupnpc"
   depends_on "zeromq"
 
   uses_from_macos "sqlite"
@@ -38,7 +36,7 @@ class Groestlcoin < Formula
   end
 
   def install
-    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    system "cmake", "-S", ".", "-B", "build", "-DWITH_ZMQ=ON", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
     pkgshare.install "share/rpcauth"

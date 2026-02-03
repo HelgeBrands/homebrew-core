@@ -6,16 +6,16 @@ class Lexicon < Formula
   url "https://files.pythonhosted.org/packages/85/18/347d64669e77c26a61f90c7cdd83a6e7dc2af996a25f63e8d7dc902bb9ee/dns_lexicon-3.23.2.tar.gz"
   sha256 "3c40174e9d657289d4d4f81d44451c4d63f8c26c8513e4d7a61c30ac456aab8f"
   license "MIT"
-  revision 1
+  revision 3
   head "https://github.com/dns-lexicon/dns-lexicon.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "dec0a89b100cacbe160b679d62e70b0651b88a5673f0f5f58cc9fa61f1bfc848"
-    sha256 cellar: :any,                 arm64_sequoia: "a7a925f9a98fc09c910cdddf580cf4335430195a7bb0e6351cec876b834fb2c0"
-    sha256 cellar: :any,                 arm64_sonoma:  "a9c6e45c164e252b3091a0346f26bfdcd638f17b2b9488ca0a39763117f2d021"
-    sha256 cellar: :any,                 sonoma:        "5111198533f020e270a059aa0954077972e7200006ee084dd7e72ebd0560a4ee"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b4f8f5ddd8684ecdc7cec32a3bf282dcc352ce124cf14a6ebb6d1b461a5bac74"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e03ec76512d6b1902311ae22bc2704d278d57754555fd2497c3c4a82bb05c276"
+    sha256 cellar: :any,                 arm64_tahoe:   "f3ab61fa699b27e1aff97590c1afdb674c926177b9e519f971e8cc580413253c"
+    sha256 cellar: :any,                 arm64_sequoia: "746b2dc4b3f4e69b8dba871fd4b30d2816fa0cb2d2ce9ed2acb0ad25cab718b7"
+    sha256 cellar: :any,                 arm64_sonoma:  "e1a8a799aa47464c702b528f91003e566d825e4b5cf0ebd6cdb6ddde358df3c8"
+    sha256 cellar: :any,                 sonoma:        "81170a4604208b5fb90c6920d8d22e54ffe42db440c9f0e5da96d2925c13a86b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e90d0148fc80a5bfcf3be52e11778fd178f5b42db199f4c54e29702d0a3303ca"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4859c64aea5d7c700e6be017b5d90a39e259380d17231dfdcc099923658a48fe"
   end
 
   depends_on "certifi" => :no_linkage
@@ -40,13 +40,13 @@ class Lexicon < Formula
   end
 
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/f3/31/246916eec4fc5ff7bebf7e75caf47ee4d72b37d4120b6943e3460956e618/boto3-1.42.4.tar.gz"
-    sha256 "65f0d98a3786ec729ba9b5f70448895b2d1d1f27949aa7af5cb4f39da341bbc4"
+    url "https://files.pythonhosted.org/packages/29/30/755a6c4b27ad4effefa9e407f84c6f0a69f75a21c0090beb25022dfcfd3f/boto3-1.42.25.tar.gz"
+    sha256 "ccb5e757dd62698d25766cc54cf5c47bea43287efa59c93cf1df8c8fbc26eeda"
   end
 
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/5c/b7/dec048c124619b2702b5236c5fc9d8e5b0a87013529e9245dc49aaaf31ff/botocore-1.42.4.tar.gz"
-    sha256 "d4816023492b987a804f693c2d76fb751fdc8755d49933106d69e2489c4c0f98"
+    url "https://files.pythonhosted.org/packages/2c/b5/8f961c65898deb5417c9e9e908ea6c4d2fe8bb52ff04e552f679c88ed2ce/botocore-1.42.25.tar.gz"
+    sha256 "7ae79d1f77d3771e83e4dd46bce43166a1ba85d58a49cffe4c4a721418616054"
   end
 
   resource "charset-normalizer" do
@@ -70,8 +70,8 @@ class Lexicon < Formula
   end
 
   resource "filelock" do
-    url "https://files.pythonhosted.org/packages/58/46/0028a82567109b5ef6e4d2a1f04a583fb513e6cf9527fcdd09afd817deeb/filelock-3.20.0.tar.gz"
-    sha256 "711e943b4ec6be42e1d4e6690b48dc175c822967466bb31c0c293f34334c13f4"
+    url "https://files.pythonhosted.org/packages/1d/65/ce7f1b70157833bf3cb851b556a37d4547ceafc158aa9b34b36782f23696/filelock-3.20.3.tar.gz"
+    sha256 "18c57ee915c7ec61cff0ecf7f0f869936c7c30191bb0cf406f1341778d0834e1"
   end
 
   resource "idna" do
@@ -110,8 +110,8 @@ class Lexicon < Formula
   end
 
   resource "oci" do
-    url "https://files.pythonhosted.org/packages/1e/d6/c8a0857d882a72e335d3eda7d3955f302a5b862f687c54a2554449cb595d/oci-2.164.0.tar.gz"
-    sha256 "fac58e1d29b36418cf1761826b31e2d152450bfec3c322e7a1d197327faf8bbf"
+    url "https://files.pythonhosted.org/packages/dd/44/9cb15fee1488c1251601cd5ed9ca50436b29fe96c53899dcf009b6c0b445/oci-2.164.2.tar.gz"
+    sha256 "a524afc07c3e57141d3acfa95493320f332215e6f7408522e9b1d6dad00e5945"
   end
 
   resource "platformdirs" do
@@ -195,18 +195,18 @@ class Lexicon < Formula
   end
 
   resource "soupsieve" do
-    url "https://files.pythonhosted.org/packages/6d/e6/21ccce3262dd4889aa3332e5a119a3491a95e8f60939870a3a035aabac0d/soupsieve-2.8.tar.gz"
-    sha256 "e2dd4a40a628cb5f28f6d4b0db8800b8f581b65bb380b97de22ba5ca8d72572f"
+    url "https://files.pythonhosted.org/packages/89/23/adf3796d740536d63a6fbda113d07e60c734b6ed5d3058d1e47fc0495e47/soupsieve-2.8.1.tar.gz"
+    sha256 "4cf733bc50fa805f5df4b8ef4740fc0e0fa6218cf3006269afd3f9d6d80fd350"
   end
 
   resource "tencentcloud-sdk-python" do
-    url "https://files.pythonhosted.org/packages/6a/ab/215e8359668ece3715e480ea8ca3cb606baaca1a91dc6466ff354c94c402/tencentcloud_sdk_python-3.1.7.tar.gz"
-    sha256 "a5c25479d428feeb7b645abe4346b7055ed28f56c4e83dd5bf885fc9e2cdbe40"
+    url "https://files.pythonhosted.org/packages/c1/65/9b952e08a9267e2b4c8c0bc4ec58155e8728bbb299cd118011f9d0a09c8d/tencentcloud_sdk_python-3.1.29.tar.gz"
+    sha256 "0e0f633d933ad907c7f13b97a9d63eade026f4c90287337b5cd70a6df1445b11"
   end
 
   resource "tldextract" do
-    url "https://files.pythonhosted.org/packages/97/78/182641ea38e3cfd56e9c7b3c0d48a53d432eea755003aa544af96403d4ac/tldextract-5.3.0.tar.gz"
-    sha256 "b3d2b70a1594a0ecfa6967d57251527d58e00bb5a91a74387baa0d87a0678609"
+    url "https://files.pythonhosted.org/packages/65/7b/644fbbb49564a6cb124a8582013315a41148dba2f72209bba14a84242bf0/tldextract-5.3.1.tar.gz"
+    sha256 "a72756ca170b2510315076383ea2993478f7da6f897eef1f4a5400735d5057fb"
   end
 
   resource "typing-extensions" do
@@ -215,8 +215,8 @@ class Lexicon < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "wcwidth" do

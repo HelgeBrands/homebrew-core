@@ -1,26 +1,26 @@
 class Jackett < Formula
   desc "API Support for your favorite torrent trackers"
   homepage "https://github.com/Jackett/Jackett"
-  url "https://github.com/Jackett/Jackett/archive/refs/tags/v0.24.425.tar.gz"
-  sha256 "127b72f4406512ca0a07c06cfe91f7b91760d362318952b66d37bf52613090f4"
+  url "https://github.com/Jackett/Jackett/archive/refs/tags/v0.24.1019.tar.gz"
+  sha256 "2736dc155371726fa308711aacf012f5025cb260cca2428e13264978136eeeea"
   license "GPL-2.0-only"
   head "https://github.com/Jackett/Jackett.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ae9e7f92837404b107929e8c494d638b184fdfaba2da8afd0741d7661b6433f0"
-    sha256 cellar: :any,                 arm64_sequoia: "28e74a23efa2d2296b48c669e8e3fadf716cc4537ca56a120205407b613d3eb5"
-    sha256 cellar: :any,                 arm64_sonoma:  "395bd55cfeb477ac016876f212e56150a1bf24af545070ce6b10a59fc622f304"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c06baa75e7a47b9e89c5e97adbedb8005ce83a6d2e4eca5239fd83e6a93629c6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "624634942a43ebe20777abccab3a18c5955a57f69c43e53d3371418230ae619d"
+    sha256 cellar: :any,                 arm64_tahoe:   "9e55477e8fb9c6192f5a52a7c414caa8d0c5f7ad8377a786fc0b98bcd4c209eb"
+    sha256 cellar: :any,                 arm64_sequoia: "0becb0c1464557f9fd1f7f289d38f838bf308d9d132ccf211a86ca9792d7af36"
+    sha256 cellar: :any,                 arm64_sonoma:  "1b10970cce7b33cb92e3c2e4b28f59acf33792101c18e53dfe29ee182409132a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "605f1785b6b3a5e4a2248f5e04686fdfd27142e9d31756fe3ab4e25ac5ba508c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8a697dbb59383125534eec3092fc1d4d8a544eace50bba54c0417b5d29bfc037"
   end
 
-  depends_on "dotnet"
+  depends_on "dotnet@9"
 
   def install
     ENV["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1"
     ENV["DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"] = "1"
 
-    dotnet = Formula["dotnet"]
+    dotnet = Formula["dotnet@9"]
 
     args = %W[
       --configuration Release
@@ -57,9 +57,7 @@ class Jackett < Formula
 
     port = free_port
 
-    pid = fork do
-      exec bin/"jackett", "-d", testpath, "-p", port.to_s
-    end
+    pid = spawn bin/"jackett", "-d", testpath, "-p", port.to_s
 
     begin
       sleep 15

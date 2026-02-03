@@ -1,17 +1,17 @@
 class Repomix < Formula
   desc "Pack repository contents into a single AI-friendly file"
   homepage "https://github.com/yamadashy/repomix"
-  url "https://registry.npmjs.org/repomix/-/repomix-1.9.2.tgz"
-  sha256 "08356e22d059f8113af908885739d52ce9337c8959dd51122ee12c2d2e37da33"
+  url "https://registry.npmjs.org/repomix/-/repomix-1.11.1.tgz"
+  sha256 "011c9a566f3373288d2139078e3713cc0bcda1cff33fa704949f085a83cb16d5"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "83d7fd007e193201f77005ec7a8b5c405dc06fe96e28706efb44cdc5e2e6d81a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "83d7fd007e193201f77005ec7a8b5c405dc06fe96e28706efb44cdc5e2e6d81a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "83d7fd007e193201f77005ec7a8b5c405dc06fe96e28706efb44cdc5e2e6d81a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "83d7fd007e193201f77005ec7a8b5c405dc06fe96e28706efb44cdc5e2e6d81a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a44fc7b279a1d04caf67d2d697acd23b3aeddff1af016e6c1f1c942cd8b051bb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a44fc7b279a1d04caf67d2d697acd23b3aeddff1af016e6c1f1c942cd8b051bb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e1b7a94d155284fc9754a51b8ae5abf7d27e65b092c881018f183b8f66fe087c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e1b7a94d155284fc9754a51b8ae5abf7d27e65b092c881018f183b8f66fe087c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e1b7a94d155284fc9754a51b8ae5abf7d27e65b092c881018f183b8f66fe087c"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e1b7a94d155284fc9754a51b8ae5abf7d27e65b092c881018f183b8f66fe087c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1f11029164a2cccc856e262250f8c054d4ff0c2ece7a25acf77e992800df49d6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1f11029164a2cccc856e262250f8c054d4ff0c2ece7a25acf77e992800df49d6"
   end
 
   depends_on "node"
@@ -22,7 +22,7 @@ class Repomix < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     clipboardy_fallbacks_dir = libexec/"lib/node_modules/#{name}/node_modules/clipboardy/fallbacks"
     rm_r(clipboardy_fallbacks_dir) # remove pre-built binaries

@@ -1,8 +1,8 @@
 class Nelm < Formula
   desc "Kubernetes deployment tool that manages and deploys Helm Charts"
   homepage "https://github.com/werf/nelm"
-  url "https://github.com/werf/nelm/archive/refs/tags/v1.17.2.tar.gz"
-  sha256 "2c1021f1f2da904e87f67f90e5c91171ca76d45a3b77f9dbe816597b074aa79d"
+  url "https://github.com/werf/nelm/archive/refs/tags/v1.19.0.tar.gz"
+  sha256 "11f84032ea4f2ea3a9fe85e92486a1c11dd6745052e2b57cfaaeabb8460f7823"
   license "Apache-2.0"
   head "https://github.com/werf/nelm.git", branch: "main"
 
@@ -14,12 +14,13 @@ class Nelm < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "345c5aa04a6d31615ce846d94358acab3f50514d2a58ba44eba205e8f3ffb8da"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "453ec7553d0b52b49849cc5473cb5e72ceb2be7d4179c89465843ee969c27179"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d6b863ab0589967c748d07737afe9d3313372643618c88ac45f52704d29cb945"
-    sha256 cellar: :any_skip_relocation, sonoma:        "45c907efb6571163915bf7db28c06aca77191fd6c8c588eca59a04e7844a8d3a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "455dae55238d6273e861f6f7e7a3db1494b1d43ee5d6ec2193e5fadb15d6a738"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7666b44bd6aa18bd9d8a6ece604b2185d1f6650ba3d3f754310b983c4525bbf3"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a02f7ee30e2f0a57f6a23dbde1cbce8153469e9c42e2f345c4911b2af418ca82"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "17acd87c094a31d3add10bcfd91bb04ee342fab9476d998923e1d51dd07a1cbb"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7b3f72adc828cc678663da1ebad535667e155f671326d150eb838f65baf2ceb2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e518451773e8e152c2890a9fedc6e99ced17b48ba7a9b9aaf2fa9d6178bd97eb"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "01eb77f0597114a5f4ebb7043890f7832dd2a4652d3428e85c1c5822a386e7aa"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a81416af088af0083bfa4249b35048f6e02986deeee2e060b101939aa8ad2641"
   end
 
   depends_on "go" => :build
@@ -31,7 +32,7 @@ class Nelm < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/nelm"
 
-    generate_completions_from_executable(bin/"nelm", "completion")
+    generate_completions_from_executable(bin/"nelm", shell_parameter_format: :cobra)
   end
 
   test do

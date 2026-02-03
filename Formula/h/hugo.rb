@@ -1,8 +1,8 @@
 class Hugo < Formula
   desc "Configurable static site generator"
   homepage "https://gohugo.io/"
-  url "https://github.com/gohugoio/hugo/archive/refs/tags/v0.152.2.tar.gz"
-  sha256 "45ffd018ad8a15d91f8689e76a3b2cb8ce73e82b3a7ae2ce632212c36e77665d"
+  url "https://github.com/gohugoio/hugo/archive/refs/tags/v0.155.2.tar.gz"
+  sha256 "69803efca258dce295d8965800657b12c95d5e58d016be7131e39ae36bb97797"
   license "Apache-2.0"
   head "https://github.com/gohugoio/hugo.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Hugo < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "da186c4aee33d7b7dea84afc0891654fc48d293db25b3232d4f41f3c0c437acc"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a46f606d36d1fa437e75a1e6307d25ab26d5cc52556f2aeae7c329161c1cc180"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9898b39f03442bf870a71bb35ca0af1de07c5750452547cd586488001bbc7875"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3dc3f22217d4ff44e7d59dedfeba99ccb58223e1c2bd8f5ed723ed2f3eec663a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8d7e359b0b5bcdecd45de75e5218e8f57571d944f6d40d74ee3e159358aeb8f4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "03d0765b1d2b4168a7cd14b80ceb9965797d3b41ba805a88e7f5d007695aab98"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7c9f2789db91529d96e0ed75ced5e34585d8d05ff804da4391f084caf9120a07"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "400cb048a964b0e2aa182fe4f963242cb553c59425be45b27f7b6ecc5fdfcec2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "fe138b619f638aae6359720672976edf7eb3bc4bd8c81fae0d60f152868a0cd2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "0dba4302b63206d5c86b3f2ab9e803f514798d1db20d91d077cea86d78f84cc4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d313b9740b09d889e8b78adbece3cc5c066d084b1d05e1560c55387106ca8405"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a412aa2754ab4886c0649d64de4158e7e1d93c4495caaa0da4e944aeadae3797"
   end
 
   depends_on "go" => :build
@@ -35,7 +35,7 @@ class Hugo < Formula
     tags = %w[extended withdeploy]
     system "go", "build", *std_go_args(ldflags:, tags:)
 
-    generate_completions_from_executable(bin/"hugo", "completion")
+    generate_completions_from_executable(bin/"hugo", shell_parameter_format: :cobra)
     system bin/"hugo", "gen", "man", "--dir", man1
   end
 

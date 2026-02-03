@@ -4,7 +4,7 @@ class DamaskGrid < Formula
   url "https://damask-multiphysics.org/download/damask-3.0.2.tar.xz"
   sha256 "82f9b3aefde87193c12a7c908f42b711b278438f6cad650918989e37fb6dbde4"
   license "AGPL-3.0-only"
-  revision 1
+  revision 3
 
   # The first-party website doesn't always reflect the newest version, so we
   # check GitHub releases for now.
@@ -14,18 +14,18 @@ class DamaskGrid < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "af5453a9caa4ceb66ae92013124cb47ec4816c2633551012a28c786de869f7ea"
-    sha256 cellar: :any,                 arm64_sequoia: "dbe12573573118c4e67b5035d500d16a2f4883f5cef5c99b371b1683ee517a7f"
-    sha256 cellar: :any,                 arm64_sonoma:  "467cf16fa9ef3fbcf8159d71a8ae6d18f8d9422a71dd41d3e8ff39f3c5d5ef1c"
-    sha256 cellar: :any,                 sonoma:        "b7f9a6d18fa58333c98ae6303e3ada4e2a3571dd278f5cae2e3be19ce28aa5e6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "139bc698159d3ec3f16266958e5a48bc716c48ac89129190bc44433c318eef5e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "24734feb1be5d996087cfc5b2aae66041d3ab99321587fa5b922ab9551fc1c25"
+    sha256 cellar: :any,                 arm64_tahoe:   "67feb496cbf763457114298ff648c31d07a02b01b699c350acf420b16e6aa071"
+    sha256 cellar: :any,                 arm64_sequoia: "34942e0fb23a92cdc84a2c98defb3b5f14192ac9ed4d8a52e6eb06c2cd7f4dee"
+    sha256 cellar: :any,                 arm64_sonoma:  "a9f89ca390d98710fdf4b49f46d0db6ad5fd5e28624e99cf6cd5fc4c8eadeabf"
+    sha256 cellar: :any,                 sonoma:        "0bc719369eea47492e6a96b48af2d4a880d1bc2aa01d942b65a27e3fc3d9a46e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "57974533d52d8aa4a48d9b3ab8f02acf59871c7cc4d132c644a3ac663ad1f11c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b83351a277928dee503f38ef92a5fd1f74f7a3f62fde3a9e0c65b21a1da0e083"
   end
 
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
   depends_on "fftw"
-  depends_on "gcc"
+  depends_on "gcc" # gfortran
   depends_on "hdf5-mpi"
   depends_on "metis"
   depends_on "open-mpi"
@@ -35,41 +35,54 @@ class DamaskGrid < Formula
 
   uses_from_macos "zlib"
 
+  on_macos do
+    depends_on "libomp"
+  end
+
   # Support PETSc 3.24.x
   # https://github.com/damask-multiphysics/DAMASK/commit/dc9aa42f04b9f5172b499c94328a22fed0ec6d9a
   patch :DATA
 
   def install
+    # Help link to libomp on macOS to avoid mixed OpenMP
+    inreplace "cmake/Compiler-GNU.cmake", '"-fopenmp"', '"-Xpreprocessor -fopenmp -lomp"' if OS.mac?
+
     ENV["PETSC_DIR"] = Formula["petsc"].opt_prefix
     args = %w[
       -DDAMASK_SOLVER=grid
     ]
-    system "cmake", "-S", ".", "-B", "build-grid", *args, *std_cmake_args
-    system "cmake", "--build", "build-grid", "--target", "install"
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
+    system "cmake", "--build", "build"
+    system "cmake", "--install", "build"
 
     pkgshare.install "examples/grid"
   end
 
   test do
-    cp_r pkgshare/"grid", testpath
-    cd "grid" do
-      inreplace "tensionX.yaml" do |s|
-        s.gsub! " t: 10", " t: 1"
-        s.gsub! " t: 60", " t: 1"
-        s.gsub! "N: 60", "N: 1"
-        s.gsub! "N: 40", "N: 1"
-      end
-
-      args = %w[
-        -w .
-        -m material.yaml
-        -g 20grains16x16x16.vti
-        -l tensionX.yaml
-        -j output
-      ]
-      system "#{bin}/DAMASK_grid", *args
-      assert_path_exists "output.hdf5", "output.hdf5 must exist"
+    if OS.mac?
+      # Avoid mixed OpenMP linkage
+      require "utils/linkage"
+      libgomp = Formula["gcc"].opt_lib/"gcc/current/libgomp.dylib"
+      refute Utils.binary_linked_to_library?(bin/"DAMASK_grid", libgomp), "Unwanted linkage to libgomp!"
     end
+
+    cp_r pkgshare/"grid/.", testpath
+    inreplace "tensionX.yaml" do |s|
+      s.gsub! " t: 10", " t: 1"
+      s.gsub! " t: 60", " t: 1"
+      s.gsub! "N: 60", "N: 1"
+      s.gsub! "N: 40", "N: 1"
+    end
+
+    args = %w[
+      -w .
+      -m material.yaml
+      -g 20grains16x16x16.vti
+      -l tensionX.yaml
+      -j output
+    ]
+    system bin/"DAMASK_grid", *args
+    assert_path_exists "output.hdf5", "output.hdf5 must exist"
   end
 end
 

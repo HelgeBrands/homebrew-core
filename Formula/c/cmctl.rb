@@ -2,17 +2,18 @@ class Cmctl < Formula
   desc "Command-line tool to manage cert-manager"
   homepage "https://cert-manager.io"
   url "https://github.com/cert-manager/cmctl/archive/refs/tags/v2.4.0.tar.gz"
-  sha256 "88a577e2e7007e9df1a5f86817e848339a66b4ae54e6e9ce1c8224038cadeb68"
+  sha256 "3de4456c6f36a143992661f7357a2bd111b224a72ce7b61d83bfdb3679f36a96"
   license "Apache-2.0"
   head "https://github.com/cert-manager/cmctl.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4abcaf188931b0fa8665ff34b3d55dcad1bf0529af0b6cb18a6a4ea3e215c322"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "520c67d651d188840f25a8cd50699dac492db8a2031ab753b3fc7374f2dfbcd6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3951b26b70dc6dd4ea7c2c6b71ae5abc7c1d4e47aaac2cf7191ebbd21db1803c"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8409f3497bed93979f6ff61b1dfa5625e07390ee8badd5aa302b7627ad0c179f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1fabef25afa1eaf0ae7fb73d5499685c1dc84ea1de2ebe4b4f7327b18187126e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "44e20819dc3337c7e67f1ff1f87e7735386fafaea3523016dd5f5b349c634e4e"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5d261e97e575479d5b88fc0d138a497be6aa7815e5b7d566e0e2a11fc48deba1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e0a72773524df6677d6bdc0531ca49d8a1a8774811bc243fcf68a0cfa165a29d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "96f6032892618ddaa22a270e58a6dfdb8577547c45b00831990cb5d98f0b2913"
+    sha256 cellar: :any_skip_relocation, sonoma:        "736e1fcbaefcfc1e055ee72f6ac1dec0ed2e971c644f0a10c4172ea79061bfba"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c6a14005f4a18617f2dc2f631eeedae85b11a9b3a9cb48962940c895919b3fed"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d65c0f7dcc02e285e82c0bb3bbe2e327dc4303cde2d9c656bc7f4f5e9924e1f1"
   end
 
   depends_on "go" => :build
@@ -29,7 +30,7 @@ class Cmctl < Formula
 
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"cmctl", "completion")
+    generate_completions_from_executable(bin/"cmctl", shell_parameter_format: :cobra)
   end
 
   test do

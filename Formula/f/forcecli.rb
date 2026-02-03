@@ -1,18 +1,19 @@
 class Forcecli < Formula
   desc "Command-line interface to Force.com"
   homepage "https://force-cli.herokuapp.com/"
-  url "https://github.com/ForceCLI/force/archive/refs/tags/v1.5.0.tar.gz"
-  sha256 "cabe517926c2d8a4ff6a3febb387c0953778611000cc39744b145ed7d8829bbc"
+  url "https://github.com/ForceCLI/force/archive/refs/tags/v1.6.0.tar.gz"
+  sha256 "2ffa9920e9577aa0e351d1703db3a450f41fc5d55117450e9a9ed2b983f0c5b9"
   license "MIT"
   head "https://github.com/ForceCLI/force.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3e60a77fa6b93b645b4f3180eb7e7c6d2aaedcb0f7923dd10ca389f79b859a86"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3e60a77fa6b93b645b4f3180eb7e7c6d2aaedcb0f7923dd10ca389f79b859a86"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3e60a77fa6b93b645b4f3180eb7e7c6d2aaedcb0f7923dd10ca389f79b859a86"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4f78a475d5a845b6c25e65e355044822683a2d4e393ed948caf01a347777e260"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4aea5100928b4404cbedfae4ab8ca082047d0776d653f5402d3e0062c592c30d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2256911fb347c49deac84bdb2bdf77746c154633fd1785fd0ab762b1308485d0"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "28b3a58673b3f10a4b5e37b61bc99e6a399b16f52cc05987fb9d0f54464eb2be"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "28b3a58673b3f10a4b5e37b61bc99e6a399b16f52cc05987fb9d0f54464eb2be"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "28b3a58673b3f10a4b5e37b61bc99e6a399b16f52cc05987fb9d0f54464eb2be"
+    sha256 cellar: :any_skip_relocation, sonoma:        "8432d60ed55ea04c2033465d6ade0afcf46b1dda52ded35887f174534e5151e3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "da4d6199c324e01c0056559a04d05d614bcf7cb412b2333710593ea478208869"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c122039e363edde2106af7b833df0d2f12f18ae42c6e9b75e05b214eb8df73ed"
   end
 
   depends_on "go" => :build
@@ -20,7 +21,7 @@ class Forcecli < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w", output: bin/"force")
 
-    generate_completions_from_executable(bin/"force", "completion")
+    generate_completions_from_executable(bin/"force", shell_parameter_format: :cobra)
   end
 
   test do

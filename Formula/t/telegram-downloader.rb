@@ -1,20 +1,21 @@
 class TelegramDownloader < Formula
   desc "Telegram Messenger downloader/tools written in Golang"
   homepage "https://docs.iyear.me/tdl/"
-  url "https://github.com/iyear/tdl/archive/refs/tags/v0.20.0.tar.gz"
-  sha256 "3b80a480f718e83a7bdb85f1989093d17a15048ef0cd380e844aa9fa556a6ea9"
+  url "https://github.com/iyear/tdl/archive/refs/tags/v0.20.1.tar.gz"
+  sha256 "dcb6c3d2b41c3712c75dc8f3d69cdc3b932ef9a288e7808df74617af5b487af5"
   license "AGPL-3.0-only"
   head "https://github.com/iyear/tdl.git", branch: "master"
 
   no_autobump! because: :bumped_by_upstream
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "70605722117d373bff3d93236657b2966f25a7cb4a113397b5c426cb10974dcc"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "76b8f18dc0942fbeda0446434951384d235bf963450d40a184c9058c41e1b806"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3752fb62a4ec1a2a221e97f87d29a8590e2d0d29a9ce43a343ebf51503e5c466"
-    sha256 cellar: :any_skip_relocation, sonoma:        "2806d91e8160b719bab4da737ea32560aab848a413aad0a45945c7bd1c9193be"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8b5ad3038ee6ebd916871a0572c216449d0b301ad754cdb0237a2d1b7b0d16d3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "27c3d0ed8aa68c55fe0920e96f4a0a7af76963faed323003e23316c1166dda37"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e8339d29ba5273b92d44fc6bc5049a32983c07f2f86cae0b973ba228738d841c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "008a73b9922a457d1bbc377043401d4a81d68a1cb74d99db65e4474d36782ca6"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d73de857fa0357279c4960e54e3b8d92169829457aafec7dddbe86ffc3681b4f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2f3897b9520bced64992a3b99333883e781398f49b66afbf198cf09d96692cb1"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "34ba9a77fcf8c49efc02a92d8b6a70c1e609cf3f02c54bdd79bb8d57faa964cb"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5343c953d5db2d4cd0e79396c59fc1e74e4bbe4782f1d75ec7c953c8754f4405"
   end
 
   depends_on "go" => :build
@@ -28,7 +29,7 @@ class TelegramDownloader < Formula
     ]
     system "go", "build", *std_go_args(ldflags:, output: bin/"tdl")
 
-    generate_completions_from_executable(bin/"tdl", "completion")
+    generate_completions_from_executable(bin/"tdl", shell_parameter_format: :cobra)
   end
 
   test do

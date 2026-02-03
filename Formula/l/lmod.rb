@@ -1,17 +1,17 @@
 class Lmod < Formula
   desc "Lua-based environment modules system to modify PATH variable"
   homepage "https://lmod.readthedocs.io"
-  url "https://github.com/TACC/Lmod/archive/refs/tags/9.0.4.tar.gz"
-  sha256 "6bfa92180bade7a964b96084fba98788cb2b158de00aaaaceefe029eaa6c4840"
+  url "https://github.com/TACC/Lmod/archive/refs/tags/9.0.6.tar.gz"
+  sha256 "370c154ef22d5fec5dd567ed26478aaf6ff55323b09a9d96826e12ca570e777e"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "5b64b2f68cee6458f91ba9870ba75ed06f1d81e59df82fc368b8319c99db35f8"
-    sha256 cellar: :any,                 arm64_sequoia: "8777704492a25e952b066d9982cfd40df6e247aa22bac2c098f55e57b0be7b64"
-    sha256 cellar: :any,                 arm64_sonoma:  "7d7a650accbc9c9e9a72b5704f125fde500798312a231d8d1c1f2eeb1edbeefa"
-    sha256 cellar: :any,                 sonoma:        "aac2835beb6ca30889946370b6739a64f149ad269069e79fb428a14d93a95db0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e52917961d9751283604f6151e3b61b4cffd3a8a3cd5bd0c71e08222261c2d48"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "98d8cc1cdb81427d124f5867419594ef9f59df78fd450d3862072b81d35953d4"
+    sha256 cellar: :any,                 arm64_tahoe:   "61e5a984cf9f6c502ebea120cd5f191448270ad339e481473048873c38cf46d3"
+    sha256 cellar: :any,                 arm64_sequoia: "6214fd884d64438ece3f047d646166f39e73505a3d1f82487b72bac86b463f78"
+    sha256 cellar: :any,                 arm64_sonoma:  "7e628ca56296dc7a1237f813c294f329980f39aed568fdf44fc0a6f221992c00"
+    sha256 cellar: :any,                 sonoma:        "63d513cb90b1b9e4956e4d68e284a2f8a55df8fb37e72e814e47ae0638ecfe3c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "de647cf52bb825b797d3713e9e4077c721a788735bc6b4a42a3b099189383bd0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c2b5ae6edeef717703eff2e3b6b1a698b57a96626c565163bde8381cca1cd2ea"
   end
 
   depends_on "luarocks" => :build
@@ -32,8 +32,8 @@ class Lmod < Formula
   end
 
   resource "luafilesystem" do
-    url "https://github.com/lunarmodules/luafilesystem/archive/refs/tags/v1_8_0.tar.gz"
-    sha256 "16d17c788b8093f2047325343f5e9b74cccb1ea96001e45914a58bbae8932495"
+    url "https://github.com/lunarmodules/luafilesystem/archive/refs/tags/v1_9_0.tar.gz"
+    sha256 "1142c1876e999b3e28d1c236bf21ffd9b023018e336ac25120fb5373aade1450"
   end
 
   resource "luaposix" do

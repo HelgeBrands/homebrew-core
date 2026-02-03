@@ -1,8 +1,8 @@
 class Dnsmasq < Formula
   desc "Lightweight DNS forwarder and DHCP server"
   homepage "https://thekelleys.org.uk/dnsmasq/doc.html"
-  url "https://thekelleys.org.uk/dnsmasq/dnsmasq-2.91.tar.gz"
-  sha256 "2d26a048df452b3cfa7ba05efbbcdb19b12fe7a0388761eb5d00938624bd76c8"
+  url "https://thekelleys.org.uk/dnsmasq/dnsmasq-2.92.tar.gz"
+  sha256 "fd908e79ff37f73234afcb6d3363f78353e768703d92abd8e3220ade6819b1e1"
   license any_of: ["GPL-2.0-only", "GPL-3.0-only"]
 
   livecheck do
@@ -11,13 +11,12 @@ class Dnsmasq < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_tahoe:   "cb56fd74e35d80af1e89152f461cfa9f77a4ec33a6dac3b33f06a00feeef77c7"
-    sha256 arm64_sequoia: "33f6b71563014d09360d028e613be61c7ed75e74360396efc4d3b9ce8899965e"
-    sha256 arm64_sonoma:  "b13b42d80e6be073357328442e047f4f7bad2646b03f799dca4b848a5a3d150b"
-    sha256 sonoma:        "4b2d8e61a8bb3601df2439914950fad6407edeae7db487dcfe6fd83987988cc9"
-    sha256 arm64_linux:   "6eb516dbfd16d9dd493604334be39927e6165c0f06fe631115aa3b40cd4185a5"
-    sha256 x86_64_linux:  "720d6acd1910592e9c17928a15433e0f2eabea814cf6e3e653f04be5d35d8d8b"
+    sha256 arm64_tahoe:   "4087c3f45434a6029c6ea7ba65d900b5e8cb0710a991f6245d9112dc87dc5c5c"
+    sha256 arm64_sequoia: "f36ffb5abb49ca8e568c9dd1f3b9891bd9e849769966cd1b0155ef85857d5f8b"
+    sha256 arm64_sonoma:  "2c7e0731da8c3568db5298aadfaa29a5e7fab84660440c2e230b789178ddf686"
+    sha256 sonoma:        "89d78775d031b10a8e9a8b9da7566df28984392b0956aead0a0d8f6244c213b6"
+    sha256 arm64_linux:   "1c05bb3e06a434205b8150ecce4f75896b8fcafb29756f40a48e68fd49633df1"
+    sha256 x86_64_linux:  "df026a9ad95a66aafb276bb28fdbbe23809bef4344acee595c072cbe59be9508"
   end
 
   depends_on "pkgconf" => :build
@@ -55,6 +54,13 @@ class Dnsmasq < Formula
     (etc/"dnsmasq.d/dhcpc").mkpath
     touch etc/"dnsmasq.d/ppp/.keepme"
     touch etc/"dnsmasq.d/dhcpc/.keepme"
+  end
+
+  def caveats
+    <<~EOS
+      On current macOS releases, `/etc/resolver/<domain>` resolver overrides do not work if the nameserver is `127.0.0.1` and dnsmasq is running on a non-53 port.
+      To use scoped resolver zones reliably, bind dnsmasq to a non-localhost IP (e.g., a loopback alias like 10.0.0.1) on port 53.
+    EOS
   end
 
   service do

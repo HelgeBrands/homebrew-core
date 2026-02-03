@@ -1,19 +1,18 @@
 class Precice < Formula
   desc "Coupling library for partitioned multi-physics simulations"
   homepage "https://precice.org/"
-  url "https://github.com/precice/precice/archive/refs/tags/v3.3.0.tar.gz"
-  sha256 "300df9dbaec066c1d0f93f2dbf055705110d297bca23fc0f20a99847a55a24f4"
+  url "https://github.com/precice/precice/archive/refs/tags/v3.3.1.tar.gz"
+  sha256 "c52b22bd7669baec3ff903eba9bf102154629634652125a60b109a5b7e803ab5"
   license "LGPL-3.0-or-later"
-  revision 1
   head "https://github.com/precice/precice.git", branch: "develop"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9c369992ebd12bdb16dd31a53363b8a03faee3aae0b8830419bf162999367b3a"
-    sha256 cellar: :any,                 arm64_sequoia: "a559bfae71fdf2ab1a8250538f487fd53b4adf2d2a642287cd85383dfeb6bcf1"
-    sha256 cellar: :any,                 arm64_sonoma:  "d3c8cb0c5bc5b24f49cf5c876bd7f8ede7dd7bf1f5e2fb4fbc2e75f9d7443e0f"
-    sha256 cellar: :any,                 sonoma:        "5170843f508fb8ab70bcd9aae84cc1c7ae8a2da5f22e8ac14c7221c82732ff3b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "944a113c6ea1cc964160a2e4d49b88407f02a3cfa2a6f36986224794c784b1e5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "05c06e8a96d3389b8410ee2fc1cc975ce73f37e16a90c37da466a85637376a76"
+    sha256 cellar: :any,                 arm64_tahoe:   "06017d88e61cd6037ba3e281a462cd3b5a949c7feb6bd0361329d515e13ca564"
+    sha256 cellar: :any,                 arm64_sequoia: "68dde149bf2cd6894e5b34aab1cbd6254f6775a3e1eb11d9224fe8c51ad56749"
+    sha256 cellar: :any,                 arm64_sonoma:  "1e50c8c9d1f803081911b18718471fa6212992ee051ac00f77f97bc7ba50a64c"
+    sha256 cellar: :any,                 sonoma:        "0dd151e2399335ae8caa1cc02edc266e389f79658329015afc981f3e8d97c4b0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6d54f37577fb4adfcb8e7ee71f4a722b953fd43b1a6da957bbfef85e8385767e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ec4b27f5dda87bff3e4bf28384d24a837b129e5d49fbb2aa6caea96a29741424"
   end
 
   depends_on "cmake" => :build

@@ -4,31 +4,31 @@ class Colmap < Formula
   url "https://github.com/colmap/colmap/archive/refs/tags/3.13.0.tar.gz"
   sha256 "98a8f8cf6358774be223239a9b034cc9d55bf66c43f54fc6ddea9128a1ee197a"
   license "BSD-3-Clause"
-  revision 1
+  revision 4
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "f4191a5203b7c9413d9d4c871a41ccfdc3f7f6209f358748ababfe839847a8ff"
-    sha256 cellar: :any,                 arm64_sequoia: "4917ae56796036fc9d4ba0474eaf5fd5b5ce22b7f8f67b6bfd2b2a9e72d5d5dc"
-    sha256 cellar: :any,                 arm64_sonoma:  "e27256e1094b70e9e90544747d51a382e8b49f93973ba589bc3928250c1e1b6f"
-    sha256 cellar: :any,                 sonoma:        "8781de1620230e34388e9e9c146237df8e2ee4648de5abb62a7377246f900332"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0257d371af643c5b1322fbbdcb676524b0c08b838d341be4eb7cd45b59598d33"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1e46bb9bb4291c3e21b985b5ff605f36fabb29d7ddc20991bc8c7cfc30528c0d"
+    sha256 cellar: :any,                 arm64_tahoe:   "c3ddfd4601a31a3585f41cbcb156478a33504ef9e26f4bcf28e4b94edfc2fdb0"
+    sha256 cellar: :any,                 arm64_sequoia: "95161d695470dcd967e382792a7af70502e9a92611d33123a3959ab1f1c36697"
+    sha256 cellar: :any,                 arm64_sonoma:  "a8e46cb6f6a1829d7adcf283522843635172e2208253850cb32710e9ea79ec3b"
+    sha256 cellar: :any,                 sonoma:        "32915062b90b298a0e178910753d28e533f6cd8a1598db75b14bf0921ec705b0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "144a551ecdef01a2b23157e9007b3770b243cd65b25d3705d6c914c77310f033"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "633c1c82e404ff2c340d3f28d0a25d781190631ba060f0e2b2db36582aa85662"
   end
 
   depends_on "cmake" => :build
   depends_on "boost"
   depends_on "ceres-solver"
   depends_on "cgal"
-  depends_on "eigen"
+  depends_on "eigen" => :no_linkage
   depends_on "faiss"
   depends_on "flann"
-  depends_on "freeimage"
   depends_on "gflags"
   depends_on "glew"
   depends_on "glog"
   depends_on "gmp"
   depends_on "lz4"
   depends_on "metis"
+  depends_on "openimageio"
   depends_on "openssl@3"
   depends_on "poselib"
   depends_on "qtbase"
@@ -45,6 +45,25 @@ class Colmap < Formula
 
   on_linux do
     depends_on "mesa"
+  end
+
+  # Backport support for OpenimageIO
+  patch :DATA # https://github.com/colmap/colmap/commit/c9e6ba0e63f1eaf9b4de985228da27ee6ec4c1f1
+  patch do
+    url "https://github.com/colmap/colmap/commit/083f4dee70b23f25729ed6d6c6fe9abc340b205e.patch?full_index=1"
+    sha256 "226dfaaf179ad650ce535f6a3f6cbb9f93bfec2587bef5eb4d2d789a2c782e44"
+  end
+  patch do
+    url "https://github.com/colmap/colmap/commit/8e014c5bc70c7e01506f1d5ef7daaf25dc3190ae.patch?full_index=1"
+    sha256 "368e697f9cc863bdb706c99383aefa81d6be2ba373285a2a398fb69aa6bb7390"
+  end
+  patch do
+    url "https://github.com/colmap/colmap/commit/74eeb69c62998c32dd8981b301956aaacec71596.patch?full_index=1"
+    sha256 "e8a8ff862a38b80d2531f2300d1817fc7f132ee8c11b0f813b1d17f02309d25b"
+  end
+  patch do
+    url "https://github.com/colmap/colmap/commit/70358de550ab47b0b83c3e5812d42ec8e2d41b22.patch?full_index=1"
+    sha256 "ffc001e4d18dee24a47d262bc0e4e30906ee51ad5f8d38e81aed6284d75b9daf"
   end
 
   def install
@@ -64,3 +83,17 @@ class Colmap < Formula
     assert_path_exists (testpath / "db")
   end
 end
+
+__END__
+diff --git a/.github/workflows/build-ubuntu.yml b/.github/workflows/build-ubuntu.yml
+index f19bac5237..e793ea64f3 100644
+--- a/.github/workflows/build-ubuntu.yml
++++ b/.github/workflows/build-ubuntu.yml
+@@ -145,6 +145,7 @@ jobs:
+             libboost-system-dev \
+             libeigen3-dev \
+             libceres-dev \
++            libsuitesparse-dev \
+             libfreeimage-dev \
+             libmetis-dev \
+             libgoogle-glog-dev \

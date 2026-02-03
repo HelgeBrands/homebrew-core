@@ -1,20 +1,20 @@
 class Nuxi < Formula
   desc "Nuxt CLI (nuxi) for creating and managing Nuxt projects"
   homepage "https://github.com/nuxt/cli"
-  url "https://registry.npmjs.org/nuxi/-/nuxi-3.31.2.tgz"
-  sha256 "c3afd3b0b1dc360d25081914b4acd939dceac0d93a87180d7d8acc7056245dd9"
+  url "https://registry.npmjs.org/nuxi/-/nuxi-3.32.0.tgz"
+  sha256 "c36926ad44b1b18cb7126246315aa2405cdf2ccaf793a60d1f08d8ebc55d9882"
   license "MIT"
   head "https://github.com/nuxt/cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "aa2df290446a90e8c364b8a1fc82c04cbb03fd88fc5ea5933e0ce0f6d3bc0dd2"
+    sha256 cellar: :any_skip_relocation, all: "bc75fed69c009329cdb37343ad428e3860a81b89cb186ed46881c191dc45a66d"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

@@ -1,8 +1,8 @@
 class PyenvVirtualenv < Formula
   desc "Pyenv plugin to manage virtualenv"
   homepage "https://github.com/pyenv/pyenv-virtualenv"
-  url "https://github.com/pyenv/pyenv-virtualenv/archive/refs/tags/v1.2.4.tar.gz"
-  sha256 "6f49a395a17221f87e1e16f0f92c99c3d21d4fc27072d5c80e65ca11b686eedd"
+  url "https://github.com/pyenv/pyenv-virtualenv/archive/refs/tags/v1.2.6.tar.gz"
+  sha256 "4094a7b43552481eccc8fe23661a9cf06eb2de86d403625fd536078a691b10da"
   license "MIT"
   version_scheme 1
   head "https://github.com/pyenv/pyenv-virtualenv.git", branch: "master"
@@ -13,16 +13,12 @@ class PyenvVirtualenv < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:    "4471ee71c65c00eb696e6caeda86d7cd9fa128c17657ab040592cf5a89502b75"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:  "dbb7fd295ec2ea03460bcb5b367be4ec2772fc2d2ecf64765309fd39e10e18a6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "5520ee72fd178ae11886721c276fcfe4008434519d8d56b25ff9eee7d40f5a9f"
-    sha256 cellar: :any_skip_relocation, arm64_ventura:  "5520ee72fd178ae11886721c276fcfe4008434519d8d56b25ff9eee7d40f5a9f"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "5520ee72fd178ae11886721c276fcfe4008434519d8d56b25ff9eee7d40f5a9f"
-    sha256 cellar: :any_skip_relocation, sonoma:         "5974b4594ca7e79058e457bbe88147751611efc836ab587cf9ba65732a3ecde5"
-    sha256 cellar: :any_skip_relocation, ventura:        "5974b4594ca7e79058e457bbe88147751611efc836ab587cf9ba65732a3ecde5"
-    sha256 cellar: :any_skip_relocation, monterey:       "5974b4594ca7e79058e457bbe88147751611efc836ab587cf9ba65732a3ecde5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "56ce37582f357b6e5bdd841b9d9a780e2a1b3ed473f20eef778105cfec203176"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "248fd1598c1d3a342b6b0c23491b4b7b8700faf3c985635409f5f3fdd09932fd"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "70ad6bd810b1c59dd95e8dc6d87a5135d184f9a48c8e8b67803e8d54abf03780"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "70ad6bd810b1c59dd95e8dc6d87a5135d184f9a48c8e8b67803e8d54abf03780"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "70ad6bd810b1c59dd95e8dc6d87a5135d184f9a48c8e8b67803e8d54abf03780"
+    sha256 cellar: :any_skip_relocation, sonoma:        "06fadc8df2e7de479b5da129213c5919a4233776e2128d84bd01341fe5692f1b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "11936498dd69400cbbb0b9fdecaaffeed1d1a0d648a974514f3de990a983ad60"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "11936498dd69400cbbb0b9fdecaaffeed1d1a0d648a974514f3de990a983ad60"
   end
 
   depends_on "pyenv"

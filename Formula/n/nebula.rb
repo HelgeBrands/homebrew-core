@@ -1,18 +1,18 @@
 class Nebula < Formula
   desc "Scalable overlay networking tool for connecting computers anywhere"
   homepage "https://github.com/slackhq/nebula"
-  url "https://github.com/slackhq/nebula/archive/refs/tags/v1.10.0.tar.gz"
-  sha256 "df36828f7cbf255a17891c8922f3fe654d553748ed41691e967743e495caa1bf"
+  url "https://github.com/slackhq/nebula/archive/refs/tags/v1.10.2.tar.gz"
+  sha256 "8d490bc345ccbf25ce4697b6df9bf15c6352768ff2643df51450b5783c651c10"
   license "MIT"
   head "https://github.com/slackhq/nebula.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7370de2917e22f06597d75233711cc26949fc95998cfab8c76fdaa56cddc1127"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7370de2917e22f06597d75233711cc26949fc95998cfab8c76fdaa56cddc1127"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7370de2917e22f06597d75233711cc26949fc95998cfab8c76fdaa56cddc1127"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c7acfcf8b6506f0a6550283fd7ff8bd76f78f5349f3e3b58a52149411aef58d7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "59d07d7faac0b116a560e2a81db64b7004c8fa62f8d750709063fbf1b45f8725"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1546b1c3c1ab341615f9cf787e81ed04997677c487fd85ed59b0bfe7253b5f93"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3a0787147b89d3cbac13c240ac552ab12e58938f8c028d6763641c19c6cd1de3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3a0787147b89d3cbac13c240ac552ab12e58938f8c028d6763641c19c6cd1de3"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3a0787147b89d3cbac13c240ac552ab12e58938f8c028d6763641c19c6cd1de3"
+    sha256 cellar: :any_skip_relocation, sonoma:        "175b9215b4b72e852991f23cad0518899f35f6c7e6ad600e4c5eea4d9d00fe57"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b7d4d1fc24abcbed9b789fed0629e37fed0999f217fe75fee8a027b34b5af8e2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cbe898fe4641737603476d61e02edbef433c3c0f944e3772bca104b620fb3889"
   end
 
   depends_on "go" => :build

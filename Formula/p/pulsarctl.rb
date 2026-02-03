@@ -1,8 +1,8 @@
 class Pulsarctl < Formula
   desc "CLI for Apache Pulsar written in Go"
   homepage "https://streamnative.io/"
-  url "https://github.com/streamnative/pulsarctl/archive/refs/tags/v4.1.0.9.tar.gz"
-  sha256 "060edf15903ec4b765aaea2dfda984dc60029d779bed670074d2dfc821bd28ae"
+  url "https://github.com/streamnative/pulsarctl/archive/refs/tags/v4.1.0.15.tar.gz"
+  sha256 "a049ad8b44fe034d268e8c2376d7d6ec94296de0bd97657156de145d2cabdd21"
   license "Apache-2.0"
   head "https://github.com/streamnative/pulsarctl.git", branch: "master"
 
@@ -14,16 +14,17 @@ class Pulsarctl < Formula
   # `GithubReleases` strategy while this is the case.
   livecheck do
     url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
     strategy :github_releases
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "669da32011e57351e04129c2e142692dcb54e0cd29d13fe679bc3ab6eddb62be"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cd45bd5c1e2acf704f1e969e5594fb9f49a43d39e152be4bf3f72bda949b04da"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e1cb6759288777447b16022f47a0bc81e35661800eb93b5932616204f8889958"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3c7af416e5fce9cc78a4e5be91e8dc081d46bc0d6f6017ec53b50942b072ff21"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2fdecb6adbaad6dd4810c06c5b7798e9bd4221d47ad2186d706109a5da715734"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "14837b19fbfa63dda1a008d48256f1e2c9232f2a62c5406dae847a579c153310"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b63d828818b25f0bfaf5d9780444e70909d4eeb18f7289c721027bb12467ea9c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b63d828818b25f0bfaf5d9780444e70909d4eeb18f7289c721027bb12467ea9c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b63d828818b25f0bfaf5d9780444e70909d4eeb18f7289c721027bb12467ea9c"
+    sha256 cellar: :any_skip_relocation, sonoma:        "3e1e9be41cb227eed13aeb4ea3b8bc5224bbbfb240dbcdf6d47bb50642aea3ba"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d4ce8dbfa8d9f172149978976412793accdccd05ec20b3e0d2013a51ed937699"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "efea18555a4bed13edec898dba7620c697ea81a5f161a5ca74dde65778b5cd5c"
   end
 
   depends_on "go" => :build
@@ -39,8 +40,7 @@ class Pulsarctl < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    # Install shell completions
-    generate_completions_from_executable(bin/"pulsarctl", "completion")
+    generate_completions_from_executable(bin/"pulsarctl", shell_parameter_format: :cobra)
   end
 
   test do

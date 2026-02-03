@@ -1,8 +1,8 @@
 class Kraftkit < Formula
   desc "Build and use highly customized and ultra-lightweight unikernel VMs"
   homepage "https://unikraft.org/docs/cli"
-  url "https://github.com/unikraft/kraftkit/archive/refs/tags/v0.12.4.tar.gz"
-  sha256 "a5d60037bacc2d292ef916296c9e9c7add2aa02e18e7e32e1982abd31d2801ca"
+  url "https://github.com/unikraft/kraftkit/archive/refs/tags/v0.12.5.tar.gz"
+  sha256 "72ae21a2b20e4d3d85e22977c5025a6c7349acc96ad596fe6b66a3d5d94b547c"
   license "BSD-3-Clause"
   head "https://github.com/unikraft/kraftkit.git", branch: "staging"
 
@@ -12,12 +12,13 @@ class Kraftkit < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "05f34993c3e9cc4056b5e51df414cb8704a3c774e4589c53c6ca99e7260b461d"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "707aedc2a6bb05218c252c202d9886ebc1ef76b1fcf6883fe7e117581232f222"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ae1eb0072f0477d97975edd221436e2893eb9c568639456be9f6d81fd4a1add5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "2b5db0c7d67e3b7f673a4e6b5cb4fe8baeea3470271f9bf8caba5cf5d30cb9f5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2eeb460984e737bb53b0d218294621a9cc335adb2303b85fc1eb26ac0b4ab152"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "36971db99f35999f8ea1395bfa601a96e24cdff0aee32faaf49e247c5192c0d2"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4460e2412f7ea04f7c54620fc216d2003e52ec18105c7d6bc5f31fde127f308f"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "288353d2c31c6790592b148ddf832e5938cc493357573f728e3dc295731afa2e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b2cc8d32fd996e0f334f914bb9251f57573d8ec4255218740f736ce089d4c614"
+    sha256 cellar: :any_skip_relocation, sonoma:        "780657ed9827075fb1c6e8ce48505e82c5ff042d348d864579f80b80eb585102"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b38b10881e0648a3a369a5f5c15d46ee5d8016ab695aa319fa44c4d13a6e8d00"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cce0e5b120ca6b93221ee7f940f72fc080ff4c5034bb5268b56f08aeecf6368a"
   end
 
   depends_on "go" => :build
@@ -44,7 +45,7 @@ class Kraftkit < Formula
     ]
     system "go", "build", *std_go_args(ldflags:, tags:, output: bin/"kraft"), "./cmd/kraft"
 
-    generate_completions_from_executable(bin/"kraft", "completion")
+    generate_completions_from_executable(bin/"kraft", shell_parameter_format: :cobra)
   end
 
   test do

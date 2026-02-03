@@ -1,8 +1,8 @@
 class Libplctag < Formula
   desc "Portable and simple API for accessing AB PLC data over Ethernet"
   homepage "https://github.com/libplctag/libplctag"
-  url "https://github.com/libplctag/libplctag/archive/refs/tags/v2.6.12.tar.gz"
-  sha256 "420c37c11832eb3f000baa66bff087e79b3ca25cb4af978eb6de23a597911a13"
+  url "https://github.com/libplctag/libplctag/archive/refs/tags/v2.6.14.tar.gz"
+  sha256 "b58aaae10efd99bec820cf1f66ff39cced5b9b31bd4f4e0695811ea33b469c10"
   license any_of: ["LGPL-2.0-or-later", "MPL-2.0"]
 
   livecheck do
@@ -11,12 +11,12 @@ class Libplctag < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "4ded324ef409f272762a7304c86a1608d235fe2a59b8ce696e108a7730283851"
-    sha256 cellar: :any,                 arm64_sequoia: "2bdf1111826c3d63ae9d0bf36fc71516578097e6c1db61613e2d69358a80643a"
-    sha256 cellar: :any,                 arm64_sonoma:  "dc5096bbf6e4aecfef2b4c82485693e042482c0d67e610022a874a8e5e0a7003"
-    sha256 cellar: :any,                 sonoma:        "5a0a6c872b0be0e836f08f0a5844878ed15c4dfc7715a8057345a3758ec0f26c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "795f174d6975cc2f0989c14ae2db0919b46eb5b50cb3b6a456d48eae24a4ccd8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a06ed36a97d76ea55cce326b049041c6a516de643e4f432a4d58096550886d71"
+    sha256 cellar: :any,                 arm64_tahoe:   "dceb68f387f52e6931dc3e2b822bf7cdb1fa465a20ab6db4fd219a123a851bae"
+    sha256 cellar: :any,                 arm64_sequoia: "d56001ff1d7199ae10cecc34235132b4d7a6ee6d833edd6cb0b737a03a4654f9"
+    sha256 cellar: :any,                 arm64_sonoma:  "68d62103d8394cf7f7b13ac0068393ae6f1c14d39874ca7d1924f7e7cbdf3f00"
+    sha256 cellar: :any,                 sonoma:        "838d47ae8ed445678848882754e999aa5ba34b78a24c5d0f3fe766f444676118"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "02526c74c4617eefb4f2282a73a7d35565f68b515250f05203c83ab3a9507fc7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3fa5fc29d194fade63f7de33f1842a1a79b2ff36899953f9a951e4a46bcd42ef"
   end
 
   depends_on "cmake" => :build

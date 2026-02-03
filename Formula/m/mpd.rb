@@ -1,19 +1,18 @@
 class Mpd < Formula
   desc "Music Player Daemon"
   homepage "https://www.musicpd.org/"
-  url "https://github.com/MusicPlayerDaemon/MPD/archive/refs/tags/v0.24.6.tar.gz"
-  sha256 "2cb85b48303f1b6325dc37ee9aeb65ae5353820b4761d4ca53f61c680716ae90"
+  url "https://github.com/MusicPlayerDaemon/MPD/archive/refs/tags/v0.24.8.tar.gz"
+  sha256 "c6c21209617960f37d94e744e24ecf864a86a828e7ee3876ab490ea0b5c3cdb4"
   license "GPL-2.0-or-later"
-  revision 2
   head "https://github.com/MusicPlayerDaemon/MPD.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "9e9735670d09577fdce0650ced98a186d606e87d0fb399bbd2b8dcd555aecc92"
-    sha256 cellar: :any, arm64_sequoia: "d5f471b385f9e55ecc428928d472371659fc22c2945e9f47e4895c821f64a19e"
-    sha256 cellar: :any, arm64_sonoma:  "4f3e53752e3d1e742526fd5dfbc0cf5b0313434c78d5803554a45bafcd10859a"
-    sha256 cellar: :any, sonoma:        "4e77496857b3ef79323749ff7d4b71ab723732905c473c4b5cc44f019e3de125"
-    sha256               arm64_linux:   "3a2b5e82ff88c015aa4f076387ead40b46f72618a552d4ed32b7d832e1235fa4"
-    sha256               x86_64_linux:  "8b19846ed84ce953157d822daabcd6bdb543e73b145a499ea74ba4b334ec43eb"
+    sha256 cellar: :any, arm64_tahoe:   "a6113a1577ffc06cbd4f9a5fba1fea2775dc8f275071ef06d447a8181ffa05a2"
+    sha256 cellar: :any, arm64_sequoia: "55a0b6f6a389702491dad9c0e646661b26b6554b4e0b6d1a4a3bfd242a7de600"
+    sha256 cellar: :any, arm64_sonoma:  "7101c0bdfc76702a4ab6772a81d08498ec0b508fec8b7aa7ca5fe4037b163fb3"
+    sha256 cellar: :any, sonoma:        "28970f00af7e8ea40a2448d9a3cecc62f77a4e5524e77a5f631d7aae0619f67f"
+    sha256               arm64_linux:   "a48f6a4225df59de9b3f641a8f5243b511a245c7c7cf42b801997ffe70a41d56"
+    sha256               x86_64_linux:  "cdddcd1cce17a0be84e4ab710c12f3097e9db2871f4c75cdf9cf6648740c64a3"
   end
 
   depends_on "meson" => :build
@@ -82,7 +81,6 @@ class Mpd < Formula
   def install
     if OS.mac? && MacOS.version <= :ventura
       remove_brew_expat
-      ENV.llvm_clang
       ENV.append "LDFLAGS", "-L#{Formula["llvm"].opt_lib}/unwind -lunwind"
       # When using Homebrew's superenv shims, we need to use HOMEBREW_LIBRARY_PATHS
       # rather than LDFLAGS for libc++ in order to correctly link to LLVM's libc++.
@@ -137,10 +135,6 @@ class Mpd < Formula
   end
 
   test do
-    # oss_output: Error opening OSS device "/dev/dsp": No such file or directory
-    # oss_output: Error opening OSS device "/dev/sound/dsp": No such file or directory
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     assert_match "[wavpack] wv", shell_output("#{bin}/mpd --version")
 
     require "expect"
@@ -152,8 +146,10 @@ class Mpd < Formula
       port "#{port}"
     EOS
 
+    plugin = OS.mac? ? "osx" : "pulse"
+
     io = IO.popen("#{bin}/mpd --stdout --no-daemon #{testpath}/mpd.conf 2>&1", "r")
-    io.expect("output: Successfully detected a osx audio device", 30)
+    io.expect("output: Successfully detected a #{plugin} audio device", 30)
 
     ohai "Connect to MPD command (localhost:#{port})"
     TCPSocket.open("localhost", port) do |sock|

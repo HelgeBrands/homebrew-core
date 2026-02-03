@@ -1,8 +1,8 @@
 class Electric < Formula
   desc "Real-time sync for Postgres"
   homepage "https://electric-sql.com"
-  url "https://github.com/electric-sql/electric/archive/refs/tags/@core/sync-service@1.2.7.tar.gz"
-  sha256 "fd740868fc0a7ce314b0a900586c86ccd925ca424e63b1fff3d2ef747302faf1"
+  url "https://github.com/electric-sql/electric/archive/refs/tags/@core/sync-service@1.4.1.tar.gz"
+  sha256 "252939615d940759c5067828c8b4693920bb27bef45f5a9a1403e7faf8dcf32e"
   license "Apache-2.0"
 
   livecheck do
@@ -11,12 +11,12 @@ class Electric < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "b4d4f3c7aacea150bf736f8a11b97e2e81f28a18a15806f01910e4cc87cb4afc"
-    sha256 cellar: :any,                 arm64_sequoia: "64910241d4b4db30f6a0f942201872d2e9ee5595e253a2c3986af543faf81c33"
-    sha256 cellar: :any,                 arm64_sonoma:  "260510260af48b4b12352876969d7f6baf8bcfb24295cd79dff5d384d7b9e431"
-    sha256 cellar: :any,                 sonoma:        "1d9dd2498679edd9c70fb452723b661da3717dc3267669cb4f32c3a963cbd61c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "76f94c065d9feca30f82a91c68a4a7c7a6423c106efa5390d77fb4f0817cb184"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "043c74c64ee06ecd14dd849be5b6ebae2212b25bac6115ea9d8a8401adaac083"
+    sha256 cellar: :any,                 arm64_tahoe:   "45b9bb6865def1f0783c1760a722f43f44c17555423d918577eddd82c69ce3b9"
+    sha256 cellar: :any,                 arm64_sequoia: "bef79f8f909b3dd0da96276d122432a06361a9410863008e50582faef7077f6c"
+    sha256 cellar: :any,                 arm64_sonoma:  "506fd6feca2b02621a05ccc5d75ce56114fd457405575ba04af99980452d5ac7"
+    sha256 cellar: :any,                 sonoma:        "29a9b2db84b2599ff845ea23729f391c80018cedbbbfcf4fac6d72cb98d5ed4f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "74d8a62265187c4f4dfc1b8620354c8ab5fb997c99358e2ad7f51e7c836eccdf"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9256cbe1b07b3f72cc11452964d6c662b15859290ccaf258105ad6bd5953c8c6"
   end
 
   depends_on "elixir" => :build
@@ -64,6 +64,7 @@ class Electric < Formula
       mkdir_p testpath/"persistent/shapes/single_stack/.meta/backups/shape_status_backups"
 
       spawn bin/"electric", "start"
+      sleep 5 if OS.mac? && Hardware::CPU.intel?
 
       output = shell_output("curl -s --retry 5 --retry-connrefused localhost:#{ENV["ELECTRIC_PORT"]}/v1/health")
       assert_match "active", output

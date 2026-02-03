@@ -1,8 +1,8 @@
 class Di < Formula
   desc "Advanced df-like disk information utility"
   homepage "https://diskinfo-di.sourceforge.io/"
-  url "https://downloads.sourceforge.net/project/diskinfo-di/di-6.2.0.tar.gz"
-  sha256 "65f7752988949c1186d368745ec1a2d9e1597cd8b20dee7d3cbed0da8ef4e4dc"
+  url "https://downloads.sourceforge.net/project/diskinfo-di/di-6.2.2.2.tar.gz"
+  sha256 "19eeeb7ebcad3061ae7814cdae5593accfb2bb261ce24795a604a282cbfc60fe"
   license "Zlib"
 
   # This only matches tarballs in the root directory, as a way of avoiding
@@ -13,12 +13,12 @@ class Di < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "2414498a2d26d606fb96b9634a500511888ffb6980e3b69517eab6e1ebe54736"
-    sha256 cellar: :any,                 arm64_sequoia: "36efa2668df142328f2c959f3a28997cf4c5f0f7eebbfb3f999c7aa89dd38125"
-    sha256 cellar: :any,                 arm64_sonoma:  "df34deef425a45072a7effb3694944b42e7b92cfebcf997c8095c1fde6be6906"
-    sha256 cellar: :any,                 sonoma:        "1306e557c1a1f5b3a8513f1cc60154138fbe7cd1677738ac228e6647cac8f84c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4ce1c25c94175f2334981070a84b70e6be5d49441cbd264a18f3fcfe76fa11a3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "91c00ae615c5055f62145f8cc95e12f90e4b27913649c988467bc206d75263fb"
+    sha256 cellar: :any,                 arm64_tahoe:   "62d724a0e3eb3478b48eb8d94c7ba89f3b72e4675f75d523177e7a18a6b37516"
+    sha256 cellar: :any,                 arm64_sequoia: "b0f9ecb8b5537a0b5ab09b4b8cf6dedd3001113f48c220873d9ff4331fe59ce5"
+    sha256 cellar: :any,                 arm64_sonoma:  "56bb403fea87acd0e51c543d2d68c5ce7188abe0c5f9f3a571518d797a7ce7e0"
+    sha256 cellar: :any,                 sonoma:        "004ef54b06af5aaedd8a6884719e64ce765d565e42fa012fda3408d1af69d3fd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8a5589a65efc777ac948a4c538bdd867516b9f173cebb3701fc8cd80526c1a7b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "57ad47925b5cb2b800c1c540469598c1fde34be1aa3de30790292999af5fb8e1"
   end
 
   depends_on "cmake" => :build

@@ -1,10 +1,20 @@
 class Trafficserver < Formula
   desc "HTTP/1.1 and HTTP/2 compliant caching proxy server"
   homepage "https://trafficserver.apache.org/"
-  url "https://downloads.apache.org/trafficserver/trafficserver-10.1.0.tar.bz2"
-  mirror "https://archive.apache.org/dist/trafficserver/trafficserver-10.1.0.tar.bz2"
-  sha256 "bccc35bbfc80f215b0858a0a7e531ac990b13a9eb1e3e81a3b15eaa3fde0596e"
   license "Apache-2.0"
+
+  stable do
+    url "https://downloads.apache.org/trafficserver/trafficserver-10.1.0.tar.bz2"
+    mirror "https://archive.apache.org/dist/trafficserver/trafficserver-10.1.0.tar.bz2"
+    sha256 "bccc35bbfc80f215b0858a0a7e531ac990b13a9eb1e3e81a3b15eaa3fde0596e"
+
+    depends_on "pcre" # PCRE2 issue: https://github.com/apache/trafficserver/issues/8780
+  end
+
+  # Allow livechecking for new releases while deprecated.
+  livecheck do
+    url :stable
+  end
 
   bottle do
     sha256 arm64_tahoe:   "f1f228335aa43ef6fc7ff8e68c2777dc3ff42335cb0b9b71bc74deac28998ab3"
@@ -17,6 +27,16 @@ class Trafficserver < Formula
     sha256 x86_64_linux:  "701d46ac0f4dfd5ed88a48e5f01bb55f675f9e275a4e692ba7a773e82e0d39f6"
   end
 
+  head do
+    url "https://github.com/apache/trafficserver.git", branch: "master"
+
+    depends_on "zstd"
+  end
+
+  # Can be undeprecated with 10.2.0 release.
+  # Backporting PCRE2 support requires 30+ commits and resolving conflicts, so not worth it.
+  deprecate! date: "2026-01-14", because: "needs EOL `pcre`"
+
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
@@ -28,7 +48,6 @@ class Trafficserver < Formula
   depends_on "luajit"
   depends_on "nuraft"
   depends_on "openssl@3"
-  depends_on "pcre" # PCRE2 issue: https://github.com/apache/trafficserver/issues/8780
   depends_on "pcre2"
   depends_on "xz"
   depends_on "yaml-cpp"
@@ -44,6 +63,8 @@ class Trafficserver < Formula
   end
 
   def install
+    odie "Remove `pcre` dependency!" if build.stable? && version >= "10.2.0"
+
     system "cmake", "-S", ".", "-B", "build",
                     "-DBUILD_EXPERIMENTAL_PLUGINS=ON",
                     "-DEXTERNAL_YAML_CPP=ON",

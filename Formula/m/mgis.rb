@@ -1,27 +1,27 @@
 class Mgis < Formula
   desc "Provide tools to handle MFront generic interface behaviours"
   homepage "https://thelfer.github.io/mgis/web/index.html"
-  url "https://github.com/thelfer/MFrontGenericInterfaceSupport/archive/refs/tags/MFrontGenericInterfaceSupport-3.0.tar.gz"
-  sha256 "dae915201fd20848b69745dabda1a334eb242d823af600825b8b010ddc597640"
+  url "https://github.com/thelfer/MFrontGenericInterfaceSupport/archive/refs/tags/MFrontGenericInterfaceSupport-3.1.tar.gz"
+  sha256 "61afae1a367dbb150b24ca85f042efb15a77184a54a746f11c08d9b7cb9e94f3"
   license any_of: ["LGPL-3.0-only", "CECILL-1.0"]
-  revision 3
   head "https://github.com/thelfer/MFrontGenericInterfaceSupport.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "b9de255b0e7dd13ccacf98b07e48ccc8c47f241eb8c52dc45a650e352b39d3b4"
-    sha256 cellar: :any,                 arm64_sequoia: "8777e0f76749fbaf403a6f58f347228504437d570a73b954ea88db500ecc72d1"
-    sha256 cellar: :any,                 arm64_sonoma:  "01f29c48e1951f74a20584362183e48ea0a73717d20d73e63666a9166f852ea6"
-    sha256 cellar: :any,                 sonoma:        "ca86411b44375bc98f40281b50eda51f914b61bbf137b0c31f0015c85da73e9c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "78cc8af7564994ea4b4380dd99c6598505b6f22a528689bb36d63f126b71d069"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e9f3936f304385534e0ab9d2a7dd5b98d10c7cd4e78c6fda2ad02d3a035b9c1b"
+    sha256 cellar: :any,                 arm64_tahoe:   "74c7f1e27791371b8e7c2014d3b1da8f7293ef0d3f6dd81e5bab33d43fb41cfd"
+    sha256 cellar: :any,                 arm64_sequoia: "6dfe278f99ca5f7116b2c526e8b316390fad47674f299814be2a7d8594ef9b40"
+    sha256 cellar: :any,                 arm64_sonoma:  "f1333cca1bf8e8686419db05e9a42697bc086c5b82fb40cd83c8ca3355e3648b"
+    sha256 cellar: :any,                 sonoma:        "0e6b9dbe76a216c54c3844fd5ddec1bda82768074d85894a0eefc9c09f4b1377"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a9d509f8a2b1594e5baa6f14f365cd04d2c508c69c6452d6233a9b077e71a877"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "424ecd722ae433941899b73dc513fbabe4ff0631988cd5e8336c56cec5c5fa1f"
   end
 
   depends_on "cmake" => :build
+  depends_on "pybind11" => :build
 
-  depends_on "boost-python3"
   depends_on "gcc" # for gfortran
   depends_on "numpy"
   depends_on "python@3.14"
+  depends_on "tbb"
 
   def python3
     which("python3.14")
@@ -34,7 +34,8 @@ class Mgis < Formula
       "-Denable-enable-doxygen-doc=OFF",
       "-Denable-c-bindings=ON",
       "-Denable-fortran-bindings=ON",
-      "-Denable-python-bindings=ON",  # requires boost-python
+      "-Denable-python-bindings=ON",
+      "-Denable-pybind11=ON",         # requires pybind11
       "-Denable-fenics-bindings=OFF", # experimental and very limited
       "-Denable-julia-bindings=OFF",  # requires CxxWrap library
       "-Denable-enable-static=OFF",

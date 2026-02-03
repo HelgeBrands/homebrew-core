@@ -1,19 +1,19 @@
 class Kind < Formula
   desc "Run local Kubernetes cluster in Docker"
   homepage "https://kind.sigs.k8s.io/"
-  url "https://github.com/kubernetes-sigs/kind/archive/refs/tags/v0.30.0.tar.gz"
-  sha256 "bfaa702786beae1a9958d4d9cdddbdcc94c8ca5f7a5dca3a4a5a748c51477693"
+  url "https://github.com/kubernetes-sigs/kind/archive/refs/tags/v0.31.0.tar.gz"
+  sha256 "f4aaa1f572f9965eea3f7513d166f545f41b61ab5efeed953048bdcb13c51032"
   license "Apache-2.0"
   head "https://github.com/kubernetes-sigs/kind.git", branch: "main"
 
   bottle do
     rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "167388c6fd980b35106c005c175d0a57e14492fc82ed6f4b11c0feb324939139"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "167388c6fd980b35106c005c175d0a57e14492fc82ed6f4b11c0feb324939139"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "167388c6fd980b35106c005c175d0a57e14492fc82ed6f4b11c0feb324939139"
-    sha256 cellar: :any_skip_relocation, sonoma:        "799bf8bfeb9df6c9fdbe780dac405d3a7657e7a108391d303dd5516e50b456ad"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5c86e8a9260b02f4064bce4d29a1653713e3beb22bb4f5ea7d037798a5d5fc08"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b34d6b4b376257667a82e16befd9e264baf7c9b0248b9f1249609311c60ffb0f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "294786a773053174dd0207abd9f19a9149e9104f6f4bd025e4922ef18056e77d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "294786a773053174dd0207abd9f19a9149e9104f6f4bd025e4922ef18056e77d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "294786a773053174dd0207abd9f19a9149e9104f6f4bd025e4922ef18056e77d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "8991293d714f2a97961a74aaa270d45c1368c8dee3570d54f3bf1533c98b6a99"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "fefb317de154724a6bef983c1e50f1709bab098b3ff829fe4aacef141307529a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a0725c9f5c415c504480815ddacad100756f3cc90601ec8f8f96f28fe3730d61"
   end
 
   depends_on "go" => :build
@@ -22,7 +22,7 @@ class Kind < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w")
 
-    generate_completions_from_executable(bin/"kind", "completion")
+    generate_completions_from_executable(bin/"kind", shell_parameter_format: :cobra)
   end
 
   test do

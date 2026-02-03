@@ -1,17 +1,17 @@
 class Mailpit < Formula
   desc "Web and API based SMTP testing"
   homepage "https://mailpit.axllent.org/"
-  url "https://github.com/axllent/mailpit/archive/refs/tags/v1.28.0.tar.gz"
-  sha256 "438581a2fd717d12b6259081420b10a8dab5af30b18b73c01db9cf5d83467869"
+  url "https://github.com/axllent/mailpit/archive/refs/tags/v1.29.0.tar.gz"
+  sha256 "249489405815b99f6318abea2c137a0fd34c3f86c2ee171654342a64a580a7f9"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9fdb8c1bd703f6cc14faab77839123ae3d2effdeb517a56b59b14edc8f00de5d"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5315a3efccfb4cbaebedd5e1a7d0aff1a08ac90751670a0c9aa00728fe89e0d6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f4868a43e21e7337273faf747103bbaad5a7bdb354cfc5f645ebcaa0212bd366"
-    sha256 cellar: :any_skip_relocation, sonoma:        "bf9758f2328ac43fb40e2ab8912dd587402e64af053e6f02994d6dab23cf3650"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2adc604c429177950ec9543b0551e8dfd7c80c4ba0e4c76df53f14d0a1c8adb0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "807cfc4326c85b02236c1fba8145231377fd1854c1c8022b933d40dd9905f6fd"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e886093f84e2ea808eaef235f33142e5ddd55fce037ea640e0d1a82ed5764ec0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fd2dc05d2517111f7eb3caa4a7fbf3338f97d75156250f661d8ca7015e1fa608"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a2850814cb116776f25ba0b9f13b72c60541a32cf631cdaf21afe732df483ff5"
+    sha256 cellar: :any_skip_relocation, sonoma:        "468ae825796969c1e8ec90224756899b7621ba04fb4e8ae59cc669e0c79d6aa4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f1f9ee2c697dd826de6b8ede6316e9ccf4877302c092dc81e7d2c33b65970fd6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d45484b319f60fad320f629a36038541dc09415d757720f3cd80b65174922b49"
   end
 
   depends_on "go" => :build
@@ -24,7 +24,7 @@ class Mailpit < Formula
     ldflags = "-s -w -X github.com/axllent/mailpit/config.Version=v#{version}"
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"mailpit", "completion")
+    generate_completions_from_executable(bin/"mailpit", shell_parameter_format: :cobra)
   end
 
   service do

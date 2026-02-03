@@ -1,8 +1,8 @@
 class Rover < Formula
   desc "CLI for managing and maintaining data graphs with Apollo Studio"
   homepage "https://www.apollographql.com/docs/rover/"
-  url "https://github.com/apollographql/rover/archive/refs/tags/v0.37.0.tar.gz"
-  sha256 "14063a8a2c7885bf84d7ff79dad4cf113d8aa1639aebbfe2c56c7f46d1191686"
+  url "https://github.com/apollographql/rover/archive/refs/tags/v0.37.2.tar.gz"
+  sha256 "d93856caec7d0886b46ba34a44d0784b63980cb170cbce66f81b08057026754a"
   license "MIT"
   head "https://github.com/apollographql/rover.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Rover < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "405761c0d7b55ed03c10085eb5e5b0736a7893cbaccfdc4b1ed7f6301c0f56c0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fe154d148780d8d6ae67964d6c2f70c511f9ec53960d939be33e5f23a6371a6a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "289ae801078c0ccddda7d770d894c1c9c05425c95d88b85028d1bf9742c7d590"
-    sha256 cellar: :any_skip_relocation, sonoma:        "d97c0ef57b8e4e799ae1b4c0b2f5f85c545c9da62d91df3258ff1229ccd80067"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4a9ccea782f28cb5e3c5399508752028c288014e4e6d0983ec90125ddc84ee13"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d0d0f745e4ab9fea139b83ffc227b4a825535832662b32d9f2ac94ed02a651e6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3e755a44e41cf581115c4a33aed936d53fb54822903d9d2378f8853b2ae4e0fa"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cb7975a257705637ae60d7ad97230c8421e8e1c59ed0e2422684d47879aa8862"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2108d7edc751f89ff03ecf42b184074dc08970661aa93d6145b8a80e0d20c404"
+    sha256 cellar: :any_skip_relocation, sonoma:        "1200527113d4901fb2c7a3302d1bfa94fc42bcfa86fad994adf02743c585636f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "529fde6809c33b69e9e51b0e6744db5e7cd37d94ffc139650877b6c1199ea111"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cc4bcf338b3edaec47cbcb05d77e5ead00a546c231776a69d0db8817178099b7"
   end
 
   depends_on "rust" => :build
@@ -31,6 +31,8 @@ class Rover < Formula
     ENV["OPENSSL_NO_VENDOR"] = "1"
 
     system "cargo", "install", *std_cargo_args
+
+    generate_completions_from_executable(bin/"rover", "completion", shells: [:bash, :zsh])
   end
 
   test do

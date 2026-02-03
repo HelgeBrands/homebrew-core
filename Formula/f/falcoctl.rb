@@ -1,18 +1,18 @@
 class Falcoctl < Formula
   desc "CLI tool for working with Falco and its ecosystem components"
   homepage "https://github.com/falcosecurity/falcoctl"
-  url "https://github.com/falcosecurity/falcoctl/archive/refs/tags/v0.11.4.tar.gz"
-  sha256 "387588e6eb8927920e45acd4121c90756ad69c6d16f5b7f94f2ceaaac45d3a73"
+  url "https://github.com/falcosecurity/falcoctl/archive/refs/tags/v0.12.2.tar.gz"
+  sha256 "05290a97ac6ac886fc4b34d157d533de37d5a1031f81cf4e6eb1f056c4015f49"
   license "Apache-2.0"
   head "https://github.com/falcosecurity/falcoctl.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7ee0b23e669161779233848fad860521187151f1c7cc154f56bc0229d88881d7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "185ca71d955334d14dcc9d9c9dee9379e9762909a81c08e7912f8dbd5310739b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "05b69f934216a147aa93b92dcaf72e9f38f806fbe1c87f044b9c999622315c97"
-    sha256 cellar: :any_skip_relocation, sonoma:        "642fb42ccac217d020faa57a26f9663cafc66a15499beda50424964796caf596"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ac30ac5c95bfd0117a63e520e127c0e899a9500f71a18112871988daf4227659"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "38df280421a9f00b883f113882555ab11e4707dee3d997c7c463f3f40095317a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "580f5b4448b45dbce6b0c81469ab2aa5fff60527bfba560e32aba21c4398065c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "975a8845bcb5401fe6b9b8084512ce4ec1f800ca8ea4eb56fce4c1c9cde5c962"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3fd72eb17b4b6f5d6839d42f7c4dedc96d3fc0b525a56fda6e8de0169d27757d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9ffd3c24f261628ce5cd34e8e3ed7eb5f1400bfb6c6ef403ee20346b27e94d97"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "166745727c43a2c13dc11acbda8317b4eef4d2603a944dfe5aeee949bcc0792d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a77803385d65096c0b0cad6fbf99aa6b78f47b00c501378e506921893cd7cbe1"
   end
 
   depends_on "go" => :build
@@ -28,7 +28,7 @@ class Falcoctl < Formula
 
     system "go", "build", *std_go_args(ldflags:), "."
 
-    generate_completions_from_executable(bin/"falcoctl", "completion")
+    generate_completions_from_executable(bin/"falcoctl", shell_parameter_format: :cobra)
   end
 
   test do

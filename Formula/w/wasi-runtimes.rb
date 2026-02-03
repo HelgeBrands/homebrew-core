@@ -1,9 +1,10 @@
 class WasiRuntimes < Formula
   desc "Compiler-RT and libc++ runtimes for WASI"
   homepage "https://wasi.dev"
-  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.7/llvm-project-21.1.7.src.tar.xz"
-  sha256 "e5b65fd79c95c343bb584127114cb2d252306c1ada1e057899b6aacdd445899e"
+  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-21.1.8/llvm-project-21.1.8.src.tar.xz"
+  sha256 "4633a23617fa31a3ea51242586ea7fb1da7140e426bd62fc164261fe036aa142"
   license "Apache-2.0" => { with: "LLVM-exception" }
+  revision 1
   head "https://github.com/llvm/llvm-project.git", branch: "main"
 
   livecheck do
@@ -11,12 +12,12 @@ class WasiRuntimes < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "56c093e2b256ef7047cbc24e45331796571fd06178aebe35d50d62ad651cc6e7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "896b392396f38240cfb95feee6cee1ae208f2e6a602e816e1e0459480e837e60"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "340b91a3d9bba3c98a3105d5b28be3d13f52139f026fd99076b4f6857da3c61e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "47ed065c1cc38b8bf6b584db846c0ce40b6992d901e4e08767cbc287d3248ec8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "767ec519709936981e26a02c069249d80146731921fd9ec4dd7baf041380edc0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "12cd64f17ca48781bd44e4ec6ea8d8ac56f8d9c462b2fba327a937c12eddf468"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f433a3ccab0903146f085de87d846d145f265614f3bc4f5b704c993ded11a9c6"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b2df86ef680a00ec6f7717efdf7530821a2dd27dadfe1cb63c53075e68c018b8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d2d4b154fce939f2063a0bc80b6b399cc0c83e7bd27076c4b604439e5feebeba"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a3dad12f44439045e740bb97fb746f4634c7cb4ffcd29553b290b802ecd3b1b8"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1b4933ccfbb424f9bd78b55f6d7db3faaca5003d413335ef12fe2cc8e8fa6666"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0ce5dca488c5fcbc1b0536d6ef8d8632d58798bd3a9905c8f76098593bbcb6cd"
   end
 
   depends_on "cmake" => :build
@@ -215,11 +216,18 @@ class WasiRuntimes < Formula
     clang = Formula["llvm"].opt_bin/"clang"
     targets.each do |target|
       system clang, "--target=#{target}", "-v", "test.c", "-o", "test-#{target}"
-      assert_equal "the answer is 42", shell_output("wasmtime #{testpath}/test-#{target}")
+      wasmtime_flags = if target.end_with?("-threads")
+        "-W threads=y -W shared-memory=y -S threads=y"
+      else
+        ""
+      end
+      assert_equal "the answer is 42",
+                   shell_output("wasmtime run #{wasmtime_flags} #{testpath}/test-#{target}").strip
 
       pthread_flags = target.end_with?("-threads") ? ["-pthread"] : []
       system "#{clang}++", "--target=#{target}", "-v", "test.cc", "-o", "test-cxx-#{target}", *pthread_flags
-      assert_equal "hello from C++ main with cout!", shell_output("wasmtime #{testpath}/test-cxx-#{target}").chomp
+      assert_equal "hello from C++ main with cout!",
+                   shell_output("wasmtime run #{wasmtime_flags} #{testpath}/test-cxx-#{target}").chomp
     end
   end
 end

@@ -1,17 +1,17 @@
 class Observerward < Formula
   desc "Web application and service fingerprint identification tool"
   homepage "https://blog.kali-team.cn/projects/observer_ward/"
-  url "https://github.com/emo-crab/observer_ward/archive/refs/tags/v2025.11.26.tar.gz"
-  sha256 "9ae709d5da525637435167c1751b96622c6bf08f46f446417f63f3297e593c5a"
+  url "https://github.com/emo-crab/observer_ward/archive/refs/tags/v2026.1.13.tar.gz"
+  sha256 "7f15a48928617b9acd08ec189b20e9dd796830328c27f7bdea8369a5605f30de"
   license "GPL-3.0-only"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "07393ee0ee22a666292e90f13eb5a0590bc3ec697b5ad5c3039870b99aecdf0b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7a4c193aa6fc2ab53b8a749f21e32112954eba4bdbd288eff1c2bfa3f36130c1"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1eaed49dbab0452cd0a45999f25d5a995110c7a89bd7161933e6b9f3ec2eb87b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c6166c0171abc0219954083eadd97ffc327a36b29f40b9b03b084c6e19188953"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cd8c22de55fa90fff19ca15d102ea750c720c1548b330b4b67b28878ed082be0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "560d52696d48e991a5fd8003b977f977644c9447fa8426bff36b3a5c47bd6423"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a512214aebb7ce2c5b30521407db42d54444ffe70138d9ef5148be6256ec6797"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "321a40ced48d4388890747b981f3688e3f5a8a8d8a9d77d4f30793e3f223b3d2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "95774cd0f192c59984a4342241991c4030b78fbb405edc3da5f54be2b29f295e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "4b97113459bf0f3cfd930ce7108670b5669c425e9ae3bbcea8e203ba7bfd6ed1"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a220e4fc24e90d8f1cc080b1cd79fc46de666a7323392cb45c0fd9c45ed54751"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2996035aa9b94a3a89a82f5fc45758a3cf1cb30fea55c7a5967e6fd7c3bd3924"
   end
 
   depends_on "protobuf" => :build

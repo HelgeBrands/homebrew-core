@@ -3,17 +3,17 @@ class Tmuxp < Formula
 
   desc "Tmux session manager. Built on libtmux"
   homepage "https://tmuxp.git-pull.com/"
-  url "https://files.pythonhosted.org/packages/d0/8b/3630f1d037e62400faec860f8d98e83b734bd1bdef3e9a081ade298299b6/tmuxp-1.61.0.tar.gz"
-  sha256 "b4355d35aff5da859f576407ee791b89a0404db97f8a16074cda0441152e11d2"
+  url "https://files.pythonhosted.org/packages/ff/20/0d381d34deb463c395dc655730950e1c1ad73b063c95cecb3f9090066bad/tmuxp-1.64.0.tar.gz"
+  sha256 "8f1e5db86ab1817a831df73be2667a619971756d7a6d8277283e61451789982c"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "32b81122569bc7d52d6777ea8dc83c8183abcf62f0eeb31af8931a7ace95a80f"
-    sha256 cellar: :any,                 arm64_sequoia: "5b3e3267003950210da54db75951eaa014174feecf10362b97156e0c76df55f3"
-    sha256 cellar: :any,                 arm64_sonoma:  "bf180057e302c3bec89f84d4fedb2a763a5fc62e704a47dfc1aa56dc2f9104d8"
-    sha256 cellar: :any,                 sonoma:        "d473483434ba16d481e8e1a35776ba1fa4410847f3e7ff09b5f599d616c68f54"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c71e5638b41313c85aefcd46cc6755f87c1836407025bd3951d81e1b60bab287"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4cdc7e8ea6cb6ec74c078c4c09dc283bbaadb08f7d0c4844f3a4ca1e917f4ebe"
+    sha256 cellar: :any,                 arm64_tahoe:   "0da0070d80d97416e21644a41b422b152c407291f5da9e57001c237cd39de771"
+    sha256 cellar: :any,                 arm64_sequoia: "fc4960f7ac2812b7e121f1c836f227233e39e5fb1d741d0a02ab9bcb4ba5a289"
+    sha256 cellar: :any,                 arm64_sonoma:  "ad25a28842d95e0ddcdb3603fbd1b2e0d29c5c95ee3035a13612c08239291a15"
+    sha256 cellar: :any,                 sonoma:        "d3858895fb3847dcdcc564b53d1d070b1ce1e2922f31e715e899f66d6c514f81"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "324265d879e56844a47115c7ac2a02a4a17c7da7c9fd4730c6927a88c88fef39"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "13cc75bf4ae045347a2b51c262da51f7cdbf2171ab24790e3521f50c271c08b9"
   end
 
   depends_on "libyaml"
@@ -26,8 +26,8 @@ class Tmuxp < Formula
   end
 
   resource "libtmux" do
-    url "https://files.pythonhosted.org/packages/94/1f/65921e53ddee1bd0225d19bb2930d0c1033e6c2b80a7ee0e4fb73862c189/libtmux-0.52.1.tar.gz"
-    sha256 "01fc034f7ce62d75eb4dfb6a01475dd0f32f044d92f084431d1f2cd3b5b97506"
+    url "https://files.pythonhosted.org/packages/e7/28/e2b252817cb181aec2f42fe2d1d7fac5ec9c4d15bfb2b8ea4bd1179e4244/libtmux-0.53.0.tar.gz"
+    sha256 "1d19af4cea0c19543954d7e7317c7025c0739b029cccbe3b843212fae238f1bd"
   end
 
   resource "pyyaml" do

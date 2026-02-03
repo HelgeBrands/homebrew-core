@@ -1,18 +1,18 @@
 class GoFeatureFlagRelayProxy < Formula
   desc "Stand alone server to run GO Feature Flag"
   homepage "https://gofeatureflag.org"
-  url "https://github.com/thomaspoignant/go-feature-flag/archive/refs/tags/v1.49.0.tar.gz"
-  sha256 "1257db6397b031ed84ea86645f9c511e737a593429d4d0fc2c82621da6ef9871"
+  url "https://github.com/thomaspoignant/go-feature-flag/archive/refs/tags/v1.51.0.tar.gz"
+  sha256 "193203548d4b98574521c1e4b59aa7f91a78cca16d9624271c44674c770b0618"
   license "MIT"
   head "https://github.com/thomaspoignant/go-feature-flag.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e151a7265105e51a6e74619ca67adea37792346f4c0ad18d3ae99ec39415dc2c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "568a5f2a4f86599e9962f412b24a4e8bfd1326e98ca42bfe36301880d422ae7a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c23e4447cf919a9e93664ac510f9356ec99c377f2e8d20418aba094d26ef7cff"
-    sha256 cellar: :any_skip_relocation, sonoma:        "5528051c6badabe755163fb2e6581c5c8a9da0f24a6178358f1d38f873bbaf0c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fac2d428015b66ba5794aa2558fbbfc28c3d4fecdc09967f8bbcbe45ecc8b38e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ea488ff93711db7aef0adeeb06be7b4c08979b315475a87b81ce3586d5f6d30d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e4a6da8921c374d1f3db59b6f2053024200e12d96828dffadba402c5455580a3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c93e76ee8e1c820dccef0fba72e1d40ec293a0979d292384f6fe1a2c2d6c55f9"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "40ceeb7219ea5517ad5759e084b84916b3ce848d53f8d5c92e3e5108ccbd116c"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2c7df940b8d6b24176dc9bba2b0f523dac8cdcecc15943a3a197b68372640dbf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "59b5db812cfd2574559fed2cf52db9463466e867cc99666a5fc6f430e012083a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "45c31f75ecc7242a4a16c2c164c6c1d759cb813dd1c390bee1f16b60a6e5147a"
   end
 
   depends_on "go" => :build
@@ -42,15 +42,9 @@ class GoFeatureFlagRelayProxy < Formula
         path: #{testpath}/flags.yml
     YAML
 
+    pid = spawn bin/"go-feature-flag-relay-proxy", "--config", testpath/"test.yml"
     begin
-      pid = fork do
-        exec bin/"go-feature-flag-relay-proxy", "--config", "#{testpath}/test.yml"
-      end
-      sleep 10
-
-      expected_output = /true/
-
-      assert_match expected_output, shell_output("curl -s http://localhost:#{port}/health")
+      assert_match "true", shell_output("curl --silent --retry 5 --retry-connrefused http://localhost:#{port}/health")
     ensure
       Process.kill("TERM", pid)
       Process.wait(pid)

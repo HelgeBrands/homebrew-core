@@ -3,19 +3,18 @@ class Streamlink < Formula
 
   desc "CLI for extracting streams from various websites to a video player"
   homepage "https://streamlink.github.io/"
-  url "https://files.pythonhosted.org/packages/4e/49/496c1dcd299bec19f5cc9b9e9b07c5baa7a774e4f960d3b18c6e821d60c9/streamlink-8.0.0.tar.gz"
-  sha256 "fb6252b87cb1d4d14dfc5bf1f4add1001e87016b150b7495e22e97aeae264655"
+  url "https://files.pythonhosted.org/packages/7a/89/ea3baa9d0c2d564412be15ef5e799a56bf2a0068b27197e5e4c312ba13f5/streamlink-8.1.2.tar.gz"
+  sha256 "d08099fa1b169bad4a991d31b2ab89f04ba08b1319ed1f5bd0ead8547d4c5ad3"
   license "BSD-2-Clause"
-  revision 1
   head "https://github.com/streamlink/streamlink.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9f6d3d8e8eafc2c9e4cd8508698b09e8e4804d4d378c6783f98bdf4052521fde"
-    sha256 cellar: :any,                 arm64_sequoia: "70a5d44810e4a6aaee85162c2a89d67923e287e49b212747a8fd87e0461c8983"
-    sha256 cellar: :any,                 arm64_sonoma:  "d333c2f0e0108ff1a9492d26b8871cd89d7716f0b3c5eb2399b6ce03bc3f0a46"
-    sha256 cellar: :any,                 sonoma:        "c7a9ea407800858d158e8092fea1c56794b4eacc3b683c8a135a86cba8f07d51"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "33616bedb72493d8f70bba45bc2f6010b5299a56bbe9241c46d7c6322f559bff"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b10c7c31985699a044ca6ac5ffdf4f57060ec3b1aabfede9842b033442539427"
+    sha256 cellar: :any,                 arm64_tahoe:   "ffef4e9b3031e354162d0c72b98e12a1d51ca7d0ace8c0957c5ac3d25ea0c8ab"
+    sha256 cellar: :any,                 arm64_sequoia: "bda66c8db416846c477586931bd7f2a51916fc063bae925500ce40cc1a86fe88"
+    sha256 cellar: :any,                 arm64_sonoma:  "a08f10fa353f23814cff9e2a8ed42856991bf4db00d208234fce1cf742b888f8"
+    sha256 cellar: :any,                 sonoma:        "4d83991dde2312e0d5ffc35df330d9022acedb27518859b5ac85bdec5ac59f65"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f68194ca613a12201e9bc6f9ec8a742cc05a4890ed41ee1c3c4b2aa44be7befb"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "34c5ebe8fefc8a7de4a63b012bca651e23ef4e8c4cb144cac4f6e4a454f92979"
   end
 
   depends_on "pkgconf" => :build
@@ -104,8 +103,8 @@ class Streamlink < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "websocket-client" do

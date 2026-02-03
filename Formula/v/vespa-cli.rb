@@ -1,8 +1,8 @@
 class VespaCli < Formula
   desc "Command-line tool for Vespa.ai"
   homepage "https://vespa.ai"
-  url "https://github.com/vespa-engine/vespa/archive/refs/tags/v8.618.24.tar.gz"
-  sha256 "4c83dd7523b14b7ff4d114c7d0bba1c528c79a3b162cc020923af320df8a6b8e"
+  url "https://github.com/vespa-engine/vespa/archive/refs/tags/v8.631.39.tar.gz"
+  sha256 "581cb632ae2124406f34cc1580977fbb3fe1fc488345e9dacf27a4a4a347793d"
   license "Apache-2.0"
 
   livecheck do
@@ -12,12 +12,12 @@ class VespaCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f8eb51e2440a0625d60491b74bcca5b7897d8632af93fcc3f0b70eb904ed958d"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "08bde659d565b59d84a8839fd0f589c70f350afa35cc5eef67ff01c258b5dc15"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6ea5397ef188086057c85d0f7356414d32956b3692561816277ad8d86f510c6d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "6a9ea1b1db912f9022fcc14b6069f37d6f4b6b60789f1ee4d1459c057a499848"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5db30df3ed06a855fff4b163c35902500dd0e58c22af28c0ea86ae4134faceb2"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9bf073647767d0fdb1a6efed16b71e89d047f67682b2633e7f5931b17de3a662"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8d2f3ae927c55bc7f6b355255c6f7c668de62b65a37a8bf4624ad68620342742"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b03b0671bf551ce3f7494705e0e10ec95dae7304ce90d9d31709e0abd341b86f"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6121cb0b7a33e47f9d2b5178f67c3fc1f1db33d9c242db867ce4e3d3a24893a7"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b2de86074b580eeb3484fae168a07d6dff2b5ec8adfa3c253e95997bcd398770"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "fe440f4c49936be833ee361d0f3d84a67f94a05453405f9a66e08793a1e1d04f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "02ffdb9681531c5d741a87aad74b05b3b348945f97ec701328b7236860c93a3e"
   end
 
   depends_on "go" => :build
@@ -27,7 +27,7 @@ class VespaCli < Formula
       with_env(VERSION: version.to_s, PREFIX: prefix.to_s) do
         system "make", "install", "manpages"
       end
-      generate_completions_from_executable(bin/"vespa", "completion")
+      generate_completions_from_executable(bin/"vespa", shell_parameter_format: :cobra)
     end
   end
 

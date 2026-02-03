@@ -1,20 +1,10 @@
 class Pinocchio < Formula
   desc "Efficient and fast C++ library implementing Rigid Body Dynamics algorithms"
   homepage "https://stack-of-tasks.github.io/pinocchio"
+  url "https://github.com/stack-of-tasks/pinocchio/releases/download/v3.9.0/pinocchio-3.9.0.tar.gz"
+  sha256 "60553630d83de492bc0cf1126add2acc591c87f1bc8ea7f70693e7563fc103a3"
   license "BSD-2-Clause"
-  revision 2
   head "https://github.com/stack-of-tasks/pinocchio.git", branch: "devel"
-
-  stable do
-    url "https://github.com/stack-of-tasks/pinocchio/releases/download/v3.8.0/pinocchio-3.8.0.tar.gz"
-    sha256 "aa4664d95a54af7197354a80f5ad324cb291b00593886b78dd868b1fd13636ca"
-
-    # Backport support for Boost 1.89.0
-    patch do
-      url "https://github.com/stack-of-tasks/pinocchio/commit/fbc4ee6dcf3a082834472faef137aff680aed185.patch?full_index=1"
-      sha256 "3e06a335e5722d8bce41825d2e4cc7c24ecb901c59bf5b4e1a41e7534508c35c"
-    end
-  end
 
   livecheck do
     url :stable
@@ -22,13 +12,12 @@ class Pinocchio < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256                               arm64_tahoe:   "e19d2282d0794c232d922aa9e3a5af8f5ca23fbe4b25c28e9602450e6f39a61e"
-    sha256                               arm64_sequoia: "beed70e9a4fcd296b71206024dedf8881ec0fcf0b6dbf58dc8c6b3f43b59ba99"
-    sha256                               arm64_sonoma:  "44ad5aeba610332c165aec43354f5c93a44a46894626de76dc878c5bb3e4826f"
-    sha256 cellar: :any,                 sonoma:        "477f4b339d7469f71458bff271d3195f0d91e33efab32d967bd30edd8546095b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4fad8d887a620862757488344c7652a2ba75edbcd1aa67f0cf7bc346a5a38d9a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "442ad85615f7ef8f854c80ae37ac5607f50eeeca5d047092a763f832606ab4c3"
+    sha256                               arm64_tahoe:   "76519ae746289a93cec4f920ec69008b4cfb5009128b49f8b93ca3da3186088c"
+    sha256                               arm64_sequoia: "8e81f8df06f2b904969ccc8bd63e34a47f230f83a3bcadde5263f931c99a9d9e"
+    sha256                               arm64_sonoma:  "48b114b546dcee6ec4904676afe63969da9d46535dce19a7a87ed83ac0ef3044"
+    sha256 cellar: :any,                 sonoma:        "6ad58ee03635189a429e1a8d3e36bec254a1f72a56f41e63f2dcb576b3d4258a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "123584ba3e7bf16d1ad6d79c8f418c399c11597333c7b88636c415065b485e9a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1b3b58345129b261aa27f271fb68ee2bf1eeedeb5fa685132b6938c7a0897998"
   end
 
   depends_on "cmake" => :build
@@ -73,11 +62,14 @@ class Pinocchio < Formula
       system "git", "pull", "--unshallow", "--tags"
     end
 
-    system "cmake", "-S", ".", "-B", "build",
-                    "-DPYTHON_EXECUTABLE=#{which(python3)}",
-                    "-DBUILD_UNIT_TESTS=OFF",
-                    "-DBUILD_WITH_COLLISION_SUPPORT=ON",
-                    *std_cmake_args
+    args = %W[
+      -DPYTHON_EXECUTABLE=#{which(python3)}
+      -DBUILD_UNIT_TESTS=OFF
+      -DBUILD_WITH_COLLISION_SUPPORT=ON
+    ]
+    args << "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-rpath,#{rpath}" if OS.mac?
+
+    system "cmake", "-S", ".", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end

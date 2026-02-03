@@ -1,18 +1,18 @@
 class Mq < Formula
   desc "Jq-like command-line tool for markdown processing"
   homepage "https://mqlang.org/"
-  url "https://github.com/harehare/mq/archive/refs/tags/v0.5.5.tar.gz"
-  sha256 "bd1e63bdbb1f6923002158ea01f785f4ff277e2d2e22b82f79cd9e12bb3fa662"
+  url "https://github.com/harehare/mq/archive/refs/tags/v0.5.13.tar.gz"
+  sha256 "217b4b293a4d04be55d15712c31c9251d7a13026b7e86f64339356ec7164b969"
   license "MIT"
   head "https://github.com/harehare/mq.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "53c3c475d27b97bc272f922e45cd92585de08d0ce137ff8e16fab0bdea18848c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "47e67854c432382998ea7ed93a58af7f9805746596ae1fb19c68e9d643cb7a3a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c73f6d0bb8a3904b02d5ffd61cdd716ddbbc8097b42dd4de43a7ba2fa2647ebb"
-    sha256 cellar: :any_skip_relocation, sonoma:        "7621825135fdb51b17dd8a1e23b0c881e8193daf4bf8efc2f702b4dea3254c72"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b68ee537f0ddb04bb3240c179bb0731c4282468b5841fc646195788a34a0e871"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8479c47dc80d33be680f9d4abd7e16d92b67146c009be40527ff3096c3816cdb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "191e97d79bdefc0ed3f34e2872ad5293e12c0645340fe7ca8923803118cf8ff1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c93e0fb4b646660d1d580dd369c593e0c61a9b9706ae5a97810f3e4e8f14473a"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "00c12a250047121958d90319b010aba3021cf2fe0c8a1f6876802aedde3abec2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "0bf2b728dfcc3356619817820f8b0f922ce46a634e6b852da07531883c2d0767"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ca4d16bf1d131ed7e4b9b60d72a3bdc2c9feaca40fe6486acb24a026b5295fc5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c87ba9af0752636533956cba2416bc15d563c011d5c0d6b66db055ce15082513"
   end
 
   depends_on "rust" => :build

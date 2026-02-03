@@ -3,11 +3,16 @@ class Semgrep < Formula
 
   desc "Easily detect and prevent bugs and anti-patterns in your codebase"
   homepage "https://semgrep.dev"
-  # pull from git tag to get submodules
+  # Pull from git tag to get submodules, https://github.com/semgrep/semgrep/issues/10877
+  # NOTE: When bumping version, make sure to update Python resources. One way to do this is,
+  # 1. comment out `pcre` resource
+  # 2. run `brew update-python-resources semgrep`
+  # 3. uncomment `pcre` resource
   url "https://github.com/semgrep/semgrep.git",
-      tag:      "v1.145.0",
-      revision: "c93a066ea94157c10207f2946ebd7f5807a11cf2"
+      tag:      "v1.146.0",
+      revision: "079e05d08b86ec1b07509d2e755c631156d3705b"
   license "LGPL-2.1-only"
+  revision 1
   head "https://github.com/semgrep/semgrep.git", branch: "develop"
 
   livecheck do
@@ -15,28 +20,26 @@ class Semgrep < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
+  no_autobump! because: "contains non-PyPI resources"
+
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "619f672709ea28d4fa997141e2436f7222cdbed7413366aeca1265a045cbf1de"
-    sha256 cellar: :any, arm64_sequoia: "5b17d1077e9489fcb4dca5bda14faae003e7f6c1ba0c1524df45f952160dbcca"
-    sha256 cellar: :any, arm64_sonoma:  "326a6301ccffb8e4ec9321c6eba83429398d6a8ab6d68b25b636554795ddd8de"
-    sha256 cellar: :any, sonoma:        "aa50bd574b8b98b450352ae3916703ff62a19068dba0ec50093b4e50942fb1fe"
-    sha256               arm64_linux:   "218eef4aae036b9090b81f1ab66ab0d95cb28706d2675b049be9bdb3ea677966"
-    sha256               x86_64_linux:  "e098bff364c6c032cb4cfb94d62cc914d3a9a898520ac75f4b93ceb3f22eae14"
+    rebuild 1
+    sha256 cellar: :any, arm64_tahoe:   "603a50f804d5eb99c3a46c13cd044da69f38fe21c360dc8034138fb7cfcb2f6e"
+    sha256 cellar: :any, arm64_sequoia: "b13bf222207312424553050ddb2b378ed7825a47fcfe59764c4cfd7ec360c6c6"
+    sha256 cellar: :any, arm64_sonoma:  "fa7b435b66176a2ca00c6d7bf4a94a097b80f7fc40ef9857c8eca285c5d67023"
+    sha256 cellar: :any, sonoma:        "16f0ca619861bde599dd3479681b16e509995c8dc37c55c9ca20d16ae8e685be"
+    sha256               arm64_linux:   "62ea451a2aef829b84e3b157bb8703d0224c4fa5acc90e729e352df1e3218494"
+    sha256               x86_64_linux:  "e83d0d6e33804a8a1eb2a0b644ba03a92e299b4f7fa381b203d540ecaac6444d"
   end
 
-  depends_on "autoconf" => :build
-  depends_on "cmake" => :build
-  depends_on "coreutils"=> :build
-  depends_on "dune" => :build
   depends_on "ocaml" => :build
   depends_on "opam" => :build
-  depends_on "pipenv" => :build
   depends_on "pkgconf" => :build
   depends_on "certifi" => :no_linkage
+  depends_on "cryptography" => :no_linkage
   depends_on "dwarfutils"
   depends_on "gmp"
   depends_on "libev"
-  depends_on "pcre"
   depends_on "pcre2"
   depends_on "pydantic" => :no_linkage
   depends_on "python@3.14"
@@ -54,11 +57,11 @@ class Semgrep < Formula
   end
 
   pypi_packages package_name:     "semgrep",
-                exclude_packages: %w[certifi pydantic rpds-py]
+                exclude_packages: %w[certifi cryptography pydantic rpds-py]
 
   resource "anyio" do
-    url "https://files.pythonhosted.org/packages/16/ce/8a777047513153587e5434fd752e89334ac33e379aa3497db860eeb60377/anyio-4.12.0.tar.gz"
-    sha256 "73c693b567b0c55130c104d0b43a9baf3aa6a31fc6110116509f27bf75e21ec0"
+    url "https://files.pythonhosted.org/packages/96/f0/5eb65b2bb0d09ac6776f2eb54adee6abe8228ea05b20a5ad0e4945de8aac/anyio-4.12.1.tar.gz"
+    sha256 "41cfcc3a4c85d3f05c932da7c26d0201ac36f72abd4435ba90d0464a3ffed703"
   end
 
   resource "attrs" do
@@ -142,8 +145,8 @@ class Semgrep < Formula
   end
 
   resource "importlib-metadata" do
-    url "https://files.pythonhosted.org/packages/76/66/650a33bd90f786193e4de4b3ad86ea60b53c89b669a5c7be931fac31cdb0/importlib_metadata-8.7.0.tar.gz"
-    sha256 "d13b81ad223b890aa16c5471f2ac3056cf76c5f10f82d6f9292f0b415f389000"
+    url "https://files.pythonhosted.org/packages/f3/49/3b30cad09e7771a4982d9975a8cbf64f00d4a1ececb53297f1d9a7be1b10/importlib_metadata-8.7.1.tar.gz"
+    sha256 "49fef1ae6440c182052f407c8d34a68f72efc36db9ca90dc0113398f2fdde8bb"
   end
 
   resource "jsonschema" do
@@ -162,8 +165,8 @@ class Semgrep < Formula
   end
 
   resource "mcp" do
-    url "https://files.pythonhosted.org/packages/3d/a1/b1f328da3b153683d2ec34f849b4b6eac2790fb240e3aef06ff2fab3df9d/mcp-1.16.0.tar.gz"
-    sha256 "39b8ca25460c578ee2cdad33feeea122694cfdf73eef58bee76c42f6ef0589df"
+    url "https://files.pythonhosted.org/packages/a7/a4/d06a303f45997e266f2c228081abe299bbcba216cb806128e2e49095d25f/mcp-1.23.3.tar.gz"
+    sha256 "b3b0da2cc949950ce1259c7bfc1b081905a51916fcd7c8182125b85e70825201"
   end
 
   resource "mdurl" do
@@ -222,13 +225,13 @@ class Semgrep < Formula
   end
 
   resource "peewee" do
-    url "https://files.pythonhosted.org/packages/6f/60/58e7a307a24044e0e982b99042fcd5a58d0cd928d9c01829574d7553ee8d/peewee-3.18.3.tar.gz"
-    sha256 "62c3d93315b1a909360c4b43c3a573b47557a1ec7a4583a71286df2a28d4b72e"
+    url "https://files.pythonhosted.org/packages/88/b0/79462b42e89764998756e0557f2b58a15610a5b4512fbbcccae58fba7237/peewee-3.19.0.tar.gz"
+    sha256 "f88292a6f0d7b906cb26bca9c8599b8f4d8920ebd36124400d0cbaaaf915511f"
   end
 
   resource "protobuf" do
-    url "https://files.pythonhosted.org/packages/0a/03/a1440979a3f74f16cab3b75b0da1a1a7f922d56a8ddea96092391998edc0/protobuf-6.33.1.tar.gz"
-    sha256 "97f65757e8d09870de6fd973aeddb92f85435607235d20b2dfed93405d00c85b"
+    url "https://files.pythonhosted.org/packages/cc/5c/f912bdebdd4af4160da6a2c2b1b3aaa1b8c578d0243ba8f694f93c7095f0/protobuf-6.33.3.tar.gz"
+    sha256 "c8794debeb402963fddff41a595e1f649bcd76616ba56c835645cab4539e810e"
   end
 
   resource "pydantic-settings" do
@@ -241,14 +244,19 @@ class Semgrep < Formula
     sha256 "636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887"
   end
 
+  resource "pyjwt" do
+    url "https://files.pythonhosted.org/packages/e7/46/bd74733ff231675599650d3e47f361794b22ef3e3770998dda30d3b63726/pyjwt-2.10.1.tar.gz"
+    sha256 "3cc5772eb20009233caf06e9d8a0577824723b44e6648ee0a2aedb6cf9381953"
+  end
+
   resource "python-dotenv" do
     url "https://files.pythonhosted.org/packages/f0/26/19cadc79a718c5edbec86fd4919a6b6d3f681039a2f6d66d14be94e75fb9/python_dotenv-1.2.1.tar.gz"
     sha256 "42667e897e16ab0d66954af0e60a9caa94f0fd4ecf3aaf6d2d260eec1aa36ad6"
   end
 
   resource "python-multipart" do
-    url "https://files.pythonhosted.org/packages/f3/87/f44d7c9f274c7ee665a29b885ec97089ec5dc034c7f3fafa03da9e39a09e/python_multipart-0.0.20.tar.gz"
-    sha256 "8dd0cab45b8e23064ae09147625994d090fa46f5b0d1e13af944c331a7fa9d13"
+    url "https://files.pythonhosted.org/packages/78/96/804520d0850c7db98e5ccb70282e29208723f0964e88ffd9d0da2f52ea09/python_multipart-0.0.21.tar.gz"
+    sha256 "7137ebd4d3bbf70ea1622998f902b97a29434a9e8dc40eb203bbcf7c2a2cba92"
   end
 
   resource "referencing" do
@@ -267,8 +275,8 @@ class Semgrep < Formula
   end
 
   resource "ruamel-yaml" do
-    url "https://files.pythonhosted.org/packages/9f/c7/ee630b29e04a672ecfc9b63227c87fd7a37eb67c1bf30fe95376437f897c/ruamel.yaml-0.18.16.tar.gz"
-    sha256 "a6e587512f3c998b2225d68aa1f35111c29fad14aed561a26e73fab729ec5e5a"
+    url "https://files.pythonhosted.org/packages/c7/3b/ebda527b56beb90cb7652cb1c7e4f91f48649fbcd8d2eb2fb6e77cd3329b/ruamel_yaml-0.19.1.tar.gz"
+    sha256 "53eb66cd27849eff968ebf8f0bf61f46cdac2da1d1f3576dd4ccee9b25c31993"
   end
 
   resource "ruamel-yaml-clib" do
@@ -277,13 +285,13 @@ class Semgrep < Formula
   end
 
   resource "sse-starlette" do
-    url "https://files.pythonhosted.org/packages/db/3c/fa6517610dc641262b77cc7bf994ecd17465812c1b0585fe33e11be758ab/sse_starlette-3.0.3.tar.gz"
-    sha256 "88cfb08747e16200ea990c8ca876b03910a23b547ab3bd764c0d8eb81019b971"
+    url "https://files.pythonhosted.org/packages/da/34/f5df66cb383efdbf4f2db23cabb27f51b1dcb737efaf8a558f6f1d195134/sse_starlette-3.1.2.tar.gz"
+    sha256 "55eff034207a83a0eb86de9a68099bd0157838f0b8b999a1b742005c71e33618"
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/ba/b8/73a0e6a6e079a9d9cfa64113d771e421640b6f679a52eeb9b32f72d871a1/starlette-0.50.0.tar.gz"
-    sha256 "a2a17b22203254bcbc2e1f926d2d55f3f9497f769416b3190768befe598fa3ca"
+    url "https://files.pythonhosted.org/packages/e7/65/5a1fadcc40c5fdc7df421a7506b79633af8f5d5e3a95c3e72acacec644b9/starlette-0.51.0.tar.gz"
+    sha256 "4c4fda9b1bc67f84037d3d14a5112e523509c369d9d47b111b2f984b0cc5ba6c"
   end
 
   resource "tomli" do
@@ -292,13 +300,13 @@ class Semgrep < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/cb/ce/f06b84e2697fef4688ca63bdb2fdf113ca0a3be33f94488f2cadb690b0cf/uvicorn-0.38.0.tar.gz"
-    sha256 "fd97093bdd120a2609fc0d3afe931d4d4ad688b6e75f0f929fde1bc36fe0e91d"
+    url "https://files.pythonhosted.org/packages/c3/d1/8f3c683c9561a4e6689dd3b1d345c815f10f86acd044ee1fb9a4dcd0b8c5/uvicorn-0.40.0.tar.gz"
+    sha256 "839676675e87e73694518b5574fd0f24c9d97b46bea16df7b8c05ea1a51071ea"
   end
 
   resource "wcmatch" do
@@ -316,7 +324,32 @@ class Semgrep < Formula
     sha256 "a07157588a12518c9d4034df3fbbee09c814741a33ff63c05fa29d26a2404166"
   end
 
+  # Due to the popularity of Semgrep, we provide an exception to bundle a copy of
+  # EOL `pcre` until the upstream has completely migrated to `pcre2`. This allows
+  # us to deprecate the `pcre` formula and avoid unwanted usage in core formulae.
+  resource "pcre" do
+    url "https://downloads.sourceforge.net/project/pcre/pcre/8.45/pcre-8.45.tar.bz2"
+    mirror "https://www.mirrorservice.org/sites/ftp.exim.org/pub/pcre/pcre-8.45.tar.bz2"
+    sha256 "4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"
+
+    # Fix -flat_namespace being used on Big Sur and later.
+    patch do
+      url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/libtool/configure-big_sur.diff"
+      sha256 "35acd6aebc19843f1a2b3a63e880baceb0f5278ab1ace661e57a502d9d78c93c"
+    end
+  end
+
   def install
+    resource("pcre").stage do
+      # Only need to build 8 bit static library (libpcre.a)
+      args = %w[--disable-shared --disable-cpp --enable-unicode-properties --with-pic]
+      args << "--enable-jit" if OS.mac? && !Hardware::CPU.arm?
+
+      system "./configure", *args, *std_configure_args(prefix: buildpath/"pcre")
+      system "make", "install"
+      ENV.prepend_path "PKG_CONFIG_PATH", buildpath/"pcre/lib/pkgconfig"
+    end
+
     # Ensure dynamic linkage to our libraries
     inreplace "src/main/flags.sh" do |s|
       s.gsub!("$(brew --prefix libev)/lib/libev.a", Formula["libev"].opt_lib/shared_library("libev"))
@@ -325,10 +358,6 @@ class Semgrep < Formula
       s.gsub!(
         "$(pkg-config tree-sitter --variable libdir)/libtree-sitter.a",
         Formula["tree-sitter"].opt_lib/shared_library("libtree-sitter"),
-      )
-      s.gsub!(
-        "$(pkg-config libpcre --variable libdir)/libpcre.a",
-        Formula["pcre"].opt_lib/shared_library("libpcre"),
       )
       s.gsub!(
         "$(pkg-config libpcre2-8 --variable libdir)/libpcre2-8.a",
@@ -377,7 +406,7 @@ class Semgrep < Formula
 
     ENV["SEMGREP_SKIP_BIN"] = "1"
     venv = virtualenv_create(libexec, "python3.14")
-    venv.pip_install resources.reject { |r| r.name == "glom" }
+    venv.pip_install resources.reject { |r| ["glom", "pcre"].include? r.name }
 
     # Replace `imp` usage: https://github.com/mahmoud/glom/commit/1f883f0db898d6b15fcc0f293225dcccc16b2a57
     # TODO: remove with glom>=23.4.0
@@ -389,8 +418,6 @@ class Semgrep < Formula
     end
 
     venv.pip_install_and_link buildpath/"cli"
-
-    generate_completions_from_executable(bin/"semgrep", "--legacy", shell_parameter_format: :click)
   end
 
   test do

@@ -3,23 +3,27 @@ class Ramalama < Formula
 
   desc "Goal of RamaLama is to make working with AI boring"
   homepage "https://github.com/containers/ramalama"
-  url "https://files.pythonhosted.org/packages/da/7c/40ba3d9cdacf20ad4b3ccc6f5652aec8c25ac855f93a3570114f84caaa17/ramalama-0.15.0.tar.gz"
-  sha256 "a4843b6741c6d759bb8cbf14735db8be3ff5e4f25ab8d7af324e94af570d6119"
+  url "https://files.pythonhosted.org/packages/8d/46/f315941789325bb0c825e85b2ed5269539367bf0c2ed96b321a9143af9e5/ramalama-0.16.0.tar.gz"
+  sha256 "24e21c49934ec6f19664f270a78232f4bcc972a7e3fc8619381be4cf096fba01"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "09ad2fd665931f9e6ea2807543d265c099c6c0d208a3af22a1cf943813ed3933"
-    sha256 cellar: :any,                 arm64_sequoia: "eb0e6322aa26a20a8e7c46a728924b25a147b3db66d70c1ca5661f81900d2ffd"
-    sha256 cellar: :any,                 arm64_sonoma:  "707d2748308f4bef1abf419c28c79d1c9459260ddc179e34ab7ae187bf68f662"
-    sha256 cellar: :any,                 sonoma:        "e342c12bd54305ca824ffe9237cafd64459242f4fb2669aa3f37cdc4c57bea56"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fff9dcb4b80ca4cd2439cbfd89930692adf74c2d1fd49c5ecad0242acc9dbcec"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "14da24f88dcbe9c9d2df00b8e3578277a7a82a74c8f30a49c54b59f9a857a018"
+    rebuild 1
+    sha256 cellar: :any,                 arm64_tahoe:   "901432b90c0f5d83e1c4a960577e8ba4640a67d26da0131226fa3a7cc37aca87"
+    sha256 cellar: :any,                 arm64_sequoia: "e78b678717a82d27db3e66149296f7fcfccf42ab5e9304ac1be6201acd47a0ad"
+    sha256 cellar: :any,                 arm64_sonoma:  "c23bdaea0c12d19844132cd848f572a48fba35248bb375d1d8fecec9db7ff022"
+    sha256 cellar: :any,                 sonoma:        "bf8e69b21f82acac85325abe5844c50ead725cd3c7ebd3940e4300bba4867ddf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5746ee51f37e956e32b2efc84c33bb1860384c2f5aba4044ee870c79cad89ae6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "603a84b6eb285ccbd1d71b66dfe6c831c73a9382c7a635deb1941ae2c37f5518"
   end
 
   depends_on "libyaml"
-  depends_on "llama.cpp"
   depends_on "python@3.14"
   depends_on "rpds-py" => :no_linkage
+
+  on_macos do
+    depends_on "llama.cpp"
+  end
 
   pypi_packages exclude_packages: "rpds-py"
 

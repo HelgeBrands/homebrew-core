@@ -3,20 +3,26 @@ class Hk < Formula
   homepage "https://hk.jdx.dev"
   # pull from git tag to get submodules
   url "https://github.com/jdx/hk.git",
-      tag:      "v1.26.0",
-      revision: "3dc8b55279e41dcb8517ba6e5daef7cee50ba7d1"
+      tag:      "v1.34.0",
+      revision: "1c3a79f32004944d2147495c09256a184a1eb0de"
   license "MIT"
   head "https://github.com/jdx/hk.git", branch: "main"
 
-  bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "126830657c2a9690663e2d9aebfb2cbbeceb338a4ff7ea526081efa64bf14f85"
-    sha256 cellar: :any,                 arm64_sequoia: "e420e34fe7b4c2a68a88aeaa7e1b186995fc3db795306ee94d03bfc06df6fbb6"
-    sha256 cellar: :any,                 arm64_sonoma:  "3663d01ee87b1679370c336cf0c729ad506fc18638a092758360a4dfdd19e3f4"
-    sha256 cellar: :any,                 sonoma:        "1be0e4ffb13cb95c03ce0847498338a406413045fa622956b6114a0afdb3a49f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6221077c7638a0ce7395284c603d1855213cf31108a0ec266752a4cd50e84f97"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "32113af46251592ffa0df1be17e1d7131ad08bce84a2d41bd84c84fa983db2ef"
+  livecheck do
+    url :stable
+    strategy :github_latest
   end
 
+  bottle do
+    sha256 cellar: :any,                 arm64_tahoe:   "552ee29a356c445e1ee5ca420d7036f88bf34aeb5142c786d80ab6cd7887b90a"
+    sha256 cellar: :any,                 arm64_sequoia: "fb011a33e0ae05fcdc6e601df28afd1ba3a51e267ca793c3bb2ac0dd3478ce5b"
+    sha256 cellar: :any,                 arm64_sonoma:  "d4f761fa97681d0c55d978a37deb6076716975a19918cf727dae4417c9f1d4bf"
+    sha256 cellar: :any,                 sonoma:        "60b7f32376c627503c6fa356b1d141eeb7092c09bb6f22fb2497b5f277f093d8"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8ccb92df265c4cd383def6d9376a27eb26ebf978fab21de6fc08d9d029157551"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "04a7035a7beafd6c61203098fdfa14dc100b5ec9ae284d22f870365d5007c11a"
+  end
+
+  depends_on "mise" => :build
   depends_on "rust" => [:build, :test]
 
   depends_on "openssl@3"
@@ -34,6 +40,8 @@ class Hk < Formula
 
     generate_completions_from_executable(bin/"hk", "completion")
 
+    system "mise", "trust"
+    system "mise", "run", "pkl:gen"
     pkgshare.install "pkl"
   end
 

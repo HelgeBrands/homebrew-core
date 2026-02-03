@@ -1,17 +1,17 @@
 class Vsearch < Formula
   desc "Versatile open-source tool for microbiome analysis"
   homepage "https://github.com/torognes/vsearch"
-  url "https://github.com/torognes/vsearch/archive/refs/tags/v2.30.1.tar.gz"
-  sha256 "f65f03538a77cd1212bd04a52bb722114765329e64bd35e10ee2aefcd81137fe"
+  url "https://github.com/torognes/vsearch/archive/refs/tags/v2.30.4.tar.gz"
+  sha256 "8b26741fc71a01bb649576b0cd8650f8baae6d72e0e96fac29cd01d210fa75a7"
   license any_of: ["BSD-2-Clause", "GPL-3.0-or-later"]
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "682936d6b9438e348ef258c1bf8f07655adc069ade788e4020c95f12daac9856"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fe13b0567e0c4989c5173b8f66713d4ce6fc601537c60f8c39e591ce344f7eac"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e106dba1bba6f22d5f1e605ec0165c9a04dbaa90a4c643ef5a33d6451f02c68c"
-    sha256 cellar: :any_skip_relocation, sonoma:        "450c6c560f6489c74b918f2f8bd1f7ee07c2ec976221edf9612bf5bccfb6a11c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a22293bacfa967390daebf320e8a092430f3865aec1f829aecd1021bfe80636b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4ed4b1ae0fab3422a3af92e277066246b517a2a920f86038e4eac25c3fa3ec6d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "539fbd49a21e13368243fbcdd1e64fae33c828d1de79e6e2ea1fef30fcdd28ed"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e4e821598add3f29decde320e2ae62d878a124c66a9bb9a853d1354d6063838e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "42282e0e131b3587f6c40e2cb7b2495c5771d85b82a3307ce18f80aab5a46350"
+    sha256 cellar: :any_skip_relocation, sonoma:        "3443ada3ee79013abb6ce44dbda9e5f61f05e4dc06b268f8b3d8e6fed61ce2a8"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1c6b5be25b7266edcda3ec361080bb234405f0a760f56f5fe874ebfff4569770"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6bbd6e819eb473c28c706996763dd8abdeafe707b7bf99838fee5e453f13ba77"
   end
 
   depends_on "autoconf" => :build

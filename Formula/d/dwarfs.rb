@@ -4,7 +4,7 @@ class Dwarfs < Formula
   url "https://github.com/mhx/dwarfs/releases/download/v0.14.1/dwarfs-0.14.1.tar.xz"
   sha256 "620cf27f2e142a5f8fc05552a70704c3bf4df23c3279c6026b3f37954d0529c5"
   license "GPL-3.0-or-later"
-  revision 2
+  revision 4
 
   livecheck do
     url :stable
@@ -13,12 +13,12 @@ class Dwarfs < Formula
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "8a8bcbdc570f4503f03bfc39ecc7bffc1fe6521ba587ba9c233e09c3cf58eb2d"
-    sha256                               arm64_sequoia: "94ff37129d30e13da16f8aa143313fb43427db8a00cf343b205cec484826ff7b"
-    sha256                               arm64_sonoma:  "39c489632fc55992ddfdcbab57b21ee8e9436b677110e43fb9b96d78c487ce79"
-    sha256 cellar: :any,                 sonoma:        "c4cdc87f691b7dc55771e60ce8bff4c80ec59cb1a2dcf4e804a6cb4cbb42624c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1d97cc1b7c588d6514b85fe02f50224e194430e5a66e8d49c64c1a0645bf265a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a057680f451685e7386657983f55b38fab25de6756bfc01e30e7182842bfe64d"
+    sha256                               arm64_tahoe:   "6ca40d057c2756095abe58a4070780788eb036e4a5992b7ce6f7a4c3cd32014b"
+    sha256                               arm64_sequoia: "362e582093c69ee2238e1184c211a54f13bd803f16076a57967287a9b6623715"
+    sha256                               arm64_sonoma:  "c880a76338b0f0a65bbd7895278801960c00a54ef0f1cd2f36df6918a4545e47"
+    sha256 cellar: :any,                 sonoma:        "6a0f9ddf890a22d1db9b164c365c468ab27def793edc99d4c7a029524eddadc1"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8e64760457c3691501128512b9fee94a30779d6d63e31abb6b093c9d4df559f6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8fbda565e1e410986963686d44c24e0736e96c4f32e2b40601abf0b26ca2f24d"
   end
 
   depends_on "cmake" => :build
@@ -85,8 +85,6 @@ class Dwarfs < Formula
       # No ASAN for folly
       ENV.append "CXXFLAGS", "-D_LIBCPP_HAS_NO_ASAN"
 
-      ENV.llvm_clang
-
       # Needed in order to find the C++ standard library
       # See: https://github.com/Homebrew/homebrew-core/issues/178435
       ENV.prepend "LDFLAGS", "-L#{Formula["llvm"].opt_lib}/unwind -lunwind"
@@ -108,7 +106,7 @@ class Dwarfs < Formula
     # get JSON info about the image
     info = JSON.parse(shell_output("#{bin}/dwarfsck test.dwarfs -j"))
     assert_equal info["created_by"], "libdwarfs v#{version}"
-    assert info["inode_count"] >= 10
+    assert_operator 10, :<=, info["inode_count"]
 
     # extract the image
     system bin/"dwarfsextract", "-i", "test.dwarfs"

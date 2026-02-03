@@ -1,17 +1,18 @@
 class Papeer < Formula
   desc "Convert websites into eBooks and Markdown"
   homepage "https://papeer.tech"
-  url "https://github.com/lapwat/papeer/archive/refs/tags/v0.8.5.tar.gz"
-  sha256 "bfa5ed66a3622b51b3462a629b01327d335bc56716f700ad97a5f4b521bcb94b"
+  url "https://github.com/lapwat/papeer/archive/refs/tags/v0.8.7.tar.gz"
+  sha256 "8055548c34cfe21a993e41339a94f2fcb3c88cb27aeeaa2d3df3e6f63d2b1aff"
   license "GPL-3.0-only"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6a280ac7dee6b5eca6178ea2f990a38bc2ff9247078225df0d7319f8c86a7b8f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6a280ac7dee6b5eca6178ea2f990a38bc2ff9247078225df0d7319f8c86a7b8f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6a280ac7dee6b5eca6178ea2f990a38bc2ff9247078225df0d7319f8c86a7b8f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "70280701b43e2af96cd8c072468d86c80bd6391fb62f4a101984e2a0c573254a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a1414b27227a341e24fbdbea2d7910b4ecb68dd5d1ba998e01f5fe3253cc17ad"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "984bae6b0bce278e01a5286f847840f540150b9523f9a251dad801242864ff44"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e8778c94187605165f90672abdef21ed925ae452bc9fbfd96c3d3c7113ca6369"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e8778c94187605165f90672abdef21ed925ae452bc9fbfd96c3d3c7113ca6369"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e8778c94187605165f90672abdef21ed925ae452bc9fbfd96c3d3c7113ca6369"
+    sha256 cellar: :any_skip_relocation, sonoma:        "78b781f8cb851cbf0ec770b898b87f10698a8dde95a890e6c44dbf0f92e7e0ad"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e252dbf3abfee873b4bec0c119e4a5fd3393dc5a15a9272a3e9bdfb90ab0c68d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "94d5180edd9948ef214b562ad6e566733e1b0b4dfa80ce67ac8c097b9868dc13"
   end
 
   depends_on "go" => :build
@@ -19,7 +20,7 @@ class Papeer < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w")
 
-    generate_completions_from_executable(bin/"papeer", "completion")
+    generate_completions_from_executable(bin/"papeer", shell_parameter_format: :cobra)
   end
 
   test do

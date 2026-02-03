@@ -1,8 +1,8 @@
 class Witness < Formula
   desc "Automates, normalizes, and verifies software artifact provenance"
   homepage "https://witness.dev"
-  url "https://github.com/in-toto/witness/archive/refs/tags/v0.10.1.tar.gz"
-  sha256 "5c4702a0b15380f82c1e421c15582671321c5c0a406093129bcfe288c68693dc"
+  url "https://github.com/in-toto/witness/archive/refs/tags/v0.10.2.tar.gz"
+  sha256 "b9eb19bc078cc83daa6a8f87f57bbfd22252f4935d2b952b5a87bfb62c8629ac"
   license "Apache-2.0"
   head "https://github.com/in-toto/witness.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Witness < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "25cde82fc6d757d7c1fbe61260802d1b190f010f2f49dee717cb52e541a89aab"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "97c4bc5582063c24500d7af959fb9bf248257c7c95a37304339246231198b252"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d359e467d168a50f63771f5e6f9d059e45b173f05ee88356760d0faa94e6cd8f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "93f926c0660d154aa6949728142111e098848fd0566a670719046a57cea0f4e9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e215d4e64d94ac2a28724181a3214f7b80ae777639f4cb43da1393ea3bf85bb0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c9e5f7f1f01c8f867e553fa0ea1dea63aca985e33bb5317b51d21147e3520799"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "77abec7a4a4acd61fa8efa44f24c6c73ae10c32542ec2969c388670d574c349b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "776513c93c45e4d935526caf0f7dc50b80e0a74973babce28a68fc3ab0dcf602"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e03d209c04d9278b8562ad0643c91934a7d6e2238f7fd549cc9ab294bf497830"
+    sha256 cellar: :any_skip_relocation, sonoma:        "17c59616cedb46ac4e73d098e4e19be3c7b2bf8acae4f13db5455326e5025b59"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "87427f6fb3bd8d47c33bebf9be42fb480abdae0be6aac684a35f3d2041f7d433"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0de296aeff869b5c0a698b436218c987af1ac65c6dd58221b923a61073e023a1"
   end
 
   depends_on "go" => :build
@@ -29,7 +29,7 @@ class Witness < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"witness", "completion")
+    generate_completions_from_executable(bin/"witness", shell_parameter_format: :cobra)
   end
 
   test do

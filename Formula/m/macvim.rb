@@ -6,6 +6,7 @@ class Macvim < Formula
   version "9.1.1887"
   sha256 "82148b9f7fa4c83e18ba7fea3f65289b1eb3e2775a4d17a4c3e0fe16087e0e53"
   license "Vim"
+  revision 1
   head "https://github.com/macvim-dev/macvim.git", branch: "master"
 
   # The stable Git tags use a `release-123` format and it's necessary to check
@@ -25,10 +26,10 @@ class Macvim < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "080aafdee7b089bdb764625f0ac7a19c69c17263b15c579298ed349425069952"
-    sha256 cellar: :any, arm64_sequoia: "7411602e3e72396de784580bd449c590df25137ec2071c412eb03dc29a85cfe2"
-    sha256 cellar: :any, arm64_sonoma:  "c7550a62ad426be5c7fbb149d848dd139227ea0b3cb51174bbe7219cddb6736f"
-    sha256 cellar: :any, sonoma:        "c8adcf1e753a966f80166c98c684a45518c10e7315e95195b6da26b544f46542"
+    sha256 cellar: :any, arm64_tahoe:   "fc4ba6cff08eda192921bb41feee3baa71f17bc6b2ee11ad81a3e70b030079b3"
+    sha256 cellar: :any, arm64_sequoia: "0af5ce60294e63121a673999d2fa49a36b5e2de883a52cbc1d65cfc291e9c803"
+    sha256 cellar: :any, arm64_sonoma:  "b6b4a634fb4689ad32273ab2c8bdfc7c814347e0aa1e3a372a116f2696705207"
+    sha256 cellar: :any, sonoma:        "3e72d1935825d8767aedb5e03d034ad6e7333ae36a58e0b7d168bb33f025c96b"
   end
 
   depends_on "gettext" => :build
@@ -75,6 +76,9 @@ class Macvim < Formula
                           "--disable-sparkle",
                           "--with-macarchs=#{Hardware::CPU.arch}"
     system "make"
+
+    # Sign with the correct runtime entitlements
+    system "make", "-C", "src", "macvim-signed-adhoc"
 
     prefix.install "src/MacVim/build/Release/MacVim.app"
     %w[gvimtutor mvim vimtutor xxd].each { |e| bin.install_symlink prefix/"MacVim.app/Contents/bin/#{e}" }

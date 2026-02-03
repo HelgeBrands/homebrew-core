@@ -7,18 +7,21 @@ class CloudProviderKind < Formula
   head "https://github.com/kubernetes-sigs/cloud-provider-kind.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b4867a99f4f151a5fc46993d341205c0284b3ca70e29ff5e232a27569f88e5ed"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "65e855c0f1b8e5f3365803e50fe681f8e19ed9afd6e73edba7bffcb558f26527"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "51ae3dec41af8ae6e0df03af05d71aa9069f5ea8e4ea423c33342cbf25f81674"
-    sha256 cellar: :any_skip_relocation, sonoma:        "7eee4fa016c965fefadc4372d845937c6cb17306e0be785c1d6da5189ee95f92"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4b665a78847892a53c75e2fadda0c56cc4921661afef1cdcc303c536c911b298"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "93f92eeade6d3ad52e1eeef18fb0907ed03e19de6ba5ceafaface4803cf1d578"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4c9a8248d6c8b7b94c81abb21d2595527ec32a8bac75ac5595476bef075feb03"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f71abaa7663200092f8b198f09930bc311b811be957e26adda42b818d069ae4e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "685eb50040567782880926ab4b29337b1f945ff8db7e1532a403eae1b2ed2c74"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d4a72446756aa5a41f10a1ff78861b6630ace289acc0896427557bf8884d80ae"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "0380652e2cba6d08efbd5a1f8c0bb8c7134e2fe92627ca67ead13a04189ff66c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6ea290e4546708f40d79a226969f39b33387e7658d6f0f736d375737cba30bdf"
   end
 
   depends_on "go" => :build
 
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w")
+
+    generate_completions_from_executable(bin/"cloud-provider-kind", shell_parameter_format: :cobra)
   end
 
   test do

@@ -1,19 +1,21 @@
 class TechnitiumDns < Formula
   desc "Self host a DNS server for privacy & security"
   homepage "https://technitium.com/dns/"
-  url "https://github.com/TechnitiumSoftware/DnsServer/archive/refs/tags/v14.2.0.tar.gz"
-  sha256 "757410eca1b32b626171383fb2b05dd001cb536e2ef0ecdc2f9c373ebcb8afea"
+  # Try upgrade to latest `dotnet` on version bump
+  url "https://github.com/TechnitiumSoftware/DnsServer/archive/refs/tags/v14.3.0.tar.gz"
+  sha256 "5f71c0661d22a5dd75374a9888bbd67469d1ba0b6b9947df770ec4833b7f36c3"
   license "GPL-3.0-or-later"
+  revision 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "eb0c547fcc0ce17425a84a0c08f1748d921071a7ec27e229e59495ea867063ca"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a9b839fc6ed49062d508c10f78a0f65396032e859c3f60a3dbd06bbb4c11cca4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bee7eaf03df88c242376b8874e3cde915b4ce744060ea98a7bd616382c74f07b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "00723b4c7ab01b4c01a7796e079cba3841781008d7ab51512c6c632e1f73917f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b0058e612905569a02dbae4f0d4db37a942b24b9b89ac5ac6f30eae6ee9e7970"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "985294f14499dc8b8bf5e88b5864fd63c2f6d0faf4c84694bc80fc6933139788"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5ed3b7b6ac909a94f18d4f85f31448a741523b4b09d2f9d62baec3c02e572df1"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "082f392340bfc89f4e507b023db57a75b8cc72b6fe105b9e7a798a0eabd5a0dc"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c4716ff2acfe129a9ec49b55f6b8bcc025276a8c0ba548b32361aa27f932991f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0b95454ad1fa1891156fec79b9c0ef3fe515e218df1823319591837524a69799"
   end
 
-  depends_on "dotnet"
+  depends_on "dotnet@9"
   depends_on "libmsquic"
   depends_on "technitium-library"
 
@@ -24,7 +26,7 @@ class TechnitiumDns < Formula
   def install
     ENV["DOTNET_CLI_TELEMETRY_OPTOUT"] = "1"
 
-    dotnet = Formula["dotnet"]
+    dotnet = Formula["dotnet@9"]
     args = %W[
       --configuration Release
       --framework net#{dotnet.version.major_minor}
@@ -56,7 +58,7 @@ class TechnitiumDns < Formula
   end
 
   test do
-    dotnet = Formula["dotnet"]
+    dotnet = Formula["dotnet@9"]
     tmpdir = Pathname.new(Dir.mktmpdir)
     # Start the DNS server
     require "pty"

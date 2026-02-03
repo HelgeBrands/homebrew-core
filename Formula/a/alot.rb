@@ -6,21 +6,21 @@ class Alot < Formula
   # TODO: check if we can remove `standard-mailcap` from `pypi_packages`
   # https://github.com/pazz/alot/issues/1632
   url "https://github.com/pazz/alot.git",
-      tag:      "0.11",
-      revision: "a8a108e2344656a13bca21211ccc0df2414cbef6"
+      tag:      "v0.12",
+      revision: "40a190f4c5f18c1283fdb3186393c4a778f865a5"
   license "GPL-3.0-only"
-  revision 3
   head "https://github.com/pazz/alot.git", branch: "master"
 
-  no_autobump! because: :requires_manual_review
+  no_autobump! because: "`update-python-resources` cannot determine dependencies"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "682d580669a0e7e68d83a60bf92d879e8c9260b14cc775a066f9460336186e05"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2073f6c4e5efd15df25adcfb47610e6e660459b4887eb65781758e25122fcce1"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ce121172682f2fa975d6bea984bc29140c5d15e2acb6711fb4e593e9cd64b861"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0182e95a1b54b00b0d23616ac1e22757ead4f31a7f6d29a71282cfe220ebc538"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5fe63c1ecf7ed1c13992b031363ce9fc57c9ed8b8f392a0f37f8b9260018e287"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1b9196aa41058870ae15ec07ab9fc659d7c5317547ebc7664af48ba85f223508"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3f75efaa2b8a673e7c156d2fe2f85351e16f96996ce3745aec793a3ab595601a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "91861d611c164dce0fffacb4b2635184e2bdf99ec2d8c3facc3f1ec37fc99d91"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e276e9f74c21c55d1eef6bd0c5e22d2d412b7a52a1553cbed0e9bb1ce43046b4"
+    sha256 cellar: :any_skip_relocation, sonoma:        "dec524cd4c1013942005765ec9478e8cbbc39ffe5ba909799414a97ecebc8111"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e0e294acc48f6670c5d9bd420a95ba19b124c6da01f57c846e7f93c6e1ef32a4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5295e73a1b7fbe558a8ac1654654139f6f9b2dde2648bd16d58e1c80ec039925"
   end
 
   depends_on "sphinx-doc" => :build
@@ -34,8 +34,8 @@ class Alot < Formula
                 extra_packages:   "standard-mailcap"
 
   resource "attrs" do
-    url "https://files.pythonhosted.org/packages/5a/b0/1367933a8532ee6ff8d63537de4f1177af4bff9f3e829baf7331f595bb24/attrs-25.3.0.tar.gz"
-    sha256 "75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b"
+    url "https://files.pythonhosted.org/packages/6b/5c/685e6633917e101e5dcb62b9dd76946cbb57c26e133bae9e0cd36033c0a9/attrs-25.4.0.tar.gz"
+    sha256 "16d5969b87f0859ef33a48b35d55ac1be6e42ae49d5e853b597db70c35c57e11"
   end
 
   resource "automat" do
@@ -59,13 +59,13 @@ class Alot < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/f1/70/7703c29685631f5a7590aa73f1f1d3fa9a380e654b86af429e0934a32f7d/idna-3.10.tar.gz"
-    sha256 "12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9"
+    url "https://files.pythonhosted.org/packages/6f/6d/0703ccc57f3a7233505399edb88de3cbd678da106337b9fcde432b65ed60/idna-3.11.tar.gz"
+    sha256 "795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902"
   end
 
   resource "incremental" do
-    url "https://files.pythonhosted.org/packages/27/87/156b374ff6578062965afe30cc57627d35234369b3336cf244b240c8d8e6/incremental-24.7.2.tar.gz"
-    sha256 "fb4f1d47ee60efe87d4f6f0ebb5f70b9760db2b2574c59c8e8912be4ebd464c9"
+    url "https://files.pythonhosted.org/packages/ef/3c/82e84109e02c492f382c711c58a3dd91badda6d746def81a1465f74dc9f5/incremental-24.11.0.tar.gz"
+    sha256 "87d3480dbb083c1d736222511a8cf380012a8176c2456d01ef483242abbbcf8c"
   end
 
   resource "mock" do
@@ -130,8 +130,8 @@ class Alot < Formula
   end
 
   resource "zope-interface" do
-    url "https://files.pythonhosted.org/packages/88/3a/7fcf02178b8fad0a51e67e32765cd039ae505d054d744d76b8c2bbcba5ba/zope_interface-8.0.1.tar.gz"
-    sha256 "eba5610d042c3704a48222f7f7c6ab5b243ed26f917e2bc69379456b115e02d1"
+    url "https://files.pythonhosted.org/packages/71/c9/5ec8679a04d37c797d343f650c51ad67d178f0001c363e44b6ac5f97a9da/zope_interface-8.1.1.tar.gz"
+    sha256 "51b10e6e8e238d719636a401f44f1e366146912407b58453936b781a19be19ec"
   end
 
   def install

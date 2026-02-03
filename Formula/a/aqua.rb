@@ -1,23 +1,26 @@
 class Aqua < Formula
   desc "Declarative CLI Version manager"
   homepage "https://aquaproj.github.io/"
-  url "https://github.com/aquaproj/aqua/archive/refs/tags/v2.55.3.tar.gz"
-  sha256 "7276fd297695f8770c7c4564c92999d4c6a3e92ab4f7b4f03eb543083eecfdb4"
+  url "https://github.com/aquaproj/aqua/archive/refs/tags/v2.56.6.tar.gz"
+  sha256 "496f2538b79cbc2da3e093ccaa5c5b00c10aea188377b8a9e04df7e9f03bcdc9"
   license "MIT"
   head "https://github.com/aquaproj/aqua.git", branch: "main"
 
+  # Upstream creates releases that use a stable tag (e.g., `v1.2.3`) but are
+  # labeled as "pre-release" on GitHub before the version is released, so it's
+  # necessary to use the `GithubLatest` strategy.
   livecheck do
     url :stable
-    regex(/^v?(\d+(?:\.\d+)+)$/i)
+    strategy :github_latest
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "11f5a81facc7c4b72c257b863bf781228ed5f2e4d20f3afc6b4a3f132c2d69d6"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "11f5a81facc7c4b72c257b863bf781228ed5f2e4d20f3afc6b4a3f132c2d69d6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "11f5a81facc7c4b72c257b863bf781228ed5f2e4d20f3afc6b4a3f132c2d69d6"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c11fe47b69a759bbf8479417d86af73e2adbd3dc20fc7c1754945abe54fd8c6d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "65345bafb9d31c5004b23aa4ab166da79e4c32b6db98ba5106d6bdf5fe7fc878"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d45cd03e639071e01d013ff8ea46f7384774a705556b63df9fc3762315a63bc3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2fe49f7af083ae678baed00d899e898185d4f2d9e8b040c97d05b32b5ac9a4ba"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2fe49f7af083ae678baed00d899e898185d4f2d9e8b040c97d05b32b5ac9a4ba"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2fe49f7af083ae678baed00d899e898185d4f2d9e8b040c97d05b32b5ac9a4ba"
+    sha256 cellar: :any_skip_relocation, sonoma:        "414eb24e5d7de32ef6915f141706c13b870fc5815cb6e25da63a8798ec52b168"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "090faea559be9a16fe5878dc0da0716c918bb75807e9306dd9e90836602f1895"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d4784d1a4dccacce1ba0bb5e73bcca829788e2fd052125ffb918c903d2256992"
   end
 
   depends_on "go" => :build

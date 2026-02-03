@@ -1,18 +1,18 @@
 class CargoHack < Formula
   desc "Cargo subcommand to provide options for testing and continuous integration"
   homepage "https://github.com/taiki-e/cargo-hack"
-  url "https://github.com/taiki-e/cargo-hack/archive/refs/tags/v0.6.39.tar.gz"
-  sha256 "88ceb040dc3d82ef1f56cd398189240d3922a4ae711a338c5c4ecd52976956a8"
+  url "https://github.com/taiki-e/cargo-hack/archive/refs/tags/v0.6.41.tar.gz"
+  sha256 "93ddd70dc31187b0009a02baf4503f510c7c4f8098fb77c11ba45200f0bd011f"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/taiki-e/cargo-hack.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c806073573b84297a74fe131e3f506e419955ce023314c39ba9bac15ef097deb"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0f72e9abb25f9ff2cc8b386a981004e178d0ce06c4715a3210d2c53508c3f481"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "cee9735e497e3f634a40a27ed4cdd10916c18ce448adf970957b8279045958a8"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8bafbec0826e9fdc7db8bb93b36ce0195672fd070bc01561f3aed46f1767347d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b8f3590a9b38593d836f9d05e4010ef2435f68a3255be5f9a4d923b4bb83297d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c7c568558a74ab119eff9121234e7ce6d09103167824a4071d981b3f690f0c1e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0c3af8a3497a396fbd644035486d1a7a5c0988ab9644bf424b0a5566db53a70c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "66deb50b39da7b108a040dfe8544b5a4a66361e5a22b752a45ac24effe375769"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e90c7f4c656c4975c1bc98d6ea9ee93e344ee5e2273ae88c41f4bcb78c7a1334"
+    sha256 cellar: :any_skip_relocation, sonoma:        "174ad68104ba651a189c7af147e3e98802fe96c5b3c97d46b76ae7ab0a39b2b2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "11572c756e1a0e7636353824f8ffb07c2b67f72718c56186364b02502d23a0e3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2890ef339e354cdf9de1c8e87796af38126cf41cae68d71e15e555756ce31e27"
   end
 
   depends_on "rust" => :build

@@ -1,8 +1,8 @@
 class Questdb < Formula
   desc "Time Series Database"
   homepage "https://questdb.io"
-  url "https://github.com/questdb/questdb/releases/download/9.2.2/questdb-9.2.2-no-jre-bin.tar.gz"
-  sha256 "27edc2e08c4cf92319a12753be933ccb595f4ed03d21b6ef527c860565fe181d"
+  url "https://github.com/questdb/questdb/releases/download/9.3.2/questdb-9.3.2-no-jre-bin.tar.gz"
+  sha256 "eb87df34305b68fa0a18e7a27429ea5d3f0d91622af9400eadf46487cb12429e"
   license "Apache-2.0"
 
   livecheck do
@@ -11,7 +11,7 @@ class Questdb < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "ac3e1c5eb793ae70ca838bb96b852d89c8f3c7eec0b2068676f5c5198561aa1c"
+    sha256 cellar: :any_skip_relocation, all: "9656e2afea3297a8c682e3a13e7c6735a0c76e224a9237f1d171047f16931a2c"
   end
 
   depends_on "openjdk"
@@ -41,12 +41,8 @@ class Questdb < Formula
 
     mkdir_p testpath/"data"
     begin
-      fork do
-        exec bin/"questdb", "start", "-d", testpath/"data"
-      end
-      sleep 30
-      output = shell_output("curl -Is localhost:9000/index.html")
-      sleep 8
+      spawn bin/"questdb", "start", "-d", testpath/"data"
+      output = shell_output("curl --head --silent --retry 5 --retry-connrefused localhost:9000/index.html")
       assert_match "questDB", output
     ensure
       system bin/"questdb", "stop"

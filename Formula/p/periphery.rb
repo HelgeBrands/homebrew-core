@@ -1,22 +1,19 @@
 class Periphery < Formula
   desc "Identify unused code in Swift projects"
   homepage "https://github.com/peripheryapp/periphery"
-  url "https://github.com/peripheryapp/periphery/archive/refs/tags/3.2.0.tar.gz"
-  sha256 "84041cf27e1f7b1f9981651f0d7c78b317388040f1f31cf131dabb744a5f922c"
+  url "https://github.com/peripheryapp/periphery/archive/refs/tags/3.4.0.tar.gz"
+  sha256 "6b053a1c36503d7fbb9f812940ae2300cca0a499a5131c8a5e550dc760881370"
   license "MIT"
-  revision 1
   head "https://github.com/peripheryapp/periphery.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "aaef4e2bf75a0d13e848bc4ba24715201ee84ef9011e9336babfdf15469d93b1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "24bef6d4f8a9d60c9869b28a4591dfb0934de4b7a9242976a03162612867d0af"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b378ac137b7b38794fc86f3ecb774251fc75912c3a3c77b5da2d58eb3e85a818"
-    sha256 cellar: :any_skip_relocation, sonoma:        "276521211fb06f701b5f75892af380a558abc2448f319fc1ddacba8f7b117b55"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7555deab2f6238fd87867b28c8b823031c74eda9c1376c805aeee2c0c3c6928b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6f158a2c187e10d04a853be4ad50c6ca0db0e89249d1b7b2fc6b9aa6855c1405"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "47b0a82b8ea7145e58bf6777ae5fd0669ce3c1aa07a9575e269f79a6619dc6bb"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fc1de77ee5f933e45565a7fd091e0ff6e80f00765c2d2aaa0f6f67e768719ec2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6ba5f8e1a305e25cc29a1b71db4bf3d7a041e1e20ba6c34c4013bbe21f7d3248"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6ed6185164fba6094ba666edb7ae10311013ca03ddc6c53bd066e61eea381e0a"
   end
 
-  depends_on xcode: ["16.0", :build]
+  depends_on xcode: ["16.4", :build]
 
   uses_from_macos "swift" => [:build, :test]
   uses_from_macos "curl"
@@ -39,7 +36,7 @@ class Periphery < Formula
     # to be at 'lib/libIndexStore.so' relative to the path of the 'swift' binary, which is a reasonable assumption for
     # most installations. However, this is not the case on the Homebrew Linux test container, and the shared libraries
     # do not appear to be present.
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
+    ENV.prepend_path "PATH", Formula["swift"].opt_libexec/"bin" if OS.linux?
 
     system "swift", "package", "init", "--name", "test", "--type", "executable"
     system "swift", "build", "--disable-sandbox"

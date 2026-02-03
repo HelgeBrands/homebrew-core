@@ -2,7 +2,7 @@ class Collectd < Formula
   desc "Statistics collection and monitoring daemon"
   homepage "https://collectd.org/"
   license "MIT"
-  revision 8
+  revision 10
 
   stable do
     url "https://storage.googleapis.com/collectd-tarballs/collectd-5.12.0.tar.bz2"
@@ -23,14 +23,12 @@ class Collectd < Formula
   no_autobump! because: :requires_manual_review
 
   bottle do
-    sha256 arm64_tahoe:   "b5f482fbf1af2823274e44bcb25a86fc6b402c26e635f3f8666b5f504cbc7540"
-    sha256 arm64_sequoia: "58f7a44814b1a467e4f68fcf719069fe352920ce6e800fc5d60e8ad2e6af1332"
-    sha256 arm64_sonoma:  "ceb6cf730de48b1f6eadfc3784060f0b6ed437c3a4fcb7f991e75853eb0d8295"
-    sha256 arm64_ventura: "756fa1c1b080652bc6654718c11f5955b1a674b319eb848609e0416415a0cde1"
-    sha256 sonoma:        "74e6ebaf66605da54399207a4f083833b39a90f6ff9edb92c82673f874af5e09"
-    sha256 ventura:       "cea97da9e5ba92d5d02fb688cc72bf698f245e5d849f44f2d3419f64f1ed5000"
-    sha256 arm64_linux:   "ee5c347f93b603ae28b0cc8f952a7ed5cca462dee6e429cf80d7e6475b8bc6e8"
-    sha256 x86_64_linux:  "5e73f288cbe0d9d1bd8e35b1782593ab8ef268d41bd05e34913bc63678d926d1"
+    sha256 arm64_tahoe:   "96b35082902fad36f2eebfadecfb13424f4f019cb051fb7cc8a80aa10369e618"
+    sha256 arm64_sequoia: "bd6bbc019cd159129bf0ae691889eb75bdb223852a510b968ac1d9f80e2f0fbe"
+    sha256 arm64_sonoma:  "bb7547382bb6e48626b092b4176b71bce3c3931d7aae4e0f1f181ee82429eeda"
+    sha256 sonoma:        "a43c1a21faa9efe89488e6f8804bafbe299ffa1ef88700257a274b964b9ab94f"
+    sha256 arm64_linux:   "ffdcf420ea811f4ed5dfb2679314260669bd20fa13ff7b309fe112eae86758f7"
+    sha256 x86_64_linux:  "34583c194f6ce6c0b08ebd64e91b079083b038139c24bd9a8d93c1ba35883526"
   end
 
   head do
@@ -91,7 +89,7 @@ class Collectd < Formula
       LoadPlugin memory
     EOS
     begin
-      pid = fork { exec sbin/"collectd", "-f", "-C", "collectd.conf" }
+      pid = spawn sbin/"collectd", "-f", "-C", "collectd.conf"
       sleep 3
       assert_path_exists log, "Failed to create log file"
       assert_match "plugin \"memory\" successfully loaded.", log.read

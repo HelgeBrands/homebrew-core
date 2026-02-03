@@ -1,8 +1,8 @@
 class RekorCli < Formula
   desc "CLI for interacting with Rekor"
   homepage "https://docs.sigstore.dev/logging/overview/"
-  url "https://github.com/sigstore/rekor/archive/refs/tags/v1.4.3.tar.gz"
-  sha256 "bc459b43c3da644c827ae15e3675bbf3ed7cb1135f07eff0d98fc8cd6495f2e3"
+  url "https://github.com/sigstore/rekor/archive/refs/tags/v1.5.0.tar.gz"
+  sha256 "84ad7f314c87b1ba8b9198aea318327dfbf97a2367bdebecb0054fb4d8b3b89b"
   license "Apache-2.0"
 
   livecheck do
@@ -11,12 +11,12 @@ class RekorCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c3f442dd21a8bcb916557c19626d062d224a2528dbb8f2f407fd64f42f745b1b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c3f442dd21a8bcb916557c19626d062d224a2528dbb8f2f407fd64f42f745b1b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c3f442dd21a8bcb916557c19626d062d224a2528dbb8f2f407fd64f42f745b1b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "7eb776133c680c11283830a9c8db98d4d019987e11ae6d6e902a3f0e97be9784"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "579c88b107ef00034cf9f495c648e54397efb045346975bbc090b86ef971d0ea"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "835024c0d2f5e990e4d24edce5d67b6df4c11254bf8fa9cc397378144676c016"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "49653b8b8750690c92ff1cd00462638aec874589298fbee806c25e86f010d23e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "49653b8b8750690c92ff1cd00462638aec874589298fbee806c25e86f010d23e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "49653b8b8750690c92ff1cd00462638aec874589298fbee806c25e86f010d23e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "61a8866b7d5853d906201ad1c5cefbd069a6c51a32dd48332829501349975696"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f6dc6a1eab182b049d9f41f1a1af0ddf727c778ade03edbf8910a404a50817f7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "69ada55b8cc3141dee6ed1aaa4f1e909257a9dfff08562210db481d503baa1cc"
   end
 
   depends_on "go" => :build
@@ -31,7 +31,7 @@ class RekorCli < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/rekor-cli"
 
-    generate_completions_from_executable(bin/"rekor-cli", "completion")
+    generate_completions_from_executable(bin/"rekor-cli", shell_parameter_format: :cobra)
   end
 
   test do

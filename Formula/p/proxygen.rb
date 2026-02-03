@@ -1,19 +1,19 @@
 class Proxygen < Formula
   desc "Collection of C++ HTTP libraries"
   homepage "https://github.com/facebook/proxygen"
-  url "https://github.com/facebook/proxygen/releases/download/v2025.11.10.00/proxygen-v2025.11.10.00.tar.gz"
-  sha256 "f0c43c542d0db9ec83523394309b06ec9f054fbc886408fce473ba9c8d1ea819"
+  url "https://github.com/facebook/proxygen/releases/download/v2026.01.12.00/proxygen-v2026.01.12.00.tar.gz"
+  sha256 "66364e2119618a98f5c3ad62765b53d8bc2c34a9e51e0e861345aa7a5e87414f"
   license "BSD-3-Clause"
   revision 1
   head "https://github.com/facebook/proxygen.git", branch: "main"
 
   bottle do
-    sha256                               arm64_tahoe:   "99e6b8f1bd6ccb4b7ea93557a52ca1227ab3191001336ba32b4e982b2dcab237"
-    sha256                               arm64_sequoia: "e3436e6b09314651fb4c177a8b59db11dd45e0026090b778d26f8f3509d60f76"
-    sha256                               arm64_sonoma:  "8da390ad7812a328dc68845e4a5fe9bde8157d22eb0d18916548a128f76b7a95"
-    sha256 cellar: :any,                 sonoma:        "a54f9822d9855419f78c1b6796ac0e4bc1cc4cd56d67bcc81f13d4c0cff3d2b9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f369c238e7e3246c622e52c012e35b2e3b01289c64c10c62344e965f44799e08"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "76fc5d9b1cfc9a76b8f160395e2eae0ad8037835c27d07eac6066a67d79557a8"
+    sha256                               arm64_tahoe:   "b1557624e624a7e8f42032e75c04fd22a0ee0f2e54a26fcabe98f0e7d7fbcb3d"
+    sha256                               arm64_sequoia: "b7b3e35457beecc359134146728539ec3448df14ed679f733195ac4aba162965"
+    sha256                               arm64_sonoma:  "a6f3d9f669d3fa0ae57cf38a7f49ea852ec0579e87836ca214982a68192ad75c"
+    sha256 cellar: :any,                 sonoma:        "cd5a5001d7606a3fac04c0765874b5aa8faa7fbd742c48d210a205bc54f60c21"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e576d6d52312503927f0c7b18777c3973d659c67a51452f0ac601e076ddaff99"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e35ca8a550df9ab8636b6121a2e817872e54df995dc4c4e5257abf34b99e956c"
   end
 
   depends_on "cmake" => :build

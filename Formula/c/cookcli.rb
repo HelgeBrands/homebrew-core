@@ -1,18 +1,18 @@
 class Cookcli < Formula
   desc "CLI-tool for cooking recipes formated using Cooklang"
   homepage "https://cooklang.org"
-  url "https://github.com/cooklang/cookcli/archive/refs/tags/v0.19.0.tar.gz"
-  sha256 "d3f6dea0429034c35107f8584e63f29c6f90b8a69ee5fa92cd7de623e573bb4b"
+  url "https://github.com/cooklang/cookcli/archive/refs/tags/v0.21.0.tar.gz"
+  sha256 "b4f7ace0d2d294ad16c989a99937dadb403e8410106aa6f05e7164098d7fa8cc"
   license "MIT"
   head "https://github.com/cooklang/cookcli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a84af0078a0b1247bd70c3bbb8c17512d8f4b3dfa49932f7f694f87976af73f5"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0117136d173111a4539459edfffb9c117f9620897ea513ae7563ed4181eac3ab"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "dc72ecac5816a50894f107f5b5a4394b3d32ca4ab7e7bdcdcbabae3cfac13127"
-    sha256 cellar: :any_skip_relocation, sonoma:        "af9a8e94caaad375003c7030544e18c3aae7556c2329a315eea8cdf7ddd08ee2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1a36ff0611168556da1317bc530bba5900b866f3206055d4136c120b090d13f3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "191d1110ad5054935e74c7a5491133edcc98824774ad4413152a9f1fdf22ceb5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "72008196908dbf8a2aefe19f729d0614e3b478f4261fc9f24445c54f41d305d6"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "04c6c815091deaf84ab6d18ee2ce57c9a2a10d5c18580e356b551f5d12dba388"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d8abaa4dc92e7ad827a217284e439c32126a6d152cb4147fc8bae59ff96b6e4e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ed7066a1f78a4e0457c41a214b6f5a0fb4f5e6497a712323deef67c87254037b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "aa7f7f683a538270aeb0bef3a6d35be7f54d1ed5a50772e5efea9885c908d61b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "584d10dcdf2af20e5fdaaaa2680b78b767a3e2994bd42789905be6068d5f2542"
   end
 
   depends_on "node" => :build
@@ -24,7 +24,7 @@ class Cookcli < Formula
     ENV["OPENSSL_DIR"] = Formula["openssl@3"].opt_prefix
 
     # Install npm dependencies and build CSS
-    system "npm", "install", *std_npm_args(prefix: false), "--ignore-scripts"
+    system "npm", "install", *std_npm_args(prefix: false)
     system "npm", "run", "build-css"
 
     # Build and install the binary

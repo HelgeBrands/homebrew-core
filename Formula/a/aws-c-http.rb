@@ -1,17 +1,17 @@
 class AwsCHttp < Formula
   desc "C99 implementation of the HTTP/1.1 and HTTP/2 specifications"
   homepage "https://github.com/awslabs/aws-c-http"
-  url "https://github.com/awslabs/aws-c-http/archive/refs/tags/v0.10.7.tar.gz"
-  sha256 "ce9e71c3eae67b1c6c0149278e0d0929a7d928c3547de64999430c8592864ad4"
+  url "https://github.com/awslabs/aws-c-http/archive/refs/tags/v0.10.10.tar.gz"
+  sha256 "4590538bb42a2b1f66fbae9f2ff867fb13e404e5565cdfa7d0a8af5a8258f8f6"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "a7f26111b34cc6e6166a7737110880ed463a6d72f461e3a11302b7458cade2f1"
-    sha256 cellar: :any,                 arm64_sequoia: "75b4c5cc6cd8fde7631ef352fe6666f5ae435b694a4ce4e4afba8ef7ebde77e9"
-    sha256 cellar: :any,                 arm64_sonoma:  "9fdcff12d1bab1a98886151a188f6d8762be0af17b96210e012870f4bad2779a"
-    sha256 cellar: :any,                 sonoma:        "d823374276406d418b7e0e27054e8ae866c5e296fe86a28da7b841a87fe097b8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "85d29fcbddd521c73e19089230ec457b9f795aa0df2b95f909d586a98a08d39f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f257e6f5e39e906029d726bc8b8ff77ab6c7a616ab739368ebf828b934a601b5"
+    sha256 cellar: :any,                 arm64_tahoe:   "ace90cfcd0130c365db116f24d30d8eb4397dcb5e176899e313a821b2f252416"
+    sha256 cellar: :any,                 arm64_sequoia: "55761cc3c5d06ef60b34ac286559378e02f5921df36709293df15420549319f1"
+    sha256 cellar: :any,                 arm64_sonoma:  "c9632cec638ec40651411d6b93e018c447f438db569805fbe9f31c84286b39c2"
+    sha256 cellar: :any,                 sonoma:        "b651e3fe29af79bc36610cd0a9eb00369ffe6d056f4810eefcfed0dbcc6ee996"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d95270c3c8fd69252049b7708ea04340ba6a79cee84cdc8a88fe06eb059594c0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "38a6265e9e4bf45c96836fbb5512497dca9d32d29d1fe588b11d734da8b75534"
   end
 
   depends_on "cmake" => :build

@@ -1,8 +1,8 @@
 class FalcosecurityLibs < Formula
   desc "Core libraries for Falco and Sysdig"
   homepage "https://falcosecurity.github.io/libs/"
-  url "https://github.com/falcosecurity/libs/archive/refs/tags/0.22.2.tar.gz"
-  sha256 "53cfb7062cac80623dec7496394739aabdfee8a774942f94be0990d81e3b2fbc"
+  url "https://github.com/falcosecurity/libs/archive/refs/tags/0.23.1.tar.gz"
+  sha256 "38c580626b072ed24518e8285a629923c8c4c6d6794b91b3b93474db7fd85cf7"
   license all_of: [
     "Apache-2.0",
     { any_of: ["GPL-2.0-only", "MIT"] }, # driver/
@@ -15,12 +15,12 @@ class FalcosecurityLibs < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "acd724bb7f64d985b8d232e17417af090231c0c82ce7d0eb685193dac340062c"
-    sha256 cellar: :any,                 arm64_sequoia: "860f44f28f71a111c16b859d772a81db6eb03ef36c478ecc4b55bdb629b7a472"
-    sha256 cellar: :any,                 arm64_sonoma:  "e892518e61bc53ae1649eb5ee6cf463e3ac84fd6f4fb4ae44c937898f988c454"
-    sha256 cellar: :any,                 sonoma:        "3c1374bc7fd7b7ff338cd3d00aa1e85d08e6bcea4efea3b1950ec1ace8aff64d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0861cf4e0463d24c5799a8d9b8425d6b3ebd2c3ce67196a15083451fc85155b6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9a7d399f5223e726dfca95955ef5f86cdecd07a98da8e20a2866f05f9bd6ae30"
+    sha256 cellar: :any,                 arm64_tahoe:   "87b28cc5019aba19e2cd7b5b50b98783d69f9daecedeb1c18dfd4c4fdb0ece00"
+    sha256 cellar: :any,                 arm64_sequoia: "e1d02fe0c79dade2fe4e5a70fa34152e3587c1a7db8aa656d2b1881060c4e359"
+    sha256 cellar: :any,                 arm64_sonoma:  "b801e47686bad7ad3a92b3f8975d014f3ad47b97d96404ea6ffeb53c3df8de9c"
+    sha256 cellar: :any,                 sonoma:        "4781af095101df212b5a1009a7f9074d7a506280544bc683468e8c3ece527d27"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8a14802ce171bcd5d26cbae15d1097f1e25ea581824e50df5fabd50b1a62e39d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3c7e23ec4937aa35b066762437b7c9a2e9d7435be1034b2cc8f6e6db40c4b7bf"
   end
 
   depends_on "cmake" => :build

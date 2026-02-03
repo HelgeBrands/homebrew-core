@@ -1,7 +1,9 @@
 class Ttyrec < Formula
   desc "Terminal interaction recorder and player"
   homepage "http://0xcc.net/ttyrec/"
-  url "http://0xcc.net/ttyrec/ttyrec-1.0.8.tar.gz"
+  # Upstream is only available via HTTP, so we prefer Debian's HTTPS mirror
+  url "https://deb.debian.org/debian/pool/main/t/ttyrec/ttyrec_1.0.8.orig.tar.gz"
+  mirror "http://0xcc.net/ttyrec/ttyrec-1.0.8.tar.gz"
   sha256 "ef5e9bf276b65bb831f9c2554cd8784bd5b4ee65353808f82b7e2aef851587ec"
   license "BSD-4-Clause"
   revision 1
@@ -29,11 +31,6 @@ class Ttyrec < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "2dd1acdb4519d34c1b28fced057623dcd6457c60def91150fd042ed6be04e481"
   end
 
-  resource "matrix.tty" do
-    url "http://0xcc.net/tty/tty/matrix.tty"
-    sha256 "76b8153476565c5c548aa04c2eeaa7c7ec8c1385bcf8b511c68915a3a126fdeb"
-  end
-
   # Fixes "ttyrec.c:209:20: error: storage size of ‘status’ isn’t known";
   # check `man 2 wait3`.
   patch :DATA
@@ -55,9 +52,9 @@ class Ttyrec < Formula
   end
 
   test do
-    resource("matrix.tty").stage do
-      assert_equal "9\tmatrix.tty", shell_output("#{bin}/ttytime matrix.tty").strip
-    end
+    (testpath/"test.tty").binwrite([0, 0, 4].pack("V3") + "test" + [9, 0, 3].pack("V3") + "end")
+
+    assert_equal "9\ttest.tty", shell_output("#{bin}/ttytime test.tty").strip
   end
 end
 

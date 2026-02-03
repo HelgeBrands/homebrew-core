@@ -1,18 +1,18 @@
 class Kew < Formula
   desc "Command-line music player"
   homepage "https://github.com/ravachol/kew"
-  url "https://github.com/ravachol/kew/archive/refs/tags/v3.6.4.tar.gz"
-  sha256 "0f8db62bda7cf41ede9c41a5132d78537d96f90ef9e06fc5072a509a9f3b30bd"
+  url "https://github.com/ravachol/kew/archive/refs/tags/v3.7.3.tar.gz"
+  sha256 "d00c4e00d989cb21b5de60b5bf21fe51e92c3f069c364cbcaec781ec8f38fc49"
   license "GPL-2.0-only"
   head "https://github.com/ravachol/kew.git", branch: "main"
 
   bottle do
-    sha256 arm64_tahoe:   "328327f6c560c6a291b1fafa0cb7449c9c92c3dce3265a97e22f4ad74977e25b"
-    sha256 arm64_sequoia: "9f461abff3e0a3da44d457397c3be044f006a427a98c954e3aca2adbaceb1119"
-    sha256 arm64_sonoma:  "599974a7d64a8828a9ef5306198321172ced4d7548f47ffb672993c69e5c5de5"
-    sha256 sonoma:        "d9febe83271d5b66de98636a86aeca31e78bc7863541898725c8a090029e00d1"
-    sha256 arm64_linux:   "4e6e0c92cea8b2a77faa5cb64202023fdc441fc52af05adda96dc53da9e819c4"
-    sha256 x86_64_linux:  "4ee9d87daee8e52d63e109b9f15a4ebf600222d5f10773efa9fe2857111d7fb9"
+    sha256 arm64_tahoe:   "4fc345414fe92160c9f41e989a916dfa0264aba3735a2693912b5f8731b92a4b"
+    sha256 arm64_sequoia: "09a4a0960121549ca718915ee7adc7c76d623b1185d61279413458dee5039be1"
+    sha256 arm64_sonoma:  "582a0f8a5d2fe154ae92588c9e1d6208333f34ca46f1d7550f670ebab031c44e"
+    sha256 sonoma:        "989390516013f40dadd4de3364bec028c1d739446d3e727f2d24f0ff7cb5577c"
+    sha256 arm64_linux:   "03e018f7bdb1c61ce3bf8a64be2039395d1b305837d0cdfe290769970b33e70c"
+    sha256 x86_64_linux:  "5a055a3d471c84dd7c0a02186e35be79b9851d606a42bb58d65a2f9bfcb434d8"
   end
 
   depends_on "pkgconf" => :build
@@ -29,6 +29,7 @@ class Kew < Formula
   uses_from_macos "curl"
 
   on_macos do
+    depends_on "gdk-pixbuf"
     depends_on "gettext"
   end
 
@@ -37,7 +38,7 @@ class Kew < Formula
   end
 
   def install
-    system "make", "install", "PREFIX=#{prefix}"
+    system "make", "install", "PREFIX=#{prefix}", "LANGDIRPREFIX=#{prefix}"
     man1.install "docs/kew.1"
   end
 

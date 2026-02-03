@@ -1,8 +1,8 @@
 class Apko < Formula
   desc "Build OCI images from APK packages directly without Dockerfile"
   homepage "https://github.com/chainguard-dev/apko"
-  url "https://github.com/chainguard-dev/apko/archive/refs/tags/v0.30.29.tar.gz"
-  sha256 "d065fd020036541f69b853cf115ff62c2b7fbfc50b103bd5a634596e29bb21aa"
+  url "https://github.com/chainguard-dev/apko/archive/refs/tags/v1.1.3.tar.gz"
+  sha256 "c6dee9dee30efdc6770709e38f3f140a0401f7c63504e1c9181c155643925465"
   license "Apache-2.0"
   head "https://github.com/chainguard-dev/apko.git", branch: "main"
 
@@ -15,12 +15,12 @@ class Apko < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0bebe3f296a0857fd8be566c2b127ada6891ed0fe698b6c4136cf81dcdd57248"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "983b8f04ce9ddee123031dd49f65c1d639921eecf689c57280fc75aea3e93687"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "aba4ad83532b39aa5b2539712baeebb047a3dacb16842cb32c21b4fd5dc4992a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "aee62f1c76eed0802bc76371c76a1a8593d2f89c0ebf36af29971c973bd78091"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2e69dace3ca3c8d4fe49e5bf4471b54f4dbdb662a2cf31e948e28a130e3be441"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e3168f4e9b46abd1c2ffe1027feab3882005e55f952a027e84d477d8f9192216"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "db6d3539b33c39ce21ff1d7562265c4f12b8b788ff15baaac76254ec87585a88"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "74b5d51457a41399e418b72d91e707126f33250d8a739af4de25c7aaf1656356"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "40aa6ae7ee48e2e6315149a8eec4194e9fe138115591bd927ea67ae782cc38d1"
+    sha256 cellar: :any_skip_relocation, sonoma:        "94f38bf6cf1aebafed950d0e5494e9ca4f22868e6ac553f68ca1fde2db990a0f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "eff0a2d7841726a17737d786675cd1c2657dbe74b9b494c30251461f1a9bfe8a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "70d3ec255602a207f63ae40afc2865294e43e7e18dc8e5e88c794f6bc0e97f38"
   end
 
   depends_on "go" => :build
@@ -35,7 +35,7 @@ class Apko < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"apko", "completion")
+    generate_completions_from_executable(bin/"apko", shell_parameter_format: :cobra)
   end
 
   test do

@@ -1,8 +1,8 @@
 class Dnscontrol < Formula
   desc "Synchronize your DNS to multiple providers from a simple DSL"
   homepage "https://dnscontrol.org/"
-  url "https://github.com/StackExchange/dnscontrol/archive/refs/tags/v4.28.2.tar.gz"
-  sha256 "44b59b025caf61b21a7cde5b8bd21dbd47d0a7eb72f4f1e1a8c2a2c854ebce65"
+  url "https://github.com/StackExchange/dnscontrol/archive/refs/tags/v4.33.0.tar.gz"
+  sha256 "db30fbd9d2e91dcd7ff3e806339041073a15ff6992f4731dc7a0dfd4382cecf4"
   license "MIT"
   version_scheme 1
   head "https://github.com/StackExchange/dnscontrol.git", branch: "main"
@@ -16,12 +16,12 @@ class Dnscontrol < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e4bbcd9d77da93123bd11e8777dbb960ca32db4d2abf9d68b79e1fb09f7fadd4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ec6e04694281dd9cff3d336dce9d1084004e59888d4bcd670193e39f1523e708"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c88bd26dc209134697d0c10b74a8d83380447ba1252adf51d69e8b54f8757a22"
-    sha256 cellar: :any_skip_relocation, sonoma:        "cdbb9e723b45d0e7325b076c7fbe4640418585c7b23c77bf2717449937c96a89"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "97d840b58d30a9448199c5f48a89a40771fc37ed26a5b825481880f1ad7d50d5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b40be4c93db519f9fd2400e23afcca70554fb0dab33d2feb0bbb369d8ecaa2c0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a809080f0f41edfb97f9f17d8ac63a407426ff44d8801d430f8e047bc5d83baf"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ed2f6ca51e0088d6c2bf69a3e001c749ac431eb0c7ddc17c8e30a6a0415d3c91"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c673e9bf9a5ac036b31907fb06d4b1499fe50307c1dfffa9f4efcf56e6ba0736"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a596e841f7e1c67de1211c12944dffe652e2f365fb19847a01790709eca52fe0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "eaefcc08d8f82bfbde240fb6938be88062493ca7f2cc6fe3ef206e928afd7220"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5513df3fa3078150c46c8195ff0d6a4c2b61f139186bc22bb855577e75da05ef"
   end
 
   depends_on "go" => :build

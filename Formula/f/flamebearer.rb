@@ -5,8 +5,6 @@ class Flamebearer < Formula
   sha256 "e787b71204f546f79360fd103197bc7b68fb07dbe2de3a3632a3923428e2f5f1"
   license "ISC"
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
     rebuild 2
     sha256 cellar: :any_skip_relocation, all: "fa4b1af3c1cbdce03df418410f78ada2b106c7383539b2f7a9e5183ba2b75b71"
@@ -16,7 +14,7 @@ class Flamebearer < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

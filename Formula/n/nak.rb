@@ -1,18 +1,23 @@
 class Nak < Formula
   desc "CLI for doing all things nostr"
   homepage "https://github.com/fiatjaf/nak"
-  url "https://github.com/fiatjaf/nak/archive/refs/tags/v0.17.2.tar.gz"
-  sha256 "098ebfc88f8b67eed705cf4bf6f8b86fbd78c9f884eb7147e2568cebe6fe6548"
+  url "https://github.com/fiatjaf/nak/archive/refs/tags/v0.18.2.tar.gz"
+  sha256 "98c0c608142c05302eea9b894f1bb1457842bfd4896868c9381cae881e152843"
   license "Unlicense"
   head "https://github.com/fiatjaf/nak.git", branch: "master"
 
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "dc44c03268610698f7c5309e9dcb092d3321ed3d9623a29118b6089b9530aa57"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "dc44c03268610698f7c5309e9dcb092d3321ed3d9623a29118b6089b9530aa57"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "dc44c03268610698f7c5309e9dcb092d3321ed3d9623a29118b6089b9530aa57"
-    sha256 cellar: :any_skip_relocation, sonoma:        "efd8919fd75ae2108a225640dd5c32d4484e8268591c7074d53ab4517f35f021"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "53768d89c3cc21ff1da56d4df107b8e7f72658b22baa354b1baf0d47249f1eba"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f0c4e97ce1f95ce9b6a3a5a5709b9ce4b8b703723e2d973424ff3f4c6cdc9880"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "83d8266db96974a9fb68bb11ec32cc5d12cf3487cc37d43e2c2956a6542cc670"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "83d8266db96974a9fb68bb11ec32cc5d12cf3487cc37d43e2c2956a6542cc670"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "83d8266db96974a9fb68bb11ec32cc5d12cf3487cc37d43e2c2956a6542cc670"
+    sha256 cellar: :any_skip_relocation, sonoma:        "67c1ecd821ae7e02482ee65cb673771ce4f5ea16345d230d7dfa062f46682e87"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d00868b1ab245f562bd40d1a0ad8f71e2101f2f3ab0df26a4694aa7f3a2ac6f2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e4864586fd39098cbcdc1f03a4e2ca6eaa5d56ae54a41390b79b38890c25c61a"
   end
 
   depends_on "go" => :build
@@ -21,12 +26,27 @@ class Nak < Formula
     system "go", "build", *std_go_args(ldflags: "-s -w -X main.version=#{version}")
   end
 
+  def shell_output_with_tty(cmd)
+    return shell_output(cmd) if $stdout.tty?
+
+    require "pty"
+    output = []
+    PTY.spawn(cmd) do |r, _w, pid|
+      r.each { |line| output << line }
+    rescue Errno::EIO
+      # GNU/Linux raises EIO when read is done on closed pty
+    ensure
+      Process.wait(pid)
+    end
+
+    assert_equal 0, $CHILD_STATUS.exitstatus
+    output.join("\n")
+  end
+
   test do
     assert_match version.to_s, shell_output("#{bin}/nak --version")
 
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
-    assert_match "hello from the nostr army knife", shell_output("#{bin}/nak event")
-    assert_match "failed to fetch 'listblockedips'", shell_output("#{bin}/nak relay listblockedips 2>&1")
+    assert_match "hello from the nostr army knife", shell_output_with_tty("#{bin}/nak event")
+    assert_match "failed to fetch 'listblockedips'", shell_output_with_tty("#{bin}/nak relay listblockedips 2>&1")
   end
 end

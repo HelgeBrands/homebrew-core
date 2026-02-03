@@ -1,8 +1,8 @@
 class Werf < Formula
   desc "Consistent delivery tool for Kubernetes"
   homepage "https://werf.io/"
-  url "https://github.com/werf/werf/archive/refs/tags/v2.55.4.tar.gz"
-  sha256 "72c5c23f52f09c608a36febe71252a3658b92cf00c80e71cbfe19a572d3e52d4"
+  url "https://github.com/werf/werf/archive/refs/tags/v2.57.1.tar.gz"
+  sha256 "04c3e016ce91232fcda7ec00be66a63c6f29ac01e9528d4d0e6267dde0e4634c"
   license "Apache-2.0"
   head "https://github.com/werf/werf.git", branch: "main"
 
@@ -15,12 +15,12 @@ class Werf < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c368a40e9c71a33231b434d695f89baacde38e0eff7ba2f09367307c1d644c20"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8aae87475585ed1d8355e8315739dab011ddaffedf56575c8f3ac24606569b3d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6b99af5aaa12088f50e42cb6418057624a827a7d6a95327bc8c1221e2e774927"
-    sha256 cellar: :any_skip_relocation, sonoma:        "42b8f3424f58ca460eb0d7670853d1e1734831fc5058692c425e2478a45f3b4c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "84bc00dbaea567806a98b3bfa3254826841ac9590d01b8147657627a802294ee"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1fecca33b932ffe8f23099aa95a4b3beb2740d91fa3aafc9bb64da23cf717cdc"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f7f091a94c05c06c22beebd2e069d5c45c241b78b11a285caad7b6a7a5f753b0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f6a778b4a3ecf0d26c3acbae78a007045cb56eab8f2da32e3181e3453ee688ac"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "33ee3bafa82c3927618d31c39f11da056604920e5937620476346376a2dcb6ea"
+    sha256 cellar: :any_skip_relocation, sonoma:        "11037b0c34dfd97eac6638718b51d0c46be852b07045e8b37efa9c583cdd7531"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6227d6717d1a7722bc78e54330d8a8f64fd342ac622060b5d7cbe7a13916a0fd"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "455ea8b47601d26cab8650fd12d0fd930ec45e6fe3ebdb2700a4825e5be87ec4"
   end
 
   depends_on "go" => :build
@@ -52,7 +52,7 @@ class Werf < Formula
 
     system "go", "build", *std_go_args(ldflags:, tags:), "./cmd/werf"
 
-    generate_completions_from_executable(bin/"werf", "completion")
+    generate_completions_from_executable(bin/"werf", shell_parameter_format: :cobra)
   end
 
   test do

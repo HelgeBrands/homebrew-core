@@ -1,19 +1,27 @@
 class Container < Formula
   desc "Create and run Linux containers using lightweight virtual machines"
   homepage "https://apple.github.io/container/documentation/"
-  url "https://github.com/apple/container/archive/refs/tags/0.7.1.tar.gz"
-  sha256 "b75b58d85071d2cbee0c5dd463bbfa1dccd0f6635382084f11c52910ebed1b62"
+  url "https://github.com/apple/container/archive/refs/tags/0.8.0.tar.gz"
+  sha256 "f2673cf3c3ce95dfd07068d802873a4a0a0dd8b449c7a20819a75787865a24a1"
   license "Apache-2.0"
+  revision 1
   head "https://github.com/apple/container.git", branch: "main"
 
   bottle do
-    sha256 arm64_tahoe: "6546cae49446c8ed44a6552cf9855717b1ec5b66e55132e768270954d1b30da2"
+    sha256 arm64_tahoe: "09c752e1322377203240406ae5f4aeb595fbc1a2391ffc11982830a43183a2b9"
   end
 
   depends_on xcode: ["26.0", :build]
   depends_on arch: :arm64
   depends_on macos: :tahoe
   depends_on :macos
+
+  # Fixes services not stopping in different launchd domains
+  # PR ref: https://github.com/apple/container/pull/1077
+  patch do
+    url "https://github.com/apple/container/commit/048bdac921ccd8395b6c5f1305fe2473616a40fc.patch?full_index=1"
+    sha256 "1a02b062531cab7852768b724d2f57e26f37e1173f9e5b86f70e3b7171d8c331"
+  end
 
   def install
     if build.head?
@@ -71,7 +79,7 @@ class Container < Formula
   # so we stop the system service to ensure no components are out of sync.
   # Ref: https://github.com/apple/container/issues/551#issuecomment-3246928923
   def post_install
-    system libexec/"ensure-container-stopped.sh"
+    system libexec/"ensure-container-stopped.sh", "-a"
   end
 
   service do

@@ -1,8 +1,8 @@
 class Roxctl < Formula
   desc "CLI for Stackrox"
   homepage "https://www.stackrox.io/"
-  url "https://github.com/stackrox/stackrox/archive/refs/tags/4.9.1.tar.gz"
-  sha256 "7e18660e02f778771a4128e676a16dacbca2afde365e114da6757367cb6edd8c"
+  url "https://github.com/stackrox/stackrox/archive/refs/tags/4.9.2.tar.gz"
+  sha256 "cf0dd5764ae49d78ddf5b6c93b140b592edaedb28ba8c41d8ec1c7cdbee20204"
   license "Apache-2.0"
   head "https://github.com/stackrox/stackrox.git", branch: "master"
 
@@ -15,12 +15,13 @@ class Roxctl < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a092f2cecb244f1e4d4ac57a56e1cff6593aef1404bae0e4d7d947958e855986"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1de3dee793d1221f6e8b5a615a13f5904237214d9866907c31147100ce762497"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1b5ff557ee3e52a592dca11577f74969bb24f8f744e43e936523fbc216e6c3c4"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0057223a349b25807d64182a94e12c3e3a13d2d2c352afe92738012543c39c26"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "34db6bcd1c1017d4dc557c6f4c86b1d64c8eb077a84ddad5370f7b1ede4cf479"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "11fe326cfac8d9686022e78d6f38d3c34e674572bcbea11765fb950b1830877b"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "eebc92d659d73543139b7e97ecfd2e16e95f862abf85da27788c678ec7cb507d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "464d7df3d63302624b8637a68f335ddc3e1d88504d47753731f349162f4737a3"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ea18d117eb31b55331b589e77c2bfba8afc6a173a9f89f96a520b2fd774b02d6"
+    sha256 cellar: :any_skip_relocation, sonoma:        "75d390cf7f6a7bf98e8423f28192c7065f2232701f66e83351df80b65a90c6fb"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e17613b8578b6420767e46df15603f00cce57adce15f31bac66f56350d306e26"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e9920a8793e0864111db1db0b8a3b5c579511c3efb40e78878ed9b98cf27291e"
   end
 
   depends_on "go" => :build
@@ -28,7 +29,7 @@ class Roxctl < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w"), "./roxctl"
 
-    generate_completions_from_executable(bin/"roxctl", "completion")
+    generate_completions_from_executable(bin/"roxctl", shell_parameter_format: :cobra)
   end
 
   test do

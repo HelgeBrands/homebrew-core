@@ -1,20 +1,20 @@
 class Cmocka < Formula
   desc "Unit testing framework for C"
   homepage "https://cmocka.org/"
-  url "https://cmocka.org/files/2.0/cmocka-2.0.0.tar.xz"
-  sha256 "b5686c51ea92d142958d68e5dcb932f9bfc32cd3dd01c524f9d4aa863ebc3d9c"
+  url "https://cmocka.org/files/2.0/cmocka-2.0.2.tar.xz"
+  sha256 "39f92f366bdf3f1a02af4da75b4a5c52df6c9f7e736c7d65de13283f9f0ef416"
   license "Apache-2.0"
   head "https://git.cryptomilk.org/projects/cmocka.git", branch: "master"
 
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "e61b47c1bd763f33ed9c8d6c35013c1ec49c80fcc789e953110d3267f345c102"
-    sha256 cellar: :any,                 arm64_sequoia: "8f9d3996bdb718f011fd7afcceaffa07ab93a3b277b55a2ac4776ca82c0b70a6"
-    sha256 cellar: :any,                 arm64_sonoma:  "4c83cad13d8e21017bb8cfc5678729cba6d8bbfb11ddb6f25213abd3dd69a6eb"
-    sha256 cellar: :any,                 sonoma:        "a9bc30a0be8d2f7b9f3f3bcd27658114c19ca566c6a781b8ff52a6e2d694e92e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c73fa42ad47ef6b63964472eacfcf9b09e3f566c8fc65c4cec09f82e89f5920c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9d86f36667a10b7fae19abb70b3698cad4895a860453938639a9eab9833453c4"
+    sha256 cellar: :any,                 arm64_tahoe:   "1526e9b10b209071770801428c41d08bf7f8601f23dce9b93ee03260dd419529"
+    sha256 cellar: :any,                 arm64_sequoia: "920260e22db9b96a6bfba2c54b48286b66b654680c37067099478abdce4a472d"
+    sha256 cellar: :any,                 arm64_sonoma:  "e2c2de2b3ade844e2b765b495c82e73e540fa0262fdaa5959f2104223310fd7b"
+    sha256 cellar: :any,                 sonoma:        "44075b56a67f29c890e88e9711337a48a4212b598998641c985f1d2a8e42e0be"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b436e2a03af8a0666e671ab970a16da1c40981de1bfeeb27dbb344cf39ba533c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3509a180a3d4d2dba82c53c2ff8465c07196ddede5298f316cd8a9540f70037d"
   end
 
   depends_on "cmake" => :build

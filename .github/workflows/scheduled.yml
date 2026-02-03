@@ -69,7 +69,7 @@ jobs:
           day="$(date +%j)"
           testing_formulae=()
           for (( i=0; i < TEST_COUNT; i++ )); do
-            index="$(( (day + i * DAYS_PER_YEAR - 1) % formulae_count ))"
+            index="$(( (10#$day + i * DAYS_PER_YEAR - 1) % formulae_count ))"
             testing_formulae+=("${formulae[${index}]}")
           done
 
@@ -80,7 +80,7 @@ jobs:
   comment_on_failure:
     needs: create_matrix
     if: needs.create_matrix.result == 'failure'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       issues: write
     env:

@@ -1,18 +1,18 @@
 class Tuios < Formula
   desc "Terminal UI OS (Terminal Multiplexer)"
   homepage "https://github.com/Gaurav-Gosain/tuios"
-  url "https://github.com/Gaurav-Gosain/tuios/archive/refs/tags/v0.4.3.tar.gz"
-  sha256 "be365d6a7568193655f2d049b2f2f95c8f27fd86bc3e6d15dca9429631ab5d12"
+  url "https://github.com/Gaurav-Gosain/tuios/archive/refs/tags/v0.6.0.tar.gz"
+  sha256 "722af8631edbf4572d5edc4e067ab8fb5fc5e06cc6052a2f2a292e95c392011c"
   license "MIT"
   head "https://github.com/Gaurav-Gosain/tuios.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "272db1ee0407bd7de8adcba6c292a3abb207e9fec4d7d5c23a45d889947fbdae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3cedaa67cb6314332ef9054c9e2140e4a5120ce58312a1c8b12a542d5a0a6ad2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c6b6afe3c26c00986e47616bee8e7fcbe74629ce950ceec179861f2460672cb5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1b67a451e54a16b42cb5c68f96b69acad44a01a5b51eb0a98659987c8e74cd1e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4b13d350746a11bb04ca911d81489684e512208d1fee651e82501b23d236c757"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "661e0452fe27db4b0e61fcc738d3335ecf250cc0e63e142176bdafe47f2a16b1"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e08771c4d69980c52802f937b63cc40ac7c6088c90f5d973aa6f257d9cb0fd0f"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "971610634ce07ba4a83fe37ca448ebfe368dc01edf795fc310ba1c1746cd2c40"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "255d6cebc99d6cbd96e6910b2cf6add2306d9bbab80a7daafc9385ed28aee076"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b839698c72b70875aed723ef2c29e8096256db5f189498849b7704cb99f8d9f3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ae813b65158d68c11f04c06e054d0b564d6424d086a6db5cc27aab4a984e237c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8e0750ab97df56afb8a6a33a08f3cb41bd735e95f81fc51b1eacdb77b8ae6f09"
   end
 
   depends_on "go" => :build
@@ -21,7 +21,7 @@ class Tuios < Formula
     ldflags = "-s -w -X main.version=#{version} -X main.commit=#{tap.user} -X main.date=#{time.iso8601} -X main.builtBy=#{tap.user}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/tuios"
 
-    generate_completions_from_executable(bin/"tuios", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"tuios", shell_parameter_format: :cobra)
   end
 
   test do

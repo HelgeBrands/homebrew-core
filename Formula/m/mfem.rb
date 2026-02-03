@@ -1,19 +1,19 @@
 class Mfem < Formula
   desc "Free, lightweight, scalable C++ library for FEM"
   homepage "https://mfem.org/"
-  url "https://github.com/mfem/mfem/archive/refs/tags/v4.8.tar.gz"
-  sha256 "65472f732d273832c64b2c39460649dd862df674222c71bfa82cf2da76705052"
+  url "https://github.com/mfem/mfem/archive/refs/tags/v4.9.tar.gz"
+  sha256 "ea3ac13e182c09f05b414b03a9bef7a4da99d45d67ee409112b8f11058447a7c"
   license "BSD-3-Clause"
-  revision 2
+  revision 1
   head "https://github.com/mfem/mfem.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9f2c75c87ae6c6287e7b47206494d25129be0c29604dee11c6f31db8c7396461"
-    sha256 cellar: :any,                 arm64_sequoia: "206d35c1e7363b016d0db71587a929bf159935baebe38612873b4d77aaa0b21f"
-    sha256 cellar: :any,                 arm64_sonoma:  "b9f0579107be2a9c6f3ba45e4c7c81ce842ad7c4caf1d24f9ab11938dfc4e4db"
-    sha256 cellar: :any,                 sonoma:        "f8b98c0b761151593d3a2d87fbdfa41b2a25f850a5f79641612aaa9f51eac0cc"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c03044cdec3a8cf55403e7c0ff67d0b6cb4e4f008ffa64d6b3a53382342c43b0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "45e7d9d5a3b6573e91b176cc3d8a10b746d5b62cd24a8a1a06cdea0afb87b532"
+    sha256 cellar: :any,                 arm64_tahoe:   "8974f38b6753c04fcea78d3cea7e8f09e9d00200c7c20f3c04aef3f7af64afc4"
+    sha256 cellar: :any,                 arm64_sequoia: "2672c4cdedf6ae743fdf5de3d61bd1582c9edf08c484ec23a1fe174f2e274ebf"
+    sha256 cellar: :any,                 arm64_sonoma:  "f91e29927107cb64ab3c32c6e1c1227b0b9108d5c671114721b6889235589852"
+    sha256 cellar: :any,                 sonoma:        "e3fb59206a0af49d8b6d518b921b62533f38ac8f69c7e6d3615f147e75bb5560"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "80164924078003ac86b7197f2e6b077dec14c55e2b4cf1511fddd5af2bd0addc"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dec7c79abbe13b993334d214016e5284f433424bc9bb21f4bdfbcf50b37a22cd"
   end
 
   depends_on "cmake" => :build
@@ -22,13 +22,6 @@ class Mfem < Formula
   depends_on "open-mpi"
   depends_on "openblas"
   depends_on "suite-sparse"
-
-  # build patch to support Hypre 3.0, bug report, https://github.com/mfem/mfem/issues/5042
-  # upstream pr ref, https://github.com/mfem/mfem/pull/4975
-  patch do
-    url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/mfem/4.8-support-hypre-3.0.patch"
-    sha256 "e490973f6b74f71c54f6449a8832575eb96c1562468210c444847109470d114f"
-  end
 
   def install
     # fix `lib/cmake/mfem/MFEMConfig.cmake` file audit failure

@@ -1,8 +1,8 @@
 class Gitea < Formula
   desc "Painless self-hosted all-in-one software development service"
   homepage "https://about.gitea.com/"
-  url "https://dl.gitea.com/gitea/1.25.2/gitea-src-1.25.2.tar.gz"
-  sha256 "b8006b388ced46627eaa53fbe05e04289ec6441a89d0f0b1f8ee33b4eec7235e"
+  url "https://dl.gitea.com/gitea/1.25.4/gitea-src-1.25.4.tar.gz"
+  sha256 "2c067547343c5c0763d3370d82c81ef4c6e511fe342b300e5a687f664f3b405e"
   license "MIT"
   head "https://github.com/go-gitea/gitea.git", branch: "main"
 
@@ -14,12 +14,12 @@ class Gitea < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d92b1096f9181a5b5e033e4e83fc381b00229b4fc2f2be9aa2c6b9e7e906de8b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7d0904afe3ee653be0b77013f981fdabea875f9eb3594fbcfec565cd4d3edecf"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4d14907739e5fc8bbd9de219fc48129f96e9146c62ae180e9c0f26b911f5041e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c6903eb65bebff1c6c09b5e01b528489b50a10f5f65bba58602d2c4fb627729f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "dd58d0f9c53bd28ca918c30421deffe7c84a2f6840f633d0fa0138fe70ef170e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bcece6c11fabf7a0f81ff3fb181ed1f1511b1496edff9459dbb7a0f81bc2cf2a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "eaf09624f8a1717d181901dfcfe6684e157815270d645398a109eee2470f221c"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8c20a38a124dacfb5b56a362ed025471072800b7354e5951d3f006861669af66"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "545623b3023a5d1774b11723f5172b69802dc8f71256cbbe32666053147eb961"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d074cadeec6acb06bd0a0920794bc0089fe4113ced998975d8a27846a0714a70"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c7d4f35526e149ef43447724df39701567354b7c62b4e8d8f57a086fe3e12e49"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "66962be9ec44dbd317637b8eb0ffc79276c721230372c3c17bc209860e740aa9"
   end
 
   depends_on "go" => :build
@@ -32,6 +32,9 @@ class Gitea < Formula
     ENV["TAGS"] = "bindata sqlite sqlite_unlock_notify"
     system "make", "build"
     bin.install "gitea"
+    system bin/"gitea", "docs", "--man", "-o", "gitea.1"
+    man1.install "gitea.1"
+    generate_completions_from_executable(bin/"gitea", shell_parameter_format: :cobra, shells: [:bash, :fish, :zsh])
   end
 
   service do
@@ -45,13 +48,9 @@ class Gitea < Formula
     ENV["GITEA_WORK_DIR"] = testpath
     port = free_port
 
-    pid = fork do
-      exec bin/"gitea", "web", "--port", port.to_s, "--install-port", port.to_s
-    end
-    sleep 5
-    sleep 10 if OS.mac? && Hardware::CPU.intel?
+    pid = spawn bin/"gitea", "web", "--port", port.to_s, "--install-port", port.to_s
 
-    output = shell_output("curl -s http://localhost:#{port}/api/settings/api")
+    output = shell_output("curl --silent --retry 5 --retry-connrefused http://localhost:#{port}/api/settings/api")
     assert_match "Go to default page", output
 
     output = shell_output("curl -s http://localhost:#{port}/")

@@ -4,27 +4,25 @@ class Abricate < Formula
   url "https://github.com/tseemann/abricate/archive/refs/tags/v1.2.0.tar.gz"
   sha256 "ac3ac3c62b445501b8d82942b0d0b20404ddd9cb9a0a8deb03cbc1f446f2c379"
   license "GPL-2.0-only"
+  revision 1
   head "https://github.com/tseemann/abricate.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e8c0b3837899f8050b4d268c35ba6b784ac1ef051b6d7b95db12517a106d9135"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "515a452de78cd20b5a0bdb08059a01264b260227689aa22afe68b11e2a20cea7"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ac44f570d4752c98c121f357c18042186348507267e12d9cc47c6ba3fe2fcd7d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c4054e10145b6129ad2c5eb85a454aea6d621fe2dc94ce0e807c072785cb844f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "dc2c8c3a22b655db4d480360501000f43f76137e3b4aa8ecbe2c4e2142ab9138"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b06655c093fec0fa230aa9876cdca639d15796e9a9d8eb50f415f0d784e483aa"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "21c1296ed3a481e1636f59ff850cdeb965c25998136116848fb935b656fb8807"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0e89b313a84f277c596aacc0a9b956f712fb8bb117addd9e20500491308c4a2f"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4d1b925954d6ccc797cef2873d31e34fddae38d6e7ad60b481f819d4bdcfdd1f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d6866f78ceb5be17bca2efaca9507d111cc20d1bf7a41d6f0dfc6195c7f22d80"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "73fed6fed04f7dc4720392aa7e34b204edb669f777350e553194b419fd1c7571"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "141c67d33465d33bd724dab3078f9eae776863804dc79486fcf9158146dc9f85"
   end
 
+  depends_on "any2fasta"
   depends_on "bioperl"
   depends_on "blast"
   depends_on "perl"
 
   uses_from_macos "unzip"
-
-  resource "any2fasta" do
-    url "https://raw.githubusercontent.com/tseemann/any2fasta/v0.4.2/any2fasta"
-    sha256 "ed20e895c7a94d246163267d56fce99ab0de48784ddda2b3bf1246aa296bf249"
-  end
 
   # Perl dependencies originally installed via cpanminus.
   # For `JSON Path::Tiny List::MoreUtils LWP::Simple` and dependencies.
@@ -139,17 +137,11 @@ class Abricate < Formula
   end
 
   def install
-    resource("any2fasta").stage do
-      bin.install "any2fasta"
-    end
-
     ENV.prepend_path "PERL5LIB", Formula["bioperl"].opt_libexec/"lib/perl5"
     ENV.prepend_create_path "PERL5LIB", libexec/"perl5/lib/perl5"
     ENV["PERL_MM_USE_DEFAULT"] = "1"
 
     resources.each do |r|
-      next if r.name == "any2fasta"
-
       r.stage do
         system "perl", "Makefile.PL", "INSTALL_BASE=#{libexec}/perl5"
         system "make", "install"

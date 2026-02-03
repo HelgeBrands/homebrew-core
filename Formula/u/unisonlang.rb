@@ -4,13 +4,12 @@ class Unisonlang < Formula
   license "MIT"
 
   stable do
-    url "https://github.com/unisonweb/unison.git",
-        tag:      "release/1.0.0",
-        revision: "177d0635420f2dd9d0ba425d65eea5911253d5bb"
+    url "https://github.com/unisonweb/unison/archive/refs/tags/release/1.1.0.tar.gz"
+    sha256 "f776bc7f96f68a7f95ee91160a6641aba0d2f7bc6ef60d5cb4b2441474ce5a39"
 
     resource "local-ui" do
-      url "https://github.com/unisonweb/unison-local-ui/archive/refs/tags/release/1.0.0.tar.gz"
-      sha256 "8e7fbe261f84ae8d4ccbb144d5fe71bf7b48dbdf05219d9db10541f5b995e1cf"
+      url "https://github.com/unisonweb/unison-local-ui/archive/refs/tags/release/1.1.0.tar.gz"
+      sha256 "45556af491e8c524a6bbc5aa130aba908f66805dd981f553ad3a6f7c0db7ae61"
 
       livecheck do
         formula :parent
@@ -24,13 +23,12 @@ class Unisonlang < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9179cd2c0ba7095f663eff4a84b25fbf5de4b666f1cb1e9883e3855f912ed12e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d2feef1cba04dc14215329a4ad00b6740d80b844b0e95dc9de5ee15b3f855d44"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8342d34324f23fc5aa7efdebdbd290477556bdf53b8519b84db4e1a16b8a1081"
-    sha256 cellar: :any_skip_relocation, sonoma:        "17316555c3db96877ba22227bbd297a71236f3cd055994396cf28a61dc6fc9e7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6dc4717d95f34f414bcdb0014986d9b8c783686c71c6f79b4bda1318adb68a13"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c9198636b6feec6c5c5c668bd715304672989d8354b48fea3e38a91ccde0eda0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "47a01b91d16c70c45f050360c3ed7e22c6ee2d4f651b76e63b8e834a507e8596"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b074c9dd7ab1d47fc52652bb813672921007fbefbb3198d3c923ba8a2f616dc0"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5f2509463fb563729981497d3b6952d591da27cf78b7df41d815fa7416e10619"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f36866630790b6ab3b0ea79c5d039dd67644d50c19a6a032a411b7fec7192a5c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d5aa6e2c708d907d6b873f01b0b21a0ad6b0945e998b3e756f1371acb423d877"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "490b67ce1c716a4dfda1e9a43c0e695970cfbfc6b5df6c072e38bea598a9d9ab"
   end
 
   head do
@@ -43,7 +41,7 @@ class Unisonlang < Formula
 
   depends_on "elm" => :build
   depends_on "elm-format" => :build
-  depends_on "ghc@9.6" => :build
+  depends_on "ghc@9.6" => :build # GHC 9.10 PR: https://github.com/unisonweb/unison/pull/6046
   depends_on "haskell-stack" => :build
   depends_on "node" => :build
 

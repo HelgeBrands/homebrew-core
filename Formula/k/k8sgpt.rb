@@ -1,18 +1,19 @@
 class K8sgpt < Formula
   desc "Scanning your k8s clusters, diagnosing, and triaging issues in simple English"
   homepage "https://k8sgpt.ai/"
-  url "https://github.com/k8sgpt-ai/k8sgpt/archive/refs/tags/v0.4.26.tar.gz"
-  sha256 "680c23f9f86653508968a716214d4845d3d498ef252255fda270656679491809"
+  url "https://github.com/k8sgpt-ai/k8sgpt/archive/refs/tags/v0.4.27.tar.gz"
+  sha256 "e06254767dcef13a16f8b3ebda3cd9d3838977e1d12064c78114bfa741482f25"
   license "Apache-2.0"
   head "https://github.com/k8sgpt-ai/k8sgpt.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7c3b8d9b2237831db8685ceb2d8ea40ab7bc72f967b3c472b3fc976c480f0b96"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "79e1285b626df033b5875ce7884ac90016662cda60841d6e37180acac524183f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ba4c32e6aab9b2bee028b14ea1e980c1171508e92890c4656b4fc5ddf70a8bb7"
-    sha256 cellar: :any_skip_relocation, sonoma:        "359857cde674b404fa74cb196bbfe358972a5fba75a902736b53ffe3581fd6c4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cb5ba08e7054cd7b5748c305384a1e569840d46b1bed4a83524844f9acfe196e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "26655f72eace559b32065237fb28fc8436c96fed3bc48c1caa27c90ef4fd30c3"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e4362247aad89da15626c901f2731b088b48332a8a6808e88893850882eebef0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "874a4d01b76f311de2058e552172ed6efaa81dbe3c45d77f938840ffdb7ff49d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ebfa8a3d4601cf9a201e9e6ce40df495a0071d9cd6b880a053d11bc9c551ab4e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "329e8ea41ea9fdaaa823332fdb1eb85433f2e9bf7391f38ba94f9b5ddb53299a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "cf0aee5e30ac6815146bbdb78f30a61d90744dbed1392904a9bd51a0b8dcb474"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "83f757fca556c176caf63b7132d109deda34659daf282816154024002837023c"
   end
 
   depends_on "go" => :build
@@ -21,7 +22,7 @@ class K8sgpt < Formula
     ldflags = "-s -w -X main.version=#{version} -X main.commit=#{tap.user} -X main.date=#{time.iso8601}"
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"k8sgpt", "completion")
+    generate_completions_from_executable(bin/"k8sgpt", shell_parameter_format: :cobra)
   end
 
   test do

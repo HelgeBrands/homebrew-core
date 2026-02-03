@@ -2,8 +2,8 @@ class Ollama < Formula
   desc "Create, run, and share large language models (LLMs)"
   homepage "https://ollama.com/"
   url "https://github.com/ollama/ollama.git",
-      tag:      "v0.13.2",
-      revision: "0c787231741eaa2e6d5b145e8565a62364a852b3"
+      tag:      "v0.15.4",
+      revision: "6a7c3f188e679b1849e4618754b25dc9c19541d7"
   license "MIT"
   head "https://github.com/ollama/ollama.git", branch: "main"
 
@@ -16,16 +16,22 @@ class Ollama < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7f3ce40690d055434c5d98d5648b29b1f6afa7b4fda05d6a0d743bb956ac18b2"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "26231b8d5205af855fa4e9cd06b23fcd810e7564290fe347b26ea20a237723be"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6cd4dd56fbf1ccbb562c16489da53876c475147faa8c31da0066142d34de5344"
-    sha256 cellar: :any_skip_relocation, sonoma:        "594e804e33cd7652964ec7ef5da784ce6b47f9742a225372f985d030cf24c998"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a76130eb26699d3a0bc846d46b54f4233e205c4f99e6698619d4ffae5153fec4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ce5bbe4e771a4d1905f37c62724221519cff775e8721af9e27a2eaac98b4081a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4925cac07c36a1af746191da00be1ce959cdc0b6a12c73327150dd7fffa96517"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3051bd65c3165f25a055c20b484e52d54077e08fb4676ed94ac53a18ea395f2b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ec1ce88667c4a2b65e62bf325a68e36aa03102e213ee2b322a03f6e0ac06eded"
+    sha256 cellar: :any_skip_relocation, sonoma:        "57201483ce5fab0449c512aa7753c94f11f1ae3c67e9e527c0ca22c6ce6146cc"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8dd685848fb003b49877e1a880b489b38d9948f08739562b5a17262f749bf025"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "96ee932dc07a7f1e5fb836ee44a465e70bd9ac69e0cb124a14b8f7858b49cd42"
   end
 
   depends_on "cmake" => :build
   depends_on "go" => :build
+
+  on_macos do
+    on_arm do
+      depends_on "mlx-c" => :no_linkage
+    end
+  end
 
   conflicts_with cask: "ollama-app"
 
@@ -44,8 +50,17 @@ class Ollama < Formula
       -X github.com/ollama/ollama/server.mode=release
     ]
 
+    mlx_args = []
+
+    # Flags for MLX (Apple silicon only)
+    if OS.mac? && Hardware::CPU.arm?
+      mlx_rpath = rpath(target: Formula["mlx-c"].opt_lib)
+      ldflags << "-extldflags '-Wl,-rpath,#{mlx_rpath}'"
+      mlx_args << "-tags=mlx"
+    end
+
     system "go", "generate", "./..."
-    system "go", "build", *std_go_args(ldflags:)
+    system "go", "build", *mlx_args, *std_go_args(ldflags:)
   end
 
   service do
@@ -62,12 +77,13 @@ class Ollama < Formula
     port = free_port
     ENV["OLLAMA_HOST"] = "localhost:#{port}"
 
-    pid = fork { exec bin/"ollama", "serve" }
-    sleep 3
+    pid = spawn bin/"ollama", "serve"
     begin
+      sleep 3
       assert_match "Ollama is running", shell_output("curl -s localhost:#{port}")
     ensure
-      Process.kill "SIGTERM", pid
+      Process.kill "TERM", pid
+      Process.wait pid
     end
   end
 end

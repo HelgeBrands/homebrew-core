@@ -1,8 +1,8 @@
 class Cppcheck < Formula
   desc "Static analysis of C and C++ code"
   homepage "https://sourceforge.net/projects/cppcheck/"
-  url "https://github.com/danmar/cppcheck/archive/refs/tags/2.18.0.tar.gz"
-  sha256 "dc74e300ac59f2ef9f9c05c21d48ae4c8dd1ce17f08914dd30c738ff482e748f"
+  url "https://github.com/danmar/cppcheck/archive/refs/tags/2.19.0.tar.gz"
+  sha256 "c6cff9d3bbcb3da941bf7f525ae974b6c7af3d610c4c5519fcd1be3f21f5ae09"
   license "GPL-3.0-or-later"
   head "https://github.com/danmar/cppcheck.git", branch: "main"
 
@@ -16,17 +16,16 @@ class Cppcheck < Formula
 
   bottle do
     rebuild 1
-    sha256 arm64_tahoe:   "a53316e5dda8adbc073f148dba329587526ba3e54157fc7f3a787bf6564d70a8"
-    sha256 arm64_sequoia: "21609bea72c672a96df641fb801021593d132ba01c644b8afdf7a7abab513807"
-    sha256 arm64_sonoma:  "4434fdc861417f4ed8a30be05626e6a882520aa7c86861a44774f7a247976d45"
-    sha256 sonoma:        "b2f0389b3f98b42c7f3dc33c3b7b0899d85789df0d30ca7c6815e5ab77ce1d93"
-    sha256 arm64_linux:   "7ade4ca187c1cf2ff5fc385a0da4306bc437d313bf1a9d2cf8b1ebac74aaf2b6"
-    sha256 x86_64_linux:  "944a5e6a09e9ef9fd3988e2f878e07e43092ffde06b4e14a1b64bbdf601cd79b"
+    sha256 arm64_tahoe:   "142eb5bb3c7b30acd011421d66c34c340f2e7de17e063b2f0c156f8ea9e69def"
+    sha256 arm64_sequoia: "fed60e1e28b77255f09af562bd6d5f73d930731590a05bb9b7f71a72492c3e6d"
+    sha256 arm64_sonoma:  "6ea6c2bd8a6ea919722f008911974397a9d8a3b64b49bbb2b0f3c77482cc117a"
+    sha256 sonoma:        "096d0538409e528f0ea03202a048b22e8c7e57b39b32a210a6ceb31c488ad2a0"
+    sha256 arm64_linux:   "ce98f6b8b78ba143c2019e88d1a291d9909176224ee8617e6c5e6660ee9fa8d3"
+    sha256 x86_64_linux:  "c9af4d9be79e7f7474dfb9d3e3bd9cf797525dd86b45fd0d193bb007635b3628"
   end
 
   depends_on "cmake" => :build
   depends_on "python@3.14" => [:build, :test]
-  depends_on "pcre"
   depends_on "tinyxml2"
 
   uses_from_macos "libxml2" => :build
@@ -38,8 +37,13 @@ class Cppcheck < Formula
   def install
     ENV.deparallelize
 
+    # Rules are disabled due to requiring EOL `pcre`. This is same choice made by Debian[^1].
+    # Feature can be re-enabled if upstream adds support for std::regex[^2] or `pcre2`.
+    #
+    # [^1]: https://salsa.debian.org/reichel/cppcheck/-/commit/82df7e7d2aaa717eb594d69861f10d2e4d383ad7
+    # [^2]: https://github.com/danmar/cppcheck/pull/7893
     args = %W[
-      -DHAVE_RULES=ON
+      -DHAVE_RULES=OFF
       -DUSE_BUNDLED_TINYXML2=OFF
       -DPYTHON_EXECUTABLE=#{python3}
       -DFILESDIR=#{pkgshare}

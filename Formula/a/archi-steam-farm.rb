@@ -2,8 +2,8 @@ class ArchiSteamFarm < Formula
   desc "Application for idling Steam cards from multiple accounts simultaneously"
   homepage "https://github.com/JustArchiNET/ArchiSteamFarm"
   url "https://github.com/JustArchiNET/ArchiSteamFarm.git",
-      tag:      "6.2.1.2",
-      revision: "fe80d3029b6ee371a5acd2bfd6ef3042aea4a3f9"
+      tag:      "6.3.2.3",
+      revision: "fda6b6929dab46becad5935ded1b1409f2da6cda"
   license "Apache-2.0"
   head "https://github.com/JustArchiNET/ArchiSteamFarm.git", branch: "main"
 
@@ -13,13 +13,12 @@ class ArchiSteamFarm < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "56ec334ab300d981a48e231f1dea4bd7fb5e4881f9e09aab51d82fdd284a936b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "490c297bc91584818ff21d9a26b7f750729bf81626aaebdf913fa2be568b32f9"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "81299bf6abd6721445576143caab857d9242158c11d5dcf0ef7f2c28b612c8ec"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "55e45a5277ae05dfc01d73366058c3e92c8626740ef408d95a899fa1a5d5924f"
-    sha256 cellar: :any_skip_relocation, ventura:       "36bce8cdb65d7803ef17f1bcaf274ba9932a282360ba92b2f348cd6ab49a6306"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "aedf76ac040d42c592fc6487e1a05515ecdbdaea434c7b95081451d7192c22c4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1eab4f0727c67da321d6322c4f30e538cd1f21743eec92700ceae659707d9b69"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bff1ff30f0a210bc670ff0bcd6b5d57684705332c813593a685e7ddf781336bb"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a19fe2c263d95e79ce89c8ee7f59600df36864b3e4c2c4579db947723dd6544f"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b727a6b98a5f206b28a1ef796382ff743b62a72aeb561b0d0ab347804c121f2f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "37b84a62c2dbee099f467f910a60c1f22fcbbc63f54f6a365061e1ebcc6197d0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6589e63af362762d32ca79125fbfab536dcc42a6c34b40e8d6842ee91e2b9c3f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3549955369ba3270005105d348a03ed8b7e0c0f4cc2aa05d84735fc849cf0e6f"
   end
 
   depends_on "node" => :build

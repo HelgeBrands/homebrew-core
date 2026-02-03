@@ -4,6 +4,7 @@ class PythonAT314 < Formula
   url "https://www.python.org/ftp/python/3.14.2/Python-3.14.2.tgz"
   sha256 "c609e078adab90e2c6bacb6afafacd5eaf60cd94cf670f1e159565725fcd448d"
   license "Python-2.0"
+  revision 1
 
   livecheck do
     url "https://www.python.org/ftp/python/"
@@ -11,14 +12,14 @@ class PythonAT314 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "4e7ee268e8f53127b99b0eaad544d25e1b2d8ce382996989c2fb1fcd49cac2a3"
-    sha256 arm64_sequoia: "4dce49c7fe46c415d2fd4daac0fe655ef8601ede59b9ab54b9d8cd43e90bb8a1"
-    sha256 arm64_sonoma:  "de13acb09424fd86894e72b1358f6fc04a6920a7c656a9b8c0833a9bc54227e8"
-    sha256 tahoe:         "4c54876bfd8fee699a74786ebd714104c835bee1332e34a2f86a23c37cbf5123"
-    sha256 sequoia:       "fdcd5b7701c8528cc72958e9c9f6a95f45e7704cd9be56efd473b59d722424a4"
-    sha256 sonoma:        "d5b0d55774003aa95fac167df9b140cb8ec88d9d35c20c63d6f98d26148d6bc5"
-    sha256 arm64_linux:   "89421722bbdc251eac8d39eba34d28430be765e09de4c2db2146a80c04fae60e"
-    sha256 x86_64_linux:  "d9648925b1a96afb3a0e70f50d174cc9486b79f59fce879c91267ec8923a0a87"
+    sha256 arm64_tahoe:   "91b7f1c080efef20bd828c3f057a874837b61ef5589633ad077ab5f1ff53ec0e"
+    sha256 arm64_sequoia: "eaa3d591aacc988e34d84f4daf95ee8bf8b8a266636e5aee03eb8df46fb29bee"
+    sha256 arm64_sonoma:  "2bb9a656efb1b4bdc1d8045e982d8953a3e8fda33bf1ae2c13d5051ef6a80407"
+    sha256 tahoe:         "19e2b71a684076117cf1fe1226f06fc2a4fafc691ee5b4cfe91002522c5ba954"
+    sha256 sequoia:       "1acda88462bdbf31a47d5dcce964dfcbea30e850e6cc18d33a553e2b12036dde"
+    sha256 sonoma:        "4617d6366749ee6cd547dfdcc4a3532874f37fc9c72f3d3215293883e5524d4f"
+    sha256 arm64_linux:   "4e059eacccc1c8b592da7638566c4030b29489ed7457f5342d2124f575c73f07"
+    sha256 x86_64_linux:  "7c704c44aa3ec95e0c521e4bcc2d7383f056ccdf48212317e859069c7b1142ce"
   end
 
   depends_on "pkgconf" => :build
@@ -65,14 +66,19 @@ class PythonAT314 < Formula
     sha256 "18f63100d6f94385c6ed57a72073443e1a71a4acb4339491615d0f16d6ff01b2"
   end
 
+  resource "packaging" do
+    url "https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz"
+    sha256 "00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4"
+  end
+
   resource "pip" do
     url "https://files.pythonhosted.org/packages/fe/6e/74a3f0179a4a73a53d66ce57fdb4de0080a8baa1de0063de206d6167acc2/pip-25.3.tar.gz"
     sha256 "8d0538dbbd7babbd207f261ed969c65de439f6bc9e5dbd3b3b9a77f25d95f343"
   end
 
   resource "wheel" do
-    url "https://files.pythonhosted.org/packages/8a/98/2d9906746cdc6a6ef809ae6338005b3f21bb568bea3165cfc6a243fdc25c/wheel-0.45.1.tar.gz"
-    sha256 "661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729"
+    url "https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz"
+    sha256 "e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803"
   end
 
   # Modify default sysconfig to match the brew install layout.
@@ -97,7 +103,7 @@ class PythonAT314 < Formula
   # The HOMEBREW_PREFIX location of site-packages.
   def site_packages = HOMEBREW_PREFIX/"lib/python#{version.major_minor}/site-packages"
 
-  def altinstall? = self != Formula["python3"]
+  def altinstall? = name != Formula["python3"].name
 
   def python3 = bin/"python#{version.major_minor}"
 

@@ -1,8 +1,8 @@
 class Sysdig < Formula
   desc "System-level exploration and troubleshooting tool"
   homepage "https://sysdig.com/"
-  url "https://github.com/draios/sysdig/archive/refs/tags/0.41.2.tar.gz"
-  sha256 "7ca055ce63a43de7dc390b237caeb13455616f84d4f4052c1744f65d9bb6ae2f"
+  url "https://github.com/draios/sysdig/archive/refs/tags/0.41.4.tar.gz"
+  sha256 "36daa6a06705569fcc9b0579992e2457494003aea0065eabf54b3e16d67511f7"
   license all_of: [
     "Apache-2.0",
     { any_of: ["GPL-2.0-only", "MIT"] },                  # `falcosecurity-libs`, driver/
@@ -16,12 +16,12 @@ class Sysdig < Formula
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "7f63b6e9d6b16ae0c2c0c52944799f6d4a4178c8edf74ec48d3af4312b06c41b"
-    sha256                               arm64_sequoia: "1416275442d0c6a75a78a614508d79f3112991fab06bb83f0f2dfa96a90e7e15"
-    sha256                               arm64_sonoma:  "7e9af5795a1ba5a21b7d4c262e35da1e0b98e5b72a9ca8a1c5f76f4f501d0eb4"
-    sha256                               sonoma:        "febcf960f78e96fecb7402b35792594bd12ac6529f400a6c8e6453f036beb552"
-    sha256                               arm64_linux:   "ebaa07fa9c03e27c8e24616abdec5f8e12b1ea0d0fc908fe1a81152df4e29432"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "beb29e061c3e604cab057c60ce7cc2becffb3208276c9f068e5e4c6cc02624f7"
+    sha256                               arm64_tahoe:   "e786adfbdbe1369eb90eecac547c16018415c5694ec7375f4996594a2a232ebb"
+    sha256                               arm64_sequoia: "78c9297d83306170d2bc43f2a92db0c0fd06ed1756b94cc631c6d353dbe7b94d"
+    sha256                               arm64_sonoma:  "97bc43a3b1e88440ee5f83e7fbfb004af08feaef74046b74fff30c55ddcfbd81"
+    sha256                               sonoma:        "16b73e4bb647fc7349f4ea5f72c622711fcc629f16fe1dbef0c1b1ad601c7dd7"
+    sha256                               arm64_linux:   "c2d55cd64ff3cf196bf2d234f743b4174a33dd8103ffc4895c8b6f90c2b7bc56"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0f0aa0b0d832cdda512511e596bf147c55f4a9d9fed2ddb5f4f07710c7e581ec"
   end
 
   # FIXME: switch to brewed `falcosecurity-libs`
@@ -54,6 +54,13 @@ class Sysdig < Formula
   resource "falcosecurity-libs" do
     url "https://github.com/falcosecurity/libs/archive/refs/tags/0.21.0.tar.gz"
     sha256 "9e977001dd42586df42a5dc7e7a948c297124865a233402e44bdec68839d322a"
+  end
+
+  # Fix inclusion of removed `zlib.cmake` module
+  # https://github.com/draios/sysdig/pull/2176
+  patch do
+    url "https://github.com/draios/sysdig/commit/1f4565219b74c8b8ff9084425e24c50b43ec3d7b.patch?full_index=1"
+    sha256 "6002ab9759c08e79d6382b48e43f47e70cf07141981be5a1717bdc4ad503402a"
   end
 
   def install

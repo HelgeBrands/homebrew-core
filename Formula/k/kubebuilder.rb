@@ -2,18 +2,18 @@ class Kubebuilder < Formula
   desc "SDK for building Kubernetes APIs using CRDs"
   homepage "https://github.com/kubernetes-sigs/kubebuilder"
   url "https://github.com/kubernetes-sigs/kubebuilder.git",
-      tag:      "v4.10.1",
-      revision: "8bce950e46b914d54c872da25500b8c27b6c05e8"
+      tag:      "v4.11.1",
+      revision: "4fbe8f6c63c6eb9a2a5cc440acbedad6b60d3225"
   license "Apache-2.0"
   head "https://github.com/kubernetes-sigs/kubebuilder.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "12ebb56f847ad9acba38ec8707b0e4127207d305de8ed108679d0cbc348e3fdc"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "12ebb56f847ad9acba38ec8707b0e4127207d305de8ed108679d0cbc348e3fdc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "12ebb56f847ad9acba38ec8707b0e4127207d305de8ed108679d0cbc348e3fdc"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3a1b98bbd0207d0e2aadacac616a535cad6853a76299a291041ad258eb095cf9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "78af0f76b525a9313733ca38692d5bfb122b51cc540037ba45d6579df14137be"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1e24bcf8fc4d65e14803f9a704c17b9e036880b042290491b2c8facc5639b71d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "609b8d60a5520ac5613682b19aaa68f28e294b8d5ec978b8cf9b17d02f3f2b02"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "609b8d60a5520ac5613682b19aaa68f28e294b8d5ec978b8cf9b17d02f3f2b02"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "609b8d60a5520ac5613682b19aaa68f28e294b8d5ec978b8cf9b17d02f3f2b02"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e0d40029764a0669e92eb886a05ea807aca4621a2f92dcba30d2992353d14ece"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b42a5dd3bd5730f4bb67ac78fe8abf619cac75430a128ca632b7c42aa74b431e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "661b80aa1b46c34d4d6dcd364dda03c617b1d151aca644dc6d9770f9cfaef6ab"
   end
 
   depends_on "go"
@@ -32,7 +32,7 @@ class Kubebuilder < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"kubebuilder", "completion")
+    generate_completions_from_executable(bin/"kubebuilder", shell_parameter_format: :cobra)
   end
 
   test do

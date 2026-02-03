@@ -1,8 +1,8 @@
 class Netatalk < Formula
   desc "File server for Macs, compliant with Apple Filing Protocol (AFP)"
   homepage "https://netatalk.io"
-  url "https://github.com/Netatalk/netatalk/releases/download/netatalk-4-3-2/netatalk-4.3.2.tar.xz"
-  sha256 "2977b4fd113182f0cc183337ba23d5701fb2be4e0dfcec7ee575b4d73a738d3a"
+  url "https://github.com/Netatalk/netatalk/releases/download/netatalk-4-4-1/netatalk-4.4.1.tar.xz"
+  sha256 "8fcab0bf3b39cd8a94fe3ee7a8264c6000515a3af377da3416696609ab13316d"
   license all_of: [
     "GPL-2.0-only",
     "GPL-2.0-or-later",
@@ -17,14 +17,12 @@ class Netatalk < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 arm64_tahoe:   "a996c4867d72289a1d1b6de73069dab3ff7e975f2a9e41af1572548e617e9663"
-    sha256 arm64_sequoia: "33055225df69045cbc4e9b44e4830ba1dd979f83dbb15726258fb09908047819"
-    sha256 arm64_sonoma:  "2ebdbc3faeb4a7ef33d4c863e7336685510e2c58ad28df1d136b0de83bc9cbbc"
-    sha256 arm64_ventura: "dbac843786ce3ce67d91c56d6052f2fb5d90897abe1c0596cd22f13f687f32ba"
-    sha256 sonoma:        "adb8b67efc6450b746c0fd67dacf69845207db2b32904eea20fcfc931cb5dc67"
-    sha256 ventura:       "2b1cb2ab91c8e9c685dddd614dd89f2391b8de3207e21c5098bb1eb5c0a6e62e"
-    sha256 arm64_linux:   "f6bb7dc5baca9769b091710448d9f6542b996778e34b86689f5f4a24e629a8d9"
-    sha256 x86_64_linux:  "d55c30bfa29981cb9c05c3eb2a9e5b1ee99d35ae295e0bfbeac2e6c51ee1d093"
+    sha256 arm64_tahoe:   "a035b13e47aa4e8c0b69b8c8d1349fdbd1770498742d4355c34fdfa8438ea6dd"
+    sha256 arm64_sequoia: "9d836b99af5ab42bba289f88704e773fbf7b943a88460d3b356cb3598fac4f46"
+    sha256 arm64_sonoma:  "00c9b000cfc0f11c3818ed4f569f23e43c2b248a954cc63ebfbaf38910d848be"
+    sha256 sonoma:        "c60acf3487cac5ef372d67eeab9f23083ff8c6812e8a039d8abfec4d72176606"
+    sha256 arm64_linux:   "ebbf5e06fe8b5d04eafee507c8be83d68ea8fc18e8c2822e1dddd3826fc37f96"
+    sha256 x86_64_linux:  "b0b70664aa88aaf213ba4d943c5f5fc0034fd5d67143ba638c4cbb7139c51046"
   end
 
   depends_on "cmark-gfm" => :build
@@ -52,8 +50,6 @@ class Netatalk < Formula
     depends_on "libtirpc" # on macOS we use native RPC instead
     depends_on "linux-pam"
   end
-
-  conflicts_with "ad", because: "both install `ad` binaries"
 
   def install
     inreplace "distrib/initscripts/macos.netatalk.in", "@sbindir@", opt_sbin
@@ -119,7 +115,7 @@ class Netatalk < Formula
       signature = 1234567890ABCDEF
     EOS
     fork do
-      system sbin/"netatalk", "-d", "-F", "#{testpath}/afp.conf"
+      system sbin/"netatalk", "-d", "-F", testpath/"afp.conf"
     end
     system sbin/"afpd", "-V"
     system sbin/"netatalk", "-V"

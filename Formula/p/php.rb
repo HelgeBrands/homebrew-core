@@ -3,9 +3,9 @@ class Php < Formula
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
   # TODO: Remove TAILCALL VM workaround in next release
-  url "https://www.php.net/distributions/php-8.5.0.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.5.0.tar.xz"
-  sha256 "39cb6e4acd679b574d3d3276f148213e935fc25f90403eb84fb1b836a806ef1e"
+  url "https://www.php.net/distributions/php-8.5.2.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.5.2.tar.xz"
+  sha256 "cb75a9b00a2806f7390dd64858ef42a47b443b3475769c8af6af33a18b1381f1"
   license all_of: [
     "PHP-3.01",
 
@@ -37,12 +37,12 @@ class Php < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "03b97964f87cb37c098baf62b9f169d2eba6d884f4081c66aff692f56bec9812"
-    sha256 arm64_sequoia: "451d75733fba64fb6e84a28333bb2b02ec83dd14137bc83c8473a26b83344829"
-    sha256 arm64_sonoma:  "4fe86395bd69087c9813c861d569f40bea798f2d5eb889f231013f31ee471c2c"
-    sha256 sonoma:        "802c83d269609153296be37dbcb14373d3d9589c1d158aeaa67218dcf9c3e3e3"
-    sha256 arm64_linux:   "f22af7b3c6b3dc169f8b44a7d21e53b0c677785cb5d0ae22dbffa30f08353cf9"
-    sha256 x86_64_linux:  "d5d380cdeefea8b7d1a264f9bff9d0cf867aae9effcf0491913de1cf4a12b99f"
+    sha256 arm64_tahoe:   "c5b132c0bf56d68ad6c240ddf72bf610eb41b03a6a60c50b8875ead25263e079"
+    sha256 arm64_sequoia: "265c26d2873a7a016ef3c742ec9690fb804609bdff6c4208bccea6adae85f52a"
+    sha256 arm64_sonoma:  "08f7b891905ba9117ddbe214750ce1fe0f2bcdb685bd1f76500b5377f6f1c585"
+    sha256 sonoma:        "a151f64a4d1f0644ac83383a2b961615397c7449dae4883cfc7ca836ec274b0c"
+    sha256 arm64_linux:   "55698912be71be10f1b43afb645dac4205a01c93b5f245fc5cf160d1a64cc804"
+    sha256 x86_64_linux:  "0a6102245c0810cc990bdb74633f20dad39564fed5bb8042f36fe60aea447ee2"
   end
 
   head do
@@ -62,6 +62,7 @@ class Php < Formula
   depends_on "freetds"
   depends_on "gd"
   depends_on "gmp"
+  depends_on "icu4c@78"
   depends_on "libpq"
   depends_on "libsodium"
   depends_on "libzip"
@@ -152,7 +153,6 @@ class Php < Formula
       --with-config-file-path=#{config_path}
       --with-config-file-scan-dir=#{config_path}/conf.d
       --with-pear=#{pkgshare}/pear
-      --disable-intl
       --enable-bcmath
       --enable-calendar
       --enable-dba
@@ -160,6 +160,7 @@ class Php < Formula
       --enable-ftp
       --enable-fpm
       --enable-gd
+      --enable-intl
       --enable-mbregex
       --enable-mbstring
       --enable-mysqlnd
@@ -307,8 +308,6 @@ class Php < Formula
 
   def caveats
     <<~EOS
-      The PHP Internationalization extension is now in the `php-intl` formula.
-
       To enable PHP in Apache add the following to httpd.conf and restart Apache:
           LoadModule php_module #{opt_lib}/httpd/modules/libphp.so
 
@@ -401,7 +400,7 @@ class Php < Formula
     EOS
 
     begin
-      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", "#{testpath}/httpd.conf"
+      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", testpath/"httpd.conf"
       sleep 10
       assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
 
@@ -409,7 +408,7 @@ class Php < Formula
       Process.wait(pid)
 
       fpm_pid = spawn sbin/"php-fpm", "-y", "fpm.conf"
-      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", "#{testpath}/httpd-fpm.conf"
+      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", testpath/"httpd-fpm.conf"
       sleep 10
       assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
     ensure

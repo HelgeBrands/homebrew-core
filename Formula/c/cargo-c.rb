@@ -1,8 +1,8 @@
 class CargoC < Formula
   desc "Helper program to build and install c-like libraries"
   homepage "https://github.com/lu-zero/cargo-c"
-  url "https://github.com/lu-zero/cargo-c/archive/refs/tags/v0.10.18.tar.gz"
-  sha256 "0f2b699be7ad5cac05624701065ae521c7f6b8159bdbcb8103445fc2440d1a7e"
+  url "https://github.com/lu-zero/cargo-c/archive/refs/tags/v0.10.20.tar.gz"
+  sha256 "9bdf7c10b44466a7c01dc4ed152da5031793cca9e0c8009d73223a32522cf2c3"
   license "MIT"
 
   livecheck do
@@ -11,12 +11,12 @@ class CargoC < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "5b1949b951da003b42de263c8170c825f9aefd44772af0ae956c57d80d3159f9"
-    sha256 cellar: :any,                 arm64_sequoia: "6794c0c0a72eefaeed40ce4c03e53d68836a95e6a91c527ff7c4457b3d73bd20"
-    sha256 cellar: :any,                 arm64_sonoma:  "a88a4bb9e31fa64875e68d5baace6548ad6b553da41d8790e684b12fb1ada6a4"
-    sha256 cellar: :any,                 sonoma:        "ee834e8d29c526dddbf7a0c12f101f892de9018e1d87461a1c51e89d658f0e1b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c73b5c8b73687c41823fc7d91f3a56c828847262eba570661529f2db9e88fd8c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0e5780a504a0a80cf05c761ba78dd7233cbeb767e46d346620b04bc404a022ec"
+    sha256 cellar: :any,                 arm64_tahoe:   "5ec0938b762dac2f00cffb75c65f16b21dcbe318c8b0139fb88f4a9420320917"
+    sha256 cellar: :any,                 arm64_sequoia: "df057729dc96660808773283b561781b60357580fb693e19ce07dab4658debbd"
+    sha256 cellar: :any,                 arm64_sonoma:  "4a64cf07223a9388b98fe5e79ddabc9f48a949cf790c72adb1baee8fddd7d21a"
+    sha256 cellar: :any,                 sonoma:        "3e68cde1e6e4176e802bbcd4c3f5d48520c62a902b1f9946ea1d5f4aaf652a1c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "05481276b5fdfe6fc11db58d3141cf51fd4aa650475615411b9497c718a0ccc9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "016c098c27ca8c651af617b38079f3086b2ddb35ffa80813b4597bb7ed6f4511"
   end
 
   depends_on "pkgconf" => :build

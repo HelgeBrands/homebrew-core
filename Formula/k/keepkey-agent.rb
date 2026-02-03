@@ -6,16 +6,15 @@ class KeepkeyAgent < Formula
   url "https://files.pythonhosted.org/packages/65/72/4bf47a7bc8dc93d2ac21672a0db4bc58a78ec5cee3c4bcebd0b4092a9110/keepkey_agent-0.9.0.tar.gz"
   sha256 "47c85de0c2ffb53c5d7bd2f4d2230146a416e82511259fad05119c4ef74be70c"
   license "LGPL-3.0-only"
-  revision 10
+  revision 12
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any,                 arm64_tahoe:   "40acf7033656bb375b6ceac017ca2cdd56c68fef74a8cfedb259992a132ca0ac"
-    sha256 cellar: :any,                 arm64_sequoia: "f5e695f3523f6e80f9e440279f48e6e3d54b1b685c0ba6dc437d1ec281ae1b49"
-    sha256 cellar: :any,                 arm64_sonoma:  "aa277831739bfb00672b2f995b2ee19e7d5bb7afc307b501651e85685b8fe91f"
-    sha256 cellar: :any,                 sonoma:        "22a2da737679ca48d801860a712d088bbf0231688475b2dda4c590b08adf73f6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "640dc5b61a554fe2d0fbd869d20e4e053554b71d14afba0ac19cfe1b759a25db"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c3b4aa1d98ae8a92be3dc01d612c979d0dee3ba49b65403deae62df0b5c6e37b"
+    sha256 cellar: :any,                 arm64_tahoe:   "fdd59c754ad9e0063c122f6e6ea4e8dad84c3e4362c3c5f9507e00f29f64fd84"
+    sha256 cellar: :any,                 arm64_sequoia: "5ab68acc0a8e5bc800b7a5244562c63b4eaa3358981061910206d5a09a31268d"
+    sha256 cellar: :any,                 arm64_sonoma:  "004d1fa2188d2a662375452fb8ddf499deb8bc3d0c66c7cf3a5fe24f973055c0"
+    sha256 cellar: :any,                 sonoma:        "05bf28e064bb3552229a7829fe1113cb85409defa8183c1c29528838aac6c955"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "729a7656a6ea9bb47c0d0e50c02a9b0bed78fec26d9e6fa9d1d5bbc6258788e2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9fe6d7952edb6af22d1163a15aa5231e5282dd397891b33a20159a1c80f3ad11"
   end
 
   depends_on "pkgconf" => :build # for hidapi resource
@@ -46,8 +45,8 @@ class KeepkeyAgent < Formula
   end
 
   resource "docutils" do
-    url "https://files.pythonhosted.org/packages/4a/c0/89fe6215b443b919cb98a5002e107cb5026854ed1ccb6b5833e0768419d1/docutils-0.22.2.tar.gz"
-    sha256 "9fdb771707c8784c8f2728b67cb2c691305933d68137ef95a75db5f4dfbc213d"
+    url "https://files.pythonhosted.org/packages/ae/b6/03bb70946330e88ffec97aefd3ea75ba575cb2e762061e0e62a213befee8/docutils-0.22.4.tar.gz"
+    sha256 "4db53b1fde9abecbb74d91230d32ab626d94f6badfc575d6db9194a49df29968"
   end
 
   resource "ecdsa" do
@@ -56,8 +55,8 @@ class KeepkeyAgent < Formula
   end
 
   resource "hidapi" do
-    url "https://files.pythonhosted.org/packages/47/72/21ccaaca6ffb06f544afd16191425025d831c2a6d318635e9c8854070f2d/hidapi-0.14.0.post4.tar.gz"
-    sha256 "48fce253e526d17b663fbf9989c71c7ef7653ced5f4be65f1437c313fb3dbdf6"
+    url "https://files.pythonhosted.org/packages/74/f6/caad9ed701fbb9223eb9e0b41a5514390769b4cb3084a2704ab69e9df0fe/hidapi-0.15.0.tar.gz"
+    sha256 "ecbc265cbe8b7b88755f421e0ba25f084091ec550c2b90ff9e8ddd4fcd540311"
   end
 
   resource "keepkey" do
@@ -68,6 +67,12 @@ class KeepkeyAgent < Formula
   resource "libagent" do
     url "https://files.pythonhosted.org/packages/33/9f/d80eb0568f617d4041fd83b8b301fdb817290503ee4c1546024df916454e/libagent-0.15.0.tar.gz"
     sha256 "c87caebdb932ed42bcd8a8cbe40ce3589587c71c3513ca79cadf7a040e24b4eb"
+
+    # Backport replacement of pkg_resources
+    patch do
+      url "https://github.com/romanz/trezor-agent/commit/68e39c14216f466c8710bf65ef133c744f8f92da.patch?full_index=1"
+      sha256 "a2b2279ba0eaf7a11d2a2e1f79155829bc8939942848b01602062f6c269b68b0"
+    end
   end
 
   resource "libusb1" do
@@ -85,6 +90,11 @@ class KeepkeyAgent < Formula
     sha256 "1fe496356820984f45559b1540c80ff10de448368929b9c60a2b55744cc88acf"
   end
 
+  resource "packaging" do
+    url "https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz"
+    sha256 "00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4"
+  end
+
   resource "protobuf" do
     url "https://files.pythonhosted.org/packages/55/5b/e3d951e34f8356e5feecacd12a8e3b258a1da6d9a03ad1770f28925f29bc/protobuf-3.20.3.tar.gz"
     sha256 "2e3427429c9cffebf259491be0af70189607f365c2f41c7c3764af6f337105f2"
@@ -96,8 +106,8 @@ class KeepkeyAgent < Formula
   end
 
   resource "pynacl" do
-    url "https://files.pythonhosted.org/packages/06/c6/a3124dee667a423f2c637cfd262a54d67d8ccf3e160f3c50f622a85b7723/pynacl-1.6.0.tar.gz"
-    sha256 "cb36deafe6e2bce3b286e5d1f3e1c246e0ccdb8808ddb4550bb2792f2df298f2"
+    url "https://files.pythonhosted.org/packages/d9/9a/4019b524b03a13438637b11538c82781a5eda427394380381af8f04f467a/pynacl-1.6.2.tar.gz"
+    sha256 "018494d6d696ae03c7e656e5e74cdfd8ea1326962cc401bcf018f1ed8436811c"
   end
 
   resource "python-daemon" do
@@ -108,11 +118,6 @@ class KeepkeyAgent < Formula
   resource "semver" do
     url "https://files.pythonhosted.org/packages/72/d1/d3159231aec234a59dd7d601e9dd9fe96f3afff15efd33c1070019b26132/semver-3.0.4.tar.gz"
     sha256 "afc7d8c584a5ed0a11033af086e8af226a9c0b206f313e0301f8dd7b6b589602"
-  end
-
-  resource "setuptools" do
-    url "https://files.pythonhosted.org/packages/18/5d/3bf57dcd21979b887f014ea83c24ae194cfcd12b9e0fda66b957c69d1fca/setuptools-80.9.0.tar.gz"
-    sha256 "f36b47402ecde768dbfafc46e8e4207b4360c654f1f3bb84475f0a28628fb19c"
   end
 
   resource "six" do
@@ -126,8 +131,8 @@ class KeepkeyAgent < Formula
   end
 
   resource "wheel" do
-    url "https://files.pythonhosted.org/packages/8a/98/2d9906746cdc6a6ef809ae6338005b3f21bb568bea3165cfc6a243fdc25c/wheel-0.45.1.tar.gz"
-    sha256 "661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729"
+    url "https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz"
+    sha256 "e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803"
   end
 
   def install

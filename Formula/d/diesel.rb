@@ -1,18 +1,18 @@
 class Diesel < Formula
   desc "Command-line tool for Rust ORM Diesel"
   homepage "https://diesel.rs"
-  url "https://github.com/diesel-rs/diesel/archive/refs/tags/v2.3.4.tar.gz"
-  sha256 "67f8109ce5e62259e540f98885d41e5fa5a44722af8f83a0256eda3c92175b76"
+  url "https://github.com/diesel-rs/diesel/archive/refs/tags/v2.3.6.tar.gz"
+  sha256 "83e5092dfcbbc4b45af42b6516b72ceeca8c7a4f3c64558d4177fb490d610db7"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/diesel-rs/diesel.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "2d74f027819bc980ea1569796d5fc77148f997e01723e6b12e1af0501eff159a"
-    sha256 cellar: :any,                 arm64_sequoia: "767354256c10b6ab236d6f7e120e41099571facfcbf1db6984e466ecc782419f"
-    sha256 cellar: :any,                 arm64_sonoma:  "c3e5bc84046ad2ed550f045322cd86bbf7abbcb5351c3643f58009229355eefb"
-    sha256 cellar: :any,                 sonoma:        "d32602fcc0b51b911c8903b0db0a4e33e3b141717415a4208f74dceca3d03373"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "743f4612208a9f01093687c49bb612e70f79bf8c00412260972076f015219c1f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "087feb936b4736004f77d71c61225eaac48b7b7f3d02b20afe4e33b080542d82"
+    sha256 cellar: :any,                 arm64_tahoe:   "37a1422a47206ba830b99bd09cccf6b7125b1f9685726235516ae4734be9e911"
+    sha256 cellar: :any,                 arm64_sequoia: "a6679308bdc2113f77acd8029490f2667a3689131c450c3d3c54a628cbb1c5f1"
+    sha256 cellar: :any,                 arm64_sonoma:  "287f81c4e14e37ced88b06329baaffe9e9d506dbf95cd78adc22b8df38a6eda5"
+    sha256 cellar: :any,                 sonoma:        "5dc92c115496af0a341643c05110a9c8b9be0420f98df5041c38569467c9d19a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7adcde0814692ab9560a8b9ccea883584bbe395685180694bb96974079a407b9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "75ac078526a9aa18442b53138d18e84d596810fc52cac7cb6a4c1957e6d4a102"
   end
 
   depends_on "rust" => [:build, :test]

@@ -1,8 +1,8 @@
 class Supabase < Formula
   desc "Open source Firebase alternative"
   homepage "https://supabase.com/docs/reference/cli/about"
-  url "https://github.com/supabase/cli/archive/refs/tags/v2.65.5.tar.gz"
-  sha256 "3dd456363d9949f0f3a591c9cba62f744928228a8d99c469b7ea36dc243975df"
+  url "https://github.com/supabase/cli/archive/refs/tags/v2.75.0.tar.gz"
+  sha256 "90cda59c0851ad3512730936e9b2706b34c00dcc58815d0cff7392ab40e60d1c"
   license "MIT"
   head "https://github.com/supabase/cli.git", branch: "develop"
 
@@ -12,12 +12,12 @@ class Supabase < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "325c27e6097a35c881b4d88826539d7b6a7739f8e490c2d42ad92b0c911df267"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "013d0a6236b19513909b45c2d3baa5fdf1922c41637565b8d298375ed5c94fcd"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "936972c794af29fdcfa586762ba9fcdbe99776b745fc48a7e683aca1c8cfd74b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "303e69bc3a3b824a554132d4abae4e003079ab47802cf3ecf3f7d7123b145485"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "332685d0e98fea00cb38e44b31efe0a3f1f42b32ab85d04c3b04be92eef88f77"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d7c85017ac5773fc504839f3fc6d4a9b89950b373df3c69ec8c5d1ad3d369f5a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "db5e821104e60b045078c15e9a44d13203c11cd8d3a3c0b131bc75f048f9f201"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "56a243b92649ebd7f117ac3a1d8eb393d7feeb2d689cecde1c76352c023ea3a5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "268953a6eae0cb3788bc2de0bd721f6329869d13e1a6d9d021b5fa23b67f5f2b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2258e552069e0316a07d0025d1742677f26cfbee3a4166b1dc379cffce949bb7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "425632b554d90abcb04264663ff50aaafe37e5aa79192b901cb4eb666a46443c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2db5332d02a31d584ca7c94475b089953535827d7e67d40a42f0938fd90860b7"
   end
 
   depends_on "go" => :build
@@ -28,7 +28,7 @@ class Supabase < Formula
       -X github.com/supabase/cli/internal/utils.Version=#{version}
     ]
     system "go", "build", *std_go_args(ldflags:)
-    generate_completions_from_executable(bin/"supabase", "completion")
+    generate_completions_from_executable(bin/"supabase", shell_parameter_format: :cobra)
   end
 
   test do

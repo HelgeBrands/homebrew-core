@@ -1,46 +1,41 @@
 class Glew < Formula
   desc "OpenGL Extension Wrangler Library"
   homepage "https://glew.sourceforge.net/"
-  url "https://downloads.sourceforge.net/project/glew/glew/2.2.0/glew-2.2.0.tgz"
-  sha256 "d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1"
+  url "https://downloads.sourceforge.net/project/glew/glew/2.3.1/glew-2.3.1.tgz"
+  sha256 "b64790f94b926acd7e8f84c5d6000a86cb43967bd1e688b03089079799c9e889"
   license "BSD-3-Clause"
-  revision 1
   head "https://github.com/nigels-com/glew.git", branch: "master"
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
-    rebuild 2
-    sha256 cellar: :any,                 arm64_tahoe:    "af7df563c00e50d3ab300d1daba874e67c997b9f18a57581ee69d9d2216d4745"
-    sha256 cellar: :any,                 arm64_sequoia:  "4ac8264612c4af3b6864eed07564e14ddf81c25a050aa2bc91953966d12e73e4"
-    sha256 cellar: :any,                 arm64_sonoma:   "05aa1fad57b8dd0d68045a54b66ad9d61c494584560a55512a2123d22849e467"
-    sha256 cellar: :any,                 arm64_ventura:  "33b1499e0219c3980310dee9e6b115af3ef0324723af7c3a0ff9a68ac7b3e841"
-    sha256 cellar: :any,                 arm64_monterey: "a116faecf407ee2a00cb775a3b668fe0f5753ceecd73678d20b3656e6c56d163"
-    sha256 cellar: :any,                 arm64_big_sur:  "088dedfcd45fe37b0d027b52bb1c730e01aeacda4d7b00ce14f67a19d1961bce"
-    sha256 cellar: :any,                 sonoma:         "b09c9df6478e5d9c3337bffd756f78c2cf6bf5e5de0bf7db8066e8683c2bb3a1"
-    sha256 cellar: :any,                 ventura:        "a9850b75eb81c4b3d5f81209fe7a9b3cd848444df83c6a391ff9d77096ba6e58"
-    sha256 cellar: :any,                 monterey:       "9d8d8c93eec4287a9231cd0378b45ee3b9735afca387fc1f5def7e2c68533097"
-    sha256 cellar: :any,                 big_sur:        "728e40242af0b9a53ae837de3d2658f205e121a04285de29f3964c2dd7512a9d"
-    sha256 cellar: :any,                 catalina:       "ee50985ccbbcd0ec1980960b7fb31fce80e99450f14ae02a751a731056182d34"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "4299aaba365fcecffb07e5d87bff754833e8e9b7a26ba648691185a97a592fab"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "7bc36f86706af951931a2c4c905b8b680cf67606406d238fbfd8923f6109e626"
+    sha256 cellar: :any,                 arm64_tahoe:   "1ec85f5ae1b523fe8b30ccd462b1f7988693f0f7b87660b12d08ecf575a1cf01"
+    sha256 cellar: :any,                 arm64_sequoia: "7cec448d9e7413bea9130a398f7ebdec896c0148f37dc69302b95f5079c0f2f1"
+    sha256 cellar: :any,                 arm64_sonoma:  "7f3110639abd423d4fe61c34b6f33bb8b859141e22ad3c32337f36508f9865c7"
+    sha256 cellar: :any,                 sonoma:        "a6ae467e7998dfc0f8b237f01118194c9aed50bc5f769cc2c10d116d14accdde"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "72762b76d9023594c8e7c35404458a7ab43b169116d73545d46b892a83314552"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e8f24c5184a070eb8500a8def5fa6b5bf4bb8b531fc305f0aa4cd71cc3fb5af6"
   end
 
   depends_on "cmake" => [:build, :test]
 
   on_linux do
     depends_on "freeglut" => :test
+    depends_on "xorg-server" => :test
     depends_on "libx11"
     depends_on "mesa"
     depends_on "mesa-glu"
   end
 
-  # cmake 4.0 build patch, upstream bug report, https://github.com/nigels-com/glew/issues/432
-  patch :DATA
+  # OpenGL extension fixes.
+  # Upstream PR ref: https://github.com/nigels-com/glew/pull/455
+  patch do
+    url "https://github.com/nigels-com/glew/commit/a7c9cc7c01fa9d59322edf702b6d59e10fe427cb.patch?full_index=1"
+    sha256 "d177dc99fb81d310d2b78b051cdddb4432843904806952794040f8201d702c0c"
+  end
 
   def install
-    system "cmake", "-S", "./build/cmake", "-B", "_build",
-                    "-DCMAKE_INSTALL_RPATH=#{rpath}",
+    args = ["-DCMAKE_INSTALL_RPATH=#{rpath}"]
+    args << "-DOPENGL_glx_LIBRARY=#{Formula["mesa"].opt_lib}/libGL.so" if OS.linux?
+    system "cmake", "-S", "./build/cmake", "-B", "_build", *args,
                     *std_cmake_args(find_framework: "FIRST")
     system "cmake", "--build", "_build"
     system "cmake", "--install", "_build"
@@ -99,26 +94,14 @@ class Glew < Formula
       flags << "-lglut"
     end
     system ENV.cc, testpath/"test.c", "-o", "test", *flags
-    # Fails in Linux CI with: freeglut (./test): failed to open display ''
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
     # Tahoe running is headless for now, maybe remove this later
     # ("GLUT Fatal Error: redisplay needed for window 1, but no display callback")
     return if OS.mac? && MacOS.version == :tahoe && ENV["HOMEBREW_GITHUB_ACTIONS"]
 
-    system "./test"
+    if OS.linux? && ENV.exclude?("DISPLAY")
+      system Formula["xorg-server"].bin/"xvfb-run", "./test"
+    else
+      system "./test"
+    end
   end
 end
-
-__END__
-diff --git a/build/cmake/CMakeLists.txt b/build/cmake/CMakeLists.txt
-index 419c243..8c66ae2 100644
---- a/build/cmake/CMakeLists.txt
-+++ b/build/cmake/CMakeLists.txt
-@@ -4,7 +4,7 @@ endif ()
-
- project (glew C)
-
--cmake_minimum_required (VERSION 2.8.12)
-+cmake_minimum_required (VERSION 3.5)
-
- include(GNUInstallDirs)

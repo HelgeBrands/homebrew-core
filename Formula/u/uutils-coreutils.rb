@@ -1,8 +1,8 @@
 class UutilsCoreutils < Formula
   desc "Cross-platform Rust rewrite of the GNU coreutils"
   homepage "https://uutils.github.io/coreutils/"
-  url "https://github.com/uutils/coreutils/archive/refs/tags/0.4.0.tar.gz"
-  sha256 "5f0c3f97b807e72edccc844c6a685ec9862199f16a665df07de5b1d20ec21233"
+  url "https://github.com/uutils/coreutils/archive/refs/tags/0.6.0.tar.gz"
+  sha256 "f751b8209ec05ae304941a727e42a668dcc45674986252f44d195ed43ccfad2f"
   license "MIT"
   head "https://github.com/uutils/coreutils.git", branch: "main"
 
@@ -12,12 +12,12 @@ class UutilsCoreutils < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "2a267c305c63cfb23b41da28f42b7d61974f1a9e4e4a0193e280e02e3a2dc2c0"
-    sha256 cellar: :any,                 arm64_sequoia: "2a59ef6947a0b8a672103ff080af286aaa00fe952e96449ad5ad7150c1296b99"
-    sha256 cellar: :any,                 arm64_sonoma:  "e931c2a51f4dbf5e7ec88be22de457f6a8df37c6fece636f9e7b118e1302f46d"
-    sha256 cellar: :any,                 sonoma:        "c96c4aa0a2fd1d4d8cd1350529a2fff794ce70a88d2a40b55aeb3faf9f502eec"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8de9bf8b860974105a72e75e944a7e7ff854066452c4dfdb0f43f19697c9dc0a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ca67406d62cfa778de25f0d0dc282849aa0ec8a5c2e76c87392f5102284ef391"
+    sha256 cellar: :any,                 arm64_tahoe:   "924e04cc141bcc932b40bc227a08870284fd97e12ef878e708fbda7520fe1221"
+    sha256 cellar: :any,                 arm64_sequoia: "c873ce99aeb0582375b6200020d8ed8caf4fda2ad4766b4f61445cc420da714b"
+    sha256 cellar: :any,                 arm64_sonoma:  "75840cfa19f39f32d53936f2c87d6f546b86336cef332ab1716347490cb44b65"
+    sha256 cellar: :any,                 sonoma:        "30a21dfd48fc8aa7829555b59770b67db8ff303d5218efad2054271a43010bd7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f53fcc66d49a33f9241eea86eb0a99c17100e773c6d6a55fde64bbe27059cf60"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8a495f658272b20d8ded7e0152f10e68932de7b97103c310cc5b5327120884d5"
   end
 
   depends_on "make" => :build
@@ -25,9 +25,11 @@ class UutilsCoreutils < Formula
   depends_on "sphinx-doc" => :build
 
   on_macos do
+    # TODO: remove conflict in follow-up CI-syntax-only PR
     conflicts_with "coreutils", because: "uutils-coreutils and coreutils install the same binaries"
   end
 
+  # TODO: remove in follow-up to 0.8.0 bump PR
   conflicts_with "unp", because: "both install `ucat` binaries"
 
   def install
@@ -37,47 +39,40 @@ class UutilsCoreutils < Formula
     inreplace "GNUmakefile", "$(SELINUX_PROGS)", ""
 
     args = %W[
-      PROG_PREFIX=u
+      PROG_PREFIX=uu-
       PREFIX=#{prefix}
       SPHINXBUILD=#{Formula["sphinx-doc"].opt_bin}/sphinx-build
     ]
     # Call `make` as `gmake` to use Homebrew `make`.
     system "gmake", "install", *args
 
-    # Symlink all commands into libexec/uubin without the 'u' prefix
+    # Symlink all commands into libexec/uubin without the 'uu-' prefix
     coreutils_filenames(bin).each do |cmd|
-      (libexec/"uubin").install_symlink bin/"u#{cmd}" => cmd
+      uu_cmd = bin/"uu-#{cmd}"
+      (libexec/"uubin").install_symlink uu_cmd.realpath => cmd
+
+      # Create a temporary compatibility executable for previous 'u' prefix.
+      # All users should get the warning in 0.6.0. Similar to brew's odeprecate
+      # timeframe, the removal can be done after 2 minor releases, i.e. 0.8.0.
+      odie "Remove compatibility exec scripts!" if build.stable? && version >= "0.8.0"
+      (bin/"u#{cmd}").write <<~SHELL
+        #!/bin/bash
+        echo "WARNING: u#{cmd} has been renamed to uu-#{cmd} and will be removed in 0.8.0" >&2
+        exec "#{uu_cmd}" "$@"
+      SHELL
     end
 
-    # Symlink all man(1) pages into libexec/uuman without the 'u' prefix
+    # Symlink all man(1) pages into libexec/uuman without the 'uu-' prefix
     coreutils_filenames(man1).each do |cmd|
-      (libexec/"uuman/man1").install_symlink man1/"u#{cmd}" => cmd
+      (libexec/"uuman/man1").install_symlink man1/"uu-#{cmd}" => cmd
     end
 
     (libexec/"uubin").install_symlink "../uuman" => "man"
-
-    # Symlink non-conflicting binaries
-    no_conflict = if OS.mac?
-      %w[
-        base32 dircolors factor hashsum hostid nproc numfmt pinky ptx realpath
-        shred shuf stdbuf tac timeout truncate
-      ]
-    else
-      %w[hashsum]
-    end
-    no_conflict.each do |cmd|
-      bin.install_symlink "u#{cmd}" => cmd
-      man1.install_symlink "u#{cmd}.1.gz" => "#{cmd}.1.gz"
-    end
   end
 
   def caveats
-    provided_by = "coreutils"
-    on_macos do
-      provided_by = "macOS"
-    end
     <<~EOS
-      Commands also provided by #{provided_by} have been installed with the prefix "u".
+      Commands have been installed with the prefix "uu-".
       If you need to use these commands with their normal names, you
       can add a "uubin" directory to your PATH from your bashrc like:
         PATH="#{opt_libexec}/uubin:$PATH"
@@ -89,7 +84,7 @@ class UutilsCoreutils < Formula
     dir.find do |path|
       next if path.directory? || path.basename.to_s == ".DS_Store"
 
-      filenames << path.basename.to_s.sub(/^u/, "")
+      filenames << path.basename.to_s.sub(/^uu-/, "")
     end
     filenames.sort
   end
@@ -97,7 +92,8 @@ class UutilsCoreutils < Formula
   test do
     (testpath/"test").write("test")
     (testpath/"test.sha1").write("a94a8fe5ccb19ba61c4c0873d391e987982fbbd3 test")
-    system bin/"uhashsum", "--sha1", "-c", "test.sha1"
-    system bin/"uln", "-f", "test", "test.sha1"
+    system bin/"usha1sum", "-c", "test.sha1" # TODO: remove in 0.8.0
+    system bin/"uu-sha1sum", "-c", "test.sha1"
+    system bin/"uu-ln", "-f", "test", "test.sha1"
   end
 end

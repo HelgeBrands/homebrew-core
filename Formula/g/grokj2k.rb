@@ -1,10 +1,8 @@
 class Grokj2k < Formula
   desc "JPEG 2000 Library"
   homepage "https://github.com/GrokImageCompression/grok"
-  # pull from git tag to get submodules
-  url "https://github.com/GrokImageCompression/grok.git",
-      tag:      "v20.0.4",
-      revision: "8a576b8157b8c55945b23b02abfffee2ed94b934"
+  url "https://github.com/GrokImageCompression/grok/releases/download/v20.0.5/source-full.tar.gz"
+  sha256 "7c34c4cd2b545d3bbd05b13c8e57db6a27dfd301613932f26aac3b4bd5397a8b"
   license "AGPL-3.0-or-later"
   head "https://github.com/GrokImageCompression/grok.git", branch: "master"
 
@@ -14,12 +12,12 @@ class Grokj2k < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c7e92721c13381eec2ee59f9ee5f6ba1cf9ecdcb64b00c07e33afbbd1234dd0e"
-    sha256 cellar: :any,                 arm64_sequoia: "e53f6d31a9f318d5298990246d05703c2a5bff654d18d458f374f3f7bd4b3f44"
-    sha256 cellar: :any,                 arm64_sonoma:  "4bf47ddf246877376dfb94dea41b8fe3799d25d6170e723ea934379cbfd10e94"
-    sha256 cellar: :any,                 sonoma:        "c9e8f4f961e891fd5b226110914ac52f45735862f5cfa0dce6713d878ad7d3d7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "38bfb196adf3559881f7d4f7faaf32df62e61d947df85d3000c9f6bb9f0903b2"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0340d5eb837faa45642c47880b744ad5ec73c45771e7860ab700720b93bf0b43"
+    sha256 cellar: :any,                 arm64_tahoe:   "32db75e1ab5ff4ca0e54cffb84a9fd62be515da0ee71d957b11cf33754257dde"
+    sha256 cellar: :any,                 arm64_sequoia: "4d74827bb0c9eaa072177d8f3e211dfbfdc66c4751a42da79765d7158f2c16db"
+    sha256 cellar: :any,                 arm64_sonoma:  "020110f635d414121deb9b43c1ab43dc00e37d01be9b68c91cc6fc7eb9085680"
+    sha256 cellar: :any,                 sonoma:        "92e81b874bc82df4baa9f60723298146ebdef12c539f2a80b3afdeeb85afce2e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d2384f388ac1e739a1a74ea2fdb86235cf3d31718f0e4322e2773451890ac5d7"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "47dce7ea3e14367dc1099c6e880f11106787b9526f4a60a4eb67491c3083292c"
   end
 
   depends_on "cmake" => :build
@@ -41,7 +39,7 @@ class Grokj2k < Formula
   end
 
   fails_with :clang do
-    build 1200
+    build 1699
     cause "Requires C++20"
   end
 
@@ -52,8 +50,6 @@ class Grokj2k < Formula
   end
 
   def install
-    ENV.llvm_clang if OS.mac? && (DevelopmentTools.clang_build_version < 1700)
-
     # Fix: ExifTool Perl module not found
     ENV.prepend_path "PERL5LIB", Formula["exiftool"].opt_libexec/"lib/perl5"
 

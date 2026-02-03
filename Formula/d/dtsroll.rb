@@ -1,26 +1,27 @@
 class Dtsroll < Formula
   desc "CLI tool for bundling TypeScript declaration files"
   homepage "https://github.com/privatenumber/dtsroll"
-  url "https://registry.npmjs.org/dtsroll/-/dtsroll-1.4.1.tgz"
-  sha256 "26a3030a532a715ee29fcd8ec9b2cc20e92293d925d135c6c69ee114f39d71da"
+  url "https://registry.npmjs.org/dtsroll/-/dtsroll-1.7.5.tgz"
+  sha256 "3aa0ce1da68fc16d0f453991d44ddf05f57918ec2ec68a315cebf0c96b2ad2fc"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "6e77274c126ca0e35fa508288d65f17353c7190eb6d12218e9c9c89e7ce20197"
-    sha256 cellar: :any,                 arm64_sequoia: "f4e9c696c1eff169a56afc231df64ddb3afd1a94a93d06df600cbca2f243ac01"
-    sha256 cellar: :any,                 arm64_sonoma:  "f4e9c696c1eff169a56afc231df64ddb3afd1a94a93d06df600cbca2f243ac01"
-    sha256 cellar: :any,                 arm64_ventura: "f4e9c696c1eff169a56afc231df64ddb3afd1a94a93d06df600cbca2f243ac01"
-    sha256 cellar: :any,                 sonoma:        "16f1125c683e13616e62314f8e4bc91be5181ac227b3aeb99dcb1d4fc2035e62"
-    sha256 cellar: :any,                 ventura:       "16f1125c683e13616e62314f8e4bc91be5181ac227b3aeb99dcb1d4fc2035e62"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0d680c2184178dcc9f3288e732ee083f093a9dce24e8023b22c57038d67202af"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "64e17a278f414e6c1c8efbd55f535d0ef459bb7c657b3ae2b4196611c21530e6"
+    sha256 cellar: :any,                 arm64_tahoe:   "6234af095c493f8f2a118e5e4e3025c19a5b66c8d9000ee593a6531d18e43cab"
+    sha256 cellar: :any,                 arm64_sequoia: "76d6b6eb995d80f1f098a9eb660d933676ad0ff149d5324bc0bd2f4aa15ec500"
+    sha256 cellar: :any,                 arm64_sonoma:  "76d6b6eb995d80f1f098a9eb660d933676ad0ff149d5324bc0bd2f4aa15ec500"
+    sha256 cellar: :any,                 sonoma:        "efb191c9347b1196532b45ef2eed4348a1846e0741359b9f118962ce1f001c70"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3e955758598ab3a89d3383642d63e872c7b14281149fda3cb18531fde95f67f9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "45d603f86036837a24b19ff57b4817799f8b69e0a011aa426046602c37736504"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
+
+    node_modules = libexec/"lib/node_modules/dtsroll/node_modules"
+    deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
   end
 
   test do

@@ -1,8 +1,8 @@
 class Kubergrunt < Formula
   desc "Collection of commands to fill in the gaps between Terraform, Helm, and Kubectl"
   homepage "https://github.com/gruntwork-io/kubergrunt"
-  url "https://github.com/gruntwork-io/kubergrunt/archive/refs/tags/v0.18.4.tar.gz"
-  sha256 "e2acf5728d71042218555e47db11cc2d8390e1678c4599ac2a6996e7dd629a5c"
+  url "https://github.com/gruntwork-io/kubergrunt/archive/refs/tags/v0.19.0.tar.gz"
+  sha256 "0bc4d67db238b974bb2a80b4786beb8ff3c38b748b3e10448c5f0174c7ead488"
   license "Apache-2.0"
   head "https://github.com/gruntwork-io/kubergrunt.git", branch: "main"
 
@@ -15,14 +15,12 @@ class Kubergrunt < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a2412fe62c8bf8d416bc173aeeb6264eb324be1e65ae4ecfa36108033df49af3"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a2412fe62c8bf8d416bc173aeeb6264eb324be1e65ae4ecfa36108033df49af3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a2412fe62c8bf8d416bc173aeeb6264eb324be1e65ae4ecfa36108033df49af3"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "a2412fe62c8bf8d416bc173aeeb6264eb324be1e65ae4ecfa36108033df49af3"
-    sha256 cellar: :any_skip_relocation, sonoma:        "02e34b79897c6c9ad7eeb097b242d338241113ff5eb6070c9df65f03c45142c0"
-    sha256 cellar: :any_skip_relocation, ventura:       "02e34b79897c6c9ad7eeb097b242d338241113ff5eb6070c9df65f03c45142c0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "db340827e03ad3467ad33e6e15f28b500c573ef04428e1929ca7254e609ff3f0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ccc160bc31408aff9e91c1d31dc272c4410f8b7ec876dbcefd1ccf4649e5d6d6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9f1c2def529c9a4c7077b49de33fa173a5178fc74310a7bd91fe43c89d939413"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9f1c2def529c9a4c7077b49de33fa173a5178fc74310a7bd91fe43c89d939413"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9f1c2def529c9a4c7077b49de33fa173a5178fc74310a7bd91fe43c89d939413"
+    sha256 cellar: :any_skip_relocation, sonoma:        "882c7940ab2db99842727401de7c2f07d08b407eb7018b49d761fd09a50b09ef"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1ec4dbf35e1ef6fa3afd74291c1b140498d90b2e1b3ca043f06a76be7e758b3a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7d71c4ea2bdbceee1b90cc2b869da0511b722ba45187e11a3d5f50f14db1c4ff"
   end
 
   depends_on "go" => :build

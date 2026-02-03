@@ -6,16 +6,16 @@ class Watson < Formula
   url "https://files.pythonhosted.org/packages/a9/61/868892a19ad9f7e74f9821c259702c3630138ece45bab271e876b24bb381/td-watson-2.1.0.tar.gz"
   sha256 "204384dc04653e0dbe8f833243bb833beda3d79b387fe173bfd33faecdd087c8"
   license "MIT"
-  revision 9
+  revision 10
   head "https://github.com/jazzband/Watson.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "430bf13f00ead9895de85d54e16373836a8f2995715e36b6c513b852987ed18a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3b151fae3be25596746fc029ed894c4cbd6e9f5ef16241affba9390fe711bef5"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8ae80fb578ab81ec018cffad0a046d0159207e7a9096181eef6871a692ba3a9a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "6cca64e26f8642ecb317eb8bc9bf18073dadca346c4581a569f1fde315d443f2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "51e8e4025f6e2616578ebec917b7603dae0f78eb53a8a7e468205ebd7d27f577"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c8cbd748c7719cdbb03ee428e1eefaa03732eda28c2bda893874799d65ed879b"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "dd59d5755139b4ef6952e14515584bc20dfa1603f89caee9057532b2bce7f611"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "43673f64013557f7d5694db5e026908ffb66a70f617b4c6d8c026470b79bb9e8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0f490cf7058219e9c270dc8b5cdfd05858fff45fc58ab70628c9c44efa97e217"
+    sha256 cellar: :any_skip_relocation, sonoma:        "29d16ea3e55b56995e95e4e14045bf36072147c56da7b3d2dbf1451981614ce6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "155dd0deb4d9ccfd91caf092d719dda688ea2761bac9178271b4c614aa6ae482"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a28ef0742aa99dbd31a42f7cdc49a704c1ef93140b5c1c4df977d4a9fbe8c10a"
   end
 
   depends_on "certifi" => :no_linkage
@@ -64,13 +64,13 @@ class Watson < Formula
   end
 
   resource "tzdata" do
-    url "https://files.pythonhosted.org/packages/95/32/1a225d6164441be760d75c2c42e2780dc0873fe382da3e98a2e1e48361e5/tzdata-2025.2.tar.gz"
-    sha256 "b60a638fcc0daffadf82fe0f57e53d06bdec2f36c4df66280ae79bce6bd6f2b9"
+    url "https://files.pythonhosted.org/packages/5e/a7/c202b344c5ca7daf398f3b8a477eeb205cf3b6f32e7ec3a6bac0629ca975/tzdata-2025.3.tar.gz"
+    sha256 "de39c2ca5dc7b0344f2eba86f49d614019d29f060fc4ebc8a417896a620b56a7"
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   def install
@@ -80,8 +80,7 @@ class Watson < Formula
 
     virtualenv_install_with_resources
 
-    bash_completion.install "watson.completion" => "watson"
-    zsh_completion.install "watson.zsh-completion" => "_watson"
+    generate_completions_from_executable(bin/"watson", shell_parameter_format: :click)
   end
 
   test do

@@ -1,18 +1,18 @@
 class Carl < Formula
   desc "Calendar for the command-line"
   homepage "https://github.com/b1rger/carl"
-  url "https://github.com/b1rger/carl/archive/refs/tags/v0.5.0.tar.gz"
-  sha256 "82518ea8fbd89985c40591a1b2c030b969829e9ce12ac52cd4923bd852dcd884"
+  url "https://github.com/b1rger/carl/archive/refs/tags/v0.6.0.tar.gz"
+  sha256 "1399bf0aadc44efb92f76a7eef6158a6a19799fe0aab82946c417b166a95bbfe"
   license "MIT"
   head "https://github.com/b1rger/carl.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fafc29ae2ab8e50cc0f7d547010cf7fa7c3a02fa69bb96f5a895afda858e5077"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a24e089317286996916a752bbe9db465f4be90e7e266f0caa35635982086d9e2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9be8efd8f1f3a08c2cd598eef4014d479c0884befdd20720a1f0a39355a61013"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b3bf67b636554ec5e2d7dd4d56d299ca46f04bc402af5cfba091be09769d00a0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5836b6a32a188ff23e42be42af8773a984e7aa9cd6404d2b64c876d45d2ed24b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8a4d985cb1d18aaaabe14401811aafa79245f504a816ec200b09600d647fabcb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "251335aec10fb79627aab7eb88a912fcf54f427dbaf5b57800da3475e884b07b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "22bb54f69ef59cb2fa7d5cad18c11b2f13c5a27cdd525e4922ea616e5270dde7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d9634216e6f64b9f1433116a4b790b166bc12956a2b268dca0d532d40be008c8"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c9e9f3658080e784393f79ebd5da5d95dec09f7510e8aeaf67df8aaaee057449"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7bcdedcb89f3fb5e7f46553a89e3b059572977fe240d6980f9c9c3239910ec43"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "81bb73ea2cf38496e2bcc84d9074de0d93a467728a9f80fef7966f73afcd4ba9"
   end
 
   depends_on "rust" => :build

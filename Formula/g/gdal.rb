@@ -1,10 +1,10 @@
 class Gdal < Formula
   desc "Geospatial Data Abstraction Library"
   homepage "https://gdal.org/en/stable/"
-  url "https://github.com/OSGeo/gdal/releases/download/v3.12.0/gdal-3.12.0.tar.gz"
-  sha256 "44c95baabe6c1a047c1ebe5043e38dd73e4936bc4c481db14efbfd03342eab73"
+  url "https://github.com/OSGeo/gdal/releases/download/v3.12.1/gdal-3.12.1.tar.gz"
+  sha256 "266cbadf8534d1de831db8834374afd95603e0a6af4f53d0547ae0d46bd3d2d1"
   license "MIT"
-  revision 2
+  revision 3
 
   livecheck do
     url "https://download.osgeo.org/gdal/CURRENT/"
@@ -12,12 +12,12 @@ class Gdal < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "295f546f2bb147e4ffde50b135921a49357bfa8b0788002b3fb334cfd73abff1"
-    sha256 arm64_sequoia: "5adb063e31879661034654e994e5d41f0ab456a8c262754332056c19f96c1370"
-    sha256 arm64_sonoma:  "741d0645d39e8129996203cadd8fa6ac8d1e3b09f0f7d8f60ba32c8db2a7c1af"
-    sha256 sonoma:        "33b4e3368f2a03bb5e3286a6bb2a955ce45458d0756295512779b890cd6c084e"
-    sha256 arm64_linux:   "a04489a0408fe8d7fadaa47ed9324f4112a01aa42bc5c2aa5bbbdbaf78e751f0"
-    sha256 x86_64_linux:  "88920d3383576797a7c6c4ab71ab2540d0b88b0be3f120333f22c6223486b796"
+    sha256 arm64_tahoe:   "50400005810bfc284f10e7edd1709657bff108c1e3246256745f6d1abcbbd8e8"
+    sha256 arm64_sequoia: "87d5bcd41a0468c82c787e02b380b89e3c430c00757a5d986a209074ce190e44"
+    sha256 arm64_sonoma:  "e7aae366cb5ac1cb80f4ddb75de1031ffe929317a5a08ddea1a9d2626911f7fc"
+    sha256 sonoma:        "b8bed2f921471c7c44f5a1d48d0d26b8d5a930a8f3e35a9a604acec373582c9f"
+    sha256 arm64_linux:   "10bedeed281d2c4e4cbd190f9ed0f484c205061251dc803bf588b9cd2b4026db"
+    sha256 x86_64_linux:  "b5f1c7881fccc6848cfca07e34349335a408c00b8a43bf496434481cf31a205f"
   end
 
   head do
@@ -88,6 +88,13 @@ class Gdal < Formula
 
   conflicts_with "avce00", because: "both install a cpl_conv.h header"
   conflicts_with "cpl", because: "both install cpl_error.h"
+
+  # Backport fix for poppler 26+ compatibility, remove in next release
+  # PR ref: https://github.com/OSGeo/gdal/pull/13664
+  patch do
+    url "https://github.com/OSGeo/gdal/commit/28a15cb76d26a27be96ab8b8bc8fcb52c153c3a9.patch?full_index=1"
+    sha256 "89171ad0d0e9edd531022011c59d1d0ae21910b4c69c44ab453c5722c82fe297"
+  end
 
   def python3
     "python3.14"

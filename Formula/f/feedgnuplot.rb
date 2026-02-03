@@ -1,22 +1,23 @@
 class Feedgnuplot < Formula
   desc "Tool to plot realtime and stored data from the command-line"
   homepage "https://github.com/dkogan/feedgnuplot"
-  url "https://github.com/dkogan/feedgnuplot/archive/refs/tags/v1.62.tar.gz"
-  sha256 "7a3854c3620f7cc6bf5bf13546f5e8cbead2bb1afedd455b9ecabf367a6e78df"
+  url "https://github.com/dkogan/feedgnuplot/archive/refs/tags/v1.64.tar.gz"
+  sha256 "30c3952600b694a98a0e0ee20ecbbc02d0c70ca96194e3719e9177409af6c5c9"
   license any_of: ["GPL-1.0-or-later", "Artistic-1.0"]
-  revision 1
 
-  no_autobump! because: :requires_manual_review
+  # Ignore `debian/<version>` tags
+  livecheck do
+    url :stable
+    regex(/v?(\d+(?:\.\d+)+)/i)
+  end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "281415695dee735e09fd941c316edf238a5f2b04c0dc91c4b1ddd079646c8235"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "281415695dee735e09fd941c316edf238a5f2b04c0dc91c4b1ddd079646c8235"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7f6265ef15bfe79ba7eb98b7c726fddcf19819ffa4ee0f613af37df07d396c48"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "85639667a8f91888be75bf1f0fb1074b6f23adf6d3e2a4ec3048efaceed0d53e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "7f6265ef15bfe79ba7eb98b7c726fddcf19819ffa4ee0f613af37df07d396c48"
-    sha256 cellar: :any_skip_relocation, ventura:       "85639667a8f91888be75bf1f0fb1074b6f23adf6d3e2a4ec3048efaceed0d53e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3a2d8d23c361d988cb5f8f0b9e4fa18b6afbb82586c1dacbd59f8b8e842b64cc"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "40767525dd58b22625351aef13957ca8c923e7c7aff998f0c00a92a1bdcca51d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5913ce76652d920426826c9a478dbf06c59e32c7e190a0b3b48689bc4817b7bf"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5913ce76652d920426826c9a478dbf06c59e32c7e190a0b3b48689bc4817b7bf"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5913ce76652d920426826c9a478dbf06c59e32c7e190a0b3b48689bc4817b7bf"
+    sha256 cellar: :any_skip_relocation, sonoma:        "5913ce76652d920426826c9a478dbf06c59e32c7e190a0b3b48689bc4817b7bf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5cc574aff748aabbe843444bece9a6f8780385de955de9c81d1a9b8574dabffa"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a6201cd96f7ebc4fd240944e10b530797484f4faefc03323bf5aef28b0223c52"
   end
 
   depends_on "gnuplot"
@@ -25,8 +26,8 @@ class Feedgnuplot < Formula
 
   on_linux do
     resource "Exporter::Tiny" do
-      url "https://cpan.metacpan.org/authors/id/T/TO/TOBYINK/Exporter-Tiny-1.002002.tar.gz"
-      sha256 "00f0b95716b18157132c6c118ded8ba31392563d19e490433e9a65382e707101"
+      url "https://cpan.metacpan.org/authors/id/T/TO/TOBYINK/Exporter-Tiny-1.006003.tar.gz"
+      sha256 "6499f09a6432cf87b133fb9580a8a9a9a6c566821346b1fdee95f7b64c0317b1"
     end
 
     resource "List::MoreUtils" do

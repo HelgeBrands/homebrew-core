@@ -1,20 +1,18 @@
 class Sqlboiler < Formula
   desc "Generate a Go ORM tailored to your database schema"
   homepage "https://github.com/volatiletech/sqlboiler"
-  url "https://github.com/volatiletech/sqlboiler/archive/refs/tags/v4.19.5.tar.gz"
-  sha256 "fae160e36637c5d0c57db53bafc11439cf61b02dc30656277d7e90c546b04a4d"
+  url "https://github.com/volatiletech/sqlboiler/archive/refs/tags/v4.19.7.tar.gz"
+  sha256 "b6e3ca096750ef7f917a81045d779126985c5aa68e3179746e05e8d108e9244d"
   license "BSD-3-Clause"
   head "https://github.com/volatiletech/sqlboiler.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ca1a271ac90407aecfc61bcc31c43f5943985c5785817f916279634570b3670a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "24bf4847e512fc0c4987ffb7aa9731270eb83642f874cceac6e3163be7ac7da5"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "24bf4847e512fc0c4987ffb7aa9731270eb83642f874cceac6e3163be7ac7da5"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "24bf4847e512fc0c4987ffb7aa9731270eb83642f874cceac6e3163be7ac7da5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "cd3b13555a393652a4f08d29c23239f57677db9f1ee7d451107ee660ce4c1aa7"
-    sha256 cellar: :any_skip_relocation, ventura:       "cd3b13555a393652a4f08d29c23239f57677db9f1ee7d451107ee660ce4c1aa7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "15045ea97a8c55564a5ec41422248e32ebfcd7b7144b1201106135f408dc1890"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d0d778d654efc38ee84e8f54d3a75a2286993a13c0ea8a5b28d160defa6367cb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9da5bc117d6334b1e04bd17a1a5fcee72fb506aa0d7fd821b2ba79a3b579f9bc"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9da5bc117d6334b1e04bd17a1a5fcee72fb506aa0d7fd821b2ba79a3b579f9bc"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9da5bc117d6334b1e04bd17a1a5fcee72fb506aa0d7fd821b2ba79a3b579f9bc"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d1c5f8a9bb11ea5a4deff6ca86985d488647dd03978382912ba8bbf340fe69c4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e7d17c535299cdad709093d4dad12bde1b6b1a84b85f4517bfb927b97c6e6115"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "02355a4d2f91c2068f54cd28f5bf09e80b164c558bf943bf1111feca994a0eb7"
   end
 
   depends_on "go" => :build

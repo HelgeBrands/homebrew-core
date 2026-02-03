@@ -1,12 +1,21 @@
 class Grpc < Formula
   desc "Next generation open source RPC library and framework"
   homepage "https://grpc.io/"
-  url "https://github.com/grpc/grpc.git",
-      tag:      "v1.76.0",
-      revision: "f5ffb68d8a2fd603dff16287e90a4ac571e1fec6"
   license "Apache-2.0"
-  revision 1
+  revision 4
   head "https://github.com/grpc/grpc.git", branch: "master"
+
+  stable do
+    url "https://github.com/grpc/grpc.git",
+        tag:      "v1.76.0",
+        revision: "f5ffb68d8a2fd603dff16287e90a4ac571e1fec6"
+
+    # backport fix for missing include
+    patch do
+      url "https://github.com/grpc/grpc/commit/d54219b508423f0a2ff6a0b98c16fb6dafd44b84.patch?full_index=1"
+      sha256 "ff479e563ae01e4e0461b79a3258c1ad544a0d1ca4f0161f64c4ec88b14cfb7d"
+    end
+  end
 
   # There can be a notable gap between when a version is tagged and a
   # corresponding release is created, so we check releases instead of the Git
@@ -20,12 +29,12 @@ class Grpc < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "0a57bc2c620ae2cecbc931e3645058e28b3cadff1028eedec4f192d800df5ea1"
-    sha256 cellar: :any, arm64_sequoia: "9caa9e92eccbf18a968646545ca5a37181956f34cc94dda764faa409a1bd355c"
-    sha256 cellar: :any, arm64_sonoma:  "910c3c46542d51659d3cff5fbc335a0991e802a46315b91ae1991e44cabb4a57"
-    sha256 cellar: :any, sonoma:        "d79fbfbb7091b0c9ae48bc4d0070e6ffc507e1155caf1cfef8bfa8413106c304"
-    sha256               arm64_linux:   "f234d89f888ef87ed628b67b1d200eb08a3d100d288c66fafc42cfc0536bc5b6"
-    sha256               x86_64_linux:  "3cdbe3ec422664114affb771f33338709a52dfa77e3c1a93d996cc4acfcc5000"
+    sha256 cellar: :any, arm64_tahoe:   "0e02f9ac0f5ef67ec546e92913e85318f3d9cf8ed6117f0c7b476d7477dfee4a"
+    sha256 cellar: :any, arm64_sequoia: "f163a8503701f9746c595ba5538a2be9958620296c59f73cae5f0ff6c2b309be"
+    sha256 cellar: :any, arm64_sonoma:  "1a64778135e1fae841b1b2ad4580d362a260fdfc5e597b2e58af04d1210c5947"
+    sha256 cellar: :any, sonoma:        "4196230bdfc8d889156533fe897dbd036692bf8b789695eaba5006709e2a0d2a"
+    sha256               arm64_linux:   "fd8bec3800a18f8bcccdc3570fd0a3b6fca0d876f0ab4b6d3e5805f8bf7452a0"
+    sha256               x86_64_linux:  "974ed2424c30eb1ce2c42ed6d13eeb983f1f0de2c732880495c9dd9c6a930854"
   end
 
   depends_on "autoconf" => :build
@@ -51,7 +60,6 @@ class Grpc < Formula
   end
 
   def install
-    ENV.llvm_clang if OS.mac? && (DevelopmentTools.clang_build_version <= 1100)
     args = %W[
       -DCMAKE_CXX_STANDARD=17
       -DCMAKE_CXX_STANDARD_REQUIRED=TRUE
@@ -73,7 +81,7 @@ class Grpc < Formula
     system "cmake", "--build", "_build"
     system "cmake", "--install", "_build"
 
-    # `grpc_cli` fails to build on Linux. In any case, it looks like it isn't meant to be be installed.
+    # `grpc_cli` fails to build on Linux. In any case, it looks like it isn't meant to be installed.
     # TODO: consider dropping this on macOS too.
     return unless OS.mac?
 

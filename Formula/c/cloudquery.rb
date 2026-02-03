@@ -1,8 +1,8 @@
 class Cloudquery < Formula
   desc "Data movement tool to sync data from any source to any destination"
   homepage "https://www.cloudquery.io"
-  url "https://github.com/cloudquery/cloudquery/archive/refs/tags/cli-v6.31.0.tar.gz"
-  sha256 "6c8d41e8abd0c63b1a70d5607fa5daa427e28a4f624eb8cd37a3e14db73e7c6f"
+  url "https://github.com/cloudquery/cloudquery/archive/refs/tags/cli-v6.34.1.tar.gz"
+  sha256 "f5c866ef555c7fe9fab70e4d8ac56d9fc270f1fe98656e58a46d87b46f7aeab6"
   license "MPL-2.0"
   head "https://github.com/cloudquery/cloudquery.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Cloudquery < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d1ba5cb48f9b89d716650eadd093bc8aa78a382bd31071a167c1ca77ec8d9158"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d1ba5cb48f9b89d716650eadd093bc8aa78a382bd31071a167c1ca77ec8d9158"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d1ba5cb48f9b89d716650eadd093bc8aa78a382bd31071a167c1ca77ec8d9158"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b7ce46d959e7c83e5045de91e60aad36fea6c12eddfa978665ceb3ce4b3c755c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f8e65406229ce5acacbc714d7b5e7d3f5a37a885187291931aa02b4907d3e43d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "10db5d83916876a7a601fae121cf0dd2b31488a6a9d50b9c4a3e4931ff95d9d3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d6d3a521e694c80dd0511e87d320577834eddcebac3b92e2af39b5b0f61b9928"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d6d3a521e694c80dd0511e87d320577834eddcebac3b92e2af39b5b0f61b9928"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d6d3a521e694c80dd0511e87d320577834eddcebac3b92e2af39b5b0f61b9928"
+    sha256 cellar: :any_skip_relocation, sonoma:        "267376971875092fba55cc421c3b6b065ac2f6f7a3b5b5413dfad5068a35ce10"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "530537abbf36d5e87540ca42f20a12c296edbc1997db804014e87242df8eef64"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f2c17f3d98acc31fac93cab7d8b6675e15c25a3ed2ce3391c32076619d932ab9"
   end
 
   depends_on "go" => :build
@@ -27,6 +27,7 @@ class Cloudquery < Formula
       ldflags = "-s -w -X github.com/cloudquery/cloudquery/cli/v6/cmd.Version=#{version}"
       system "go", "build", *std_go_args(ldflags:)
     end
+    generate_completions_from_executable(bin/"cloudquery", shell_parameter_format: :cobra)
   end
 
   test do

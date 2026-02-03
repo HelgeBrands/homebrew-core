@@ -1,10 +1,10 @@
 class Capnp < Formula
   desc "Data interchange format and capability-based RPC system"
   homepage "https://capnproto.org/"
-  url "https://capnproto.org/capnproto-c++-1.2.0.tar.gz"
-  sha256 "ed00e44ecbbda5186bc78a41ba64a8dc4a861b5f8d4e822959b0144ae6fd42ef"
+  url "https://github.com/capnproto/capnproto/archive/refs/tags/v1.3.0.tar.gz"
+  sha256 "01ab2ba7f52fcc3c51a10e22935aae56f3bc5e99b726b7e507fe6700cb12147d"
   license "MIT"
-  head "https://github.com/capnproto/capnproto.git", branch: "master"
+  head "https://github.com/capnproto/capnproto.git", branch: "v2"
 
   livecheck do
     url "https://capnproto.org/install.html"
@@ -12,14 +12,13 @@ class Capnp < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "5ffb6b5fe19040d81b1f2915fce9b22d2d1da019263c6d44585bc82cb4b10001"
-    sha256 arm64_sequoia: "32850d9930ecb4a82632d22ba68f5dc3ee221d9b4b00e7bbcfd57fc093b0e6b9"
-    sha256 arm64_sonoma:  "5627bf9b2d201d61d69cd4fefcbea4170bfc6c37bcdacd11f541a170191836a6"
-    sha256 arm64_ventura: "628e24ec584599abf82afa1f517fa92a6064a9511175f646d26fc0eded6a28f9"
-    sha256 sonoma:        "fa74eafe82cb0fb8753552e68548a15106b9e2543263b837d6221c5962ee3a6f"
-    sha256 ventura:       "32dcff1c319cd23a163fc233426cd57e7f7170209f9344ecc485122dad3d7631"
-    sha256 arm64_linux:   "22fbab45d8401d46c54dd930009a3d527beced94406743a17c280466b0622e81"
-    sha256 x86_64_linux:  "0b35a0dde079a841e258c6d364e32e6f4cd543d00e94f240ae67e0c461192576"
+    rebuild 1
+    sha256 arm64_tahoe:   "830c585121ebefe42e7fd8687dc6c4a16791709ddc82400531e426decbbaf579"
+    sha256 arm64_sequoia: "0b22246ef1430b58434c29e1060ebee51bfbc29d388ab0e97b3a7b6ea347aa93"
+    sha256 arm64_sonoma:  "933447a496eb80984f2fede5b6483a77b9146e146473cdc4d18b24b90ccd0ca1"
+    sha256 sonoma:        "020c95a5ec0a2aec01133ae4bd2571c6bd196ef705a4fbca5f27f365ed1b9580"
+    sha256 arm64_linux:   "17188a4772e30b20fb5563630136e090ade04e78d2494598b2099431e714152f"
+    sha256 x86_64_linux:  "1516426871f805f99d241f9a5b0d4d73c6c76ca698d232d85339fd9bbf2d4a14"
   end
 
   depends_on "cmake" => :build
@@ -49,8 +48,8 @@ class Capnp < Formula
                     "-DCMAKE_CXX_FLAGS=-fPIC",
                     *std_cmake_args
     system "cmake", "--build", "build_static"
-    lib.install buildpath.glob("build_static/src/capnp/*.a")
-    lib.install buildpath.glob("build_static/src/kj/*.a")
+    lib.install buildpath.glob("build_static/c++/src/capnp/*.a")
+    lib.install buildpath.glob("build_static/c++/src/kj/*.a")
   end
 
   test do

@@ -2,8 +2,8 @@ class Vcluster < Formula
   desc "Creates fully functional virtual k8s cluster inside host k8s cluster's namespace"
   homepage "https://www.vcluster.com"
   url "https://github.com/loft-sh/vcluster.git",
-      tag:      "v0.30.3",
-      revision: "538bba63cf6f6b52f53b69f5f9418d6343f41b23"
+      tag:      "v0.31.0",
+      revision: "3d3005dace9f8aa418a8f042eec530ec47df45af"
   license "Apache-2.0"
   head "https://github.com/loft-sh/vcluster.git", branch: "main"
 
@@ -16,12 +16,12 @@ class Vcluster < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "74fd16899f13d220b7e205334ebfdc102b837f4cb74047e898f88f453148cf37"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c47fb66b88050330c2814a463728b7c34e674cf752451764ac929f4d21967d68"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "575da70f78bbc7648e9b2707517413993b2f82c3c79441832152850f055b408e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "243acfd2f11165397c4fed3cd0e7c2f18d43147c4413a6f8f1c5aaa6e06e77f1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a8aef48ee77f88a558b74e5016e1e541ee224ac14a2cb7f591257975d67eb1c6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dbf4011ef82fd2ad14aa3f3fd5e22ee59bb1393cc65816575c672350f10c7214"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fc0966aed8794dcce8f524cdd39d1a0c73d27b579e2b6410abe451a6390965ed"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cca4976054a53ecaebf8d2cd27a275fb83d4f57de1e6983ef3c0bb7da8efc62d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "fc857fcb3338d97ec2bb936b34ffc5ef46a091f166ae04ec7f2dca28a1c1b868"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2d864b05d4940b7f2b57a4dd8c67bec60f9b5330c8eb383396cef293cc43153f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ca8667f99784e8c0d6ba10dccabacdb8a13b31a689a7969d747c0dd735acae5e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6735041d5864b2ab734d666335defba2899445daffddfe31b5ab935ffcc93e37"
   end
 
   depends_on "go" => :build
@@ -33,7 +33,7 @@ class Vcluster < Formula
     system "go", "generate", "./..."
     system "go", "build", "-mod", "vendor", *std_go_args(ldflags:), "./cmd/vclusterctl"
 
-    generate_completions_from_executable(bin/"vcluster", "completion")
+    generate_completions_from_executable(bin/"vcluster", shell_parameter_format: :cobra)
   end
 
   test do

@@ -1,18 +1,18 @@
 class Poutine < Formula
   desc "Security scanner that detects vulnerabilities in build pipelines"
   homepage "https://boostsecurityio.github.io/poutine/"
-  url "https://github.com/boostsecurityio/poutine/archive/refs/tags/v1.0.4.tar.gz"
-  sha256 "91fd5c703e27385809fc40deb49af3b3de2feda47bf1f75fb6c1065602a880a8"
+  url "https://github.com/boostsecurityio/poutine/archive/refs/tags/v1.0.7.tar.gz"
+  sha256 "4f9afcc3b28d1d45a6197347f0b490daccdbaee8b00948c21ac97ddae8becbb3"
   license "Apache-2.0"
   head "https://github.com/boostsecurityio/poutine.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0afa5f904991ba614cf1db698ce0c04183c6344a7c3ce11c4b8b8314f9ba10cf"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1f8374f4d3d0d5959c8517717d27258eef38cc94c85eff7442893ff6818fb0a4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "91d35839002da6d0a56c792bc9ea5e52f4b1eaba6ed745778403e4dcefeabcac"
-    sha256 cellar: :any_skip_relocation, sonoma:        "9dc49d0cc8d30e052e274a1256eb5290fc86075cfec2ee2404ffb67178e0797d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f2a0eeb8d9a18a3c114cb36aa373bb31f469cc4bf80cd514710c56ae9c708fef"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "48c55c8e40e28044455775e8dc4ac9a3207dd2a11ea791483a3a0e8548fafc18"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c3a1d7b6c03e3a65a362b9e0e6b336cda3a9a54596eefe43e225b2f89fd45aa0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ed1b800dfe6416b29a3d2e7370d2b8975930f7bc67aa19b62f2b92b938643bca"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e817a66bbe8aeb126212d5019f3d3cb84bde5e5637931c20904f934a96ccbb48"
+    sha256 cellar: :any_skip_relocation, sonoma:        "dfda9e0ac756d2883b94e4c860a28fda2d11d8b5e43d0e3b41c333f1d21e1c25"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "be5163a1819edf58b6f0d40de0c55018114da3ac14fc2f1b93e898928f0ba6da"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "eabf6bfd4eff9c3e15496c03f3ec9d9705c9add4e2364c10ac2c31640bc0f13d"
   end
 
   depends_on "go" => :build
@@ -27,7 +27,7 @@ class Poutine < Formula
 
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"poutine", "completion")
+    generate_completions_from_executable(bin/"poutine", shell_parameter_format: :cobra)
   end
 
   test do

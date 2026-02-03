@@ -146,7 +146,7 @@ jobs:
       issues: write # for Homebrew/actions/create-or-update-issue
     needs: remove-unused-patches
     if: always() && github.repository_owner == 'Homebrew'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
       - name: Create issue on failure
         uses: Homebrew/actions/create-or-update-issue@main

@@ -2,9 +2,9 @@ class PhpAT83 < Formula
   desc "General-purpose scripting language"
   homepage "https://www.php.net/"
   # Should only be updated if the new version is announced on the homepage, https://www.php.net/
-  url "https://www.php.net/distributions/php-8.3.28.tar.xz"
-  mirror "https://fossies.org/linux/www/php-8.3.28.tar.xz"
-  sha256 "25e3860f30198a386242891c0bf9e2955931f7b666b96c3e3103d36a2a322326"
+  url "https://www.php.net/distributions/php-8.3.30.tar.xz"
+  mirror "https://fossies.org/linux/www/php-8.3.30.tar.xz"
+  sha256 "67f084d36852daab6809561a7c8023d130ca07fc6af8fb040684dd1414934d48"
   license all_of: [
     "PHP-3.01",
 
@@ -35,12 +35,12 @@ class PhpAT83 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "3f5e8c7ed9ec451818faa7e0c821f8c72c435d37d0f65fae36d4dbd1a8970086"
-    sha256 arm64_sequoia: "f5da03dc49473e1568f79faf39504c4e1843616df6b55a6f2b4badf0b9f4f08d"
-    sha256 arm64_sonoma:  "cb7483a7e469d1aad7c7e894b68ea5f1bea4b543bd98d07bfa9547269ffb7f08"
-    sha256 sonoma:        "c960ba429337c3b6c6f6f486372d3405f478918ffca8b0a20abeab77d989824c"
-    sha256 arm64_linux:   "2a08069187c6a1db001a9be210bc0efc7ce13987c7ae749435a5bc7424208ae9"
-    sha256 x86_64_linux:  "5567c2dfa60f29464dac9ac560c4e2bfaa96e4d7d0b85501a165df001074702c"
+    sha256 arm64_tahoe:   "d1f5a25762883bb6430412c4985a8e196d9b59b2c18519ba9776866e4e78bea1"
+    sha256 arm64_sequoia: "84654c911799653e0dc10ddd4c53dc89949559e8c9aae436ced19fb507b29a05"
+    sha256 arm64_sonoma:  "71f92454efe678cb3a58cf324606c5140e0fe710f2f0b52734ecf969c6aa86e2"
+    sha256 sonoma:        "26cb3b3b5c03d6eeb3f857a3057d1f1744c6c1fb6fdf4e968d406d43427ea711"
+    sha256 arm64_linux:   "c2a4a6d9fcf5c5c6992d6b5f8f3a11a40817a162034153a73c942c9d9398bd73"
+    sha256 x86_64_linux:  "d76ecadb991dc61601793f2c2ceb5ebefcb75c88ff4950f500a12e6360b79a3a"
   end
 
   keg_only :versioned_formula
@@ -424,7 +424,7 @@ class PhpAT83 < Formula
     EOS
 
     begin
-      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", "#{testpath}/httpd.conf"
+      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", testpath/"httpd.conf"
       sleep 10
       assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
 
@@ -432,7 +432,7 @@ class PhpAT83 < Formula
       Process.wait(pid)
 
       fpm_pid = spawn sbin/"php-fpm", "-y", "fpm.conf"
-      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", "#{testpath}/httpd-fpm.conf"
+      pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", testpath/"httpd-fpm.conf"
       sleep 10
       assert_match expected_output, shell_output("curl -s 127.0.0.1:#{port}")
     ensure

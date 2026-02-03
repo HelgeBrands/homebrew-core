@@ -2,21 +2,20 @@ class Swiftlint < Formula
   desc "Tool to enforce Swift style and conventions"
   homepage "https://github.com/realm/SwiftLint"
   url "https://github.com/realm/SwiftLint.git",
-      tag:      "0.62.2",
-      revision: "da9d742874d88f6d5d0f7b315d1fcf12655f2311"
+      tag:      "0.63.2",
+      revision: "88952528a590ed366c6f76f6bfb980b5ebdcefc1"
   license "MIT"
-  revision 1
   head "https://github.com/realm/SwiftLint.git", branch: "main"
 
   no_autobump! because: :bumped_by_upstream
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2cb2d6b1098854c845274b4dc22921af32bf76e1e925c07c3c436af749553dd0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2914e328400b90f66824f4be94d25fb7c814ad19135a465984d65d5334bd40d3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "700a3adc43be2eaa8b547f0c58c5ca6fac4b9420df1d94ddfb5bd2f71703b147"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3df8ef1565ac4424b04aa96d6ea70d288c33f4a65151a36eb5b1060a23b1e69b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "97119f1ea9d4d9136b62f255a20c36efef40773b942f5b8c84832638dc1d8358"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "618f29a2e8ee39339a32076172975616e090ab27889a9f1dcb2aeea07a598d8a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9ad276ba7ae7348568afe4a5bb626a9f051e0aac2f1c601764e2bf23d3947c49"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "47176ffa07d052fe7510bce247d4e57ba030bdf9adf26ba6822cb2f43d8efefa"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d66bb4281b662bd332c65575527415e37e99bd78b2c64063825d11df46591077"
+    sha256 cellar: :any_skip_relocation, sonoma:        "6950d654181f4ba4c82ffb760c95b2e19cfed713ba924baef08f9a2a3ce3c9de"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6ef09967cda2dc493af8039f8b13731a22a4e09d6bfa761de608b5944eb01a96"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d8408453159a1aae0ea8abfc5bf3c8c3b3275891099130e13f96bfbd53a0bedb"
   end
 
   depends_on macos: :ventura

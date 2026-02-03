@@ -1,21 +1,20 @@
 class TerraformDocs < Formula
   desc "Tool to generate documentation from Terraform modules"
   homepage "https://terraform-docs.io/"
-  url "https://github.com/terraform-docs/terraform-docs/archive/refs/tags/v0.20.0.tar.gz"
-  sha256 "793ad60be207292b9f27664d5c73bd75512e7a5e458b0fe2daa872b5ad46d6a9"
+  url "https://github.com/terraform-docs/terraform-docs/archive/refs/tags/v0.21.0.tar.gz"
+  sha256 "e8180d74662707b2643930aee7ba012a29ad767ef55fd3321d6a9f3ce7fa79b8"
   license "MIT"
 
   no_autobump! because: :requires_manual_review
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7fe8d99487a213818abfba231555ba8fb1e8fb91349e681b497e81907bb9a3f6"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "61839fb6a203ccc38e8c8f6d17eac0180ca754dfee8acb2c22caf36462445270"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "077a2f758437da21b2261542136cce7ef0e3a25a49bc9302881656c80710000c"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "b9846110ee3a9ab3686bd96e381e651ed83816224c476540218c289a72c2f2ba"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b5dcc69027cbb34191b24b89b2364c79f41bfdc710a9ed97313305df0b840ea8"
-    sha256 cellar: :any_skip_relocation, ventura:       "d81ad6cb5d8ecd1c47f261ccfe5e997944e5d79bbf65b4b2967a0181e3e8b1e0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "195ef180318ab81e1e834597c845df5c9a71f792bb2d6037f77f766cdb6b9100"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0ed822006985f68806fc9ad31c591f314252ab941d939568a40096989fcecb36"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e0d3dc055f2dec3731d78b46495b133ff703f1552380f32020ab8efcc59f6f82"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2d35e1bb260d8ec2fd27135ffddaa6d59a41b7fba788c99f4fdd9f7f9157b82b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "efbfbfdbad330848c4b3e1f7165765aed9616a65a438fb90de41af9243f97eda"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e1b1e387eb27ef167275c66f73dc3019c082777c333ef8c03f93372594394c7f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "728494fc61676afd9396d470988588a9961c4609820bb2028194864f37f2ed1e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ef78dd170f5f0e90ab3b71116d50949545fb6b5c7de883749f9f9fc151f2c3ac"
   end
 
   depends_on "go" => :build
@@ -27,7 +26,7 @@ class TerraformDocs < Formula
 
     bin.install "bin/#{os}-#{cpu}/terraform-docs"
 
-    generate_completions_from_executable(bin/"terraform-docs", "completion", shells: [:bash, :zsh])
+    generate_completions_from_executable(bin/"terraform-docs", "completion")
   end
 
   test do

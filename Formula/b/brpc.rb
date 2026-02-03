@@ -1,19 +1,18 @@
 class Brpc < Formula
   desc "Better RPC framework"
   homepage "https://brpc.apache.org/"
-  url "https://dlcdn.apache.org/brpc/1.15.0/apache-brpc-1.15.0-src.tar.gz"
-  sha256 "0bc8c2aee810c96e6c77886f828fbfdf32ae353ce997eb46f2772c0088010c35"
+  url "https://dlcdn.apache.org/brpc/1.16.0/apache-brpc-1.16.0-src.tar.gz"
+  sha256 "4d5e84048e12512c008d24e52c9e0baa876b5f3f9b06f0aead38b55ea248fdc3"
   license "Apache-2.0"
-  revision 1
   head "https://github.com/apache/brpc.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "a717956c5a369f398e56b76ff82b4d174bee5ac45e146c71622d150752cc8204"
-    sha256 cellar: :any, arm64_sequoia: "be8f287e39290e85309bb5edc8692247e6a2a9a12ff60e746d9a4a416af10097"
-    sha256 cellar: :any, arm64_sonoma:  "077f72babfe5e3360ac3ea4c1bf7360576fe529fdee919d5bd952ea2b18ba78a"
-    sha256 cellar: :any, sonoma:        "36626965d76c93590d8676a1f81c321298c251c9ef0e4b64da63ec8d0cfd0c0c"
-    sha256               arm64_linux:   "3ec33864c3e4c1ae23eff2ae7d3cdf560a44b1fafc956ad1f26c0ea7044b9bb9"
-    sha256               x86_64_linux:  "4d0b4d90964afcb19e0dea4ac28d731579a246f002160a13fbd14b223731ff15"
+    sha256 cellar: :any, arm64_tahoe:   "9f749085a9ffc7bdbc37df38a1026a5c633aacd51972da257caa744ef06635b6"
+    sha256 cellar: :any, arm64_sequoia: "a0cf0ef8d126ffea67d0366cfbb0d039987b2a54c0872271e24a6231153fdd65"
+    sha256 cellar: :any, arm64_sonoma:  "e28fc3fbcd68781d861023b747078f09cbb9e4b968f8ef4b389459d2575b28ad"
+    sha256 cellar: :any, sonoma:        "766c971326938d129d6ead09bd4fdacdad6e55c6816a5935b9467d55be843ded"
+    sha256               arm64_linux:   "c9e0a00bc92e3cd7cb8a0a60de88ef65757627646baa4b1a2510e181a2453ce9"
+    sha256               x86_64_linux:  "17a192f07db661c8dde442fe7a87f18bf28f6fb340ab6ea29178c28159f88c4d"
   end
 
   depends_on "cmake" => :build
@@ -21,7 +20,7 @@ class Brpc < Formula
   depends_on "gflags"
   depends_on "leveldb"
   depends_on "openssl@3"
-  depends_on "protobuf@29"
+  depends_on "protobuf"
 
   on_linux do
     depends_on "pkgconf" => :test
@@ -72,7 +71,7 @@ class Brpc < Formula
       }
     CPP
 
-    protobuf = Formula["protobuf@29"]
+    protobuf = Formula["protobuf"]
     flags = %W[
       -I#{include}
       -I#{protobuf.opt_include}

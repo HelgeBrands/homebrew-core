@@ -4,6 +4,7 @@ class ProtocGenGrpcWeb < Formula
   url "https://github.com/grpc/grpc-web/archive/refs/tags/2.0.2.tar.gz"
   sha256 "0f0c8c0c1104306d67dad678be7c14efe52a698795a58b2b72ab67a8bb100c15"
   license "Apache-2.0"
+  revision 2
 
   livecheck do
     url :stable
@@ -11,12 +12,12 @@ class ProtocGenGrpcWeb < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "d7c7fa3e703cb3a73a2c40eae79eb32d5192b34eb77ff931350337fe860375a9"
-    sha256 cellar: :any,                 arm64_sequoia: "7a083a9a7ae60994a3898f7dc61375dbf8a5705b12e7ae7be392de584ed90832"
-    sha256 cellar: :any,                 arm64_sonoma:  "adce43fdc5a56ab4592bbe6c0959a624f215eebbcfed219c1b4fd19c68230062"
-    sha256 cellar: :any,                 sonoma:        "1d7475acee08122debcf4ae8d514892bf606e0392bb806b7f969f60f80149627"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f59db0212739c4b8c98474e2fb642ade70042f7003c43cbdb4666970665164bc"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0a2da89855c161c0bcb2d39ea2fa33a75ad5bc21deadf05da95dcfb7714d631a"
+    sha256 cellar: :any,                 arm64_tahoe:   "9af493e95682f631439158b401f97298ce962cb800b7b9124669c771f4a8765d"
+    sha256 cellar: :any,                 arm64_sequoia: "eb6bb14dcfe3c1aa89abfdbb933c09f33626c2b6b4c5de5666986692e6364cc1"
+    sha256 cellar: :any,                 arm64_sonoma:  "b8856c973c1d821803a2616b22275f4c94b5ae4bb3390990e53044fad0a063b4"
+    sha256 cellar: :any,                 sonoma:        "ec9590373e9414070067925b83954e9920957c631ff740478eeb14775d9b9776"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5b32d54f7a13da54578aa4fea781eeb4981343354d839caa42fe5ccaa1722d5a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a78f69a6baf9b44939f78c40f7b73ea85de1a4fd87f0cddd7f5958eb494fbd70"
   end
 
   depends_on "cmake" => :build
@@ -24,8 +25,14 @@ class ProtocGenGrpcWeb < Formula
   depends_on "node" => :test
   depends_on "typescript" => :test
   depends_on "abseil"
-  depends_on "protobuf@29"
+  depends_on "protobuf"
   depends_on "protoc-gen-js"
+
+  # Workaround to build with Protobuf 30+. Issue ref: https://github.com/grpc/grpc-web/issues/1522
+  patch do
+    url "https://raw.githubusercontent.com/Homebrew/homebrew-core/d0b7cf85a11a9acfa1a422305948dff6621bbda9/Patches/protoc-gen-grpc-web/protobuf-30.diff"
+    sha256 "9c7e0ddf5ba68c179e7b8edc2c48de5b9b9d4801a6c8fd93ee199e27291aeebd"
+  end
 
   def install
     # Workarounds to build with latest `protobuf` which needs Abseil link flags and C++17
@@ -56,7 +63,7 @@ class ProtocGenGrpcWeb < Formula
         rpc RunTest(Test) returns (TestResult);
       }
     PROTO
-    protoc = Formula["protobuf@29"].bin/"protoc"
+    protoc = Formula["protobuf"].bin/"protoc"
     system protoc, "test.proto", "--plugin=#{bin}/protoc-gen-grpc-web",
                    "--js_out=import_style=commonjs:.",
                    "--grpc-web_out=import_style=typescript,mode=grpcwebtext:."

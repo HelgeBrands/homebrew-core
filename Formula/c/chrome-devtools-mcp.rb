@@ -1,19 +1,19 @@
 class ChromeDevtoolsMcp < Formula
   desc "Chrome DevTools for coding agents"
   homepage "https://github.com/chromedevtools/chrome-devtools-mcp"
-  url "https://registry.npmjs.org/chrome-devtools-mcp/-/chrome-devtools-mcp-0.11.0.tgz"
-  sha256 "19cf8cab05791df9192e9d8b1db484d53da7ab19e5ab31ba2ececd00e4420a91"
+  url "https://registry.npmjs.org/chrome-devtools-mcp/-/chrome-devtools-mcp-0.15.1.tgz"
+  sha256 "407b0553b7746535a44300284ba165efaec2e5c0677bee86f96c9e568658b44c"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "2ba341aa5ec10db6ff153eb18ed1751a48b48a962289d3d7e9db161bd8621308"
+    sha256 cellar: :any_skip_relocation, all: "4ebc06edd9f3a40aa4859e8c08dccbc62b02d2c3a1d48762f4f601220744057c"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     node_modules = libexec/"lib/node_modules/chrome-devtools-mcp/node_modules"
 

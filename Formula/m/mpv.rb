@@ -1,34 +1,19 @@
 class Mpv < Formula
   desc "Media player based on MPlayer and mplayer2"
   homepage "https://mpv.io"
+  url "https://github.com/mpv-player/mpv/archive/refs/tags/v0.41.0.tar.gz"
+  sha256 "ee21092a5ee427353392360929dc64645c54479aefdb5babc5cfbb5fad626209"
   license :cannot_represent
-  revision 5
+  revision 1
   head "https://github.com/mpv-player/mpv.git", branch: "master"
 
-  stable do
-    url "https://github.com/mpv-player/mpv/archive/refs/tags/v0.40.0.tar.gz"
-    sha256 "10a0f4654f62140a6dd4d380dcf0bbdbdcf6e697556863dc499c296182f081a3"
-
-    # Backport support for FFmpeg 8
-    patch do
-      url "https://github.com/mpv-player/mpv/commit/26b29fba02a2782f68e2906f837d21201fc6f1b9.patch?full_index=1"
-      sha256 "ac7e5d8e765186af2da3bef215ec364bd387d43846ee776bd05f01f9b9e679b2"
-    end
-
-    # Backport fix for old macOS
-    patch do
-      url "https://github.com/mpv-player/mpv/commit/00415f1457a8a2b6c2443b0d585926483feb58b7.patch?full_index=1"
-      sha256 "4d54edac689d0b5d2e3adf0a52498f307fa96e6bae14f026b62322cd9d6a9ba6"
-    end
-  end
-
   bottle do
-    sha256 arm64_tahoe:   "b0c96c2de5c40cc4aa8013f8f8bd99ac84ebb6712e4c72f7475fb14aac0cf9cf"
-    sha256 arm64_sequoia: "97797d9045ec1d1e6626679b21552633765269858c1e5ae4811d20e903e5b033"
-    sha256 arm64_sonoma:  "b61a1b36b99557752dfe28a51575d4d68939ac6b567c013b8e2d4675e3ac18d7"
-    sha256 sonoma:        "bd6d0e4f3b201d7a9dd6351958740055318e05a203241f543255f4de5d32459e"
-    sha256 arm64_linux:   "f6ff26eb086f3353cebe619108304d40b0feae70f83ecdfd904b716819c01575"
-    sha256 x86_64_linux:  "a713417cace2c823932de6097a8c46bce45e873dd601ad6e9e8d26c2b3f23732"
+    sha256               arm64_tahoe:   "0ff98843bdf59e26cfe7c32fba419ad94e293d04fc327064e7070848eddd4d91"
+    sha256               arm64_sequoia: "f831d29c24e5f96b5a06ac37deb1cab56850656dbc09da0e8d1534cb497e47d3"
+    sha256               arm64_sonoma:  "2f45230e29fee9676e4a3f945b2d11871f5e3a63acad8de189cbd72bc97aa072"
+    sha256 cellar: :any, sonoma:        "501b6d1fe876b8c25129671538b66be34c0b998d6b68bce6d673ed41a7915e15"
+    sha256               arm64_linux:   "ff3a3ea88a8335bc8910f810ce183fb88fb611222ee03092e0f5309b35f9fd07"
+    sha256               x86_64_linux:  "5fc074ab939efde3b808b71c0a3ec8911b99d75b813caa914f50427ca8808b63"
   end
 
   depends_on "docutils" => :build
@@ -60,11 +45,11 @@ class Mpv < Formula
 
   on_linux do
     depends_on "alsa-lib"
-    depends_on "libdrm"
     depends_on "libva"
     depends_on "libvdpau"
     depends_on "libx11"
     depends_on "libxext"
+    depends_on "libxfixes"
     depends_on "libxkbcommon"
     depends_on "libxpresent"
     depends_on "libxrandr"
@@ -73,7 +58,7 @@ class Mpv < Formula
     depends_on "mesa"
     depends_on "pulseaudio"
     depends_on "wayland"
-    depends_on "wayland-protocols" # needed by mpv.pc
+    depends_on "wayland-protocols" => :no_linkage # needed by mpv.pc
   end
 
   conflicts_with cask: "stolendata-mpv", because: "both install `mpv` binaries"

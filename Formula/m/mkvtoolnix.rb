@@ -1,19 +1,10 @@
 class Mkvtoolnix < Formula
   desc "Matroska media files manipulation tools"
   homepage "https://mkvtoolnix.download/"
+  url "https://mkvtoolnix.download/sources/mkvtoolnix-97.0.tar.xz"
+  mirror "https://fossies.org/linux/misc/mkvtoolnix-97.0.tar.xz"
+  sha256 "5d43bf66e011ff5af09516a2dba2fb717b1631791a3a7498fcf74849a86929d3"
   license "GPL-2.0-or-later"
-
-  stable do
-    url "https://mkvtoolnix.download/sources/mkvtoolnix-96.0.tar.xz"
-    mirror "https://fossies.org/linux/misc/mkvtoolnix-96.0.tar.xz"
-    sha256 "509a1e3aca1f63fe5cc96b4c7272ba533dbcbb69c61d1c5114dccf610fd405cb"
-
-    # Backport fix for older Xcode
-    patch do
-      url "https://codeberg.org/mbunkus/mkvtoolnix/commit/a821117045d0328b1448ca225d0d5b9507aa00af.diff"
-      sha256 "4d537e37b1351ff23590199685dfc61c99844421629a9c572bb895edced1ac67"
-    end
-  end
 
   livecheck do
     url "https://mkvtoolnix.download/sources/"
@@ -21,12 +12,12 @@ class Mkvtoolnix < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "776e3fc01a1f51a1a1f0e9c5844b285d4af16adcee0736dfcc05acfc7cb34042"
-    sha256 cellar: :any, arm64_sequoia: "0f64a3ada75c754fa79150e02a4836d53a41a4566b84fe59bc70aee522aba679"
-    sha256 cellar: :any, arm64_sonoma:  "7208159c5de6a55aaca8a393f9f7f4eaf4c786b09d991a24f425f5c5423a62ce"
-    sha256 cellar: :any, sonoma:        "eb0b55d8318e0ca6d0036b55412f4be018c7b1e4a6815d4fbde8af3433ab098b"
-    sha256               arm64_linux:   "69d64fb1753b2a506aca453be6d02b509decb17ce8d384a0136b6385c1095719"
-    sha256               x86_64_linux:  "0e64a7c6803260c78f6b987d86cda0f39b1e1bde9ecf14c7170e0d1a225f9919"
+    sha256 cellar: :any, arm64_tahoe:   "e453841cd51b3cddf8a548f5fba0b4fd4c0f6833b0173b0e6171572a3ef8c502"
+    sha256 cellar: :any, arm64_sequoia: "743a06fea2874eef6c51eaeb03c9253e669e3565af52e695439a20b411a861f8"
+    sha256 cellar: :any, arm64_sonoma:  "3b97f5cbea5e445b61880d0eebd5b7949c8d52c7d98958c9d989b35eba2dacc4"
+    sha256 cellar: :any, sonoma:        "bb1e89c8b2cd654b62676c2049238fb2f2e0d0249ecaa5568e1a75462d48aa1d"
+    sha256               arm64_linux:   "5a6a57905e880e317182176d731dcef803314e88992225ececd7025b11fab8f0"
+    sha256               x86_64_linux:  "e415dc4e60a4c40bd85914743d281420c44c557942bcea5cc9a531ea9d629de4"
   end
 
   head do
@@ -66,8 +57,8 @@ class Mkvtoolnix < Formula
     # Remove bundled libraries
     rm_r(buildpath.glob("lib/*") - buildpath.glob("lib/{avilib,librmff}*"))
 
-    # Boost Math needs at least C++14, Qt needs at least C++17
-    ENV.append "CXXFLAGS", "-std=c++17"
+    # Configure script needs help with C++ standard in Boost Math
+    ENV.append "CXXFLAGS", "-std=c++20"
 
     features = %w[flac gmp libebml libmatroska libogg libvorbis]
     extra_includes = ""

@@ -1,20 +1,20 @@
 class FzfMake < Formula
-  desc "Fuzzy finder with preview window for make, pnpm, yarn, just & task"
+  desc "Fuzzy finder with preview window for various command runners including make"
   homepage "https://github.com/kyu08/fzf-make"
-  url "https://github.com/kyu08/fzf-make/archive/refs/tags/v0.65.0.tar.gz"
-  sha256 "00f85aeb7d4e8ac098cd535c7400de9d1f1b5153a2346283f6b8292b816a3408"
+  url "https://github.com/kyu08/fzf-make/archive/refs/tags/v0.67.0.tar.gz"
+  sha256 "c545efe9155aea1d01966a455a3478a1cdd4348701e06fe8be2c2bae545ebf68"
   license "MIT"
   head "https://github.com/kyu08/fzf-make.git", branch: "main"
 
   no_autobump! because: :bumped_by_upstream
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "81b1b3d82819e4a2693f1c22ec973b419ed7b6af473987f044775e3b5d272cfa"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d864e72ee4c2a3614dbc75e717a07b24d484fdc241989e9eb95190cae4be8e4a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6ac36a1c123ec412060a4c13e6b500722f9a8bb371f04e779f103c20e9a497fb"
-    sha256 cellar: :any_skip_relocation, sonoma:        "fb5a59a263dda617ec7000fb7fbad8b2561ba359e0c4d714f017fda387c592e1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b78cebbe9f95b9feaac8c89d127e8d4ba2ae59d583333ac823d88fda77feeebd"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "23e0704ea80d91ec63cf7f63349d24e1d5d974449a8e59c9532e00709c5a2d25"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a382a32a1f95ded17f8bc120c9c4609103aa6927d51097f01abfe639b6efaa85"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "20a815ebe812643b6c9530e5385c17543656e841a2bf4bee1ef811408c274bd7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0d6438ea11020ae65f8a90b5815a8f6a08707d5a43af003895c536ad0e021845"
+    sha256 cellar: :any_skip_relocation, sonoma:        "839942db45ac44308970bafe34cf99391b7227f1afa167cc8bc7b3f0c32e23a2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "de118f89a8ef64e3ccac6c14658416f31f0cfbc02240d35c2de7ace924d1c57c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4e398ac0827b41f2847baaa4910e813264a8444346869b6f119f523924672a8b"
   end
 
   depends_on "rust" => :build
@@ -26,8 +26,6 @@ class FzfMake < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/fzf-make -v")
 
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     (testpath/"Makefile").write <<~MAKE
       brew:
         cc test.c -o test
@@ -35,7 +33,13 @@ class FzfMake < Formula
 
     begin
       output_log = testpath/"output.log"
-      pid = spawn bin/"fzf-make", [:out, :err] => output_log.to_s
+      if OS.mac?
+        pid = spawn bin/"fzf-make", [:out, :err] => output_log.to_s
+      else
+        require "pty"
+        r, _w, pid = PTY.spawn("#{bin}/fzf-make > #{output_log} 2>&1")
+        r.winsize = [80, 130]
+      end
       sleep 5
       sleep 5 if OS.mac? && Hardware::CPU.intel?
       assert_match "make brew", output_log.read

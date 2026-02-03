@@ -3,18 +3,18 @@ class Pytr < Formula
 
   desc "Use TradeRepublic in terminal and mass download all documents"
   homepage "https://github.com/pytr-org/pytr"
-  url "https://files.pythonhosted.org/packages/a2/64/25ce842142742a5dfbb3505674ebed72d6ea21bca06bc1d059877b85fa26/pytr-0.4.4.tar.gz"
-  sha256 "21e5f26da56ecc4ebd713dd294dcd08b008352973f3440728136263203417108"
+  url "https://files.pythonhosted.org/packages/db/1d/f7d0c067f6f56b8d723e57ed60c2558137a97b332acc0279b457e7f8bf35/pytr-0.4.5.tar.gz"
+  sha256 "6be72cc8b848f6cf6f34e72b5897bd580e2a37997d69eb99e44d3a6fa64d0911"
   license "MIT"
   revision 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ae8f409d7a7176f24388323bd1c7417b50f20a14f206289ad744dcdf5aaf040a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aebd819a6efefb708da0787f4356bd1992f8f877bb16746b17bc209bb1f79221"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b8add44a27b414a2376a220a30c29b6c442b7daffff1f1871389c807580c921f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "7316e1c8764651f4489ec505854e149efdfee97baf1f5bb93b951a040d9130f3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a8ea4be5bc2f5ba740bfeb913c95a7d7f6292f0ccf37d59a3c648c052679f106"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4a6b5e2a8e1a0d54dccce7ad3f939cc2370294cfcf189806ffa280e7ad3e41f7"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "de2e9deba3c544c3b89710b49514b47ff4294f8b15ad86668469c90ff35de3b8"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0fc070782ceb93a105084822251268a9f33cf9a923bc1d7662c60c8eb9b655c2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6d9f7d78185b4c0b31deddc6288fe68fc733a774291f7d9c34efe251f141f5f8"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a79c281b08b37f629be1e608621f19b68821ee8c9df8fd822a778755e3d755fa"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "51eceaf6a64cb5bf7d83bdb0f811d706e6e217039028f51cbe42b2ec63ea4c38"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e75d04904988694accb1e2d053bd6342a0c8af3881d3ef9e8086dd32e98ea628"
   end
 
   depends_on "certifi" => :no_linkage
@@ -88,8 +88,8 @@ class Pytr < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "websockets" do

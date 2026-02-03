@@ -1,19 +1,19 @@
 class Phantom < Formula
   desc "CLI tool for seamless parallel development with Git worktrees"
   homepage "https://github.com/aku11i/phantom"
-  url "https://registry.npmjs.org/@aku11i/phantom/-/phantom-3.2.0.tgz"
-  sha256 "d4656179367893a97d41559e185926e8fcb43fc968eb80b2149d0f94148207bc"
+  url "https://registry.npmjs.org/@aku11i/phantom/-/phantom-5.0.0.tgz"
+  sha256 "b097b6b6001479e06505cb317e439ed3a082ae5b07b874852c0ca27c4a553788"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "ac40d55a8811db0f8c58300a6babb906da296f9f9755e7cf72befb487bbb39f7"
+    sha256 cellar: :any_skip_relocation, all: "95f621c48ef1e7062ff8350df36e7f5da2b068f07d0865acbd146c7b2810c690"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     generate_completions_from_executable(bin/"phantom", "completion", shells: [:fish, :zsh])
   end

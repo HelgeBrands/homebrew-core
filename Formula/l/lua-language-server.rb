@@ -3,21 +3,18 @@ class LuaLanguageServer < Formula
   homepage "https://github.com/LuaLS/lua-language-server"
   # pull from git tag to get submodules
   url "https://github.com/LuaLS/lua-language-server.git",
-      tag:      "3.15.0",
-      revision: "32fec3cc99af8b9a1e45c2455a8c3bd0d3e38f66"
+      tag:      "3.17.1",
+      revision: "0187ddf19f940d8b9b95d916d73f4660ec417471"
   license "MIT"
   head "https://github.com/LuaLS/lua-language-server.git", branch: "master"
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
-    rebuild 2
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ef7f4b3deddd4c769cc560e2d83b0f77a3cbb3a8962a0d59722d5a585e898ef0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0f2db5d06db488201ce9e000eed86dc15860739aed1e472009e131f541c2bb04"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b8084051b1b309d0185e2470f861e9744c615f7eb0dffdccbdfaaa467bd889eb"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4a2b24818fe3e60da52a1f6139457b2f976805d526f74857e658512e63ce57e9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9b02e69dcb139ed5472e7f897aa111328bee55968e541b51d2459a4ea2e5428e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "91928c7baa9ab26fc967bf5967fa69918dc20038990762ddf9900032da51913d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "343210c808436accc9ec883be989ecf7455f55ff66e4683fb4a0646b73884402"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1eec1827a7ffdfd5f81d57960dd1976be47e02df2cdba1941bb897de4ba309df"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3a2bcea7210b185df6b649ea4171dd94dab595beb0ed81e8d78280d059af134c"
+    sha256 cellar: :any_skip_relocation, sonoma:        "7e0b2481681da2c86cff51304a9a2cafd2d26b6e549bcbfaf22b1892c007811c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e7c6c4ef67e0ed03ec9e2026eb8b41db5431c83f150b23e59ad9707809498bb3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "44a10ed9818ad611862a647ca7948208bb5a6eb90a27023c52e3ed79b853b7e5"
   end
 
   depends_on "ninja" => :build
@@ -31,6 +28,9 @@ class LuaLanguageServer < Formula
     inreplace buildpath.glob("**/3rd/bee.lua/test/test.lua"),
       "os.exit(lt.run(), true)",
       "os.exit(true, true)"
+
+    # remove git metadata from submodules
+    rm_r Dir["meta/3rd/*/.git"]
 
     chdir "3rd/luamake" do
       system "compile/install.sh"

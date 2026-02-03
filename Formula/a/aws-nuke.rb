@@ -1,18 +1,18 @@
 class AwsNuke < Formula
   desc "Nuke a whole AWS account and delete all its resources"
   homepage "https://github.com/ekristen/aws-nuke"
-  url "https://github.com/ekristen/aws-nuke/archive/refs/tags/v3.62.0.tar.gz"
-  sha256 "42f13a8d53fd20de849d86c7b142a24227c3005d2a68d1a649f0b8bec8858f0f"
+  url "https://github.com/ekristen/aws-nuke/archive/refs/tags/v3.63.3.tar.gz"
+  sha256 "be7af50f73ac93436171e4b051793e00e926f9ee0711e7bc18d405f7ae2805e9"
   license "MIT"
   head "https://github.com/ekristen/aws-nuke.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ed92b66e0c34a9ec567fe852ebd4181d40610a7f36200739567d30e0418006e4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ed92b66e0c34a9ec567fe852ebd4181d40610a7f36200739567d30e0418006e4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ed92b66e0c34a9ec567fe852ebd4181d40610a7f36200739567d30e0418006e4"
-    sha256 cellar: :any_skip_relocation, sonoma:        "47565ec1d05fd6ab4227cde37fb7b19eba48b1375a33265d34f898cabf91ca82"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "917b8cce111e95280678a59c2cafb67da5258850b73bf366fbcac3d25645c7a6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "282ae4f9cc805c80a3c6be6f6f91f4f2add82db7a5f4415632502e1a1ab4e9e2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "520a4f595424dde32bf186579be0089ec2e3691a1d5f985058cd3d6975693029"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "520a4f595424dde32bf186579be0089ec2e3691a1d5f985058cd3d6975693029"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "520a4f595424dde32bf186579be0089ec2e3691a1d5f985058cd3d6975693029"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d30fe205c82098d6b10c5623e7c93a8238849622c921a44dfd3cf905fefa34c0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "fa4ee7b503b7e4dff826fd4f27058390072fdfec02ee3210327cbbcdb362d8bd"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a9f00df30b4767b144c4bfb6cbb1cc25ba25a14b2f82a1bc050177f07c9d6144"
   end
 
   depends_on "go" => :build
@@ -27,7 +27,7 @@ class AwsNuke < Formula
 
     pkgshare.install "pkg/config"
 
-    generate_completions_from_executable(bin/"aws-nuke", "completion")
+    generate_completions_from_executable(bin/"aws-nuke", shell_parameter_format: :cobra)
   end
 
   test do

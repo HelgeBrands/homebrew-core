@@ -1,24 +1,25 @@
 class Nerdctl < Formula
   desc "ContaiNERD CTL - Docker-compatible CLI for containerd"
   homepage "https://github.com/containerd/nerdctl"
-  url "https://github.com/containerd/nerdctl/archive/refs/tags/v2.2.0.tar.gz"
-  sha256 "105bead380f5f0d342506939d82793869604f61a88fdacd07b26e6a4d2521236"
+  url "https://github.com/containerd/nerdctl/archive/refs/tags/v2.2.1.tar.gz"
+  sha256 "f39c34d3a285e087f2b2869f06fea343d8285ad9bfb9417b9c5b6dd4e78d6fad"
   license "Apache-2.0"
   head "https://github.com/containerd/nerdctl.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "ca84e31ca98411c702d7dd1a87fdfc28fed3f4bb6d82c3f2b8e77997acf50b02"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "39b4b06765ec46fea74d4d87abe14820f42492fbf610248bc8fb3e4ee048fc6b"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "988e4dc5097b4de4101f5cccd25de622b9d2871f4579b3ddb59863df5e640dff"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "e52decf20eb724537a3eb99dfebd44b23d07336ed86f67cd7d90430767fc5b9e"
   end
 
   depends_on "go" => :build
   depends_on :linux
 
   def install
-    ldflags = "-s -w -X github.com/containerd/nerdctl/v2/pkg/version.Version=#{version}"
+    ldflags = "-s -w -X github.com/containerd/nerdctl/v#{version.major}/pkg/version.Version=#{version}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/nerdctl"
 
-    generate_completions_from_executable(bin/"nerdctl", "completion")
+    generate_completions_from_executable(bin/"nerdctl", shell_parameter_format: :cobra)
   end
 
   test do

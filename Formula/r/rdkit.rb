@@ -2,10 +2,9 @@ class Rdkit < Formula
   desc "Open-source chemoinformatics library"
   homepage "https://rdkit.org/"
   # NOTE: Make sure to update RPATHs if any "@rpath-referenced libraries" show up in `brew linkage`
-  url "https://github.com/rdkit/rdkit/archive/refs/tags/Release_2025_09_1.tar.gz"
-  sha256 "7fb3510b69af358009e2d0763c1d9665ac34f4c2cd3314cf5210ee3d5a33d501"
+  url "https://github.com/rdkit/rdkit/archive/refs/tags/Release_2025_09_5.tar.gz"
+  sha256 "1ac784a5f83a7db10aa50be0cd213eba7c1f3436ed4da12363e57589b571db46"
   license "BSD-3-Clause"
-  revision 1
   head "https://github.com/rdkit/rdkit.git", branch: "master"
 
   livecheck do
@@ -16,13 +15,15 @@ class Rdkit < Formula
     end
   end
 
+  no_autobump! because: :incompatible_version_format
+
   bottle do
-    sha256                               arm64_tahoe:   "196b3bd7410b0dc65624d6d525cc51ca48c69f961f48c4b5d07c2d4b39729a87"
-    sha256                               arm64_sequoia: "fd165ec6200aaa8f8f9989942188fc9f296c3f462e8bdfd47fa002413c17e6a8"
-    sha256                               arm64_sonoma:  "709b6b9976a723b632f865c3d8b9798b977de85ab6e311f9b72b237d137fde2b"
-    sha256 cellar: :any,                 sonoma:        "cf228316aef4978ed51a650420ace449ddddf11b9606924ab5b47b4492f1582d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "442e8e1ab3ca1fbc1b0bd206db18309dbc53f6143ce86ccb11d753dbb2fb9626"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4da31b2d2ad9545c3021cbf4803ed237b9e23ccbf07cd081df32429b34941fa9"
+    sha256                               arm64_tahoe:   "bc7e57163aa8f3b028a4f2e9f16f7e870bc18781bb3aae764d187d8449d4adf1"
+    sha256                               arm64_sequoia: "0f8d37f04bf7cf0382fbb768e5d3799e613249a8e6087a8e3d9cbd940d3171a2"
+    sha256                               arm64_sonoma:  "4110e7a9eecbd7d00448adeaa07c7ae0c7f1888a6b43259151b4a68e5cf39514"
+    sha256 cellar: :any,                 sonoma:        "01188c35240ccc23134f306e08950d155aa7df731a8581a187ce25109989d543"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b9da159e87c42de7237295dcfa2791cd6c2c20315b70213500fe703ee1603184"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "11b8b37ba83f0541ab9b500f40821502ba482d41f7a356bf1214198274b3cb77"
   end
 
   depends_on "catch2" => :build
@@ -34,12 +35,12 @@ class Rdkit < Formula
   depends_on "boost-python3"
   depends_on "cairo"
   depends_on "coordgen"
-  depends_on "eigen"
+  depends_on "eigen" => :no_linkage
   depends_on "freetype"
   depends_on "inchi"
   depends_on "maeparser"
   depends_on "numpy"
-  depends_on "py3cairo"
+  depends_on "py3cairo" => :no_linkage
   depends_on "python@3.14"
 
   resource "better_enums" do
@@ -116,6 +117,8 @@ class Rdkit < Formula
       system "cmake", "--build", "#{builddir}/Code/PgSQL/rdkit"
       system "cmake", "--install", builddir, "--component", "pgsql"
     end
+
+    rm lib/"libexpat.a" # conflicts with `expat` formula
   end
 
   def caveats

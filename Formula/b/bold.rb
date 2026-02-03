@@ -1,8 +1,8 @@
 class Bold < Formula
   desc "Drop-in replacement for Apple system linker ld"
-  homepage "https://github.com/kubkon/bold"
-  url "https://github.com/kubkon/bold/archive/refs/tags/v0.2.0.tar.gz"
-  sha256 "7b12aceeabe32249784347f3bb1befde6dcf621668d0352497ee8ef8c381d9ee"
+  homepage "https://codeberg.org/kubkon/bold"
+  url "https://codeberg.org/kubkon/bold/archive/v0.2.0.tar.gz"
+  sha256 "23f334869f73d85fdc761df4a4d2c43864ae31563280f52568f314ccae393e46"
   license "MIT"
 
   bottle do
@@ -13,6 +13,9 @@ class Bold < Formula
     sha256 cellar: :any_skip_relocation, sonoma:        "c63ee99bb85ab7dc35e04f09613b7ce775e1933ef264bb10bdf9a5127f2ff7d1"
     sha256 cellar: :any_skip_relocation, ventura:       "c9f50e5f314cfaeb955778838e303f508167ac884b48846ff1c31c786dcd5644"
   end
+
+  # Aligned to `zig@0.14` formula. Can be removed if upstream updates to newer Zig.
+  deprecate! date: "2026-08-19", because: "does not build with Zig >= 0.15"
 
   depends_on "zig@0.14" => :build
   depends_on :macos # does not build on linux
@@ -46,7 +49,7 @@ class Bold < Formula
     macos_min = MacOS.version.to_s
 
     system bin/"bold", "hello.o", "-arch", arch, "-macos_version_min", macos_min,
-                        "-syslibroot", MacOS.sdk_path, "-lSystem", "-o", "test"
+                       "-syslibroot", MacOS.sdk_path, "-lSystem", "-o", "test"
 
     assert_equal "Hello from Bold", shell_output("./test")
   end

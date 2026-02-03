@@ -1,21 +1,17 @@
 class Genact < Formula
   desc "Nonsense activity generator"
   homepage "https://github.com/svenstaro/genact"
-  url "https://github.com/svenstaro/genact/archive/refs/tags/v1.4.2.tar.gz"
-  sha256 "c7e7c4b215d9d1376c22f4183147debd0ef24aacd772df7311a33678f2119e33"
+  url "https://github.com/svenstaro/genact/archive/refs/tags/v1.5.1.tar.gz"
+  sha256 "07d62d0c7a41e83bf4ab8b76a1c0754556697faf5aa023b4e34906ff52323a7d"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:    "34bcd82ccf6d8e8699240368b8bb8de6f8f1c5df7acd6b5fb34ac6c3818f7165"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:  "b47c77b95e1ad1b3d53ef03ce4f7798d2b3e12da6d1ec809038eeed2d45b06e2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "b942eed75c111fcdafe3445553e2b8ef861db535dd503f653df91744b9202ccd"
-    sha256 cellar: :any_skip_relocation, arm64_ventura:  "8537ed041674f1d9418bf57d04af4857a76063454d3721fef418e88c3869b286"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "942880050979de965ede2a91030cd3a49bed2a79ae268242e99b9576b2749b07"
-    sha256 cellar: :any_skip_relocation, sonoma:         "2be5433dec7eb3fff8181616f7e56545ef8b39e2e103ce92d89b8555db514f56"
-    sha256 cellar: :any_skip_relocation, ventura:        "083442858a2c592b845c0a2ad7b54d2ebd576def0bd47b8ba3e761d5efbe428d"
-    sha256 cellar: :any_skip_relocation, monterey:       "f552366e174168da76eb245cee3c48b691b342867eddc142404f476bf2777fea"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "8ed0416d2bf5805a5563a19e176512265e6a56df9e09566cc7274fc88ef2bd97"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "c7be03a27ce9da39007c389b06729a30860a95cf5559b3a29a27089de55dce02"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9c8aa46fe815cb6071fa2d2ef972e90f8cff20cb20d9ac6f1bd7f29c71e58349"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5c2e5db24a9ec0cadf2af721abc2dfd27313f99fcda417f6175b0740113d0332"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8d7886757a4c9f642ac48430ed90a6fc639796a85c476e984ffe3fe6322de760"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9fae2a7cae987cb1cfad8a48fa42d57b68e6760e767d2beae851ccff0d337201"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e88c678ec203a1dbbb34426823d2a38316e51609756b20808ac4953ffcf69917"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "eef6ed32cd4140f969d859c3f3c46fb7e39facafb1b50430dd7a6b73e0e6a208"
   end
 
   depends_on "rust" => :build

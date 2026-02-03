@@ -1,8 +1,8 @@
 class Epinio < Formula
   desc "CLI for Epinio, the Application Development Engine for Kubernetes"
   homepage "https://epinio.io/"
-  url "https://github.com/epinio/epinio/archive/refs/tags/v1.13.2.tar.gz"
-  sha256 "30dc2fd5627ca29446dff807bc741cc0ec3bfee0a54c9cfd466f55ef29f2d1a2"
+  url "https://github.com/epinio/epinio/archive/refs/tags/v1.13.7.tar.gz"
+  sha256 "2a76233b9505b56412b6e0c94262f5e280ee994f52b274b91d2d3885f5167896"
   license "Apache-2.0"
 
   # Upstream creates a stable version tag ahead of release but a version isn't
@@ -15,12 +15,12 @@ class Epinio < Formula
   no_autobump! because: :requires_manual_review
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "416a0bb80d182b065605e7bf6a4b135d10f0fb6d2d5078157b122d47ea0be8dd"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "4dd67ad91dd21c5ee07720145f275a4e9dd9173cfe1db601bc9d9081cb1f5614"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e1fed3562ebc90a810d5406ee038bd58d7684dca72cc2422aeaa30ac87af4952"
-    sha256 cellar: :any_skip_relocation, sonoma:        "79635a67a55420342ed10f283f64dc28e8d2cd16916e38911c8b2b704174c833"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7eddc766661370c2cea233ae3430493b0f3597b28c14e707e10ed2734c5bc8ce"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5a175610e2b5aedc1a5f183a6f65f20fc58b2431a39eb60ce66b16dd8e0a589a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e9939142c9afbdf45d913167c183e5924e210c974a96f0514303e54b16250e69"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "14be1d65fb6c9a2ca089f95d2997748eb292085a18b2abee91722525eaabe452"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9106aaae80f1dd972e111bbd214d2ae143727b69b3e4c9f2ef8146534d12fbad"
+    sha256 cellar: :any_skip_relocation, sonoma:        "1d7ec94d78cb849a577333123139e99109882573be987db24b45ea27d85fdeb4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a920907c0b93e56441159d28beb97e38235211470f3fa4a1f2d2d2a4e1e56150"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ba723d8589e4ac397193ecca44b4bd24aa95a3ae54e4012e15416a79ba0ce288"
   end
 
   depends_on "go" => :build
@@ -28,7 +28,7 @@ class Epinio < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w -X github.com/epinio/epinio/internal/version.Version=v#{version}")
 
-    generate_completions_from_executable(bin/"epinio", "completion")
+    generate_completions_from_executable(bin/"epinio", shell_parameter_format: :cobra)
   end
 
   test do

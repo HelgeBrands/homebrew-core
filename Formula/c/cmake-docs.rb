@@ -1,10 +1,10 @@
 class CmakeDocs < Formula
   desc "Documentation for CMake"
   homepage "https://www.cmake.org/"
-  url "https://github.com/Kitware/CMake/releases/download/v4.2.0/cmake-4.2.0.tar.gz"
-  mirror "http://fresh-center.net/linux/misc/cmake-4.2.0.tar.gz"
-  mirror "http://fresh-center.net/linux/misc/legacy/cmake-4.2.0.tar.gz"
-  sha256 "4104e94657d247c811cb29985405a360b78130b5d51e7f6daceb2447830bd579"
+  url "https://github.com/Kitware/CMake/releases/download/v4.2.3/cmake-4.2.3.tar.gz"
+  mirror "http://fresh-center.net/linux/misc/cmake-4.2.3.tar.gz"
+  mirror "http://fresh-center.net/linux/misc/legacy/cmake-4.2.3.tar.gz"
+  sha256 "7efaccde8c5a6b2968bad6ce0fe60e19b6e10701a12fce948c2bf79bac8a11e9"
   license "BSD-3-Clause"
   head "https://gitlab.kitware.com/cmake/cmake.git", branch: "master"
 
@@ -13,7 +13,7 @@ class CmakeDocs < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "8a737fc1de5511719eb3e25268edf0e712daf9eb8253e84cf72dd7ac7db96ff8"
+    sha256 cellar: :any_skip_relocation, all: "544c5147f09e438da02cfb8ab3e90e8eb25d77033da2568c337589452b229951"
   end
 
   depends_on "cmake" => :build

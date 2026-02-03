@@ -6,15 +6,15 @@ class Urlwatch < Formula
   url "https://files.pythonhosted.org/packages/76/a3/e3bc54a669fa3ec440ea9d8db64590e761343b02b6ae9fcfcdc05c28d9ea/urlwatch-2.29.tar.gz"
   sha256 "f317ca8b123b15af510ec9e08bf885d8a8b574f502253e5ded200d757366da98"
   license "BSD-3-Clause"
-  revision 4
+  revision 6
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9d014ebf3eb1235d38b4964a05461120de1426452261b583de571d030654a9e4"
-    sha256 cellar: :any,                 arm64_sequoia: "f5e8858dbc7a50101ace8adf03c34b79861db7b9a99b109c654b3f6788749bbc"
-    sha256 cellar: :any,                 arm64_sonoma:  "3c5bc6ba9da011a056826cfdc27af93f3f5b1e8c4b1ab38d0aaaa93a791402bd"
-    sha256 cellar: :any,                 sonoma:        "fa451b194dc078446d66cd375930f8f277858881b7267f97f5a5b830997c8e35"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f72e211102fbbb59d059b2c8a7d5c60f4ca348e327a67f1ff464203b9783d2c8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6e1018faef2e034dcf202db3cb38a3fda919aada2426a980df34fac11c8a3c76"
+    sha256 cellar: :any,                 arm64_tahoe:   "da1dfa601ce4dd511146452f65ca384670ac5efbbfc45aba8be8565da5993db2"
+    sha256 cellar: :any,                 arm64_sequoia: "f9b726bd4effdab60598dfca7868e5f331caf5c76f9c67b1d0f8308503242b3e"
+    sha256 cellar: :any,                 arm64_sonoma:  "b803d5803379bdbddd0f56abcd7fce9b994d28707daeac408a781e62e6cb657b"
+    sha256 cellar: :any,                 sonoma:        "41685b256f308a7adf68334a28eff6da32d02d4a228ba76e9572bf81054767cf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a3a93b1adfa0052e3b2e9414a7475553adf2d8ea5d565605f50415c55f4c1de1"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "78f57748f6a4cd8ec212f0626c54feb2b97b6dd8295f8706255428bbd7b033bf"
   end
 
   depends_on "certifi"
@@ -24,7 +24,12 @@ class Urlwatch < Formula
   uses_from_macos "libxml2", since: :ventura
   uses_from_macos "libxslt"
 
-  pypi_packages exclude_packages: "certifi"
+  on_linux do
+    depends_on "cryptography" => :no_linkage
+  end
+
+  pypi_packages exclude_packages: %w[certifi cryptography],
+                extra_packages:   %w[jeepney secretstorage]
 
   resource "charset-normalizer" do
     url "https://files.pythonhosted.org/packages/13/69/33ddede1939fdd074bce5434295f38fae7136463422fe4fd3e0e89b98062/charset_normalizer-3.4.4.tar.gz"
@@ -47,13 +52,18 @@ class Urlwatch < Formula
   end
 
   resource "jaraco-context" do
-    url "https://files.pythonhosted.org/packages/df/ad/f3777b81bf0b6e7bc7514a1656d3e637b2e8e15fab2ce3235730b3e7a4e6/jaraco_context-6.0.1.tar.gz"
-    sha256 "9bae4ea555cf0b14938dc0aee7c9f32ed303aa20a3b73e7dc80111628792d1b3"
+    url "https://files.pythonhosted.org/packages/cb/9c/a788f5bb29c61e456b8ee52ce76dbdd32fd72cd73dd67bc95f42c7a8d13c/jaraco_context-6.1.0.tar.gz"
+    sha256 "129a341b0a85a7db7879e22acd66902fda67882db771754574338898b2d5d86f"
   end
 
   resource "jaraco-functools" do
-    url "https://files.pythonhosted.org/packages/f7/ed/1aa2d585304ec07262e1a83a9889880701079dde796ac7b1d1826f40c63d/jaraco_functools-4.3.0.tar.gz"
-    sha256 "cfd13ad0dd2c47a3600b439ef72d8615d482cedcff1632930d6f28924d92f294"
+    url "https://files.pythonhosted.org/packages/0f/27/056e0638a86749374d6f57d0b0db39f29509cce9313cf91bdc0ac4d91084/jaraco_functools-4.4.0.tar.gz"
+    sha256 "da21933b0417b89515562656547a77b4931f98176eb173644c0d35032a33d6bb"
+  end
+
+  resource "jeepney" do
+    url "https://files.pythonhosted.org/packages/7b/6f/357efd7602486741aa73ffc0617fb310a29b588ed0fd69c2399acbb85b0c/jeepney-0.9.0.tar.gz"
+    sha256 "cf0e9e845622b81e4a28df94c40345400256ec608d0e55bb8a3feaa9163f5732"
   end
 
   resource "keyring" do
@@ -91,13 +101,19 @@ class Urlwatch < Formula
     sha256 "dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf"
   end
 
+  resource "secretstorage" do
+    url "https://files.pythonhosted.org/packages/1c/03/e834bcd866f2f8a49a85eaff47340affa3bfa391ee9912a952a1faa68c7b/secretstorage-3.5.0.tar.gz"
+    sha256 "f04b8e4689cbce351744d5537bf6b1329c6fc68f91fa666f60a380edddcd11be"
+  end
+
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   def install
-    virtualenv_install_with_resources
+    without = %w[jeepney secretstorage] unless OS.linux?
+    virtualenv_install_with_resources(without:)
   end
 
   test do

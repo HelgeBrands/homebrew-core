@@ -1,8 +1,8 @@
 class UrdfdomHeaders < Formula
   desc "Headers for Unified Robot Description Format (URDF) parsers"
   homepage "https://wiki.ros.org/urdfdom_headers/"
-  url "https://github.com/ros/urdfdom_headers/archive/refs/tags/2.0.1.tar.gz"
-  sha256 "3b624b05119cb9d9c89495b6580663ba8fd138b7fb28769c1f756c1d11102f52"
+  url "https://github.com/ros/urdfdom_headers/archive/refs/tags/2.1.0.tar.gz"
+  sha256 "aa5509d1931d31acb070d34cee9f46a08e1d62b1f89d50a1392405cdf4f02966"
   license "BSD-3-Clause"
 
   # Upstream uses Git tags (e.g. `1.0.0`) to indicate a new version. They
@@ -14,7 +14,7 @@ class UrdfdomHeaders < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "09e2e16d5838468adb353600a570603c23e3ef665ec3effc2ce261676c54f7b8"
+    sha256 cellar: :any_skip_relocation, all: "afc75cef67f3551d5af2d8a4fce3a1b94af64c05f2b1e3ee86cd064fed2ba217"
   end
 
   depends_on "cmake" => :build

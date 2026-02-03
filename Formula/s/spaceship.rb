@@ -1,20 +1,20 @@
 class Spaceship < Formula
   desc "Zsh prompt for Astronauts"
   homepage "https://spaceship-prompt.sh/"
-  url "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.19.1.tar.gz"
-  sha256 "c74c24b899df46656dfce56e330e5a70801bd54dcf3ebac877f99c1ce7b07c63"
+  url "https://github.com/spaceship-prompt/spaceship-prompt/archive/refs/tags/v4.21.0.tar.gz"
+  sha256 "990f3e036a93b7e7860b8de82833fc4c0fedb4df06f68af242aaf6fe9e61148d"
   license "MIT"
   head "https://github.com/spaceship-prompt/spaceship-prompt.git", branch: "master"
 
   no_autobump! because: :requires_manual_review
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5d7ebf8c4287d2e7dc9f067d9be745a5ee11fe6fefdad12a2e53cb575bca0db7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "260a6bd913f5af19058338f46a169999e32d25787fb2dddc8f4dd5e510e5ff87"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d74fa6ef80e222ed800d3dc0d56e6f76dc6e260a80fdc5e2d5b0174a2a56514a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "86e6e526c2741c544d3748e06915face82bdcfc5f6f658912c430f12a8010d88"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b4ce2b91005163820f34eda2704476acb27352b46079b5fc78adc19894a2235b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "783bf9c28e2bf2535d8a3b9ea2c1530dd3444e1db13df3f4b8bc97e398283abc"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "84eace17844d30a9c2f60cd493a7afbeffca1da08f8d6bc2ef1d26338adc11a9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "077566293e9bbe856e0703dca5dc771b39716a738b5f6a59d6e8c7aa281974d4"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "feb71d2a0b3d9e175fcc0c65a853a5744c5209b2173dffc49c4788014370dd76"
+    sha256 cellar: :any_skip_relocation, sonoma:        "57297c8a29038f69c8c70f599bffdbe9b63384ee41b44f6bdaba39c63db29dae"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6c808d17e3bdd0434218e5b849145eeea68629a3e8c6b08d95881d56139035e3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1fb363db031640964ff0beeef6f4aaa1f637489f0422f12e2814eb382109e0b9"
   end
 
   depends_on "zsh-async"

@@ -3,18 +3,18 @@ class ErlangLanguagePlatform < Formula
   homepage "https://whatsapp.github.io/erlang-language-platform/"
   # We require the submodules, so we fetch via git
   url "https://github.com/WhatsApp/erlang-language-platform.git",
-      tag:      "2025-11-04",
-      revision: "9e99f9644ed76baa13ae2396a6c325b65f0b099a"
+      tag:      "2026-01-15",
+      revision: "da5ec8d23af9df264c33cc1ce2d74844d13a5b77"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/WhatsApp/erlang-language-platform.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2ea1cb6a202161f728a8610bafe96d12ca0cb28af799e2fcd08067f2f691ceca"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3340ffdf7d564b1a6b1f8bc9aa68db1173cb41ed01fa931d69daa0704a5e8836"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f227be4bb28337c295244928149443f466fd005010f633da9b8dbbc3f20093ad"
-    sha256 cellar: :any_skip_relocation, sonoma:        "231d06bdc29e136f84057ea5f361c7f66d84faf77679c18d9d348584213eb00f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1e016a10f3b0f0ec5c56550f66ae943620c0264a4890e0138c8b1d6a35ceee85"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "950d85b6bd7a10767160a2f6079d00455048464ea913e5aca623bf4eacd6af03"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "040a4e92cb397e6a7cbcffe64ce430752ead2e698a52f020ef0d26b7eba3c94b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "23aeca9955cbfa193c228f75054d0bb009f962a9b7dab14f259a41c7483a1b8d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "350edc5aeb41c02b381d1e04f23649e986b7f58991ddf09fe03b900ba549cd5c"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f40912c298670c75879c68de4d66c4caa3c3f8ab0d24e29b926b5251755ed3a7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d207054c85fa68fd4d5d54b00e12f5801f4554d06608b8b722b94b9ccece3a6b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8c04b3f6599af457cdcce9859f5608d98f5a16e49325b6147c2498bf464e4516"
   end
 
   depends_on "rust" => :build
@@ -61,7 +61,7 @@ class ErlangLanguagePlatform < Formula
     ERL
 
     # Run ELP lint to detect diagnostics
-    output = shell_output("#{bin}/elp lint my_module.erl", 101)
+    output = shell_output("#{bin}/elp lint my_module.erl")
 
     # Verify that ELP detected the unused variable diagnostic
     assert_match("variable 'X' is unused", output)

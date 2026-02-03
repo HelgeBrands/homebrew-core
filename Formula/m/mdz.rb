@@ -1,27 +1,30 @@
 class Mdz < Formula
   desc "CLI for the mdz ledger Open Source"
   homepage "https://github.com/LerianStudio/midaz"
-  url "https://github.com/LerianStudio/midaz/archive/refs/tags/v3.4.7.tar.gz"
-  sha256 "d03a4af26f0f1727fc8a835194b747e20754466995efc94fb02e7cd5f24f1b67"
+  url "https://github.com/LerianStudio/midaz/archive/refs/tags/v3.4.8.tar.gz"
+  sha256 "5c0cb5d387c098e8cac4b27f7a7a41ef79e269133df858e72cc39aa5289d46af"
   license "Apache-2.0"
   head "https://github.com/LerianStudio/midaz.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "eae2798da396b801c695e6978eb58cb5e0bbf324ea42dae90b4f217626e176be"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "72ee178fa41be3906334cc09bdbafd3f1e06fafa24ae9ec1e18468c05232dd34"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0a6de3fe955f6a47f7f5de344e96a30922660bad15835fb4e9e9ed3787dc649c"
-    sha256 cellar: :any_skip_relocation, sonoma:        "944c0dd7f07c17c109d1f4a9755aa5c244daa7ebbb4059fa12939e551b3a4ed6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a29bc7b1da823425c04ba436f2b748a7df60c5c3e7b4dab348327e695f9d8a59"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "520b220ac4c79235d78f4f307e3186f16fdf10b14acdf22f9284194c142229a0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3a1c03fc48b61199f901d75a4b134f8cdc1277fb4178a264618c2515b0524e61"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ea69452ef480ba56338872b9b54822b10a937714623b419c39f625edb967f514"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2c79d4e3a94f1fed2aefd1a26ea7fe662c11848a530eb0d5a534748133bfa01d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "67a2670b5a05ea3680a71fe581c13970bc68538d5177fb68b0b1a7beba531bb9"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6aa2bbede1274c606887b5f6b5dee1be081dcf13f0bf761a5961a491def7097c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "df3007f6d42e420fbb28b893c09e219fedde0418df2a6d9612c4ca7e84c58e61"
   end
+
+  deprecate! date: "2026-01-13", because: :unsupported
+  disable! date: "2027-01-13", because: :unsupported
 
   depends_on "go" => :build
 
   def install
-    ldflags = "-s -w -X github.com/LerianStudio/midaz/v3/components/mdz/pkg/environment.Version=#{version}"
+    ldflags = "-s -w -X github.com/LerianStudio/midaz/v#{version.major}/components/mdz/pkg/environment.Version=#{version}"
     system "go", "build", *std_go_args(ldflags:), "./components/mdz"
 
-    generate_completions_from_executable(bin/"mdz", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"mdz", shell_parameter_format: :cobra)
   end
 
   test do

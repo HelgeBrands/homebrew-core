@@ -32,7 +32,7 @@ jobs:
     if: >
       github.repository_owner == 'Homebrew' &&
       (github.event_name != 'workflow_run' || github.event.workflow_run.event == 'pull_request')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     outputs:
       recreate: ${{ steps.check.outputs.recreate }}
     permissions:
@@ -47,7 +47,7 @@ jobs:
 
       - name: Download `event_payload` artifact
         if: github.event_name == 'workflow_run'
-        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: event_payload
           github-token: ${{ github.token }}

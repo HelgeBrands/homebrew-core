@@ -1,25 +1,25 @@
 class Nx < Formula
   desc "Smart, Fast and Extensible Build System"
   homepage "https://nx.dev"
-  url "https://registry.npmjs.org/nx/-/nx-22.2.0.tgz"
-  sha256 "6a36f400625250b167e38713aa57726404dfdd4bc93174b5243ba60f7eaf6954"
+  url "https://registry.npmjs.org/nx/-/nx-22.4.4.tgz"
+  sha256 "3fd64e6d05ee6156ecd4cd476e40f167b4686719c010efc3d590458bc16e56a5"
   license "MIT"
   version_scheme 1
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "390cbe7612b08879810f64cf387043bdf7c4f62599703881dadc00a80d30b488"
-    sha256 cellar: :any,                 arm64_sequoia: "9b771179c595da20f4b90b9b69ab5a87d3979008571ac9315867e0169664f88c"
-    sha256 cellar: :any,                 arm64_sonoma:  "9b771179c595da20f4b90b9b69ab5a87d3979008571ac9315867e0169664f88c"
-    sha256 cellar: :any,                 sonoma:        "b8e4bae7e19c7f527441212756d66664e58e89ed94cb768ab306776dc630463c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f38be74cf830de714f23e8f1f630941be8034637cb9bb9ed94f2f223d7736b3d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "369cd24c724151add52f396c2f72326efc1cbb721aa46d9d21bf0446d8848436"
+    sha256 cellar: :any,                 arm64_tahoe:   "83839b3292fa5cc6526ca300a5617b87acec26900178c0b0005f7830b639fc95"
+    sha256 cellar: :any,                 arm64_sequoia: "a63d25ce08509f896a01f4fcc8451c0a9bfebcf700a7848d905e89c31c3b08b5"
+    sha256 cellar: :any,                 arm64_sonoma:  "a63d25ce08509f896a01f4fcc8451c0a9bfebcf700a7848d905e89c31c3b08b5"
+    sha256 cellar: :any,                 sonoma:        "bce611e4f83ba496591f0d276122de49a215d49cfc2da0ee79bd1ded7750f55f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5daf237b5e88773707f7b56015cea21a75b930d4e3ca78d9cbfdd0ff3b44e4e6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "557343a813d686554c6b64298f19084fda583f0fe23a9cb459f9132823be4194"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

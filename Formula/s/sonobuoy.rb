@@ -2,16 +2,17 @@ class Sonobuoy < Formula
   desc "Kubernetes component that generates reports on cluster conformance"
   homepage "https://sonobuoy.io/"
   url "https://github.com/vmware-tanzu/sonobuoy/archive/refs/tags/v0.57.4.tar.gz"
-  sha256 "6665ad9ed741ac721d2c62352dfe555da16569daece8cc1d2c1ae5a2d18dad15"
+  sha256 "5e84f5e4723879b613688ce70522fc0423e5fbe2ada5c341484a60f295715af9"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "588cc92c6ea528b1701c96e1b5bb7d68c424add0b2353011186dd094772c00e8"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "588cc92c6ea528b1701c96e1b5bb7d68c424add0b2353011186dd094772c00e8"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "588cc92c6ea528b1701c96e1b5bb7d68c424add0b2353011186dd094772c00e8"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4711a1afe5ca0f37274374a17fcacb88cc6274c88d5cb82083bbf3bf0aed1b69"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6ed11988d2d86a58f92d4b15ca336ca107c5b6d60f106b130f61be933b3245f0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9a328c9d18793027bdd1b12dd3c43b7b6bf84adb8e91fda9da519bfaee495d90"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d38eeff7e2714c2a329f9028c96692c2c4997bf2772d530672dc893b70235735"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d38eeff7e2714c2a329f9028c96692c2c4997bf2772d530672dc893b70235735"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d38eeff7e2714c2a329f9028c96692c2c4997bf2772d530672dc893b70235735"
+    sha256 cellar: :any_skip_relocation, sonoma:        "7520b1997a933d60f51a3ac76778969f722c02d006e26640196b4bfc15a4342d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "27202e2a75ff97b252c812426b61c3e16bed22b1e8de258e61c4c222d8056719"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1415146262a80affb1f033a826e071437e651d443da8f6df933fc58fe9d2b043"
   end
 
   depends_on "go" => :build
@@ -20,7 +21,7 @@ class Sonobuoy < Formula
     ldflags = "-s -w -X github.com/vmware-tanzu/sonobuoy/pkg/buildinfo.Version=v#{version}"
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"sonobuoy", "completion")
+    generate_completions_from_executable(bin/"sonobuoy", shell_parameter_format: :cobra)
   end
 
   test do

@@ -1,19 +1,19 @@
 class Devcontainer < Formula
   desc "Reference implementation for the Development Containers specification"
   homepage "https://containers.dev"
-  url "https://registry.npmjs.org/@devcontainers/cli/-/cli-0.80.3.tgz"
-  sha256 "376b47d0033d2152dcc4c6f13904a1063949941088ec7f5fa51bdf51e5fe2138"
+  url "https://registry.npmjs.org/@devcontainers/cli/-/cli-0.82.0.tgz"
+  sha256 "a5508f00ee0d478a74c72671e2489bc3281ec63b1af2eb0601664de57e56f8ed"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "ac9b6c565fb9a1cea644ba5ef043a1ac024de1b801fa13d1e4301d035f557176"
+    sha256 cellar: :any_skip_relocation, all: "a1b71a1a293b83d43288ee2200903feccd8ac0d33d62a136a58f38f89c88683d"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

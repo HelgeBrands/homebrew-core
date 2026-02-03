@@ -1,19 +1,20 @@
 class Helmfile < Formula
   desc "Deploy Kubernetes Helm Charts"
   homepage "https://github.com/helmfile/helmfile"
-  url "https://github.com/helmfile/helmfile/archive/refs/tags/v1.2.2.tar.gz"
-  sha256 "8992127362d5fdff46695a30656af0fed32cfec4dda3645f20dde0b8d2a703f4"
+  url "https://github.com/helmfile/helmfile/archive/refs/tags/v1.2.3.tar.gz"
+  sha256 "cf9b4e96830c8562a6b0436e102d2117d8b2cbd9b7dbe308e6a6d032ed7e7a1d"
   license "MIT"
   version_scheme 1
   head "https://github.com/helmfile/helmfile.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ef3f0e06f9846d6938bec287fa7b35e78ab89b7f63b40f2643d8d6cd4ca6e416"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "39c42f826dae3645b8863738d931f2eefc83c90bbdb668deead13f2d950b601a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d265fb098a06fbd108b2523802e9ea627aa5520245b5d9a3c28eaad7c6c06f07"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4d83b514c81caf619d906bdd587d1fd647e1935df2614fa34e4a3dc75d4b4889"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "920490f8f508ede66e99b35011decb695c768ff66a4fca453913661e58ecae25"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "20c9a1cb80bee4aa46978be8a71f4991efcb349d24a833e465cfdc62f333efa8"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bc3b63a85d4da093849221e7655fbefe24f4491d659ff15a5eeac369cb8de482"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9a7b3e153a332998843cd3e245f27784ff55a83b63c3723cc78a4e4dbf28fa87"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "eb65696011e4aa751b40fa5fc8e86cf25a4d35b42bccfca98861ddf1d5305c80"
+    sha256 cellar: :any_skip_relocation, sonoma:        "066505124cd7fa876e7eb4b85d7890811ca30c1e81a7cd88032e3facb2749338"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3cee1aee8664d8e746a3e1606714ffe0032f8a9df0f311fc5c26e305cd145c7a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2b4b22e8b5d9e3030ec4abe10c5667869558a7d32d20308c3a497629b4c8048c"
   end
 
   depends_on "go" => :build
@@ -30,7 +31,7 @@ class Helmfile < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"helmfile", "completion")
+    generate_completions_from_executable(bin/"helmfile", shell_parameter_format: :cobra)
   end
 
   test do

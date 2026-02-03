@@ -1,21 +1,23 @@
 class Ggc < Formula
   desc "Modern Git CLI"
   homepage "https://github.com/bmf-san/ggc"
-  url "https://github.com/bmf-san/ggc/archive/refs/tags/v7.0.4.tar.gz"
-  sha256 "495f5f443986862e86bb95edbcbab36d3acb1a96c4a46945c43c2b461a40f47f"
+  url "https://github.com/bmf-san/ggc/archive/refs/tags/v8.0.0.tar.gz"
+  sha256 "8cc3288a72a079ebd812f0ebb1431e160d3dcce7a2f2506c7ca2ccd3737e4483"
   license "MIT"
   head "https://github.com/bmf-san/ggc.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ceeb963a55d8cc4e86c2c6c2db03d3983b26ad81d9e44d3fde4aeb0589115720"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ceeb963a55d8cc4e86c2c6c2db03d3983b26ad81d9e44d3fde4aeb0589115720"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ceeb963a55d8cc4e86c2c6c2db03d3983b26ad81d9e44d3fde4aeb0589115720"
-    sha256 cellar: :any_skip_relocation, sonoma:        "788988450cb1897dc1a285bacee8fcf7bb6bfd7c4ecea1698c0d5a491df83358"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "82e6ec994931f3ea6036c56239dee279a1efaeed98022b589246cba6ae83838c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c17fd850e4c4bd9e15b1a441981a9f7ff535da35375a37a47c29326ea956f021"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5fbd5361d7bce7e997800f41e1d2dbf17539e50244c7f97f2b0e7fc5ac6cc262"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5fbd5361d7bce7e997800f41e1d2dbf17539e50244c7f97f2b0e7fc5ac6cc262"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5fbd5361d7bce7e997800f41e1d2dbf17539e50244c7f97f2b0e7fc5ac6cc262"
+    sha256 cellar: :any_skip_relocation, sonoma:        "62ef70af9842d3b8e7af5b221653c3549c30b2bbf0c1ea56913b5e2b9fc86ba2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "bbe28620cef34395a62cd0334ea1f9407eb22e030dc735d3ee02ff660c27a56d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "78b37423f77b006cc1db779608221658276c6a0769a5d012c17bc6a9fb648f89"
   end
 
   depends_on "go" => :build
+
+  uses_from_macos "vim"
 
   def install
     ldflags = "-s -w -X main.version=#{version} -X main.commit=#{tap.user}"
@@ -24,10 +26,6 @@ class Ggc < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/ggc version")
-
-    # `vim` not found in `PATH`
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     assert_equal "main", shell_output("#{bin}/ggc config get default.branch").chomp
   end
 end

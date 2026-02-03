@@ -1,8 +1,8 @@
 class WhisperCpp < Formula
   desc "Port of OpenAI's Whisper model in C/C++"
   homepage "https://github.com/ggml-org/whisper.cpp"
-  url "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/v1.8.2.tar.gz"
-  sha256 "bcee25589bb8052d9e155369f6759a05729a2022d2a8085c1aa4345108523077"
+  url "https://github.com/ggml-org/whisper.cpp/archive/refs/tags/v1.8.3.tar.gz"
+  sha256 "870ba21409cdf66697dc4db15ebdb13bc67037d76c7cc63756c81471d8f1731a"
   license "MIT"
   head "https://github.com/ggml-org/whisper.cpp.git", branch: "master"
 
@@ -12,12 +12,12 @@ class WhisperCpp < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "8cb50399576f2aa6a88de95f5bb7635065b0235619f8d3f196753d8009aabfd3"
-    sha256 cellar: :any,                 arm64_sequoia: "a5ae48613187e5607b0d3338e7fea58ae1107a14de85d6adb5a3f07fc49c9724"
-    sha256 cellar: :any,                 arm64_sonoma:  "5d70c696e7a8e20375915f7565745d07c5d8cd2725595f172bf6cf6b46318b2e"
-    sha256 cellar: :any,                 sonoma:        "48518a1190475e02f7e1f5fe9adbd813f73ff91b3fb55b1834c0ce8ac4f94ea9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2b2df7c96d567867f3114a3a4326c6d08cc37c98588cb58a0c8d6188ca296297"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f4847bfe03f4be61bd1a364e6bddb259160d09de148cc870ab06058412359b57"
+    sha256 cellar: :any,                 arm64_tahoe:   "5eedd491cfac5e7fb0212068d794ff129ab2b7b1e0353c16e9b69c3ef8040278"
+    sha256 cellar: :any,                 arm64_sequoia: "315a2b2b47fc231ad88586dae9c1f2d4147222d0d6acd62a921eba6263c32c2d"
+    sha256 cellar: :any,                 arm64_sonoma:  "f0901568c7babbd3022a043887007400e4b57a22d3a90b9c0824d01fa3a77270"
+    sha256 cellar: :any,                 sonoma:        "e6c2f78cbc5d6b311dfe24d8c5d4ffc68a634465c5e35ed11746068583d273c4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "684199fd6bec28cddfa086c584a49d236386c109f901a443b577b857fd052f83"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "09defdf76a98554ed27b2fd4c2e34472b83603b17ed0411505166146799800ac"
   end
 
   depends_on "cmake" => :build
@@ -46,6 +46,10 @@ class WhisperCpp < Formula
     # Expose executables and pkgconfig files
     bin.install_symlink libexec.glob("bin/*")
     (lib/"pkgconfig").install_symlink libexec.glob("lib/pkgconfig/*")
+
+    # Install whisper headers and libraries for opt paths
+    include.install_symlink libexec.glob("include/whisper.h")
+    lib.install_symlink libexec.glob("lib/libwhisper*")
 
     pkgshare.install "models/for-tests-ggml-tiny.bin", "samples/jfk.wav"
   end

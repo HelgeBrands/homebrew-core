@@ -6,22 +6,26 @@ class MinLang < Formula
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "df3efb13f502be8765eb32f92c34e839774a9c528eee4cf28e95c745c70df742"
-    sha256 cellar: :any,                 arm64_sequoia: "55abfc756fcd03084ea6cecc4f55f694127244be085a40fb475c8ea313c1b1ff"
-    sha256 cellar: :any,                 arm64_sonoma:  "dfce5c1fe83a37626f59fb7f55560d7e6127c29a110602a0c0e2e8ff2469720c"
-    sha256 cellar: :any,                 arm64_ventura: "55dd93aee4c6e5b332fb6ef5068f9076ee0188c682aac21f5e3cbc24ee8a263f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c14a84fc2c375ab64eef59cea18373fb47a154d5946e24c1b32dff772470b99d"
-    sha256 cellar: :any_skip_relocation, ventura:       "1d103d8fdb4f5d04ac85c30966ec14ce719822cc287aff6bda29d2e7944493c2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0fec39dc5874993f43231ceb8a90d0f774a7956906e4549335d21a4b43078d64"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5d41319d9cf4c586dae36e4eed94e93cfc70969a977c592f7d819d9d6d420a7d"
+    rebuild 2
+    sha256 cellar: :any,                 arm64_tahoe:   "2ef803c82853b1b321beeafc765188f15dbec742127101fec848307fd3fe98d2"
+    sha256 cellar: :any,                 arm64_sequoia: "71000cdcf6ff4197db8463e2bcdcfdbe06aeca5015b5d99bc2540bc586203a03"
+    sha256 cellar: :any,                 arm64_sonoma:  "d2c9b6fa074041130942ce3d6920b72fbcafa19cdd430d3cb7d5aa587c472145"
+    sha256 cellar: :any,                 sonoma:        "1b6a74a5d1854800edb8eab49013a818352c7f9b081324de871aa82adf49da21"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "eb035bc0b1423297e5f251ae2ad2c3833f03ae343fda90867668eb73ea6f0b43"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8eb616acafc4d01b6a464c3d034ab13990837c1a0a2f7b808892fe877988ea82"
   end
 
   depends_on "nim"
   depends_on "openssl@3"
-  depends_on "pcre"
+  depends_on "pcre2" => :no_linkage
 
   def install
-    system "nimble", "build", '--passL:"-lpcre -lssl -lcrypto"'
+    # Remove bundled libraries
+    rm_r(["minpkg/vendor/openssl", "minpkg/vendor/pcre"])
+    inreplace ["minpkg/lib/min_crypto.nim", "minpkg/lib/min_http.nim"], /passL: "-B?static /, 'passL: "'
+    inreplace "minpkg/lib/min_global.nim", /passL: "-B?static (.*) -lpcre([" ])/, "passL: \"\\1\\2"
+
+    system "nimble", "build", "--passL:\"-lssl -lcrypto -Wl,-rpath,#{rpath(target: Formula["pcre2"].opt_lib)}\""
     bin.install "min"
   end
 

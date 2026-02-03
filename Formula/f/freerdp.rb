@@ -1,17 +1,17 @@
 class Freerdp < Formula
   desc "X11 implementation of the Remote Desktop Protocol (RDP)"
   homepage "https://www.freerdp.com/"
-  url "https://github.com/FreeRDP/FreeRDP/releases/download/3.19.0/freerdp-3.19.0.tar.gz"
-  sha256 "f3d021e56e5fee789149f875887850185c310b96240c998c15a864e4fb1aaf46"
+  url "https://github.com/FreeRDP/FreeRDP/releases/download/3.22.0/freerdp-3.22.0.tar.gz"
+  sha256 "656670f3aac2c995cb4b1ba181549cc122cc9c95ec31be68a582c1182f474376"
   license "Apache-2.0"
 
   bottle do
-    sha256 arm64_tahoe:   "585b02fc4f3867d7d11a67e53c3e4f7ee5233fd1bd0e9ae086b45dacba48b201"
-    sha256 arm64_sequoia: "5c345db85d04025b82b9db73d13b19bc199224dda44f370ccfd67330be19e856"
-    sha256 arm64_sonoma:  "1c26e42d031cb6410b11a5583fd10d52d72fd8571cbbfe0bd0e919aef73f8d9b"
-    sha256 sonoma:        "5a337fc72cde5656af0fdf814121ea91f6c06d0213a07658960ecc0c6f856445"
-    sha256 arm64_linux:   "53d384928d823bf41e16557c2c91bbad19693a6abc5f1481f87b9f1415dec99c"
-    sha256 x86_64_linux:  "8b8986561923aa81f03df8fe808bcb5f1f7d044d8032fecfb4c59d4e6ad516cb"
+    sha256 arm64_tahoe:   "328b6073d003b664b0a87e649b327595d97305277e48ab4ce087dd7acb817af8"
+    sha256 arm64_sequoia: "a5d1a1ab0e786ef9f499660272e594c92444329c264f85c13cb0d02b74c9961a"
+    sha256 arm64_sonoma:  "8a1c8b3a5f217237234ee710c744a180aeefc167e5c6ee27d26d2fe83128dad2"
+    sha256 sonoma:        "24154b0c3eea81f0f46304c5f234cb461f8587760bde933b2802925409be4bfc"
+    sha256 arm64_linux:   "65473ec4a4b8b206e03dded436dbfb9a02f1c73ab081af5ba2cb91b96cf09062"
+    sha256 x86_64_linux:  "eaa14b21c022071c044d965b7bc163657d15a07dccecb4181c507862c8dce818"
   end
 
   head do
@@ -98,8 +98,6 @@ class Freerdp < Formula
   end
 
   test do
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     success = `#{bin}/xfreerdp --version` # not using system as expected non-zero exit code
     details = $CHILD_STATUS
     raise "Unexpected exit code #{$CHILD_STATUS} while running xfreerdp" if !success && details.exitstatus != 128

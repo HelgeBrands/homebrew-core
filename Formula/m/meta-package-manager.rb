@@ -4,18 +4,18 @@ class MetaPackageManager < Formula
 
   desc "Wrapper around all package managers with a unifying CLI"
   homepage "https://kdeldycke.github.io/meta-package-manager/"
-  url "https://files.pythonhosted.org/packages/d5/67/4cca6786b70e283bb3e55ff171a20c6ef5b3c699698a79e784847570219f/meta_package_manager-6.0.0.tar.gz"
-  sha256 "602545ad753350bff85ce61dd4a85e207bcd36cbfa97e32065f6b33e3b1b0727"
+  url "https://files.pythonhosted.org/packages/38/55/3d0e52ca7363a6a16347f0730de828e238c9a4e4f226679be82582e76b1c/meta_package_manager-6.1.0.tar.gz"
+  sha256 "8e053d13ee1e8bd9026ab6c06f7cdad29816b534bbacea326763db9d1ea3ff7e"
   license "GPL-2.0-or-later"
   head "https://github.com/kdeldycke/meta-package-manager.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "95f2579c1edcea4359b78d6ea2723b8652fe563ca9be9c274d50b285b9c45a09"
-    sha256 cellar: :any,                 arm64_sequoia: "6c77eecfa18767725551b9f2439daec7dcfec47e7d18c89ab6d141210f5181fc"
-    sha256 cellar: :any,                 arm64_sonoma:  "5738e7c20a5f8994ee456cec04f23c1194db3fe17051c9a493d943ae2a36c2a0"
-    sha256 cellar: :any,                 sonoma:        "6e44a99eeef1d16927d1d818ddd09bf5cf561ae1f52a62f014eed83d395babcf"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "50713c42f86e523f92fdad96cf547f5ea6c8dd51b8879c988b4133db63f97a1b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ecd3cc5a04b9ff331471ef8385f1283ce41eaf7ec649cc36af2f9dc29c7ff537"
+    sha256 cellar: :any,                 arm64_tahoe:   "ae184d028714e9017025de80029f0059d1e092896daf301ca1574ceaec14af52"
+    sha256 cellar: :any,                 arm64_sequoia: "c8c2119c98aa898148ed575257d29f90d5370cddc4ad8f1198937a4020b77cec"
+    sha256 cellar: :any,                 arm64_sonoma:  "9696592f3237607e70ff88aa25439217bd5bc6003eb30fc15631d5780fd170cb"
+    sha256 cellar: :any,                 sonoma:        "9fc86bdbc2dce6d63cdef4fefc3c0299b172a4314b20160465c60c4b3f1dbbed"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d2d5426adad0305be5dd0032dc22d62204b0f06e33a1888946bae73ec1a6f5e9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c0188ed994191f854e6f4f923378c85e8bcaa4c7d9b4e09bbaae486d54026a45"
   end
 
   depends_on "rust" => :build
@@ -41,8 +41,8 @@ class MetaPackageManager < Formula
   end
 
   resource "beartype" do
-    url "https://files.pythonhosted.org/packages/8c/1d/794ae2acaa67c8b216d91d5919da2606c2bb14086849ffde7f5555f3a3a5/beartype-0.22.8.tar.gz"
-    sha256 "b19b21c9359722ee3f7cc433f063b3e13997b27ae8226551ea5062e621f61165"
+    url "https://files.pythonhosted.org/packages/c7/94/1009e248bbfbab11397abca7193bea6626806be9a327d399810d523a07cb/beartype-0.22.9.tar.gz"
+    sha256 "8f82b54aa723a2848a56008d18875f91c1db02c32ef6a62319a002e3e25a975f"
   end
 
   resource "boltons" do
@@ -101,8 +101,8 @@ class MetaPackageManager < Formula
   end
 
   resource "extra-platforms" do
-    url "https://files.pythonhosted.org/packages/4b/87/594306b0ce79517405b2886bca0e390819ead2c17f66d6d8a013bf767bc2/extra_platforms-5.1.0.tar.gz"
-    sha256 "53c11441c8e7552e70d351fe225222dbcc8d6addcfafaf10b72501d22f36394b"
+    url "https://files.pythonhosted.org/packages/8c/36/1cf59977458a824a759a38b8279c7d5e41d8de12368f3685d188a5cc3ce4/extra_platforms-7.0.0.tar.gz"
+    sha256 "e45d539ae667e59711d3d4c25bba36bf0a45af7d444a64f6d22466cec3826965"
   end
 
   resource "fqdn" do
@@ -126,8 +126,8 @@ class MetaPackageManager < Formula
   end
 
   resource "jsonschema" do
-    url "https://files.pythonhosted.org/packages/74/69/f7185de793a29082a9f3c7728268ffb31cb5095131a9c139a74078e27336/jsonschema-4.25.1.tar.gz"
-    sha256 "e4a9655ce0da0c0b67a085847e00a3a51449e1157f4f75e9fb5aa545e122eb85"
+    url "https://files.pythonhosted.org/packages/b3/fc/e067678238fa451312d4c62bf6e6cf5ec56375422aee02f9cb5f909b3047/jsonschema-4.26.0.tar.gz"
+    sha256 "0c26707e2efad8aa1bfc5b7ce170f3fccc2e4918ff85989ba9ffa9facb2be326"
   end
 
   resource "jsonschema-specifications" do
@@ -171,8 +171,8 @@ class MetaPackageManager < Formula
   end
 
   resource "pyparsing" do
-    url "https://files.pythonhosted.org/packages/f2/a5/181488fc2b9d093e3972d2a472855aae8a03f000592dbfce716a512b3359/pyparsing-3.2.5.tar.gz"
-    sha256 "2df8d5b7b2802ef88e8d016a2eb9c7aeaa923529cd251ed0fe4608275d4105b6"
+    url "https://files.pythonhosted.org/packages/33/c1/1d9de9aeaa1b89b0186e5fe23294ff6517fce1bc69149185577cd31016b2/pyparsing-3.3.1.tar.gz"
+    sha256 "47fad0f17ac1e2cad3de3b458570fbc9b03560aa029ed5e16ee5554da9a2251c"
   end
 
   resource "python-dateutil" do
@@ -246,8 +246,8 @@ class MetaPackageManager < Formula
   end
 
   resource "tzdata" do
-    url "https://files.pythonhosted.org/packages/95/32/1a225d6164441be760d75c2c42e2780dc0873fe382da3e98a2e1e48361e5/tzdata-2025.2.tar.gz"
-    sha256 "b60a638fcc0daffadf82fe0f57e53d06bdec2f36c4df66280ae79bce6bd6f2b9"
+    url "https://files.pythonhosted.org/packages/5e/a7/c202b344c5ca7daf398f3b8a477eeb205cf3b6f32e7ec3a6bac0629ca975/tzdata-2025.3.tar.gz"
+    sha256 "de39c2ca5dc7b0344f2eba86f49d614019d29f060fc4ebc8a417896a620b56a7"
   end
 
   resource "uri-template" do
@@ -256,13 +256,13 @@ class MetaPackageManager < Formula
   end
 
   resource "uritools" do
-    url "https://files.pythonhosted.org/packages/36/b1/e482d43db3209663b82a59e37cf31f641254180190667c6b0bf18a297de8/uritools-5.0.0.tar.gz"
-    sha256 "68180cad154062bd5b5d9ffcdd464f8de6934414b25462ae807b00b8df9345de"
+    url "https://files.pythonhosted.org/packages/dd/f7/6651d145bedd535a5bdd6dad108329ec1fec89d38ec611f8d98834eb5378/uritools-6.0.1.tar.gz"
+    sha256 "2f9e9cb954e7877232b2c863f724a44a06eb98d9c7ebdd69914876e9487b94f8"
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "wcmatch" do

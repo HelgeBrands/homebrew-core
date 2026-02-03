@@ -1,18 +1,19 @@
 class Gptscript < Formula
   desc "Develop LLM Apps in Natural Language"
   homepage "https://docs.gptscript.ai/"
-  url "https://github.com/gptscript-ai/gptscript/archive/refs/tags/v0.9.7.tar.gz"
-  sha256 "d5c5d6d5acde988bc47a6566b2cc5b87e3fea2fa9112cd6ce3b6534405646a20"
+  url "https://github.com/gptscript-ai/gptscript/archive/refs/tags/v0.9.8.tar.gz"
+  sha256 "13666d4cce007c3da8c1a9afdd6ffa0ae9d584aaa5ca57597caf71c5008d490c"
   license "Apache-2.0"
   head "https://github.com/gptscript-ai/gptscript.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9c07b26c14d5743725320bc0278e538ec58f6be02f43cddcf8ade03bff290fcf"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9c07b26c14d5743725320bc0278e538ec58f6be02f43cddcf8ade03bff290fcf"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9c07b26c14d5743725320bc0278e538ec58f6be02f43cddcf8ade03bff290fcf"
-    sha256 cellar: :any_skip_relocation, sonoma:        "579c7c3e34bef2d478e764e2aaf5d63b4c6e5bbbbc15798a0582a5f0dace897a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1cb2cff551ce0f291592f83cb3dbf28d52c6e041a75ab585f8ed648e27e2d65b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "549dac1f76d4938b6bde125cfd16157eca990725c5a00441215cdf36b9d70394"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "98967124df84610751260f4f03fa7fee00a941da36856e3ffb8e20e41726d232"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "98967124df84610751260f4f03fa7fee00a941da36856e3ffb8e20e41726d232"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "98967124df84610751260f4f03fa7fee00a941da36856e3ffb8e20e41726d232"
+    sha256 cellar: :any_skip_relocation, sonoma:        "0fc40388c1dbb5e75e5270e56fb52a91972345b29499c6a101480b7f4fc6a6a0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f0563f0afa41010c31bab0afa7be1c030e92f341851a44c04c16bb7d327e0109"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "251b0b4896122432f75e7402bb84e136999962195563ca19e0d4cf05e5103dc4"
   end
 
   depends_on "go" => :build
@@ -25,7 +26,7 @@ class Gptscript < Formula
     system "go", "build", *std_go_args(ldflags:)
 
     pkgshare.install "examples"
-    generate_completions_from_executable(bin/"gptscript", "completion")
+    generate_completions_from_executable(bin/"gptscript", shell_parameter_format: :cobra)
   end
 
   test do

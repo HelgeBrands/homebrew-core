@@ -1,17 +1,17 @@
 class GeminiCli < Formula
   desc "Interact with Google Gemini AI models from the command-line"
   homepage "https://github.com/google-gemini/gemini-cli"
-  url "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.19.4.tgz"
-  sha256 "2ae7ab76decd7133d2fd72993860e5860c4fcbe3b570855de73db11cb417b4b5"
+  url "https://registry.npmjs.org/@google/gemini-cli/-/gemini-cli-0.26.0.tgz"
+  sha256 "3bb6e356cfa64c42ed0fef25af63b11464d8ffb2aacd438b9b89182301d49200"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f6be559c5a052b9d9bb1f868b43cab71e82abed1d2269feb82ab6d5238fceeb9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f6be559c5a052b9d9bb1f868b43cab71e82abed1d2269feb82ab6d5238fceeb9"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f6be559c5a052b9d9bb1f868b43cab71e82abed1d2269feb82ab6d5238fceeb9"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0b2108b13c084d5fe9e31da2e16cc02d46e5770beba91abf2a333f51b1a9cd53"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "307a36ac07998e36c4debff4f508a862a9cdc39dbef99fc59be4159585656b02"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ab90d72b3d96f9f0aa419a84938ee2f09b915704bbb6115a3a0c065fb94d9f30"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1980775cab656f7a54e8a45cfbf74c08ed0cd3a11852273af13229c1527dca33"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1980775cab656f7a54e8a45cfbf74c08ed0cd3a11852273af13229c1527dca33"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1980775cab656f7a54e8a45cfbf74c08ed0cd3a11852273af13229c1527dca33"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d0b274c3db8d35dc397deccf7c89e9890e65ab447a48b3d541e901087c7440e9"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "198f958e91662e35e5dd7c88bf9eb63de213a24f656c4f6c94473b9fb0c953a5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "eb73502527e6471968693444d154e0e629295a604dae7442e31cc5faec0aa8c1"
   end
 
   depends_on "node"
@@ -22,14 +22,16 @@ class GeminiCli < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     # Remove incompatible pre-built binaries
     os = OS.kernel_name.downcase
     arch = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch.to_s
     node_modules = libexec/"lib/node_modules/@google/gemini-cli/node_modules"
-    libexec.glob("#{node_modules}/tree-sitter-bash/prebuilds/*")
-           .each { |dir| rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}" }
+    (node_modules/"tree-sitter-bash/prebuilds").glob("*")
+                                               .each { |dir| rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}" }
+    (node_modules/"node-pty/prebuilds").glob("*")
+                                       .each { |dir| rm_r(dir) if dir.basename.to_s != "#{os}-#{arch}" }
 
     clipboardy_fallbacks_dir = libexec/"lib/node_modules/@google/#{name}/node_modules/clipboardy/fallbacks"
     rm_r(clipboardy_fallbacks_dir) # remove pre-built binaries
@@ -44,6 +46,6 @@ class GeminiCli < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/gemini --version")
 
-    assert_match "Please set an Auth method", shell_output("#{bin}/gemini --prompt Homebrew 2>&1", 1)
+    assert_match "Please set an Auth method", shell_output("#{bin}/gemini --prompt Homebrew 2>&1", 41)
   end
 end

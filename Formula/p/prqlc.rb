@@ -1,18 +1,18 @@
 class Prqlc < Formula
   desc "Simple, powerful, pipelined SQL replacement"
   homepage "https://prql-lang.org"
-  url "https://github.com/PRQL/prql/archive/refs/tags/0.13.7.tar.gz"
-  sha256 "7bd4b7c220b46af8ec8c20a2c014323f4d884d1dd7f3dcf33e1e9352bb894f70"
+  url "https://github.com/PRQL/prql/archive/refs/tags/0.13.10.tar.gz"
+  sha256 "ca618ce52bbec3de60b5bf8193c4c0f208b7681374575b809e4f1604867dba47"
   license "Apache-2.0"
   head "https://github.com/prql/prql.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3e5ec7b5bc0da73f3ed4ee328d3ab07eb0286722220de0f57ff148c5dcfc6762"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9011765fd6827e852b2f8efaa55ba2ac55d7d9fdb419a155df7fc2bedfd34328"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "beaa9ca2134ca6bff10c228455a78302e6e2211364f018d8b35ffda94997a077"
-    sha256 cellar: :any_skip_relocation, sonoma:        "5cb95346d70fdf08e78b242d3bea6135d19137f861ae1a8d370b606256ca0521"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7402fb2692cbde3fe5488faefd3196da6db92e3ee8ef2b560ee218e90b5778e2"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "81182772334a0d09626cfa11b42c081392c4398d2b87792f5daf0264933aa788"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "dcb91072733b283682b4c9d3dca802ecec5ad33935f54092184d2c496e3ba3c1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a342aa3ae3364743dd5ca259dfe7e59a89a94e6e92a79bf0a32e7d7504a3821c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9d3b5b71aabc6d888bd4b46ed35cb40a3e798a002b24c24d6394750b99f8d002"
+    sha256 cellar: :any_skip_relocation, sonoma:        "17c8d48e115b06614e4e417a4d2b8635f08fde0544ad663703c7faeeb881a7db"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "25e37b1562abe783c7c255f61eed8530f74f0d75fb8a5710110ccd3f6494eaba"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2cf210eb5b1b31dcad620de55f4247bd6b149a5c79b84507b88d55eb9cb0371c"
   end
 
   depends_on "rust" => :build

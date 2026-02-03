@@ -2,7 +2,7 @@ class Stp < Formula
   desc "Simple Theorem Prover, an efficient SMT solver for bitvectors"
   homepage "https://stp.github.io/"
   license "MIT"
-  revision 6
+  revision 8
   head "https://github.com/stp/stp.git", branch: "master"
 
   stable do
@@ -22,12 +22,12 @@ class Stp < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1b28ac9825ba0a6908354c4b8959bf7cb34317639b8c288a7b309886960a4088"
-    sha256 cellar: :any,                 arm64_sequoia: "91f0848cba55dcbfbdbbef7220828ff7c1a23a332e3327b46257e763c8fde991"
-    sha256 cellar: :any,                 arm64_sonoma:  "f20320e0a370b7cff73244f7f078ca3a3b709a38a22c0e2a08c5b2d91592fd9b"
-    sha256 cellar: :any,                 sonoma:        "bbb526b8193afe56890171c943f6b9181cf6c29cad87fb39ce2835bf65d5efa0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6baee7b408a2d1d6d18d0f4a2cac1e22831d7b0233d4f22901013ffcef5e8051"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4a7ca336edc0743c191c4be54bbca7afb134845f04e05b247f142d6d43f8f7e8"
+    sha256 cellar: :any,                 arm64_tahoe:   "aa08a02cc2bf05e0272644b9568aa861e7272a0368c98066c95a75877d2c303a"
+    sha256 cellar: :any,                 arm64_sequoia: "b3d18ec4ee1bfdda98b50cf653a3db4e76b83a88952bf8be3273ea50793dac9e"
+    sha256 cellar: :any,                 arm64_sonoma:  "30a4268486f368e5d2d3b232812afeba87b643f5eeca6f9fe3db6bc689ec6705"
+    sha256 cellar: :any,                 sonoma:        "ee33974fa9d80245ee1f586d6a7321a46d46ccbd8186aa57fa8eab6c17ce2bd4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5d349289acbbeba2c7f4184598d7fe1ddd974c3c34a1ffb1d3ee3f224be8ade8"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7e8b01d46340707274e6cff8df7c1510d88f7f8ab42ae41721af62682fb52c79"
   end
 
   # stp refuses to build with system bison and flex

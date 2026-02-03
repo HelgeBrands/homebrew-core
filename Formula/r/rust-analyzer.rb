@@ -2,17 +2,17 @@ class RustAnalyzer < Formula
   desc "Experimental Rust compiler front-end for IDEs"
   homepage "https://rust-analyzer.github.io/"
   url "https://github.com/rust-lang/rust-analyzer.git",
-      tag:      "2025-12-08",
-      revision: "5e3e9c4e61bba8a5e72134b9ffefbef8f531d008"
+      tag:      "2026-02-02",
+      revision: "7cb789d98202b88c34e9710e53f8aeac0fa5096e"
   license any_of: ["Apache-2.0", "MIT"]
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "89eba99194dbfbb774d94146b428ff9508f168f0cf3342d855b7d230b0cf5274"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a128141be21c02a4be4408c1b33a49fde0af5614688b0676e23f0c4f02ee8610"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "281185f8ae6e1d28156d54dd319db010c4a96c7e36443bc17886a5aa02a45f98"
-    sha256 cellar: :any_skip_relocation, sonoma:        "32f0d1673fa05d76c5f32afe92797acf61423bde18cb95c3df6c0fa54b16d616"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cec45bcd5a416ffa22fd2cceebe73f7b663b22d1a56696bafe48c00b60ddb7cb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2323083258a4ec5f80801612efb908ba7c3b372b19fadad8766db7c5a9c98f0e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d05c4eda1ea5c2314e93060d5ccdebf6c7dd21a0c28a41db12fa922f02da3191"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1bcc788cbb71603a44aa35cbbe02f70424653cb915aff4c58722e92b2139ef2c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a1cc443cc5a0af903925e36998126a7887e7b309c1e2b4b780b354a581b9cebd"
+    sha256 cellar: :any_skip_relocation, sonoma:        "03e7aa3c7aec3231b9b81672d80919b8c8bd07b635b6ca1f9bf571e6e9a07e98"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "101506b95b1cd0eb5ee28bf6e045f81addc212693d546528ed95edd468b8665a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "54ccd8465fff4b26173db051492ef524d1ee14e0908ecf8dba7632dae6e8b857"
   end
 
   depends_on "rust" => :build

@@ -1,8 +1,8 @@
 class Immer < Formula
   desc "Library of persistent and immutable data structures written in C++"
   homepage "https://sinusoid.es/immer/"
-  url "https://github.com/arximboldi/immer/archive/refs/tags/v0.8.1.tar.gz"
-  sha256 "de8411c84830864604bb685dc8f2e3c0dbdc40b95b2f6726092f7dcc85e75209"
+  url "https://github.com/arximboldi/immer/archive/refs/tags/v0.9.1.tar.gz"
+  sha256 "b18b92ba60ec3186dc36ef671d3c2ae542cbb63eb6dc0e258476c6111a67c971"
   license "BSL-1.0"
 
   livecheck do
@@ -11,8 +11,7 @@ class Immer < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, all: "b7829748b93385f0e75c14f6b04502c943d7ca8b3530b6d3715cfb1c00fbd401"
+    sha256 cellar: :any_skip_relocation, all: "9e8fb22791b14e5ff097df3c481289d5e87c31f5eb97f54c7e84fac00d93fbf1"
   end
 
   depends_on "cmake" => :build

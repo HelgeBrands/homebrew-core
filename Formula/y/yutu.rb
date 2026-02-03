@@ -1,8 +1,8 @@
 class Yutu < Formula
   desc "MCP server and CLI for YouTube"
   homepage "https://github.com/eat-pray-ai/yutu"
-  url "https://github.com/eat-pray-ai/yutu/archive/refs/tags/v0.10.3.tar.gz"
-  sha256 "00c4ee6850705ae4557733580d9ebbd9f378a28eb39f3a261fb5df10e8764423"
+  url "https://github.com/eat-pray-ai/yutu/archive/refs/tags/v0.10.4.tar.gz"
+  sha256 "7d0b4f69b75119f619cdbb4fe565a7c22c0b178de5d2a132fbe05ad80d3ccc14"
   license "Apache-2.0"
   head "https://github.com/eat-pray-ai/yutu.git", branch: "main"
 
@@ -12,12 +12,13 @@ class Yutu < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9d33cf0182cf6ff04a769a81a44bb0945a1dd624411e7481602effd6b70020db"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9d33cf0182cf6ff04a769a81a44bb0945a1dd624411e7481602effd6b70020db"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9d33cf0182cf6ff04a769a81a44bb0945a1dd624411e7481602effd6b70020db"
-    sha256 cellar: :any_skip_relocation, sonoma:        "fd3c7e56880e904d1837b2ce878f7282f0a7a8fc1b665bcc25ba636ade375eb1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4fd8a1d662ef8836fc99240dddab3edb5955719ec36d9465dc9432819454dffc"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f3e5c22981d232278c70dc658e0c12218ae1e20482c7cb6cdfc5177b50078564"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1477d1f88d423ed9deca2dd76dbbb2b259757818822a08b4d0ff1d86a6689a93"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1477d1f88d423ed9deca2dd76dbbb2b259757818822a08b4d0ff1d86a6689a93"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1477d1f88d423ed9deca2dd76dbbb2b259757818822a08b4d0ff1d86a6689a93"
+    sha256 cellar: :any_skip_relocation, sonoma:        "08074111931e8fb7cc8e16a58a9f6eef91af13c02e69f12cc2f58b64408490f0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "fe30adec402612d7536fd90cd3e6d922e86d3c1d837f2271387f202146dc198a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b49e6b9de9d3bb5248fc0f1c4438fe6f21de0a4a0c59f297132faf9db8887844"
   end
 
   depends_on "go" => :build
@@ -34,7 +35,7 @@ class Yutu < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"yutu", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"yutu", shell_parameter_format: :cobra)
   end
 
   test do

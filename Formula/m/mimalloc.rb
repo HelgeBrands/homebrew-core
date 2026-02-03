@@ -1,8 +1,8 @@
 class Mimalloc < Formula
   desc "Compact general purpose allocator"
   homepage "https://github.com/microsoft/mimalloc"
-  url "https://github.com/microsoft/mimalloc/archive/refs/tags/v3.1.5.tar.gz"
-  sha256 "1c6949032069d5ebea438ec5cedd602d06f40a92ddf0f0d9dcff0993e5f6635c"
+  url "https://github.com/microsoft/mimalloc/archive/refs/tags/v3.2.7.tar.gz"
+  sha256 "33621bea902711639b8f83128e64685ffc8224a65443625530747603a2d8726d"
   license "MIT"
 
   livecheck do
@@ -11,14 +11,12 @@ class Mimalloc < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c8c2f8ebafa0b1add9f1217251cf0822f7cd385471f24070cd6bc8ee8bf05702"
-    sha256 cellar: :any,                 arm64_sequoia: "a78d24b6319552c5fe4a5d35fcc220323bf3444a14442fba3e6daf3f3eb4229a"
-    sha256 cellar: :any,                 arm64_sonoma:  "87831a2e64cf404071b0a1975a0ba104c2149fe7dd4c1c04b1a36781bab63e48"
-    sha256 cellar: :any,                 arm64_ventura: "13ff3e501f31a5eab5674930dea31ae4bebaed70ba17f7dc6a05442d15a5ce1e"
-    sha256 cellar: :any,                 sonoma:        "e22c58771015099a1b1db1feaf3b243a181dc78de09c791a2a796fe77d7c99b3"
-    sha256 cellar: :any,                 ventura:       "e5fa2eb61ae09ac8ef2effc66927e8546b9eb267469b3e530f8453e1690f7d9e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f4b913ad10a6af5beb4728c4b0b02aead0427122e917d49e9f7d504bee8ea032"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e0c5c5e10bd186bc8fc0ac85f3b97d784ed3255bf683e786a8ae28fddeb394e7"
+    sha256 cellar: :any,                 arm64_tahoe:   "16d4d25364809b2040df7ffe0ec3cf47d7207c9c0ae0109255ed21cd7cc6600e"
+    sha256 cellar: :any,                 arm64_sequoia: "1826ca9e06e2ef683d66cfdf4bbbe01995fed8a9f1a513572863be15416b4e80"
+    sha256 cellar: :any,                 arm64_sonoma:  "591c1738cf48f244a2fbd9a79cfd89d9c40d4207efd1eb60451a4a233286a115"
+    sha256 cellar: :any,                 sonoma:        "d779c65f26702e21b83811e15dcee9f544c8658a4d85fa206b6779a1eab75dac"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "761330f4930b0faae8680e3f13c3afe9b27edfd538a04e5a038bab56cad139fd"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "176610b6c2dfc5a0588633aad6c9f511fa349b12b74fb6ce76060b8d1f6a04bc"
   end
 
   depends_on "cmake" => :build
@@ -33,6 +31,6 @@ class Mimalloc < Formula
   test do
     cp pkgshare/"test/main.c", testpath
     system ENV.cc, "main.c", "-L#{lib}", "-lmimalloc", "-o", "test"
-    assert_match "heap stats", shell_output("./test 2>&1")
+    assert_match(/pages\s+peak\s+total\s+current\s+block\s+total/, shell_output("./test 2>&1"))
   end
 end

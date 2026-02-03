@@ -1,8 +1,8 @@
 class Proto < Formula
   desc "Pluggable multi-language version manager"
   homepage "https://moonrepo.dev/proto"
-  url "https://github.com/moonrepo/proto/archive/refs/tags/v0.54.0.tar.gz"
-  sha256 "dec204e18be7da765af800b5e3634e2fc462a70980bcacdacb4c751059a9842b"
+  url "https://github.com/moonrepo/proto/archive/refs/tags/v0.55.1.tar.gz"
+  sha256 "00b4053527ed12be90077e949cc45ffcaeb5eeaf054fa84e773e5ff11e42d7ea"
   license "MIT"
   head "https://github.com/moonrepo/proto.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Proto < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4ad58ea9a8deed173c8c24ba3965b0e12b1efabf20a98be24a4cb125716f3488"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b777c70710f6869c8bea756832e009350af4582ba7af48f6019e99f38aa2067a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "153986ea9cc22697c1f947cbaaba83e849c0ed727eada06641ef21ecb69b1f41"
-    sha256 cellar: :any_skip_relocation, sonoma:        "59c0f3afde2d1b59092e090fb62e57d771da5ae801ca543d12abf90db88dec9f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "aae2e1469e6e386b8ccadd197c8b339462884ce699070bdd8fa82799f878f3de"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "32f5ff6d0d9248e6f9fc8c9ae05a57d680f2f76090ee2ac8890e5115f8efc212"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "951695dcb1ef54559eafc54ecece2df42d04aa3b855313839ea66dcf6c05f008"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e44893059b23198b8c3084082ecada46248f74b7f6f5483484566cbe7172b3df"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "35a45e88016c9f517b62ad66598b05b37a6379364b2a02e1a6024b3b835a096d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "fe216ba2758b4f9b8c58284a61462f81518a064bc2669b4b168c8e2b12f9b597"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "200826e091f6cbc2ec6b8c80f8197937144f2480a170c8b13bbf6d1692052fa6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4e30ebf78c021e94ebf83d59cca719e0bf2efd1e1d089160a5a4c685c39d10ce"
   end
 
   depends_on "pkgconf" => :build

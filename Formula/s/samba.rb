@@ -4,8 +4,8 @@ class Samba < Formula
   # option. The shared folder appears in the guest as "\\10.0.2.4\qemu".
   desc "SMB/CIFS file, print, and login server for UNIX"
   homepage "https://www.samba.org/"
-  url "https://download.samba.org/pub/samba/stable/samba-4.23.3.tar.gz"
-  sha256 "06cdbb27a6956978b045455fe0696d998ffbac8d24ba24de87a4ef8200813320"
+  url "https://download.samba.org/pub/samba/stable/samba-4.23.5.tar.gz"
+  sha256 "593a43ddd0d57902237dfa76888f7b02cb7fc7747111369cb31e126db4836b9f"
   license "GPL-3.0-or-later"
 
   livecheck do
@@ -14,12 +14,12 @@ class Samba < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "f90690906321e036be0fa6aa5b384a8e2b0b2f3459ab6705d29ab9ef26e843ad"
-    sha256 arm64_sequoia: "d79512f5bde6f026b53a73ea6a6259f1ee1ae8ff3c6ac3d9f3bf3ea5607f2c46"
-    sha256 arm64_sonoma:  "87e9d10d181fb0c9d2ae729e3fb83f9744489bbb7f24daca26679cd230a93fde"
-    sha256 sonoma:        "9a0889c0691438278e36abcc8fd543a3707e01f2b38db80a01cdb50ba080e355"
-    sha256 arm64_linux:   "9690405109131c6b3c76ecc3f1d940544b0fe540239248394bc07fb5a6005b47"
-    sha256 x86_64_linux:  "3b2deef65bc456c32b690f9c856edfb79db9965ea1a61f7c7af6c54657d4e755"
+    sha256 arm64_tahoe:   "5038c21262a618d3793ba5b6f742c59ec89ddd725c4105af256b2f4b063d509c"
+    sha256 arm64_sequoia: "ee91a82bda16b4282addb5343b699d4f14dce4234811dcff8a8c25229a3c872e"
+    sha256 arm64_sonoma:  "cf5e9081dea3a189a3d1dffc01c42681577292bb8bc15695fd36a2a9cac987b6"
+    sha256 sonoma:        "1ca6190634311ff6c7bf2db40869e414c6ff3fa8e40e87eaacb7ed8361a00f5c"
+    sha256 arm64_linux:   "fb0486bf1a4b077d1edc0a12ed0f48bb7a7441b55d022676440e7988b6b99739"
+    sha256 x86_64_linux:  "ed4456ea2d610761d1634900f6b8d817214fa3d4049284ed96b6fca3b8bc5560"
   end
 
   depends_on "bison" => :build
@@ -141,9 +141,9 @@ class Samba < Formula
 
   test do
     smbd = if OS.mac?
-      "#{sbin}/samba-dot-org-smbd"
+      sbin/"samba-dot-org-smbd"
     else
-      "#{sbin}/smbd"
+      sbin/"smbd"
     end
 
     system smbd, "--build-options", "--configfile=/dev/null"

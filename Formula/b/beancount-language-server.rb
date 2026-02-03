@@ -1,20 +1,18 @@
 class BeancountLanguageServer < Formula
   desc "Language server for beancount files"
   homepage "https://github.com/polarmutex/beancount-language-server"
-  url "https://github.com/polarmutex/beancount-language-server/archive/refs/tags/v1.4.1.tar.gz"
-  sha256 "d8a7ed7eba4461d851574bcb42c614180513144bd56e429f803997a3555dfdaf"
+  url "https://github.com/polarmutex/beancount-language-server/archive/refs/tags/1.9.0.tar.gz"
+  sha256 "92a0c82b939ad66769e91270fdf3905717913c9ebf79dd62b6a50f5f8d7fa827"
   license "MIT"
   head "https://github.com/polarmutex/beancount-language-server.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f8d4cc8564372d39f54e6e97c4f281fdcafb80a1532a6f5331c25a34965a1571"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "95b7377fc99ef879688e3f7bfab1e85ac155c1d583db4dd5e4ef84c200b026ea"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b0a5131af0d419d63a342539a0ab3aca43fe3dfc16d755f49dfa33440bdb4c57"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "6f3d2946f89f9262d2970c998617d0d068ad05a89195dd2936f1d2f59733f9d9"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4d8f70336fdbf1f1dabfedf317f39375a9c7a3c84ba4ae25d219e1b947e0f465"
-    sha256 cellar: :any_skip_relocation, ventura:       "b848c9af6a74cf7768da405c1d244a7d35f66f230c06e0818f30a16584928511"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "253473490238b1c2faf4d80f5d79149cdebaf6b035cfd57fb99dddef4a474e90"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6125cd5ffaf34194e79987170c30d737ef6bc4a04b2e53a007bbd68344863a74"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4ab3735ebd3988b9a39be66ef707d83b888b1d8756fed4c95210bf2d0d5d5236"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1ffd2d2ffdb0c9c648f0b0c8185033c1c949b6962401180623c7f4c6423c5805"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bdc0854fbf32f846ca4a3bd72ddd2233cf5e1c8edd3a05a52725d66ec7eba75d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "eefdb2597ea64a79eccd58a74d1d8130ff0b5ea6f43e6ad24a5de68368ed62b2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "57f46e781bc3f726978531654b47b1a46c07b44b0980b2147cdbcf01c23eca31"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f5b9fdeeeae9ff12ecf0eabeb54267e69062d1106a8681b01f77daa17cd27fc9"
   end
 
   depends_on "rust" => :build

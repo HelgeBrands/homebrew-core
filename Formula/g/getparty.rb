@@ -1,18 +1,18 @@
 class Getparty < Formula
   desc "Multi-part HTTP download manager"
   homepage "https://github.com/vbauerster/getparty"
-  url "https://github.com/vbauerster/getparty/archive/refs/tags/v1.25.0.tar.gz"
-  sha256 "d2d155cff18e05a431843ce989e14a15281b1ce8acf1d00f9c329c3df0854f50"
+  url "https://github.com/vbauerster/getparty/archive/refs/tags/v1.26.0.tar.gz"
+  sha256 "8f69c220d158153a9c4fb46eefcade37cdaff71954393b57152fbca93eeee223"
   license "BSD-3-Clause"
   head "https://github.com/vbauerster/getparty.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "46155a52925366b0e92b248d056a7d0793518d7336dba38ecca21081dc738c23"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "46155a52925366b0e92b248d056a7d0793518d7336dba38ecca21081dc738c23"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "46155a52925366b0e92b248d056a7d0793518d7336dba38ecca21081dc738c23"
-    sha256 cellar: :any_skip_relocation, sonoma:        "578a3d91dff37c658e6b873b87a5cb581486db5dd3e9082cfb4c3cdf7e8c254e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7c67a02f2c4530453e0b3ea71579112120e20e252d7cf76bb966ca43e8029b61"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "10c7dce4c0208431aa33705d19ec8259d4c23c27461f1f5e0d11e11f18e30a6c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "830fa1ac371b12729704b955c5fa4e6103b3a618051f22aabfaa342c0bd96f5b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "830fa1ac371b12729704b955c5fa4e6103b3a618051f22aabfaa342c0bd96f5b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "830fa1ac371b12729704b955c5fa4e6103b3a618051f22aabfaa342c0bd96f5b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c700e3f01d2596b21d35d3d43d9111f2a1e003359edaf87c78668052c681efdf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5d2684fc2f55e4390e1a7c2cd1741058ce98f3d1bbb7888c091e5a90ed905cea"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "02d9d6b3d68a13bc4238ef4b7243aa21aeda321e0e51dec1a8cc29abfe08d52b"
   end
 
   depends_on "go" => :build

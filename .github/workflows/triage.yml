@@ -23,9 +23,9 @@ jobs:
     permissions:
       contents: read
     if: always() && github.repository_owner == 'Homebrew'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     steps:
-      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: event_payload
           path: ${{ github.event_path }}
@@ -36,7 +36,7 @@ jobs:
       issues: write
       pull-requests: write
     if: always() && github.repository_owner == 'Homebrew' && github.actor != 'BrewTestBot'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     env:
       PR: ${{ github.event.number }}
     steps:
@@ -115,7 +115,7 @@ jobs:
         run: gh pr comment "${PR}" --body "${BODY}" --repo "${GITHUB_REPOSITORY}"
 
   triage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     permissions:
       contents: read
       issues: write
@@ -302,6 +302,7 @@ jobs:
                 openvino|\
                 pcl|\
                 ponyc|\
+                prowler|\
                 pytorch|\
                 qtwebengine|\
                 root|\
@@ -348,10 +349,10 @@ jobs:
                 libgpg-error|\
                 libidn2|\
                 libmicrohttpd|\
-                librist|\
                 libnghttp2|\
                 libomp|\
                 libpng|\
+                librist|\
                 libtool|\
                 libunistring|\
                 mpfr|\
@@ -359,20 +360,21 @@ jobs:
                 node|\
                 numpy|\
                 openblas|\
+                openjdk|\
                 openjpeg|\
                 openssl@3|\
                 p11-kit|\
                 pango|\
                 pcre2|\
                 python@3.14|\
+                qtbase|\
                 rav1e|\
+                readline|\
                 rust|\
                 sdl2|\
                 shared-mime-info|\
                 sqlite|\
                 suite-sparse|\
-                qtbase|\
-                readline|\
                 unbound|\
                 xz|\
                 zstd\
@@ -382,14 +384,29 @@ jobs:
 
             - label: CI-build-dependents-from-source
               path:
-                - 'Formula/.+/(cabal-install|docbook-xsl|emscripten|erlang|ocaml|ocaml-findlib|ocaml-num|openjdk|rust)\.rb'
-                - 'Aliases/(ghc|go)(@[0-9.]+)?$'
+                - "Formula/.+/(\
+                    cabal-install|\
+                    docbook-xsl|\
+                    emscripten|\
+                    erlang|\
+                    ocaml|\
+                    ocaml-findlib|\
+                    ocaml-num|\
+                    openjdk|\
+                    pyqt-builder|\
+                    rust\
+                    )\\.rb"
+                - "Aliases/(\
+                    ghc|\
+                    go\
+                    )(@[0-9.]+)?$"
               missing_content: '\n  revision [0-9]+\n'
               keep_if_no_match: true
               allow_any_match: true
 
             - label: CI-skip-recursive-dependents
               path: "Formula/.+/(\
+                alsa-lib|\
                 ca-certificates|\
                 certifi|\
                 cmake|\
@@ -398,9 +415,10 @@ jobs:
                 glib|\
                 harfbuzz|\
                 openssl@3|\
-                wayland-protocols|\
+                rust|\
                 sqlite|\
-                systemd\
+                systemd|\
+                wayland-protocols\
                 ).rb"
               keep_if_no_match: true
               allow_any_match: true
@@ -408,6 +426,7 @@ jobs:
             - label: CI-linux-self-hosted
               path: "Formula/.+/(\
                 dart-sdk|\
+                dotnet|\
                 envoy|\
                 qt@5|\
                 qtwebengine|\
@@ -420,7 +439,6 @@ jobs:
 
             - label: CI-linux-self-hosted-deps
               path: "Formula/.+/(\
-                alsa-lib|\
                 glib|\
                 libcap|\
                 libva|\
@@ -463,7 +481,7 @@ jobs:
       issues: write
       pull-requests: write
     if: always() && github.repository_owner == 'Homebrew'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     env:
       PR: ${{ github.event.number }}
     steps:

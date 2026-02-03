@@ -1,8 +1,8 @@
 class Promtail < Formula
   desc "Log agent for Loki"
   homepage "https://grafana.com/loki"
-  url "https://github.com/grafana/loki/archive/refs/tags/v3.6.2.tar.gz"
-  sha256 "6ebcd323959fcc6b6ec5a466c5a6c975d186c9c3a81b61f3c69cdc8b047c1961"
+  url "https://github.com/grafana/loki/archive/refs/tags/v3.6.4.tar.gz"
+  sha256 "99da52c3d14c7bd7e528d9e84dbf8e7261a0ef216c8af4cfaf59d173707fb283"
   license "AGPL-3.0-only"
   head "https://github.com/grafana/loki.git", branch: "main"
 
@@ -11,12 +11,12 @@ class Promtail < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "20602ca819e7a52281886c5a751759c5dbc8caf82577a0e23d2debc101f098ca"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c1991630c6b990da2af196aec20796b79c65f6c8c8658677cb794fa69af97909"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "271c50b1bfaa8207809606a2d930215bafd93090bd11162c6af24ca5c4408cbc"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c7478272711dd38b33a4e1becbfe7d7830fd386d83a38eccbe0348a3caaffdb8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "de70cfbbb2c2ec874dc6785727a2a36c917f539f95a1ac39720f16a8cfb36995"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ad2cd556056ee6b4bdc133199b0c053a7df93d00e79ceea3ffd6c3e1c1a33bd3"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "72aa80a154d7dd92d217376df43d1ccc32925fcaea25d44061605895545ca7fe"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "18cfa9d700b733e0ff3343d5f421d1bcac1edc1bdf89221f78a0b532dfd38baa"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "56808a12406df65713247a8244416279195589bd4639419e2ddf18707e17c21d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "758d7fb210bd101749f89b17ef46de1ee2e6b59e4dfc11879ac5ff438022627e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b8bc0d44bfb3af68a2dd0746766486dbe57405213606a62bd87ad3d4138c55ab"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4dcc66990d9bad002992d3a954e860a0f85e734667690f81426f5dc361fc5684"
   end
 
   depends_on "go" => :build
@@ -49,7 +49,7 @@ class Promtail < Formula
       s.gsub!(/__path__: .+$/, "__path__: #{testpath}")
     end
 
-    fork { exec bin/"promtail", "-config.file=promtail-local-config.yaml" }
+    spawn bin/"promtail", "-config.file=promtail-local-config.yaml"
     sleep 3
     sleep 3 if OS.mac? && Hardware::CPU.intel?
 

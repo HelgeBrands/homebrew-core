@@ -1,18 +1,17 @@
 class Alda < Formula
   desc "Music programming language for musicians"
   homepage "https://alda.io"
-  url "https://github.com/alda-lang/alda/archive/refs/tags/release-2.3.5.tar.gz"
-  sha256 "0d7babe617ea7e8e20db9cb0e9c95d8631e9d67babdcce73e26ebc545716365e"
+  url "https://github.com/alda-lang/alda/archive/refs/tags/release-2.4.1.tar.gz"
+  sha256 "0d55dc2cd3d9b7abb6a91ee117c0079e7a5d81fac5b8c8e30bb070f854696eaa"
   license "EPL-2.0"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4912e2d3e2170139b141265108123e4e0720e14fddb874cda07d5dcc3266f579"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e8ba7e1c062cdc18395cfbd06c390420d0848b79181f1ea03857fdbad1007fb6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7910f43e3fe793ba0b3852420996d0afda849985c01c573f849e78478caf9fe2"
-    sha256 cellar: :any_skip_relocation, sonoma:        "23fdeb527ed70db77f08e34e9c9d740b9de63a30923c29f33b8ee4cba35d1fa8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c0169935fd947185c65f8285ff870accb9143ab6eef2a9c2cfd80a3c82145ce4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "41a11630d37ed6d45b44d13a439ec58452c819994148c623d4c9049ab0e83993"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "75c0b47d258e6e7913f766db0c22819679c4b5fe565d8b2e75817071a954a4c9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "24a57e98d6e29acb9ee3accc52a4a64fa54a3fb1e05de047568bda7bee60dd78"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "54045afb6fbb6e41b656361f5a8746f603d202f5b4a48914311af5f755d83219"
+    sha256 cellar: :any_skip_relocation, sonoma:        "6282e20ee062a9a29f7171d78509ae39db4f2c6a9b795b9cfcd5e75513880f56"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "43c9caa77b36a35e9a877d567e8b3137170bf1141aa959f174ff8d6ba20c5553"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e9971beaa735a115cda3d3b9ec2feff88025370c0712636d7ce0b7003e0e6a31"
   end
 
   depends_on "go" => :build
@@ -32,7 +31,7 @@ class Alda < Formula
       bin.write_jar_script libexec/"alda-player-fat.jar", "alda-player"
     end
 
-    generate_completions_from_executable(bin/"alda", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"alda", shell_parameter_format: :cobra)
   end
 
   test do

@@ -3,10 +3,9 @@ class C7n < Formula
 
   desc "Rules engine for cloud security, cost optimization, and governance"
   homepage "https://github.com/cloud-custodian/cloud-custodian"
-  url "https://github.com/cloud-custodian/cloud-custodian/archive/refs/tags/0.9.48.0.tar.gz"
-  sha256 "44c5ca2da22ef9f1ce0550729acd2d4d55e1c96ced95c3978fc75ebfcf6c6775"
+  url "https://github.com/cloud-custodian/cloud-custodian/archive/refs/tags/0.9.49.0.tar.gz"
+  sha256 "1381234a127fe6b9e0d2d8311370872ffbaa4a1f06c0ddeb267c5c1787ad6934"
   license "Apache-2.0"
-  revision 1
 
   livecheck do
     url :stable
@@ -14,12 +13,12 @@ class C7n < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1583cde0e32902a5b509315879f32ce67e7a7862b6df3066fcfc30991ce31a8f"
-    sha256 cellar: :any,                 arm64_sequoia: "2202d9e5a4321c9266ac24ebb01fa2807c32e98b476e4ddae8e45e60f4908f57"
-    sha256 cellar: :any,                 arm64_sonoma:  "6e021c83bcafff381df531f5a15bd3788bf523133168854ba1ee14f44eec6bb9"
-    sha256 cellar: :any,                 sonoma:        "d0382085fb900e4b11a8d2b3594bb1606fb2884757c8741671e62168321c35b3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5b3db42fda265e17bde7f4e004d8df930633e0c5ee2c3af3f0ca90ce085e6333"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fdb1966adcdfacf76aba5609aff7aa55d9635642e164250419bb6f14c7779247"
+    sha256 cellar: :any,                 arm64_tahoe:   "a9dac537ea251f664ce56cf9f2aa5094403a353031a80f545f68aa35f2ecbc23"
+    sha256 cellar: :any,                 arm64_sequoia: "9644279717ba642a2febb5a99e4cf9ec74368304386a3c708feae0404fdd0606"
+    sha256 cellar: :any,                 arm64_sonoma:  "ebf72590d0abf196867dc802f6aa441f93f8fb43366cc709c589df475d455332"
+    sha256 cellar: :any,                 sonoma:        "37665a19ced3db873f95d19e001a2077323a66bb3e91abfcfaf2058c2936ca2a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3f12bdb60b8522eb665671a5bb5a32c68d4aa1d9073dc63a2e597e57dc150b47"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "50b81664894d361f31d99622dde15a222742c592420f17803c333f35163e165b"
   end
 
   depends_on "cryptography" => :no_linkage
@@ -40,13 +39,13 @@ class C7n < Formula
   end
 
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/f3/31/246916eec4fc5ff7bebf7e75caf47ee4d72b37d4120b6943e3460956e618/boto3-1.42.4.tar.gz"
-    sha256 "65f0d98a3786ec729ba9b5f70448895b2d1d1f27949aa7af5cb4f39da341bbc4"
+    url "https://files.pythonhosted.org/packages/ee/21/8be0e3685c3a4868be48d8d2f6e5b4641727e1d8a5d396b8b401d2b5f06e/boto3-1.42.24.tar.gz"
+    sha256 "c47a2f40df933e3861fc66fd8d6b87ee36d4361663a7e7ba39a87f5a78b2eae1"
   end
 
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/5c/b7/dec048c124619b2702b5236c5fc9d8e5b0a87013529e9245dc49aaaf31ff/botocore-1.42.4.tar.gz"
-    sha256 "d4816023492b987a804f693c2d76fb751fdc8755d49933106d69e2489c4c0f98"
+    url "https://files.pythonhosted.org/packages/12/d7/bb4a4e839b238ffb67b002d7326b328ebe5eb23ed5180f2ca10399a802de/botocore-1.42.24.tar.gz"
+    sha256 "be8d1bea64fb91eea08254a1e5fea057e4428d08e61f4e11083a02cafc1f8cc6"
   end
 
   resource "jmespath" do
@@ -55,8 +54,8 @@ class C7n < Formula
   end
 
   resource "jsonschema" do
-    url "https://files.pythonhosted.org/packages/74/69/f7185de793a29082a9f3c7728268ffb31cb5095131a9c139a74078e27336/jsonschema-4.25.1.tar.gz"
-    sha256 "e4a9655ce0da0c0b67a085847e00a3a51449e1157f4f75e9fb5aa545e122eb85"
+    url "https://files.pythonhosted.org/packages/b3/fc/e067678238fa451312d4c62bf6e6cf5ec56375422aee02f9cb5f909b3047/jsonschema-4.26.0.tar.gz"
+    sha256 "0c26707e2efad8aa1bfc5b7ce170f3fccc2e4918ff85989ba9ffa9facb2be326"
   end
 
   resource "jsonschema-specifications" do
@@ -95,8 +94,8 @@ class C7n < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   def install

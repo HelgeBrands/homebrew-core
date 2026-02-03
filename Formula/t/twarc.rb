@@ -6,15 +6,15 @@ class Twarc < Formula
   url "https://files.pythonhosted.org/packages/44/1e/b124f63e6b220c0bd85abe062b77809a0cfd2e9e6d8aed25f9069687df5a/twarc-2.14.1.tar.gz"
   sha256 "54537495c6575863769e82ba4a0db7d68538e7c5afa9b8fcc8856a0ae94d9fa0"
   license "MIT"
-  revision 1
+  revision 2
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "02d3e93c8d41be751b50675d139d5cf17773bdb8c4d94e5544356b47f472089a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ccb4350e926d0ef0a8e25088b55f1785b46441c5d92efd635663965fd8977e00"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b1928e9f96a3d7e2df82bbe016a23fb4582c0b922a4279944d44214fd27b21bf"
-    sha256 cellar: :any_skip_relocation, sonoma:        "cdabb7b41c7a0f66ffe5ceda06356facc62fb4ca17d364d93261edde926de2cb"
-    sha256                               arm64_linux:   "fa6a3a7b685740863d09616984c75ccf6c01e3699d9b6a97997b304a9b6bb15e"
-    sha256                               x86_64_linux:  "838e0a3b393ae6000ce041d092a6d310d309cd85286c11bcf3ef1b9f8cb89334"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "db9e6c81fdf10b57b1088a8ab38e39df62e6c7e7a4ff59ac7c99a831b6e3a436"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a8ece55dd20076323c923f67c06cc05ce2dbc3d535d3746c08420cdd9613daaa"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bbf83545193ee50cbdca9c86d942a41556754ad4d4c55bfd6f4ae3cea04c7242"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b175e12ab700e554a919fb5ed97b10cf97d3d039db90ef7bbb97f2ac741b8224"
+    sha256                               arm64_linux:   "97ac9dcf94d545374e82cceeab9a681b5aa9381986ed82ce55dd0f90aa5a8075"
+    sha256                               x86_64_linux:  "d553debe051e9d6d6797a7d89ccd0b943234542d4fd576b6722250cc533a7432"
   end
 
   depends_on "cmake" => :build
@@ -57,8 +57,8 @@ class Twarc < Formula
   end
 
   resource "humanize" do
-    url "https://files.pythonhosted.org/packages/b6/43/50033d25ad96a7f3845f40999b4778f753c3901a11808a584fed7c00d9f5/humanize-4.14.0.tar.gz"
-    sha256 "2fa092705ea640d605c435b1ca82b2866a1b601cdf96f076d70b79a855eba90d"
+    url "https://files.pythonhosted.org/packages/ba/66/a3921783d54be8a6870ac4ccffcd15c4dc0dd7fcce51c6d63b8c63935276/humanize-4.15.0.tar.gz"
+    sha256 "1dd098483eb1c7ee8e32eb2e99ad1910baefa4b75c3aff3a82f4d78688993b10"
   end
 
   resource "idna" do
@@ -117,13 +117,13 @@ class Twarc < Formula
   end
 
   resource "tzdata" do
-    url "https://files.pythonhosted.org/packages/95/32/1a225d6164441be760d75c2c42e2780dc0873fe382da3e98a2e1e48361e5/tzdata-2025.2.tar.gz"
-    sha256 "b60a638fcc0daffadf82fe0f57e53d06bdec2f36c4df66280ae79bce6bd6f2b9"
+    url "https://files.pythonhosted.org/packages/5e/a7/c202b344c5ca7daf398f3b8a477eeb205cf3b6f32e7ec3a6bac0629ca975/tzdata-2025.3.tar.gz"
+    sha256 "de39c2ca5dc7b0344f2eba86f49d614019d29f060fc4ebc8a417896a620b56a7"
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   def install
@@ -132,10 +132,15 @@ class Twarc < Formula
     ENV["SOURCE_DATE_EPOCH"] = "1451574000"
 
     virtualenv_install_with_resources
+
+    generate_completions_from_executable(bin/"twarc2", shell_parameter_format: :click)
   end
 
   test do
-    assert_equal "usage: twarc [-h] [--log LOG] [--consumer_key CONSUMER_KEY]",
-                 shell_output("#{bin}/twarc -h").chomp.split("\n").first
+    (testpath/"config").write <<~EOS
+      bearer_token = 'test'
+    EOS
+    assert_match version.to_s, shell_output("#{bin}/twarc2 --config config version")
+    assert_match "Unauthorized", shell_output("#{bin}/twarc2 --config #{testpath}/config tweet 123 2>&1")
   end
 end

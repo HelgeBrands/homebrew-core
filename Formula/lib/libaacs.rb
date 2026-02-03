@@ -39,6 +39,7 @@ class Libaacs < Formula
 
   depends_on "bison" => :build
   depends_on "libgcrypt"
+  depends_on "libgpg-error"
 
   uses_from_macos "flex" => :build
 

@@ -1,9 +1,9 @@
 class Xterm < Formula
   desc "Terminal emulator for the X Window System"
   homepage "https://invisible-island.net/xterm/"
-  url "https://invisible-mirror.net/archives/xterm/xterm-404.tgz"
-  mirror "https://deb.debian.org/debian/pool/main/x/xterm/xterm_404.orig.tar.gz"
-  sha256 "63332f921c227ba59e589fa07dfdad1599c10ac859ea26c72ac1dd4a41b565a4"
+  url "https://invisible-mirror.net/archives/xterm/xterm-406.tgz"
+  mirror "https://deb.debian.org/debian/pool/main/x/xterm/xterm_406.orig.tar.gz"
+  sha256 "066eb2d66430897fe1dadd271554ccdae33d77c512126a758fc4de37b1148799"
   license "X11"
 
   livecheck do
@@ -12,12 +12,12 @@ class Xterm < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "f25948fe147b7cce574b4077fdca1ff5726208d1dfc451f22e8b75a3cc006697"
-    sha256 arm64_sequoia: "04e7983ed65bb02a13f4108dff47b51d1670f368a145953d3cc9d05df109a475"
-    sha256 arm64_sonoma:  "9a7d99ac23b25ac6312679c368d0fa7556d2699ed710a1adb12b4fcaaa97429c"
-    sha256 sonoma:        "949b1063c251fd3163a3d56bb52f04e616678a1e7be3b9d48b70f8216379495e"
-    sha256 arm64_linux:   "3e8f6ef498a38d5e3292efdff9b7f5c8757c80b231d6761b045a4053ff4417cf"
-    sha256 x86_64_linux:  "c73ce34894665b770029c534f7256962d1f78f082547410fb04de0de9ce57782"
+    sha256 arm64_tahoe:   "febe264a3f84f698a283fe06451f6aa5851f423b44e0117ed4ae36c52cadf783"
+    sha256 arm64_sequoia: "0928f2fef86350a848646a02ad1f0eb407b0a3c8a5c791e9ae5c4d40ff6dfcf4"
+    sha256 arm64_sonoma:  "bba1270c756fb3372f837f9765afbd14f72bb248ec78b06efd875d78624de0a6"
+    sha256 sonoma:        "3ee7f80ce88a4cab63dd10009911e2cf2aee234d3e2f9344328184f30b0c8d67"
+    sha256 arm64_linux:   "e25efccd11367f25e330e4e4bd209bd6c508bacf714b2a8c200f2779834f46a1"
+    sha256 x86_64_linux:  "ac01af9a5aa916e65baea9cf66b32be40e00ffe1fd19388a4ba61a6f50bce0e6"
   end
 
   depends_on "pkgconf" => :build

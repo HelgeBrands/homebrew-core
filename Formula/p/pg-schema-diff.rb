@@ -1,20 +1,18 @@
 class PgSchemaDiff < Formula
   desc "Diff Postgres schemas and generating SQL migrations"
   homepage "https://github.com/stripe/pg-schema-diff"
-  url "https://github.com/stripe/pg-schema-diff/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "036abefc48a7c4b3fe73f8ab659f7d3f3379d85b3747cd2ceb973ae542192667"
+  url "https://github.com/stripe/pg-schema-diff/archive/refs/tags/v1.0.5.tar.gz"
+  sha256 "203619e794338e15ddc65e6bb5f9de817b881e03518289eb029ef866d3babc52"
   license "MIT"
   head "https://github.com/stripe/pg-schema-diff.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f7b9f07306b17afb7b12fa45a249b678a07150517c971b36cb110b2bf02f45d9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8b98ed4ac4b75b8b959780a011c8b4fa6399267222bd2756a0d8989e249b2677"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8b98ed4ac4b75b8b959780a011c8b4fa6399267222bd2756a0d8989e249b2677"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "8b98ed4ac4b75b8b959780a011c8b4fa6399267222bd2756a0d8989e249b2677"
-    sha256 cellar: :any_skip_relocation, sonoma:        "bbe23212edff4718890067907cad83d7cd8ae4c7fc53be464e1319c1c5d35a29"
-    sha256 cellar: :any_skip_relocation, ventura:       "bbe23212edff4718890067907cad83d7cd8ae4c7fc53be464e1319c1c5d35a29"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "52287a45b152a43d11d6f60375c3f3b31c5f8551f253f418f2045adb711f80fa"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "761c21b121914bd68e6e972d000f26cc08e809348945b48c467dbb51f6b9189e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ce562e873fafe35ea9c104c0d30366a916b01c315d0a53e7e22a48666babb20d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ce562e873fafe35ea9c104c0d30366a916b01c315d0a53e7e22a48666babb20d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ce562e873fafe35ea9c104c0d30366a916b01c315d0a53e7e22a48666babb20d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a357fe43e6cccb582d451a420d774a5317223d2d583c312e903e94c86a351428"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "eda75ea6c5b0b62c8fdc9ccade5faf1991f217d7cd61d02010d433b862b7af99"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fc47dac60204e4dcd0f0af5db2f253b7d40cd74d29ce27fbe55301250b3dd305"
   end
 
   depends_on "go" => :build
@@ -22,7 +20,7 @@ class PgSchemaDiff < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w"), "./cmd/pg-schema-diff"
 
-    generate_completions_from_executable(bin/"pg-schema-diff", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"pg-schema-diff", shell_parameter_format: :cobra)
   end
 
   test do

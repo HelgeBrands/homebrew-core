@@ -1,17 +1,17 @@
 class Primecount < Formula
   desc "Fast prime counting function program and C/C++ library"
   homepage "https://github.com/kimwalisch/primecount"
-  url "https://github.com/kimwalisch/primecount/archive/refs/tags/v7.20.tar.gz"
-  sha256 "a9d260b78b9c94c9c0347b3191ab748bc47c0b60114497b80f4290bc36cf9e76"
+  url "https://github.com/kimwalisch/primecount/archive/refs/tags/v8.1.tar.gz"
+  sha256 "cef67e849a42d642e34579c8caa5e0629fba3e89a84f8279b3dfeb920a5dcb61"
   license "BSD-2-Clause"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "8274febe76ed6bc31480f91f4acd15e0958f1748d5e4fb599cd93d1ae5e709ba"
-    sha256 cellar: :any,                 arm64_sequoia: "2f6ed227a05dbc8d620fa1715d7d4789fef81ac46ce655a0d6251c875a0868af"
-    sha256 cellar: :any,                 arm64_sonoma:  "bcc6a6bb5514e53daa8a5acb6a9a47ef5f8197435d1e81ca2c3f26866e5a2f6e"
-    sha256 cellar: :any,                 sonoma:        "d26abdeae8b66fb58d69cae5e64cfb1474d217ddb44ac5f3abe957deec9ec51a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "037103e37c9278fcb57ad945bc9b5bec19d47b98d232b49e73633c046f921c74"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "01616508a7eff07bd9f42903f02baf06821b28d0235ad47621a1ae208aee6991"
+    sha256 cellar: :any,                 arm64_tahoe:   "ebf1a59073734f4e1825cba2fdbfdb8605970a45ec83994d303755ed50e99351"
+    sha256 cellar: :any,                 arm64_sequoia: "bdf50eb309006b7b5333e3e3805f8b99f4f7a6c2e7d3b4848eec0eb881e5d00f"
+    sha256 cellar: :any,                 arm64_sonoma:  "7d4a8f3fd457585dc300d3af5aa91d43922719da0a5777f3df342b99715d0626"
+    sha256 cellar: :any,                 sonoma:        "d302af04297c3839965bb8fd0745e6c5a099556faa617b9722cd93af1fc81d39"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "83e972469286eef94f87a056cab175428ae658ebfe3798251516550cc629f242"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1a4dbf85d66cf71edd11b771f3da25922c8a9c8a254b1b22d1427a08571c63a2"
   end
 
   depends_on "cmake" => :build

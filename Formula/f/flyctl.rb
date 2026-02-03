@@ -2,8 +2,8 @@ class Flyctl < Formula
   desc "Command-line tools for fly.io services"
   homepage "https://fly.io"
   url "https://github.com/superfly/flyctl.git",
-      tag:      "v0.3.231",
-      revision: "f286ff0782f4665ea603692951294979d57e56f8"
+      tag:      "v0.4.6",
+      revision: "4fd60abf9c13af3f0055008a6b1da8dba398ed69"
   license "Apache-2.0"
   head "https://github.com/superfly/flyctl.git", branch: "master"
 
@@ -18,12 +18,12 @@ class Flyctl < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "35dc0220e8807eb28661e4a0f77ee458ef355149c2635464403603495920bf69"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "35dc0220e8807eb28661e4a0f77ee458ef355149c2635464403603495920bf69"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "35dc0220e8807eb28661e4a0f77ee458ef355149c2635464403603495920bf69"
-    sha256 cellar: :any_skip_relocation, sonoma:        "38f146dabc8d135563422cca55c4985a6925650c7ec42b56f083ee33dd703c31"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7367b47b5f8c2ee9f0c7c5428439134ca9f62f276d0f923929eeb19647900b7f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7c062a9758f6b8e34d864e60b4f9bcb8648a6d29baebeb8a42f4a6fc88ad6f84"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1194f45fd87c8d7cbd0a5cf66288478e4ceb4d6020cdad7bfffbbfbf4ceaff04"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1194f45fd87c8d7cbd0a5cf66288478e4ceb4d6020cdad7bfffbbfbf4ceaff04"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1194f45fd87c8d7cbd0a5cf66288478e4ceb4d6020cdad7bfffbbfbf4ceaff04"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e1f16a600ef6f804818140b54cb04cba628aa3e9d0d4ae94db630a499643c94d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e5d873e18366a8f9a35ad3195b3688397adea3f9ca26eab9f5a2f4be50105305"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a97fab2e780c6d2fb0c6b5de8d59e233a2b220e477db8d6742a9978a6476a3a9"
   end
 
   depends_on "go" => :build
@@ -40,8 +40,9 @@ class Flyctl < Formula
 
     bin.install_symlink "flyctl" => "fly"
 
-    generate_completions_from_executable(bin/"flyctl", "completion")
-    generate_completions_from_executable(bin/"fly", "completion")
+    %w[flyctl fly].each do |cmd|
+      generate_completions_from_executable(bin/cmd, shell_parameter_format: :cobra)
+    end
   end
 
   test do

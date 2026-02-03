@@ -2,8 +2,8 @@ class Docker < Formula
   desc "Pack, ship and run any application as a lightweight container"
   homepage "https://www.docker.com/"
   url "https://github.com/docker/cli.git",
-      tag:      "v29.1.2",
-      revision: "890dcca8776eaeb472d7c9842f326d8c25805f3d"
+      tag:      "v29.2.1",
+      revision: "a5c7197d720daef7d8b9e6174ee78c0743cea166"
   license "Apache-2.0"
   head "https://github.com/docker/cli.git", branch: "master"
 
@@ -13,12 +13,12 @@ class Docker < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0cdb49be9628d7d0335d204e9d707cee7cbfb67b7c7b84f726921696bc342e41"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "254d1bd212fa43d2b237e186a02c1899ee498cdecd15a3b319dcab6bab67f699"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5512a2d3264c679c3d934b9a090a8b840322db145681263b6ae2fb1d6683d5e4"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e96ff243dde9b9ebdff24e71ac9923c86aa5433b390513067006e6377b12b9c7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c99120d359ac277828cb4bddd62a3b5a7b03f1c4611176c11400c15e2c6c2e01"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cf6817eaf3df2be27c9e60fae78d39dd5be7e1a185424fc0fccae2378e711630"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "22f9479c4bf4ab09ce0e07107efeedcd0f141462496a0367e1052ba3d7eec81f"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "022cbc5204661a76c5bbdbe2c97d54f1ec65dbef7ddad328d3807978ca7c6ca2"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d89c4720fd7f7324b05de6ce7f7b7f64d369057abd7716e4ddec209a9e5dad5b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "5addad45cc92ca06a7a700808195549c53a53ce75f1d8c74dea94185ed80d415"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b2c07a14258bc121c8b145f19a58d58fc94a0885b1506ce2dcce294222ad749a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0c31d41cc1981fc06c01e49ed2e2e7fdbf6635344c2362ae14f5f45009e21ef6"
   end
 
   depends_on "go" => :build

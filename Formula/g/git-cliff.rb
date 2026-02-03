@@ -1,17 +1,17 @@
 class GitCliff < Formula
   desc "Highly customizable changelog generator"
   homepage "https://git-cliff.org/"
-  url "https://github.com/orhun/git-cliff/archive/refs/tags/v2.10.1.tar.gz"
-  sha256 "172888704ad429e238e61472e31704d4fdf5ff9c2c04479bb9452fb70d7a9278"
+  url "https://github.com/orhun/git-cliff/archive/refs/tags/v2.12.0.tar.gz"
+  sha256 "2a55fd44467dfb6b0a0a494328af2b664775f938367603e1f0441f66c7146732"
   license all_of: ["Apache-2.0", "MIT"]
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "0a978b84549832e62979abce0b5377b3a64b2441e2ccae3facfea04133257c02"
-    sha256 cellar: :any,                 arm64_sequoia: "27fed8903d353b11137224ecee446ad9079cbc961b5af6985cd3dc3aa8f8d5cc"
-    sha256 cellar: :any,                 arm64_sonoma:  "f1f0402edae6f7dd97b0e4cc52e2c0cef8faaf6580a7264d45550017ed5ebc47"
-    sha256 cellar: :any,                 sonoma:        "456cd8d3c1b270b0212d5c8135d0166fa5659a6487865a3263b027a40b7d26c7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "047289bef8f7f6eb7f7758abdbc637734a13f4ab3e804a6f87f24cadcd924343"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cffef67f47048fced6244c5c51525ada1b3a3634b7d40c082effccbb0dbf92d8"
+    sha256 cellar: :any,                 arm64_tahoe:   "d8ff71f07e4ca5d7e5c1a1d0e40272a261be049d7e433872c1ebb03d281cf4f2"
+    sha256 cellar: :any,                 arm64_sequoia: "a4b743b1bb268c652d6d449828ab3fa58100164a4de8983a80ab15d5a497cc6f"
+    sha256 cellar: :any,                 arm64_sonoma:  "117a0e83dac2503c680e2d94ccf54b329a302b9bbc7c3182a25a0fd5c12d0df0"
+    sha256 cellar: :any,                 sonoma:        "191f40af9fe03bbfd35c4309f994821a0fe51e3698dae4f9a21ef1074aabbe5f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "016b1f59ad4750b2623bf567d5affe869de4da94f6bc8ab2d9ac1f1119081cd6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b4f4d9d3c654f43227a90669f4ae00114b8b06ef49e076a6af17a9f6ab65aa09"
   end
 
   depends_on "pkgconf" => :build

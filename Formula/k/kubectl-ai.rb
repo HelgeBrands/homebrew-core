@@ -1,8 +1,8 @@
 class KubectlAi < Formula
   desc "AI powered Kubernetes Assistant"
   homepage "https://github.com/GoogleCloudPlatform/kubectl-ai"
-  url "https://github.com/GoogleCloudPlatform/kubectl-ai/archive/refs/tags/v0.0.28.tar.gz"
-  sha256 "b9c6edc1db0238ec79049c4090fec57023a00e13f72e1125cdbefe7ed10eb948"
+  url "https://github.com/GoogleCloudPlatform/kubectl-ai/archive/refs/tags/v0.0.29.tar.gz"
+  sha256 "1910e96d1d1f3c1180f1f288e2c362c90ecb3f0101e8133a40096368d69eb61c"
   license "Apache-2.0"
 
   livecheck do
@@ -11,12 +11,12 @@ class KubectlAi < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0a55f94f1953ddaec0707e1572a6a9537251a3eda5ccaadc5712e85a950453d2"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0a55f94f1953ddaec0707e1572a6a9537251a3eda5ccaadc5712e85a950453d2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0a55f94f1953ddaec0707e1572a6a9537251a3eda5ccaadc5712e85a950453d2"
-    sha256 cellar: :any_skip_relocation, sonoma:        "9a1bc2c5fdd677d4ef9f4179d784724c61cfe5e7ec1181238c0f49d81532db54"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fb1c4844e7a10ef7fa38f195285900105f84cf388b4a0567ab4a6842130c77dc"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9282d1dfac83cf8b9bedb6ed2c6e549ee49af76e4d3cef97f36487cd55157d3a"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e2a67423eb2cd82deeb3dc7a19e7b9d2077c3e301611778c23c115b7f8e1ad07"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e2a67423eb2cd82deeb3dc7a19e7b9d2077c3e301611778c23c115b7f8e1ad07"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e2a67423eb2cd82deeb3dc7a19e7b9d2077c3e301611778c23c115b7f8e1ad07"
+    sha256 cellar: :any_skip_relocation, sonoma:        "94e2319c962f2017bff56b7ba9aa413f0fb4ea21a43445401dbe5fe72f237971"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c20c658418c707f535a2197695b7e9117fd6584e6cb6a1da0e071ebd529e40e5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2f6c086aa37afc23548ace865384d2d1261a069cdf6af56a96b284755f72095b"
   end
 
   depends_on "go" => :build
@@ -25,7 +25,7 @@ class KubectlAi < Formula
     ldflags = "-s -w -X main.version=#{version} -X main.commit=#{tap.user} -X main.date=#{time.iso8601}"
     system "go", "build", *std_go_args(ldflags:), "./cmd"
 
-    generate_completions_from_executable(bin/"kubectl-ai", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"kubectl-ai", shell_parameter_format: :cobra)
   end
 
   test do

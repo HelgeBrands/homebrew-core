@@ -1,8 +1,8 @@
 class Bitrise < Formula
   desc "Command-line automation tool"
   homepage "https://github.com/bitrise-io/bitrise"
-  url "https://github.com/bitrise-io/bitrise/archive/refs/tags/v2.35.3.tar.gz"
-  sha256 "9af5bf6bfa9444e859385278b423d5b990adeef0fbd304bfd7e0ec2119d6e237"
+  url "https://github.com/bitrise-io/bitrise/archive/refs/tags/v2.37.0.tar.gz"
+  sha256 "bfbc47097bdffe83b7b1c8e2aaaa0f8bc7221edcfa81041e5563806b4a489608"
   license "MIT"
   head "https://github.com/bitrise-io/bitrise.git", branch: "master"
 
@@ -12,15 +12,15 @@ class Bitrise < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "619a028026e2c0e1a7988e2a16a5af0b3f5d394534c045dc11d42cd9ea18a5df"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "619a028026e2c0e1a7988e2a16a5af0b3f5d394534c045dc11d42cd9ea18a5df"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "619a028026e2c0e1a7988e2a16a5af0b3f5d394534c045dc11d42cd9ea18a5df"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e9af948435369e6dbacf57a653cc744d462462894fab4b63acc2eb887648b18b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c1f8f5b179d78782f7f239f1e9abb43e4dce6cad785a6ebea1432487f7314dbf"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b2039a92015026aa0cb0b7901e85a6c0fbef6e03f2eb559d36573898657b4403"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "10ea2280c99e77cd4f3ede2b82624ec073f51d26333ffab54f960a0e1192d511"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "10ea2280c99e77cd4f3ede2b82624ec073f51d26333ffab54f960a0e1192d511"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "10ea2280c99e77cd4f3ede2b82624ec073f51d26333ffab54f960a0e1192d511"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ae85dc8e80161a6a575280762584d63f28101f5572f3b9df29c885afad2aa25a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "847f187e7bb41720f799cf7a436d722b76a342dae5909ff77d3eabc75aee4362"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "86036b2870a8c0a4cfe1f9cef947fce890b11b10c5034122601fcb90d59d4382"
   end
 
-  depends_on "go" => :build
+  depends_on "go" => [:build, :test]
 
   uses_from_macos "rsync"
 

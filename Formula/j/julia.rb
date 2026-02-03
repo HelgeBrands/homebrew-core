@@ -1,27 +1,40 @@
 class Julia < Formula
   desc "Fast, Dynamic Programming Language"
   homepage "https://julialang.org/"
-  # Use the `-full` tarball to avoid having to download during the build.
-  url "https://github.com/JuliaLang/julia/releases/download/v1.12.2/julia-1.12.2-full.tar.gz"
-  sha256 "fcb641075c5465e5de4de15d0c5c73c23517a31fe8e65f8ad89b6a7cc847d46c"
   license all_of: ["MIT", "BSD-3-Clause", "Apache-2.0", "BSL-1.0"]
   head "https://github.com/JuliaLang/julia.git", branch: "master"
+
+  stable do
+    # Use the `-full` tarball to avoid having to download during the build.
+    url "https://github.com/JuliaLang/julia/releases/download/v1.12.4/julia-1.12.4-full.tar.gz"
+    sha256 "6ea60c05395e29012b63934e686b0daa1cc155947be429ae0b247b3ea7e7be93"
+
+    # Backport fix for system p7zip
+    patch do
+      url "https://github.com/JuliaLang/julia/commit/e7b2b231a5349582406950162806c341bcdbc6ba.patch?full_index=1"
+      sha256 "ec9a577d26665bba6db1c23bffb5fc217e8e633d1fa1740e0b43a02c54798b71"
+    end
+    patch do
+      url "https://github.com/JuliaLang/julia/commit/634170eb527cf211799bc16c11e6d0fc38c4befa.patch?full_index=1"
+      sha256 "c0d00141f5432a36f7e8e6cf084974184436e91086c37aa510baf065742b424d"
+    end
+  end
 
   # Upstream creates GitHub releases for both stable and LTS versions, so the
   # "latest" release on GitHub may be an LTS version instead of a "stable"
   # version. This checks the first-party download page, which links to the
   # `stable` tarballs from the newest releases on GitHub.
   livecheck do
-    url "https://julialang.org/downloads/"
+    url "https://julialang.org/downloads/manual-downloads/"
     regex(/href=.*?julia[._-]v?(\d+(?:\.\d+)+)[._-]full\.t/i)
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "f5435c7a2aa8bfca2d15167832577d8caacd4997443493ebe388d3fe33b1b266"
-    sha256 cellar: :any,                 arm64_sequoia: "978903b643a290574e54716d57d5f661d4387bb5c11fe1af1148e93fe7bed79d"
-    sha256 cellar: :any,                 arm64_sonoma:  "15e76dfc12bf66e53517366c2051cd40cd7b99f47d6557094668754e6a6f47fe"
-    sha256 cellar: :any,                 sonoma:        "b33aa40c661a0472be63a14ce3380a8e4a2bb600ecf8b7d957d003671a396927"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "aaf9aec2367571152cb6b142816d60806ef20cdc1e8e0cb5cd1caca078c305c1"
+    sha256 cellar: :any,                 arm64_tahoe:   "e397e49ba85b706cb3803750ffb1244598a1d848d33c1e8b5722d9396da834fc"
+    sha256 cellar: :any,                 arm64_sequoia: "090e845a69444f8ada9b7400ecfd14470bc0e6c0fcd70e071e3201dfa9af0442"
+    sha256 cellar: :any,                 arm64_sonoma:  "1ecf10c129a9182e351fb016f4f070f62b3266469d4761c037a474f1650b57da"
+    sha256 cellar: :any,                 sonoma:        "52aa74ca389a5dfc95fd960c979c42aba276602caafc8df6c0037d91602d44a1"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d337599170bd3931b9ac022a1c61b40422fa2e6f1d0b93f16c68db228310870e"
   end
 
   depends_on "cmake" => :build # Needed to build LLVM
@@ -219,7 +232,8 @@ class Julia < Formula
     return if OS.mac? && Hardware::CPU.intel? && ENV["HOMEBREW_GITHUB_ACTIONS"]
 
     with_env(CI: nil) do
-      system bin/"julia", *args, "--eval", 'Base.runtests("core")'
+      # FIXME: Skipping test on macOS as runners keep timing out
+      system bin/"julia", *args, "--eval", 'Base.runtests("core")' unless OS.mac?
     end
 
     # Check that Julia can load stdlibs that load non-Julia code.

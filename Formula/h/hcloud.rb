@@ -1,18 +1,18 @@
 class Hcloud < Formula
   desc "Command-line interface for Hetzner Cloud"
   homepage "https://github.com/hetznercloud/cli"
-  url "https://github.com/hetznercloud/cli/archive/refs/tags/v1.57.0.tar.gz"
-  sha256 "f6bad0ed7969fec9c6ec301cb8b5f8b6dc4cb0ab16a543df325e8d51ae96d3b1"
+  url "https://github.com/hetznercloud/cli/archive/refs/tags/v1.61.0.tar.gz"
+  sha256 "e99b116586d8040f33994bb1ef232b7def058fcd43f24abd3db22e822da11419"
   license "MIT"
   head "https://github.com/hetznercloud/cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "290cd3bb0a6090e6c125ddb04a1bc15f5a957381abeada90d52bff7c6d39069c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e2dfa03017cfab9b7873296bb7ff798b8699954b6dd20df3c9db27da605dc1a2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "df765b395ef066fa7d3c4365665ef13e0211dfcd2a07f043a592586ec6c93d53"
-    sha256 cellar: :any_skip_relocation, sonoma:        "717e2e9b8d2250453319ce774779ef36fa22d57a7f36147e644060aa28a8e107"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d329996ffa1d7e76498168352852bbeafcbfdd708eddcde6743855282efb115a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "448635e0f502574d40d8edcd5fc66e10892d4a87b804b70332c516639aac5bcb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5d6f30a931983997ef14b383558216328b786b64eec64d11fa1248bca2c70742"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8ca3416fdeadd625d4655b08e0e8ae5436f01910c8ebcab9ec755f45eac63c58"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a8a3496527433273f3c9505319aef57bf99595094a3424853d8ae3b275c39094"
+    sha256 cellar: :any_skip_relocation, sonoma:        "58471d520acb9f6854a3cf0e1e90cdb38085493b4b5429c54bb4e0a9549a3f1f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d72dfad8b325798ee9e47b7a53a157bba678073b1c669128855a7670b9daa7ca"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cef8841a8741b1736526db75fb1e52ff14cb31afc7a5cdac2a57d96ef6cb2e93"
   end
 
   depends_on "go" => :build
@@ -25,7 +25,7 @@ class Hcloud < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/hcloud"
 
-    generate_completions_from_executable(bin/"hcloud", "completion")
+    generate_completions_from_executable(bin/"hcloud", shell_parameter_format: :cobra)
   end
 
   test do

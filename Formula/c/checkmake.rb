@@ -1,24 +1,19 @@
 class Checkmake < Formula
   desc "Linter/analyzer for Makefiles"
   homepage "https://github.com/checkmake/checkmake"
-  url "https://github.com/checkmake/checkmake/archive/refs/tags/0.2.2.tar.gz"
-  sha256 "4e5914f1ee3e5f384d605406f30799bf556a06b9785d5b0e555fd88b43daf19c"
+  url "https://github.com/checkmake/checkmake/archive/refs/tags/v0.3.2.tar.gz"
+  sha256 "450412ba6500ef7c4c8a0150a5e1a3d2e76591ce9f37609bcbd5508298ad9bef"
   license "MIT"
   head "https://github.com/checkmake/checkmake.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:    "e7fd519185b64fed252c60bd351ec0d1829dec01f8ba15573b0484c3446722e1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:  "c64480b72e17320c970baf104cb6c69a2c9aa54365dd66c2a0a97a9ac0a2581d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "7140ec560527466720bbd18e7337f47243ce479bac151a7dea0a84f70a8fd9da"
-    sha256 cellar: :any_skip_relocation, arm64_ventura:  "d48a73b85de9be214bafa9ab4cf9712cf1934f898d3fc7b3b6160507a788e3b7"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "4ddd0a9fa6c9c4e9ba3cd4b04986f6f34f55e3787bd6c6e9dde0dee30a577937"
-    sha256 cellar: :any_skip_relocation, arm64_big_sur:  "56a6b97b1e5c3dc5b6a589e0d52b526eb2a0529dfce6a9b8a4a85b93a9bd9da3"
-    sha256 cellar: :any_skip_relocation, sonoma:         "ee0863d4827ecd46eed6829e6142d37abc0d918629bb3700336817cbadb3b203"
-    sha256 cellar: :any_skip_relocation, ventura:        "836d536fe0255fc744a2fa630572e54477f8e59ab19006ddfebb09be51fd14c0"
-    sha256 cellar: :any_skip_relocation, monterey:       "16692c95f5e36286cfeedfe914b239200d428b7ed64c1ae61c931c1568dcdbdd"
-    sha256 cellar: :any_skip_relocation, big_sur:        "e8f88660a76082b44e64c8485238aaf46d5e18575ea11ce47c93a2466af24bcd"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "3f014f3713165ff2f13b59b28db7d7a7672d57b12514284477372bd097dea574"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "920aea0127e9224ec538e4c4f1f1e4fafec0f6e10610687e60c20d053cc02f0e"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "830ad356f8143c6cf17c178be7e6b244982354975ffa8a4b2fa1b5150907b58d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f4cc9b6deb720d7ef53cad7f243810dc3e1217307035256d7b56865eda287382"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "128dd99341f31a790f9ae61549bb735909989086659b192cecff3f0aeba556f5"
+    sha256 cellar: :any_skip_relocation, sonoma:        "62d2f5dcd3fd0fd6f1162bd67d58812aa5e59f78af2dc193c98c20b04eaa07fa"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ac2838e91b6e12598749426385f3f02470cc749d78bb5783020a00fd65f82139"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "73f82defd4eb6ae7267171725d0c0c672583ec1184463858b90d79b1dccf884c"
   end
 
   depends_on "go" => :build
@@ -28,11 +23,13 @@ class Checkmake < Formula
     ENV["BUILDER_NAME"] = "Homebrew"
     ENV["BUILDER_EMAIL"] = "homebrew@brew.sh"
     ENV["PREFIX"] = prefix
-    system "make"
+    system "make", "VERSION=#{version}"
     system "make", "install"
   end
 
   test do
+    assert_match version.to_s, shell_output("#{bin}/checkmake --version")
+
     sh = testpath/"Makefile"
     sh.write <<~EOS
       clean:
@@ -52,6 +49,6 @@ class Checkmake < Formula
 
       .PHONY: clean test
     EOS
-    assert_match "phonydeclared", shell_output("#{bin}/checkmake #{sh}", 2)
+    assert_match "phonydeclared", shell_output("#{bin}/checkmake #{sh}", 1)
   end
 end

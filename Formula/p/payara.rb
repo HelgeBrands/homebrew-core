@@ -1,8 +1,8 @@
 class Payara < Formula
   desc "Java EE application server forked from GlassFish"
   homepage "https://www.payara.fish"
-  url "https://search.maven.org/remotecontent?filepath=fish/payara/distributions/payara/7.2025.1/payara-7.2025.1.zip"
-  sha256 "ce585cac73b6937f35b3c8ece296e3fc19cbbc94bfe8548900343c6879a08a58"
+  url "https://search.maven.org/remotecontent?filepath=fish/payara/distributions/payara/7.2026.1/payara-7.2026.1.zip"
+  sha256 "c79e74cb26834b1b0486cb22bcbf3f6941b689f1c5c1b61c749764585863e54a"
   license any_of: [
     "CDDL-1.1",
     { "GPL-2.0-only" => { with: "Classpath-exception-2.0" } },
@@ -14,7 +14,7 @@ class Payara < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "979944b7770742234202de806fa0540edc9c46b80d49c231214d7c8db733fa83"
+    sha256 cellar: :any_skip_relocation, all: "3d46ba86dac7ff17e2524f8dd28dc635b7b4c5af5719f887aa84911c8d9ee0e3"
   end
 
   depends_on :macos # The test fails on Linux.
@@ -30,7 +30,7 @@ class Payara < Formula
                              "AS_INSTALL=#{libexec}/glassfish"
 
     libexec.install Dir["*"]
-    bin.install Dir["#{libexec}/bin/*"]
+    bin.install libexec.glob("bin/*")
     bin.env_script_all_files(libexec/"bin", Language::Java.java_home_env)
   end
 

@@ -1,17 +1,17 @@
 class Ttdl < Formula
   desc "Terminal Todo List Manager"
   homepage "https://github.com/VladimirMarkelov/ttdl"
-  url "https://github.com/VladimirMarkelov/ttdl/archive/refs/tags/v4.18.0.tar.gz"
-  sha256 "bf8f4c53d9328d537560a7a21bbe073bfcd4a79bdcc5f8e5112b99bf5ebe36bc"
+  url "https://github.com/VladimirMarkelov/ttdl/archive/refs/tags/v4.21.0.tar.gz"
+  sha256 "717862ea7b61f444c68ddd0189f6940a3b74b978b9e3ad6edaa058ddc29d8643"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "25146ca88f48f235528ff32c69de9555443d0a993ed7df4e82398ef03bba038c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c1fdcbfeb32fc0752c998e672427a3cdcbd733292df2fc00be135e19ab64df6a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b84830328cc3582e306efb6483ab95ce7c42c826f75b36a37ab552f9a0fa7309"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8a1a4c8ecd32d3146a9e90f58ed03a562611da73767d0a590eb2cb9077de0a32"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4aade463913e94988704241c847bffff80693ecdd9a1a1af5aa566d355a0b768"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8b02ed74588d562509fa7031e437e6c4431dec0c8ba97ee08aabd66bff5acb8f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f71caa82403ad1f8b5602a0f3a9bb28ab2f4f4a2115a3447f9304437601e5b59"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9828f7ad762f009af081799716a00d52c52d5f1142c0828672d758029706d9f9"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1158cd6d488f787a22ea86d925f09ff09cd98d8675f0de5a7187aa70519b5357"
+    sha256 cellar: :any_skip_relocation, sonoma:        "4270bc11324881b71c417609a5982db5f09eabba568a380937127550d12a602a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ceb1973a20b50738d353d17fd43d1b940767eb8effe05ef848160e9629c3ce41"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a1235e823b0105dee66193e56c33c89cfd8f2f7dc16994de9b021f7e4ec1c027"
   end
 
   depends_on "rust" => :build

@@ -1,32 +1,26 @@
 class Diamond < Formula
   desc "Accelerated BLAST compatible local sequence aligner"
   homepage "https://github.com/bbuchfink/diamond"
-  url "https://github.com/bbuchfink/diamond/archive/refs/tags/v2.1.16.tar.gz"
-  sha256 "bdbe7264ea64c29745af83a011345f6fa4b9a5c98e89fbaaba3f04e088f821a8"
+  url "https://github.com/bbuchfink/diamond/archive/refs/tags/v2.1.21.tar.gz"
+  sha256 "e83c042e20b20ec80c9f28875412156b29478e894182e8568006d8b84fff88e5"
   license "GPL-3.0-or-later"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bfddc0a39ea401d0ed0da7be65da52ac27aa05f71b93f6a2a4c70137f0519c06"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "56008cf521601f21b1a2a286fcf8bf4da5f01caf713e442b8bd8b3c4c816f530"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c58b437b60f37bdecaeaff8e818b89234dd5e7e236c0d45578897299f57eab72"
-    sha256 cellar: :any_skip_relocation, sonoma:        "252e823a7bae4101629067123df9232a4a7e93b65a2f651ae9d0e7669114220f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2a767c368f68b5b5277f59624362258185c138e8a95997f3fd76c7ff30698596"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ebc481813d0e3096025456527c8e04171454acd89af707deebc364d17c9e15bd"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6bc356ee72b03c833b6dbb69987160a54f980f14e9469dfb659c62dfc98e3efe"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "54f5d97371e7df896a4eb5bfcd03c457005c61bfc76357251d767f3b2d664080"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6a00cb756d355d44a24316e018b9914213577a97d0fd36186aed8d48161ba087"
+    sha256 cellar: :any_skip_relocation, sonoma:        "66977c36402c5fa18194d3881488a4b08ee69c2b92c8f88b6913ee4c220d79aa"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "be59840aad28e5be295b8f8505349ae4bd27e19881209e389ecf31b08d553cfc"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "52acaae4f62d4c4f1844dd4c82202ba1eefa590ac39cec2a639d2e3868b439d2"
   end
 
   depends_on "cmake" => :build
 
+  uses_from_macos "sqlite"
   uses_from_macos "zlib"
 
   def install
-    # Fix to error: no member named 'uncaught_exception' in namespace 'std'; did you mean 'uncaught_exceptions'?
-    if DevelopmentTools.clang_build_version >= 1700
-      inreplace "src/util/log_stream.h",
-                "!std::uncaught_exception()",
-                "std::uncaught_exceptions() == 0"
-    end
-
-    system "cmake", "-S", ".", "-B", "build", "-DCMAKE_POLICY_VERSION_MINIMUM=3.5", *std_cmake_args
+    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end

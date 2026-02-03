@@ -1,18 +1,18 @@
 class Pyscn < Formula
   desc "Intelligent Python Code Quality Analyzer"
   homepage "https://github.com/ludo-technologies/pyscn"
-  url "https://github.com/ludo-technologies/pyscn/archive/refs/tags/v1.5.0.tar.gz"
-  sha256 "be9bae9d19e8f7fb668b8cdaf24049547b0e8a17a014a20e32fe3ea3898baa62"
+  url "https://github.com/ludo-technologies/pyscn/archive/refs/tags/v1.9.3.tar.gz"
+  sha256 "8c5cc506840bd0cb24e7cca0a34dd85e56f2dd791678aa9d654d43fb529bdb4f"
   license "MIT"
   head "https://github.com/ludo-technologies/pyscn.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1d1174a6bea25357e7332c876a7c69e4c54e0d62d2cac3e7487cbede1fc67795"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cc51bdd0c11baede86044cd4a27e1c976f3aea4b512792f19f5a79d1624f2d58"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8fd8ff1aa70796d86019d937d7ff492ae9de2065f322ec9d58b87f67fce8b333"
-    sha256 cellar: :any_skip_relocation, sonoma:        "03b3095fb6cc4f01cbc1c592b1f11117d2a502be8111faf07d2f62028d89060e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4dae356ccfbcb1c3951960cf9a98b5b5f955c52ab5b633f468c4aa40156b859d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2c986e17051ae77a0494be217f4985d2871268e867ecdf1398e9f1773d80c23c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1eaac812bb2d3e761d74cd16a4fc9e7617d0d59e3ec03443f8cab7c5aaeb65ba"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ff7963fadd1d94964a23f07c1b0c06ce45ead645996efdc3d03586250ffcc1a3"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "153f339dc5ff81da14d1c8f3fa03e7dc5d8a5a99634237c4291618ccb54e1021"
+    sha256 cellar: :any_skip_relocation, sonoma:        "181b026bdb6821be449b19f4fb185e21070266fb0a8fda2f9986df97ea57b2d6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "97f77095a9149c8ac1a39a10eca4f1797b36e5b349fef04b82faa1564e8295b0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dcbece31a3c87dd2656d0d25bc258656a6b9d151f0f0c591b5e3f2110c638c4d"
   end
 
   depends_on "go" => :build
@@ -28,7 +28,7 @@ class Pyscn < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/pyscn"
 
-    generate_completions_from_executable(bin/"pyscn", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"pyscn", shell_parameter_format: :cobra)
   end
 
   test do

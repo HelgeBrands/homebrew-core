@@ -1,9 +1,9 @@
 class Doxygen < Formula
   desc "Generate documentation for several programming languages"
   homepage "https://www.doxygen.nl/"
-  url "https://doxygen.nl/files/doxygen-1.15.0.src.tar.gz"
-  mirror "https://downloads.sourceforge.net/project/doxygen/rel-1.15.0/doxygen-1.15.0.src.tar.gz"
-  sha256 "a8cafe605867ad475aaf288a3852783076e1df83aabf16488bbfa958062e7440"
+  url "https://doxygen.nl/files/doxygen-1.16.1.src.tar.gz"
+  mirror "https://downloads.sourceforge.net/project/doxygen/rel-1.16.1/doxygen-1.16.1.src.tar.gz"
+  sha256 "201ce33b514ea87cc1697c0dcf829692c2695c1812683a9cc622194b05e263a8"
   license "GPL-2.0-only"
   head "https://github.com/doxygen/doxygen.git", branch: "master"
 
@@ -13,12 +13,12 @@ class Doxygen < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "42405feb56da268767c920d2abf25ddfe0f24d3c4c0a4128f5403298f760ff7a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6c0af6e75eb3574bb8a4b56cf44e43a44d92399188e611e86307edb7ac28fea8"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ebdf6db27eca4f28351f3048bd22148fe161459af097d13e594672ae4d112add"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e90217d7fb072089ed49a420872b0845914df54d7f2d8227df56620b489d16cf"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a2edc41f859b4fbc634e5e08cbaa00701adc3242c4e5516f8d50843c8078d35b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f36442ab1eea967aa66a5b5db5b59cffb87c75eb5ec81e43c43fe3227e64cde8"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d1f4cf02f9ce45b0b994819f4e38a1aa243a28dddfec953fef8679d47064e2e0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8ae1834cdf58645b3c5fab847b4f03de8cd94d74725fdab3a08c199f8fb2012d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9d9ce6c6aecc2f0b6a048453fa78dc66bdedb6f37fe76c4a3e136fbe37668371"
+    sha256 cellar: :any_skip_relocation, sonoma:        "1fb471112843de03b9dfe61c0f1612dd6d5deb69f28b273d0f0b1e08aec25447"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "eb514ebc6d4e2b9aead5758c4d1d907bbaf74861ea40d3a9b4ced03afd64b289"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d66ed3672e6af0d95a9a29585dab4bd7ed73a9397627038dd5d4a7cb8a5efc46"
   end
 
   depends_on "bison" => :build
@@ -29,7 +29,7 @@ class Doxygen < Formula
 
   def install
     system "cmake", "-S", ".", "-B", "build",
-                    "-DPYTHON_EXECUTABLE=#{which("python3")}",
+                    "-DPython_EXECUTABLE=#{which("python3")}",
                     *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"

@@ -4,6 +4,7 @@ class Cdo < Formula
   url "https://code.mpimet.mpg.de/attachments/download/30128/cdo-2.5.4.tar.gz"
   sha256 "c7fc17d3eda8c216edb2f5e36c8ab32bcaeeb6b6f16296246f065c576d4efad2"
   license "GPL-2.0-only"
+  revision 1
 
   livecheck do
     url "https://code.mpimet.mpg.de/projects/cdo/news"
@@ -13,12 +14,13 @@ class Cdo < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ac3a2d381e38e5568dbbe5d24abcf398785d43f73e3939ee6fc09409e7cd9a17"
-    sha256 cellar: :any,                 arm64_sequoia: "6c701ca30d73ec7122f35107cda470383e717e718b248e5b3c8ed50274ff9d21"
-    sha256 cellar: :any,                 arm64_sonoma:  "85771da9b3bbfb6121bc21ad92dea584a9bacfa920613b6f99e4e2ef4f147691"
-    sha256 cellar: :any,                 sonoma:        "8216fcbf340be848dbcfddf69445bc227981feeca4d743ff6770b16fa76a1b64"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2482072807a8e6a5bf6450b02322a82313826da4ad2aea9ea315e18fb8d3dd42"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "65c4d121e2090988c4ee5c941c42e9dcb0745fa63c708674bff958a6daeec73d"
+    rebuild 1
+    sha256 cellar: :any,                 arm64_tahoe:   "895bb2a7a6f9dc329535089444eb352c81123d9869cad730d4721d2cec851ef4"
+    sha256 cellar: :any,                 arm64_sequoia: "b3549cf83a97f5262f0efd6faaa8721e8bbb128f9a2e19b005361f8a7b9a14f0"
+    sha256 cellar: :any,                 arm64_sonoma:  "e61f98a07756a0b4b780f39b3b0b83948d13fde8d270ef226d71574d17c33d40"
+    sha256 cellar: :any,                 sonoma:        "a12b01b5b6a5b81c4a3ea2e1b962862c14b6e53fd170fb41af17191175d70904"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c88d42b076ec7343fc339f79c84ff03654d57e3b2f1e17aedceb2769a7bf3880"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b284ae6d808c0453e0eb5c748a09574d8180ec382c15d5cca99f3f84566c11fc"
   end
 
   depends_on "eccodes"
@@ -43,13 +45,12 @@ class Cdo < Formula
   end
 
   def install
-    ENV.llvm_clang if OS.mac? && DevelopmentTools.clang_build_version <= 1500
-
     args = %W[
       --disable-openmp
       --with-eccodes=#{Formula["eccodes"].opt_prefix}
       --with-netcdf=#{Formula["netcdf"].opt_prefix}
       --with-hdf5=#{Formula["hdf5"].opt_prefix}
+      --with-proj=#{Formula["proj"].opt_prefix}
       --with-szlib=#{Formula["libaec"].opt_prefix}
     ]
 

@@ -1,30 +1,27 @@
 class Execline < Formula
   desc "Interpreter-less scripting language"
   homepage "https://skarnet.org/software/execline/"
-  url "https://skarnet.org/software/execline/execline-2.9.7.0.tar.gz"
-  sha256 "73c9160efc994078d8ea5480f9161bfd1b3cf0b61f7faab704ab1898517d0207"
+  url "https://skarnet.org/software/execline/execline-2.9.8.1.tar.gz"
+  sha256 "23350d10797909636060522607591cb4a2118328cb58c5e65fb19a2c0d47264e"
   license "ISC"
   head "git://git.skarnet.org/execline", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3cef3552d9f1488ee1bfe7b32e50c3568f671a5d179e8f3c602c667dfe76cca9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e8bbbad617bb8ac9e26e9631efdf913a74a06b7f5a88b06363dd1d29aa7b2dac"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d5fe2632e0befbca3259c9fef9072b4f64dab302bea224139726a4b89052a3ae"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "ea0514d4e9ef6f17b557d38150fa968c578cce538f460fa18e19913b884b2905"
-    sha256 cellar: :any_skip_relocation, sonoma:        "56bb7856a71a5077be1f29a8e0ada34478f502f4eb60284dc1e7a9d763f2c25a"
-    sha256 cellar: :any_skip_relocation, ventura:       "1765cdd721993a610bbdbd27a19939450d6f4fe8f3296151e8e09da4a0c5c0ea"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ae2121f67e055f6b0dee1a23c671629de78ce3b4c589caa17e0b0f8e77b88aa9"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "135280851c5d80d05338574a9714112313e6358d0f4d572de470998bcdf503b9"
+    sha256 cellar: :any,                 arm64_tahoe:   "1821cb1a1f4cb4563107a96a6e4226fbb19f71e2b4f4958ba3072e2320d3cde8"
+    sha256 cellar: :any,                 arm64_sequoia: "7e85921f90d391666a22e1daf7b572164be83fc0bccf6d716afa70eb590ae347"
+    sha256 cellar: :any,                 arm64_sonoma:  "b87efb740ad77909dbcd391cf64b3f258e8de85d88e9222c54a6199e8ec870bb"
+    sha256 cellar: :any,                 sonoma:        "02723eef03476c8dcd5448899b4717e06d9c4c3b94e2d39b4421dc730e27da4e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "49daa9344067f4534f19592352185b0b5a573f2e8420929d65238294770723ef"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7ecaef5ce93cc303329fc01de0290f3b4bd4c7c3b2ef7510eefa5d60b1869ca1"
   end
 
   depends_on "pkgconf" => :build
   depends_on "skalibs"
 
   def install
-    # Shared libraries are linux targets and not supported on macOS.
     args = %W[
       --disable-silent-rules
-      --disable-shared
+      --enable-shared
       --enable-pkgconfig
       --with-pkgconfig=#{Formula["pkgconf"].opt_bin}/pkg-config
       --with-sysdeps=#{Formula["skalibs"].opt_lib}/skalibs/sysdeps

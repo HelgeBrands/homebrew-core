@@ -1,12 +1,13 @@
 class Utf8cpp < Formula
   desc "UTF-8 with C++ in a Portable Way"
   homepage "https://github.com/nemtrif/utfcpp"
-  url "https://github.com/nemtrif/utfcpp/archive/refs/tags/v4.0.8.tar.gz"
-  sha256 "f808b26d8c3a59def27fea207182ece77a8930bd121a69f80d328ecf3cfef925"
+  url "https://github.com/nemtrif/utfcpp/archive/refs/tags/v4.0.9.tar.gz"
+  sha256 "397a9a2a6ed5238f854f490b0177b840abc6b62571ec3e07baa0bb94d3f14d5a"
   license "BSL-1.0"
+  version_scheme 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "7089d7abf749ad7d492fdc83781eb929aacc6ee829d5e85753a380256adf48fc"
+    sha256 cellar: :any_skip_relocation, all: "5e326ac5dcf874a01fe9feab70c26db351f7cf272b07c127f8af2aca5dd98e72"
   end
 
   depends_on "cmake" => [:build, :test]
@@ -18,6 +19,8 @@ class Utf8cpp < Formula
   end
 
   test do
+    assert_match("PACKAGE_VERSION \"#{version}\"", (share/"utf8cpp/cmake/utf8cppConfigVersion.cmake").read)
+
     (testpath/"CMakeLists.txt").write <<~CMAKE
       cmake_minimum_required(VERSION 4.0 FATAL_ERROR)
       project(utf8_append LANGUAGES CXX)

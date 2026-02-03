@@ -1,20 +1,19 @@
 class Jscpd < Formula
   desc "Copy/paste detector for programming source code"
   homepage "https://github.com/kucherenko/jscpd"
-  url "https://registry.npmjs.org/jscpd/-/jscpd-4.0.5.tgz"
-  sha256 "e284fc35166ee0cd5f0db3d5c15b8e9bf8bbc2914d498f361c65e259cf15ae67"
+  url "https://registry.npmjs.org/jscpd/-/jscpd-4.0.8.tgz"
+  sha256 "5a0b4fcff2dd82a6881adda1263ac7e25a1a86134aa6ece4be2e41a334722ee8"
   license "MIT"
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any_skip_relocation, all: "8472b1d0c9e380790a51810478a6620ecd7dca78216743f8240331c12f8558b3"
+    sha256 cellar: :any_skip_relocation, all: "9ef7720150049fa9a499b14563c826252ab356bb314ef2a9a2def468774ee046"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

@@ -1,8 +1,8 @@
 class Md5sha1sum < Formula
   desc "Hash utilities"
   homepage "http://microbrew.org/tools/md5sha1sum/"
-  url "http://microbrew.org/tools/md5sha1sum/md5sha1sum-0.9.5.tar.gz"
-  mirror "https://mirrorservice.org/sites/distfiles.macports.org/md5sha1sum/md5sha1sum-0.9.5.tar.gz"
+  url "https://distfiles.macports.org/md5sha1sum/md5sha1sum-0.9.5.tar.gz"
+  mirror "http://microbrew.org/tools/md5sha1sum/md5sha1sum-0.9.5.tar.gz"
   sha256 "2fe6b4846cb3e343ed4e361d1fd98fdca6e6bf88e0bba5b767b0fdc5b299f37b"
   license "GPL-2.0-or-later"
   revision 1
@@ -33,8 +33,16 @@ class Md5sha1sum < Formula
 
   depends_on "openssl@3"
 
+  on_sequoia :or_newer do
+    keg_only :shadowed_by_macos, "macOS provides FreeBSD md5sum and sha1sum"
+  end
+
   on_sonoma :or_older do
     conflicts_with "coreutils", because: "both install `md5sum` and `sha1sum` binaries"
+  end
+
+  on_linux do
+    keg_only "Linux provides md5sum and sha1sum via GNU coreutils or BusyBox"
   end
 
   def install

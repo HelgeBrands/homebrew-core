@@ -1,18 +1,18 @@
 class Oauth2c < Formula
   desc "User-friendly CLI for OAuth2"
   homepage "https://github.com/cloudentity/oauth2c"
-  url "https://github.com/cloudentity/oauth2c/archive/refs/tags/v1.18.0.tar.gz"
-  sha256 "87458914b1aa1ef813f76b8a043a1d8878209042ac0285d8c27d15d304d4a37f"
+  url "https://github.com/cloudentity/oauth2c/archive/refs/tags/v1.19.0.tar.gz"
+  sha256 "ff2b46b344b3444e344bba336fefe6e7706b3196b69c4e38c9e95dd527110745"
   license "Apache-2.0"
   head "https://github.com/cloudentity/oauth2c.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "464c3b65bb50f51bd2a61fa89582801b9420db58e31eb978b0842a91d1fdb259"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "464c3b65bb50f51bd2a61fa89582801b9420db58e31eb978b0842a91d1fdb259"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "464c3b65bb50f51bd2a61fa89582801b9420db58e31eb978b0842a91d1fdb259"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8e4b119f8eaacd454bd2f2f90d3a6cfa7e23fea5fafdd672a2e29a857181fb49"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "baedcb78680c53e08ccc596342bd3a8bf239c2ebbb61bbe0d7127c47bcfcd768"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f09a2161be9f9da16d6da8490838446b08f25809ae63a0760a772459c77e37c9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e75715a36d6ef6248ca5d9ea3c3640a84f56ea674cd473dead06e2c5ca30160a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e75715a36d6ef6248ca5d9ea3c3640a84f56ea674cd473dead06e2c5ca30160a"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e75715a36d6ef6248ca5d9ea3c3640a84f56ea674cd473dead06e2c5ca30160a"
+    sha256 cellar: :any_skip_relocation, sonoma:        "212dedc74ce1045c7d9ddfd7c6f7b5bbafe868598b33e29a6b998d74b9a6f825"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "451c6e4bfef376b6484a2af2e95a75fa2075670ce4a521e41a46709c356955e2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bff01427c8c97ff748c92541c90d2a1274bca0853011afd944ab6acae4ec619c"
   end
 
   depends_on "go" => :build
@@ -22,7 +22,7 @@ class Oauth2c < Formula
 
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"oauth2c", "completion")
+    generate_completions_from_executable(bin/"oauth2c", shell_parameter_format: :cobra)
   end
 
   test do

@@ -1,10 +1,10 @@
 class Widelands < Formula
   desc "Free real-time strategy game like Settlers II"
   homepage "https://www.widelands.org/"
-  url "https://github.com/widelands/widelands/archive/refs/tags/v1.2.1.tar.gz"
-  sha256 "799bfd32048ef20118c48e21f3fc843ae0451c42bb8bf2eabcb9b26bf6fe54b4"
+  url "https://github.com/widelands/widelands/archive/refs/tags/v1.3.tar.gz"
+  sha256 "8468b6bc0ddb70749c09c5603109ceeb79b95f3602d3aa55ecfad84f8ea82571"
   license "GPL-2.0-or-later"
-  revision 2
+  revision 1
   version_scheme 1
 
   livecheck do
@@ -13,12 +13,12 @@ class Widelands < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "2e93a441e258d920fffae7b0a0a009965eb49c4e775d65e50591af211786376a"
-    sha256 arm64_sequoia: "52ea992bb1eefb72d352bb73ae3de85042a5489d9b5330fd319ecec53e8a8f0f"
-    sha256 arm64_sonoma:  "1bcf79335668fad8e45389a492587b718f87d240fac8300ca6974f6b3ec07fa2"
-    sha256 sonoma:        "78aec7c4d000504fea9fe879aa4cec3d6661cd051537f90eacc9fe9957cf6bfc"
-    sha256 arm64_linux:   "abb750a955e4afcc7c7820c822920c79f90db4328cbcfaacd152a236ba85de39"
-    sha256 x86_64_linux:  "efca73a2fd0fbb0ec46951eccf835bad7ffd0b47d3f3dee959d1229b069b46ea"
+    sha256 arm64_tahoe:   "3a62a862ea1cf6d5f34619afd4c0b80b0ef433848ded0d103af4bb24b302fbcb"
+    sha256 arm64_sequoia: "0dc37d35152b9d92f8b2a1989e5d83a8d7c15456f070390e720b25396a6cca57"
+    sha256 arm64_sonoma:  "a671a12752fb6378b4afcf4609f8b80301f24c6bb0a32c6b69c8e836e4f935c7"
+    sha256 sonoma:        "e75054b0b228da298b0f20e2c513caa9cbd25504e186c57f637d2c21544727cf"
+    sha256 arm64_linux:   "e1e5ad56b87f7e520ab0ecb4eabc565cbe772e4ea1042eb927a26e7fbea3484b"
+    sha256 x86_64_linux:  "b9c9ed74ec42f56a34fe2fd7a75f28e7877c9ca4d27c17f9d69d856a2391aec2"
   end
 
   depends_on "asio" => :build
@@ -46,12 +46,6 @@ class Widelands < Formula
 
   on_linux do
     depends_on "mesa"
-  end
-
-  # Backport fix for newer asio
-  patch do
-    url "https://github.com/widelands/widelands/commit/c0b44ccc04df35a9a23ca9be3e05f5d3a5428f6f.patch?full_index=1"
-    sha256 "8db8447ab83e10031e0903cc0accec962f30f5b9fa31a8ce68db788efa7756b4"
   end
 
   def install

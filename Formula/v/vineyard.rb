@@ -4,15 +4,15 @@ class Vineyard < Formula
   url "https://github.com/v6d-io/v6d/releases/download/v0.24.4/v6d-0.24.4.tar.gz"
   sha256 "055bab09ca67542ccb13229de8c176b7875b4ba8c8a818e942218dccc32a6bae"
   license "Apache-2.0"
-  revision 5
+  revision 8
 
   bottle do
-    sha256                               arm64_tahoe:   "958196ddc3602a43f684b164d0b16c8eb600dfd4564902c84c200cb038469d46"
-    sha256                               arm64_sequoia: "7d28a6ff0e615971935eb7178d371a50ea098de53a28b6a94d52910615aa7838"
-    sha256                               arm64_sonoma:  "704e400ac3c658be7b80d4e7424025419acdbd7a0bf2e1b609534715ded96c33"
-    sha256                               sonoma:        "dffc6f5ad24a5ade2a2ee3b70fee427a3da6fa0468ee813c2e0af0dfc6ea0d18"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "22e03fd66d9d2df6bbc9101171d3cb14a8d22adf6529924d2b76034aebe91043"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d31f535aa73f4268bcb0e1e72307e3b698a4c80ad68b16d3940be7eab0444524"
+    sha256                               arm64_tahoe:   "919c4b1917e6c9de9ac61fb81fddaa53341a4ccd5006b37303ee8912dbd083b6"
+    sha256                               arm64_sequoia: "7115452ec4ac6196760c896397ef8f9b7501ed68d025f617bc414ee5d50fac93"
+    sha256                               arm64_sonoma:  "961ce13405feed87837d8a59b9f73d4ce279d98d935698615b7f0255f3ecaf82"
+    sha256                               sonoma:        "a04569fcbe3d84dbf0b0201db5f6ebb0ccc11fbce5f35d840a36c060acd96f62"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "cc5088eb334d6fc02585840db5bb706abc3bf5eff6f6e4a7530d9b2d1cca4273"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "898b18380f4cc4dd14a07b242a0764379d41f4b412c3c4b843b4f685d7aa46de"
   end
 
   depends_on "cmake" => [:build, :test]
@@ -50,9 +50,16 @@ class Vineyard < Formula
     sha256 "ce1325c893f210a3eae9ff29a8ab6cfa377d6672ab260db58de8522857856206"
   end
 
+  # Apply open PR to build with glog >= 0.7
+  # PR ref: https://github.com/v6d-io/v6d/pull/2066
+  patch do
+    url "https://github.com/v6d-io/v6d/commit/45e06b0309397f713437ad64b545dc26fb18863d.patch?full_index=1"
+    sha256 "bb5745c04b86b9a31847b24b00973bf87891a3bb7896cf9f204592032a419af1"
+  end
+
   def install
-    # TODO: Remove after https://github.com/Homebrew/brew/pull/20696
-    ENV.llvm_clang if OS.mac? && MacOS.version == :tahoe && DevelopmentTools.clang_build_version == 1700
+    # Workaround for older libstdc++
+    ENV.append "CXXFLAGS", "-include memory_resource" if OS.linux?
 
     # Workaround to support Boost 1.87.0+ until upstream fix for https://github.com/v6d-io/v6d/issues/2041
     boost_asio_post_files = %w[

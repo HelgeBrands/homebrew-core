@@ -1,19 +1,19 @@
 class Yamlresume < Formula
   desc "Resumes as code in YAML"
   homepage "https://github.com/yamlresume/yamlresume"
-  url "https://registry.npmjs.org/yamlresume/-/yamlresume-0.8.1.tgz"
-  sha256 "021fbab2315534aa0b6c521f353f6550bd6e9f9db23ce9574169e78d6b64ee4d"
+  url "https://registry.npmjs.org/yamlresume/-/yamlresume-0.10.2.tgz"
+  sha256 "93c7bde59f5d6982a7eb0359bd4adb32a90119c70177eefad961d0f53519379e"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "2000ae710f694301ed939f1f811493fd2713afb038aa4e22f0bdc6a5309e4cad"
+    sha256 cellar: :any_skip_relocation, all: "136b9d1b904d319e017e0a83916b185c642679f1cfed40a853d24e004fa7baad"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

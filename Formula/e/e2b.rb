@@ -1,19 +1,19 @@
 class E2b < Formula
   desc "CLI to manage E2B sandboxes and templates"
   homepage "https://e2b.dev"
-  url "https://registry.npmjs.org/@e2b/cli/-/cli-2.4.2.tgz"
-  sha256 "0eb29751b38c7e4b3c613b7e18c1e772a14bb3acf192231fb9aba2e64d228bf3"
+  url "https://registry.npmjs.org/@e2b/cli/-/cli-2.6.0.tgz"
+  sha256 "3b6ad6576dc0df54882c79bdc70d2dc22d5051e60404d9998e8a357b3c113672"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "624c671149b3692128e380ab3e156c692d872b3ab0a273639afa35d51e4c6b81"
+    sha256 cellar: :any_skip_relocation, all: "513296faceb93c43ef7bd0a9e5ac7e8b04309506b0d376387c8d37a9e644135f"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

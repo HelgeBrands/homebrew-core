@@ -1,8 +1,8 @@
 class Ejabberd < Formula
   desc "XMPP application server"
   homepage "https://www.ejabberd.im"
-  url "https://github.com/processone/ejabberd/archive/refs/tags/25.10.tar.gz"
-  sha256 "f676b71e7dbf143291728bc0247673afb256e75917da89520795c01df1154598"
+  url "https://github.com/processone/ejabberd/archive/refs/tags/26.01.tar.gz"
+  sha256 "ccdb8efc9e9a93d547848df8df10c7d4953187e8409a20e389a0fb35a4d7176c"
   license "GPL-2.0-only"
   head "https://github.com/processone/ejabberd.git", branch: "master"
 
@@ -15,12 +15,12 @@ class Ejabberd < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "fb03cdd8427030f04552ab27c20ae4dd4e8622507e54357e22d1db117c0afcdb"
-    sha256 cellar: :any,                 arm64_sequoia: "6c2af70ef4c7beba90ad33237b2ff25b6d427e2e2cd282f5ef39a1f22d1e1a8a"
-    sha256 cellar: :any,                 arm64_sonoma:  "df253b058b0d822faf3f7633f0b2329b4c8d1c6c5171aa283676fe75ea6db0b8"
-    sha256 cellar: :any,                 sonoma:        "ce332373f5629441ec5d72d5e3af4442bcc5cdc0367c4fabbe003da0df89c4d9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fc673d4b32c832b4dd1d26d74ef115b0f8cefc4926260cae982502e1d2fe15cd"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "567bcd25ca021bd22afac704b2c7ad1e02fe64b7a55b065048a3d1aa8154e3c3"
+    sha256 cellar: :any,                 arm64_tahoe:   "e52391f4eb6214faa508f8a9c06b09db0dcee3c2556337412a54d0732009c886"
+    sha256 cellar: :any,                 arm64_sequoia: "8b0caf472cf1ffb0fa2f8194e80b81f493b9537518505cb2d1e656cb7b82b328"
+    sha256 cellar: :any,                 arm64_sonoma:  "43163a3a736232611782585f30b4ff76aa8d840c053a04dc8897d11255ddefdd"
+    sha256 cellar: :any,                 sonoma:        "8ee21deb91fc91aec93105f07d9b9bdfb15b835b6d11e9552a6ff2d14cdb12c4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a04b42070cfef6e56115a5095675c2eabe6e2106c2518f5afaa68f8a13a0e258"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a03d150f061f863bde609840faa726ba7f745d80cfffeb89d53ddaeda9de2c3b"
   end
 
   depends_on "autoconf" => :build
@@ -94,7 +94,13 @@ class Ejabberd < Formula
   end
 
   test do
-    pid = spawn sbin/"ejabberdctl", "start"
+    ENV["EJABBERD_BYPASS_WARNINGS"] = "true"
+    ENV["EJABBERD_CONFIG_PATH"] = testpath/"ejabberd.yml"
+
+    cp etc/"ejabberd/ejabberd.yml", testpath/"ejabberd.yml"
+    inreplace testpath/"ejabberd.yml", "port: 1883", "port: #{free_port}"
+
+    pid = spawn sbin/"ejabberdctl", "foreground"
     sleep 1
     system sbin/"ejabberdctl", "ping"
   ensure

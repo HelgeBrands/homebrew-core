@@ -3,19 +3,18 @@ class Gcovr < Formula
 
   desc "Reports from gcov test coverage program"
   homepage "https://gcovr.com/"
-  url "https://files.pythonhosted.org/packages/e4/ce/b7516854699f807f58c3c9801ad44de7f51a952be16b62a5948b358f1aa4/gcovr-8.4.tar.gz"
-  sha256 "8ea0cf23176b1029f28db679d712ca6477b3807097c3755c135bdc53b51cfa72"
+  url "https://files.pythonhosted.org/packages/07/37/b4a87dff166dc0a5002e9d03fcb6ca8eeff048247b011b67f047e31122c9/gcovr-8.6.tar.gz"
+  sha256 "b2e7042abca9321cadbab8a06eb34d19f801b831557b28cdc30a029313de8b9e"
   license "BSD-3-Clause"
-  revision 1
   head "https://github.com/gcovr/gcovr.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6245154c7a888383910468cdb7d7431b15eabc3c01e2e462ef2e865a49c411d8"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "856453915ec622e2e806e6564115a8b29acc10eb3e8848f517b7f886b9e481c9"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3001317222ca281652e142c40aaf297e5bf267bf4939fcb5343c7c8fe6ba4c58"
-    sha256 cellar: :any_skip_relocation, sonoma:        "15a551d30e43fbd76a9bc724fed4a1de7c3ab719a10bfad5b9e449944cc92d5f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "91e733bf266a318c07a778a1fa4993b608b8d6a29cacfc5493c69a20903869d6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ba749608e29a48a382efa802ec17ba1e7f28897ffa2fe586f2af1cee2d3367ef"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "49fb3d1e586e2f9dc1cd64e58167158f38a8246f3014943327abcff092aa2bdf"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a3ed44ba1b42ef26b474a36f17251e2d538d42c98aa8bf5c55ad82a56a932df7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0dee9c6126251e0b9492ab42dce9c630a4b8f1a9ea504abaa7009bcfa2190819"
+    sha256 cellar: :any_skip_relocation, sonoma:        "1ff642a465d7cefa35c1e8708bd3a2699b806105bf835102dfcf521bfe78f1f7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2833433cdbd2cd88bb6fca30ac2152e89fd4b4346f26657cace31524fe055f89"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "798eca898b3c7345e82eb9240b05a0b60ca803fb202c9b602f01daa85caefb62"
   end
 
   depends_on "python@3.14"
@@ -24,8 +23,8 @@ class Gcovr < Formula
   uses_from_macos "libxslt"
 
   resource "colorlog" do
-    url "https://files.pythonhosted.org/packages/d3/7a/359f4d5df2353f26172b3cc39ea32daa39af8de522205f512f458923e677/colorlog-6.9.0.tar.gz"
-    sha256 "bfba54a1b93b94f54e1f4fe48395725a3d92fd2a4af702f6bd70946bdc0c6ac2"
+    url "https://files.pythonhosted.org/packages/a2/61/f083b5ac52e505dfc1c624eafbf8c7589a0d7f32daa398d2e7590efa5fda/colorlog-6.10.1.tar.gz"
+    sha256 "eb4ae5cb65fe7fec7773c2306061a8e63e02efc2c72eba9d27b0fa23c94f1321"
   end
 
   resource "jinja2" do

@@ -1,17 +1,17 @@
 class Prs < Formula
   desc "Secure, fast & convenient password manager CLI with GPG & git sync"
   homepage "https://timvisee.com/projects/prs"
-  url "https://github.com/timvisee/prs/archive/refs/tags/v0.5.5.tar.gz"
-  sha256 "833e47894b64e9da25183782fd10b16c6879d201cf5f60e02ce3d4c654309f53"
+  url "https://github.com/timvisee/prs/archive/refs/tags/v0.5.7.tar.gz"
+  sha256 "8505d8dc0bacd13cef65f1f17c90e11a762e745dcd5f51a85bc4d2ada810715b"
   license "GPL-3.0-only"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e6b6ba3893c637d7d43c3cd63427f125b0e0033a04247284b8fa81e6daf2c72c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "eccd7f0e9e1519265b50002aa29def833a870cb826cf3e71ee1231b493181acd"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f3514b10156042e9b99cf4dfe627ab9a968178ebb21b85e25e8a7ab264cd35d9"
-    sha256 cellar: :any_skip_relocation, sonoma:        "f612132dc672132ed25235e3678b17658f5acad5d0efb226174374c0787fe8d3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e2a819c27ce1f9742733d7e6f5e79dd6ee9ee75f7caf7a66d03052bf6b7b062d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7481a21f903a29e8dc9dcc33b321aa5253a6089b0ee088315d3513a73371d2ad"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f53f048b8032b0c131746e445fd4c896a65e5aae465e7b084a71a79a82cebe38"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c5abb9e5a43f538983f27343f23e0ed1871abc7a2e7a1f2ac3c6c365d89c1384"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "16b44d4ebdd5bba2a59fcc869c82138465dfefd8059ce3ded727dd0cebf3be7a"
+    sha256 cellar: :any_skip_relocation, sonoma:        "7f82b973048c8f4b0f3b3c724a251f72269debbe48122154cfd32c110b63058d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "80b326c45a7233857d739be2a63869e098b78a048a8c9e6a65a80fc544a44d7c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ab608fbae7c8ed1b01104fe4e95d8035c815a751e299355d9af19492b6c35225"
   end
 
   depends_on "pkgconf" => :build
@@ -21,6 +21,13 @@ class Prs < Formula
   on_linux do
     depends_on "libxcb"
     depends_on "openssl@3"
+  end
+
+  # Fix compilation error on macOS
+  # PR ref: https://github.com/timvisee/prs/pull/46
+  patch do
+    url "https://github.com/timvisee/prs/commit/dd29c60992714a160e88c32f6ec8848e7ccbee12.patch?full_index=1"
+    sha256 "51ce3804136dc7712e7c2d6c434d68d7ab10885f16b0d79f7549f2c99d9d45a4"
   end
 
   def install

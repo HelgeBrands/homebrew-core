@@ -1,24 +1,24 @@
 class NodeSass < Formula
   desc "JavaScript implementation of a Sass compiler"
   homepage "https://github.com/sass/dart-sass"
-  url "https://registry.npmjs.org/sass/-/sass-1.95.1.tgz"
-  sha256 "a9365f60df8b4e5d92952b097cf9011ca63ad0c5cdd7e99686e76f2620e04664"
+  url "https://registry.npmjs.org/sass/-/sass-1.97.3.tgz"
+  sha256 "cfe3175ed6c5f2b2c0bafc893b30930f67ac8a3105ff516d253c00ad18fa89ea"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "be6a1475648bc348afc5a80b3181c185a34973da07661af4da4d2919fd0df666"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "be6a1475648bc348afc5a80b3181c185a34973da07661af4da4d2919fd0df666"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "be6a1475648bc348afc5a80b3181c185a34973da07661af4da4d2919fd0df666"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3b1b78bb7fa0654c2cf1da2e71e0f75dae797882ba8c31d73afe772ae67be09d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "de471f38cca26b297e56f9b00ffeac1c056814c641926f56c490d76015aa267e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "87f3efb0d5658dba9b5cc87b95dc03f39daecade711b52db84a184b72b894971"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "15a879e3d1f1ace6178f43fffcfd7029ebe4f22f4c488344f26886c9c69897f5"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "15a879e3d1f1ace6178f43fffcfd7029ebe4f22f4c488344f26886c9c69897f5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "15a879e3d1f1ace6178f43fffcfd7029ebe4f22f4c488344f26886c9c69897f5"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2d4e56b85d3e3450eda92b7d1ef2877e85bf21137200b27033dbd437275c41ac"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "0549bf9a5b98b7359028e60ca3aa9951d945a30d6629cfcbfe82cd3ea4700d4e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9e7b9364654d6b7b856c8e0d7359107a4c13ebdbedbd792e403df29944fe6509"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

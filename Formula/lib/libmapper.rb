@@ -1,17 +1,17 @@
 class Libmapper < Formula
   desc "Distributed system for media control mapping"
   homepage "http://www.libmapper.org"
-  url "https://github.com/libmapper/libmapper/releases/download/2.4.14/libmapper-2.4.14.tar.gz"
-  sha256 "b6b1ffbd3bec8eb7a73d9c70900f00284fcc242f83c1fdc390391a9059d4367a"
+  url "https://github.com/libmapper/libmapper/releases/download/2.5.1/libmapper-2.5.1.tar.gz"
+  sha256 "ce46ede6443b5c9c2d986d77e6eab901da4537394f14220f3102df2af7652495"
   license "LGPL-2.1-or-later"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9cc0ffc210a4bdc777ccecc2f3d6557c9068801341b95e4bab834a1cb5c0de84"
-    sha256 cellar: :any,                 arm64_sequoia: "f4b628b7551c6d4a1052cc7dab8d37e48ec1343e3c2947fdb87ac8407e042326"
-    sha256 cellar: :any,                 arm64_sonoma:  "bd991c3b22f031ead73a425582228f175646172957eff5671d762d2a88197aa4"
-    sha256 cellar: :any,                 sonoma:        "2b4b3afb52b575f600f3b15781e1b30372d1691c2e85b7f3cd4373f76d723fcb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a921c84b89b5506fe3a799f8b55d42c40e3aceb1632ec8aacf634bea861f5a61"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2991261b209aa1a21d24f68e570f7462c3bd4093a89dd8f2009b1e3a4ad69be6"
+    sha256 cellar: :any,                 arm64_tahoe:   "3c40391b0053a48a237a9958b2eb8a7bc556f1d53bd42d83682894d8a284fe5c"
+    sha256 cellar: :any,                 arm64_sequoia: "243decca19fafb7401110a972fadbc46237c8ca1482ca508e8bdb2c167360a78"
+    sha256 cellar: :any,                 arm64_sonoma:  "740c9c2d5e885e185319df50c6f3baa6f5525008eced450def3d50251ef590e6"
+    sha256 cellar: :any,                 sonoma:        "7abd4912e21aade67e40b51b1bb5c9ab77c12871cdef5ac4cea9115415afbd6e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "eb7b40032574927fec3dab98515547d5a1b7ce8c21708e70edb8629574b99690"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "de57d036dca0a463b09a7041a0e1f9564556209c17ca100e96085964a3883a0f"
   end
 
   depends_on "autoconf" => :build

@@ -1,8 +1,8 @@
 class Bitcoin < Formula
   desc "Decentralized, peer to peer payment network"
   homepage "https://bitcoincore.org/"
-  url "https://bitcoincore.org/bin/bitcoin-core-30.0/bitcoin-30.0.tar.gz"
-  sha256 "9b472a4d51dfed9aa9d0ded2cb8c7bcb9267f8439a23a98f36eb509c1a5e6974"
+  url "https://bitcoincore.org/bin/bitcoin-core-30.2/bitcoin-30.2.tar.gz"
+  sha256 "6fd00b8c42883d5c963901ad4109a35be1e5ec5c2dc763018c166c21a06c84cb"
   license all_of: [
     "MIT",
     "BSD-3-Clause", # src/crc32c, src/leveldb
@@ -16,12 +16,12 @@ class Bitcoin < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "b41df41b0bdf46fe7877a738e33eaaf0eabc97361eb3b759e2712e1ec93a23a7"
-    sha256 cellar: :any,                 arm64_sequoia: "7174a1ba2ff1ed54708af13bb36f27424c37cae053c8dfda0ac19d0ac1d2671b"
-    sha256 cellar: :any,                 arm64_sonoma:  "672a522db69b84fa3c9d1111e3cbbfe4b780ab915c449b8a67f6f142503eff8b"
-    sha256 cellar: :any,                 sonoma:        "353356a2b200c3ef5e1c3727a11cd8ac86058673c157758e9aa3fee027146fca"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ad4203d3296dae07be3e8d6ffe961e77faf4b1e76a59de729b7929c87c51c428"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ae10c54ebb004117d6b3ab91f62fb6b6dc6e3ed9c6953686a79a20a3de340b60"
+    sha256 cellar: :any,                 arm64_tahoe:   "5c0409619840c651a880ec360e992e0b68f0d27cb3105113eec42b698ac288e5"
+    sha256 cellar: :any,                 arm64_sequoia: "dfb8eff303ad4b182f37cee99e00ed53231b4f7fc680b7f61c47ba65e1ae3ab4"
+    sha256 cellar: :any,                 arm64_sonoma:  "9c6484cc655800889089b1b842fe0e56289365376ea594c8f3bd8e1670b3fb43"
+    sha256 cellar: :any,                 sonoma:        "409e8f2be7d2774ebab20eadc7023b8e38259629739e00f85d60a7047df17ecd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2228d4aaaeee7a30d6886f6eb344b6f50fad4d45a2ffec3a82fef2daa12d45c8"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "aa01580f9ecf9f7c7b7fdb14bfc4965a87dc83b54bb7ae45324d5999176feefb"
   end
 
   depends_on "boost" => :build

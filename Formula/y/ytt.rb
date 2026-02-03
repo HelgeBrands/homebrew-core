@@ -1,20 +1,18 @@
 class Ytt < Formula
   desc "YAML templating tool that works on YAML structure instead of text"
   homepage "https://carvel.dev/ytt/"
-  url "https://github.com/carvel-dev/ytt/archive/refs/tags/v0.52.1.tar.gz"
-  sha256 "c02a8dbcff7f7cf3a92ac6a210d299dd5df13946625e092fa2da48622a8e2fec"
+  url "https://github.com/carvel-dev/ytt/archive/refs/tags/v0.53.0.tar.gz"
+  sha256 "a2bbfa57d42ce0f6e902759fafa6ee0a8451287a1f13896ce245cdccd323453e"
   license "Apache-2.0"
   head "https://github.com/carvel-dev/ytt.git", branch: "develop"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "df0049384c4b323958071878cb575eb05b8f4ed31d318bc3e2d721752bd3b2e9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "df0049384c4b323958071878cb575eb05b8f4ed31d318bc3e2d721752bd3b2e9"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "df0049384c4b323958071878cb575eb05b8f4ed31d318bc3e2d721752bd3b2e9"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "df0049384c4b323958071878cb575eb05b8f4ed31d318bc3e2d721752bd3b2e9"
-    sha256 cellar: :any_skip_relocation, sonoma:        "551e538f70010d174fe740c7fb952a2a4c5e65c842b7cbb8ff35bfa05124de43"
-    sha256 cellar: :any_skip_relocation, ventura:       "551e538f70010d174fe740c7fb952a2a4c5e65c842b7cbb8ff35bfa05124de43"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d0ef1bf1260bd779d5f9bf9583cccdcaa354fd0f38e87f2442e93cfdd72579a8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5387c59c39c72bdd4425f8d0d54b338b5c0b4f4f5fa642f618a824285a490faa"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3671dcc301fa479467bee7da5991d1d168ff7aab4bc70e3ce34e287bc7224925"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3671dcc301fa479467bee7da5991d1d168ff7aab4bc70e3ce34e287bc7224925"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3671dcc301fa479467bee7da5991d1d168ff7aab4bc70e3ce34e287bc7224925"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e2fd2576b239a134a0f28ba33103429319c061eabb60d06b0b8dc512200f8155"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "037ad1a610273ab72834dd9bcdc9cb868308d45ee2c5a30556183408da7038a4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3976a0d0c388ddf9e1f7755c73959df6015a31567964edd50aa16b2dec7f4574"
   end
 
   depends_on "go" => :build
@@ -23,7 +21,7 @@ class Ytt < Formula
     ldflags = "-s -w -X carvel.dev/ytt/pkg/version.Version=#{version}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/ytt"
 
-    generate_completions_from_executable(bin/"ytt", "completion")
+    generate_completions_from_executable(bin/"ytt", shell_parameter_format: :cobra)
   end
 
   test do

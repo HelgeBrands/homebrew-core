@@ -3,15 +3,15 @@ class Cryfs < Formula
 
   desc "Encrypts your files so you can safely store them in Dropbox, iCloud, etc."
   homepage "https://www.cryfs.org"
-  url "https://github.com/cryfs/cryfs/releases/download/1.0.1/cryfs-1.0.1.tar.gz"
-  sha256 "5383cd77c4ef606bb44568e9130c35a996f1075ee1bdfb68471ab8bc8229e711"
+  url "https://github.com/cryfs/cryfs/releases/download/1.0.3/cryfs-1.0.3.tar.gz"
+  sha256 "5550f612f7b692e60c0c10a0331dcefbcc9616ad1411a016de7e4503ad866696"
   license "LGPL-3.0-or-later"
-  revision 5
-  head "https://github.com/cryfs/cryfs.git", branch: "develop"
+  revision 1
+  head "https://github.com/cryfs/cryfs.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "47146379f054330f91b6ade148957e79a93cce9c6f6bc1cd0070bb39decba471"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "823beaba77708c4fef1ecf93dc955667cafa57893f687f9d136ad276fb22b227"
+    sha256 cellar: :any_skip_relocation, arm64_linux:  "aad3465262b4d592cf14d87253fca6f7543c8f1f1b6a5ab177d36befda519fd2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux: "4d391a757720609a5f34600e573d517e8f061afddb31ff743d4f18737e2cf399"
   end
 
   depends_on "cmake" => :build
@@ -24,18 +24,6 @@ class Cryfs < Formula
   depends_on "libfuse@2" # FUSE 3 issue: https://github.com/cryfs/cryfs/issues/419
   depends_on :linux # on macOS, requires closed-source macFUSE
   depends_on "spdlog"
-
-  # Backport fix for Boost.Process 1.88.0+. Remove in the next release
-  patch do
-    url "https://github.com/cryfs/cryfs/commit/91e2c9b8fd5f7a1b0e57ad1310534606ce70c338.patch?full_index=1"
-    sha256 "50551c3d73502a9e9796d95f751969e9865a03e6d7429123388ae1f52eb47131"
-  end
-
-  # Fix build with Boost 1.89.0, pr ref: https://github.com/cryfs/cryfs/pull/500
-  patch do
-    url "https://github.com/cryfs/cryfs/commit/f2f3c19979545c4789647e648cc1480ce647f42a.patch?full_index=1"
-    sha256 "35491d35bb341c8651bac6c7348b4d8d42df19304a09824d0eb94206180231d6"
-  end
 
   def install
     ENV.runtime_cpu_detection # for bundled cryptopp

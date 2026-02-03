@@ -1,11 +1,9 @@
 class Psalm < Formula
   desc "PHP Static Analysis Tool"
   homepage "https://psalm.dev"
-  # Bump to PHP 8.4 or newer on the next release, if possible.
-  url "https://github.com/vimeo/psalm/releases/download/6.13.1/psalm.phar"
-  sha256 "6cec66e4b622403098d2153df7c5a79e9dbec78e2c89d7c27ff3aa950fb582f0"
+  url "https://github.com/vimeo/psalm/releases/download/6.15.0/psalm.phar"
+  sha256 "a935f936f6ae158fab6fa8a925e5d9b3b273739b71be3ed800f7cab93e541433"
   license "MIT"
-  revision 1
 
   livecheck do
     url :stable
@@ -13,11 +11,11 @@ class Psalm < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "47754cc0108c32b16106e360bc4fa3815d2acf5f7064d28a5f62e82c3a59441f"
+    sha256 cellar: :any_skip_relocation, all: "40c0e525fdb10d1ea872cfbe80db2ff2d7674b7399cdfa67ac1cb3a866e92916"
   end
 
   depends_on "composer" => :test
-  depends_on "php@8.3"
+  depends_on "php"
 
   # Keg-relocation breaks the formula when it replaces `/usr/local` with a non-default prefix
   on_macos do
@@ -30,7 +28,7 @@ class Psalm < Formula
     libexec.install "psalm.phar" => "psalm"
 
     (bin/"psalm").write <<~PHP
-      #!#{Formula["php@8.3"].opt_bin}/php
+      #!#{Formula["php"].opt_bin}/php
       <?php require '#{libexec}/psalm';
     PHP
   end

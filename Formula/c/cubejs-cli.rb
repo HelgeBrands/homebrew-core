@@ -1,17 +1,17 @@
 class CubejsCli < Formula
   desc "Cube.js command-line interface"
   homepage "https://cube.dev/"
-  url "https://registry.npmjs.org/cubejs-cli/-/cubejs-cli-1.5.12.tgz"
-  sha256 "5c9ba8be42ba2b4de798433e30a38d686cab851a033867e70538ac0646dff0c8"
+  url "https://registry.npmjs.org/cubejs-cli/-/cubejs-cli-1.6.7.tgz"
+  sha256 "0be6aa8bb722757d268d317afd3dd107a204445212771a6e470b23ea41157b28"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b32cedab8cd0daba7ec433284579997812ec978e4711e35e69ce872b66cd2730"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d5482f9377a4aa4793632ba30f8147273fd0c90a41f8ab88a5c2f2ab220187dc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d5482f9377a4aa4793632ba30f8147273fd0c90a41f8ab88a5c2f2ab220187dc"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ba1f6f3d990eef52c3b8a5069adda3f87b433ab1f1a85d6ff8ee98e1af779f10"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a3a42a699722211ca2fe24b9cc1f676d998d7616f795063a8125e80fe8bad8b4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a3a42a699722211ca2fe24b9cc1f676d998d7616f795063a8125e80fe8bad8b4"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d9d608133de609e48610b2f1a3813fb2e92a28822ce31b0508e560a06d3799d1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b53cb14d4ed49417e4561e62c32c8fccbab04798ba57bc086bacb9f64b3109b7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b53cb14d4ed49417e4561e62c32c8fccbab04798ba57bc086bacb9f64b3109b7"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c823048af13f406617f142fb637c1651d4e828876fe0746d8923843c6178afcc"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "269fdf86d190c1a8166e0352409db5af41ff64b99258de5ca891f9858d29cfe0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "269fdf86d190c1a8166e0352409db5af41ff64b99258de5ca891f9858d29cfe0"
   end
 
   depends_on "node"
@@ -19,7 +19,7 @@ class CubejsCli < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     node_modules = libexec/"lib/node_modules/cubejs-cli/node_modules"
     deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?

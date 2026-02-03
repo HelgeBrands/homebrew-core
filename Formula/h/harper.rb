@@ -1,8 +1,8 @@
 class Harper < Formula
   desc "Grammar Checker for Developers"
   homepage "https://github.com/Automattic/harper"
-  url "https://github.com/Automattic/harper/archive/refs/tags/v1.1.0.tar.gz"
-  sha256 "8f840285d7ae3222e67c3b858822b80da66ebb3ed2b35693fa045f2c2afc6817"
+  url "https://github.com/Automattic/harper/archive/refs/tags/v1.5.1.tar.gz"
+  sha256 "37ddaa7a76738d41914b6235054c4aa255b5c029f19e42fd4e44c9a4fa44daf0"
   license "Apache-2.0"
   head "https://github.com/Automattic/harper.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Harper < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "229b279b1c16386fd5e330122e9b3ee99b6b4a6b950d9a9b07abdd5918bbd3ae"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "769a20edde833f97dc1d1fa82c1a94ca6a9483f605faa6e85150a981e0c2d253"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "597160ab9e3f86c9e68c29c8630c67fce4443b7e257a944332a10590c6c4a6aa"
-    sha256 cellar: :any_skip_relocation, sonoma:        "383f0efe1a4361ed5fee833f07e8a960ca7c25f9c225e7683310a7d4ea0ed31f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1310d9a6ee804b73b4ce22e018ac181a3a2d23cd2b7adce9eda13685feecbc23"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "af5dd2195fcb99397073318698bfe8753894d5f622fb671efc7a79af57765310"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8698f5a6d0a766e9fe4c3bee6dc4457fdaab972b54e8d4048597ecc6f643c26b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "482087f427bdba5a70b9211b790efbae590e2472bb58aa4cb61f2ceb2c2f4c2d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "44cfa710ac7e26466167b4f9fe1f1d2b6ce967edd088062f9b16d0772e74d3fa"
+    sha256 cellar: :any_skip_relocation, sonoma:        "89a1dad7cf547d2bb3e0b2d3c03783aa46d831560d46adde870907e8c258f18b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "95341de19035942a16dfe14a18549ae55a1dffa30f73f390e549f5e4fc60fde2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "823d59b9613071d54db5618cc7a5cafd6da3b05c8997132c9484eaca322fca38"
   end
 
   depends_on "rust" => :build
@@ -40,7 +40,7 @@ class Harper < Formula
     assert_match "test.md: No lints found", lint_output
 
     output = shell_output("#{bin}/harper-cli parse test.md")
-    assert_equal "Word", JSON.parse(output.lines.first)["kind"]["kind"]
+    assert_equal "HeadingStart", JSON.parse(output.lines.first)["kind"]["kind"]
 
     assert_match "\"iteration\"", shell_output("#{bin}/harper-cli words")
 

@@ -1,18 +1,19 @@
 class Edencommon < Formula
   desc "Shared library for Watchman and Eden projects"
   homepage "https://github.com/facebookexperimental/edencommon"
-  url "https://github.com/facebookexperimental/edencommon/archive/refs/tags/v2025.11.10.00.tar.gz"
-  sha256 "22d5ff10ae4c07f5e4eef8ff97fe3e0ada2a1f03dfe5f18a86c42e37653741a4"
+  url "https://github.com/facebookexperimental/edencommon/archive/refs/tags/v2026.01.12.00.tar.gz"
+  sha256 "3b60d7dd939c5844b1758a843a37f42cfafda37536a4396eb3876cee70a844bd"
   license "MIT"
+  revision 1
   head "https://github.com/facebookexperimental/edencommon.git", branch: "main"
 
   bottle do
-    sha256                               arm64_tahoe:   "8c4642924cc8d5fec4538562ed6105f35aba2c3b7a8152059f0f5d51c31bc824"
-    sha256                               arm64_sequoia: "05e14c0825f5fb89d9540e3b10336e77654440e39df3a7d698213ec2a72bbc8d"
-    sha256                               arm64_sonoma:  "5ecdcb82d01ddc06d5fa42cfcfbfabc72405db8d819731280bf0e68cd70a70dc"
-    sha256 cellar: :any,                 sonoma:        "53eca9bab57c4207d2f61efd79f4af62dfb65fae23494048c62a9ede76e6c89d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6239682c9b84924d4bb406f8abe66d8145513a37e37f0318ea198426b877c0d8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2cd0b0748ddf5630673d0aef820873c867df373d62007785003fb7c80973f0be"
+    sha256                               arm64_tahoe:   "ff942a530e45fb9f08635976fab75a51051f3a4df8b0bc40c95905d912bf69c5"
+    sha256                               arm64_sequoia: "422a39ee2415e2b4be9469c4a3f58c4d814aa24746d78b26286d540f64889ab6"
+    sha256                               arm64_sonoma:  "49e25ce35016c1b3f96cc5357a4214fbe642e7ffb384486d2e339ca0652330a0"
+    sha256 cellar: :any,                 sonoma:        "f4b2e78e855180b5839b6a9d942f88c55de21d7a682714848a69b393672fb729"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a7f762271950bf4220b9d53e9531f1b6c46af0fc792d9691960b7234de1ecaec"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0269aa5d2ab3b0d02cfca1d218696098348194210562eb58184af593900ff264"
   end
 
   depends_on "cmake" => :build
@@ -29,6 +30,9 @@ class Edencommon < Formula
   depends_on "openssl@3"
 
   def install
+    # Workaround to build with glog >= 0.7 until fixed upstream
+    inreplace "CMakeLists.txt", /^find_package\(Glog MODULE /, "# \\0"
+
     # Fix "Process terminated due to timeout" by allowing a longer timeout.
     inreplace buildpath.glob("eden/common/{os,utils}/test/CMakeLists.txt"),
               /gtest_discover_tests\((.*)\)/,

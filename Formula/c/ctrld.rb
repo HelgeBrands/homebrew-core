@@ -1,17 +1,17 @@
 class Ctrld < Formula
   desc "Highly configurable, multi-protocol DNS forwarding proxy"
   homepage "https://github.com/Control-D-Inc/ctrld"
-  url "https://github.com/Control-D-Inc/ctrld/archive/refs/tags/v1.4.8.tar.gz"
-  sha256 "75508b3708f99b11f94fc3d9382d3da5bdf7550e37deaca985321404330228b6"
+  url "https://github.com/Control-D-Inc/ctrld/archive/refs/tags/v1.4.9.tar.gz"
+  sha256 "7330daba75b3ebfa819a2017265e05ed08cd0aaf050e98c87ae777483a1d2491"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "710b801a77ad73069363fdff50e2a62ab7ae3e1a122a9a4d0db03257f46d80ea"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "710b801a77ad73069363fdff50e2a62ab7ae3e1a122a9a4d0db03257f46d80ea"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "710b801a77ad73069363fdff50e2a62ab7ae3e1a122a9a4d0db03257f46d80ea"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e3cf03f219e2c390c980e07dde007e4760d5c30c523cbde95c25bd37f3c9d5fc"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3f276f6a16575d426ce8288830e0a1a8c7d9d2160affab78f64eb0c4843012ed"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "00ae361937a0efd62e0a635587a3e32e96e9652edd13099a58890bd376bdda21"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ec4357c6b91023d31be6b5230885166118df8760c9b67d4e8c456662a998c994"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ec4357c6b91023d31be6b5230885166118df8760c9b67d4e8c456662a998c994"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ec4357c6b91023d31be6b5230885166118df8760c9b67d4e8c456662a998c994"
+    sha256 cellar: :any_skip_relocation, sonoma:        "57e39011343a9dd05d402b61dae82d2b6537b250984525b860ad1cdee38789e8"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5ac01cc0ee8244a34f96a8d986c20041be358ba4127af5ef94c4e9dced344136"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "51feab86ea1915f33ce80f722b8e174df2cf10ed98f01e3ae6d55a1f680687e8"
   end
 
   depends_on "go" => :build
@@ -23,6 +23,7 @@ class Ctrld < Formula
       -X github.com/Control-D-Inc/ctrld/cmd/cli.commit=#{tap.user}
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/ctrld"
+    generate_completions_from_executable(bin/"ctrld", shell_parameter_format: :cobra)
   end
 
   test do

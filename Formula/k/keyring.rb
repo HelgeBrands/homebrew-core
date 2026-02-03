@@ -6,20 +6,21 @@ class Keyring < Formula
   url "https://files.pythonhosted.org/packages/43/4b/674af6ef2f97d56f0ab5153bf0bfa28ccb6c3ed4d1babf4305449668807b/keyring-25.7.0.tar.gz"
   sha256 "fe01bd85eb3f8fb3dd0405defdeac9a5b4f6f0439edbb3149577f244a2e8245b"
   license "MIT"
+  revision 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "abb97de4f89e2a7c81bddd8695a8a4ec626214554c1578f8d6839e923ae948c3"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "abb97de4f89e2a7c81bddd8695a8a4ec626214554c1578f8d6839e923ae948c3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "abb97de4f89e2a7c81bddd8695a8a4ec626214554c1578f8d6839e923ae948c3"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1a6ba9b6306faa11ba267c8ba8a6d53fe78c7ee0e5be0afb71c2dc90b86c90f4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e4f8ef8b6c8b613770c1804e258f25f7d751c1a7ec414b59a0643cb8d52c9235"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e4f8ef8b6c8b613770c1804e258f25f7d751c1a7ec414b59a0643cb8d52c9235"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "05fe88bf0d79ee6a0d4e6794ce2cfb8727b4dccc8e1d850e4fc4218f9ff34c3f"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "05fe88bf0d79ee6a0d4e6794ce2cfb8727b4dccc8e1d850e4fc4218f9ff34c3f"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "05fe88bf0d79ee6a0d4e6794ce2cfb8727b4dccc8e1d850e4fc4218f9ff34c3f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "4bbee0818e804547f13f8da8679f56ed5152477400d22d1a54075338a83a95cc"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d5aaaee3ad69593dd4d361f7b7c8cae215288c4e48dbd1d36224aaaf9b242df9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d5aaaee3ad69593dd4d361f7b7c8cae215288c4e48dbd1d36224aaaf9b242df9"
   end
 
   depends_on "python@3.14"
 
   on_linux do
-    depends_on "cryptography"
+    depends_on "cryptography" => :no_linkage
   end
 
   pypi_packages package_name:     "keyring[completion]",
@@ -32,13 +33,13 @@ class Keyring < Formula
   end
 
   resource "jaraco-context" do
-    url "https://files.pythonhosted.org/packages/df/ad/f3777b81bf0b6e7bc7514a1656d3e637b2e8e15fab2ce3235730b3e7a4e6/jaraco_context-6.0.1.tar.gz"
-    sha256 "9bae4ea555cf0b14938dc0aee7c9f32ed303aa20a3b73e7dc80111628792d1b3"
+    url "https://files.pythonhosted.org/packages/cb/9c/a788f5bb29c61e456b8ee52ce76dbdd32fd72cd73dd67bc95f42c7a8d13c/jaraco_context-6.1.0.tar.gz"
+    sha256 "129a341b0a85a7db7879e22acd66902fda67882db771754574338898b2d5d86f"
   end
 
   resource "jaraco-functools" do
-    url "https://files.pythonhosted.org/packages/f7/ed/1aa2d585304ec07262e1a83a9889880701079dde796ac7b1d1826f40c63d/jaraco_functools-4.3.0.tar.gz"
-    sha256 "cfd13ad0dd2c47a3600b439ef72d8615d482cedcff1632930d6f28924d92f294"
+    url "https://files.pythonhosted.org/packages/0f/27/056e0638a86749374d6f57d0b0db39f29509cce9313cf91bdc0ac4d91084/jaraco_functools-4.4.0.tar.gz"
+    sha256 "da21933b0417b89515562656547a77b4931f98176eb173644c0d35032a33d6bb"
   end
 
   resource "jeepney" do
@@ -52,17 +53,18 @@ class Keyring < Formula
   end
 
   resource "secretstorage" do
-    url "https://files.pythonhosted.org/packages/32/8a/ed6747b1cc723c81f526d4c12c1b1d43d07190e1e8258dbf934392fc850e/secretstorage-3.4.1.tar.gz"
-    sha256 "a799acf5be9fb93db609ebaa4ab6e8f1f3ed5ae640e0fa732bfea59e9c3b50e8"
+    url "https://files.pythonhosted.org/packages/1c/03/e834bcd866f2f8a49a85eaff47340affa3bfa391ee9912a952a1faa68c7b/secretstorage-3.5.0.tar.gz"
+    sha256 "f04b8e4689cbce351744d5537bf6b1329c6fc68f91fa666f60a380edddcd11be"
   end
 
   resource "shtab" do
-    url "https://files.pythonhosted.org/packages/5a/3e/837067b970c1d2ffa936c72f384a63fdec4e186b74da781e921354a94024/shtab-1.7.2.tar.gz"
-    sha256 "8c16673ade76a2d42417f03e57acf239bfb5968e842204c17990cae357d07d6f"
+    url "https://files.pythonhosted.org/packages/b0/7a/7f131b6082d8b592c32e4312d0a6da3d0b28b8f0d305ddd93e49c9d89929/shtab-1.8.0.tar.gz"
+    sha256 "75f16d42178882b7f7126a0c2cb3c848daed2f4f5a276dd1ded75921cc4d073a"
   end
 
   def install
-    virtualenv_install_with_resources
+    without = %w[jeepney secretstorage] unless OS.linux?
+    virtualenv_install_with_resources(without:)
 
     generate_completions_from_executable(bin/"keyring", "--print-completion", shells: [:bash, :zsh])
   end

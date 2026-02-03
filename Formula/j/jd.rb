@@ -1,20 +1,18 @@
 class Jd < Formula
   desc "JSON diff and patch"
   homepage "https://github.com/josephburnett/jd"
-  url "https://github.com/josephburnett/jd/archive/refs/tags/v2.3.0.tar.gz"
-  sha256 "5c7c749f58655a29345d7c0345b803d554629ecbad439096a6fb28eeeff276c0"
+  url "https://github.com/josephburnett/jd/archive/refs/tags/v2.4.0.tar.gz"
+  sha256 "084aeab667883da93dea85ece23e517e9d35aa1cfbf2e86dfc360556f71d2f83"
   license "MIT"
   head "https://github.com/josephburnett/jd.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "04b3942cc2ea6a3129250512e1f06d9354ef9d2acc420a185e230d6eba1357db"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "65c8688b9faa2ed36501f6cd8b07a424844c1addd0d5e9a5a800aac3b2acce32"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "65c8688b9faa2ed36501f6cd8b07a424844c1addd0d5e9a5a800aac3b2acce32"
-    sha256 cellar: :any_skip_relocation, arm64_ventura: "65c8688b9faa2ed36501f6cd8b07a424844c1addd0d5e9a5a800aac3b2acce32"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3528b572d310d68bbbb04d7ee487142e34e2a4402cc279b45c9fe89458b02624"
-    sha256 cellar: :any_skip_relocation, ventura:       "3528b572d310d68bbbb04d7ee487142e34e2a4402cc279b45c9fe89458b02624"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f07f301c762898c1ae7c0ef3056a528a286ab3327324a95f021866134c34e82d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "105ce145b5b39abed50c84e01d71f75a0cdfc23cb6d67c627b81ff2d4a8ab177"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "dcfc103ee3e77348d2e926b7e11c03367357c0cc54596c952112ad50cb0ec7ad"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "dcfc103ee3e77348d2e926b7e11c03367357c0cc54596c952112ad50cb0ec7ad"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "dcfc103ee3e77348d2e926b7e11c03367357c0cc54596c952112ad50cb0ec7ad"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c9fbde83fd5d2b67c3c1512b0ec62cf7ff9565645d4e0cc6f8558eea4469322c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ffda495360ef70d13304338d7ba4201eed61da7d6be7c67f045ff2fac5e0aefe"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f20b38ccd3d2c9636afa560f2c29ef87e532c47ada4cfc4df468bf897217dd12"
   end
 
   depends_on "go" => :build

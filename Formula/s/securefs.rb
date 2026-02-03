@@ -4,7 +4,7 @@ class Securefs < Formula
   url "https://github.com/netheril96/securefs/archive/refs/tags/v2.0.0.tar.gz"
   sha256 "d7fac7adc70c09473173aeadee5b7041d7e63fbf392ef40bdd77888590bb12a2"
   license "MIT"
-  revision 2
+  revision 5
   head "https://github.com/netheril96/securefs.git", branch: "master"
 
   livecheck do
@@ -13,8 +13,8 @@ class Securefs < Formula
   end
 
   bottle do
-    sha256 arm64_linux:  "5a8c11b8e79d1cfd3da960223b8a3298517c8ee5226df355d51493002edc1ffa"
-    sha256 x86_64_linux: "00bda9002f4d1207cbfa59054622baf3a984dddd29d27d4952a5b7bbcad7f711"
+    sha256 arm64_linux:  "7e087fde5a7371287f70bba1e263ede84ef5b934794f30f644e81be044741648"
+    sha256 x86_64_linux: "f91050ed851418fffbac2f809c473e6a70ec61307f7614a97c3da981e118f0c7"
   end
 
   depends_on "cmake" => :build

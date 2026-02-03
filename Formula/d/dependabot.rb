@@ -1,18 +1,18 @@
 class Dependabot < Formula
   desc "Tool for testing and debugging Dependabot update jobs"
   homepage "https://github.com/dependabot/cli"
-  url "https://github.com/dependabot/cli/archive/refs/tags/v1.79.0.tar.gz"
-  sha256 "b6a691512902236adffe823047b322e5fe168ab668e6336f39608de2b9364038"
+  url "https://github.com/dependabot/cli/archive/refs/tags/v1.82.0.tar.gz"
+  sha256 "78724bf99e251ed80ae527304a2ee697e9b2116d67ba7538a41d6bf7b23cee7a"
   license "MIT"
   head "https://github.com/dependabot/cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8b8543719295fe6ff27eb6b49149e6afeb8481529de21cc9109fc18df9da9d2b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8b8543719295fe6ff27eb6b49149e6afeb8481529de21cc9109fc18df9da9d2b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8b8543719295fe6ff27eb6b49149e6afeb8481529de21cc9109fc18df9da9d2b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "5e5ca46bc9709af7d0aa6b392fa6b448575438500141ede4d12299b599cb8c2d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9af4586d28734b4a277a0ecbf40890efed147b13bb1b564ebe486e8a7c2b57bf"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a96ec7e4ae4c5fc8d754a0349db96253534af8b1841e2caa5746d242df5ff884"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "72247ff631898021581a17162931b2db1ee1bb6d701f4bfe49a465b9a3b1ac4d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "72247ff631898021581a17162931b2db1ee1bb6d701f4bfe49a465b9a3b1ac4d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "72247ff631898021581a17162931b2db1ee1bb6d701f4bfe49a465b9a3b1ac4d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "0fda03914e6838f0f13cd4e221440585c9dc5a8f052478a4ef1e7edf1dd46309"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6d02a3e3906e117029b7796404b1380786ecedc1400c06554be21f5dec5a1872"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4a597f7bc53aea52242c0b6543658d904e3077e4d3e23cf59d996375c22421e2"
   end
 
   depends_on "go" => :build
@@ -24,7 +24,7 @@ class Dependabot < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/dependabot"
 
-    generate_completions_from_executable(bin/"dependabot", "completion")
+    generate_completions_from_executable(bin/"dependabot", shell_parameter_format: :cobra)
   end
 
   test do

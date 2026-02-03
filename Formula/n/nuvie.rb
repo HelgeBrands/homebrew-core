@@ -29,6 +29,10 @@ class Nuvie < Formula
     depends_on "sdl2"
   end
 
+  # https://github.com/nuvie/nuvie/commit/759cc0c33bb1a555d6935976c467e52007c3aea1
+  deprecate! date: "2026-01-23", because: "has moved to the ScummVM project", replacement_formula: "scummvm"
+  disable! date: "2026-01-23", because: "has moved to the ScummVM project", replacement_formula: "scummvm"
+
   def install
     # Work around GCC 11 / Clang 17 failure due to higher default C++ standard.
     # We use C++03 standard as C++11 standard needs upstream fix.
@@ -74,11 +78,8 @@ class Nuvie < Formula
   end
 
   test do
-    pid = fork do
-      exec bin/"nuvie"
-    end
+    pid = spawn bin/"nuvie"
     sleep 3
-
     assert_path_exists bin/"nuvie"
     assert_predicate bin/"nuvie", :executable?
   ensure

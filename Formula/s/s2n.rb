@@ -1,8 +1,8 @@
 class S2n < Formula
   desc "Implementation of the TLS/SSL protocols"
   homepage "https://github.com/aws/s2n-tls"
-  url "https://github.com/aws/s2n-tls/archive/refs/tags/v1.6.2.tar.gz"
-  sha256 "b62c52ededd0b42e58fea660727141728cfb853c564083dbfc6fd027a1564582"
+  url "https://github.com/aws/s2n-tls/archive/refs/tags/v1.7.0.tar.gz"
+  sha256 "a6e8228e238239bb3c17b1eda3ed702bcbb2eaebc792eac4d754cc5619b0ea06"
   license "Apache-2.0"
   head "https://github.com/aws/s2n-tls.git", branch: "main"
 
@@ -12,12 +12,12 @@ class S2n < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "961c46d7d33c628c162307be158faae67782822000a3e01ba988ad81cfbc5b28"
-    sha256 cellar: :any,                 arm64_sequoia: "54235155349bd2f732dc7bcf996086d1b7db2ebe6b8976729d104685a55b4130"
-    sha256 cellar: :any,                 arm64_sonoma:  "2ee4c0e00795cb0faac9969fde49991c28c74b3469f362c5ddea796c018f6fd3"
-    sha256 cellar: :any,                 sonoma:        "deda042e4641b8fb290d0272e8d291cb151d1019c1795ebb75501599ad8dfa42"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3d29b061028a7bd373b0ccbfd7318971e34af2efc27a1f6116863719473b15ae"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f98d7cbfc6d0f1e1eda1a81d08fec377af2cb96d6da535cb8a2b4cbb54f14f98"
+    sha256 cellar: :any,                 arm64_tahoe:   "ca94f20f9515bbc532c75daa5139b002acdf6cef293580f1d41e46c5e8bc0463"
+    sha256 cellar: :any,                 arm64_sequoia: "0788c487e889ddc4f0a4f630995935bc2bcd0a9db3f6edcaa8ad8fc5629b0063"
+    sha256 cellar: :any,                 arm64_sonoma:  "387de3d2f399c6254fa6c0d92d44636f22e87db1912a808fd8ee09e2e00b1ace"
+    sha256 cellar: :any,                 sonoma:        "de714207e93dc81581c5b39df944c2adafccb8e99fa817f7cf5c09bad9a062fd"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7538a6e5a8ec4141def33751194c7cf0620656c6183adc732eb8e11844278963"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2b41180743edfc682c30ec1afee892ca7f8c3d9920c6494b96c66c1d893f9558"
   end
 
   depends_on "cmake" => :build

@@ -1,18 +1,18 @@
 class Opa < Formula
   desc "Open source, general-purpose policy engine"
   homepage "https://www.openpolicyagent.org"
-  url "https://github.com/open-policy-agent/opa/archive/refs/tags/v1.11.0.tar.gz"
-  sha256 "a76cabc9e19bc86ee1f7b401a6c5a37905e9c66d297a6d20b9bc9d8eb7593d50"
+  url "https://github.com/open-policy-agent/opa/archive/refs/tags/v1.13.1.tar.gz"
+  sha256 "24cc7bfc1b83180462b574f941790b8926a8a632b7b5fe29c1646165f3ef3c32"
   license "Apache-2.0"
   head "https://github.com/open-policy-agent/opa.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0aed2dedca03358420b13e6f052bb82cfee17901bfe2cc7eb1bbf538118a852e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "64b000dbdfda7f37130c5645860d859cff483134b30a25827b62bd97450e74cd"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2c74ea17a1ae280e38c216c607b6cae49498fe9f6dabac9805e33b1f43412b7f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "9319e6b87cdfc0ebb6ebefd59cae6bfcb2b98ea4e2237db035775abeccf97f7e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "8d46e56b179a2529191545fda3b3047e696c48fbb702a608798be060e3d83609"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2d93cd91a2526cc4819f6b3bd6cc39376272d9c33f3a308de0517682d1e20ee1"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "af33a0f65619797bb0cd70be7522f69666a47c58e4d3029dce129d6cd85e7002"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1bb99c0c709e4f086b5ebcfdde8ea64bbc40597535f136c168db460f033c23b7"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6135a9f679f19ddb05aff9cb16c72b263ad66c5f7426e0a29254e45bca01cdbb"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b5e4aca2e1d995782f3278310805b8e77babaab1f65aac4aa79a3041e4f0830b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a0c75925d5ed9ade03de7f5b8b9ced03ba8e58bb8a9557404d5d85c41ec46074"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3473223c3f717b979fa9978fb27e00f9895ca7340508b687de11df928f738c4c"
   end
 
   depends_on "go" => :build
@@ -26,7 +26,7 @@ class Opa < Formula
     system "./build/gen-man.sh", "man1"
     man.install "man1"
 
-    generate_completions_from_executable(bin/"opa", "completion")
+    generate_completions_from_executable(bin/"opa", shell_parameter_format: :cobra)
   end
 
   test do

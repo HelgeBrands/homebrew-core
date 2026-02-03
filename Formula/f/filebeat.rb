@@ -2,20 +2,20 @@ class Filebeat < Formula
   desc "File harvester to ship log files to Elasticsearch or Logstash"
   homepage "https://www.elastic.co/products/beats/filebeat"
   url "https://github.com/elastic/beats.git",
-      tag:      "v9.2.2",
-      revision: "46e1e32d1aac0400a852b4565f184e23ab03e0e1"
+      tag:      "v9.2.4",
+      revision: "fd909e2bd4416ce14162971875d6013334f6fd44"
   # Outside of the "x-pack" folder, source code in a given file is licensed
   # under the Apache License Version 2.0
   license "Apache-2.0"
   head "https://github.com/elastic/beats.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9f686f852c0c1579605dd19c18f10d85a36dbaa5f7f1c391bb408e99a1d3580d"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9009c0b5a86948d24e01fda24b44d4b432adc2e6c64d75c34f81333dcdcf0d90"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "859e26016e663a0d84e9fa9d489e451468a9fb84ce39b5c70b0fb9bc7a7420f4"
-    sha256 cellar: :any_skip_relocation, sonoma:        "da6ace161bfd27c663c6755395e86233767ab41b84e6bfa80138e70f17bac0e0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c69763bd047e861d5f8db592bc525477ad58381ec7e5d3ccff110b77db51be45"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "09b006075d23e777e30689fa5b9337bcb1e160be02ba737524715b3ebf9d9e82"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "67a528d0f41945a2390b4ef2e672aa0a1ff09f4624822ccc61606598a781e1ac"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7c759c2f8d0145c86b7ba465bb5d52d46e457ea92275fe2185e0f74f639b9f5c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5ef61c002c962cb89a737c20d31ee5694f163cd5524a4f31a04d212a310232c6"
+    sha256 cellar: :any_skip_relocation, sonoma:        "38f2d82164ec80ee4ca0afca63210ed6969e81806669a83af7ffbec0d9bfdeeb"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d628403dac6e46f3f9cef6aa672f2cd47d00b0895f8eaab2cd797a4a9caa9d5a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1bddfa1ec21b30c8854ac91e88dad20ede66ef2403aaddca8d95911888f95862"
   end
 
   depends_on "go" => :build
@@ -83,10 +83,10 @@ class Filebeat < Formula
     (testpath/"log").mkpath
     (testpath/"data").mkpath
 
-    pid = spawn bin/"filebeat", "-c", "#{testpath}/filebeat.yml",
-                                "--path.config", "#{testpath}/filebeat",
+    pid = spawn bin/"filebeat", "-c", testpath/"filebeat.yml",
+                                "--path.config", testpath/"filebeat",
                                 "--path.home=#{testpath}",
-                                "--path.logs", "#{testpath}/log",
+                                "--path.logs", testpath/"log",
                                 "--path.data", testpath
 
     sleep 1

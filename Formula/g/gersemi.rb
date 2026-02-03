@@ -3,21 +3,27 @@ class Gersemi < Formula
 
   desc "Formatter to make your CMake code the real treasure"
   homepage "https://github.com/BlankSpruce/gersemi"
-  url "https://files.pythonhosted.org/packages/f8/04/043649d0a633aec2efd0b572591cc55a30fb193c2f222e36b9c5240e3791/gersemi-0.24.0.tar.gz"
-  sha256 "2b39554605cefb39438b2d1b84d488d35bfdff6a71f985dba85151104f0846af"
+  url "https://files.pythonhosted.org/packages/4f/dd/c791442e6cc4279b14b7d54ca31c9824a5e0f8b7c9d11e738430fccbde00/gersemi-0.25.4.tar.gz"
+  sha256 "834b68e663f746d2c0af54bd9bd573ae02306b76be87ab180c52c05a1b403206"
   license "MPL-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "6f98f42c3ba8af19df31279bf7d490589fe0124087946956948cc92293a90aef"
-    sha256 cellar: :any,                 arm64_sequoia: "cf3932f1aa97ba0b048ff2db85a33aaad47f9112b7aaae14f305acf0c644bb45"
-    sha256 cellar: :any,                 arm64_sonoma:  "5172d48d61fbc622365bf846dd1a14296d26cddf4c8afff28cd274e59eb7f7aa"
-    sha256 cellar: :any,                 sonoma:        "6c0493068a327473b97668205a56798c9c21a491597dc21c40de5bb06c9ca526"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e2463ed7861195badb5c11438d4b06c02a7a28e26d51acc2a8be7e95ace67257"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b2c881558531fda60425a7e2ebff40338f4fca5444851fbc76105e659b873a4f"
+    sha256 cellar: :any,                 arm64_tahoe:   "a4a14a304bc6c31f83c293466580c90f6b7ef2d378d817a250a40d89b3eb3388"
+    sha256 cellar: :any,                 arm64_sequoia: "e89cc4677ceb0030d3987bee99a988603eefa1148e2e9a6a07cb1b13e029cea0"
+    sha256 cellar: :any,                 arm64_sonoma:  "34f8954545512ef8006e0f8084ba565f0527c1ed45d07433d7f5ca8e765a7be1"
+    sha256 cellar: :any,                 sonoma:        "156694580a2f961b53aee318a7e577e5c06f01707ccb28a8faae5162f0782b61"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c518ac2bd8270d607ddce1953aa1ef935c52bdb8054b3423938cf1c63964da0f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bb775d4be68f6aec722ef31f7496c3c231c657ce77a0e70926432d943e585645"
   end
 
+  depends_on "rust" => :build
   depends_on "libyaml"
   depends_on "python@3.14"
+
+  resource "ignore-python" do
+    url "https://files.pythonhosted.org/packages/5a/c1/39cfd73def936e6c9c06ae6227b314c90f7a57d725cf1cd15e3f576906c6/ignore_python-0.3.1.tar.gz"
+    sha256 "a9c691ca0f5002391fc10c7d8c29859d38594b4751a5eb43f95b5a9f7bda30bc"
+  end
 
   resource "lark" do
     url "https://files.pythonhosted.org/packages/da/34/28fff3ab31ccff1fd4f6c7c7b0ceb2b6968d8ea4950663eadcb5720591a0/lark-1.3.1.tar.gz"

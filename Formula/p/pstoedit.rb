@@ -1,36 +1,42 @@
 class Pstoedit < Formula
   desc "Convert PostScript and PDF files to editable vector graphics"
   homepage "http://www.pstoedit.net/"
-  url "https://downloads.sourceforge.net/project/pstoedit/pstoedit/4.02/pstoedit-4.02.tar.gz"
-  sha256 "5588b432d2c6b2ad9828b44915ea5813ff9a3a3312a41fa0de4c38ddac9df72f"
+  url "https://github.com/woglu/pstoedit/archive/refs/tags/v4.3.tar.gz"
+  sha256 "36dfdc79c750930dd57e2c4a4dee2a6ab1a1fe65cd8fc4dc047dbfb6f2cfa15b"
   license "GPL-2.0-or-later"
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
-    sha256 arm64_tahoe:   "e773007c11d92ed03d522da9acddabe00010345187e10dcf2b8921bdcac62cb4"
-    sha256 arm64_sequoia: "4577e541a3d69e7c9fdc3291b552e4cfb50a8a3603c080a3c2c2d1f9ea7e96a6"
-    sha256 arm64_sonoma:  "b17eff3c581194a6bf0290507456b75edbbad20cde4c01793cc9754425e59712"
-    sha256 arm64_ventura: "355cc44f552bd82c5cf39915449de0a4051eb2f9efba352323b87eb0403f15db"
-    sha256 sonoma:        "6353b2d9287a6e0524047a32cafb61f8c09d4d476d1bc13d40b73289aace060c"
-    sha256 ventura:       "bd4b577c2ed8b2f4c1b9ded0ed953365f445b29bff62e262caef589cb49d049c"
-    sha256 arm64_linux:   "ae82c51bc2186d4b32fa75d8b8bceff7bec7f2da0bf20c4cf51d669d0c5a4cec"
-    sha256 x86_64_linux:  "c2c8d0315852f2dca193e34433526f2635f9a8b3b6fd02ccca85646f92cbf56a"
+    rebuild 1
+    sha256 arm64_tahoe:   "71b16f3464e1314670842c663a4cfee626a740a6bc39f7ea6219cb7f21329fee"
+    sha256 arm64_sequoia: "fff1ed2e7e57c3852c5fe36c3908938d19ec278a852e1aa8ef48cc2a175c747c"
+    sha256 arm64_sonoma:  "2e0dd4ee1aeeb14214e8c313d0cbaceb1c2f0b89abb67ac6e56d1a23335ad9b3"
+    sha256 sonoma:        "80cd866453569577436a25984e996e66d45b8cf0b719c771bc25da182d92342d"
+    sha256 arm64_linux:   "c68b2fe60978946380b35dc59bf333c260dab5ac1fe3c6c17f75f4c6fbf52eb6"
+    sha256 x86_64_linux:  "9e40b2f416da1059d432772976a9782362d5911680ca6026c1af161ce9bc462e"
   end
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
   depends_on "pkgconf" => :build
+
   depends_on "gd"
   depends_on "ghostscript"
   depends_on "imagemagick"
+  depends_on "libzip"
   depends_on "plotutils"
 
   def install
-    # Avoid Linux libc-specific behavior when building on macOS
-    # Notified author about the issue via email
-    inreplace "src/pstoedit.cpp", "#ifndef _MSC_VER\n", "#if !defined(_MSC_VER) && !defined(__APPLE__)\n"
+    # Workaround for windows only header `io.h`
+    inreplace "src/drvsvg.cpp", "#include <io.h>", "#include <unistd.h>\n#include <fcntl.h>"
 
-    system "./configure", *std_configure_args
-    system "make", "install"
+    system "autoreconf", "--force", "--install", "--verbose"
+    system "./configure", "--enable-docs=no", *std_configure_args
+
+    # The GitHub release tarball does not ship the generated manpage (pstoedit.1),
+    # so building the doc/ subdir fails. Build/install only src/ and config/.
+    system "make", "-C", "src", "install"
+    system "make", "-C", "config", "install"
   end
 
   test do

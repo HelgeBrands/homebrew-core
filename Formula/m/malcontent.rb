@@ -1,18 +1,18 @@
 class Malcontent < Formula
   desc "Supply Chain Attack Detection, via context differential analysis and YARA"
   homepage "https://github.com/chainguard-dev/malcontent"
-  url "https://github.com/chainguard-dev/malcontent/archive/refs/tags/v1.18.2.tar.gz"
-  sha256 "c8a24ed7dca47f02f996ea1a820bb5fe4d9c6e4c43c6320d3a1a10914ced4f8e"
+  url "https://github.com/chainguard-dev/malcontent/archive/refs/tags/v1.20.5.tar.gz"
+  sha256 "cbea1c73f1bf262571ba42797a89fc47e0b51ebe7569f1d384cc195ddfb29b09"
   license "Apache-2.0"
   head "https://github.com/chainguard-dev/malcontent.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "e75427c566d2cabb5fe3b94ee51b0f59d99c15b2c6fc4c8168d92b6fa3cba642"
-    sha256 cellar: :any,                 arm64_sequoia: "9e8e0a6f6a1120ece44849a5613703e909a6e9a7d8dd9d808187d37d7c305717"
-    sha256 cellar: :any,                 arm64_sonoma:  "78a5fb6b8b7a044968b8c170848902061a6a8b37c4a7405b874286293cb616a1"
-    sha256 cellar: :any,                 sonoma:        "e24d14a8b999685e99eeac1157b5fc0b119bf9137dd181cf46c828c4e671a1b7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3691b34727b3dd929227fd1808222857be156d2fe1a93bd427fbbf8cc0174548"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9c0df57f13c115a2c14e7d72334f7c8413b0b417113f211a86adc3cf44ddb235"
+    sha256 cellar: :any,                 arm64_tahoe:   "9c0fef3aed136966f0ba7061a138693fdafda0d6adba73d6e8f23877d2092092"
+    sha256 cellar: :any,                 arm64_sequoia: "90dfe387aeb5ba8178b518eee20034dba07acee88684560aeb6f9ca8c489163a"
+    sha256 cellar: :any,                 arm64_sonoma:  "6e36f92b1e98177adc221947b3eb395bf64ae8925cdf397c4d3b1882d11c75b6"
+    sha256 cellar: :any,                 sonoma:        "551faf7b2a1b7617bbf9d0c31dd512447c4e845c9f5d12a430af0eb577ddb155"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a2769604060486e0f14d4a6a9c0b353031e2a310836471aeed505b95c17f6ef6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "03528b719cda3ff42ea486bb246e66ed76f78e0687dedcd6d365c6d5777ca36a"
   end
 
   depends_on "go" => :build

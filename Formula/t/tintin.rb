@@ -1,8 +1,8 @@
 class Tintin < Formula
   desc "MUD client"
   homepage "https://tintin.mudhalla.net/"
-  url "https://github.com/scandum/tintin/releases/download/2.02.51/tintin-2.02.51.tar.gz"
-  sha256 "9279f25d18defddf449863f4bad6ec971feacd297a9d9ddaac28c9b5d5eced02"
+  url "https://github.com/scandum/tintin/releases/download/2.02.61/tintin-2.02.61.tar.gz"
+  sha256 "640b4823b6f24ada6d417311bfd6263ab13be2422573c3b4ad4352223b535d88"
   license "GPL-3.0-or-later"
 
   livecheck do
@@ -11,18 +11,16 @@ class Tintin < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c79e4c05084a38e2dce0d540e32dad034ded6da9669f4351a8e1ee4f3f749bc5"
-    sha256 cellar: :any,                 arm64_sequoia: "c8410631e4b5913d30deff7f49b6c1f0b8e5d86b9aa894a61a5a61138ce4a8fe"
-    sha256 cellar: :any,                 arm64_sonoma:  "699fae6ad2d5b69edb8a966d22364e25c27485084d3c8a55d6b767680e4be03e"
-    sha256 cellar: :any,                 arm64_ventura: "27270803fb800ee49cd574dcbfa6a7d2e3dd18e4baf5a7d04107684421d15849"
-    sha256 cellar: :any,                 sonoma:        "39d054d89de62da4d8e05f4f85e33bcf7eaac2ac6ca5567138bc9b0dbf94b912"
-    sha256 cellar: :any,                 ventura:       "1bf5c897c70f625d4d2b115b832470b7ff7009caf600f03b4a6075fc66c1b813"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "12d800c80fab044fd6ac3cc2052516797095394b8e5e532e8e59c7a3bb0dd52f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "135f4682a04e95b104a5bcb6ac078c42bd87cc5c355a455c96d9ae796ce9d34a"
+    sha256 cellar: :any,                 arm64_tahoe:   "703ec5ebcc98c21a3d5d6b07ac46a6f9fa873424a5c4d3bb72099a99d70ed74a"
+    sha256 cellar: :any,                 arm64_sequoia: "45a2bd003f8af9e75652aa3eae618565b7d3855c64e27e959ce619503c50431d"
+    sha256 cellar: :any,                 arm64_sonoma:  "29db49a2c0495ee7f69d736d1175dc1629f6910647cb82ffaee82d36e32912d1"
+    sha256 cellar: :any,                 sonoma:        "0a26a3534747268cdb94ff00ca79f1bc82c60c4baf5511d339b58385bf70cabe"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "55c5da4c7f337551822f85be46322e99b3885db87d50df1ec4f3accdba33dea5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "be0a084d5f7c9bb8a0b273a4fd509c0ab115e5c8c7d1ffaa8e11911eae07149c"
   end
 
   depends_on "gnutls"
-  depends_on "pcre" # PCRE2 issue: https://github.com/scandum/tintin/issues/163
+  depends_on "pcre2"
 
   uses_from_macos "zlib"
 

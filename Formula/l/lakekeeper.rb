@@ -1,24 +1,26 @@
 class Lakekeeper < Formula
   desc "Apache Iceberg REST Catalog"
   homepage "https://github.com/lakekeeper/lakekeeper"
-  url "https://github.com/lakekeeper/lakekeeper/archive/refs/tags/v0.10.4.tar.gz"
-  sha256 "00c3fd4a22c7427805eea96a322168253ca55f6086e81ad6a0d04554b74b69c3"
+  url "https://github.com/lakekeeper/lakekeeper/archive/refs/tags/v0.11.2.tar.gz"
+  sha256 "d7487a517e8431063f4cc6aee01637b37402ceb4db7d8a05e1f1fc86d9b6c89e"
   license "Apache-2.0"
   head "https://github.com/lakekeeper/lakekeeper.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "a29657c2e8cf86736a47a1d81f2fb1f8d3e4c66bcf8523bd71970f5368aae810"
-    sha256 cellar: :any,                 arm64_sequoia: "1d7ba6534d0539fd25eb9081a33ea3646f7f1579ba2eae43b3c0442c64d01345"
-    sha256 cellar: :any,                 arm64_sonoma:  "04dd036525bf2972a9479129e6f9f4a91bf2bbab05a009f74cce5bc6b19da0a8"
-    sha256 cellar: :any,                 sonoma:        "63e2795f77e080d5fa64be57899f533866714a8b9b48ee1f34021cf4c8e16b40"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2125b8f42d464bd17c05e616326599b47cf83416cf592993f881cef87299d21e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6235743c9b0ea5c4154905ba4837f0ccc5ca906d074d43f063c3e6156df27e5b"
+    sha256 cellar: :any,                 arm64_tahoe:   "6f7271f10f1ec09aa7985c8d27f5a7d4d74aa9ef44473159c6b71904855e0f6c"
+    sha256 cellar: :any,                 arm64_sequoia: "f6d924e9624c18f32dc1774e22a95edc263f45e6dbc52c8bd4dbb960026f8de1"
+    sha256 cellar: :any,                 arm64_sonoma:  "ac3cf3735076050b4e5740b05d036d289f0c8d260ddf854f0c8dbb7a07edcec7"
+    sha256 cellar: :any,                 sonoma:        "cecaff2bd1aa57acaaacd56a16dc197127fa1fd8815d2ebf1700cd596a004448"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1e629ffb3d5e156c74a055068ccbeef84b02fbf3c99d0a3e6693f339525ae2e2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ca3e632b99ffc2205d7dbadc9250d47b64fa2f7593317259652c81ef65c93f71"
   end
 
   depends_on "cmake" => :build
   depends_on "rust" => :build
   depends_on "postgresql@18" => :test
   depends_on "openssl@3"
+
+  uses_from_macos "llvm" => :build # for libclang
 
   def install
     # Ensure that the `openssl` crate picks up the intended library.

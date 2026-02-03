@@ -1,18 +1,18 @@
 class HarborCli < Formula
   desc "CLI for Harbor container registry"
   homepage "https://github.com/goharbor/harbor-cli"
-  url "https://github.com/goharbor/harbor-cli/archive/refs/tags/v0.0.15.tar.gz"
-  sha256 "f7323306672e4b1cf88152e6293e95faa42a410d8cbf1bec7b2adb0d27994101"
+  url "https://github.com/goharbor/harbor-cli/archive/refs/tags/v0.0.16.tar.gz"
+  sha256 "10324b3171def7a47de3bfd9a4169153162809c252a24319ae3fb53a6cc52a95"
   license "Apache-2.0"
   head "https://github.com/goharbor/harbor-cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e78a24b1c8308b67e46f19a9df083a6253e4a33d13df18e35d3a23bdf79043eb"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e78a24b1c8308b67e46f19a9df083a6253e4a33d13df18e35d3a23bdf79043eb"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e78a24b1c8308b67e46f19a9df083a6253e4a33d13df18e35d3a23bdf79043eb"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e5da3257ca34c7b9035ae893aac44ce75a1abb8ac92f4255e71cb8dd7b8c35af"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "54f5ae8e66d99a8f9c43412d709b3d159e885a509e3fb3b40216c4b0c7462ac8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9c2af0b68ae68bbee178472b06c2b9bda57655c0df2dccd4c7ef90cf075bda54"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e84f204e42b97b5bddd25bae37fb1162e9fbd975dcc80a0bef7f96bb16225c1d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e84f204e42b97b5bddd25bae37fb1162e9fbd975dcc80a0bef7f96bb16225c1d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e84f204e42b97b5bddd25bae37fb1162e9fbd975dcc80a0bef7f96bb16225c1d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f400826defea52348d021cccc0107713691ad88c53b8b1ac7529e4567c33389d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "1d517c11548f1c5579e8553c6e65245b899258193994d681025f4107b5973038"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "753a9f4811330dde575c4ccce57c9bd2011cf243047b2bbbbbbe6f1553042842"
   end
 
   depends_on "go" => :build
@@ -27,7 +27,7 @@ class HarborCli < Formula
     ]
     system "go", "build", *std_go_args(ldflags:, output: bin/"harbor"), "./cmd/harbor"
 
-    generate_completions_from_executable(bin/"harbor", "completion", shells: [:bash, :zsh, :fish, :pwsh])
+    generate_completions_from_executable(bin/"harbor", shell_parameter_format: :cobra)
   end
 
   test do

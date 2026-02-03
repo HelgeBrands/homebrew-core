@@ -5,28 +5,21 @@ class Ruby < Formula
   head "https://github.com/ruby/ruby.git", branch: "master"
 
   stable do
-    # Consider changing the default of `Gem.default_user_install` to true with Ruby 3.5.
-    # This may depend on https://github.com/rubygems/rubygems/issues/5682.
-    url "https://cache.ruby-lang.org/pub/ruby/3.4/ruby-3.4.7.tar.gz"
-    sha256 "23815a6d095696f7919090fdc3e2f9459b2c83d57224b2e446ce1f5f7333ef36"
+    # TODO: enable default_user_install when updating to Ruby 4.1
+    url "https://cache.ruby-lang.org/pub/ruby/4.0/ruby-4.0.1.tar.gz"
+    sha256 "3924be2d05db30f4e35f859bf028be85f4b7dd01714142fd823e4af5de2faf9d"
 
     # Should be updated only when Ruby is updated (if an update is available).
     # The exception is Rubygem security fixes, which mandate updating this
     # formula & the versioned equivalents and bumping the revisions.
     resource "rubygems" do
-      url "https://rubygems.org/rubygems/rubygems-3.7.2.tgz"
-      sha256 "efece01225a532f4b52cf8764d20a00e0d29ed6f85b33d9302df4896a90fa5ab"
+      url "https://rubygems.org/rubygems/rubygems-4.0.3.tgz"
+      sha256 "f5f728a40603773eec1a5c0857693485e7a118619f6ae70dcece6c2e719129a0"
 
       livecheck do
         url "https://rubygems.org/pages/download"
         regex(/href=.*?rubygems[._-]v?(\d+(?:\.\d+)+)\.t/i)
       end
-    end
-
-    # Update the bundled openssl gem for compatibility with OpenSSL 3.6+
-    resource "openssl" do
-      url "https://github.com/ruby/openssl/archive/refs/tags/v3.3.1.tar.gz"
-      sha256 "ca9b8f5940153e67b0d5e7e075ecd64b9d28b9f9b2f2c9f0748c1538734dfe10"
     end
   end
 
@@ -36,12 +29,12 @@ class Ruby < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "fd5bd616bde3e6620a727de2ac4846af1a844de3fc4bd2be0be8da5ea37c8cea"
-    sha256 arm64_sequoia: "c2e6a5b6e46e28ff6fb34295146ee09cb2f4d461cbb3d43b9e3f38faac6ce2bc"
-    sha256 arm64_sonoma:  "f7a70bf109409b25cc7078f63eeb30bda4b79cdb6f65a04a6eaaa119382d0719"
-    sha256 sonoma:        "39a1a9c6b5027fa1c9d2ccd8ef43bce3691af2092df7ffc5dcab2eff8f91dc76"
-    sha256 arm64_linux:   "8effd59d391a4fa6b5f2a14b8c3250b8d306da641278788a3cc64d15d6876b30"
-    sha256 x86_64_linux:  "cb6a3b60667918b8615997e17583b00c9bf62dacd9e3a747738c91b11953929a"
+    sha256 arm64_tahoe:   "0f6a59a8949a3d4ad2c35807f374d4792283345e9cc69a1f12ddb5993d23d0d3"
+    sha256 arm64_sequoia: "ea90ab0003a47defd79647ef1b8002adc152eaabf639040fb7057aeb95926ac1"
+    sha256 arm64_sonoma:  "41321b9d5893e3d67102e9d514052d72bab4d713bd3d279b2458d34a6fac33d1"
+    sha256 sonoma:        "c78fa581f759b2b5bc58efcc7d1a81750a754158cc325a548ff463ab7a951744"
+    sha256 arm64_linux:   "f1aebc9f58955ee8a1721b34a7e085566d3447e2fee350adfaef36a7fd0839a2"
+    sha256 x86_64_linux:  "eb763f349d519ac1d5f7893228be8298667939ef78c631858eb4bbba43ce4083"
   end
 
   keg_only :provided_by_macos
@@ -79,17 +72,6 @@ class Ruby < Formula
   end
 
   def install
-    if build.stable?
-      openssl_gem_version = File.read("ext/openssl/openssl.gemspec")[/spec\.version\s*=\s*"(\d+(?:\.\d+)+)/, 1]
-      odie "Remove openssl resource!" if Version.new(openssl_gem_version) >= "3.3.1"
-      rm_r(%w[ext/openssl test/openssl])
-      resource("openssl").stage do
-        (buildpath/"ext").install "ext/openssl"
-        (buildpath/"ext/openssl").install "lib", "History.md", "openssl.gemspec"
-        (buildpath/"test").install "test/openssl"
-      end
-    end
-
     # otherwise `gem` command breaks
     ENV.delete("SDKROOT")
 
@@ -189,6 +171,7 @@ class Ruby < Formula
     config_file.write rubygems_config
   end
 
+  # TODO: remove when enabling default_user_install
   def post_install
     # Since Gem ships Bundle we want to provide that full/expected installation
     # but to do so we need to handle the case where someone has previously
@@ -210,6 +193,14 @@ class Ruby < Formula
           alias :old_ruby :ruby
           alias :old_default_specifications_dir :default_specifications_dir
         end
+
+        # TODO: enable this with Ruby 4.1
+        #
+        # def self.default_user_install
+        #   return true unless ENV.key?("GEM_HOME")
+        #
+        #   false
+        # end
 
         def self.default_dir
           path = [
@@ -274,6 +265,7 @@ class Ruby < Formula
   end
 
   def caveats
+    # TODO: update path when enabling `Gem.default_user_install`
     <<~EOS
       By default, binaries installed by gem will be placed into:
         #{rubygems_bindir}
@@ -291,10 +283,10 @@ class Ruby < Formula
     ENV["GEM_HOME"] = testpath
     system bin/"gem", "install", "json"
 
-    (testpath/"Gemfile").write <<~EOS
+    (testpath/"Gemfile").write <<~RUBY
       source 'https://rubygems.org'
       gem 'github-markup'
-    EOS
+    RUBY
     system bin/"bundle", "exec", "ls" # https://github.com/Homebrew/homebrew-core/issues/53247
     system bin/"bundle", "install", "--binstubs=#{testpath}/bin"
     assert_path_exists testpath/"bin/github-markup", "github-markup is not installed in #{testpath}/bin"

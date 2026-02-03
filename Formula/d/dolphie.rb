@@ -3,18 +3,17 @@ class Dolphie < Formula
 
   desc "Feature-rich top tool for monitoring MySQL"
   homepage "https://github.com/charles-001/dolphie"
-  url "https://files.pythonhosted.org/packages/7b/9f/a4f1388772174c3013c668ecfed626a4fbaddbae9546ff28258fc9506efe/dolphie-6.10.6.tar.gz"
-  sha256 "fbfd0a11bd7b570b653107d293999da38a6c69bb3b70199088c64978baa253f1"
+  url "https://files.pythonhosted.org/packages/fb/39/a44bd83ed3d5fc561415fd05d2b5d07f35f766e6b6cc40201f18c36132cf/dolphie-6.11.4.tar.gz"
+  sha256 "9385534c2a5fe5b65ed5cb8b153abd751c366d04d31c728b580b7a4374b2d110"
   license "GPL-3.0-or-later"
-  revision 1
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "bd60a4f346deb316d7e118a306797cf98272b48bdcd654082c2387dc6006f9e1"
-    sha256 cellar: :any,                 arm64_sequoia: "60ef13f6bfd15f182809deb9fad54be0daea4d7dd10b761dada2e9b8c90bffe1"
-    sha256 cellar: :any,                 arm64_sonoma:  "e5cf507a04b162d1cc9bee29631fb40b58c769b2df2baacd1ef6f472a39324c8"
-    sha256 cellar: :any,                 sonoma:        "f6efcfa24699d9e6891d3c5f17a922fff09bd6d412f49d6efc13f1166aa34234"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b2a1a4213ec924159ae748ee75f5506ddea9e255f8c327a230e812d9d9df3e17"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f0ce3f1d9f87eb077361caefd2ed81e4d00a7a417c68abead7b4d7304f4dead2"
+    sha256 cellar: :any,                 arm64_tahoe:   "73978ef13c70c5071e093208e4ea69c9391b3c28a8cf40afe650fe114ddc336a"
+    sha256 cellar: :any,                 arm64_sequoia: "81c97577f43f4311d05c52834a0e176ae34b2699c99c6859e50802c9c1d673fd"
+    sha256 cellar: :any,                 arm64_sonoma:  "d2b5432b43a222b325bbfcbea5f84d8a1736c521fea55f29df8f2a0c833047f0"
+    sha256 cellar: :any,                 sonoma:        "9f5c7e29fe3a4691807485655182f6a8b194f60edf6e3f25dc3bf2a11eea15b6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d69a0874cf52561bd1ef91efc2765c4afd2c02e2120c260183bd331a805f8689"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "68c3f39493ba521d2ae07a5020a7421d5b5e2616d0d122e9fa3ef6677602c153"
   end
 
   depends_on "rust" => :build # for orjson
@@ -65,8 +64,8 @@ class Dolphie < Formula
   end
 
   resource "orjson" do
-    url "https://files.pythonhosted.org/packages/c6/fe/ed708782d6709cc60eb4c2d8a361a440661f74134675c72990f2c48c785f/orjson-3.11.4.tar.gz"
-    sha256 "39485f4ab4c9b30a3943cfe99e1a213c4776fb69e8abd68f66b83d5a0b0fdc6d"
+    url "https://files.pythonhosted.org/packages/04/b8/333fdb27840f3bf04022d21b654a35f58e15407183aeb16f3b41aa053446/orjson-3.11.5.tar.gz"
+    sha256 "82393ab47b4fe44ffd0a7659fa9cfaacc717eb617c93cde83795f14af5c2e9d5"
   end
 
   resource "packaging" do
@@ -85,8 +84,8 @@ class Dolphie < Formula
   end
 
   resource "psutil" do
-    url "https://files.pythonhosted.org/packages/e1/88/bdd0a41e5857d5d703287598cbf08dad90aed56774ea52ae071bae9071b6/psutil-7.1.3.tar.gz"
-    sha256 "6c86281738d77335af7aec228328e944b30930899ea760ecf33a4dba66be5e74"
+    url "https://files.pythonhosted.org/packages/73/cb/09e5184fb5fc0358d110fc3ca7f6b1d033800734d34cac10f4136cfac10e/psutil-7.2.1.tar.gz"
+    sha256 "f7583aec590485b43ca601dd9cea0dcd65bd7bb21d30ef4ddbf4ea6b5ed1bdd3"
   end
 
   resource "pygments" do
@@ -110,13 +109,13 @@ class Dolphie < Formula
   end
 
   resource "sqlparse" do
-    url "https://files.pythonhosted.org/packages/18/67/701f86b28d63b2086de47c942eccf8ca2208b3be69715a1119a4e384415a/sqlparse-0.5.4.tar.gz"
-    sha256 "4396a7d3cf1cd679c1be976cf3dc6e0a51d0111e87787e7a8d780e7d5a998f9e"
+    url "https://files.pythonhosted.org/packages/90/76/437d71068094df0726366574cf3432a4ed754217b436eb7429415cf2d480/sqlparse-0.5.5.tar.gz"
+    sha256 "e20d4a9b0b8585fdf63b10d30066c7c94c5d7a7ec47c889a2d83a3caa93ff28e"
   end
 
   resource "textual" do
-    url "https://files.pythonhosted.org/packages/ab/00/9520327698acb6d8ae120b311ef1901840d55a6c41580e377f36261daf7a/textual-6.7.1.tar.gz"
-    sha256 "2a5acb0ab316a7ba9e74b0a291fab8933d681d7cf6f4e1eeb45c39a731b094cf"
+    url "https://files.pythonhosted.org/packages/39/55/29416ef63de4c37b37da217b94439a28496a4dc585209f5bf1437a61d120/textual-6.12.0.tar.gz"
+    sha256 "a32e8edbf6abdb0c42d486e96bdf419eb3aa378edb1b1271b84637f3dbd64c73"
   end
 
   resource "typing-extensions" do
@@ -130,8 +129,8 @@ class Dolphie < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "zstandard" do
@@ -148,10 +147,6 @@ class Dolphie < Formula
   end
 
   test do
-    # Fails in Linux CI with "ParseError: end of file reached"
-    # See https://github.com/Homebrew/homebrew-core/pull/152912#issuecomment-1787257320
-    return if OS.linux? && ENV["HOMEBREW_GITHUB_ACTIONS"]
-
     output = shell_output("#{bin}/dolphie mysql://user:password@host:port 2>&1")
     assert_match "Invalid URI: Port could not be cast to integer value as 'port'", output
 

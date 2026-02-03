@@ -2,18 +2,18 @@ class GolangciLint < Formula
   desc "Fast linters runner for Go"
   homepage "https://golangci-lint.run/"
   url "https://github.com/golangci/golangci-lint.git",
-      tag:      "v2.7.2",
-      revision: "9f61b0f53f80672872fced07b6874397c3ed197b"
+      tag:      "v2.8.0",
+      revision: "e2e40021c9007020676c93680a36e3ab06c6cd33"
   license "GPL-3.0-only"
   head "https://github.com/golangci/golangci-lint.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c72569b2643ab9ee31ee9a44a11dee6abcd6ac6d5ab1b0af573cfd6bb921b356"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d330bf7c9dfd556a1ec0e928c71406ce65b5e47cf206171698965c7cedd423f7"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9c553a929ddb7d3a96232177ea76fecfaa5e9f31a70097e490247cfe8b1e102a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "3f40f13f6f5f3a556c18a657f83a34c1f017581b54d26b7c3a88204166335cf7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a3bef1765b5963d77d0f75138341da616c88ca4d44b7f80c576252cb22f11b9b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9bd9a868dfc3f40226b69018000ba2076285a112895ea44a43787af1e0ed6022"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "48a1896101fccaf8eb0e499fa57cfbccccd9bcbd02dac1e21f8588fd62db1d7f"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "27b696d692604a802cb4e854af48cf63b84f90f1a57fdcf4492cccbb32728edd"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9ccc525927eeb9b9a4818ab08de8afc24cbaeb0a36d3e8b229c534a1c401361d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b7e19fc5c021c8221b8a4e659289447a131505c21cd94f467c396a097aaae94f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "96e0a07ed2009f86e638aff478ffcd1ee0b2a07557a7e08dd9bbe0e94f2c991c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e1a68dffae26d225a535a75814790c762750b5e3706ea90643e7ebbaa446db0a"
   end
 
   depends_on "go"
@@ -28,7 +28,7 @@ class GolangciLint < Formula
 
     system "go", "build", *std_go_args(ldflags:), "./cmd/golangci-lint"
 
-    generate_completions_from_executable(bin/"golangci-lint", "completion")
+    generate_completions_from_executable(bin/"golangci-lint", shell_parameter_format: :cobra)
   end
 
   test do

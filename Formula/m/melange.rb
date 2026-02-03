@@ -1,8 +1,8 @@
 class Melange < Formula
   desc "Build APKs from source code"
   homepage "https://github.com/chainguard-dev/melange"
-  url "https://github.com/chainguard-dev/melange/archive/refs/tags/v0.36.0.tar.gz"
-  sha256 "332826264d8e895e5aa77d6e2b6ec146d551b88409f1e1b7d72d3df1e682d03a"
+  url "https://github.com/chainguard-dev/melange/archive/refs/tags/v0.40.4.tar.gz"
+  sha256 "01f054d49e75f1bcd815d6a3881cd56be1c2fb6329ac6ba2de41fada2e06341e"
   license "Apache-2.0"
   head "https://github.com/chainguard-dev/melange.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Melange < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "77a5e545eed1807e68d345d974aa7c7a74f3104c232bf045ab11e09c9de5f0f1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3c830ad44e12fbce450ba2f1aa56843d454c958e811bb812e62dfafe681f42fc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d9f84d5f2cbae95b20e3ddedf2d761ae468e4f64661be0b4bb6ffd5748444904"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b796f5b19fd30b1593a8d0a02c64269e99827b635dbfb8f194e94fad596b7828"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a2e69d19a4b5873cfa29414ca8a8f3af3084d6b227ec42d8907e124133a7c21c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e2ce25ed525d92703db5907e41b200968f1d7f31e829f16cfd4ad76e75429272"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bcca2d1ea4b76afa0581d5a72af4c7500b25e57530c115d63c16ac188f01b40e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c1ac2239ed99bc8f0e50a1fefcfa7723c24a1653708173c3784d3e580759a02a"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "952375ed01c8d77f326dc9d41f50f5a11d331758979c5a10226b46e7b7e71f6b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9b6dbf933a7b9d49ce98bf48f5c505321f38114ffd930a5584ab34e492a74b13"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7cc599ed33d4d4d2af37befb29be5e846a2f4543eaf8644be55e804f18cedaa4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a689ff4fc7d8d91b3795e1048f4608d9cb5fb68da740e83b0e204bd3962c6cc0"
   end
 
   depends_on "go" => :build
@@ -32,7 +32,7 @@ class Melange < Formula
     ]
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"melange", "completion")
+    generate_completions_from_executable(bin/"melange", shell_parameter_format: :cobra)
   end
 
   test do

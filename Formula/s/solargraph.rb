@@ -3,22 +3,23 @@ class Solargraph < Formula
   homepage "https://solargraph.org"
   # Must be git, because solargraph.gemspec uses git ls-files
   url "https://github.com/castwide/solargraph.git",
-      tag:      "v0.57.0",
-      revision: "9c707a291291ef6b86a030bca80b92b4cc3de7d0"
+      tag:      "v0.58.2",
+      revision: "676da4c4cec040d735a9a54265c91dc91ec462bb"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "da52af7a6bfc1dbead71eca2fde7908c2faa2b388151aec229d40ac1a6a091bd"
-    sha256 cellar: :any,                 arm64_sequoia: "b5206d19e035110287f74c4cef7e113c70b23bf0d12087c0d74eea355d61364e"
-    sha256 cellar: :any,                 arm64_sonoma:  "7a05aa840993a08073ba901e7977f285aae32d90162a3e10bf80612475c5cb18"
-    sha256 cellar: :any,                 sonoma:        "50fc5d9a0676cbca78cab5c86b8028c6200adf9c92e950c00472d810b9a8fa8b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d806c1ebe2389b5067f09558153aed3453abfc6fd45233f7d81b191c2a8a1149"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b8c9f63702530f99129b29adcb133824d55f02d491315fe04c68ae0240a08fdd"
+    sha256 cellar: :any,                 arm64_tahoe:   "de2b5ae2215048580bee20fcf06f997308802199b744b0f1044577eea79ddaa5"
+    sha256 cellar: :any,                 arm64_sequoia: "41a456516443f9280bcbdf08ee6bc5369aa5d31b4f4f56f1a5b85e8d4d81f7d6"
+    sha256 cellar: :any,                 arm64_sonoma:  "20c3023c9fbfbf468e1bbb37abceeb6373244155b2759e01cea255c8e4deaa1d"
+    sha256 cellar: :any,                 sonoma:        "1ed7f4fbdecf7262acffd74d020a188616f0cf36a0f89e93fbc2d84bacc70e58"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "90ab5950530d16e54f51ad731ce5235b2b187f749a02afe7891a39b4cad713e2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "70e8460037225569d5269a99511eeee2dd0c145ce41caed6114bbb8a6f83c356"
   end
 
-  depends_on "ruby" # Requires >= Ruby 2.7
-
+  depends_on "ruby"
   depends_on "xz"
+
+  uses_from_macos "zlib"
 
   def install
     ENV["GEM_HOME"] = libexec

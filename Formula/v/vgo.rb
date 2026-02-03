@@ -1,18 +1,18 @@
 class Vgo < Formula
   desc "Project scaffolder for Go, written in Go"
   homepage "https://github.com/vg006/vgo"
-  url "https://github.com/vg006/vgo/archive/refs/tags/v0.2.0.tar.gz"
-  sha256 "3a2fee499c91225f2abe1acdb8a640560cda6f4364f4b1aff04756d8ada6282d"
+  url "https://github.com/vg006/vgo/archive/refs/tags/v0.3.0.tar.gz"
+  sha256 "262ab18eb8e2f68031e17727c1c8b0e01e61c385dcd7addbd2c1ae86ecd312b4"
   license "MIT"
   head "https://github.com/vg006/vgo.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "625060653e73c0e996276bc83f4f6dfc586c10739248ea167e296ef4d1212d64"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "625060653e73c0e996276bc83f4f6dfc586c10739248ea167e296ef4d1212d64"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "625060653e73c0e996276bc83f4f6dfc586c10739248ea167e296ef4d1212d64"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ed465eb32ba71c56fbb1f2430e89f8db84230a825ea361a7332d622065be2ee0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c9544aa949090a4777ed45e28cb84512c712899bb7d2f512e4629174e261a3f0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "00919354e85aa7eabe2a62e05f80e9704ec285193c5caf5a5a752d26af38084f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ff3f68e2c54740a2b3cdd2074e33ba392fc4d4398c7ab77c441f96b5294cd4dc"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ff3f68e2c54740a2b3cdd2074e33ba392fc4d4398c7ab77c441f96b5294cd4dc"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ff3f68e2c54740a2b3cdd2074e33ba392fc4d4398c7ab77c441f96b5294cd4dc"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f1f6d163d6dc4217b8501804008210bdba10fd415b31112d4d78da74e351219a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7d885ec1ff53867945a651083c1c1db6b0aa08fb5eef94f4bf05e47fa65e64b4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2ea7f580c8df4839b99a44f522001776ec0dba68b005afff0b08cc567aafbdd1"
   end
 
   depends_on "go" => :build
@@ -20,7 +20,7 @@ class Vgo < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w")
 
-    generate_completions_from_executable(bin/"vgo", "completion")
+    generate_completions_from_executable(bin/"vgo", shell_parameter_format: :cobra)
   end
 
   test do

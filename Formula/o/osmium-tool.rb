@@ -1,21 +1,17 @@
 class OsmiumTool < Formula
   desc "Libosmium-based command-line tool for processing OpenStreetMap data"
   homepage "https://osmcode.org/osmium-tool/"
-  url "https://github.com/osmcode/osmium-tool/archive/refs/tags/v1.18.0.tar.gz"
-  sha256 "5438f57043c9df05137ca4bd1b1e4a5fb1c9c8c49cb4bec43a5f1ef30ed68fb5"
+  url "https://github.com/osmcode/osmium-tool/archive/refs/tags/v1.19.0.tar.gz"
+  sha256 "192713eef894735cf2d0dbeed3f8def67c067198e553de01d4a1f14417a64019"
   license "GPL-3.0-or-later"
-  revision 2
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "39ab8848b7d3cd170e244d6b41e8c7f367331f25f6cf3fa32f68d64679f9a001"
-    sha256 cellar: :any,                 arm64_sequoia: "b886fcf15d6f433f85d93af8b7b5e50d28ab7d65ebf0db6fa25988fad440c248"
-    sha256 cellar: :any,                 arm64_sonoma:  "5b609383ae13cdd88a464a02f49edd29eccc95dd1fa7cdb3f1f3eb217e80c259"
-    sha256 cellar: :any,                 arm64_ventura: "e91c59db15ddbd9abd1a82d3245e8673e405ee9bb4294a94802bd93785e13dd1"
-    sha256 cellar: :any,                 sonoma:        "834c9965363b4920ae4d7ff2b53dafd9a9707cd489a56e5fe0b9212c8407ec24"
-    sha256 cellar: :any,                 ventura:       "af40e84b8362633d1e8b37e74b89c61bddac06254ee548fed4d53d535f989043"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f1d278d2df1034fbdb2e72a6fefa9e6cb7c2fe6e885040782d5179302f167b84"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9866803a6ed76ff8ea79186e180b44fe9c81d3c8fbc904bbbffe5e32a90cab20"
+    sha256 cellar: :any,                 arm64_tahoe:   "bc1baa5dd5df76da0e60f58ab7aeca9dcc6777db4a17e0dfb504bacc257d9244"
+    sha256 cellar: :any,                 arm64_sequoia: "e57e2cba4963d12d94581a3a36a4c72da6cb1d525424fcb453b7fd0aaed010a2"
+    sha256 cellar: :any,                 arm64_sonoma:  "fc65c6b56db4e2d6c82c11aceede8839433d417cb1e03db37f7ce60c99cc046d"
+    sha256 cellar: :any,                 sonoma:        "4ef02a031522ff53efdf941b319ac1f6cc87e03cb2f90f3955c642ab4c594bdc"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4a7b8de027ed75631ab6ed95bf5d49f64ec865f863cf1f52bd036cdd55299b74"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5df231e42fafe4d7e276c602219adce1c84ac38e536871af96322730caa7f795"
   end
 
   depends_on "cmake" => :build

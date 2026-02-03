@@ -1,18 +1,18 @@
 class Sttr < Formula
   desc "CLI to perform various operations on string"
   homepage "https://github.com/abhimanyu003/sttr"
-  url "https://github.com/abhimanyu003/sttr/archive/refs/tags/v0.2.28.tar.gz"
-  sha256 "c0b5d8fac3d126178f7ec197567eb54566f35faa5d6f3f6d3b67c76197a56691"
+  url "https://github.com/abhimanyu003/sttr/archive/refs/tags/v0.2.30.tar.gz"
+  sha256 "64c4ddd6f84c99f197053e96c489dea48c0bd83a33dfdd69ab209653bc38b9c8"
   license "MIT"
   head "https://github.com/abhimanyu003/sttr.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8f1be1d2a7eb9477f196fcfb5ffe0c8024a39a8852ed3958bc97a3fa09e679cf"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8f1be1d2a7eb9477f196fcfb5ffe0c8024a39a8852ed3958bc97a3fa09e679cf"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8f1be1d2a7eb9477f196fcfb5ffe0c8024a39a8852ed3958bc97a3fa09e679cf"
-    sha256 cellar: :any_skip_relocation, sonoma:        "2a3fd1aa69df4461a58bdbd86ff2c8bcd4baf2e4f7e97e2eb172002c17e8408d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "332f5e9d7051c1a09123d7132a408d46451a63d2430ee88ce8fd81409d3cc4fb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "98f1e5d2d185559e9f9072fc6e11cbcf29ac4925591b5397ae274662c1d8266f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a1fabf7a53aab3e69a2b42a474f524143bf15bf5f2a448fd6bb5aaceff8eff52"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a1fabf7a53aab3e69a2b42a474f524143bf15bf5f2a448fd6bb5aaceff8eff52"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a1fabf7a53aab3e69a2b42a474f524143bf15bf5f2a448fd6bb5aaceff8eff52"
+    sha256 cellar: :any_skip_relocation, sonoma:        "eff47c0cfbea20e7735f4187b0034c20ae1e833f4f3fff832b9409a57412d7a5"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "66489b5018db928761078bcfaf11c87ad3ea74e981943fbb53af7c06e684f296"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8a3c432bf1cb5babeb063aafc6a8f468f02b9c801724369058e675105dc22a09"
   end
 
   depends_on "go" => :build

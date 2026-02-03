@@ -1,8 +1,8 @@
 class Feluda < Formula
   desc "Detect license usage restrictions in your project"
   homepage "https://github.com/anistark/feluda"
-  url "https://github.com/anistark/feluda/archive/refs/tags/v1.10.3.tar.gz"
-  sha256 "c78b3511e09ea3681eeaac5bf84a128dfcea594d0af4d4b2ea8cbd6ae3ece74c"
+  url "https://github.com/anistark/feluda/archive/refs/tags/v1.11.1.tar.gz"
+  sha256 "2a869288fec7f6edad343aca29571215c94e7b47eba93e93dfb9f3ada8ede2e3"
   license "MIT"
   head "https://github.com/anistark/feluda.git", branch: "main"
 
@@ -15,12 +15,12 @@ class Feluda < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "cd19318e96fae63e531b77fe85d12bb8e40eef2b9d312877b5456dc192ad8e99"
-    sha256 cellar: :any,                 arm64_sequoia: "85a73cc0b5e89eb4faf1106e2dcfbf7a91ea209bfeeb0121feca711d9f3a6b17"
-    sha256 cellar: :any,                 arm64_sonoma:  "c3877bb3fe92ac0d0768e6a6acf524370b65bedbd122eb96cd2413c5975c39c4"
-    sha256 cellar: :any,                 sonoma:        "93ea9c385e42f5521d55c91752e19892d0eac93be267567635bba93ebf2365c5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cffe5b12991b6e80ee4a06ed22b0a6ce9eaac1dfc4f722a4a4cdf839c230cb0e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9aaa05c7034ac1a3a5dc5348aad55447f8d2bf8458223944aa0d9160ede0137d"
+    sha256 cellar: :any,                 arm64_tahoe:   "c5a79e16db9aaecf862c615a7685d40670b76b467e7647c7b2066b7422b0c26b"
+    sha256 cellar: :any,                 arm64_sequoia: "11b51281849d161059d2764ad69ec67b6f6b2ccee27c510dc8ae7a00f91f8113"
+    sha256 cellar: :any,                 arm64_sonoma:  "1ce8fb8e97f2cabad02bc52c18bedf9e59e9598206038fcb03f20dfff8864284"
+    sha256 cellar: :any,                 sonoma:        "edddc53a133468675c3cb6b7884cf6e42c9dec9cde8974b633bfd9417b84c450"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "efb0d80afc80d70bc034a675add404fe998cf76ecf14f2291316172df317c4f4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0efdb784efdc278b3568b01d301d79cfbc6226216079133e746f910523249e27"
   end
 
   depends_on "pkgconf" => :build

@@ -1,18 +1,18 @@
 class Egctl < Formula
   desc "Command-line utility for operating Envoy Gateway"
   homepage "https://gateway.envoyproxy.io/"
-  url "https://github.com/envoyproxy/gateway/archive/refs/tags/v1.6.1.tar.gz"
-  sha256 "d09f115adc7ce19fda7073b82f771858c9b48c4a92830e985de0832dbe2b3963"
+  url "https://github.com/envoyproxy/gateway/archive/refs/tags/v1.6.3.tar.gz"
+  sha256 "aeb5d0f9f869f19836947bb03187abd3b3bebf58f20cf1c52b6a3f9b0510a384"
   license "Apache-2.0"
   head "https://github.com/envoyproxy/gateway.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e4ee6943fc711a6d433dec1264dd187a6945dd9d6baedf3010f960db54d5d0ec"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3609fb5a6ab4a3a52e78aa33f340bc981bed2fe1b286ee8ec5b094dd2056a119"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ef0f135be34d827cb733d7f82e2b1d16ee669041514602001b692cefb7324cc9"
-    sha256 cellar: :any_skip_relocation, sonoma:        "7d046c8b33e63495267198432a7e5cab9d43a265e5fd9c4a9c32fdae6494357f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a121ab88934e572a47d1a8ad17a15a622ed244b7b4e70a702ef575cc4dc53000"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "693f2ca4e3e30d119d6fc09b174a82fa443626a839fc0d773f9dde444643eaf5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "74bcfaeaf49698c4ccee6fe612ed76df5216abfbe7ac1e8a8bd642ae5b9efa82"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b393280517bff82a4a84acb118260c772b98a94bae6f9d21bcbbc781d53215b3"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0b58809b2aaee626dab9ffa84228b0f758b16fdf9379382b395eccd25fbb8e3b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9d3baf5118202c0557f9d984e4634aaaf6bbfc9e876c49606428019490679b61"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "190add40ffb29614f4ba51aacafcd598ef27871fd4f9db5733ac25e83423c7e0"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5e301e06f16506193dda54d901bed0c2a4d27081d1256021eaae24ee4a1ebc4f"
   end
 
   depends_on "go" => :build
@@ -29,7 +29,7 @@ class Egctl < Formula
     ]
     system "go", "build", *std_go_args(ldflags:), "./cmd/egctl"
 
-    generate_completions_from_executable(bin/"egctl", "completion")
+    generate_completions_from_executable(bin/"egctl", shell_parameter_format: :cobra)
   end
 
   test do

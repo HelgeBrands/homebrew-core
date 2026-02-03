@@ -1,19 +1,18 @@
 class Nzbget < Formula
   desc "Binary newsgrabber for nzb files"
   homepage "https://nzbget.com"
-  url "https://github.com/nzbgetcom/nzbget/archive/refs/tags/v25.4.tar.gz"
-  sha256 "2603116ffaef4992621cf7a82ce300f41a676a312de784f2bac5058abc1a2385"
+  url "https://github.com/nzbgetcom/nzbget/archive/refs/tags/v26.0.tar.gz"
+  sha256 "9b683ce96d7a2e5e702a169e3fbfd16824cfe0ce8ed887c76cc25a574f69c9cd"
   license "GPL-2.0-or-later"
-  revision 1
   head "https://github.com/nzbgetcom/nzbget.git", branch: "develop"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "d58d5e02c13187de9e65cd6d35120b1611433af868cf679671dd88857a388a91"
-    sha256 cellar: :any,                 arm64_sequoia: "557f35ed33c1b601a460529ee647920add29173737393db95b1ce162b9105df4"
-    sha256 cellar: :any,                 arm64_sonoma:  "5f500e14b4eb1daa87f1ecd30acd5975f070518fc80068c696163fd1a5fbc560"
-    sha256                               sonoma:        "c6eefaf0b485757b8557105179aed95b178423fab5aaa42f783408e6c614df4c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "dc9d8d51be52ecdde34f047d3b6dc171596305e911d7926f858341add9415c8b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f841f60ac2ac0a4e8b23ac2b4cd837fe6be993c8f46e538be7e744c328e4a7e9"
+    sha256 cellar: :any,                 arm64_tahoe:   "01ec25a5c4703d854aaded258e2fb777d2f20a0282a45db6929442b570cd6c19"
+    sha256 cellar: :any,                 arm64_sequoia: "ee93b4ba22524fa9155ab2d052c885e4ab42cda7e2d0c07245ee9fe68757908d"
+    sha256 cellar: :any,                 arm64_sonoma:  "aee89ca3a7b8f4ba9a7232da66d2b021715f39178dd8415042cfc9b70ab5108f"
+    sha256                               sonoma:        "27a640e5d51479adefa4390a9b2f4f701b7d3ccfc5172a124a56958ecdc21f80"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ce1e4e0933a2c3b44cca39a8b4c3623e3796ca8d3d87c9c6db4e4cc016261156"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1f387731a5b9f1b82455f38f4a72d432f2f277a6b6ca630fff629d59328ff2dd"
   end
 
   depends_on "cmake" => :build

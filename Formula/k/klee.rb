@@ -4,22 +4,23 @@ class Klee < Formula
 
   desc "Symbolic Execution Engine"
   homepage "https://klee-se.org"
-  url "https://github.com/klee/klee/archive/refs/tags/v3.1.tar.gz"
-  sha256 "ae3d97209fa480ce6498ffaa7eaa7ecbbe22748c739cb7b2389391d0d9c940f7"
+  url "https://github.com/klee/klee/archive/refs/tags/v3.2.tar.gz"
+  sha256 "83d9b9ce0ba187e48c0e55623bf1a68b5eb61376da7ce82551c9d885715a21dd"
   license "NCSA"
-  revision 5
+  revision 1
   head "https://github.com/klee/klee.git", branch: "master"
 
   bottle do
-    sha256 arm64_tahoe:   "e84476efdf5e4498e6ba7a074737bcada4c4fbad8c9ddbec61a835bd472a2164"
-    sha256 arm64_sequoia: "69dbd249f89fc29778470f17936601f0ade3588e115c6e038736527565b4e30c"
-    sha256 arm64_sonoma:  "71f02322eb16b4755ba704f7ecebf67300da267d583cf28fb52f1b2524f91e96"
-    sha256 sonoma:        "2e7767d7b04094b45886f2c900a3d589652e4b1085291b92f2404dcacbc6a830"
-    sha256 x86_64_linux:  "21f88c5eabbb655518bab3b8564f0b70e9a1fc2984dc73887b7c99b569078340"
+    sha256 arm64_tahoe:   "421635321178c30ef79f3aa342d7df9bfd7968b7bd6f3b02fbdf42623e80dca2"
+    sha256 arm64_sequoia: "b8f260fadb301622f193e9466a8734bb8530d17f93590a3e74651a7f143c7e6e"
+    sha256 arm64_sonoma:  "c62509d999dd15e6f2116139e6b44cffc8a6a1ddcd5a55f8c1cca142070bb0ad"
+    sha256 sonoma:        "38c8d19adcd33cfea3175f0eca22d3ecf2f762766140b3bb552e3c3e45ad8455"
+    sha256 x86_64_linux:  "75128bdec9c7cbe12b19d81c974fdeab261f999271f4dcd876e797cfc8243b11"
   end
 
   depends_on "cmake" => :build
 
+  depends_on "cryptominisat"
   depends_on "gperftools"
   depends_on "llvm@16" # LLVM 17+ issue: https://github.com/klee/klee/issues/1754
   depends_on "python@3.14"

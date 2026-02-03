@@ -3,10 +3,9 @@ class MysqlAT84 < Formula
   # FIXME: Actual homepage fails audit due to Homebrew's user-agent
   # homepage "https://dev.mysql.com/doc/refman/8.4/en/"
   homepage "https://github.com/mysql/mysql-server"
-  url "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.7.tar.gz"
-  sha256 "c0bf33a94cdb908f149aea0797affb1b139262ccf0e0b9787a17246207542e69"
+  url "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.8.tar.gz"
+  sha256 "be9d96cdf87f276952a2cdd960f106b960a8860e46c115ed39c1b5f2e0387a20"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
-  revision 2
 
   livecheck do
     url "https://dev.mysql.com/downloads/mysql/8.4.html?tpl=files&os=src&version=8.4"
@@ -16,15 +15,18 @@ class MysqlAT84 < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 arm64_tahoe:   "7563211df92e3e75113b15a48b5badeba2d0f37b41db59639e69e0ef85329041"
-    sha256 arm64_sequoia: "ccda879c2b0e6c573770a85202168cce1a5ae0835ed5ffe5a56925acffa7ed08"
-    sha256 arm64_sonoma:  "9a20a85e617bb471b8ee58e8b87fb1aeac27333a9110ab8a440eaea4949f602e"
-    sha256 sonoma:        "386b10801b1f3d2a9321952674ed6400e0ea701c1cc41717abde8d5f85edf9a3"
-    sha256 arm64_linux:   "9a4a4d03971a2e147b85bf96fb87e01a6b1fab92625c9b445712382774eff857"
-    sha256 x86_64_linux:  "d2b9dd5fe8cf8f4d072bbdb8cb8e4bb76e481c2afd4d9b338e4dc92ff2790327"
+    sha256 arm64_tahoe:   "6cdfe342dc41fbd745c2852632b06066615d0cdfee7d1203d08d713e8e6fe420"
+    sha256 arm64_sequoia: "25a0f96b86fa0e45209498f8adbb8219024bd5e0efdd53efe8dc06efa427879a"
+    sha256 arm64_sonoma:  "1a650a3cff377ab30924bd2a9d67dc3ff598a1c22898fe719b42457a14c98320"
+    sha256 sonoma:        "c9de140d9777cd3e240d9872829321a44f4d5da0da12bedef4eabc034ea9fa9b"
+    sha256 arm64_linux:   "58064211c9d12d5a76ee4dffa23b0170f759013573365156eb26b6ee699380db"
+    sha256 x86_64_linux:  "21e98dfa0aeb46d7590ec7c68f678fceba70652c80e9319f0e7a9498948e79f5"
   end
 
   keg_only :versioned_formula
+
+  # See: https://endoflife.date/mysql
+  deprecate! date: "2032-04-30", because: :unsupported
 
   depends_on "bison" => :build
   depends_on "cmake" => :build

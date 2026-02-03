@@ -1,18 +1,18 @@
 class Cagent < Formula
   desc "Agent Builder and Runtime by Docker Engineering"
   homepage "https://github.com/docker/cagent"
-  url "https://github.com/docker/cagent/archive/refs/tags/v1.13.0.tar.gz"
-  sha256 "e9fe310f5476d981502f241076f2acdb83326ecefafcfccfeade8863ead43b2c"
+  url "https://github.com/docker/cagent/archive/refs/tags/v1.20.3.tar.gz"
+  sha256 "0d7a49d09ad666b216a4053402c670a2ab586b1eafc70a1cd2eec433b8b6e4cd"
   license "Apache-2.0"
   head "https://github.com/docker/cagent.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "37e31fba9b940b3a55ffb88a2be853924131e8470b7f0ac08576831378204925"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6ad3ea95470465852f9d91bf5325a59542ad55e708509b3397ab30ff7f775a96"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "cef1af6c5ab75e79304c42a7ff65899995e244da21033b42d7f57f835d63a7dc"
-    sha256 cellar: :any_skip_relocation, sonoma:        "013129c638e3b0fdc6e49d0902572eea069d274234aa85e666915be931cf045a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1904614c4e57ca0cb2ddcb040feea738b4befe20f2acabfaef26117b2e677c67"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cdd156a2d6ddb9cada31c7f167ef79e0c20f37045e22d9fe6b2406c3f639e030"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0189f225c29a8054d7640c9a319a756ebd000340b561b8fb1bf446cc0bf5ccab"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "38a99bc789577c71be3f10e9a0184e13aa4e4da67808d3105721a55c88ce2192"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b7e97e1a463e8bb1e8c7bc6fcf21bea0d3d25654523e6bccc62d98caaf299bfc"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ec36caaebf9f993bb49968eefe584b346d2999d281460433740db83cdc608ba2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "15af3bb59566857915d948cd2b75216701892a20b28842a8c46b469a47c6209e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4ec94cbeab6b402c69e5beb387f54facba197cc75c66bc37760552d69bd4de6a"
   end
 
   depends_on "go" => :build
@@ -28,7 +28,7 @@ class Cagent < Formula
 
     system "go", "build", *std_go_args(ldflags:)
 
-    generate_completions_from_executable(bin/"cagent", "completion")
+    generate_completions_from_executable(bin/"cagent", shell_parameter_format: :cobra)
   end
 
   test do

@@ -1,18 +1,18 @@
 class Gabo < Formula
   desc "Generates GitHub Actions boilerplate"
   homepage "https://github.com/ashishb/gabo"
-  url "https://github.com/ashishb/gabo/archive/refs/tags/v1.6.5.tar.gz"
-  sha256 "fbba5bfddeda1c820a3ec8b178953c4fd89d7fc75690d325bd5c957298dff2e2"
+  url "https://github.com/ashishb/gabo/archive/refs/tags/v1.7.3.tar.gz"
+  sha256 "e2716f7abdf0a6e4b1d7b43e2cfe49891609e3876907c5f6fdd8ff9b223577c9"
   license "Apache-2.0"
   head "https://github.com/ashishb/gabo.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bb5fffd10e9eac37b6eca0f1667165ad02dc6d3f91655deadfd3235adcab2be1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bb5fffd10e9eac37b6eca0f1667165ad02dc6d3f91655deadfd3235adcab2be1"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bb5fffd10e9eac37b6eca0f1667165ad02dc6d3f91655deadfd3235adcab2be1"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c7334017af4b41ce46907fd489eb9d3aea3e895b5094faa7b7b8753f5f4cc7e3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3d8d3f94d6a4c05a95d92f613b3d8ece1382627aff4aec5dd3f91cc977f9c75b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c21c7cf791a18fa4687a6d82cadd8e3d9b5c1257be4bc90ff3983106cd1309a0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e863c52b27292a66b57497df679888d5bbadb3ebc3b112e780408a8ef0e46419"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e863c52b27292a66b57497df679888d5bbadb3ebc3b112e780408a8ef0e46419"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e863c52b27292a66b57497df679888d5bbadb3ebc3b112e780408a8ef0e46419"
+    sha256 cellar: :any_skip_relocation, sonoma:        "012f0d79d826c0f6f4bca9925b824d15ed3f3db146b2af3a1e4d001096e0a736"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d87b3d0cc85231d27c1dc6af5066d212c21f6cd02f78067d707f549193a331aa"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "63904ba3a68f8cbc2e0e49669530e33705a4f67ce659f773012096386a6ec57b"
   end
 
   depends_on "go" => :build

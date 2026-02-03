@@ -1,18 +1,18 @@
 class Crd2pulumi < Formula
   desc "Generate typed CustomResources from a Kubernetes CustomResourceDefinition"
   homepage "https://github.com/pulumi/crd2pulumi"
-  url "https://github.com/pulumi/crd2pulumi/archive/refs/tags/v1.6.0.tar.gz"
-  sha256 "65ba960325bfbd288b1cbe4675e1c24fd2fe6422b2cffc46a74fa801063beba6"
+  url "https://github.com/pulumi/crd2pulumi/archive/refs/tags/v1.6.1.tar.gz"
+  sha256 "14dff554dc6b26b43d80c36f85bd8768f9361e234aa5dcb48d8579df59c58c80"
   license "Apache-2.0"
   head "https://github.com/pulumi/crd2pulumi.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c380a1dbe25ab6bc39fd1a6fb7f4d676ffbdfdd1ac6f5fe6de532f16e95663a8"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2ab981239750c76bf83cb6d29fd9c0486596c22a125318e760bb9b4877ca050b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "037495a268751f289edfd7c1ef440dcb609ec7e21c139c26d78279fe7613daf5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ef183fcd4992a46265574b8946c96993beb1cdf93a9d15a928b4970ca6f8eaef"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7d7228a160a405a73fdd32f62e83b3cbae37e5f2f5459e079ce184c96d0432e4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "20318e7be374b5f94eb7ad06a0cd7580ca2d1648cfeeb619f6d835824af47f6c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "390736f4a83c23f407845ce7ce35757716472b769bee83dcde62f069ff00a46e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a1ed183c72738984c22e661317d46e0ecab3d42778cb7717e2416702c8cb4033"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "fbe06b9b4521bcaf695da2fb7be72a3fdbecb10c67cd1c51cd50bc3f4f0e40f9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b3e9a575ef13202f6cc87a9c294e97a6ed7a0f83ef44c23d10434930a8718b0b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "0fa027064356ef61b917229eda5aad7f5de51d51057ca576f47fc2332d5e4530"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e818166ab902b8bd93fde2953476d23b153ccbb38211a5de2590287116e49cc2"
   end
 
   depends_on "go" => :build
@@ -20,7 +20,7 @@ class Crd2pulumi < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w -X github.com/pulumi/crd2pulumi/cmd.Version=#{version}")
 
-    generate_completions_from_executable(bin/"crd2pulumi", "completion")
+    generate_completions_from_executable(bin/"crd2pulumi", shell_parameter_format: :cobra)
   end
 
   test do

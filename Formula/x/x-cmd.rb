@@ -1,8 +1,8 @@
 class XCmd < Formula
   desc "Bootstrap 1000+ command-line tools in seconds"
   homepage "https://x-cmd.com"
-  url "https://github.com/x-cmd/x-cmd/archive/refs/tags/v0.7.4.tar.gz"
-  sha256 "3ad7638b4970d697797074429122deb953596c1c7e127144eda30c95b8c5af1c"
+  url "https://github.com/x-cmd/x-cmd/archive/refs/tags/v0.7.15.tar.gz"
+  sha256 "eda4e3d939a072879138f55fb1ad213f1af66414212bda6b484ae88cd2c66537"
   license all_of: ["AGPL-3.0-only", "MIT", "BSD-3-Clause"]
 
   head "https://github.com/x-cmd/x-cmd.git", branch: "X"
@@ -13,12 +13,12 @@ class XCmd < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "142aa2c66a0b9cf1c48e13965a727b777d2a9441d572bb0ac539c847956dbc82"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "142aa2c66a0b9cf1c48e13965a727b777d2a9441d572bb0ac539c847956dbc82"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "142aa2c66a0b9cf1c48e13965a727b777d2a9441d572bb0ac539c847956dbc82"
-    sha256 cellar: :any_skip_relocation, sonoma:        "dc92846cb07473d545542b0bb716a73137d20b2366ca729e9c8e193237a874cb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "118d9b998585d0cba45641ab7a331d3114ea4f05bbde44dac4adaf189da10192"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "118d9b998585d0cba45641ab7a331d3114ea4f05bbde44dac4adaf189da10192"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e4665e8a9713586178b922de593531f9e3125f3e61d0d170dca2a6a2a00b7a13"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e4665e8a9713586178b922de593531f9e3125f3e61d0d170dca2a6a2a00b7a13"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e4665e8a9713586178b922de593531f9e3125f3e61d0d170dca2a6a2a00b7a13"
+    sha256 cellar: :any_skip_relocation, sonoma:        "8602d3e643a15fa16b277cc63e7603acf6606d32d09fd8ee08b73ff68a3ad58f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f2e8ddc934ab5d230d646596bdd41fb431b5f43fdb6416d6150c52ae525534d3"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f2e8ddc934ab5d230d646596bdd41fb431b5f43fdb6416d6150c52ae525534d3"
   end
 
   def install

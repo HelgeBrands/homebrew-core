@@ -1,22 +1,22 @@
 class Iccdev < Formula
   desc "Developer tools for interacting with and manipulating ICC profiles"
   homepage "https://github.com/InternationalColorConsortium/iccDEV"
-  url "https://github.com/InternationalColorConsortium/iccDEV/archive/refs/tags/v2.3.1.1.tar.gz"
-  sha256 "de8750b0fbf9e3ec1e7260c0752427f54c9bb81b2f9366eaf75b7a7509d80097"
+  url "https://github.com/InternationalColorConsortium/iccDEV/archive/refs/tags/v2.3.1.3.tar.gz"
+  sha256 "d194fa587df807560be3ae75e123a97253dbc0736f26a41567668d64a23b6ec6"
   license "BSD-3-Clause"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "b2e46c66e480ec9a70b025d89844c5db91055d13f01b25d13d9755800edd631f"
-    sha256 cellar: :any,                 arm64_sequoia: "90ea8470a294030b8b04b8824b28f0048599d0dae633427e5d090f532f9aff48"
-    sha256 cellar: :any,                 arm64_sonoma:  "ba969c4f1b20223708114a944155cd4386618e5965edd805a4fd9be9f7ac43cc"
-    sha256 cellar: :any,                 sonoma:        "a0bd33c510fc412600e8c3b02f0d861a44f1cbd53435b5ac6784063271c33bfe"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5eb04e0083eed9bdfbf6fc94272d5a9e7ac1b0a4319251ac51e25e3940a68346"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0cf6fcda86a52a73d2897ca15ca72ede473c11661fb672f7f15038c098621226"
+    sha256 cellar: :any,                 arm64_tahoe:   "8c5210763a2f893c65972c8be64ed3210d5e22c2037b6aafb51f5e755b474124"
+    sha256 cellar: :any,                 arm64_sequoia: "7427af0311d8b3b7f889e7c37a741a71bf79b7a43899166da0652e7337a48cf3"
+    sha256 cellar: :any,                 arm64_sonoma:  "570017a83ed706ac41584d1263617924dc010aafa1e84fa596de5be5a3ad7594"
+    sha256 cellar: :any,                 sonoma:        "3c09476da0f6cf699cd805ebc82787eaa2c2141b93edd5f2269fb2e6ba5a6365"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "831d5975519ba2d54adff28f6e38ea4e33d179e5552b5e61ba0fd5b2aea58750"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1c66ea4bd5604c515aeab524cced417072e3e12b570a33372c341cdc172871bb"
   end
 
   depends_on "cmake" => :build
   depends_on "nlohmann-json" => :build
-  depends_on "jpeg"
+  depends_on "jpeg-turbo"
   depends_on "libpng"
   depends_on "libtiff"
   depends_on "wxwidgets"

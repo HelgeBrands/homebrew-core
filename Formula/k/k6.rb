@@ -1,8 +1,8 @@
 class K6 < Formula
   desc "Modern load testing tool, using Go and JavaScript"
   homepage "https://k6.io"
-  url "https://github.com/grafana/k6/archive/refs/tags/v1.4.2.tar.gz"
-  sha256 "1f653584c4b8a191474a55a8f2a1ae661b82c6e7e90e243cf27969eb21ee8453"
+  url "https://github.com/grafana/k6/archive/refs/tags/v1.5.0.tar.gz"
+  sha256 "215f25088ef4a6c52d18e8ee572149c880f1eabf312909e9e87faad5ffe3f00e"
   license "AGPL-3.0-or-later"
   head "https://github.com/grafana/k6.git", branch: "master"
 
@@ -12,12 +12,12 @@ class K6 < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "16d9d5cdc4f7c2a0e2420affbf03a30d8f40f7179069ee636a92dfba1e466ae4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "16d9d5cdc4f7c2a0e2420affbf03a30d8f40f7179069ee636a92dfba1e466ae4"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "16d9d5cdc4f7c2a0e2420affbf03a30d8f40f7179069ee636a92dfba1e466ae4"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8e87e08d199ee6ab373625095ffc95f50cb56570465826f3374aec5a28220094"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3c9268001ac3541a3b3448401fc6c1d3e851473c91145e5ef437b54964dbfe69"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e4b39f62d3763e6462dcd0721dbd84393e5c933d62be984e6253c1b5f378b2bc"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2a2899218ee6fb6cfbc5ed1c1f96da21edf476425129ca1c47b134e3a1dcc477"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2a2899218ee6fb6cfbc5ed1c1f96da21edf476425129ca1c47b134e3a1dcc477"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2a2899218ee6fb6cfbc5ed1c1f96da21edf476425129ca1c47b134e3a1dcc477"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e2abc002d9fbb3f0d992a401a5af502be1afa36094c7275625ec844d6f54e31f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6e5afba1da2c9d522888f3ae81a3523c39555e2ebba8eca8920f93d0403f68c8"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b3af63a4685b6c4213a80477f6e8d5121fcaa9c5ca19d5219fdc8c8a14818750"
   end
 
   depends_on "go" => :build
@@ -25,7 +25,7 @@ class K6 < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w")
 
-    generate_completions_from_executable(bin/"k6", "completion")
+    generate_completions_from_executable(bin/"k6", shell_parameter_format: :cobra)
   end
 
   test do

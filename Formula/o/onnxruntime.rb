@@ -2,10 +2,10 @@ class Onnxruntime < Formula
   desc "Cross-platform, high performance scoring engine for ML models"
   homepage "https://github.com/microsoft/onnxruntime"
   url "https://github.com/microsoft/onnxruntime.git",
-      tag:      "v1.22.2",
-      revision: "5630b081cd25e4eccc7516a652ff956e51676794"
+      tag:      "v1.23.2",
+      revision: "a83fc4d58cb48eb68890dd689f94f28288cf2278"
   license "MIT"
-  revision 6
+  revision 2
 
   livecheck do
     url :stable
@@ -13,17 +13,18 @@ class Onnxruntime < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "bae32682bbceb26383c7bebfc7d8bc9ed5ee63f9eaa31026cfb3da37ef59a1ff"
-    sha256 cellar: :any,                 arm64_sequoia: "d97eccb16843ad02d9e154c8e985a856879fbf16966c7f884abd4ee25bf8a464"
-    sha256 cellar: :any,                 arm64_sonoma:  "7a1493fb8053642af4fe83fbcc1d35f9edea72d532abcffbb020c165ce6faaae"
-    sha256 cellar: :any,                 sonoma:        "eef920dd99439437fe1e5ce7efc2b7ffde95cd2307153d42f199efb356b79c02"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1b6ccde36734462e9c6e6df1810f199cebe9e04c78f97434120710218d04d630"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cf6bf729cf1549c759eab627e31da6ba06cc91ce0b6b9a6ee1d7686e185ab2e7"
+    sha256 cellar: :any,                 arm64_tahoe:   "7961b7f20c6a369878cbde0532a30cd50a846b4abe0460bbb68369a6c39956c0"
+    sha256 cellar: :any,                 arm64_sequoia: "eb8f0e4c01b621c598334d6c31d15f718e86afb549594aac9767a44cf0eba5e0"
+    sha256 cellar: :any,                 arm64_sonoma:  "2b4c5553f548cc00668544b5e68cd3176c2034956ac9056dc903d664dfb48395"
+    sha256 cellar: :any,                 sonoma:        "1d5569783b025d46ba0cae230c7b4af91e771b928a11e0c2952303a7b71000d2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "10e31920c66836733dabb7ba1e418659fdee4d69b9dee31e53c192ef486c1ff5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6876efbb834a8c76531b95ec3625f0f8f21e8465d8791760d72d8696c495645f"
   end
 
   depends_on "boost" => :build
   depends_on "cmake" => :build
   depends_on "cpp-gsl" => :build
+  depends_on "eigen" => :build
   depends_on "flatbuffers" => :build # NOTE: links to static library
   depends_on "howard-hinnant-date" => :build
   depends_on "nlohmann-json" => :build
@@ -33,19 +34,6 @@ class Onnxruntime < Formula
   depends_on "onnx"
   depends_on "protobuf"
   depends_on "re2"
-
-  # Need newer than stable `eigen` after https://github.com/microsoft/onnxruntime/pull/21492
-  # element_wise_ops.cc:708:32: error: no matching member function for call to 'min'
-  resource "eigen3" do
-    url "https://gitlab.com/libeigen/eigen/-/archive/1d8b82b0740839c0de7f1242a3585e3390ff5f33/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33.tar.bz2"
-    version "1d8b82b0740839c0de7f1242a3585e3390ff5f33"
-    sha256 "37c2385d5b18471d46ac8c971ce9cf6a5a25d30112f5e4a2761a18c968faa202"
-
-    livecheck do
-      url "https://raw.githubusercontent.com/microsoft/onnxruntime/refs/tags/v#{LATEST_VERSION}/cmake/deps.txt"
-      regex(%r{^eigen;.*/eigen[._-](\h+)\.zip}i)
-    end
-  end
 
   resource "pytorch_cpuinfo" do
     url "https://github.com/pytorch/cpuinfo/archive/8a1772a0c5c447df2d18edf33ec4603a8c9c04a6.tar.gz"
@@ -86,13 +74,14 @@ class Onnxruntime < Formula
       -DHOMEBREW_ALLOW_FETCHCONTENT=ON
       -DFETCHCONTENT_FULLY_DISCONNECTED=ON
       -DFETCHCONTENT_TRY_FIND_PACKAGE_MODE=ALWAYS
+      -DFETCHCONTENT_SOURCE_DIR_MP11=#{Formula["boost"].opt_prefix}
       -DPython_EXECUTABLE=#{python3}
       -DONNX_CUSTOM_PROTOC_EXECUTABLE=#{Formula["protobuf"].opt_bin}/protoc
       -Donnxruntime_BUILD_SHARED_LIB=ON
       -Donnxruntime_BUILD_UNIT_TESTS=OFF
       -Donnxruntime_GENERATE_TEST_REPORTS=OFF
       -Donnxruntime_RUN_ONNX_TESTS=OFF
-      -Donnxruntime_USE_FULL_PROTOBUF=ON
+      -Donnxruntime_USE_FULL_PROTOBUF=OFF
     ]
 
     # Regenerate C++ bindings to use newer `flatbuffers`

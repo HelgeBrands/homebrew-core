@@ -1,40 +1,50 @@
 class Xgo < Formula
   desc "AI-native programming language that integrates software engineering"
   homepage "https://xgo.dev/"
-  url "https://github.com/goplus/xgo/archive/refs/tags/v1.5.3.tar.gz"
-  sha256 "af10b9e8d3980e4c4f4b9bf3d341e3d1dd72d1324ca26825b360c3ce865b7da0"
+  url "https://github.com/goplus/xgo/archive/refs/tags/v1.6.2.tar.gz"
+  sha256 "1fa550a9bea9abfe78d4726c9bc173bc7a2e83a2a77fad450294325331801543"
   license "Apache-2.0"
   head "https://github.com/goplus/xgo.git", branch: "main"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   bottle do
-    sha256 arm64_tahoe:   "a75c004854a1a9bc80a4cf44e9587d66fea27e47c3d766cd51d51b7c02df3006"
-    sha256 arm64_sequoia: "0833d3abb66a496f7f4dac08bbb60e140213560acc6b88044d3c275bcd2ef268"
-    sha256 arm64_sonoma:  "4d9fd8b8ef8b25a88fc0e34c480f07ef2a8057f3aae157d774e3aa1f51959be1"
-    sha256 sonoma:        "9af23dadf176158e70483d0647a4562f627975335664c868f94e1ea33b24a9ce"
-    sha256 arm64_linux:   "b836969dc91f0841cfaef9a87fdc1a7ed3efd1dc7bb45a60ede2845573bc0491"
-    sha256 x86_64_linux:  "928ebd50cc947e4aab439df06de50e88b70345bed28e63b7dd84d3a685678db3"
+    sha256 arm64_tahoe:   "327de65a0450f47147acc99afc5cfdc5a3d407499d2d506dbd37de896fc1528c"
+    sha256 arm64_sequoia: "82b88f964aefc2670e17d2923bdec93abd21b96a7c4f2adffc6c9116ba4804e9"
+    sha256 arm64_sonoma:  "6849838d45583087b52e52675d8d38670169846965ec2c9cf3fe5e475e877cd3"
+    sha256 sonoma:        "c84da9b00f830dcae41a3d188246975444ae4e75500f83138ddfeeac51d4c6f9"
+    sha256 arm64_linux:   "d2814a297dcd979f2b9291d6ab818a8032fee8cf54e24a6aab6ef93782b32f65"
+    sha256 x86_64_linux:  "6252ca4b94116631284441dea700dd25ba2875b89f37dc6397fc4e440763c4e9"
   end
 
   depends_on "go"
 
   def install
     ENV["GOPROOT_FINAL"] = libexec
+
+    # Add VERSION file
+    (buildpath/"VERSION").write version
+
     system "go", "run", "cmd/make.go", "--install"
 
     libexec.install Dir["*"] - Dir[".*"]
     bin.install_symlink Dir[libexec/"bin/*"]
 
-    generate_completions_from_executable(bin/"xgo", "completion")
+    generate_completions_from_executable(bin/"xgo", shell_parameter_format: :cobra)
   end
 
   test do
+    assert_match version.to_s, shell_output("#{bin}/xgo version")
+
     system bin/"xgo", "mod", "init", "hello"
     (testpath/"hello.xgo").write <<~XGO
       println("Hello World")
     XGO
 
     # Run xgo fmt, run, build
-    assert_equal "v#{version}", shell_output("#{bin}/xgo env XGOVERSION").chomp
     system bin/"xgo", "fmt", "hello.xgo"
     assert_equal "Hello World\n", shell_output("#{bin}/xgo run hello.xgo 2>&1")
     system bin/"xgo", "build", "-o", "hello"

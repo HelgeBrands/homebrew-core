@@ -1,17 +1,17 @@
 class Appwrite < Formula
   desc "Command-line tool for Appwrite"
   homepage "https://appwrite.io"
-  url "https://registry.npmjs.org/appwrite-cli/-/appwrite-cli-12.0.1.tgz"
-  sha256 "6219e1bef799c67518d2871fbeeeda978349d75b9094b2928c28e7727605a2f8"
+  url "https://registry.npmjs.org/appwrite-cli/-/appwrite-cli-13.1.0.tgz"
+  sha256 "8d1a4684f97566352b43256b48cbf7bf60de098012d406a643d98df75aa04729"
   license "BSD-3-Clause"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b8847b1978d3abab44203533deb860639e261536193b88d41b518a88b403866a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "03f8c6ab339bd087f9a5b1f81eaea505e7033f906a69af8a49b9b233d67f84e6"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "03f8c6ab339bd087f9a5b1f81eaea505e7033f906a69af8a49b9b233d67f84e6"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4412406673e641bb53943452ad2e1751c8426528388cba319e15f29fba6335e9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b079320906ce2b534317e9ef820b53d3b858aaf14792323a464a6a91f4f26be7"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b079320906ce2b534317e9ef820b53d3b858aaf14792323a464a6a91f4f26be7"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "cb64af9cb03b48893c19cd72903bb72f8df5092e0eae5cb520e59af962ccb297"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2b1b2cbd3ca47e5ae2a518941b41df1fca2e6f4bbbdf7259796591982f2f16f9"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2b1b2cbd3ca47e5ae2a518941b41df1fca2e6f4bbbdf7259796591982f2f16f9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "820ce78f469b4b3206c1efea4dc22c8b4b107f36ef4f9aeeff05ea94a4ffe8da"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "9a775afc64023abbf595551bfd69e344d47c77397410d90b4e13bc77411c57d6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9a775afc64023abbf595551bfd69e344d47c77397410d90b4e13bc77411c57d6"
   end
 
   depends_on "node"
@@ -22,15 +22,6 @@ class Appwrite < Formula
 
     node_modules = libexec/"lib/node_modules/appwrite-cli/node_modules"
     deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
-
-    # Ensure uniform bottles
-    file = libexec/"lib/node_modules/appwrite-cli/lib/commands/update.js"
-    homebrew_check_str = "scriptPath.includes('/opt/homebrew/') || scriptPath.includes('/usr/local/Cellar/')"
-    inreplace file do |s|
-      s.gsub! "scriptPath.includes('/usr/local/lib/node_modules/')", "scriptPath.includes('/lib/node_modules/')"
-      s.gsub! "scriptPath.includes('/opt/homebrew/lib/node_modules/') ||", ""
-      s.gsub! homebrew_check_str, "true"
-    end
   end
 
   test do

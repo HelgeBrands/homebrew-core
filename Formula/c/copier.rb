@@ -3,17 +3,17 @@ class Copier < Formula
 
   desc "Utility for rendering projects templates"
   homepage "https://copier.readthedocs.io/"
-  url "https://files.pythonhosted.org/packages/06/61/226642b1efad2a39008ee5b913cd82a6f22a564b652e8f0645488a27a2e2/copier-9.11.0.tar.gz"
-  sha256 "e73d6989fa140b621a5c571984c46122704086a9caa84a6e07699a5234d297ab"
+  url "https://files.pythonhosted.org/packages/40/be/35bb44c0c7c278bd9144f5934aa10a2d532cedea4e16494c6552aa7132e1/copier-9.11.3.tar.gz"
+  sha256 "f4da98c7f3dd2243480433541b3b4d9daa788bce13b7b6d43c0c6d84bd50e889"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "08d45d07923a1af38714a5e099bb9005722ba1e420e878758eb94890a625cb87"
-    sha256 cellar: :any,                 arm64_sequoia: "ebe305f2ec500ea3f8bcb080723f23963ffbcbdd3683fd3e23f590c6b8ca5782"
-    sha256 cellar: :any,                 arm64_sonoma:  "b650f999fcbaa3220277428cadfa8bb1a25886375f670d54c2cb59e1397533dd"
-    sha256 cellar: :any,                 sonoma:        "55505968e154ef6d9f029edd5d8f571b0f017fef87e53d5fec47d04463210f02"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "71d658ac1006169f0c1ff89b0252048907962ccd3a20bbf692cc739da8ae27b4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0c2a43234adfa53df8dee1f9fe902517a30913125faae283654ccce8af40fb0f"
+    sha256 cellar: :any,                 arm64_tahoe:   "c60b62a2cf182a47b1406affd60a277e1332de67dd022816585be3c4b55ac007"
+    sha256 cellar: :any,                 arm64_sequoia: "dc18a8e40a09129b1686c6f80dbb4e36cb9884ffa3906e5f2fbcb19ea97c0520"
+    sha256 cellar: :any,                 arm64_sonoma:  "3b4878a12e5929b905f351c727fa88f3dc1e43d1a5f596de7f2d6b8c2e6a6e9c"
+    sha256 cellar: :any,                 sonoma:        "d7c7bbc10fac18fda6bf5706efbfa4c12c76df271e738a132915a0e63e31e4a2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4aac49b092300d5d45db5c73ceebfb6ac6e912738acd5ec85c0dd7542eadb7c6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "63563da04feab3c0c9843a2d78925a1279fd49cb10721128017617e69fb4ff7d"
   end
 
   depends_on "libyaml"
@@ -53,18 +53,18 @@ class Copier < Formula
   end
 
   resource "packaging" do
-    url "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz"
-    sha256 "d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"
+    url "https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz"
+    sha256 "00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4"
   end
 
   resource "pathspec" do
-    url "https://files.pythonhosted.org/packages/ca/bc/f35b8446f4531a7cb215605d100cd88b7ac6f44ab3fc94870c120ab3adbf/pathspec-0.12.1.tar.gz"
-    sha256 "a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"
+    url "https://files.pythonhosted.org/packages/4c/b2/bb8e495d5262bfec41ab5cb18f522f1012933347fb5d9e62452d446baca2/pathspec-1.0.3.tar.gz"
+    sha256 "bac5cf97ae2c2876e2d25ebb15078eb04d76e4b98921ee31c6f85ade8b59444d"
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/61/33/9611380c2bdb1225fdef633e2a9610622310fed35ab11dac9620972ee088/platformdirs-4.5.0.tar.gz"
-    sha256 "70ddccdd7c99fc5942e9fc25636a8b34d04c24b335100223152c2803e4063312"
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "plumbum" do
@@ -93,8 +93,8 @@ class Copier < Formula
   end
 
   resource "wcwidth" do
-    url "https://files.pythonhosted.org/packages/24/30/6b0809f4510673dc723187aeaf24c7f5459922d01e2f794277a3dfb90345/wcwidth-0.2.14.tar.gz"
-    sha256 "4d478375d31bc5395a3c55c40ccdf3354688364cd61c4f6adacaa9215d0b3605"
+    url "https://files.pythonhosted.org/packages/25/6f/e1ea6dcb21da43d581284d8d5a715c2affb906aa3ed301f77f7f5ae0e7d5/wcwidth-0.3.1.tar.gz"
+    sha256 "5aedb626a9c0d941b990cfebda848d538d45c9493a3384d080aff809143bd3be"
   end
 
   def install

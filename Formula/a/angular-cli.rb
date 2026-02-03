@@ -1,19 +1,19 @@
 class AngularCli < Formula
   desc "CLI tool for Angular"
   homepage "https://angular.dev/cli/"
-  url "https://registry.npmjs.org/@angular/cli/-/cli-21.0.2.tgz"
-  sha256 "3c9268ee7441012ecfb54f741de8eccf66974a76d98ca7f50ca50b6e3c96465c"
+  url "https://registry.npmjs.org/@angular/cli/-/cli-21.1.2.tgz"
+  sha256 "563db766ea8773b90ecfa8f365ad5c3c8964ec5bda44aca6d9968fdb1452a894"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "22fdd69b9e4f09ee402fd434bd889db3558329dbd2dadf7e788e94d5b59cdb65"
+    sha256 cellar: :any_skip_relocation, all: "c0d520caf124df5b2a4bcbe6c70dcb099749f9fc5e2710a3569d055abf54bf1f"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

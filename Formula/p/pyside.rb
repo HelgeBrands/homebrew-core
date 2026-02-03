@@ -1,9 +1,9 @@
 class Pyside < Formula
   desc "Official Python bindings for Qt"
   homepage "https://wiki.qt.io/Qt_for_Python"
-  url "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.9.3-src/pyside-setup-everywhere-src-6.9.3.tar.xz"
-  mirror "https://cdimage.debian.org/mirror/qt.io/qtproject/official_releases/QtForPython/pyside6/PySide6-6.9.3-src/pyside-setup-everywhere-src-6.9.3.tar.xz"
-  sha256 "7cd2d5abb98f2e6f442b0e41f5fcf930e7312ae4b17f681316b1adc7b63bb172"
+  url "https://download.qt.io/official_releases/QtForPython/pyside6/PySide6-6.10.2-src/pyside-setup-everywhere-src-6.10.2.tar.xz"
+  mirror "https://cdimage.debian.org/mirror/qt.io/qtproject/official_releases/QtForPython/pyside6/PySide6-6.10.2-src/pyside-setup-everywhere-src-6.10.2.tar.xz"
+  sha256 "05eec38bb71bffff8860786e3c0766cc4b86affc72439bd246c54889bdcb7400"
   # NOTE: We omit some licenses even though they are in SPDX-License-Identifier or LICENSES/ directory:
   # 1. LicenseRef-Qt-Commercial is removed from "OR" options as non-free
   # 2. GFDL-1.3-no-invariants-only is only used by not installed docs, e.g. sources/{pyside6,shiboken6}/doc
@@ -13,7 +13,6 @@ class Pyside < Formula
     { "GPL-3.0-only" => { with: "Qt-GPL-exception-1.0" } },
     { any_of: ["LGPL-3.0-only", "GPL-2.0-only", "GPL-3.0-only"] },
   ]
-  revision 1
 
   livecheck do
     url "https://download.qt.io/official_releases/QtForPython/pyside6/"
@@ -21,12 +20,12 @@ class Pyside < Formula
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "5c2a5e8a649e37dfab0a2641368e572ac5b97363a5e12ab5d8a49431227deb53"
-    sha256                               arm64_sequoia: "4a48df6b8cc88ebb6fb258702ec55a0994e87d61feb178b246488f89b8813959"
-    sha256                               arm64_sonoma:  "b21cd20cbc695a1a63e8a538b46bf3c114f855d2c5e6ba0e432b55dddfaf8fa6"
-    sha256 cellar: :any,                 sonoma:        "c820e8348a2a56622a2d75df62ac14216194d4038cb7e6ea646659c0ed4eab99"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "465cd5bc3c6a59e84bf83eb48f276f5ca4cf2ce17d7b2f28a6e51faf2536f689"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fd2885c335c6f909626fbbba0e5904ecca66c1e9d83d6dd646aae4aa5765a827"
+    sha256                               arm64_tahoe:   "cbcca6b77aac196a483e2eb7a8607fffb5cd9049ddd3455f1911fd6909a6103d"
+    sha256                               arm64_sequoia: "17264c40ff755192d0c8873e446c0b4b8fc0d5cc1c0c9f4e7654f1bb715a9b6b"
+    sha256                               arm64_sonoma:  "85293c1cb557034147ec0af05d14d02ed7cb3299cad331a41e3815693528c76c"
+    sha256 cellar: :any,                 sonoma:        "1df8b97e514607a94b664e7b332067928fc20d136d285692a773100955ac8a70"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f8d3b9d8bc555ff9eecfb4c2b701a3ba4c2c4cf2ea32699dc0ac0c371627484c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "167c82aecf1896fe9eab2ef5b8488b4f69ecdf2ac4ca906de4b6c95e63545b76"
   end
 
   depends_on "cmake" => :build
@@ -83,10 +82,6 @@ class Pyside < Formula
       depends_on "qtwebview"
     end
   end
-
-  # Fix .../sources/pyside6/qtexampleicons/module.c:4:10: fatal error: 'Python.h' file not found
-  # Upstream issue: https://bugreports.qt.io/browse/PYSIDE-2491
-  patch :DATA
 
   def python3
     "python3.13"
@@ -165,18 +160,3 @@ class Pyside < Formula
     system "./test"
   end
 end
-
-__END__
-diff --git a/sources/pyside6/qtexampleicons/CMakeLists.txt b/sources/pyside6/qtexampleicons/CMakeLists.txt
-index 1562f7b..0611399 100644
---- a/sources/pyside6/qtexampleicons/CMakeLists.txt
-+++ b/sources/pyside6/qtexampleicons/CMakeLists.txt
-@@ -32,6 +32,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
-     target_compile_definitions(QtExampleIcons PRIVATE "-DNDEBUG")
- endif()
-
-+get_property(SHIBOKEN_PYTHON_INCLUDE_DIRS GLOBAL PROPERTY shiboken_python_include_dirs)
-+
- target_include_directories(QtExampleIcons PRIVATE ${SHIBOKEN_PYTHON_INCLUDE_DIRS})
-
- get_property(SHIBOKEN_PYTHON_LIBRARIES GLOBAL PROPERTY shiboken_python_libraries)

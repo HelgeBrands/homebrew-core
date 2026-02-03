@@ -3,18 +3,18 @@ class Black < Formula
 
   desc "Python code formatter"
   homepage "https://black.readthedocs.io/en/stable/"
-  url "https://files.pythonhosted.org/packages/c4/d9/07b458a3f1c525ac392b5edc6b191ff140b596f9d77092429417a54e249d/black-25.12.0.tar.gz"
-  sha256 "8d3dd9cea14bff7ddc0eb243c811cdb1a011ebb4800a5f0335a01a68654796a7"
+  url "https://files.pythonhosted.org/packages/13/88/560b11e521c522440af991d46848a2bde64b5f7202ec14e1f46f9509d328/black-26.1.0.tar.gz"
+  sha256 "d294ac3340eef9c9eb5d29288e96dc719ff269a88e27b396340459dd85da4c58"
   license "MIT"
   head "https://github.com/psf/black.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6d1577acf6369be0377e0eaa5b487e5375fbc1523ac28f5942d62cd78c8ea281"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "11f14ceb1eaf6de73cf480c24a9993373d7430dc73ec7076546ee5b35da2a02e"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7d13b4221dda9078d6d11dd48c0c21374447c236bdefdfd7e2116df5492513f6"
-    sha256 cellar: :any_skip_relocation, sonoma:        "92cc4d51e309382592505e4f8f52ad94d702d1ab7c20376a373101494dcd3475"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "34e4f929dc6c3dd647a4ca682d385c64f55c7ffb933b522c2c4f56de1367abb0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1165d91c7925e398265d92bec581e2abca646cf0b33030469aad167bb0c1f9ea"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "cbd1f8cf8d35ee909a3453ef97027c3b8d99e0ac652ada54b581fd8044709f2b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "4182b03a0e4de5718afc262719a91d559df50e08c4f04a708b4aabdde81aa27b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3b06bfacf9218f039b00d4b4636d259042129dd9757226365b43cc8cc90f94ac"
+    sha256 cellar: :any_skip_relocation, sonoma:        "bfb65f801be6489d37b89a30d3deb0a915495fd34542c7910386464c74a03889"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ab4ebeee4c361339c321a5fd97be86f76ae30b3f0f3f88b974e8bb4ca43c2752"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b4a42c523c52c578661e2e4ceb6cfea5287779c8dd7bae2cf4ea5f70e48e7802"
   end
 
   depends_on "python@3.14"
@@ -27,8 +27,8 @@ class Black < Formula
   end
 
   resource "aiohttp" do
-    url "https://files.pythonhosted.org/packages/1c/ce/3b83ebba6b3207a7135e5fcaba49706f8a4b6008153b4e30540c982fae26/aiohttp-3.13.2.tar.gz"
-    sha256 "40176a52c186aefef6eb3cad2cdd30cd06e3afbe88fe8ab2af9c0b90f228daca"
+    url "https://files.pythonhosted.org/packages/50/42/32cf8e7704ceb4481406eb87161349abb46a57fee3f008ba9cb610968646/aiohttp-3.13.3.tar.gz"
+    sha256 "a949eee43d3782f2daae4f4a2819b2cb9b0c5d3b7f7a927067cc84dafdbb9f88"
   end
 
   resource "aiosignal" do
@@ -72,8 +72,8 @@ class Black < Formula
   end
 
   resource "pathspec" do
-    url "https://files.pythonhosted.org/packages/ca/bc/f35b8446f4531a7cb215605d100cd88b7ac6f44ab3fc94870c120ab3adbf/pathspec-0.12.1.tar.gz"
-    sha256 "a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"
+    url "https://files.pythonhosted.org/packages/4c/b2/bb8e495d5262bfec41ab5cb18f522f1012933347fb5d9e62452d446baca2/pathspec-1.0.3.tar.gz"
+    sha256 "bac5cf97ae2c2876e2d25ebb15078eb04d76e4b98921ee31c6f85ade8b59444d"
   end
 
   resource "platformdirs" do

@@ -1,18 +1,19 @@
 class Lima < Formula
   desc "Linux virtual machines"
   homepage "https://lima-vm.io/"
-  url "https://github.com/lima-vm/lima/archive/refs/tags/v2.0.2.tar.gz"
-  sha256 "51e0461c719c67c87310a1df4c55afe83f8379c246cd66c1c38773785f7994c8"
+  url "https://github.com/lima-vm/lima/archive/refs/tags/v2.0.3.tar.gz"
+  sha256 "55625e642de492827e6cf7740c095822ef8193458211e286f17a3c11ebf50a93"
   license "Apache-2.0"
   head "https://github.com/lima-vm/lima.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "defa0a10a5e8cc7dead80a9c677ecac7b46e2fbf4c10884b5c299a4e6dddf924"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b1c8e8186c915a23e0476283800f5c55b6de47e43fcd84e34105593dc65dc819"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6a2aae0db4aa6ce8622ee028162f2c05f9453b8e011dc7bf5913b3c475b3bfdf"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ab457ddfb877c61773fd01e878eb9ab49b523657d3fa55058ffc7e232ae58500"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6ad81031a9b23a70988ad38cb6b007e63f845da127cafc2c6d53ba81486c6d8d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "791885039d138822b267006cbb3d50ae7e097945dae62d12c22b9f45c649919b"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "03c09127136956dd84a90626bf0da8a61ba27034cefb44f907467a15e85747a3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8413f1a4345b6d4d09491f34b31743db5c127e4b5be09e94aea254978cfd647d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "15b4bb67026a8ece6a67c964c7ef3876f56fa984cc770d410ad07dec888486d0"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2df3eb5de5aa4c29b3045562ab5d1a4f475cbed1b7b32ad4ac6a5a37c9483580"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c1e395abb2679e126b217c5ad8803732429229da8ba1e2a7716e21ab4ace4757"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c16c98fca4ff0deae01d3ad5d13c013ebcc7012232a6f80228a83b4ccbe8bd90"
   end
 
   depends_on "go" => :build
@@ -37,7 +38,7 @@ class Lima < Formula
     share.install Dir["_output/share/*"]
 
     # Install shell completions
-    generate_completions_from_executable(bin/"limactl", "completion")
+    generate_completions_from_executable(bin/"limactl", shell_parameter_format: :cobra)
   end
 
   def caveats

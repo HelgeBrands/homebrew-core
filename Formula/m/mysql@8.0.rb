@@ -3,28 +3,28 @@ class MysqlAT80 < Formula
   # FIXME: Actual homepage fails audit due to Homebrew's user-agent
   # homepage "https://dev.mysql.com/doc/refman/8.0/en/"
   homepage "https://github.com/mysql/mysql-server"
-  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.44.tar.gz"
-  sha256 "a8cc09a35af63668c5235cf282aef789428c6f30c1d9a581b337c816ce8ce8bb"
+  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.45.tar.gz"
+  sha256 "f679707d05f0c2b61e9b14961302e7f540c23e9e5e2bffd8ad9193599e295cee"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
-  revision 2
 
   livecheck do
     url "https://dev.mysql.com/downloads/mysql/8.0.html?tpl=files&os=src&version=8.0"
     regex(/href=.*?mysql[._-](?:boost[._-])?v?(8\.0(?:\.\d+)*)\.t/i)
   end
 
-  no_autobump! because: :incompatible_version_format
-
   bottle do
-    sha256 arm64_tahoe:   "89c3894521c22f7f3ff67538451a2465f128a7fa103256ed58a99596b6e9fcf3"
-    sha256 arm64_sequoia: "da7fcc717f5261ad4030ee033c636e8d1bad0860782129d516142209266c85fd"
-    sha256 arm64_sonoma:  "3e4b3ffeab4f1fa601e3933271b2cc2bde866cd0b55eeb4c84ab4422568329b0"
-    sha256 sonoma:        "c3f7d266655d2572895a01cafe5837c6fa7715af1d3e45ffd22efa6224a6ea21"
-    sha256 arm64_linux:   "2c4ba532ad90081a3afceebe715a533a369135cd3c3a8c17809c00d077ec0d66"
-    sha256 x86_64_linux:  "a071d62e17d4ae5087f89f8954766f635854ba102d87282a1af56829e4529f9a"
+    sha256 arm64_tahoe:   "0014d05529c164efc357b20d05d8b5dd1eb2a9c8162d24eee55e1548dc39599e"
+    sha256 arm64_sequoia: "8fd6e495989455fbe118c73bd6c19eff89d0249cda83bc42ca2d841556b11504"
+    sha256 arm64_sonoma:  "bc149b8d7f01171052de8b8249fb15c369a5e21a7d666f1553e8af3f1c7ea17a"
+    sha256 sonoma:        "1851a5edf373453dcb8342dfc782b6b094a47f722fb486453c9d7f5820fba68a"
+    sha256 arm64_linux:   "30ad6024ef4e57dfc47f7a18d5ae8c21319389f1a9b7ad8fa21a2136cbedc3cb"
+    sha256 x86_64_linux:  "1064700ff66ef0b260831670b63927ef24eb8adb0de4f54f57f2ff8107dc202d"
   end
 
   keg_only :versioned_formula
+
+  # See: https://endoflife.date/mysql
+  deprecate! date: "2026-04-30", because: :unsupported
 
   depends_on "bison" => :build
   depends_on "cmake" => :build

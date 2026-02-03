@@ -3,11 +3,23 @@ class SyslogNg < Formula
 
   desc "Log daemon with advanced processing pipeline and a wide range of I/O methods"
   homepage "https://www.syslog-ng.com"
-  url "https://github.com/syslog-ng/syslog-ng/releases/download/syslog-ng-4.10.1/syslog-ng-4.10.1.tar.gz"
-  sha256 "dea90cf1dc4b8674ff191e0032f9dabc24b291abfd7f110fd092ae5f21cde5d7"
   license all_of: ["LGPL-2.1-or-later", "GPL-2.0-or-later"]
-  revision 3
   head "https://github.com/syslog-ng/syslog-ng.git", branch: "develop"
+
+  stable do
+    url "https://github.com/syslog-ng/syslog-ng/releases/download/syslog-ng-4.10.2/syslog-ng-4.10.2.tar.gz"
+    sha256 "841503de6c2486e66fd08f0c62ac2568fc8ed1021297f855e8acd58ad7caff76"
+
+    # Backport Python dependency updates to avoid vulnerable packages
+    patch do
+      url "https://github.com/syslog-ng/syslog-ng/commit/89c1dcfb411e3c5611629fe99561f3106eb19b0f.patch?full_index=1"
+      sha256 "eb42508fa0a1b716ef8967151f10fe86b427e21fc50ef2f160c14bbd35a89291"
+    end
+    patch do
+      url "https://github.com/syslog-ng/syslog-ng/commit/dc070981e726ca1babb8e48bc368d0429eac9223.patch?full_index=1"
+      sha256 "1d7bb9994f0aff742fec24a038df90d199fa2e43aae28a396dc51a892fe7a95b"
+    end
+  end
 
   livecheck do
     url :stable
@@ -15,12 +27,12 @@ class SyslogNg < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "de321c8629d5063aebf2bd17f7112ac08b7a7082cb6b329b4e645623dfdeb214"
-    sha256 arm64_sequoia: "cd73472808d144299ea6f756a606f8774b2db6c4075443db732e5066af1921a0"
-    sha256 arm64_sonoma:  "293fd9077af989210279585230ccfb74fe120cdae4e9af743d50883ce445bca6"
-    sha256 sonoma:        "e2ed2980c24562ebdd85ca9ff6b7a605351f544248e72dc26ba5ce33e6bdc566"
-    sha256 arm64_linux:   "626af44535225d386ef4de41a121d3cba7916568759aa17c86fc2a38558942b4"
-    sha256 x86_64_linux:  "74d538f25fbf55d0307f7366e16e8be235e99cebdd569b35ceefab53ae901c75"
+    sha256 arm64_tahoe:   "0a3a80ea6526e2b5dc0884a562e5b26cb82a0ff9b6830992ab087d56c2cbf05a"
+    sha256 arm64_sequoia: "6247fedd689fa834b488a7cf04952a96eda47f71f80af324b694ea0690b3078d"
+    sha256 arm64_sonoma:  "fcbfe149b4d89ecd5e5bb55cfa449b1dc88f6c0bff59eaf9e56cc06cb4580bb8"
+    sha256 sonoma:        "4807a03b86afaeb94309dab844062c55521484e7cceef4cb3190136dc46531f6"
+    sha256 arm64_linux:   "4ab28e3ef104754afa47b09ceafd6162c7d9239aa9b876055d07d74894c80d07"
+    sha256 x86_64_linux:  "91a18b034e0b78035a437a6bc0702202c37eb065061a6ec87b16c523246a3f3a"
   end
 
   depends_on "pkgconf" => :build
@@ -46,16 +58,20 @@ class SyslogNg < Formula
   depends_on "riemann-client"
 
   uses_from_macos "curl"
+  uses_from_macos "zlib"
 
   on_macos do
+    depends_on "autoconf" => :build
+    depends_on "automake" => :build
+    depends_on "libtool" => :build
     depends_on "gettext"
   end
 
   def install
     ENV["VERSION"] = version
 
-    # Workaround to allow Python 3.13+
-    inreplace "requirements.txt", "PyYAML==6.0.1", "PyYAML==6.0.2"
+    # Need to regenerate configure on macOS to avoid undefined symbols, e.g. "_evt_tag_errno"
+    system "autoreconf", "--force", "--install", "--verbose" if OS.mac?
 
     python3 = "python3.14"
     venv = virtualenv_create(libexec, python3)
@@ -64,8 +80,6 @@ class SyslogNg < Formula
     args = std_pip_args(prefix: false, build_isolation: true).reject { |s| s["--no-deps"] }
     system python3, "-m", "pip", "--python=#{venv.root}/bin/python",
                           "install", *args, "--requirement=#{buildpath}/requirements.txt"
-
-    ENV.append "CXXFLAGS", "-std=c++17"
 
     system "./configure", "--disable-silent-rules",
                           "--enable-all-modules",

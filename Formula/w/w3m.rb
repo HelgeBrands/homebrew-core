@@ -1,48 +1,31 @@
 class W3m < Formula
   desc "Pager/text based browser"
   homepage "https://w3m.sourceforge.net/"
+  url "https://git.sr.ht/~rkta/w3m/archive/v0.5.6.tar.gz"
+  sha256 "8dd652cd3f31817d68c7263c34eeffb50118c80be19e1159bf8cbf763037095e"
   license "w3m"
-  head "https://github.com/tats/w3m.git", branch: "master"
-
-  stable do
-    url "https://deb.debian.org/debian/pool/main/w/w3m/w3m_0.5.3+git20230121.orig.tar.xz"
-    sha256 "974d1095a47f1976150a792fe9c5a44cc821c02b6bdd714a37a098386250e03a"
-    version "0.5.3-git20230121"
-
-    # Fix for CVE-2023-4255
-    patch do
-      url "https://sources.debian.org/data/main/w/w3m/0.5.3%2Bgit20230121-2.1/debian/patches/0002-CVE-2023-4255.patch"
-      sha256 "7a84744bae63f3e470b877038da5a221ed8289395d300a904ac5a8626b0a9cea"
-    end
-  end
-
-  livecheck do
-    url "https://deb.debian.org/debian/pool/main/w/w3m/"
-    regex(/href=.*?w3m[._-]v?(\d+(?:\.\d+)+(?:\+git\d+)?)\.orig\.t/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| match.first.tr("+", "-") }
-    end
-  end
-
-  no_autobump! because: :requires_manual_review
+  head "https://git.sr.ht/~rkta/w3m", branch: "master"
 
   bottle do
-    sha256 arm64_tahoe:   "66b442a770ff9d6b7abb96a5994925af7a6ae07c68c4362d801e3d9b69f1fc6f"
-    sha256 arm64_sequoia: "d43c6ea193e92ae3a7ff8c68d77dfa6b69b28695bf0ef4009c07a8b55049bbb0"
-    sha256 arm64_sonoma:  "7ebcfdfd3b2424232e38d4bb2df40b78aa189a5f9f59d7d95479a5c9b5504962"
-    sha256 arm64_ventura: "76450cc0ba39c902c03f3262950fc6fbd71ab37487d8b739d3c39294e08f269f"
-    sha256 sonoma:        "b832f5eced22941c1c3f44520dd6bc6f656d861c27eb52a942b93723df23d0da"
-    sha256 ventura:       "b0a1d6e3855af50f3d32878d2889fa99f281985bec224b18ce42e48d55df89a1"
-    sha256 arm64_linux:   "bf66af8f63d1faba8adeccf8539174f8cf1e40834068a57745ef7f8916694079"
-    sha256 x86_64_linux:  "08f462b37359e85d7d9628d5bfce123da1f7e28c1811157b3d485cb6424fff39"
+    sha256 arm64_tahoe:   "4d1b70b398bc3a41d00bac9aeb84e5b697cef48f4daf2da9b78440b45ebb64f0"
+    sha256 arm64_sequoia: "b6e39e9e98c34c037f13b56bf6138a0df42b16f70607ee85b7e09ae0ecf6708e"
+    sha256 arm64_sonoma:  "8dea1ca031a24f4e74a67d9b0887ce16567e235178ff9379a86aeef0b0ccdb3e"
+    sha256 sonoma:        "ba058257e2b72d1f48947a0af5f4c6851e21c7bd8634dafc5f7482de4fbaa522"
+    sha256 arm64_linux:   "669365ddf231bcd4acac703d1d2431a04253f8ba531dd9a49785e15eb5b723bf"
+    sha256 x86_64_linux:  "02d2666c615eff0b1119e7ac2c85ae782ae0c06bf1c38efe21829cfd8a5941d1"
   end
 
+  depends_on "gettext" => :build
   depends_on "pkgconf" => :build
   depends_on "bdw-gc"
   depends_on "openssl@3"
 
   uses_from_macos "ncurses"
   uses_from_macos "zlib"
+
+  on_macos do
+    depends_on "gettext"
+  end
 
   def install
     system "./configure", "--disable-image",

@@ -4,6 +4,7 @@ class Git < Formula
   url "https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.52.0.tar.xz"
   sha256 "3cd8fee86f69a949cb610fee8cd9264e6873d07fa58411f6060b3d62729ed7c5"
   license "GPL-2.0-only"
+  revision 1
   head "https://github.com/git/git.git", branch: "master"
 
   livecheck do
@@ -12,12 +13,13 @@ class Git < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "8c43e1c8916f146d294922af82de59ec9ecc897d2ad518c51049104708a61c5a"
-    sha256 arm64_sequoia: "237d6093833bb6b4d13e9ce601aed25257da006e091895c2b069b1101ce87444"
-    sha256 arm64_sonoma:  "40042fdb9e8223f35f6808e04d3471735357462784ca77e3cb4c5ce97f13c6d8"
-    sha256 sonoma:        "3423ab7630438cf26cc38759856cae3a3d80b9328b7f9e72a981d199d427b602"
-    sha256 arm64_linux:   "2e58298564bb960362eb4c75f101b7d878d66471a948f83b5767304b0488f865"
-    sha256 x86_64_linux:  "0bfd0b1eae2f70cacf14971bdfef206f6aea78a1c4c4c19f486705766f743954"
+    rebuild 1
+    sha256 arm64_tahoe:   "b38e9da78154b13b32f1445f8547ac399f2b2e7141ad75b6629d24469e27c7ed"
+    sha256 arm64_sequoia: "c19806bab8c8059b2a01275670829864d4c4243042b6ed771e0cff2cfdc20e2d"
+    sha256 arm64_sonoma:  "44293f455b4c39f3e3466715be74aecd3995ed765163a5def0407dc6b6cdad17"
+    sha256 sonoma:        "4712f38cb96b889883b28adb93cfb06f489676f5e5ae9e7583098a93b9cdd862"
+    sha256 arm64_linux:   "567e3a8b79357b48b95a1d4c59f4c1e8f1e9e8fcd921104598f608960a15acab"
+    sha256 x86_64_linux:  "6fdac40b74282d1b5aa610a2ad05a7688c146acdec7bdb5004ee42ca25a705fe"
   end
 
   depends_on "gettext"
@@ -27,8 +29,17 @@ class Git < Formula
   uses_from_macos "expat"
   uses_from_macos "zlib"
 
+  on_macos do
+    depends_on "libiconv"
+  end
+
   on_linux do
     depends_on "openssl@3" # Uses CommonCrypto on macOS
+  end
+
+  resource "Authen::SASL" do
+    url "https://cpan.metacpan.org/authors/id/E/EH/EHUELS/Authen-SASL-2.1900.tar.gz"
+    sha256 "be3533a6891b2e677150b479c1a0d4bf11c8bbeebed3e7b8eba34053e93923b0"
   end
 
   resource "html" do
@@ -71,6 +82,7 @@ class Git < Formula
     perl_version = Utils.safe_popen_read("perl", "--version")[/v(\d+\.\d+)(?:\.\d+)?/, 1]
 
     if OS.mac?
+      ENV["ICONVDIR"] = Formula["libiconv"].opt_prefix
       ENV["PERLLIB_EXTRA"] = %W[
         #{MacOS.active_developer_dir}
         /Library/Developer/CommandLineTools
@@ -157,9 +169,13 @@ class Git < Formula
     chmod 0644, Dir["#{share}/doc/git-doc/**/*.{html,txt}"]
     chmod 0755, Dir["#{share}/doc/git-doc/{RelNotes,howto,technical}"]
 
-    # git-send-email needs Net::SMTP::SSL or Net::SMTP >= 2.34
+    # git-send-email needs Net::SMTP::SSL or Net::SMTP >= 2.34 and Authen::SASL
     resource("Net::SMTP::SSL").stage do
       (share/"perl5").install "lib/Net"
+    end
+
+    resource("Authen::SASL").stage do
+      (share/"perl5").install "lib/Authen"
     end
 
     # This is only created when building against system Perl, but it isn't

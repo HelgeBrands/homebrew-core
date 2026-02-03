@@ -1,19 +1,19 @@
 class StyleDictionary < Formula
   desc "Build system for creating cross-platform styles"
   homepage "https://github.com/style-dictionary/style-dictionary"
-  url "https://registry.npmjs.org/style-dictionary/-/style-dictionary-5.1.1.tgz"
-  sha256 "a842bd3e12d423e1e94fc32c761e480e36bc5b2557209fbab179c86301b7c408"
+  url "https://registry.npmjs.org/style-dictionary/-/style-dictionary-5.2.0.tgz"
+  sha256 "1a42228043ec272a1140f6f19f343c970309d6e870f94d637c189caef3df2786"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "7fdd23ee5810c54a986af48711be28021089d32e489060503b824ef4438a48e7"
+    sha256 cellar: :any_skip_relocation, all: "eb23784de97cd98957b42f9c304eb37802254f1b39dc868602a58355b83fa4ac"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     # Build an `:all` bottle by removing example files
     examples = libexec/"lib/node_modules/style-dictionary/examples"

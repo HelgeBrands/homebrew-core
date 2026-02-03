@@ -4,7 +4,7 @@ class Acl2 < Formula
   url "https://github.com/acl2/acl2/archive/refs/tags/8.6.tar.gz"
   sha256 "c2d73e66422901b3cc2a6f5a9ab50f5f3b1b4060cf9dc9148d076f3a8b957cf9"
   license "BSD-3-Clause"
-  revision 13
+  revision 15
 
   livecheck do
     url :stable
@@ -12,11 +12,11 @@ class Acl2 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "79f4d9fcd79ff956c2b698d4a0d1400506a9c83a032b3b675f67382c2e2ad805"
-    sha256 arm64_sequoia: "dcb4361aebe67010a2b772fa08b00d05dce7f44e342101da07ce04fe3b4d41ed"
-    sha256 arm64_sonoma:  "238c9edf710d6c268f15b57b0da402f900618c562df34d359e5727e95a03d4c6"
-    sha256 sonoma:        "465e7552071a28adb773e85803c29193614d27fa020783e0a758d4fc1b7a1a99"
-    sha256 x86_64_linux:  "0ae5f2bf2d53143d05ad171874894656618f1b10b23a2d7c5e43a461351aa6b9"
+    sha256 arm64_tahoe:   "1206a65d92771cb92c143f845aea5d823cd51e9509c4a9634f81ca6dbc34093c"
+    sha256 arm64_sequoia: "e1ea055ee9d9b0ca6390d588b36b87404f3db11adfc9b6d1a08bc9f739b8db3f"
+    sha256 arm64_sonoma:  "33da5327235e954378f521c26627f0c340d07eab414fff7974373a1b30b68753"
+    sha256 sonoma:        "19f12e7e0c35bfae87ee58e66f0ec527138e1aa88120b173acce226b4d3b3a1a"
+    sha256 x86_64_linux:  "36e546567d2531e1d88437d92508f20bf5800e016b5ac7b48afa805a8168ac90"
   end
 
   depends_on "sbcl"
@@ -27,17 +27,20 @@ class Acl2 < Formula
       "books/kestrel/axe/x86/examples/popcount/popcount-macho-64.executable",
       "books/kestrel/axe/x86/examples/factorial/factorial.macho64",
       "books/kestrel/axe/x86/examples/tea/tea.macho64",
+      "books/kestrel/axe/x86/examples/tea/tea.elf64",
+      "books/kestrel/axe/x86/examples/add/add.elf64",
     ])
 
     # Move files and then build to avoid saving build directory in files
     libexec.install Dir["*"]
 
-    sbcl = Formula["sbcl"].opt_bin/"sbcl"
-    system "make", "-C", libexec, "all", "basic", "LISP=#{sbcl}", "USE_QUICKLISP=0"
-    system "make", "-C", libexec, "all", "basic", "LISP=#{sbcl}", "USE_QUICKLISP=0", "ACL2_PAR=p"
+    sbcl = Formula["sbcl"]
+    args = ["LISP=#{sbcl.opt_bin}/sbcl", "USE_QUICKLISP=0", "ACL2_MAKE_LOG=NONE"]
+    system "make", "-C", libexec, "all", "basic", *args
+    system "make", "-C", libexec, "all", "basic", *args, "ACL2_PAR=p"
 
     ["acl2", "acl2p"].each do |acl2|
-      inreplace libexec/"saved_#{acl2}", Formula["sbcl"].prefix.realpath, Formula["sbcl"].opt_prefix
+      inreplace libexec/"saved_#{acl2}", sbcl.prefix.realpath, sbcl.opt_prefix
       (bin/acl2).write_env_script libexec/"saved_#{acl2}", ACL2_SYSTEM_BOOKS: "#{libexec}/books"
     end
   end

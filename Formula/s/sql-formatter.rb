@@ -1,12 +1,12 @@
 class SqlFormatter < Formula
   desc "Whitespace formatter for different query languages"
   homepage "https://sql-formatter-org.github.io/sql-formatter/"
-  url "https://registry.npmjs.org/sql-formatter/-/sql-formatter-15.6.10.tgz"
-  sha256 "3b070a5bb281e40c0e78e22aa1651407781dd847e09ac913eafcb2963d9fab0d"
+  url "https://registry.npmjs.org/sql-formatter/-/sql-formatter-15.7.0.tgz"
+  sha256 "9381fd6cfc2ea37e07b978290e94a7e9baa04f2a71ffc7a62a89eb71e4713df9"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "0519d62277b7da2544a1d0d6e3e6eccde59fa89a807f3f694df7b753d34d36aa"
+    sha256 cellar: :any_skip_relocation, all: "54c1798301319ba620edceadf7c064aa61773aa84f25ae8485bb6b43a6a8dac8"
   end
 
   depends_on "node"

@@ -1,14 +1,15 @@
 class Openblas < Formula
   desc "Optimized BLAS library"
   homepage "https://www.openblas.net/"
-  url "https://github.com/OpenMathLib/OpenBLAS/archive/refs/tags/v0.3.30.tar.gz"
-  sha256 "27342cff518646afb4c2b976d809102e368957974c250a25ccc965e53063c95d"
+  url "https://github.com/OpenMathLib/OpenBLAS/archive/refs/tags/v0.3.31.tar.gz"
+  sha256 "6dd2a63ac9d32643b7cc636eab57bf4e57d0ed1fff926dfbc5d3d97f2d2be3a6"
   # The main license is BSD-3-Clause. Additionally,
   # 1. OpenBLAS is based on GotoBLAS2 so some code is under original BSD-2-Clause-Views
   # 2. lapack-netlib/ is a bundled LAPACK so it is BSD-3-Clause-Open-MPI
   # 3. interface/{gemmt.c,sbgemmt.c} is BSD-2-Clause
   # 4. relapack/ is MIT but license is omitted as it is not enabled
   license all_of: ["BSD-3-Clause", "BSD-2-Clause-Views", "BSD-3-Clause-Open-MPI", "BSD-2-Clause"]
+  revision 1
   head "https://github.com/OpenMathLib/OpenBLAS.git", branch: "develop"
 
   livecheck do
@@ -17,24 +18,45 @@ class Openblas < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "a25af8ac88166d74dcea256b9ee9ffaad0c5ace88941a3e760d32aa3813e778c"
-    sha256 cellar: :any,                 arm64_sequoia: "f194baff998d5d4418c0a647f592f14c10f8c26cd1542f64b310ac72844a095a"
-    sha256 cellar: :any,                 arm64_sonoma:  "46471ce1e3f44f4c765bb6fad1690a9aa69fe9c948379e6f40b9c5e38652c4b9"
-    sha256 cellar: :any,                 arm64_ventura: "0b711f2254dc6c5ce89d21cba9f67d89da72b3cfe55bb840f4130dd2bab62fd6"
-    sha256 cellar: :any,                 sonoma:        "dcef53fdbfa90411375b209ac11ae5b41e6c63f9f139e155d892bb2e4616feb6"
-    sha256 cellar: :any,                 ventura:       "ebd50b45068b81d33f2269f523ade1e357a230234ef27524a37365de0b657580"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "60f63379659c38cea3a544c5e85e612ce0a0d02433aeb581fce3e1264f909eef"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "08c0a5b778704cdfbf09b0db18a87cbfc2ba2a82241d2d999488a771cb308447"
+    sha256 cellar: :any,                 arm64_tahoe:   "86be8c9ee5070d3b4e940ab72cd89998dcf59ece4691d7b3bc2a9549f3999d31"
+    sha256 cellar: :any,                 arm64_sequoia: "fcde181971556b1ef2febf3051c4365c2138e5be4b81c44b14ebf642a7aa0bd2"
+    sha256 cellar: :any,                 arm64_sonoma:  "a29ae64872e453f299745202b9cdcad7d9479b00af47528d80d3ce068b0bb80d"
+    sha256 cellar: :any,                 sonoma:        "b44311b4806a899fb976c6e7f9369ef1a8f913324f32b2b631dd7bcac2dd93fe"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "dcaadf5e964f6c0de691cf40697b9a0981926396a8fd5a2253db7fe4dd006a3c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "df4ff7c931ea08422354e0d8dcd1efb84144b91393ec58572434483a154f6bbf"
   end
 
   keg_only :shadowed_by_macos, "macOS provides BLAS in Accelerate.framework"
 
   depends_on "pkgconf" => :test
   depends_on "gcc" # for gfortran
-  fails_with :clang
+
+  on_macos do
+    depends_on "libomp"
+  end
+
+  # Fix configuration header on Linux Arm with GCC 12
+  # https://github.com/OpenMathLib/OpenBLAS/pull/5606
+  patch do
+    url "https://github.com/OpenMathLib/OpenBLAS/commit/c077708852c7262b6bc0da6bc094b447e7ba7b3c.patch?full_index=1"
+    sha256 "e59596a7bec1fa6c22c4bee20c8040faa15fa57aa6486acd99b9688aef15f4da"
+  end
 
   def install
+    # Workaround to use Apple Clang, GCC gfortran and link to `libomp`. We do not
+    # want to link GCC's libgomp as it will cause dependents to mix multiple OpenMP:
+    # https://cpufun.substack.com/p/is-mixing-openmp-runtimes-safe
+    if ENV.compiler == :clang
+      inreplace "Makefile.install" do |s|
+        s.gsub! ":= -fopenmp", ":= -I#{Formula["libomp"].opt_include} -Xpreprocessor -fopenmp"
+        s.gsub! "+= -lgomp", "+= -L#{Formula["libomp"].opt_lib} -lomp"
+      end
+      inreplace "Makefile.system" do |s|
+        s.gsub! "+= -fopenmp", "+= -Xpreprocessor -fopenmp"
+        s.gsub! "+= -lgfortran", "+= -L#{Formula["gcc"].opt_lib}/gcc/current -lgfortran"
+      end
+    end
+
     ENV.runtime_cpu_detection
     ENV.deparallelize # build is parallel by default, but setting -j confuses it
 
@@ -68,6 +90,14 @@ class Openblas < Formula
   end
 
   test do
+    if OS.mac?
+      require "utils/linkage"
+      libgomp = Formula["gcc"].opt_lib/"gcc/current/libgomp.dylib"
+      libomp = Formula["libomp"].opt_lib/"libomp.dylib"
+      refute Utils.binary_linked_to_library?(lib/"libopenblas.dylib", libgomp), "Unwanted linkage to libgomp!"
+      assert Utils.binary_linked_to_library?(lib/"libopenblas.dylib", libomp), "Missing linkage to libomp!"
+    end
+
     (testpath/"test.c").write <<~C
       #include <stdio.h>
       #include <stdlib.h>
@@ -95,6 +125,8 @@ class Openblas < Formula
     cp_r pkgshare/"cpp_thread_test/.", testpath
     ENV.prepend_path "PKG_CONFIG_PATH", lib/"pkgconfig" if OS.mac?
     flags = shell_output("pkgconf --cflags --libs openblas").chomp.split
+    flags += %W[-L#{Formula["libomp"].lib} -lomp] if OS.mac?
+
     %w[dgemm_thread_safety dgemv_thread_safety].each do |test|
       inreplace "#{test}.cpp", '"../cblas.h"', '"cblas.h"'
       system ENV.cxx, *ENV.cxxflags.to_s.split, "-std=c++11", "#{test}.cpp", "-o", test, *flags

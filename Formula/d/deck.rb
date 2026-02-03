@@ -1,18 +1,18 @@
 class Deck < Formula
   desc "Creates slide deck using Markdown and Google Slides"
   homepage "https://github.com/k1LoW/deck"
-  url "https://github.com/k1LoW/deck/archive/refs/tags/v1.21.6.tar.gz"
-  sha256 "3bef75b2511d670e2b9bf1e862fc1699ccb1d86a40e064321c1d9cca4a9b32e1"
+  url "https://github.com/k1LoW/deck/archive/refs/tags/v1.23.0.tar.gz"
+  sha256 "5cfecf75c0a379add9b3d346cc4331f26ca1cb9f8176e8468db089506cac27f1"
   license "MIT"
   head "https://github.com/k1LoW/deck.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "be0c9c52497dfc33f9027af097de5c963330a962a725ca046a4fc17fea6acfa0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "be0c9c52497dfc33f9027af097de5c963330a962a725ca046a4fc17fea6acfa0"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "be0c9c52497dfc33f9027af097de5c963330a962a725ca046a4fc17fea6acfa0"
-    sha256 cellar: :any_skip_relocation, sonoma:        "db30dd298903cf219ba499df9afb3b25540e985bddbd8248ecdeeb64c8bfdaf6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f02e666613be605d6904a322de2e9c395001b4699e9f39e95cc326bd753d6981"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "581c6721da01acf1c7f3ed248f8adba69139c1adf14e0dfbf8b5525289c3b0bf"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "529b027151a24b9069d3558ed42dcdf997692b35336b09d0c9ca486639822d22"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "529b027151a24b9069d3558ed42dcdf997692b35336b09d0c9ca486639822d22"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "529b027151a24b9069d3558ed42dcdf997692b35336b09d0c9ca486639822d22"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a0d8c6095b2f953104253b5aea59cca568a04c68db9d6d993b3dcb2eaa7738c2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "61dd928ae3d50c240b3dce2b40ab37e81f4bb2ff5e23eed5549f091115d74a71"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "874f7ec7e3d4c80abe02c4ae55ffec15fcc0d0e22bbbed70e6269cb8eaa93c20"
   end
 
   depends_on "go" => :build
@@ -20,7 +20,7 @@ class Deck < Formula
   def install
     system "go", "build", *std_go_args(ldflags: "-s -w"), "./cmd/deck"
 
-    generate_completions_from_executable(bin/"deck", "completion")
+    generate_completions_from_executable(bin/"deck", shell_parameter_format: :cobra)
   end
 
   test do

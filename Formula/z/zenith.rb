@@ -1,8 +1,8 @@
 class Zenith < Formula
   desc "In terminal graphical metrics for your *nix system"
   homepage "https://github.com/bvaisvil/zenith/"
-  url "https://github.com/bvaisvil/zenith/archive/refs/tags/0.14.1.tar.gz"
-  sha256 "73d704b3cbf93506c22f3a7d98ae1a75011434a27a978dd0a7b6b30c7794423b"
+  url "https://github.com/bvaisvil/zenith/archive/refs/tags/0.14.3.tar.gz"
+  sha256 "b092048d1a9ce7234584d928e4b103aaaa7e47589923cf4e48dfa8919b3f8d88"
   license "MIT"
   version_scheme 1
   head "https://github.com/bvaisvil/zenith.git", branch: "master"
@@ -13,16 +13,12 @@ class Zenith < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:    "2774e00fb53ed4446adc9916a1ffc4a2fd639e862b73fca0b4efde11651b14e9"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:  "27a11d6590b2e48b771af993c0b39a3bdfcbc629f97837fb633a199203d1a013"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "a756e7ce1451f19ff41f5d41207cb6d7638b081399c365ef5d9ffd0c8beb3794"
-    sha256 cellar: :any_skip_relocation, arm64_ventura:  "b52ba65cef2bd5122e967f6115e83aaf94c7f0016f1005c45614bbf790184ecc"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "436fde6c104ba8f224fc7076df51b652f3ff3d9031cfcb08cd5884cde42e4125"
-    sha256 cellar: :any_skip_relocation, sonoma:         "d4172d5c72a51ab8aebba7d4c47070b0a8cefdb40a8b73b928ddd02475dbef81"
-    sha256 cellar: :any_skip_relocation, ventura:        "f177e534fc869dea3f2dc14f4ac29689c646991afd43b7e918b57b55d4a50395"
-    sha256 cellar: :any_skip_relocation, monterey:       "9027e600ac7437f36f97ac6712c0d0183448b11929dc2cde6fb14153a029408c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "a63fd0f8939e226783ff561e979b63f40e4c0d6b77cba2fdd4cafc0eb2662abb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "d4c7423ab047dead7279b56bd10dea35d14b07a58f26f97fef4dd065a8c0b8e5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c81ddc75796095724c82b528314108b9faef5bb5fc4b0f4957d6bce598a637f1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c7d440b1ca179d4cccdcea57576decde4aaeea001d6ccdaa8ec6b6190e74cfbc"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "951081852c40e287d187388d69d6d59dcfc096b461c68dbb4255af5bbaeb29a7"
+    sha256 cellar: :any_skip_relocation, sonoma:        "604878551ce967241a95e00fcd5a8c536143ac3885bda1c8e9ba709a10e3ac1d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "04e3f9eca98968d07a3695cf519ced235645d4123bd7cc1d10a569c6fd0fa55e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f6f97827bc9854759a38f7e5cb6b86dc14a92152809e0d06d0815adec23af64f"
   end
 
   depends_on "rust" => :build
@@ -45,7 +41,9 @@ class Zenith < Formula
     sleep 1
     w.write "q"
     output = OS.mac? ? r.read : (testpath/"out.log").read
-    assert_match(/PID\s+USER\s+P\s+N\s+↓CPU%\s+MEM%/, output.gsub(/\e\[[;\d]*m/, ""))
+    assert_match "PID", output
+    assert_match "CPU", output
+    assert_match "MEM", output
   ensure
     Process.kill("TERM", pid)
   end

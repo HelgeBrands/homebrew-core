@@ -3,11 +3,10 @@ class Mysql < Formula
   # FIXME: Actual homepage fails audit due to Homebrew's user-agent
   # homepage "https://dev.mysql.com/doc/refman/9.3/en/"
   homepage "https://github.com/mysql/mysql-server"
-  url "https://cdn.mysql.com/Downloads/MySQL-9.5/mysql-9.5.0.tar.gz"
-  mirror "https://repo.mysql.com/apt/ubuntu/pool/mysql-innovation/m/mysql-community/mysql-community_9.5.0.orig.tar.gz"
-  sha256 "ef3343981375865a2519f72b600e55f9c646e60e204a2964d3b7e8e748a110a5"
+  url "https://cdn.mysql.com/Downloads/MySQL-9.6/mysql-9.6.0.tar.gz"
+  mirror "https://repo.mysql.com/apt/ubuntu/pool/mysql-innovation/m/mysql-community/mysql-community_9.6.0.orig.tar.gz"
+  sha256 "240061d869d5ae188c9a333845928899e9d963ccbd67865a8a2e4b6fcb67178c"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
-  revision 2
 
   livecheck do
     url "https://dev.mysql.com/downloads/mysql/?tpl=files&os=src"
@@ -17,12 +16,12 @@ class Mysql < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 arm64_tahoe:   "ae901d075edcd8f857a50916cbcf502f67faf4d8c97beee5482c06c4e4eb4ffc"
-    sha256 arm64_sequoia: "39cb419abcedaf51d6aa224812800ef35f1c93ff669a407728aa231e869954bd"
-    sha256 arm64_sonoma:  "195316dfa0f29dff00d600ad2e04f84ff7a80c98905b5b722b4797ef7d539224"
-    sha256 sonoma:        "e616ab53df78acfa432e4bb39e4ba4d209c16caeb92133eb35d88f24a45d94fc"
-    sha256 arm64_linux:   "f43f6dcdebbd0c582a3aceb90a05560b05b7849de6908e19f8f584f8fa5c84fb"
-    sha256 x86_64_linux:  "f666b5b780009e06d0d5a2e1ac4e9ce40246bb3a99826a713a76467f8f654ed0"
+    sha256 arm64_tahoe:   "d51ce7302dedf3dd04d77e1f30ed6e975c4c21264faaa24aad7629b35166b5eb"
+    sha256 arm64_sequoia: "c8dc8176a9e28dd96c82bea016fbf31b735b0bab0b3bca7212625ad9eff7eb63"
+    sha256 arm64_sonoma:  "2a97b572ec58e25adfa69ab4e26096362eb0049f21971469600f2ac6597bfbb7"
+    sha256 sonoma:        "6e03cab52201f12180339184e6f63facc865539aa2a59c721d4ca872fc86c41a"
+    sha256 arm64_linux:   "52c3b93c86c5ab7593d6607ca5d528542055daecc7a3d188dca5f8ee577b66f1"
+    sha256 x86_64_linux:  "24ce2e9b005789315614ab4576c0e25e47a98dee9da3cc133318885d5f41dd1a"
   end
 
   depends_on "bison" => :build

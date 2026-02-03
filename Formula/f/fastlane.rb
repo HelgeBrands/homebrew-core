@@ -1,8 +1,8 @@
 class Fastlane < Formula
   desc "Easiest way to build and release mobile apps"
   homepage "https://fastlane.tools"
-  url "https://github.com/fastlane/fastlane/archive/refs/tags/2.229.1.tar.gz"
-  sha256 "3e9c945e804cf99f20e0d29fa91c2fbd7cf303c171cf7b36c7b125b49a776e45"
+  url "https://github.com/fastlane/fastlane/archive/refs/tags/2.231.1.tar.gz"
+  sha256 "4a1d78218c26b0bd53db2c3ee039ca57e488d059a4939b1c07c3458b7ed2742e"
   license "MIT"
   head "https://github.com/fastlane/fastlane.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Fastlane < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "0c70a893ee9bda5fe70704a86c83a3fe077fb15cf3d5d2e90288d55a3565d457"
-    sha256 cellar: :any,                 arm64_sequoia: "dad9fd2c520ef5c6aef07d4cc72f6b7e96200b2d1399c1635f9064144ab270b5"
-    sha256 cellar: :any,                 arm64_sonoma:  "6f43ca74792b08b7fdb5aaa38d47ee1638ecace8e2068c91e06cfc8df243113e"
-    sha256 cellar: :any,                 sonoma:        "0505ac896e42a2b22c49c87ea7f9b41d78f3992c25db53abc72f5a911a31f458"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9b8b7a3e5ce981682b4309b8a3d77a40ff7f2d1ed259bb1a817e59026d12359b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "57e24bbe564f09cc51f39e43432601597685b442ff8f4dbc3c32bc0050d9d393"
+    sha256 cellar: :any,                 arm64_tahoe:   "4541293bf6b14a659bd4b2052b6284a6a20ebb337cf9fa629b67364a6997264b"
+    sha256 cellar: :any,                 arm64_sequoia: "573fe683c6ae680347d0cf1abaaa940368563858be408e5605fb6ea423935765"
+    sha256 cellar: :any,                 arm64_sonoma:  "929d07eed6b7d3b6aeb2d6027cbcbb945bd6a07b0a4ccdf9610b22a21fd902c4"
+    sha256 cellar: :any,                 sonoma:        "b02ca0dbfbd130e5f434ac48423ddb540c5d432b8aa0125a6f792755b0e2d26a"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "74bb4f784115927e175e136e536fae1827d8ce47a9f524be8fca5ff5c7987be6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9c361e9ef331fafff75a02f3ca2e350d23509fcf6ca398288fe0689458291fc1"
   end
 
   depends_on "ruby"
@@ -35,10 +35,6 @@ class Fastlane < Formula
     ENV["GEM_PATH"] = libexec
     ENV["LANG"] = "en_US.UTF-8"
     ENV["LC_ALL"] = "en_US.UTF-8"
-
-    # `abbrev`, `mutex_m` gem no longer with ruby 3.4+, upstream patch pr, https://github.com/fastlane/fastlane/pull/29182
-    system "gem", "install", "abbrev", "--no-document"
-    system "gem", "install", "mutex_m", "--no-document"
 
     system "gem", "build", "fastlane.gemspec"
     system "gem", "install", "fastlane-#{version}.gem", "--no-document"
@@ -69,6 +65,9 @@ class Fastlane < Formula
   end
 
   test do
+    ENV["LANG"] = "en_US.UTF-8"
+    ENV["LC_ALL"] = "en_US.UTF-8"
+
     assert_match "fastlane #{version}", shell_output("#{bin}/fastlane --version")
 
     actions_output = shell_output("#{bin}/fastlane actions")

@@ -3,13 +3,13 @@ class Checkdmarc < Formula
 
   desc "Command-line parser for SPF and DMARC DNS records"
   homepage "https://domainaware.github.io/checkdmarc/"
-  url "https://files.pythonhosted.org/packages/50/81/de2f72eedc45b44596c9a3764155d86927fb0784dc1a42a53282c0a47b71/checkdmarc-5.12.27.tar.gz"
-  sha256 "bcf98ec40736bab0fd3387f742c7d771b8fcfa0c1a218c2efaaa6dc5a6dd557a"
+  url "https://files.pythonhosted.org/packages/5d/85/a9ad6ec88771f6087a78a9664b069ae9fa1246667a14f64978467121c7b4/checkdmarc-5.13.3.tar.gz"
+  sha256 "f5888fc6ca9221fd9e72f49606edc893c30370d2e7cf03a3381244d4a7c56588"
   license "Apache-2.0"
   head "https://github.com/domainaware/checkdmarc.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "5e200744c2f64793f666483eb86c5ae367a0969bec599c0639f9e9fa2621d136"
+    sha256 cellar: :any_skip_relocation, all: "381be60d14e387cf07281de169763a3ec3d6ce01948c2dcacb4269cf12842f47"
   end
 
   depends_on "certifi" => :no_linkage
@@ -49,8 +49,8 @@ class Checkdmarc < Formula
   end
 
   resource "publicsuffixlist" do
-    url "https://files.pythonhosted.org/packages/95/35/1f51ea2b86e656fd766410fab262c045623e10c0f5461d4f1e6c5db759de/publicsuffixlist-1.0.2.20251205.tar.gz"
-    sha256 "458bcbb5d69057e5d76c8b8b61d5caa1c998104ef5788b95d8a265561696fa76"
+    url "https://files.pythonhosted.org/packages/db/a0/df4d9eb48b7e6359bd66e2ba28cdc191bf602f8db0fd9f54e0aa622c142d/publicsuffixlist-1.0.2.20260117.tar.gz"
+    sha256 "24e11230db4fe4d7e68bb43203f80bf527f614c0625a7dc2749d7b0444d858e5"
   end
 
   resource "pyleri" do
@@ -74,8 +74,8 @@ class Checkdmarc < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "xmltodict" do

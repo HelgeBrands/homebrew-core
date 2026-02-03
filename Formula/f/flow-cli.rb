@@ -1,8 +1,8 @@
 class FlowCli < Formula
   desc "Command-line interface that provides utilities for building Flow applications"
   homepage "https://onflow.org"
-  url "https://github.com/onflow/flow-cli/archive/refs/tags/v2.12.0.tar.gz"
-  sha256 "49f932c0a4411c7389e03e49356c74069094db03e45fafc641072a4afe34c7a1"
+  url "https://github.com/onflow/flow-cli/archive/refs/tags/v2.14.0.tar.gz"
+  sha256 "7c3d062c777cbc917f534ae4b1032a1b296b0e9f00bdc2b11d307bb7426cabcb"
   license "Apache-2.0"
   head "https://github.com/onflow/flow-cli.git", branch: "master"
 
@@ -12,12 +12,12 @@ class FlowCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a53e1b350c049d8e4320225e80e9449ad6fc6499e49dd2b5121fa0423b1026b4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "406616141a564c6a550741bf82e149e91a01673ebce10d6e2e47f53e097e8409"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f2cfea080dee164f8f746b77bc181066c70331e13a27b78f355bd00c94c239ee"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1a3eb1dc2680541385122b271d5eb585ea5685136159f5893f1fbddb26a41482"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "edf8c28df9d3a013d22da8324a0c4bc16c3b13d72664ead0b6ee2ef63b9f7e75"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a2b7fd221f75c9d4f021ce2b5681b657dda66e9da73fd8f1c1560f6dfa6af611"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "91bfdc8f59e56d7615195af5696a771fbb19d54a1099948c4138f2a907b5f717"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e2bd8cf5041d29b6029552f8152545f41d95bd6dcaeee0912ed3a35045e158f3"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c5b8e9f9fa09932fac34c33b9cb3e6472c798894948dbcc95b1178096d3c1ba9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "1b0d6fc9f9aac7fa4cd5c46be1571bd72e9326a472bbdc17c9e05c152205e330"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7756efe7e97d731b03ec2f548868e4950de9052f53df302d41d8b0617861476d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1f6c8d70521255e0a0d34251ae40c8767854495df3563d44123b813a5271ced5"
   end
 
   depends_on "go" => :build
@@ -28,7 +28,7 @@ class FlowCli < Formula
     system "make", "cmd/flow/flow", "VERSION=v#{version}"
     bin.install "cmd/flow/flow"
 
-    generate_completions_from_executable(bin/"flow", "completion")
+    generate_completions_from_executable(bin/"flow", shell_parameter_format: :cobra)
   end
 
   test do

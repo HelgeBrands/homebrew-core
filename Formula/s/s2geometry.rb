@@ -4,6 +4,7 @@ class S2geometry < Formula
   url "https://github.com/google/s2geometry/archive/refs/tags/v0.13.1.tar.gz"
   sha256 "df001f8352dce083a87b74646bcbc65fbbcd039646bda5b64adfda1e2ea32d47"
   license "Apache-2.0"
+  revision 1
 
   livecheck do
     url :homepage
@@ -11,27 +12,24 @@ class S2geometry < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "f9bd88e3c1134eaafbafb2b18548ae9de6a614cb3a85c13cff63ef7eed6dd8eb"
-    sha256 cellar: :any,                 arm64_sequoia: "44785d45e28a46b001100e2f37df4070cc16f64d74e34d4166608c5c63709fa8"
-    sha256 cellar: :any,                 arm64_sonoma:  "1b5f4d70eda36bb453f8ecfadcc4da58e90b225f9dcd4fa082de1c1dbaa48efe"
-    sha256 cellar: :any,                 sonoma:        "7f3ff45faca313aa6d2e4a8c8a8f0b7151405d03f45da3b9fcb0c2f64146611c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "657cba1a641ba0e2bd4d2f023c54a69f15e84720650cc71499e0cd52dff1e6f3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c7d6394576719ec997bb1486097874d967746d264e438dec148a82c2a2df7d42"
+    sha256 cellar: :any,                 arm64_tahoe:   "8f79d0c4a802ebb6534abcf48d19ff6b23e7b3dd2f00bacab751be2795b17ee5"
+    sha256 cellar: :any,                 arm64_sequoia: "97278dc633347c47bdb0ab98b766f3e0d878ddb69ab42d07deae9d28222b7c0f"
+    sha256 cellar: :any,                 arm64_sonoma:  "04808ef92b7db6eb5f653296206f4e228136db79fea36ca811ea31d7e3a3b582"
+    sha256 cellar: :any,                 sonoma:        "e619f78302f4cf5ec4a2977fc7a1d7f3a03703a7f0d64ffd15190554afaa5b26"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "0134241899aea80e57425a5acc31198a3d43722551e523186ef9693786ba7c3a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "781a1286862396a5a038f772d972654fb61087bf9f7d1a872a6d05bcb4982bbe"
   end
 
   depends_on "cmake" => [:build, :test]
   depends_on "abseil"
-  depends_on "glog"
   depends_on "openssl@3"
 
   def install
+    # Keep C++ standard in sync with `abseil.rb`.
     args = %W[
-      -DOPENSSL_ROOT_DIR=#{Formula["openssl@3"].opt_prefix}
       -DBUILD_TESTS=OFF
-      -DWITH_GFLAGS=1
-      -DWITH_GLOG=1
       -DCMAKE_CXX_STANDARD=17
-      -DCMAKE_CXX_STANDARD_REQUIRED=TRUE
+      -DOPENSSL_ROOT_DIR=#{Formula["openssl@3"].opt_prefix}
     ]
 
     # Fix missing include of unaligned.h

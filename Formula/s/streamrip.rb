@@ -3,21 +3,18 @@ class Streamrip < Formula
 
   desc "Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer"
   homepage "https://github.com/nathom/streamrip"
-  # Test dependencies should be removed, so they are added to `pypi_packages`
-  # `pygments` should be added manually, it is removed with test dependencies
-  # PR ref: https://github.com/nathom/streamrip/pull/886
   url "https://files.pythonhosted.org/packages/b8/c9/6997772e0217f3081e4e692c7b8b104aaa564c008f2593341e81bbbd2396/streamrip-2.1.0.tar.gz"
   sha256 "e59b4b406f9ac77eb59c927a1a082644e0902152ffeb6212b6b24af7fbef5540"
   license "GPL-3.0-only"
-  revision 5
+  revision 7
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0d812d36f8ae97ca6768c62f534df7d87b2f8dbaab0d7a792a1a091616b0154c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e4246c1398af8242f6559aca9d873354769ee84e6f2e73c4532a0c927ed07367"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3e7c84c812ab394a3472db374c6c3f394545d48fa769cb9d4967abd66d7e2a62"
-    sha256 cellar: :any_skip_relocation, sonoma:        "6470b712aa2bd5945d6e5dade235f178c4f80af9672f18120acd4fe7520054e9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "bb10a0f5c82f33c52b877ad69ad64a753358e69964964e3f47f01cd9b4665c3b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4ccfcda537beda0c3648c267c1655a07e76429ef5c0582fd126f95add3cea28f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7410e3c65b79df9f5b208ba8097f5552510d790c176ccbbdfd21726f58641a76"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "30224cdcaa8c3ca3e2556fc41b3abcf8c35ebbe906c8a30b5c2fe2ba006d4f14"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "50defc9faa77dd29727f9e043a17f22e97dbbae6f865bf940a2dfa6f9bd2e8b9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "35ddef95f2e85edcb252d701b046f054307f40e8fc62759298ca942937e5b8e6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "9a9e07cf21dd4e604991d45a8836a0fa79c37815eb23e4f0d180e98846b25fd2"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "97ef055ea54d754f48da23b5e4799c17b67eba27194803d40ce150eb5cd96f7b"
   end
 
   depends_on "certifi" => :no_linkage
@@ -27,11 +24,12 @@ class Streamrip < Formula
 
   uses_from_macos "libffi"
 
-  pypi_packages exclude_packages: %w[certifi pillow pytest-asyncio pytest-mock]
+  pypi_packages exclude_packages: %w[certifi pillow pytest-asyncio pytest-mock],
+                extra_packages:   "pygments"
 
   resource "aiodns" do
-    url "https://files.pythonhosted.org/packages/e6/11/238e97cbf5c1c0f725d590a092e0618dcdc50f44dbd1e2a926fae27e6f06/aiodns-3.6.0.tar.gz"
-    sha256 "9b0ef54339e6687cdbd39a7d73d7de2467cb5c115281da28f2598f058633dac8"
+    url "https://files.pythonhosted.org/packages/85/2f/9d1ee4f937addda60220f47925dac6c6b3782f6851fd578987284a8d2491/aiodns-3.6.1.tar.gz"
+    sha256 "b0e9ce98718a5b8f7ca8cd16fc393163374bc2412236b91f6c851d066e3324b6"
   end
 
   resource "aiofiles" do
@@ -45,8 +43,8 @@ class Streamrip < Formula
   end
 
   resource "aiohttp" do
-    url "https://files.pythonhosted.org/packages/1c/ce/3b83ebba6b3207a7135e5fcaba49706f8a4b6008153b4e30540c982fae26/aiohttp-3.13.2.tar.gz"
-    sha256 "40176a52c186aefef6eb3cad2cdd30cd06e3afbe88fe8ab2af9c0b90f228daca"
+    url "https://files.pythonhosted.org/packages/50/42/32cf8e7704ceb4481406eb87161349abb46a57fee3f008ba9cb610968646/aiohttp-3.13.3.tar.gz"
+    sha256 "a949eee43d3782f2daae4f4a2819b2cb9b0c5d3b7f7a927067cc84dafdbb9f88"
   end
 
   resource "aiolimiter" do
@@ -185,8 +183,8 @@ class Streamrip < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "yarl" do
@@ -200,9 +198,13 @@ class Streamrip < Formula
     ENV["SOURCE_DATE_EPOCH"] = "1451574000"
 
     virtualenv_install_with_resources
+
+    generate_completions_from_executable(bin/"rip", shell_parameter_format: :click)
   end
 
   test do
-    system bin/"rip", "url", "https://soundcloud.com/radiarc/radiarc-irrelevance-fading"
+    assert_match version.to_s, shell_output("#{bin}/rip --version")
+
+    system bin/"rip", "database", "browse", "Downloads"
   end
 end

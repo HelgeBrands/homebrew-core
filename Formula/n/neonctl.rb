@@ -1,24 +1,24 @@
 class Neonctl < Formula
   desc "Neon CLI tool"
   homepage "https://neon.tech/docs/reference/neon-cli"
-  url "https://registry.npmjs.org/neonctl/-/neonctl-2.18.1.tgz"
-  sha256 "9f1b5013a5a16350a590202a5a2ccf6ea59dddc8b1090bdc6e4cdcf81362b9fe"
+  url "https://registry.npmjs.org/neonctl/-/neonctl-2.20.2.tgz"
+  sha256 "8c7879b6d96c3c0bdb14c68202debfbc8a52909efcaa5fb40e0397aa0772a605"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "76649c3caee0f2b1c941d53d45239006f2f3f6dfc30c197ea0f38e0e2d3e1703"
-    sha256 cellar: :any,                 arm64_sequoia: "a16713735f8adbce6c29b3d10ffc3df43be05d662a11fe8f4b67b1495b5c300c"
-    sha256 cellar: :any,                 arm64_sonoma:  "a16713735f8adbce6c29b3d10ffc3df43be05d662a11fe8f4b67b1495b5c300c"
-    sha256 cellar: :any,                 sonoma:        "09f80cc6b2f5ab047c536cd203fa7a4ce1dcfbbba6bd019c198cc08454b17c34"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a37551c61c0adc19df6c46b7643e0aa9428a9a7930a4413dea6740785eb8a12f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3887aab1e3e92996cd1b813930314dfa76d9a6c911b89a7d9da1a0a96f2b065c"
+    sha256 cellar: :any,                 arm64_tahoe:   "e5af3032138299fb82ebce6a80948d78ffe8705f8b2c067b168420c92edb7710"
+    sha256 cellar: :any,                 arm64_sequoia: "590761948cacefe8a0d814f9d7f71ef6d8ed433e918745f5a659de819eefd50c"
+    sha256 cellar: :any,                 arm64_sonoma:  "590761948cacefe8a0d814f9d7f71ef6d8ed433e918745f5a659de819eefd50c"
+    sha256 cellar: :any,                 sonoma:        "6d8eccad09ff96a3af68f6ecc75ab8949e502d8d5a57050657dec6e9ab338499"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a90e9601389605182e417e1c1e19a3eb1177a0934d7fef571f26399214eb5c7e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "23846fc3ac45f55b078e725449329b6d794da97310cac6ab26adf80c26f5d9df"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     %w[neonctl neon].each do |cmd|
       generate_completions_from_executable(bin/cmd, "completion", shells: [:bash, :zsh])

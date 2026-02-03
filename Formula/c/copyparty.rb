@@ -3,34 +3,32 @@ class Copyparty < Formula
 
   desc "Portable file server"
   homepage "https://github.com/9001/copyparty"
-  url "https://files.pythonhosted.org/packages/0e/f8/29e5d6181b60e0be3d9fb6e73a96c27dfabef1f3eb188ba2eb1a9c989404/copyparty-1.19.21.tar.gz"
-  sha256 "b86f6ce8af6318cfc1e67fb76f98b528d64d7da2ee4780e792d62d7ae26a254b"
+  url "https://files.pythonhosted.org/packages/83/b9/15b2c3f9ab5d0843d9ad3bd827ce389eaa272a2fd8c095e46f1ed96abaf2/copyparty-1.20.6.tar.gz"
+  sha256 "1fc00d302505f56df2568193b8e224778eacfddfc70ffaa276c3be1a642df98e"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "6a64d28b767d71537abfd24e8f599232747394126b279031c3cc648180e5799c"
-    sha256 cellar: :any,                 arm64_sequoia: "971f343bb3daf27d8ccca7bb6fc960ad84d611e170526fd8f1c4c9e485540159"
-    sha256 cellar: :any,                 arm64_sonoma:  "ade54d72daadae6d210c060c1f42610916cd4908db87a623ebf771aefc05a0af"
-    sha256 cellar: :any,                 sonoma:        "aed23fc8919190d729c01415be61328eb2e76214d16b57686fa0c8d4f626b4e9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "00ec3dff2d0b4a8ed24a79f8babec1abddd174c1be678e61d7aebf38325cd95b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d1238e2b7cbadaba2ed504c37ac625d6b56591ae41cea7de6748b74f23d6a3cd"
+    sha256 cellar: :any,                 arm64_tahoe:   "511a544d44af87ea9d4fcf3b58a7d245e80eb9ee99c134770a8a3c742164c261"
+    sha256 cellar: :any,                 arm64_sequoia: "ec2bce74c7bdd10d262fb2886ffa94195e0fc25ec0dd6b76d396bf1c2b402309"
+    sha256 cellar: :any,                 arm64_sonoma:  "bc6c22e26e08d2d6251d3edb94c63031854ac406360035c48be043626ed6ee1c"
+    sha256 cellar: :any,                 sonoma:        "de87bc17293154dbff3a0e2d03ffc822c98eb4f3c0bed3d65d048e8ee99197ad"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d7ea9568a1e0b6bc32450e6a8d2d9fa17950c91cb8ca9b18daa6137d3454b76a"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f89b29aecd65a3e44df6ed1742f7afe7b91ea44e3dce37a97d8651ea7beff0de"
   end
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "pkgconf" => :build
   depends_on "cryptography" => :no_linkage
-  depends_on "glib"
+  depends_on "pillow" => :no_linkage
   depends_on "python@3.14"
-  depends_on "vips"
   depends_on "zeromq"
 
   on_macos do
     depends_on "gettext"
   end
 
-  pypi_packages package_name:     "copyparty[thumbnails2,audiotags,ftpd,ftps,tftpd,pwhash,zeromq]",
-                exclude_packages: ["cffi", "cryptography", "pycparser"]
+  pypi_packages package_name:     "copyparty[thumbnails,audiotags,ftpd,ftps,tftpd,pwhash,zeromq]",
+                exclude_packages: %w[cffi cryptography pillow pycparser]
 
   resource "argon2-cffi" do
     url "https://files.pythonhosted.org/packages/0e/89/ce5af8a7d472a67cc819d5d998aa8c82c5d860608c4db9f46f1162d7dab9/argon2_cffi-25.1.0.tar.gz"
@@ -63,13 +61,13 @@ class Copyparty < Formula
   end
 
   resource "pyasynchat" do
-    url "https://files.pythonhosted.org/packages/8a/fd/aacc6309abcc5a388c66915829cd8175daccac583828fde40a1eea5768e4/pyasynchat-1.0.4.tar.gz"
-    sha256 "3f5333df649e46c56d48c57e6a4b7163fd07f626bfd884e22ef373ab3c3a4670"
+    url "https://files.pythonhosted.org/packages/ec/d2/b41df9021c12ca314146abcde7bdd3d9d37d44cc01559d7f13df459ee586/pyasynchat-1.0.5.tar.gz"
+    sha256 "36665473ae730dac51e6d7dad70f8295962120c830ab692f0a31efba32687e24"
   end
 
   resource "pyasyncore" do
-    url "https://files.pythonhosted.org/packages/25/6e/956e2bc9b47e3310cd524036f506b779a77788c2a1eb732e544240ad346f/pyasyncore-1.0.4.tar.gz"
-    sha256 "2c7a8b9b750ba6260f1e5a061456d61320a80579c6a43d42183417da89c7d5d6"
+    url "https://files.pythonhosted.org/packages/4e/43/035dfe0cb01687c1940fdc008f46a43c41067e226e862df49327469764a0/pyasyncore-1.0.5.tar.gz"
+    sha256 "dd483d5103a6d59b66b86e0ca2334ad43dca732ff23a0ac5d63c88c52510542e"
   end
 
   resource "pyftpdlib" do
@@ -80,11 +78,6 @@ class Copyparty < Formula
   resource "pyopenssl" do
     url "https://files.pythonhosted.org/packages/80/be/97b83a464498a79103036bc74d1038df4a7ef0e402cfaf4d5e113fb14759/pyopenssl-25.3.0.tar.gz"
     sha256 "c981cb0a3fd84e8602d7afc209522773b94c1c2446a3c710a75b06fe1beae329"
-  end
-
-  resource "pyvips" do
-    url "https://files.pythonhosted.org/packages/4c/a2/d8ecd2f7ffa084870ba071a584aac44800a89f3c77b305999be7dc8b7bb3/pyvips-3.0.0.tar.gz"
-    sha256 "79459975e4a16089b0eaafed26eb1400ae66ebc16d3ff3a7d2241abcf19dc9e8"
   end
 
   resource "pyzmq" do

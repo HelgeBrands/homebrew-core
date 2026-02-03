@@ -1,24 +1,24 @@
 class McpServerKubernetes < Formula
   desc "MCP Server for kubernetes management commands"
   homepage "https://github.com/Flux159/mcp-server-kubernetes"
-  url "https://registry.npmjs.org/mcp-server-kubernetes/-/mcp-server-kubernetes-3.0.1.tgz"
-  sha256 "b85f48ce42e980d0dfb48a971ba7f56c646ac70df63deaf5d15b138868b84b66"
+  url "https://registry.npmjs.org/mcp-server-kubernetes/-/mcp-server-kubernetes-3.2.0.tgz"
+  sha256 "c8bf8254bab03b0715a0e8ab26aa94a52b04f49f20afe905f46e6de007c1c1cc"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c5a7cda742e27865eac9c251ea6893875d538270a6f58f1b5f90ed18eb073ed2"
-    sha256 cellar: :any,                 arm64_sequoia: "1640d4eb5023441235aea8211ded706e20bdde07ce3816ba5428fab34212d8a6"
-    sha256 cellar: :any,                 arm64_sonoma:  "1640d4eb5023441235aea8211ded706e20bdde07ce3816ba5428fab34212d8a6"
-    sha256 cellar: :any,                 sonoma:        "ebbbe7bb74acbc7be2dd53ef463b9d76b8dad6d35cbf4d92a59edf64e9fdd088"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "974d82c9f97ebef8de1d75f14d6bf40d1caf15c74f82ca79cb22af4d154d96ae"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "08ae58f36aabfffa45e6e6dc63cff5d30b0db38faea76292be98e1a6fa84996b"
+    sha256 cellar: :any,                 arm64_tahoe:   "b6d71409dcf2cde018670c290b1842c2889e7e901927a661ce5f3422c3a70260"
+    sha256 cellar: :any,                 arm64_sequoia: "996705fa8e0e5d260cd19f35c0431eb2488a52a478b45e38700cd118a74966cf"
+    sha256 cellar: :any,                 arm64_sonoma:  "996705fa8e0e5d260cd19f35c0431eb2488a52a478b45e38700cd118a74966cf"
+    sha256 cellar: :any,                 sonoma:        "311dce8a705b6b559e58e06b89616dfe8b03d59193bcd27003fed4becad83027"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "2b1640a036e056b6621ba480ddbfc7892bafc859f3c2f57338cd34551ccbbfce"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e94b9e348dddb6249939a68201aa9e6520e00266d0fe6f269721ca061eadb12e"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     # Remove incompatible pre-built binaries
     os = OS.kernel_name.downcase

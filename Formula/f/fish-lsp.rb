@@ -1,17 +1,17 @@
 class FishLsp < Formula
   desc "LSP implementation for the fish shell language"
   homepage "https://www.fish-lsp.dev"
-  url "https://registry.npmjs.org/fish-lsp/-/fish-lsp-1.1.1.tgz"
-  sha256 "8cf14e16170a68bb95ece08c7de3d3f5d7fc93e906ed31ff31422f5d136ac7ca"
+  url "https://registry.npmjs.org/fish-lsp/-/fish-lsp-1.1.3.tgz"
+  sha256 "1579b9ff599a46fd9d1c276eec1b6d67dcc5cd45cb6637d776e7912794f2fa55"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "24b6e8313b5cba1c82528316b4952de227b88099dbedc65aa6e1f2f8a415becf"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "635491635bf5bdb5b955e23a63b2db37d050443ac6011b1946264f878cbe8fcc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "635491635bf5bdb5b955e23a63b2db37d050443ac6011b1946264f878cbe8fcc"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1069f2d8da6c1e66afa0ad06e135a1999821ef8af9dbd13fe68507323db0e92f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "460cb824aa3530382261c31071af777f59f12a487f94b419f974b4b21445cace"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9ac8504ba6a7eb1edba342d5c4606aed495d2971b75d537ac88886cbaf976cc8"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "201dab806604b73ba3fc768994a068d6b690fd461b4c0a34ac525e6f146ae9af"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fb11ab4f3df4006699a25c212ecd542dc793a227ab7f63ce08ffe8ac70bf8dd9"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b0a5d288e4fe733eb8f8c5e6f889144df95d51557b43df2372544dccfc7209a9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "61faa3f547a6236194f97ff1be7e9b9b29a5e0fea3487b5305ba7ad68f6d590c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "81fcd3fda13c220f8cd5bb8a6c2a3e35c1a6d62919af172ffa1e2ed662357d2d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9e96b735a5eca4159c0b77327b17974c1293835e2362789868af9431a85b0dad"
   end
 
   depends_on "fish" => [:build, :test]

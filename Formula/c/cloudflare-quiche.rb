@@ -2,8 +2,8 @@ class CloudflareQuiche < Formula
   desc "Savoury implementation of the QUIC transport protocol and HTTP/3"
   homepage "https://docs.quic.tech/quiche/"
   url "https://github.com/cloudflare/quiche.git",
-      tag:      "0.24.6",
-      revision: "020a43a0a5eed76f57dd3ce5012149aa576c594d"
+      tag:      "0.24.8",
+      revision: "c9d3e85f0f2acda30acbe186033bf534faeba7f3"
   license "BSD-2-Clause"
   head "https://github.com/cloudflare/quiche.git", branch: "master"
 
@@ -13,18 +13,18 @@ class CloudflareQuiche < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "94cf2f6d446be6967e0ff5c897119207150b727f19393c6274be619010818ec6"
-    sha256 cellar: :any,                 arm64_sequoia: "9fdfdfd55a6503b9aca9a34c7e35077df3041cafb794804f35346ff340821d57"
-    sha256 cellar: :any,                 arm64_sonoma:  "ad2a4fbf4f65847baa4aeec6d238951104c14aba3a982c7b0eeb6f98df0ed157"
-    sha256 cellar: :any,                 arm64_ventura: "9f08f4d1db96fe372ed1d5a548fdedf54102442bffe182f33ebc4fd745fdc8fc"
-    sha256 cellar: :any,                 sonoma:        "dae3a219d175e8bdc73500e2765719dc3a4feac6bb71e0402be87dba907ba1c3"
-    sha256 cellar: :any,                 ventura:       "95150c13315bb303844632259de94ef54a66bc5ccf1bbf985bb2b1aca92236f7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a72afc04e7c22ff6967b255960cf8fa23a3ce06c2b7d1be375088f3315002470"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d774a224f07c7e4ad2144a6df48c39502100c3396e569e8f91c295019d0d799a"
+    sha256 cellar: :any,                 arm64_tahoe:   "ba78563fafdaf69338396b4734533541ec95a4e9c36cead1d287791fc201c856"
+    sha256 cellar: :any,                 arm64_sequoia: "c92ce4617bdd0ff59d27e49f6a1d737f61970a89519ef8ee365e3db2a12859c0"
+    sha256 cellar: :any,                 arm64_sonoma:  "e7028455aeb569bd24049fa7ace630ee7b43895277287eccaffaa749b9ce5103"
+    sha256 cellar: :any,                 sonoma:        "1b5aa7ccc0b2d5896b66b9a74f9b4998aafb305f8ded6196639c9f1a82f11185"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "9c5f7fc2fc291253b0cd5d2cd6a3cf5a82195d881b3d03e29bce4cf3ea7f84c6"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a45ea376a784323b0bd7ee2e67e2be69b645e71cf0564b8b00853cf34e3ce5cc"
   end
 
   depends_on "cmake" => :build
+  depends_on "pkgconf" => :build
   depends_on "rust" => :build
+  depends_on "fontconfig"
 
   uses_from_macos "llvm" => :build
 

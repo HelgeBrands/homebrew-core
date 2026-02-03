@@ -1,17 +1,17 @@
 class Gotun < Formula
   desc "Lightweight HTTP proxy over SSH"
   homepage "https://github.com/Sesame2/gotun"
-  url "https://github.com/Sesame2/gotun/archive/refs/tags/v0.6.1.tar.gz"
-  sha256 "d63768ad7ae61b2fa29f100e22af19b9d43886eb85712e64c58d24b9408b92c1"
+  url "https://github.com/Sesame2/gotun/archive/refs/tags/v0.8.0.tar.gz"
+  sha256 "c0521f2e4df9bd8bae9afbca4bd4ab48bc1b3b24ef06ec17301dcfa1dfef1f93"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "700956caa0621363c75435dcb00f638b26ac709be5b41cc850561b05c99bc94b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "700956caa0621363c75435dcb00f638b26ac709be5b41cc850561b05c99bc94b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "700956caa0621363c75435dcb00f638b26ac709be5b41cc850561b05c99bc94b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "9359d4ea158a6c165a1f02c694cde47e5155234933c2136500fb5433027b562b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d25f8a2fc8013990e210a4654bd55d91fb53135133a300c6f778235434ed6037"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f89af90bec14e9b584e6e2fb1751f11809f72ad43d570c6ef56ff69c79b52d94"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1404cfcbbe2c3948baa3388361eeb2be34b590fbbdfd090849e38a10a1eeadc9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1404cfcbbe2c3948baa3388361eeb2be34b590fbbdfd090849e38a10a1eeadc9"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1404cfcbbe2c3948baa3388361eeb2be34b590fbbdfd090849e38a10a1eeadc9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ce42412109096343b27d56419cc3c9ba18e4012556f7f221cf727af8d00e1bce"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "3b4aa3385559f0ac14ce53cd7e1630f1e444dfd469b6b77a8ae8d6b2b8135c1f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4781293eb4e7feed7cb77184d0896c1e84f7416b90f20a220d08942606527910"
   end
 
   depends_on "go" => :build
@@ -19,7 +19,7 @@ class Gotun < Formula
   def install
     ldflags = "-s -w -X main.Version=#{version}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/gotun"
-    generate_completions_from_executable(bin/"gotun", "completion")
+    generate_completions_from_executable(bin/"gotun", shell_parameter_format: :cobra)
   end
 
   test do
@@ -45,7 +45,7 @@ class Gotun < Formula
       # GNU/Linux raises EIO when read is done on closed pty
     end
 
-    assert_match "HTTP-over-SSH", output
+    assert_match "GoTun dev", output
     assert_match "localhost:#{port}", output
   ensure
     Process.kill "TERM", server_pid

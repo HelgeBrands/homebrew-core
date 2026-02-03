@@ -1,10 +1,10 @@
 class Adios2 < Formula
   desc "Next generation of ADIOS developed in the Exascale Computing Program"
   homepage "https://adios2.readthedocs.io"
-  url "https://github.com/ornladios/ADIOS2/archive/refs/tags/v2.10.2.tar.gz"
-  sha256 "14cf0bcd94772194bce0f2c0e74dba187965d1cffd12d45f801c32929158579e"
+  url "https://github.com/ornladios/ADIOS2/archive/refs/tags/v2.11.0.tar.gz"
+  sha256 "0a2bd745e3f39745f07587e4a5f92d72f12fa0e2be305e7957bdceda03735dbf"
   license "Apache-2.0"
-  revision 1
+  revision 2
   head "https://github.com/ornladios/ADIOS2.git", branch: "master"
 
   livecheck do
@@ -13,12 +13,12 @@ class Adios2 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "fb192ffe0a0bc23c4cc56526c9a2b8346e53e5260874cc300bb0a065aeae7418"
-    sha256 arm64_sequoia: "61c5f21327298bf1f22d9ecbe76cf663de26fb497d6f627cca61f81757c434ba"
-    sha256 arm64_sonoma:  "125c9a9dd992a8fd49fd86481dba54839837a820b65cabc554661a3214c624ef"
-    sha256 sonoma:        "5ee13af0760b4bd1832c934036fda68e64ed02b6f0bbc16cab9b7b47205cb1e3"
-    sha256 arm64_linux:   "8d3519f6da5495d9fae6f5a090444aaaebbca838dabc5516d52adf12a4ee1109"
-    sha256 x86_64_linux:  "cbf4cd5b3bb96bb85cc986f7c74a53323c7b04fde0ab265c30e1dfca5f789b08"
+    sha256 arm64_tahoe:   "cfaa152686072051bf806292f84349863cfe91bbaa0ec5a78a1f8860c271bdb3"
+    sha256 arm64_sequoia: "e86c2fb5b9a560bfa635e782524d707f9898da66e6f3c4cd9774b0b646b0f99b"
+    sha256 arm64_sonoma:  "ec0c9b5d971fff4f46067e043c4af98a9dcb239b58684440b42e4831889bcde7"
+    sha256 sonoma:        "024c1dcfbee8324b98a8722a43774b1d82c6ca6ec6215e12af82d7c803217560"
+    sha256 arm64_linux:   "e9ee045840f9b577f276af5dfc35db65c235271af34e59e4c4cef21ffef46f1a"
+    sha256 x86_64_linux:  "bc99b90e7bf695c4ae428ae7abdedefd43b5fe26074d20905c0b8f33cf576add"
   end
 
   depends_on "cmake" => :build
@@ -32,6 +32,7 @@ class Adios2 < Formula
   depends_on "mpi4py"
   depends_on "numpy"
   depends_on "open-mpi"
+  depends_on "openssl@3"
   depends_on "pugixml"
   depends_on "python@3.14"
   depends_on "sqlite"
@@ -52,13 +53,17 @@ class Adios2 < Formula
   # Apple clang version 14.0.0 (clang-1400.0.29.202)
   fails_with :clang if DevelopmentTools.clang_build_version == 1400
 
+  # Upstream PR: https://github.com/ornladios/ADIOS2/pull/4791
+  patch do
+    url "https://github.com/ornladios/ADIOS2/commit/1dcffdf15a90282549ce679e96ac59f35e93acde.patch?full_index=1"
+    sha256 "1133316f038abed99824d00584b70454122083cf0e2717a1322511b91a14c4dd"
+  end
+
   def python3
     "python3.14"
   end
 
   def install
-    ENV.llvm_clang if DevelopmentTools.clang_build_version == 1400
-
     # CMake FortranCInterface_VERIFY fails with LTO on Linux due to different GCC and GFortran versions
     ENV.append "FFLAGS", "-fno-lto" if OS.linux?
 

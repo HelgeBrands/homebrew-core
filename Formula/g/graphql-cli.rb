@@ -13,8 +13,6 @@ class GraphqlCli < Formula
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 
-  no_autobump! because: :requires_manual_review
-
   bottle do
     rebuild 2
     sha256 cellar: :any_skip_relocation, all: "9acfbbbc98a9212677f8cda3b773d20958ddb1cd5503d2c9894e531e44861832"
@@ -24,7 +22,7 @@ class GraphqlCli < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

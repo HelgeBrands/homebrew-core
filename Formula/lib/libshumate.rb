@@ -1,8 +1,8 @@
 class Libshumate < Formula
   desc "Shumate is a GTK toolkit providing widgets for embedded maps"
   homepage "https://gitlab.gnome.org/GNOME/libshumate"
-  url "https://download.gnome.org/sources/libshumate/1.5/libshumate-1.5.1.tar.xz"
-  sha256 "daadf8b700134388c7e933e0b623586aaa7f2fbe8b3a6259387513303b9876e6"
+  url "https://download.gnome.org/sources/libshumate/1.5/libshumate-1.5.3.tar.xz"
+  sha256 "35f013b25391856e1b5c3d4409a5c4a640c6ccb5f5296ff982ec7bed39f56d4c"
   license "LGPL-2.1-or-later"
 
   # libshumate doesn't use GNOME's "even-numbered minor is stable" version
@@ -14,12 +14,12 @@ class Libshumate < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "ee7739a41376eb9b7db3153e5cbf2719788a9fd89800b6af8b3d403a6fff73b8"
-    sha256 cellar: :any, arm64_sequoia: "51c8cab27d80ff2f52bb1b85819b1f4246d43565b7b3a38f127baadaf9df1cbe"
-    sha256 cellar: :any, arm64_sonoma:  "62c2d15b3d08e7a5d8cf2de69904eef1b6cff9411abb2ca64a403783b50e63ad"
-    sha256 cellar: :any, sonoma:        "ba2d1b47d584f1affe9d8b2a6e7bd762d8379dddde359a6b027860e62414fdb0"
-    sha256               arm64_linux:   "26e71aaa3d84bcb7fc29b96eaa2552e6eac7393bd8dd3b22d099baad590858f3"
-    sha256               x86_64_linux:  "e6812d64f61328c439254ed27d1235733d2938953dbef6715bb73410923f852f"
+    sha256 cellar: :any, arm64_tahoe:   "2cd842e531b375139ccfb04c61bb4c7d1b928de07519fffd61028e3c2da30f67"
+    sha256 cellar: :any, arm64_sequoia: "6b9e2112f1a167bce3813b372410621845ee237b745dcec9bbbc4d926ef4f5ce"
+    sha256 cellar: :any, arm64_sonoma:  "cb433a4f692036e749cb314d6eb6d940b79bce489f81433a710ec779399517cc"
+    sha256 cellar: :any, sonoma:        "5d8671c20ed555e9f4e04f55736d47a24936d3d689f6e1e023eff8772edbd12b"
+    sha256               arm64_linux:   "c8bea7fcb39d24d1490e83c40cea1a97bf1df88d78b526a04ba8c1168647da5a"
+    sha256               x86_64_linux:  "14d26d5c003ac2c1ee97006aaf45b33304dce57b70a2758f01615533b35d7dcb"
   end
 
   depends_on "gettext" => :build

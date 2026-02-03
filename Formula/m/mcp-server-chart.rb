@@ -1,19 +1,19 @@
 class McpServerChart < Formula
   desc "MCP with 25+ @antvis charts for visualization, generation, and analysis"
   homepage "https://github.com/antvis/mcp-server-chart"
-  url "https://registry.npmjs.org/@antv/mcp-server-chart/-/mcp-server-chart-0.9.6.tgz"
-  sha256 "4722feaa651b8923b56cad068b0d849f3cd2889c7e2a8506f899edc57aba52a7"
+  url "https://registry.npmjs.org/@antv/mcp-server-chart/-/mcp-server-chart-0.9.9.tgz"
+  sha256 "7c857085593404b2ff3092c1ded37b86d6304738de271c1a90391b60c81edbca"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "5369d16092babbaf7a189979e8efefcc210035fd3b9b3d15bbf6671106203b21"
+    sha256 cellar: :any_skip_relocation, all: "22df63f24187f5e67e43cad6953192a212332b28cdff254eb8017240cc7269e6"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

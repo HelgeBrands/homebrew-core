@@ -1,12 +1,12 @@
 class Docmd < Formula
   desc "Minimal Markdown documentation generator"
   homepage "https://docmd.mgks.dev/"
-  url "https://registry.npmjs.org/@mgks/docmd/-/docmd-0.3.2.tgz"
-  sha256 "97b30febf58c1a1ceceb117dfc8e237e8e332f3c26420fa248397d41458c3dd9"
+  url "https://registry.npmjs.org/@mgks/docmd/-/docmd-0.3.9.tgz"
+  sha256 "3bb453b54bf5a101df12e98ef0cc9ad121f68530a5f867721133b9155bad7981"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "4f3d3e3f3f3e4cb8e9f2d5a2a6e377593a6e1b7918ea9774e99d29e1b58c17a8"
+    sha256 cellar: :any_skip_relocation, all: "6bd3c0aa846cbe4b7dff1bb8a01af75743f52327c95a20ca85aaaf4e8ff86c22"
   end
 
   depends_on "esbuild" # for prebuilt binaries
@@ -14,7 +14,7 @@ class Docmd < Formula
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
 
     # Remove pre-built binaries
     rm_r(libexec/"lib/node_modules/@mgks/docmd/node_modules/@esbuild")

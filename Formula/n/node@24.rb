@@ -1,8 +1,8 @@
 class NodeAT24 < Formula
   desc "Open-source, cross-platform JavaScript runtime environment"
   homepage "https://nodejs.org/"
-  url "https://nodejs.org/dist/v24.11.1/node-v24.11.1.tar.xz"
-  sha256 "ea4da35f1c9ca376ec6837e1e30cee30d491847fe152a3f0378dc1156d954bbd"
+  url "https://nodejs.org/dist/v24.13.0/node-v24.13.0.tar.xz"
+  sha256 "320fe909cbb347dcf516201e4964ef177b8138df9a7f810d0d54950481b3158b"
   license "MIT"
 
   livecheck do
@@ -11,13 +11,12 @@ class NodeAT24 < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "1de6db6089defc2be8a2bf78f18a912ddcd2dbc29aa462bb6ab2d8eae79196ed"
-    sha256 cellar: :any,                 arm64_sequoia: "26fbc261005760e2926470638b1f193c7d01e4cdc27d6f1be20b0579eeadb17f"
-    sha256 cellar: :any,                 arm64_sonoma:  "330ed07f6a653e68f0e28aea73e5058a797c0b1b5c7eaa6f7059e3876f0685eb"
-    sha256 cellar: :any,                 sonoma:        "83e2050820cee83cbf271a05e6e9ca897ff87766016c8583934070648d895053"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d053019f0e6c60ec70a747787f350fe4f28a247658a7f206196626e932d307f4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7ff88048e8c1d3f09025f0bd99a60e6cddbdcb59b664c52edcb891ad9886f652"
+    sha256 cellar: :any,                 arm64_tahoe:   "36bc3c404c60cef1c868032b3196c26683dc96de1c881d4f4409496d08509c38"
+    sha256 cellar: :any,                 arm64_sequoia: "dd36cbbbb43556f07560b6800ad9b65636ee7226313f0585787dfb519f147006"
+    sha256 cellar: :any,                 arm64_sonoma:  "39336ec43a60453d71ac281934a3dc7ba233ecf72dd3b46f1d6ad028e6260efa"
+    sha256 cellar: :any,                 sonoma:        "9a93fc7599d02a03c3de3014b1cca008631d7c3c9441f597f1a7657c57ec6844"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "bdd3c079aa582a83fb629a90c06e433bc79f7b6bd162bed9376867a1807c8152"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0bca02d5db89e1f13256dbc8f4286dc85354e1b62fc4c74c28f582ab4122a93b"
   end
 
   keg_only :versioned_formula

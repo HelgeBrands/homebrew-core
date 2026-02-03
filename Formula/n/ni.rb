@@ -1,19 +1,21 @@
 class Ni < Formula
   desc "Selects the right Node package manager based on lockfiles"
   homepage "https://github.com/antfu-collective/ni"
-  url "https://registry.npmjs.org/@antfu/ni/-/ni-28.0.0.tgz"
-  sha256 "c42870d682f7192d822f1f59660a1296ea1184e0bb0e107e44e6c564df90c458"
+  url "https://registry.npmjs.org/@antfu/ni/-/ni-28.2.0.tgz"
+  sha256 "7f03ce8e7dd309ea9642b264576c18d8753bfcb6fb8a2c4a858a915b52e8595c"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "d4a448151946e4ba086cf681a03bb7e6eb0f8496d187b2bf9d49544c6657e26d"
+    sha256 cellar: :any_skip_relocation, all: "e4bd225db6e063efeaeb254a8284bdbe10c1a925991c311b322201159ae4ccdb"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
+
+    generate_completions_from_executable(bin/"nr", shell_parameter_format: "--completion-")
   end
 
   test do

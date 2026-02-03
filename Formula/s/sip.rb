@@ -3,25 +3,27 @@ class Sip < Formula
 
   desc "Tool to create Python bindings for C and C++ libraries"
   homepage "https://python-sip.readthedocs.io/en/latest/"
-  url "https://files.pythonhosted.org/packages/d0/5f/d6dc58565d2d174064b545f8b3bef7b6117d25ee06181d5560cc290bd344/sip-6.15.0.tar.gz"
-  sha256 "3920f26515456ee21114a1f8282144f8c156b1aabc3b44424155d5f81396025f"
+  url "https://files.pythonhosted.org/packages/8e/3d/4245885c0480230d4bc389c6165c841546bf43c1e780fd77995caf5ad7b8/sip-6.15.1.tar.gz"
+  sha256 "dc2e58c1798a74e1b31c28e837339822fe8fa55288ae30e8986eb28100ebca5a"
   license "BSD-2-Clause"
   head "https://github.com/Python-SIP/sip.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2475b9243ead136b847da26877f0b403f2b05f56e5fdf48ac461470fd7b012cc"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2475b9243ead136b847da26877f0b403f2b05f56e5fdf48ac461470fd7b012cc"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2475b9243ead136b847da26877f0b403f2b05f56e5fdf48ac461470fd7b012cc"
-    sha256 cellar: :any_skip_relocation, sonoma:        "34e3958c8e2da261a7aa204845e6578b1bed4ba97cdaf3d90e18445cfbd0ebc0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "34e3958c8e2da261a7aa204845e6578b1bed4ba97cdaf3d90e18445cfbd0ebc0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "34e3958c8e2da261a7aa204845e6578b1bed4ba97cdaf3d90e18445cfbd0ebc0"
+    sha256 cellar: :any_skip_relocation, all: "3d21ba4eb3a03542a519d2a27356993664cfea23499cd27475ffde3c97bc3816"
   end
 
   depends_on "python@3.14"
 
+  pypi_packages extra_packages: "platformdirs"
+
   resource "packaging" do
     url "https://files.pythonhosted.org/packages/a1/d4/1fc4078c65507b51b96ca8f8c3ba19e6a61c8253c72794544580a7b6c24d/packaging-25.0.tar.gz"
     sha256 "d443872c98d677bf60f6a1f2f8c1cb748e8fe762d2bf9d3148b5599295b0fc4f"
+  end
+
+  resource "platformdirs" do
+    url "https://files.pythonhosted.org/packages/cf/86/0248f086a84f01b37aaec0fa567b397df1a119f73c16f6c7a9aac73ea309/platformdirs-4.5.1.tar.gz"
+    sha256 "61d5cdcc6065745cdd94f0f878977f8de9437be93de97c1c12f853c9c0cdcbda"
   end
 
   resource "setuptools" do
@@ -39,6 +41,10 @@ class Sip < Formula
     # Modify the path sip-install writes in scripts as we install into a
     # virtualenv but expect dependents to run with path to Python formula
     inreplace venv.site_packages/"sipbuild/builder.py", /\bsys\.executable\b/, "\"#{which(python3)}\""
+
+    # Replace vendored platformdirs with latest version for easier relocation
+    # https://github.com/pypa/setuptools/pull/5076
+    venv.site_packages.glob("setuptools/_vendor/platformdirs*").map(&:rmtree)
   end
 
   test do

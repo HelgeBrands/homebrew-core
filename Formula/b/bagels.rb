@@ -6,15 +6,15 @@ class Bagels < Formula
   url "https://files.pythonhosted.org/packages/6e/04/e19a99e357221cb41e1e2f0352172e282ac8195fa2418b776345497fb260/bagels-0.3.12.tar.gz"
   sha256 "c3ebd4a727ddd62450528676a1ce3e475f92bd36edfed5f9c0b110bb24592608"
   license "GPL-3.0-or-later"
-  revision 3
+  revision 6
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1ebb32b309920cb764da62b033d5bccbfa09dfa11c5581cc8597ac89986f7244"
-    sha256 cellar: :any,                 arm64_sequoia: "9a8b026ca9cac5a530c2b4e551656ac9610a7e919ea41282ed377f5b6ff66805"
-    sha256 cellar: :any,                 arm64_sonoma:  "f71c2e720a443ff29d0bc7a419e3b32a3dba2502033b4be10ade3f4ff1f68465"
-    sha256 cellar: :any,                 sonoma:        "e5d88f4c44909050077f58b307a054f4aca77e8b390886a52ee6c583b46e1cf0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2ef7eee832173106939e6508b115b52fe3b7221ba24b30c8d1210dd71ade85a3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "924afaa7c9c818cbfd8aa36ad09b22b5edbffeadf4a76062695b163a113c6a25"
+    sha256 cellar: :any,                 arm64_tahoe:   "1dad1fc1fef02aeb54cb07c86ca1cdac1bd1765a361de4288e8399fd982e9f69"
+    sha256 cellar: :any,                 arm64_sequoia: "da7423ec2d6597f5aa5e28e232918ce3a4f1a224024d05ee0305025fe9741f5d"
+    sha256 cellar: :any,                 arm64_sonoma:  "d0492357086859cc4e798df084ef164738db0cc0cfb3554fa34390237578a767"
+    sha256 cellar: :any,                 sonoma:        "992786146cf54913c488e62f6b91577a18c5fe214eccbe03e27fb73ae809a51d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b61e6d4a956b556626be7b1ec419ef6ea0d6b1e1aa7f5e18a8b2d5b6cc00389d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "81ad6fa9758b3d50f95fce3b26087aba4ad0551ed1dd174de7dd267f3c385114"
   end
 
   depends_on "certifi" => :no_linkage
@@ -31,8 +31,8 @@ class Bagels < Formula
   end
 
   resource "aiohttp" do
-    url "https://files.pythonhosted.org/packages/1c/ce/3b83ebba6b3207a7135e5fcaba49706f8a4b6008153b4e30540c982fae26/aiohttp-3.13.2.tar.gz"
-    sha256 "40176a52c186aefef6eb3cad2cdd30cd06e3afbe88fe8ab2af9c0b90f228daca"
+    url "https://files.pythonhosted.org/packages/50/42/32cf8e7704ceb4481406eb87161349abb46a57fee3f008ba9cb610968646/aiohttp-3.13.3.tar.gz"
+    sha256 "a949eee43d3782f2daae4f4a2819b2cb9b0c5d3b7f7a927067cc84dafdbb9f88"
   end
 
   resource "aiohttp-jinja2" do
@@ -176,8 +176,8 @@ class Bagels < Formula
   end
 
   resource "sqlalchemy" do
-    url "https://files.pythonhosted.org/packages/f0/f2/840d7b9496825333f532d2e3976b8eadbf52034178aac53630d09fe6e1ef/sqlalchemy-2.0.44.tar.gz"
-    sha256 "0ae7454e1ab1d780aee69fd2aae7d6b8670a581d8847f2d1e0f7ddfbf47e5a22"
+    url "https://files.pythonhosted.org/packages/be/f9/5e4491e5ccf42f5d9cfc663741d261b3e6e1683ae7812114e7636409fcc6/sqlalchemy-2.0.45.tar.gz"
+    sha256 "1632a4bda8d2d25703fdad6363058d882541bdaaee0e5e3ddfa0cd3229efce88"
   end
 
   resource "textual" do
@@ -196,13 +196,13 @@ class Bagels < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "werkzeug" do
-    url "https://files.pythonhosted.org/packages/45/ea/b0f8eeb287f8df9066e56e831c7824ac6bab645dd6c7a8f4b2d767944f9b/werkzeug-3.1.4.tar.gz"
-    sha256 "cd3cd98b1b92dc3b7b3995038826c68097dcb16f9baa63abe35f20eafeb9fe5e"
+    url "https://files.pythonhosted.org/packages/5a/70/1469ef1d3542ae7c2c7b72bd5e3a4e6ee69d7978fa8a3af05a38eca5becf/werkzeug-3.1.5.tar.gz"
+    sha256 "6a548b0e88955dd07ccb25539d7d0cc97417ee9e179677d22c7041c8f078ce67"
   end
 
   resource "xdg-base-dirs" do
@@ -217,6 +217,8 @@ class Bagels < Formula
 
   def install
     virtualenv_install_with_resources
+
+    generate_completions_from_executable(bin/"bagels", shell_parameter_format: :click)
   end
 
   test do

@@ -1,18 +1,18 @@
 class ZlibRs < Formula
   desc "C API for zlib-rs"
   homepage "https://github.com/trifectatechfoundation/zlib-rs/tree/main/libz-rs-sys-cdylib#libz-rs-sys-cdylib"
-  url "https://github.com/trifectatechfoundation/zlib-rs/archive/refs/tags/v0.5.3.tar.gz"
-  sha256 "c26eacb667c98dcb6df097b4755b3805bc26cd8a37dc8862e1c5cb1a295fe7ab"
+  url "https://github.com/trifectatechfoundation/zlib-rs/archive/refs/tags/v0.6.0.tar.gz"
+  sha256 "4b18b072127af931239b3f65d708e71fa074ec9bf973973067ed80668c7b3be9"
   license "Zlib"
   head "https://github.com/trifectatechfoundation/zlib-rs.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "fe1f191c84e3afd6473d38eec57b4c1b7613989c83e80f238e6de5e75e583532"
-    sha256 cellar: :any,                 arm64_sequoia: "aa93c0077e5236f9bcfff50a155b4dedaecf9dfcf8330adc4e74703b14e16b94"
-    sha256 cellar: :any,                 arm64_sonoma:  "9bd41095be95da8036a6835ee2c67ee8071307cbb062b04c735ba93e45bc0ab2"
-    sha256 cellar: :any,                 sonoma:        "36569c8c422da6af05d8218d7577447e63359114be15cc87f6c4f3825da63a7b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9aadc63bed073b000ba154abd326365bb9f6f3199eaffdde0614c956915349ca"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b1d96e87280ffff8785c375552a21be6eb79062a40391d056c925f626facde4b"
+    sha256 cellar: :any,                 arm64_tahoe:   "19c8f5a8517752b647ecd3b853cfb01fdb46925ab12ca02bd65047e5c786dbc6"
+    sha256 cellar: :any,                 arm64_sequoia: "43b10da1eab03efcb0e50bc277ba3b72715503c0a247a50c0f74d5799a8e776b"
+    sha256 cellar: :any,                 arm64_sonoma:  "b85b8863dc0cd2e5d2098219006b75dc2cf3dd0e54aa7e3085e577c1b490e373"
+    sha256 cellar: :any,                 sonoma:        "70faedde8a81552d859b118a10b685acc23cd46ddd9cd44275fd47060c73a0a0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "63eaf5c1cddf341784563a182dfd1ba5ac2f2609b359a73a950b149e6267111f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "364aae1b5ac613cca65411bdbc01c1222b506a3d2c4a1eb5cf6fb93926ee9ea6"
   end
 
   depends_on "cargo-c" => :build

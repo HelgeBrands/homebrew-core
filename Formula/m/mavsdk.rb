@@ -2,9 +2,10 @@ class Mavsdk < Formula
   desc "API and library for MAVLink compatible systems written in C++17"
   homepage "https://mavsdk.mavlink.io/main/en/index.html"
   url "https://github.com/mavlink/MAVSDK.git",
-      tag:      "v3.11.2",
-      revision: "a25fd153f92a7572c4bb6964bfcdbc7ba96e0892"
+      tag:      "v3.14.0",
+      revision: "7cbd8e5af40892bbb62f6025ee3ff14a70765829"
   license "BSD-3-Clause"
+  revision 2
 
   livecheck do
     url :stable
@@ -12,12 +13,12 @@ class Mavsdk < Formula
   end
 
   bottle do
-    sha256               arm64_tahoe:   "30b7b4238767d5941bd4f4353cea2dfd51a7db89c34e18d79c96dfbc5cba0d8d"
-    sha256               arm64_sequoia: "e7c44e6102e43565a47696a98281eb363837acb2adacd5d1667c7497d8a4a0d6"
-    sha256               arm64_sonoma:  "8ee910c8c16ce19f6cc53c2f32d354f0260d9217a9cf983ac08ba1aeb5876734"
-    sha256 cellar: :any, sonoma:        "f87acf1a01a612d18c2e41d3cccba50321451ece27278387d7969d566bd31aa1"
-    sha256               arm64_linux:   "3b8ab75d1ce97f6f04c14bec143152df9673d396448e163f660598e7d1765e18"
-    sha256               x86_64_linux:  "70f4809b7eaaf5f238eeca8066f264a941b478e1fcd72071bfcc60c6da488533"
+    sha256               arm64_tahoe:   "ea6efaf1bc0a338189d4ad905329d9fb88425e45820d27dbdb4d015350921942"
+    sha256               arm64_sequoia: "570c42227d3d25b433865759e8d736c8cf7433c3c8d8dc1e9f5cfe684e8e6f4e"
+    sha256               arm64_sonoma:  "0d0d99ccbb6f9bbd6c7c6b241a78d767e799a69c4389558e4a5c2bf90a3872ee"
+    sha256 cellar: :any, sonoma:        "ea084d133c1cf0d9bd332dd9746c5cd8bc6488c955fbd8fb39aa5ac819efaac0"
+    sha256               arm64_linux:   "80134a026df280a340b19bbef5a776111609de83f9574ae0d172e79be679707c"
+    sha256               x86_64_linux:  "65a37c9e2fbfc8633b469fb45951f97aba889b2d74aa3d8abd3830208beec969"
   end
 
   depends_on "cmake" => :build
@@ -61,8 +62,6 @@ class Mavsdk < Formula
   end
 
   def install
-    ENV.llvm_clang if OS.mac? && (DevelopmentTools.clang_build_version <= 1100)
-
     # Fix version being reported as `v#{version}-dirty`
     inreplace "CMakeLists.txt", "OUTPUT_VARIABLE VERSION_STR", "OUTPUT_VARIABLE VERSION_STR_IGNORED"
 
@@ -74,7 +73,9 @@ class Mavsdk < Formula
     (buildpath/"third_party/mavlink").install resource("mavlink")
 
     %w[mavlink picosha2 libevents libmavlike].each do |dep|
-      system "cmake", "-S", "third_party/#{dep}", "-B", "build_#{dep}", *std_cmake_args(install_prefix: libexec)
+      system "cmake", "-S", "third_party/#{dep}", "-B", "build_#{dep}",
+                      "-DMAVLINK_DIALECT=ardupilotmega",
+                      *std_cmake_args(install_prefix: libexec)
       system "cmake", "--build", "build_#{dep}"
       system "cmake", "--install", "build_#{dep}"
     end

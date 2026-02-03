@@ -6,17 +6,16 @@ class ArcadeLearningEnvironment < Formula
   url "https://github.com/Farama-Foundation/Arcade-Learning-Environment/archive/refs/tags/v0.11.2.tar.gz"
   sha256 "d6ac9406690bb3533b37a99253bdfc59bc27779c5e1b6855c763d0b367bcbf96"
   license "GPL-2.0-only"
-  revision 1
+  revision 3
   head "https://github.com/Farama-Foundation/Arcade-Learning-Environment.git", branch: "master"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "8f064101937b69531d91019cbe7707ede64b32c80ca1a5c25c654d1659331484"
-    sha256 cellar: :any,                 arm64_sequoia: "da30b51a9970f4021b5b868cdae341c1b935e686eaefeb8b736d745db77afa2f"
-    sha256 cellar: :any,                 arm64_sonoma:  "6812d9341ff79682a410b8e9049595a686f89bdbb60772b6b3b3707c945ec852"
-    sha256 cellar: :any,                 sonoma:        "77504f7bbe80fcd02974ee91650ce2abf27289a4abf1f4de18c111ea72c7d550"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "adbb8756e9d7682016e87d35a9a7fd9f5bb4eb9125f7b5a68e96166b3f04ec86"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8a62c769d2dd61d395d321f74dfbafc5f1b8c38c2df4434ef21d45f0a53e7528"
+    sha256 cellar: :any,                 arm64_tahoe:   "07721a46da29649eae3b86700a82d0d3607cf8bf892618386b993bd7d83f9bbf"
+    sha256 cellar: :any,                 arm64_sequoia: "1d0fe5fb5b101c445af92040aad1a2f0266403cba429574c509c669f2f5d3a8c"
+    sha256 cellar: :any,                 arm64_sonoma:  "95b58973de90266dbe8eb0d13906728e0296f81c65006fb7f823fc1a60154fab"
+    sha256 cellar: :any,                 sonoma:        "e333435bee44a87a5801d92da22052285309add5af3d8d4af65c1f3eef117b93"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "95b42ddc09df18ef6dc46e269c3caeb81e4bf013c77dc9dae8d5cb0df676fda9"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "014165614d2bd86806bbc2232fa074360b493d54805968e5fd330a0ad217c805"
   end
 
   depends_on "cmake" => :build

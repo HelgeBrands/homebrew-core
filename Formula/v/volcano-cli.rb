@@ -1,18 +1,18 @@
 class VolcanoCli < Formula
   desc "CLI for Volcano, Cloud Native Batch System"
   homepage "https://volcano.sh"
-  url "https://github.com/volcano-sh/volcano/archive/refs/tags/v1.13.0.tar.gz"
-  sha256 "1839c3959a05292d741e7e26b0dc33e018acfc818f5a690fa8ccaa8fe847a3d2"
+  url "https://github.com/volcano-sh/volcano/archive/refs/tags/v1.14.0.tar.gz"
+  sha256 "aa57f6b131d359c98bb31ee8d1a8bcda0b2fc8b6b42b94bc558d8d65053dbfe1"
   license "Apache-2.0"
   head "https://github.com/volcano-sh/volcano.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d753db4b00bd45c2420176535394cdbfe05aa8cfdf9c7bfe7d5921cf40557e9c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aa4b9505f24d04917a6f03276e47411dcd4560629b739f13b201e668028d7452"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b6b2364981682f4eabcda333112dae9209295536994d7223119629e6b09bbaa9"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0d67f7ed570525b1eaad996edbde306095182fa3c85916c3605c6791456cac3e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "15f70bf49e9dc50d3a1aa0b03fc41f5f37a4c52cef60452501e5560a6b1632f5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e2d068ecba92dbdfeccc8baeadaa348e8543a24d3d34874b67051a7f01e57da4"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3cb70d15ecd4198530e1c97a7b825c37da2425f9cce05f2b07b9b42501d54dd4"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fd9f6be414d8823ab16520f62f21cf017666453972674f77a0bd999f0bdce1a5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "253c7991511e3a4e65e27ac565ba897713ac42b69708997f4efb364a0e7ff2e2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9e0e861dd124a015bbb8af32ebae49ee296d1c49ed7605478f6da71265fd83a4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "02c118173fac75ffbec168e5882d63d491fe0e92921e30b12fa733c2ee0d6836"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2c8e729baa3fea7efa5aa299dce6adb10cb8f40bf4b5430792fd79120c10a592"
   end
 
   depends_on "go" => :build

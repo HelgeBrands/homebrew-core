@@ -3,18 +3,18 @@ class Hapless < Formula
 
   desc "Run and manage background processes"
   homepage "https://bmwant.link/hapless-easily-run-and-manage-background-processes/"
-  url "https://files.pythonhosted.org/packages/06/cd/6aac45f40878b332beb9397a67a0bd303c40739020fafa9118d11ec87941/hapless-0.14.0.tar.gz"
-  sha256 "8eb7631d95336fd8ab33d3b1edc04bd48acc64ce6f2fd678bddfb0dca82cfe76"
+  url "https://files.pythonhosted.org/packages/2c/ab/a5c875f00927421371c9c36849030ba84dc171e7157575fd85126e893064/hapless-0.15.1.tar.gz"
+  sha256 "b54707a5f77ac8e779bfd0c8c49344333e9d40a5c9479f0da1c303ffa237077d"
   license "MIT"
   head "https://github.com/bmwant/hapless.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1f1b7e79dfde8dbe3455de9b60c62a99beb47ad4c4205ed6dc41eac53ad5e658"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "64caa2c200a8de591971236bc8d4d3278659a168b54a1276f270e8bf668afca3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "dc139bf4e116e32d5361c3b4ee0d852a8652fb1045a8a198788024880cf69c58"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0002b73048141bbfee5af4902268a678ea4e8b43a5c15a4fa2f6f18378d54980"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1dacaef22d5d890857200588faf20af1754969ccf1ba9857777cc922b83f3b80"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a67ed90db3f8ae881ae0d5419219deca72c4afba42e88cfb9c12def1d094698c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "10bca31787230dbc7dea0b9c712227213933bfc8e787517336e05af2b20482ab"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bbaab090f0b2b39cd85b5998db27b9b939f96913468ba3e996fe7d250babe00d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "811714c5adb45e7d208ac4131ba087a107cf255fad0d81ab4082ec3024c7938e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c24bf0290bdf13f87894126b8affc18cbbcf7557b24afbb8ed771381ec5729e0"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "bd5b41eadd8958beb78247a97440cc9f047868f068a1b24ed291264804a2e941"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "38580e0b77980e077abdfb6d5ae9b15423add9d65cb59630a62c41fb86e4495c"
   end
 
   depends_on "python@3.14"
@@ -30,8 +30,8 @@ class Hapless < Formula
   end
 
   resource "humanize" do
-    url "https://files.pythonhosted.org/packages/b6/43/50033d25ad96a7f3845f40999b4778f753c3901a11808a584fed7c00d9f5/humanize-4.14.0.tar.gz"
-    sha256 "2fa092705ea640d605c435b1ca82b2866a1b601cdf96f076d70b79a855eba90d"
+    url "https://files.pythonhosted.org/packages/ba/66/a3921783d54be8a6870ac4ccffcd15c4dc0dd7fcce51c6d63b8c63935276/humanize-4.15.0.tar.gz"
+    sha256 "1dd098483eb1c7ee8e32eb2e99ad1910baefa4b75c3aff3a82f4d78688993b10"
   end
 
   resource "markdown-it-py" do
@@ -64,13 +64,10 @@ class Hapless < Formula
     sha256 "098522a3bebed9153d4570c6d0288abf80a031dfdb2048d59a49e9dc2190fc98"
   end
 
-  resource "typing-extensions" do
-    url "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz"
-    sha256 "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466"
-  end
-
   def install
     virtualenv_install_with_resources
+
+    generate_completions_from_executable(bin/"hap", shell_parameter_format: :click)
   end
 
   test do

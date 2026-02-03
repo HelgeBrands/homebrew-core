@@ -1,9 +1,9 @@
 class RomTools < Formula
   desc "Tools for Multiple Arcade Machine Emulator"
   homepage "https://www.mamedev.org/"
-  url "https://github.com/mamedev/mame/archive/refs/tags/mame0283.tar.gz"
-  version "0.283"
-  sha256 "cffd615ec2e7a1c708a75ef52593f84b501ff792ebfa553bde0e20ccd5f30d07"
+  url "https://github.com/mamedev/mame/archive/refs/tags/mame0285.tar.gz"
+  version "0.285"
+  sha256 "2b7ed1553ddf434692f62ded87b296931968d55e15f786a8588102880851f41c"
   license "GPL-2.0-or-later"
   head "https://github.com/mamedev/mame.git", branch: "master"
 
@@ -14,12 +14,12 @@ class RomTools < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "adb45f2c4b30d78136c0b97956eb693cb6927278d95a2b5c7183407138945714"
-    sha256 cellar: :any,                 arm64_sequoia: "ecfaea538f984a59ff677ab59807634526b9e0cad59a97c5deb48b23de6cfa92"
-    sha256 cellar: :any,                 arm64_sonoma:  "dd614f87ae6d02401463626d81b0c99f4a81e05cfa11762de7b02f34f83ee72b"
-    sha256 cellar: :any,                 sonoma:        "46e5c41d3d2559130a1a2a4f78cd8074abb6b736b5e2348def89efd30b37731d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0edacec9161270fb10b3003bdb7e96aa2d9f9740b529936a80b26a441d19b9a1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bb5c65e56aaa27d2d226d66be1c3acab3352fbcaf242047006ea590753d1595d"
+    sha256 cellar: :any,                 arm64_tahoe:   "d31797f7ef2978b9764cd249e45f05440e91586ca0a61dcfdc9219f1194a825c"
+    sha256 cellar: :any,                 arm64_sequoia: "86cae030e7e29d1d7c4eca5af3b1a1ffbb8b646a0a46fe0da768438c264f5351"
+    sha256 cellar: :any,                 arm64_sonoma:  "a4a1e43f5dd79dc8c9b391ad0b28478d6df6c4f12004718c5e51e7c274a9dd89"
+    sha256 cellar: :any,                 sonoma:        "6abd153f6b61bf2554ed86676c3690d6d176aaf6aeae66b4a96c55035950988f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "979d102c1bb386a037d806a5f5acacb06a8450643ed5aad8e111f59480256149"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "eb7411f1d6cd2251410fbce7b78c561b8a804a2769a59fac4fb3f261a1dc269c"
   end
 
   depends_on "asio" => :build

@@ -1,30 +1,49 @@
 class Promptfoo < Formula
   desc "Test your LLM app locally"
   homepage "https://promptfoo.dev/"
-  url "https://registry.npmjs.org/promptfoo/-/promptfoo-0.120.2.tgz"
-  sha256 "ed3e06b849bd7f826f725d3128805307703d368aabb474a1f8c7e7a85d85843b"
+  url "https://registry.npmjs.org/promptfoo/-/promptfoo-0.120.20.tgz"
+  sha256 "d89a9d28c6d1bd0a90736ba71611a0650f8066ea84ad3c1352a4b82ce2524dd7"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "54b5b4ac1bda1f469d36227b8f2562c3f85140a1c0e27e54761797b26be9ac0f"
-    sha256 cellar: :any,                 arm64_sequoia: "5e1a07770d9844c059330e66057ca01adbfe8a8711f94c64506f9e03515b3100"
-    sha256 cellar: :any,                 arm64_sonoma:  "cefe497ed0e656928d0ae6198977047d898d4c648c69af3ca52c910b20efaa06"
-    sha256 cellar: :any,                 sonoma:        "eb74c656c01a730686591954901bccd196dde245c52efcefb19739b43c3ed69f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7aa791b78a392840c3d5f527a298ec66eaf2003f0cc82ac9ca6d207dd1701570"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b36395129ce7693baaf71b5b7ac3e00f7d6e6473f3fed4c7f28b0b1551ca02e4"
+    sha256                               arm64_tahoe:   "a4f10e78fe6df79cb480046bd3cc1943f614428c5f8a4edc15a778d7761ce8b2"
+    sha256                               arm64_sequoia: "f431cc764b3f3ca8e1cabbabb5de28d5f131230fc29f4481609d6ffaa41907b5"
+    sha256                               arm64_sonoma:  "868793eca910e16a2f1b3a2af26715bee3ddcb4177aaa512cc30a417889c184e"
+    sha256                               sonoma:        "e0d50e88d03d7f71de0d881d7f66d6686b045f592647e430cbb37fa953520f26"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "53c4974502237c5d065aa0599ebff6cfd35804a1e755a6051e855eeb9a544900"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "908173c45a1279f18fbf03b5d59b15227cf5b6b94c4e07c9d70f1f8a4916e651"
   end
 
+  depends_on "glib"
   depends_on "node"
+  depends_on "vips"
 
   on_macos do
     depends_on "llvm" => :build if DevelopmentTools.clang_build_version < 1700
+    depends_on "gettext"
+  end
+
+  fails_with :clang do
+    build 1699
+    cause "better-sqlite3 fails to build"
+  end
+
+  # Resources needed to build sharp from source to avoid bundled vips
+  # https://sharp.pixelplumbing.com/install/#building-from-source
+  resource "node-addon-api" do
+    url "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.5.0.tgz"
+    sha256 "d12f07c8162283b6213551855f1da8dac162331374629830b5e640f130f07910"
+  end
+
+  resource "node-gyp" do
+    url "https://registry.npmjs.org/node-gyp/-/node-gyp-12.2.0.tgz"
+    sha256 "8689bbeb45a3219dfeb5b05a08d000d3b2492e12db02d46c81af0bee5c085fec"
   end
 
   def install
-    ENV.llvm_clang if OS.mac? && (DevelopmentTools.clang_build_version < 1700)
-
-    system "npm", "install", *std_npm_args(ignore_scripts: false)
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    ENV["SHARP_FORCE_GLOBAL_LIBVIPS"] = "1"
+    system "npm", "install", *std_npm_args(ignore_scripts: false), *resources.map(&:cached_download)
+    bin.install_symlink libexec.glob("bin/*")
 
     os = OS.mac? ? "apple-darwin" : "unknown-linux-musl"
     arch = Hardware::CPU.arm? ? "aarch64" : "x86_64"
@@ -34,6 +53,17 @@ class Promptfoo < Formula
     rm_r(node_modules/"@anthropic-ai/claude-agent-sdk/vendor/ripgrep")
     codex_vendor = node_modules/"@openai/codex-sdk/vendor"
     codex_vendor.children.each { |dir| rm_r dir if dir.basename.to_s != "#{arch}-#{os}" }
+
+    arch = Hardware::CPU.intel? ? "x64" : Hardware::CPU.arch.to_s
+    keep = node_modules.glob("onnxruntime-node/bin/napi-v*/#{OS.kernel_name.downcase}/#{arch}")
+    rm_r(node_modules.glob("onnxruntime-node/bin/napi-v*/*/*") - keep)
+    if OS.linux? && Hardware::CPU.intel?
+      rm(node_modules.glob("onnxruntime-node/bin/napi-v*/*/*/libonnxruntime_providers_{cuda,tensorrt}.so"))
+    end
+
+    # Remove unneeded pre-built binaries
+    rm_r(node_modules.glob("@img/sharp-*"))
+    rm_r(node_modules.glob("sharp/node_modules/@img/sharp-*"))
   end
 
   test do

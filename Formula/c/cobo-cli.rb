@@ -6,16 +6,16 @@ class CoboCli < Formula
   url "https://files.pythonhosted.org/packages/85/f5/b116ad0bc82961a47f7407611d6950f18078bdd3b193d2a34cf1e8b8065c/cobo_cli-0.0.9.tar.gz"
   sha256 "70932b6e5b115e222bdc418e5ce7a17b3229ac530157534c3e374f832cd056cf"
   license "MIT"
-  revision 1
+  revision 4
   head "https://github.com/CoboGlobal/cobo-cli.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "d3d99d9f82b1fc2766d84837323fe15ca2b027bdfb20800c841b581192dc113b"
-    sha256 cellar: :any,                 arm64_sequoia: "c6a56abb9ce6197672b9fb72dd077a7004ece250a80d48f07fb5b27bf4c72c0f"
-    sha256 cellar: :any,                 arm64_sonoma:  "cbf697c652faba6e3799e59a6d8d10e2353bc02edb7f08d762bef5f683c68ba3"
-    sha256 cellar: :any,                 sonoma:        "4fa37ea30301eaf3b838750693db8b5113c75638a6fa6bc4ca7c966691644fc2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "91ba0d3173dac10839065211a0cdd92f003eb6dfad925434cd5c760ca513ee4c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8ada3ed5c25b7208aaaf03738ee5638ce24e1dae04a19e12c74ed6366d734d4e"
+    sha256 cellar: :any,                 arm64_tahoe:   "2dabea420520a063b9aa37407fc90f64a3d8bd373e8cf72ddacdb5674997fc5d"
+    sha256 cellar: :any,                 arm64_sequoia: "41840dbeb63c550db8d8fe95114909aa92b855f60cfd61bbc79d8573be28e087"
+    sha256 cellar: :any,                 arm64_sonoma:  "db2166ddc4b3060b3e2ad00128195d9fc5846cea3da6d5aa9c6af87fa4f950cb"
+    sha256 cellar: :any,                 sonoma:        "8ad50050f8a23bbedf6b637ccf79f318ceeb8cf80864fe991679b9aa6c9e80d3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a61f85e033085d5a52a0b58b50b533ef158f206a1b2ef33b713c2667f9a99c49"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "408e623e0790867416381dfb169550204142daa96143d8e532c55d8dfd0a30d1"
   end
 
   depends_on "certifi" => :no_linkage
@@ -64,8 +64,8 @@ class CoboCli < Formula
   end
 
   resource "gitpython" do
-    url "https://files.pythonhosted.org/packages/9a/c8/dd58967d119baab745caec2f9d853297cec1989ec1d63f677d3880632b88/gitpython-3.1.45.tar.gz"
-    sha256 "85b0ee964ceddf211c41b9f27a49086010a190fd8132a24e21f362a4b36a791c"
+    url "https://files.pythonhosted.org/packages/df/b5/59d16470a1f0dfe8c793f9ef56fd3826093fc52b3bd96d6b9d6c26c7e27b/gitpython-3.1.46.tar.gz"
+    sha256 "400124c7d0ef4ea03f7310ac2fbf7151e09ff97f2a3288d64a440c584a29c37f"
   end
 
   resource "idna" do
@@ -74,8 +74,8 @@ class CoboCli < Formula
   end
 
   resource "marshmallow" do
-    url "https://files.pythonhosted.org/packages/ab/5e/5e53d26b42ab75491cda89b871dab9e97c840bf12c63ec58a1919710cd06/marshmallow-3.26.1.tar.gz"
-    sha256 "e6d8affb6cb61d39d26402096dc0aee12d5a26d490a121f118d2e81dc0719dc6"
+    url "https://files.pythonhosted.org/packages/55/79/de6c16cc902f4fc372236926b0ce2ab7845268dcc30fb2fbb7f71b418631/marshmallow-3.26.2.tar.gz"
+    sha256 "bbe2adb5a03e6e3571b573f42527c6fe926e17467833660bebd11593ab8dfd57"
   end
 
   resource "mypy-extensions" do
@@ -99,8 +99,8 @@ class CoboCli < Formula
   end
 
   resource "pynacl" do
-    url "https://files.pythonhosted.org/packages/b2/46/aeca065d227e2265125aea590c9c47fbf5786128c9400ee0eb7c88931f06/pynacl-1.6.1.tar.gz"
-    sha256 "8d361dac0309f2b6ad33b349a56cd163c98430d409fa503b10b70b3ad66eaa1d"
+    url "https://files.pythonhosted.org/packages/d9/9a/4019b524b03a13438637b11538c82781a5eda427394380381af8f04f467a/pynacl-1.6.2.tar.gz"
+    sha256 "018494d6d696ae03c7e656e5e74cdfd8ea1326962cc401bcf018f1ed8436811c"
   end
 
   resource "python-dotenv" do
@@ -139,8 +139,8 @@ class CoboCli < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/1c/43/554c2569b62f49350597348fc3ac70f786e3c32e7f19d266e19817812dd3/urllib3-2.6.0.tar.gz"
-    sha256 "cb9bcef5a4b345d5da5d145dc3e30834f58e8018828cbc724d30b4cb7d4d49f1"
+    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
+    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
   end
 
   resource "websocket-client" do

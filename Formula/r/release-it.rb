@@ -1,8 +1,8 @@
 class ReleaseIt < Formula
   desc "Generic CLI tool to automate versioning and package publishing related tasks"
   homepage "https://github.com/release-it/release-it"
-  url "https://registry.npmjs.org/release-it/-/release-it-19.0.6.tgz"
-  sha256 "18aecf72a774f9cf7a09596792f32913dcb18f60ca23c6c6c3bd46dd76fe31bb"
+  url "https://registry.npmjs.org/release-it/-/release-it-19.2.4.tgz"
+  sha256 "56c91ae9295a790fab1b96beeb823855cb6eb3e52c70bce1ec0befd22db2ea7a"
   license "MIT"
 
   livecheck do
@@ -11,14 +11,14 @@ class ReleaseIt < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "030a7b741bc19ada26fb075226dfd3572a8fcdb2efad68bc8b233f2b6367fe7b"
+    sha256 cellar: :any_skip_relocation, all: "28bedf74932fc5949dd5a17c7bb06359d4572ad7b117a0dbf37425b51f162825"
   end
 
   depends_on "node"
 
   def install
     system "npm", "install", *std_npm_args
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    bin.install_symlink libexec.glob("bin/*")
   end
 
   test do

@@ -1,18 +1,18 @@
 class Deno < Formula
   desc "Secure runtime for JavaScript and TypeScript"
   homepage "https://deno.com/"
-  url "https://github.com/denoland/deno/releases/download/v2.5.6/deno_src.tar.gz"
-  sha256 "62d3e8f87aed734cdce27660ebfed1c31b6b279f21f36070cdc64e828ae3bfb0"
+  url "https://github.com/denoland/deno/releases/download/v2.6.8/deno_src.tar.gz"
+  sha256 "61fab2832c0fd946ba40196df267d0f10cb5fc7ac375ca50d95cd463ecb775b2"
   license "MIT"
   head "https://github.com/denoland/deno.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "871665778a8c0c47e08c015ea306602a87724084af607d9240945ecd25a6c045"
-    sha256 cellar: :any,                 arm64_sequoia: "bf884efe04ab87e287967e39aa9c39be38ed69430ab8243ca248fa3e89093af8"
-    sha256 cellar: :any,                 arm64_sonoma:  "226116dd9a574107a2acea853afb68490bf237b0b80ae8bfa2a31b49c52fc983"
-    sha256 cellar: :any,                 sonoma:        "efe8a5c311b761a6460f6d7ef89372c3efc164c86250b034a208889fd1694eb5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e414376d3a199003eb6ca2611ce5d7e12c85c9570aa935104aea8dbea64d9849"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "275b9f3112cd2a440f1c27b6aa6a4321e0d23e8d563a34d126d42d167c734896"
+    sha256 cellar: :any,                 arm64_tahoe:   "bd7b7db49667cda74050a638f06909100ef06c8e74fdef22a15c92e570a29d76"
+    sha256 cellar: :any,                 arm64_sequoia: "706dbf1c178727750a8e0b24396d509dc0894dbcccb53afa71ef8fac55d5152d"
+    sha256 cellar: :any,                 arm64_sonoma:  "9d1a64b0a1f3f6114467b14e1eb5eec107b4ea66f3d7551e15edf001d12df932"
+    sha256 cellar: :any,                 sonoma:        "ccc80775945b46a52fd4bfb3f1764bd76d43fef6aac7927785fed7d0a36f2e08"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "ac6dbd968a7cb3a01000ac573cfb5bd786809d8708fcd5c802fe2b77cfe848a4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b6a374952637a52cb58e2b674e3b567998fdef933df8691d347f44186f46ee23"
   end
 
   depends_on "cmake" => :build
@@ -62,6 +62,7 @@ class Deno < Formula
     ENV["GN_ARGS"] = "clang_version=#{llvm.version.major} use_lld=#{OS.linux?}"
 
     system "cargo", "install", "--no-default-features", "-vv", *std_cargo_args(path: "cli")
+    bin.install_symlink bin/"deno" => "dx"
     generate_completions_from_executable(bin/"deno", "completions")
   end
 
@@ -83,6 +84,7 @@ class Deno < Formula
     assert_match "hello deno", shell_output("#{bin}/deno run hello.ts")
     assert_match "Welcome to Deno!",
       shell_output("#{bin}/deno run https://deno.land/std@0.100.0/examples/welcome.ts")
+    assert_match "hello deno", shell_output("#{bin}/dx -y cowsay hello deno")
 
     linked_libraries = [
       Formula["sqlite"].opt_lib/shared_library("libsqlite3"),

@@ -1,18 +1,18 @@
 class Ghalint < Formula
   desc "GitHub Actions linter"
   homepage "https://github.com/suzuki-shunsuke/ghalint"
-  url "https://github.com/suzuki-shunsuke/ghalint/archive/refs/tags/v1.5.4.tar.gz"
-  sha256 "bd3c22fc58ba5f4a1546aceb373aaa1c609b902a874d75688be700bc2fd9c09d"
+  url "https://github.com/suzuki-shunsuke/ghalint/archive/refs/tags/v1.5.5.tar.gz"
+  sha256 "faeaa04092a4d26c39b6ac7b5ecded5d9c970df35654a3b873d69e45e038fe1a"
   license "MIT"
   head "https://github.com/suzuki-shunsuke/ghalint.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1e3e179f2fcf0e0831f3f13f7fa4fa2683bbbfb47faf1e685dae331d0eda175b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1e3e179f2fcf0e0831f3f13f7fa4fa2683bbbfb47faf1e685dae331d0eda175b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1e3e179f2fcf0e0831f3f13f7fa4fa2683bbbfb47faf1e685dae331d0eda175b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "01479ab393749b664a5e5a3e349726ca9447d41a3f596a0133262b6752cf36c0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ad7e75a4beff5fa95e0d60cb1349329b4a19e01f8ef66108186594a35ee7f030"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4c6aaeab36b13a7dabc95f4ba7700219fd8ccba540eacd178bbd3f7ba32f7399"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d76a40b66cef3c662e3640e21831608994afd975421cdcade724f9c2a91cfdf0"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d76a40b66cef3c662e3640e21831608994afd975421cdcade724f9c2a91cfdf0"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d76a40b66cef3c662e3640e21831608994afd975421cdcade724f9c2a91cfdf0"
+    sha256 cellar: :any_skip_relocation, sonoma:        "59af90a6c1a219d9c22e362f1c4247e6c86d467bc1fca2f1b0e6863bc40d8b87"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "dc504c542ae7a9a1760a766f97dec113404448ac12f60bb816fe01063928db19"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b4279ba059a6609ea05324b5a7c05a8e7aab91f5b2a87a9c8b1f29aaf934b337"
   end
 
   depends_on "go" => :build
@@ -20,6 +20,8 @@ class Ghalint < Formula
   def install
     ldflags = "-s -w -X main.version=#{version} -X main.commit=#{tap.user} -X main.date=#{time.iso8601}"
     system "go", "build", *std_go_args(ldflags:), "./cmd/ghalint"
+
+    generate_completions_from_executable(bin/"ghalint", "completion")
   end
 
   test do

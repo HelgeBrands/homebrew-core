@@ -1,19 +1,18 @@
 class Deadfinder < Formula
   desc "Finds broken links"
   homepage "https://rubygems.org/gems/deadfinder"
-  url "https://github.com/hahwul/deadfinder/archive/refs/tags/1.9.1.tar.gz"
-  sha256 "60942329779ba01d92532bdd3a937bfd04686693b911e6193692daee9634b4e6"
+  url "https://github.com/hahwul/deadfinder/archive/refs/tags/1.10.0.tar.gz"
+  sha256 "8309c720ffa76c6588c5bc8f8dc169b6633059a9d8d68cb75cc8488667d81c01"
   license "MIT"
-  revision 1
   head "https://github.com/hahwul/deadfinder.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1196ba7f69fa9a76f88885d99e4d5fa64075abbe0f6c89a4c2bb52989197d564"
-    sha256 cellar: :any,                 arm64_sequoia: "0785938ab4601e4c8371a92312db832f87987c81222eb739c54d943ecd7c8deb"
-    sha256 cellar: :any,                 arm64_sonoma:  "55e3dfeaebcc4fcef7a89bccdfea2b6f7992b9a42efd534bd6f2e76a463493c0"
-    sha256 cellar: :any,                 sonoma:        "defe5253cc1e6191ffe124ac210238638d4045a0d2d3c3d091871107ad571daa"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7b94db3d53d160760d22898af2ba63d16585acf50382f38de0b98bd36ab58f45"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8e7ca7f45309f8d124e6da42cabcdf6358fd4cc149d95f03aa88a712d83654a7"
+    sha256 cellar: :any,                 arm64_tahoe:   "16bda27518c67963187cbf3e02885836e78ee3ab17d65f2da4cef4649e422dba"
+    sha256 cellar: :any,                 arm64_sequoia: "74df74b31f0ada58abad5f04c1ad388637a11985bdd6bf5334892e14bd530cb4"
+    sha256 cellar: :any,                 arm64_sonoma:  "f072d90102f04bd6e2c58fffe8092f631c05f799529836a489106c8928e596ad"
+    sha256 cellar: :any,                 sonoma:        "58f600effe963652e5b1a8728756f8cb4f569c24e81317bc58df4fefd2225450"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8dc0fc3a591571d5b1ad2103ebe18d7faf57e4e1784b52684606af0187159fa5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "668e513fa6afb8939fa8f1401c024a63b9838ac77a25c5336b446bff2d6cabc0"
   end
 
   depends_on "pkgconf" => :build

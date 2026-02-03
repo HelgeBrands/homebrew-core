@@ -1,10 +1,10 @@
 class PerconaXtrabackup < Formula
   desc "Open source hot backup tool for InnoDB and XtraDB databases"
   homepage "https://www.percona.com/software/mysql-database/percona-xtrabackup"
-  url "https://downloads.percona.com/downloads/Percona-XtraBackup-8.4/Percona-XtraBackup-8.4.0-4/source/tarball/percona-xtrabackup-8.4.0-4.tar.gz"
-  sha256 "e566a164a21b18781aad281b84426418ac2bcf71052ec85d8c5e62f742a7dfeb"
+  url "https://downloads.percona.com/downloads/Percona-XtraBackup-8.4/Percona-XtraBackup-8.4.0-5/source/tarball/percona-xtrabackup-8.4.0-5.tar.gz"
+  sha256 "fadcf27efd2a2596f689388659e2ff5c36debcc051a55974ac8bb4a83c015f57"
   license "GPL-2.0-only"
-  revision 4
+  revision 2
 
   livecheck do
     url "https://www.percona.com/products-api.php", post_form: {
@@ -21,12 +21,12 @@ class PerconaXtrabackup < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "63dfd7a4b5b458d0ba8cf09b4148f8f8a470ab3c00a7a83dca13128b8eeb8591"
-    sha256 arm64_sequoia: "e87ba8266054512e560e86da6b19e135bf9c2a82d5dee652a09b948f017c6255"
-    sha256 arm64_sonoma:  "c41538aee9b7ff1332cbbd14549fd49462e1481c3eded16b4df2215228e7cb7d"
-    sha256 sonoma:        "b8e2134a1922fe4b6032303bcbd382e54c9cef5ffeb80c44862ce3568203aebe"
-    sha256 arm64_linux:   "59998f7b305740e735a62dc7ba534f65a53df8ca329df9cbaaf3d66443fe27f0"
-    sha256 x86_64_linux:  "f9b2887a142203c7e138ec1f8c183882daa8c74754112d7615c160447e933210"
+    sha256 arm64_tahoe:   "96024bb8409bcff42ddfbc9aa4bccd7c390986bf2fdb4fa57b6b297631e2151d"
+    sha256 arm64_sequoia: "5c6db8e6389ca3aa4ac9524ff91fb6fa3270691e08a5fd96fc93ff605db71aa7"
+    sha256 arm64_sonoma:  "49606f5d2e2e023251d7dd61621259b6fbf76e0eed4d58f090c5ed9eeeb56440"
+    sha256 sonoma:        "7c4e93b24453175ece99e7bdce34b6a1086de6c40df73046f30054d575c9c790"
+    sha256 arm64_linux:   "3ebe5fd44fbb59db104d2db26e69cdc30a8f94b01f91c5f1d0ba0a83030fe543"
+    sha256 x86_64_linux:  "9ed8e667ef9fe9cd72e013e96f74e3d2f6c2eb3b8ee049b4f73cf853b107015a"
   end
 
   depends_on "bison" => :build # needs bison >= 3.0.4
