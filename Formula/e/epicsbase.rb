@@ -3,7 +3,7 @@ class Epicsbase < Formula
   homepage "https://epics-controls.org/"
   url "https://github.com/epics-base/epics-base.git",
      tag:      "R7.0.10",
-     revision: "86154953f57b1796e7cb81bbc807eae120b9e840"
+     revision: "bf11a0c31c919ba85ba2e23b72bcf0b5f9f62e77"
   license "EPICS"
   depends_on "pkg-config" => :build
   depends_on "perl"
