@@ -13,10 +13,8 @@ class Epicsbase < Formula
     sha256 "b988e750302893a206ed01e854dec0df04b4a23707a92bdc9f4096e0936c9b2d"
   end
   def install
-    # EPICS needed this environment variables
-    ENV["EPICS_HOST_ARCH"] = Utils.safe_popen_read("./startup/EpicsHostArch").strip
     hostarch = Utils.safe_popen_read("./startup/EpicsHostArch").strip
-    puts "EPICS_HOST_ARCH = #{hostarch}"
+    ENV["EPICS_HOST_ARCH"] = hostarch
     ENV["EPICS_BASE"] = buildpath
     # Optional: optinal config files
     inreplace "configure/CONFIG_SITE", /#?INSTALL_LOCATION=.*/, "INSTALL_LOCATION=#{prefix}"
