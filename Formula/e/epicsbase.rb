@@ -5,13 +5,16 @@ class Epicsbase < Formula
      tag:      "R7.0.10",
      revision: "bf11a0c31c919ba85ba2e23b72bcf0b5f9f62e77"
   license "EPICS"
+
   depends_on "pkg-config" => :build
   depends_on "perl"
   depends_on "readline"
+
   patch do
     url "https://github.com/HelgeBrands/homebrew-core/raw/refs/heads/main/Patches/epicsbase/fix-build.diff"
     sha256 "b988e750302893a206ed01e854dec0df04b4a23707a92bdc9f4096e0936c9b2d"
   end
+
   def install
     hostarch = Utils.safe_popen_read("./startup/EpicsHostArch").strip
     ENV["EPICS_HOST_ARCH"] = hostarch
