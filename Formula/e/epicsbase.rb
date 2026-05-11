@@ -6,7 +6,7 @@ class Epicsbase < Formula
      revision: "bf11a0c31c919ba85ba2e23b72bcf0b5f9f62e77"
   license "EPICS"
 
-  depends_on "pkg-config" => :build
+  depends_on "pkgconf => :build
   depends_on "perl"
   depends_on "readline"
 
