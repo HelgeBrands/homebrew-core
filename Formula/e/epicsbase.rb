@@ -26,8 +26,7 @@ class Epicsbase < Formula
     libexec.install Dir["*"]
 
         Dir["#{prefix}/bin/#{hostarch}/*"].each do |f|
-                bin.install_symlink "#{prefix}/bin/#{hostarch}/#{f}"
-
+                bin.install_symlink f
 	end
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
