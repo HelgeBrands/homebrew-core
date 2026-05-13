@@ -28,6 +28,8 @@ class Epicsbase < Formula
 	Dir["#{libexec}/bin/#{hostarch}/*"].each do |f|
 		bin.install_symlink "#{libexec}/bin/#{hostarch}/#{f}"
 	end
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
+    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
   end
 
   def caveats
