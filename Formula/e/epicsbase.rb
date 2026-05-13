@@ -23,25 +23,11 @@ class Epicsbase < Formula
     inreplace "configure/CONFIG_SITE", /#?INSTALL_LOCATION=.*/, "INSTALL_LOCATION=#{prefix}"
     system "make"
     # installation: simply copy over this stuff
-    prefix.install Dir["*"]
+    libexec.install Dir["*"]
 
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/caget" => "caget"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/caput" => "caput"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/catime" => "catime"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/cainfo" => "cainfo"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/caEventRate" => "caEventRate"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/camonitor" => "camonitor"
-
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvget" => "pvget"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvput" => "pvput"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvinfo" => "pvinfo"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvlist" => "pvlist"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/pvmonitor" => "pvmonitor"
-
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softIoc"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softIocPVA"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
+	Dir["#{libexec}/bin/#{hostarch}/*"].each do |f|
+		bin.install_symlink "#{libexec}/bin/#{hostarch}/#{f}"
+	end
   end
 
   def caveats
