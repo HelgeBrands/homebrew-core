@@ -41,13 +41,13 @@ class Epicsbase < Formula
 
       To use EPICS in the shell you have to put this here into shell configuration:
         export EPICS_BASE=#{opt_prefix}
-        export EPICS_HOST_ARCH=$(#{opt_prefix}/startup/EpicsHostArch)
+        export EPICS_HOST_ARCH=$(#{opt_prefix}/bin/EpicsHostArch.pl)
 
     EOS
   end
 
   test do
-    hostarch = Utils.safe_popen_read("#{prefix}/startup/EpicsHostArch").strip
+    hostarch = Utils.safe_popen_read("#{opt_prefix}/bin/EpicsHostArch.pl").strip
     puts "EPICS_HOST_ARCH = #{hostarch}"
     # simple test if these files exists
     assert_path_exists "#{prefix}/bin/#{hostarch}/caput", :exist?
