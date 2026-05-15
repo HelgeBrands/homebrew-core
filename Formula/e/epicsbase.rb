@@ -52,16 +52,28 @@ class Epicsbase < Formula
     # simple test if these files exists
     assert_path_exists "#{prefix}/bin/#{hostarch}/caput", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caput -V")
+    # simple fail test, no chanel available
+    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:FAIL 1")
+
+
     assert_path_exists "#{prefix}/bin/#{hostarch}/caget", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caget -V")
+    # simple fail test, no chanel available
+    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:FAIL")
+
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/pvget", :exist?
     output = Utils.safe_popen_read("#{bin}/pvget", "-h", err: :out)
     assert_match "Usage: pvget", output
+    output = Utils.safe_popen_read("#{bin}/pvget", "HOMEBREW:FAIL", err: :out)
+    assert_match "Timeout", output
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/pvput", :exist?
     shell_output("#{bin}/pvput -h")
     assert_match "Usage: pvput", output
+    output = Utils.safe_popen_read("#{bin}/pvput", "HOMEBREW:FAIL 1", err: :out)
+    assert_match "Timeout", output
+
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/softIoc", :exist?
     assert_match "Usage: softioc", shell_output("#{bin}/softioc -h")
