@@ -6,10 +6,9 @@ class Epicsbase < Formula
      revision: "bf11a0c31c919ba85ba2e23b72bcf0b5f9f62e77"
   license "EPICS"
 
-  depends_on "pkgconf" => :build
   license "EPICS"
-
   depends_on "pkg-config" => :build
+  depends_on "pkgconf" => :build
   depends_on "perl"
   depends_on "readline"
 
@@ -28,9 +27,9 @@ class Epicsbase < Formula
     # installation: simply copy over this stuff
     libexec.install Dir["*"]
 
-        Dir["#{prefix}/bin/#{hostarch}/*"].each do |f|
-                bin.install_symlink f
-	end
+    Dir["#{prefix}/bin/#{hostarch}/*"].each do |f|
+      bin.install_symlink f
+    end
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
   end
@@ -53,15 +52,12 @@ class Epicsbase < Formula
     assert_path_exists "#{prefix}/bin/#{hostarch}/caput", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caput -V")
     # simple fail test, no chanel available
-    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:TEST 1 2>&1",1)
-
-
+    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:TEST 1 2>&1", 1)
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/caget", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caget -V")
     # simple fail test, no chanel available
-    assert_match "Channel connect timed out", shell_output("#{bin}/caget HOMEBREW:TEST 2>&1",1)
-
+    assert_match "Channel connect timed out", shell_output("#{bin}/caget HOMEBREW:TEST 2>&1", 1)
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/pvget", :exist?
     output = Utils.safe_popen_read("#{bin}/pvget", "-h", err: :out)
@@ -71,14 +67,13 @@ class Epicsbase < Formula
     output = Utils.safe_popen_read("#{bin}/pvput", "-h", err: :out)
     assert_match "Usage: pvput", output
 
-
     assert_path_exists "#{prefix}/bin/#{hostarch}/softIoc", :exist?
-    output = shell_output("#{bin}/softioc -h 2>&1", 0)
+    output = shell_output("#{bin}/softioc -h 2>&1")
     assert_match "Usage:", output
     assert_match "softioc", output
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/softIocPVA", :exist?
-    output = shell_output("#{bin}/softiocpva -h 2>&1", 0)
+    output = shell_output("#{bin}/softiocpva -h 2>&1")
     assert_match "Usage:", output
     assert_match "softiocpva", output
 
@@ -103,16 +98,13 @@ class Epicsbase < Formula
       exec bin/"softioc", "-D", "#{prefix}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
     end
     begin
-        sleep 2
-        output=shell_output("#{bin}/caget HOMEBREW:TEST 2>&1",0)
-        assert_match "HOMEBREW:TEST", output
-        assert_match "5", output
+      sleep 2
+      output=shell_output("#{bin}/caget HOMEBREW:TEST 2>&1")
+      assert_match "HOMEBREW:TEST", output
+      assert_match "5", output
     ensure
       Process.kill("TERM", pid)
       Process.wait(pid)
     end
-
-
-
   end
 end
