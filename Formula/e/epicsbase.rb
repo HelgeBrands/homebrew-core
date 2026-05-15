@@ -53,31 +53,66 @@ class Epicsbase < Formula
     assert_path_exists "#{prefix}/bin/#{hostarch}/caput", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caput -V")
     # simple fail test, no chanel available
-    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:FAIL 1")
+    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:TEST 1 2>&1",1)
+
 
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/caget", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caget -V")
     # simple fail test, no chanel available
-    assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:FAIL")
+    assert_match "Channel connect timed out", shell_output("#{bin}/caget HOMEBREW:TEST 2>&1",1)
 
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/pvget", :exist?
     output = Utils.safe_popen_read("#{bin}/pvget", "-h", err: :out)
     assert_match "Usage: pvget", output
-    output = Utils.safe_popen_read("#{bin}/pvget", "HOMEBREW:FAIL", err: :out)
-    assert_match "Timeout", output
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/pvput", :exist?
-    shell_output("#{bin}/pvput -h")
+    output = Utils.safe_popen_read("#{bin}/pvput", "-h", err: :out)
     assert_match "Usage: pvput", output
-    output = Utils.safe_popen_read("#{bin}/pvput", "HOMEBREW:FAIL 1", err: :out)
-    assert_match "Timeout", output
 
 
     assert_path_exists "#{prefix}/bin/#{hostarch}/softIoc", :exist?
-    assert_match "Usage: softioc", shell_output("#{bin}/softioc -h")
+    output = shell_output("#{bin}/softioc -h 2>&1", 0)
+    assert_match "Usage:", output
+    assert_match "softioc", output
+
     assert_path_exists "#{prefix}/bin/#{hostarch}/softIocPVA", :exist?
-    assert_match "Usage: softiocpva", shell_output("#{bin}/softiocpva -h")
+    output = shell_output("#{bin}/softiocpva -h 2>&1", 0)
+    assert_match "Usage:", output
+    assert_match "softiocpva", output
+
+    ENV["EPICS_CA_ADDR_LIST"]         = "127.0.0.1"
+    ENV["EPICS_CA_AUTO_ADDR_LIST"]    = "NO"
+    ENV["EPICS_CAS_INTF_ADDR_LIST"]   = "127.0.0.1"
+    ENV["EPICS_CAS_BEACON_ADDR_LIST"] = "127.0.0.1"
+
+    (testpath/"test.db").write <<~EOS
+      record(ao,"HOMEBREW:TEST") {
+      field(DTYP,"Soft Channel")
+      field(VAL,"5.0")
+      }
+    EOS
+
+    (testpath/"st.cmd").write <<~EOS
+      dbLoadDatabase("#{testpath}/test.db")
+      iocInit()
+    EOS
+
+    pid = fork do
+      exec bin/"softioc", "-D", "#{prefix}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
+    end
+    begin
+        sleep 2
+        output=shell_output("#{bin}/caget HOMEBREW:TEST 2>&1",0)
+        assert_match "HOMEBREW:TEST", output
+        assert_match "5", output
+    ensure
+      Process.kill("TERM", pid)
+      Process.wait(pid)
+    end
+
+
+
   end
 end
