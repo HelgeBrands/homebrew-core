@@ -33,7 +33,6 @@ class Epicsbase < Formula
     ]
     user_tools.each do |t|
       src = prefix/"bin"/hostarch/t
-      ohai "src = #{src} (exists=#{src.exist?})"
       cp src, bin if src.exist?
     end
     bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
