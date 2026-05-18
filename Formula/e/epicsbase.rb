@@ -15,11 +15,7 @@ class Epicsbase < Formula
     hostarch = Utils.safe_popen_read("./startup/EpicsHostArch").strip
     ENV["EPICS_HOST_ARCH"] = hostarch
     ENV["EPICS_BASE"] = buildpath
-    # the EPICS makefile based configuration is set here in CONFIG_SITE.local
-    # this includes the requirement from homebrew to install directly into
-    # the bin/ directory. Sorry for this to the EPICS Community
-    # this is a requirement form homebrew. Otherwise I was NOT able to bring this through the
-    # github pipelines
+    # Override base configuration with CONFIG_SITE.local to force Filesystem Hierarchy Standard usage
     (buildpath/"configure/CONFIG_SITE.local").write <<~EOS
       INSTALL_LOCATION = #{prefix}
       SHRLIB_LDFLAGS = -dynamiclib
