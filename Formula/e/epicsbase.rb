@@ -71,10 +71,21 @@ class Epicsbase < Formula
     assert_match "Usage:", output
     assert_match "softiocpva", output
 
+    ca_port      = free_port
+    ca_repeater  = free_port
+    pva_port     = free_port
+
     ENV["EPICS_CA_ADDR_LIST"]         = "127.0.0.1"
     ENV["EPICS_CA_AUTO_ADDR_LIST"]    = "NO"
     ENV["EPICS_CAS_INTF_ADDR_LIST"]   = "127.0.0.1"
     ENV["EPICS_CAS_BEACON_ADDR_LIST"] = "127.0.0.1"
+    # Channel Access (CA)
+    ENV["EPICS_CA_SERVER_PORT"]   = ca_port.to_s
+    ENV["EPICS_CA_REPEATER_PORT"] = ca_repeater.to_s
+
+    # PV Access (PVA)
+    ENV["EPICS_PVA_SERVER_PORT"]  = pva_port.to_s
+    ENV["EPICS_PVA_BROADCAST_PORT"] = free_port.to_s
 
     (testpath/"test.db").write <<~EOS
       record(ao,"HOMEBREW:TEST") {
@@ -89,13 +100,17 @@ class Epicsbase < Formula
     EOS
 
     pid = fork do
-      exec bin/"softioc", "-D", "#{prefix}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
+      exec bin/"softiocpva", "-D", "#{prefix}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
     end
     begin
-      sleep 2
+      sleep 10
       output=shell_output("#{bin}/caget HOMEBREW:TEST 2>&1")
       assert_match "HOMEBREW:TEST", output
       assert_match "5", output
+      output=shell_output("#{bin}/pvget HOMEBREW:TEST 2>&1")
+      assert_match "HOMEBREW:TEST", output
+      assert_match "5", output
+
     ensure
       Process.kill("TERM", pid)
       Process.wait(pid)
