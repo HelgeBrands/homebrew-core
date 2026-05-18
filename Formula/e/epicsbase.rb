@@ -15,8 +15,10 @@ class Epicsbase < Formula
     hostarch = Utils.safe_popen_read("./startup/EpicsHostArch").strip
     ENV["EPICS_HOST_ARCH"] = hostarch
     ENV["EPICS_BASE"] = buildpath
-    # Optional: optinal config files
+    # the EPICS makefile based configuration is set here
     inreplace "configure/CONFIG_SITE", /#?INSTALL_LOCATION=.*/, "INSTALL_LOCATION=#{prefix}"
+    # avoid errors from linker
+    inreplace "configure/os/CONFIG.darwinCommon.darwinCommon", /-flat_namespace/, ""
     system "make"
     # installation: simply copy over this stuff
     libexec.install Dir["*"]
@@ -110,7 +112,6 @@ class Epicsbase < Formula
       output=shell_output("#{bin}/pvget HOMEBREW:TEST 2>&1")
       assert_match "HOMEBREW:TEST", output
       assert_match "5", output
-
     ensure
       Process.kill("TERM", pid)
       Process.wait(pid)
