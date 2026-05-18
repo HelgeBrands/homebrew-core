@@ -25,6 +25,9 @@ class Epicsbase < Formula
       SHRLIB_LDFLAGS = -dynamiclib
     EOS
 
+    # avoid errors from linker
+    inreplace "configure/os/CONFIG.darwinCommon.darwinCommon", /-flat_namespace/, ""
+
     system "make"
     # only these files are copied over to bin
     user_tools = %w[
