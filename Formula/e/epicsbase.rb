@@ -16,7 +16,7 @@ class Epicsbase < Formula
     ENV["EPICS_BASE"] = buildpath
     # Override base configuration with CONFIG_SITE.local to force Filesystem Hierarchy Standard usage
     (buildpath/"configure/CONFIG_SITE.local").write <<~EOS
-      INSTALL_LOCATION = #{prefix}/libexec
+      INSTALL_LOCATION = #{libexec}
       SHRLIB_LDFLAGS = -dynamiclib
     EOS
 
