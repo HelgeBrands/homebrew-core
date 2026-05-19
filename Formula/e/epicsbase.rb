@@ -120,6 +120,5 @@ class Epicsbase < Formula
     output = shell_output("#{bin}/softiocpva -D #{libexec}/dbd/softIocPVA.dbd st.cmd 2>&1")
     assert_match "HOMEBREW:TEST", output
     assert_match "5", output
-
   end
 end
