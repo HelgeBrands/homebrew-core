@@ -75,12 +75,12 @@ class Epicsbase < Formula
     output = Utils.safe_popen_read("#{bin}/pvput", "-h", err: :out)
     assert_match "Usage: pvput", output
 
-    assert_path_exists "#{bin}/softIoc", :exist?
+    assert_path_exists "#{bin}/softioc", :exist?
     output = shell_output("#{bin}/softioc -h 2>&1")
     assert_match "Usage:", output
     assert_match "softioc", output
 
-    assert_path_exists "#{bin}/softIocPVA", :exist?
+    assert_path_exists "#{bin}/softiocpva", :exist?
     output = shell_output("#{bin}/softiocpva -h 2>&1")
     assert_match "Usage:", output
     assert_match "softiocpva", output
