@@ -110,23 +110,16 @@ class Epicsbase < Formula
 
     (testpath/"st.cmd").write <<~EOS
       dbLoadDatabase("#{testpath}/test.db")
+      dbLoadRecords("#{libexec}/db/softIocExit.db","IOC=HOMEBREW")
       iocInit()
+      dbgf("HOMEBREW:TEST")
+      dbpf("HOMEBREW:exit",0)
+
     EOS
 
-    pid = fork do
-      exec bin/"softiocpva", "-D", "#{libexec}/dbd/softIocPVA.dbd", "#{testpath}/st.cmd"
-    end
-    begin
-      sleep 10
-      output=shell_output("#{bin}/caget HOMEBREW:TEST 2>&1")
-      assert_match "HOMEBREW:TEST", output
-      assert_match "5", output
-      output=shell_output("#{bin}/pvget HOMEBREW:TEST 2>&1")
-      assert_match "HOMEBREW:TEST", output
-      assert_match "5", output
-    ensure
-      Process.kill("TERM", pid)
-      Process.wait(pid)
-    end
+    output = shell_output("#{bin}/softiocpva -D #{libexec}/dbd/softIocPVA.dbd st.cmd 2>&1")
+    assert_match "HOMEBREW:TEST", output
+    assert_match "5", output
+
   end
 end
