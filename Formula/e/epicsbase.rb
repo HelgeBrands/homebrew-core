@@ -114,7 +114,7 @@ class Epicsbase < Formula
     EOS
 
     pid = fork do
-      exec bin/"softiocpva", "-D", "#{libexec}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
+      exec bin/"softiocpva", "-D", "#{libexec}/dbd/softIocPVA.dbd", "#{testpath}/st.cmd"
     end
     begin
       sleep 10
