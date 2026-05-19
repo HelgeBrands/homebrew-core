@@ -16,7 +16,7 @@ class Epicsbase < Formula
     ENV["EPICS_BASE"] = buildpath
     # Override base configuration with CONFIG_SITE.local to force Filesystem Hierarchy Standard usage
     (buildpath/"configure/CONFIG_SITE.local").write <<~EOS
-      INSTALL_LOCATION = #{prefix}
+      INSTALL_LOCATION = #{prefix}/libexec
       SHRLIB_LDFLAGS = -dynamiclib
     EOS
 
@@ -30,11 +30,16 @@ class Epicsbase < Formula
       pvget pvput pvinfo pvlist pvcall pvmonitor EpicsHostArch.pl
     ]
     user_tools.each do |t|
-      src = prefix/"bin"/hostarch/t
-      cp src, bin if src.exist?
+      src = prefix/"libexec/bin"/hostarch/t
+      bin.install_symlink src => t
     end
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIoc" => "softioc"
-    bin.install_symlink "#{prefix}/bin/#{hostarch}/softIocPVA" => "softiocpva"
+    user_libs = Dir["#{libexec}/lib/#{hostarch}/*.dylib"]
+    user_libs.each do |t|
+      lib.install_symlink t
+    end
+    bin.install_symlink "#{prefix}/libexec/bin/#{hostarch}/EpicsHostArch.pl" => "EpicsHostArch.pl"
+    bin.install_symlink "#{prefix}/libexec/bin/#{hostarch}/softIoc" => "softioc"
+    bin.install_symlink "#{prefix}/libexec/bin/#{hostarch}/softIocPVA" => "softiocpva"
   end
 
   def caveats
@@ -42,7 +47,7 @@ class Epicsbase < Formula
       EPICS Base is installed
 
       To use EPICS in the shell you have to put this here into shell configuration:
-        export EPICS_BASE=#{opt_prefix}
+        export EPICS_BASE=#{opt_prefix}/libexec
         export EPICS_HOST_ARCH=$(#{opt_prefix}/bin/EpicsHostArch.pl)
 
     EOS
@@ -52,30 +57,30 @@ class Epicsbase < Formula
     hostarch = Utils.safe_popen_read("#{opt_prefix}/bin/EpicsHostArch.pl").strip
     puts "EPICS_HOST_ARCH = #{hostarch}"
     # simple test if these files exists
-    assert_path_exists "#{prefix}/bin/#{hostarch}/caput", :exist?
+    assert_path_exists "#{bin}/caput", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caput -V")
     # simple fail test, no chanel available
     assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:TEST 1 2>&1", 1)
 
-    assert_path_exists "#{prefix}/bin/#{hostarch}/caget", :exist?
+    assert_path_exists "#{bin}/caget", :exist?
     assert_match "EPICS Version", shell_output("#{bin}/caget -V")
     # simple fail test, no chanel available
     assert_match "Channel connect timed out", shell_output("#{bin}/caget HOMEBREW:TEST 2>&1", 1)
 
-    assert_path_exists "#{prefix}/bin/#{hostarch}/pvget", :exist?
+    assert_path_exists "#{bin}/pvget", :exist?
     output = Utils.safe_popen_read("#{bin}/pvget", "-h", err: :out)
     assert_match "Usage: pvget", output
 
-    assert_path_exists "#{prefix}/bin/#{hostarch}/pvput", :exist?
+    assert_path_exists "#{bin}/pvput", :exist?
     output = Utils.safe_popen_read("#{bin}/pvput", "-h", err: :out)
     assert_match "Usage: pvput", output
 
-    assert_path_exists "#{prefix}/bin/#{hostarch}/softIoc", :exist?
+    assert_path_exists "#{bin}/softIoc", :exist?
     output = shell_output("#{bin}/softioc -h 2>&1")
     assert_match "Usage:", output
     assert_match "softioc", output
 
-    assert_path_exists "#{prefix}/bin/#{hostarch}/softIocPVA", :exist?
+    assert_path_exists "#{bin}/softIocPVA", :exist?
     output = shell_output("#{bin}/softiocpva -h 2>&1")
     assert_match "Usage:", output
     assert_match "softiocpva", output
@@ -109,7 +114,7 @@ class Epicsbase < Formula
     EOS
 
     pid = fork do
-      exec bin/"softiocpva", "-D", "#{prefix}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
+      exec bin/"softiocpva", "-D", "#{libexec}/dbd/softIoc.dbd", "#{testpath}/st.cmd"
     end
     begin
       sleep 10
