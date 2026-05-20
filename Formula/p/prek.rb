@@ -1,18 +1,18 @@
 class Prek < Formula
   desc "Fast Git hook manager written in Rust, drop-in alternative to pre-commit"
   homepage "https://github.com/j178/prek"
-  url "https://github.com/j178/prek/archive/refs/tags/v0.3.13.tar.gz"
-  sha256 "3bfa9e8ddeff7733b83cd2e7c96842c383aa922c9d8f8e683f7e67e63808adf2"
+  url "https://github.com/j178/prek/archive/refs/tags/v0.4.1.tar.gz"
+  sha256 "79aa52eee107e10b2d52baba6e7a52a7c3df2d13a2eb823211111a50927fe7fd"
   license "MIT"
   head "https://github.com/j178/prek.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0cb113bc18e3f9c94e0f2a42add59b683aee315669260871020e6ebf9ff61ad1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "832ac1bb72754d0b300b440206eabeea1dd24dbab258d61224e6c7473b5c6d5f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "17be59ab4a3c43ffaae0dd64afb9a55d4fc295152075735bbadb43fe3ae380f5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "234bd702d96c445688be5b31d8a90e8c1f78aa82d688217fb3f40f890c6cbd03"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d0f3ec9a34c04457cef6adffe8faf492ad20fa25f240667dae9a28b0b4140c2a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a9d21f3c62210a7b426ac3b667300922a4b68b592d116c8d194a97d0db347ed2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2c08e721cd02703c0182b7572abba589af3a60f48ca846de2514cb7576f233e9"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8da070397d0e92f3a87fb3080b84845a04a0d8e2811b3da16fae3870dc39c0f5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ba6915f87aa74d3d79f8495c7baf97550f5b436d575e69f4d6bfd9fe6585ad17"
+    sha256 cellar: :any_skip_relocation, sonoma:        "7a62ec762f492cb4bb444d84644e34b5e94bf0bb02abcad368fe53a36d4caf87"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "93eaedbfc162f04fd20fa43a3f728396bfb78e7d70002efdb59a8e2fc6d10c57"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1148ee47ec4f8ec5632e8cd18c45f26ae8f8c275d82e2d76fb26dbc0b6d6d6e5"
   end
 
   depends_on "rust" => :build

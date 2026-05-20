@@ -6,14 +6,15 @@ class Apprise < Formula
   url "https://files.pythonhosted.org/packages/2f/74/9c16829d3e7e45ce7daf1b704687fa4fde7ea00d72eafe8de18c72bf5995/apprise-1.10.0.tar.gz"
   sha256 "b768f32d99e45ed5f4c3eef1f67903e803c97f97ba61a531a5d0a45d40df90a8"
   license "BSD-3-Clause"
+  revision 2
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "368d80d8324136215dc957ddf7c55ae511664f38b455d32c05302575fc0a83a6"
-    sha256 cellar: :any,                 arm64_sequoia: "67872e6dba410069e6702456d780456a312f5551f4f0fe8da0d00d732bc343a9"
-    sha256 cellar: :any,                 arm64_sonoma:  "3828587acc342d928fddae6d28a7bf234093b5788ac2ccfa523325751212ba64"
-    sha256 cellar: :any,                 sonoma:        "fec3c78446eaf6d7f53b6590eb598e9f6ab8849b45672c9b5a24afa57cadd0e3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "eeec860adf335460b845a80a560c8b4292b3f2ab038a0d435fc83cd14a0b255d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e1f19f989ded5e9b3c8ffb1a56229d9cbe73fd7e46eb5314c17657a9f5ab0efa"
+    sha256 cellar: :any,                 arm64_tahoe:   "65e93747468219e5760a7ce3b5b0bad3d575eb0668a7881f0630f0284b691bd0"
+    sha256 cellar: :any,                 arm64_sequoia: "ff8a7a5fcd60e785cfee7ba85ff8747d252d7a1ecd319cf7528a8d6e65ebf0e2"
+    sha256 cellar: :any,                 arm64_sonoma:  "b36869bccaeeb06ab5f4a6417cb31b7c009e07a080a4499e39484b5b88deb399"
+    sha256 cellar: :any,                 sonoma:        "eab9154602efd4b1403e9daf32212e32001e74084c4cc8f28840b63d0192b410"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "94ce990261da4b3384f467587ec7c579391dfe181b0a0ab5483a786e5d159f5c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "36e90fe7f4b6b3f15d5bf95c8b81ffab9e47d0a915f54df745955fd894a34711"
   end
 
   depends_on "certifi"
@@ -28,13 +29,13 @@ class Apprise < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz"
-    sha256 "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+    url "https://files.pythonhosted.org/packages/23/e4/796662cd90cf80e3a363c99db2b88e0e394b988a575f60a17e16440cd011/click-8.4.0.tar.gz"
+    sha256 "638f1338fe1235c8f4e008e4a8a254fb5c5fbdcbb40ece3c9142ebb78e792973"
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/ce/cc/762dfb036166873f0059f3b7de4565e1b5bc3d6f28a414c13da27e442f99/idna-3.13.tar.gz"
-    sha256 "585ea8fe5d69b9181ec1afba340451fba6ba764af97026f92a91d4eef164a242"
+    url "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz"
+    sha256 "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc"
   end
 
   resource "markdown" do
@@ -53,8 +54,8 @@ class Apprise < Formula
   end
 
   resource "requests" do
-    url "https://files.pythonhosted.org/packages/5f/a4/98b9c7c6428a668bf7e42ebb7c79d576a1c3c1e3ae2d47e674b468388871/requests-2.33.1.tar.gz"
-    sha256 "18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517"
+    url "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz"
+    sha256 "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
   end
 
   resource "requests-oauthlib" do
@@ -63,8 +64,8 @@ class Apprise < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
-    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
+    url "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz"
+    sha256 "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c"
   end
 
   def install

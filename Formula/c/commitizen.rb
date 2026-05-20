@@ -3,18 +3,18 @@ class Commitizen < Formula
 
   desc "Defines a standard way of committing rules and communicating it"
   homepage "https://commitizen-tools.github.io/commitizen/"
-  url "https://files.pythonhosted.org/packages/ac/2a/ac219a23e89210aa3ee9244dc076e39bc532bc3f352024f3d478f3e79b85/commitizen-4.15.1.tar.gz"
-  sha256 "cca192e07b2f9d77734044c631da294b3007ef9aa10cc8f0600290aa662e9fa3"
+  url "https://files.pythonhosted.org/packages/09/02/e404c26bea344629fde63e511260cea9260e690e9fae46b58f2cb3efd89e/commitizen-4.16.2.tar.gz"
+  sha256 "346f32cb81641ec12716f78d16ab7caab28a5e728efc0da36a15a0c6c6839513"
   license "MIT"
   head "https://github.com/commitizen-tools/commitizen.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "3400bb3929c673457bbc342a1f5ac8945938c1466d162ae11351a4f3f675333e"
-    sha256 cellar: :any,                 arm64_sequoia: "1de4e0f79d6c515c0c2204c1dd1024c1e3af717ba0c56cfba035a4860b1f9122"
-    sha256 cellar: :any,                 arm64_sonoma:  "501a3a27968e1ad8130495762de36d530e42c7dd667fea2efda0a5a090647db4"
-    sha256 cellar: :any,                 sonoma:        "1e6b688d1016c011a0a171fbd640423941a4636a39e57173230e31928ee309d8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4855d08245a6d1c60b2f3fce4f6767aac003b1c9fe488d2f1be8ee00efbf3705"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "919b19f134b37f26a00db9ea7f2dc3aa47b6623c511e97d9971f8541a4abfe4d"
+    sha256 cellar: :any,                 arm64_tahoe:   "9401165092558f59dffe80414b47ba03db11517848292e9ee8d7113637430127"
+    sha256 cellar: :any,                 arm64_sequoia: "dde13f1cbd907f92e7949c08e02d2be8cbd4f2a1f85931ee634ae0ff6d6e0aff"
+    sha256 cellar: :any,                 arm64_sonoma:  "6e37df32cf3bcd8a61d4ba2e23115a172e1b681f92f22f0dbba5855e7040bf18"
+    sha256 cellar: :any,                 sonoma:        "d1fdc1b23201cf57b67c16cf01f7f5822e6910ac7628a550e86cffc916eccdaf"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7ab87547949d6734cfc6636b3edebdba6456b329be2d6fc2e4ab43b1c300881d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "594c5e2a63027bc82f5f3b6d73d5e0403c508dff1666b50e8a2b1799a6c61ff7"
   end
 
   depends_on "maturin" => :build
@@ -83,8 +83,8 @@ class Commitizen < Formula
   end
 
   resource "tomlkit" do
-    url "https://files.pythonhosted.org/packages/c3/af/14b24e41977adb296d6bd1fb59402cf7d60ce364f90c890bd2ec65c43b5a/tomlkit-0.14.0.tar.gz"
-    sha256 "cf00efca415dbd57575befb1f6634c4f42d2d87dbba376128adb42c121b87064"
+    url "https://files.pythonhosted.org/packages/51/db/03eaf4331631ef6b27d6e3c9b68c54dc6f0d63d87201fed600cc409307fd/tomlkit-0.15.0.tar.gz"
+    sha256 "7d1a9ecba3086638211b13814ea79c90dd54dd11993564376f3aa92271f5c7a3"
   end
 
   resource "wcwidth" do

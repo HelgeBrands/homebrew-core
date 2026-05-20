@@ -1,18 +1,18 @@
 class Ironclaw < Formula
   desc "Security-first personal AI assistant with WASM sandbox channels"
   homepage "https://github.com/nearai/ironclaw"
-  url "https://github.com/nearai/ironclaw/archive/refs/tags/ironclaw-v0.28.0.tar.gz"
-  sha256 "a2e6d6e6937cccc3518395d365e45da433a2f0db80f565ead03afc7ef633ab01"
+  url "https://github.com/nearai/ironclaw/archive/refs/tags/ironclaw-v0.28.2.tar.gz"
+  sha256 "5ef57be870ca678cc5fbd6237416edd2a298e88be9ec977ccaadb65766902a4c"
   license any_of: ["MIT", "Apache-2.0"]
   head "https://github.com/nearai/ironclaw.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ec97e126e2d9e2b02ccd1858279ddc63a1486bae9d69bb5a2d24f283c2a49215"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "94eb2e9491748659c9ede945ed1e4936d4e2d58498c6a43a85f8f0feb9b23796"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f8824663840f30b3bf8a480b1a263ff1d1bb86284b0d9ad811a930b24e669001"
-    sha256 cellar: :any_skip_relocation, sonoma:        "abd37bf7acca5241ef42ef13c5e9672d495bac55b76103c10dabcaa7522015e4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "363c3ff9cc340338fc4e52153fe722b2f1106d76059cfb510361287950dbeca3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fbe27f44a8a50e29de913b372c2aebe2a4d2d313e7396e243d91cbcfddb0e450"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f95eccf4898ee8c4c151cca3baaa33e417587cd25ff34c40d7eef95ac31ff953"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b445e60956b382ba381d4c2f2ec90c6a5cef5603169110d6c73652422f6e96dd"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d4d2e842960d2aee05c55f3ad755741e34e90a42f694bca48a45e6d0cee75c23"
+    sha256 cellar: :any_skip_relocation, sonoma:        "de1a22b10ded70f7a0dcfe095ef7a1863221fdf99a8ef27f4f47d229c9818890"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "16e7c1d0758261305e7313950ba12e4b430c9764d2b82ddd58d85b2c11259238"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7c24a74906052cde2aaa2e19ad5648f1fc503aae003808dd59c39a726a919a78"
   end
 
   depends_on "pkgconf" => :build

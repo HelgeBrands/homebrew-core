@@ -1,8 +1,8 @@
 class Teleport < Formula
   desc "Modern SSH server for teams managing distributed infrastructure"
   homepage "https://goteleport.com/"
-  url "https://github.com/gravitational/teleport/archive/refs/tags/v18.7.6.tar.gz"
-  sha256 "30fb59382ba7e52f799c4ac3f950b3d7a4fbdfba2a826c8789c4ec4ac8e08f8c"
+  url "https://github.com/gravitational/teleport/archive/refs/tags/v18.8.1.tar.gz"
+  sha256 "ec182a6c5cef4452529700d857fe921aac530b1a32b1da1201bc660007ba5396"
   license all_of: ["AGPL-3.0-or-later", "Apache-2.0"]
   head "https://github.com/gravitational/teleport.git", branch: "master"
 
@@ -18,12 +18,12 @@ class Teleport < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "b4b9df4c5ba17babe93352cf25e73aced6e4ed0d86f4a393672ee473ea63ff5b"
-    sha256 cellar: :any,                 arm64_sequoia: "efc941f612d387b46bba9a408f2c11facbb15b58a6cd336174e4a3f417a96c6c"
-    sha256 cellar: :any,                 arm64_sonoma:  "e8ac1dad84b0763b80df169c435634eb926b081884bd53c919c55deb29c966c0"
-    sha256 cellar: :any,                 sonoma:        "fc5c40b3bdbf1124e7da9575daf43f58365a8d66a8334f0a0ad80d20bebab97a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "55c40800f2b336d8f99aa0f09b1a7d6c3b817e33f2ae0178b74f24263f81bfa6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ee0c21b593b301bb8a88f92cb097970d2380ff2d6a8dc62cb13ef482ed74bf30"
+    sha256 cellar: :any,                 arm64_tahoe:   "3ee6aa44146eb1ab513f5846c4c319478666459ecf4f33ce82f86b398c555c52"
+    sha256 cellar: :any,                 arm64_sequoia: "e75e4a5cc7c3354f4e4db62a7bb2ee02da9fc0f8bfa21e454dd5d388428d2879"
+    sha256 cellar: :any,                 arm64_sonoma:  "6f3a3fa785485a98d9fa9282caf446e628d8512147b97145f9cd1313dd797c4e"
+    sha256 cellar: :any,                 sonoma:        "478c2225317f48e0923922c1b6421d7d501c36cbc1e4ce8c16c3e61e2e49c9e3"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "683198dd3f6d3ca282726a1d72ab7170f91c1b794b807d48c4e4f5986f1fdd45"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "73c06d4a2209950804154ee84274c7375cfab68dbd15ee3150a4730fb34bcf3a"
   end
 
   depends_on "binaryen" => :build
@@ -35,9 +35,6 @@ class Teleport < Formula
   # TODO: try to remove rustup dependancy, see https://github.com/Homebrew/homebrew-core/pull/191633#discussion_r1774378671
   depends_on "rustup" => :build
   depends_on "libfido2"
-  depends_on "openssl@3"
-
-  uses_from_macos "zip"
 
   conflicts_with "etsh", because: "both install `tsh` binaries"
   conflicts_with "tctl", because: "both install `tctl` binaries"
@@ -55,9 +52,6 @@ class Teleport < Formula
       regex(/name\s*=\s*"wasm-bindgen".*?version\s*=\s*["'](\d+(?:\.\d+)+)["']/im)
     end
   end
-
-  # disable `wasm-opt` for ironrdp pkg release build, upstream pr ref, https://github.com/gravitational/teleport/pull/50178
-  patch :DATA
 
   def install
     # Workaround to avoid patchelf corruption when cgo is required
@@ -78,9 +72,10 @@ class Teleport < Formula
     resource("wasm-bindgen").stage do
       system "cargo", "install", *std_cargo_args(path: "crates/cli", root: buildpath)
     end
+    ENV.prepend_path "PATH", buildpath/"bin"
 
-    # Replace wasm-bindgen binary call to the built one
-    inreplace "Makefile", "wasm-bindgen target", buildpath/"bin/wasm-bindgen target"
+    # Reduce overlinking with OpenSSL
+    ENV.append "CGO_LDFLAGS", "-Wl,-dead_strip_dylibs" if OS.mac?
 
     # Workaround for error: The CPU Jitter random number generator must not be compiled with optimizations.
     # Issue ref: https://github.com/aws/aws-lc-rs/issues/1097
@@ -115,18 +110,3 @@ class Teleport < Formula
     assert_match(/Version:\s*#{version}/, status)
   end
 end
-
-__END__
-diff --git a/web/packages/shared/libs/ironrdp/Cargo.toml b/web/packages/shared/libs/ironrdp/Cargo.toml
-index ddcc4db..913691f 100644
---- a/web/packages/shared/libs/ironrdp/Cargo.toml
-+++ b/web/packages/shared/libs/ironrdp/Cargo.toml
-@@ -7,6 +7,9 @@ publish.workspace = true
- 
- # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
- 
-+[package.metadata.wasm-pack.profile.release]
-+wasm-opt = false
-+
- [lib]
- crate-type = ["cdylib"]
