@@ -6,15 +6,16 @@ class Conan < Formula
   url "https://files.pythonhosted.org/packages/54/89/5b9d6cca677e57b67560aa3b7f82728127889ce74bb91171ded6f28e42b8/conan-2.28.1.tar.gz"
   sha256 "e4ed10123751bf2931c32c33cadafe4881c72e1c22a1c97b19cb75780692fae5"
   license "MIT"
+  revision 2
   head "https://github.com/conan-io/conan.git", branch: "develop2"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "a557f2856b6a4dc974425ac86b18e3f9c7f290211ee496a3c7e43e6495d96937"
-    sha256 cellar: :any,                 arm64_sequoia: "98d4701a204346ecf652c70d561e9fea05737778cafa1bed8061d7bdb0b0e54e"
-    sha256 cellar: :any,                 arm64_sonoma:  "025c673b95520da3a117762babb6b2d58f08d67efbeacd88689c8cafca18ad13"
-    sha256 cellar: :any,                 sonoma:        "70888da2cb609569190c1a036a1764f311201e9080718d69676a0d5bff3bb103"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ded922d3af6aab497ba3a45d82827123cc198f40bd3c8031f65715885845216b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "143963896e1fe0932d156f863026569362c5db4cc8fa600a1c4f0c03b2820943"
+    sha256 cellar: :any,                 arm64_tahoe:   "bbae3059aaf68e700f9cb5d95401500780a89f8fc605286b365a749dd179afca"
+    sha256 cellar: :any,                 arm64_sequoia: "c6d3fe47e24338ea74c004cb7821581f1e3a3bdeea7c1ccc5fa24a77631a7c39"
+    sha256 cellar: :any,                 arm64_sonoma:  "af83f8d95b9558e4d99f668cf9d0d75d233e3c259c5acd654832120b6d754261"
+    sha256 cellar: :any,                 sonoma:        "62a34dfe440e8fc104b71e40b952f4e95572bed05e1465764ff0350c4505bbe7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f6cc68d020cb98337adb4e8b13b67de8565ec1294699072b43b6d2ee698fa89f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bebe368fa0d1edb72f3f1899cc896c090285f768fa7a98c91cf57391eec46f73"
   end
 
   depends_on "pkgconf" => :build
@@ -47,8 +48,8 @@ class Conan < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/ce/cc/762dfb036166873f0059f3b7de4565e1b5bc3d6f28a414c13da27e442f99/idna-3.13.tar.gz"
-    sha256 "585ea8fe5d69b9181ec1afba340451fba6ba764af97026f92a91d4eef164a242"
+    url "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz"
+    sha256 "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc"
   end
 
   resource "jinja2" do
@@ -77,8 +78,8 @@ class Conan < Formula
   end
 
   resource "requests" do
-    url "https://files.pythonhosted.org/packages/5f/a4/98b9c7c6428a668bf7e42ebb7c79d576a1c3c1e3ae2d47e674b468388871/requests-2.33.1.tar.gz"
-    sha256 "18817f8c57c6263968bc123d237e3b8b08ac046f5456bd1e307ee8f4250d3517"
+    url "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz"
+    sha256 "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
   end
 
   resource "six" do
@@ -87,8 +88,8 @@ class Conan < Formula
   end
 
   resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/c7/24/5f1b3bdffd70275f6661c76461e25f024d5a38a46f04aaca912426a2b1d3/urllib3-2.6.3.tar.gz"
-    sha256 "1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"
+    url "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz"
+    sha256 "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c"
   end
 
   def install

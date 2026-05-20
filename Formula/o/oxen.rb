@@ -1,8 +1,8 @@
 class Oxen < Formula
   desc "Data VCS for structured and unstructured machine learning datasets"
   homepage "https://www.oxen.ai/"
-  url "https://github.com/Oxen-AI/Oxen/archive/refs/tags/v0.49.1.tar.gz"
-  sha256 "bc269006ea37b659f68ceb144f1f7e779b212a70b6e2c13c588c22fb2bd882d6"
+  url "https://github.com/Oxen-AI/Oxen/archive/refs/tags/v0.50.0.tar.gz"
+  sha256 "56df64f027be2d879fa1014c5e2bc237354227aac5da156dc7e6fe93bdb2f866"
   license "Apache-2.0"
   head "https://github.com/Oxen-AI/Oxen.git", branch: "main"
 
@@ -16,27 +16,23 @@ class Oxen < Formula
   no_autobump! because: :bumped_by_upstream
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "68f441f57e12d8ae3593203d942e4983830c3b84e21251b6d50f0222e07b7a04"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f0c3fc6ba2cced0615ffdf18717e2c8e30724a5a7bc9cb5678d33bb108d46f4d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "759448da501564145c1b54790982f938f259c7762abbb6d128b1c2e8e3e19a05"
-    sha256 cellar: :any_skip_relocation, sonoma:        "035fffc51affe434e3c0bc02b52ed75acdc25a616bdc696d5ec9b58e33e2168d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4d4cb6a26dd2180314e11fe4d9bf086bd7af8642e120d38b03eb7b373cdb0987"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "89490195053a07d426a713caeb2494f361a55fb46dd7150b4cbd18eefdfdd142"
+    rebuild 1
+    sha256 cellar: :any,                 arm64_tahoe:   "1b6894b73776bbe2742cab33b7045da7ec5eaed1e468eff7beab8404be858dd5"
+    sha256 cellar: :any,                 arm64_sequoia: "f515c1d40286ce4349bb864650772cfd201baf8f9671890787be70d1cbaa08c4"
+    sha256 cellar: :any,                 arm64_sonoma:  "8879683186a6b1940bb941c7b4ec79d2b1def2db745a3bc5ac5de471c77bd027"
+    sha256 cellar: :any,                 sonoma:        "e4b6eb4f28f04f202e1c8f6a4e5c4be679eeb85f1f8318e0f20f5e22f87671ae"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4d6e16f1934ff862c18fea462d259543e3d04cbb50d6b4d141188d1b1307071d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a5a70f9754bb0055216c7fd5108e9771530bb79fc819024ec625c840298e01a1"
   end
 
   depends_on "cmake" => :build # for libz-ng-sys
-  depends_on "pkgconf" => :build
   depends_on "rust" => :build
-  depends_on "xz"
+  depends_on "rocksdb"
 
-  uses_from_macos "bzip2"
-  uses_from_macos "llvm" # for libclang
-
-  on_linux do
-    depends_on "openssl@3"
-  end
+  uses_from_macos "llvm" => :build # for libclang
 
   def install
+    ENV["ROCKSDB_LIB_DIR"] = Formula["rocksdb"].opt_lib
     system "cargo", "install", *std_cargo_args(path: "crates/cli")
   end
 

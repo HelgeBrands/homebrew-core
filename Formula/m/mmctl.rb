@@ -1,8 +1,8 @@
 class Mmctl < Formula
   desc "Remote CLI tool for Mattermost server"
   homepage "https://github.com/mattermost/mattermost"
-  url "https://github.com/mattermost/mattermost/archive/refs/tags/v11.6.1.tar.gz"
-  sha256 "d5876c827542581d2301bcc7d9015ca17b1d7fbb822e4663df0379ab8e895eb0"
+  url "https://github.com/mattermost/mattermost/archive/refs/tags/v11.7.0.tar.gz"
+  sha256 "4b006ac8307139f94fd1ce28a046fbdf1b7c16bebacae6343a1272b0d0cfaecc"
   license all_of: ["AGPL-3.0-only", "Apache-2.0"]
   head "https://github.com/mattermost/mattermost.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Mmctl < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "550585187150d135c27982498bc6fa84184e4322d112cadddbd8e3fd7fd3c123"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "550585187150d135c27982498bc6fa84184e4322d112cadddbd8e3fd7fd3c123"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "550585187150d135c27982498bc6fa84184e4322d112cadddbd8e3fd7fd3c123"
-    sha256 cellar: :any_skip_relocation, sonoma:        "cf3863e62efc192e178719a9ca6ccba8edada502c0b767148ebfd2427772d8f1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a5b49aeda4a3fa4b70cbcdc9b2939f9f990cf3851cdd845166bd134968f11be4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d25dab0040428b200abcd1fb6c8bbd83bd10b101c50a6df310edf7fa6cefefc9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "cfae1fc99b93e7392cec45c244b05768f82cc814e4bcf9152e4b0104a89a96da"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "cfae1fc99b93e7392cec45c244b05768f82cc814e4bcf9152e4b0104a89a96da"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "cfae1fc99b93e7392cec45c244b05768f82cc814e4bcf9152e4b0104a89a96da"
+    sha256 cellar: :any_skip_relocation, sonoma:        "bf8a55cd6a870d7af16f559e78adcf223d636e8a50484360ab68e96c2bb86fee"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f3f3a0a084f15e5412d51fe4daba9a44e6f68068fb56f8709076b6afd88b9758"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d128f76d26fb0c3a081e34bf10c6477e2e52aa7076a156e48f359299f8152ba9"
   end
 
   depends_on "go" => :build

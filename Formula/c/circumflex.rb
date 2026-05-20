@@ -1,35 +1,34 @@
 class Circumflex < Formula
   desc "Hacker News in your terminal"
   homepage "https://github.com/bensadeh/circumflex"
-  url "https://github.com/bensadeh/circumflex/archive/refs/tags/4.0.tar.gz"
-  sha256 "48799d929afb0b4d0b2bca57ce7919eebd5ff11227f49fd851adf20a1689113a"
+  url "https://github.com/bensadeh/circumflex/archive/refs/tags/4.1.1.tar.gz"
+  sha256 "c5900e13c41d2e5a1da2d45e0d63b38d345dca584edfbf8e60b4daa7cda88cae"
   license "MIT"
   head "https://github.com/bensadeh/circumflex.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f221aab5645f12b7d8187a21881906aabfdaa7e11c13e6facd5baea0c804b889"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f221aab5645f12b7d8187a21881906aabfdaa7e11c13e6facd5baea0c804b889"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f221aab5645f12b7d8187a21881906aabfdaa7e11c13e6facd5baea0c804b889"
-    sha256 cellar: :any_skip_relocation, sonoma:        "98082abc7cbc19c8a3de2069320459d7ca20c9004fb29ad3f986d02c3ff450ce"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "47da3ca485277ef48e64a67b4cdd45e657e2d44f4b84943a39b9f07027ed7d3f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "78f6ce73a62d0763a860bd1530dd8e590e6b2405892444fc338278711fd47891"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "950e2d99874688e36c1b0950dacbca36068b0d22a8b2be58fa49761de5461b70"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "950e2d99874688e36c1b0950dacbca36068b0d22a8b2be58fa49761de5461b70"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "950e2d99874688e36c1b0950dacbca36068b0d22a8b2be58fa49761de5461b70"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a34efb5434e33d6f180906091ffbf36f6d8ae97f5f3ec5ea23b31797f96f4fe6"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "110ac9e04a50ca218c7590a158608d23babc29001f90a942d568183e1a613280"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9045e704896543669129c725e4aae147a51e49b516126ce7960163164f8b670d"
   end
 
   depends_on "go" => :build
-  depends_on "less"
 
   def install
     system "go", "build", *std_go_args(output: bin/"clx", ldflags: "-s -w"), "./cmd/clx"
     man1.install "share/man/clx.1"
+    bash_completion.install "share/completions/clx.bash" => "clx"
+    zsh_completion.install  "share/completions/_clx"     => "_clx"
+    fish_completion.install "share/completions/clx.fish"
   end
 
   test do
     ENV["XDG_CONFIG_HOME"] = testpath/".config"
-    config_home = if OS.mac?
-      testpath/"Library/Application Support"
-    else
-      testpath/".config"
-    end
+    config_home = testpath/".config"
 
     assert_match "Item added to favorites", shell_output("#{bin}/clx add 1")
     assert_path_exists config_home/"circumflex/favorites.json"

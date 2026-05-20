@@ -5,6 +5,7 @@
   "goenv",
   "luarocks",
   "meson",
+  "opendoor",
   "phpmyadmin",
   "python-setuptools",
   "rabbitmq",

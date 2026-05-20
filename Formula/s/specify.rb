@@ -3,17 +3,17 @@ class Specify < Formula
 
   desc "Toolkit to help you get started with Spec-Driven Development"
   homepage "https://github.com/github/spec-kit"
-  url "https://github.com/github/spec-kit/archive/refs/tags/v0.8.7.tar.gz"
-  sha256 "401df81dc721576e2e23ea150f94d9227341b7ac3556b7e4ae89c20d45437e8c"
+  url "https://github.com/github/spec-kit/archive/refs/tags/v0.8.11.tar.gz"
+  sha256 "d4c45b7331ee1a66d00331c6f54fe71fcda5a9eae9021e0871ddcab97c3894e5"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "890e85efdc7e74ee9a25ea82c616b54bd6cdb8002d1585d412306046a3ac9276"
-    sha256 cellar: :any,                 arm64_sequoia: "f7ec4223c9d03ac8105c7512fc4b275c6794594b4cbd201bb49925960408b4b8"
-    sha256 cellar: :any,                 arm64_sonoma:  "90f009998ef61ce1b9b2706516d495208140eaab97b3253ee85d09600325ea7c"
-    sha256 cellar: :any,                 sonoma:        "0f0b0864fb7894bf1d485d35cdab2bd3199d9a62099e8007a18b2660986768e7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fdee60d74d44b1b2109ccb1912d2dd33677a0b36138a8f945d81ac66b563b2df"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bce3d5a246948256166439a070cde3e9d9b44cc117b1165fc537cc597646a65c"
+    sha256 cellar: :any,                 arm64_tahoe:   "f51fcb3dd32243c1effe638a4e3cf90013c27aa3880bf05649e2ba280cae6993"
+    sha256 cellar: :any,                 arm64_sequoia: "972e561f1d2e831d979b23527f4ebe38ec3199a06e8f22f8a78606839525f92c"
+    sha256 cellar: :any,                 arm64_sonoma:  "1b1cbc5f7fe04c68f6a28c262d160eced982d8646f0320a67cde4b61b6a99554"
+    sha256 cellar: :any,                 sonoma:        "dbd72b51f173978bcc04d48e8cd8217c69e9b4105c2ae1037f9662d86c7c2bb1"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5f2ee774bf1d845c7b2f80886dfff842140d70af5296ed7ffc88d9bc5442cb5f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bc4ec90d529217de73e728ab6194276c156c0345151a5fa13f74c77e16e6665c"
   end
 
   depends_on "certifi" => :no_linkage
@@ -38,8 +38,8 @@ class Specify < Formula
   end
 
   resource "markdown-it-py" do
-    url "https://files.pythonhosted.org/packages/5c/5c/f3aedc83549aae71cd52b9e9687fe896e3dc6e966ba20eba04718605d198/markdown_it_py-4.1.0.tar.gz"
-    sha256 "760e3f87b2787c044c5138a5ba107b7c2be26c03b13cc7f8fe42756b65b1df6c"
+    url "https://files.pythonhosted.org/packages/06/ff/7841249c247aa650a76b9ee4bbaeae59370dc8bfd2f6c01f3630c35eb134/markdown_it_py-4.2.0.tar.gz"
+    sha256 "04a21681d6fbb623de53f6f364d352309d4094dd4194040a10fd51833e418d49"
   end
 
   resource "mdurl" do

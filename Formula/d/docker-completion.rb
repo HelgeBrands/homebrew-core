@@ -1,8 +1,8 @@
 class DockerCompletion < Formula
   desc "Bash, Zsh and Fish completion for Docker"
   homepage "https://www.docker.com/"
-  url "https://github.com/docker/cli/archive/refs/tags/v29.4.3.tar.gz"
-  sha256 "e9341f05882778096d85f8cc34222b5b731bad9561980c377b9e8477dfb1ebc2"
+  url "https://github.com/docker/cli/archive/refs/tags/v29.5.1.tar.gz"
+  sha256 "de3cdd74a66f4cfe843983e4ca8d2133cf5eecc8ad8b5450cec0b7ccd59f921d"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/docker/cli.git", branch: "master"
@@ -12,7 +12,7 @@ class DockerCompletion < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "6ef19a37f309cce65ad8155e248cfa31b7aa41b8c9001fc3fdb9c62d1fc734ee"
+    sha256 cellar: :any_skip_relocation, all: "7f7c4f61c5cab06b8b02be75b7f18ae4ad15b6a4d3ed2efb21795780b2fffd50"
   end
 
   conflicts_with cask: "docker-desktop"
