@@ -37,9 +37,11 @@ class Epicsbase < Formula
     user_libs.each do |t|
       lib.install_symlink t
     end
-    bin.install_symlink "#{prefix}/libexec/bin/#{hostarch}/EpicsHostArch.pl" => "EpicsHostArch.pl"
-    bin.install_symlink "#{prefix}/libexec/bin/#{hostarch}/softIoc" => "softioc"
-    bin.install_symlink "#{prefix}/libexec/bin/#{hostarch}/softIocPVA" => "softiocpva"
+    bin.install_symlink "#{libexec}/bin/#{hostarch}/EpicsHostArch.pl" => "EpicsHostArch.pl"
+    bin.install_symlink "#{libexec}/bin/#{hostarch}/softIoc" => "softioc"
+    bin.install_symlink "#{libexec}/bin/#{hostarch}/softIocPVA" => "softiocpva"
+    include.install_symlink Dir[libexec/"include/*"]
+
   end
 
   def caveats
