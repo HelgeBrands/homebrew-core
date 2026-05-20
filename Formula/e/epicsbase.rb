@@ -41,7 +41,6 @@ class Epicsbase < Formula
     bin.install_symlink "#{libexec}/bin/#{hostarch}/softIoc" => "softioc"
     bin.install_symlink "#{libexec}/bin/#{hostarch}/softIocPVA" => "softiocpva"
     include.install_symlink Dir[libexec/"include/*"]
-
   end
 
   def caveats
