@@ -20,15 +20,17 @@ class Caqtdm < Formula
 
   def install
     require "macho"
-    hostarch = Utils.safe_popen_read(Formula["epicsbase"].opt_libexec"/bin/EpicsHostArch.pl").strip
+    perl_hostarch = Formula["epicsbase"].opt_bin
+    perl_hostarch /= "EpicsHostArch.pl"
+    hostarch = Utils.safe_popen_read(perl_hostarch).strip
     ENV["QTDIR"] = Formula["qt"].opt_prefix
     ENV.append_path "PATH", Formula["qt"].opt_bin
     ENV["EPICS_BASE"] = Formula["epicsbase"].opt_prefix
     ENV["EPICS_HOST_ARCH"] = hostarch
     ENV["EPICSINCLUDE"] = Formula["epicsbase"].opt_prefix
     ENV["EPICSINCLUDE"] += "/include"
-    ENV["EPICSLIB"] = Formula["epicsbase"].opt_libexec
-    ENV["EPICSLIB"] += "/lib"/hostarch
+    ENV["EPICSLIB"] = "#{Formula["epicsbase"].opt_lib}"
+
     ENV["CAQTDM_MODBUS"] = "1"
 
     ENV["CAQTDM_GPS"] = "1"
