@@ -30,7 +30,7 @@ class Caqtdm < Formula
     ENV["EPICS_HOST_ARCH"] = hostarch
     ENV["EPICSINCLUDE"] = Formula["epicsbase"].opt_prefix
     ENV["EPICSINCLUDE"] += "/include"
-    ENV["EPICSLIB"] = Formula["epicsbase"].lib.to_s
+    ENV["EPICSLIB"] = Formula["epicsbase"].opt_lib.to_s
 
     ENV["CAQTDM_MODBUS"] = "1"
 
