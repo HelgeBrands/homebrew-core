@@ -68,11 +68,11 @@ class Caqtdm < Formula
     puts ">> Detected PYTHONVERSION: #{ENV["PYTHONVERSION"]} "
     puts ">> Detected PYTHONLIB: #{ENV["PYTHONLIB"]} "
     puts ">> Detected PYTHONINCLUDE: #{ENV["PYTHONINCLUDE"]} "
-
-    ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
-
     os = OS.mac? ? "macx" : OS.kernel_name.downcase
     compiler = ENV.compiler.to_s.match?("clang") ? "clang" : "g++"
+    if OS.mac?
+      ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
+    end
 
     # system "qmake", "PREFIX=#{prefix} release -spec #{os}-#{compiler}"
     system Formula["qtbase"].bin/"qmake", "all.pro", "PREFIX=#{prefix} release -spec #{os}-#{compiler}"
