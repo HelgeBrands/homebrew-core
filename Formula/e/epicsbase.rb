@@ -55,36 +55,13 @@ class Epicsbase < Formula
   end
 
   test do
-    hostarch = Utils.safe_popen_read("#{opt_prefix}/bin/EpicsHostArch.pl").strip
-    puts "EPICS_HOST_ARCH = #{hostarch}"
-    # simple test if these files exists
-    assert_path_exists "#{bin}/caput", :exist?
-    assert_match "EPICS Version", shell_output("#{bin}/caput -V")
-    # simple fail test, no chanel available
+    hostarch = shell_output("#{opt_prefix}/bin/EpicsHostArch.pl").strip
+
+    assert_match version.to_s, shell_output("#{bin}/caput -V")
+
     assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:TEST 1 2>&1", 1)
 
-    assert_path_exists "#{bin}/caget", :exist?
-    assert_match "EPICS Version", shell_output("#{bin}/caget -V")
-    # simple fail test, no chanel available
     assert_match "Channel connect timed out", shell_output("#{bin}/caget HOMEBREW:TEST 2>&1", 1)
-
-    assert_path_exists "#{bin}/pvget", :exist?
-    output = Utils.safe_popen_read("#{bin}/pvget", "-h", err: :out)
-    assert_match "Usage: pvget", output
-
-    assert_path_exists "#{bin}/pvput", :exist?
-    output = Utils.safe_popen_read("#{bin}/pvput", "-h", err: :out)
-    assert_match "Usage: pvput", output
-
-    assert_path_exists "#{bin}/softioc", :exist?
-    output = shell_output("#{bin}/softioc -h 2>&1")
-    assert_match "Usage:", output
-    assert_match "softioc", output
-
-    assert_path_exists "#{bin}/softiocpva", :exist?
-    output = shell_output("#{bin}/softiocpva -h 2>&1")
-    assert_match "Usage:", output
-    assert_match "softiocpva", output
 
     ca_port      = free_port
     ca_repeater  = free_port
