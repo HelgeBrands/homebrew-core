@@ -39,8 +39,8 @@ class Caqtdm < Formula
     ENV["QTDIR"] = Formula["qt"].opt_prefix
     ENV["QTHOME"] = Formula["qt"].opt_prefix
     ENV["QWTHOME"] = Formula["qwt"].opt_prefix
-    ENV["CAQTDM_COLLECT"] = prefix.to_s
-    ENV["QTCONTROLS_LIBS"] = prefix.to_s
+    ENV["CAQTDM_COLLECT"] = libexec.to_s
+    ENV["QTCONTROLS_LIBS"] = libexec.to_s
     ENV["QWTVERSION"] = "6.1"
     ENV["QWTLIBNAME"] = "qwt"
     ENV["QWTLIB"] = Formula["qwt"].opt_prefix
@@ -185,8 +185,10 @@ class Caqtdm < Formula
       bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
       bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
     else
+     bin.install_symlink "#{libexec}/caQtDM"
      caqtdm_bin = "#{prefix}/caQtDM"
-     Dir["#{prefix}/lib*.so*"].each do |so|
+
+     Dir["#{libexec}/lib*.so*"].each do |so|
              lib.install_symlink so => File.basename(so)
      end
      plugin_path = "#{prefix}"
