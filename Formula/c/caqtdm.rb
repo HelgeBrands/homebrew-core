@@ -11,6 +11,7 @@ class Caqtdm < Formula
   depends_on "python"
   depends_on "qt"
   depends_on "qt5compat"
+  depends_on "qttools"
   depends_on "qtimageformats"
   depends_on "qtnetworkauth"
   depends_on "qtpositioning"
@@ -172,6 +173,30 @@ class Caqtdm < Formula
       bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm_designer" => "caqtdm_designer"
       bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
       bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
+    else
+     caqtdm_bin = "#{prefix}/caQtDM"
+     Dir["#{prefix}/lib*.so*"].each do |so|
+             lib.install_symlink so => File.basename(so)
+     end
+     plugin_path = "#{prefix}"
+     (bin/"caqtdm").write <<~EOS
+       #!/bin/sh
+       export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
+       export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+       export EPICS_BASE="#{Formula["epicsbase"].opt_prefix}"
+       export EPICS_HOST_ARCH="#{ENV["EPICS_HOST_ARCH"]}"
+       exec "#{caqtdm_bin}" "$@"
+     EOS
+     (bin/"caqtdm").chmod 0755
+     calldesigner = "#{Formula["qttools"].opt_bin}/designer"
+          (bin/"caqtdm_designer").write <<~EOS
+            #!/bin/sh
+            export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
+            export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+            exec "#{calldesigner}" "$@"
+          EOS
+     (bin/"caqtdm_designer").chmod 0755
+
     end
   end
 
