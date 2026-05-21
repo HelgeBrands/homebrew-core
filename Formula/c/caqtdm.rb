@@ -8,7 +8,7 @@ class Caqtdm < Formula
 
   depends_on "qtbase" => :build
   depends_on "epicsbase"
-  depends_on "python"
+  depends_on "python3"
   depends_on "qt"
   depends_on "qt5compat"
   depends_on "qttools"
@@ -51,16 +51,27 @@ class Caqtdm < Formula
     ENV["PYTHONVERSION"] = Formula["python"].version.major.to_s
     ENV["PYTHONVERSION"] += "."
     ENV["PYTHONVERSION"] += Formula["python"].version.minor.to_s
-    ENV["PYTHONLIB"] = Formula["python"].opt_prefix
-    ENV["PYTHONLIB"] += "/Frameworks/Python.framework/Versions/"
-    ENV["PYTHONLIB"] += ENV["PYTHONVERSION"].to_s
-    ENV["PYTHONLIB"] += "/lib/"
-    ENV["PYTHONINCLUDE"] = Formula["python"].opt_prefix
-    ENV["PYTHONINCLUDE"] += "/Frameworks/Python.framework/Versions/"
-    ENV["PYTHONINCLUDE"] += ENV["PYTHONVERSION"].to_s
-    ENV["PYTHONINCLUDE"] += "/include/python"
-    ENV["PYTHONINCLUDE"] += ENV["PYTHONVERSION"].to_s
+    if OS.mac?
+      ENV["PYTHONLIB"] = Formula["python"].opt_prefix
+      ENV["PYTHONLIB"] += "/Frameworks/Python.framework/Versions/"
+      ENV["PYTHONLIB"] += ENV["PYTHONVERSION"].to_s
+      ENV["PYTHONLIB"] += "/lib/"
+      ENV["PYTHONINCLUDE"] = Formula["python"].opt_prefix
+      ENV["PYTHONINCLUDE"] += "/Frameworks/Python.framework/Versions/"
+      ENV["PYTHONINCLUDE"] += ENV["PYTHONVERSION"].to_s
+      ENV["PYTHONINCLUDE"] += "/include/python"
+      ENV["PYTHONINCLUDE"] += ENV["PYTHONVERSION"].to_s
+    else
+        python3 = Formula["python@3"].opt_bin/"python3"
+        ENV["PYTHONINCLUDE"] = Utils.safe_popen_read(
+          python3, "-c", "import sysconfig; print(sysconfig.get_path('include'))"
+        ).strip
+        ENV["PYTHONLIB"] = Utils.safe_popen_read(
+          python3, "-c", "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"
+        ).strip
 
+
+    end
     puts ">> Detected QWTLIB: #{ENV["QWTLIB"]}"
     puts ">> Detected QWTINCLUDE: #{ENV["QWTINCLUDE"]}"
     puts ">> Detected qwt: #{Formula["qwt"].opt_prefix}"
