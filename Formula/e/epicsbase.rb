@@ -55,8 +55,6 @@ class Epicsbase < Formula
   end
 
   test do
-    hostarch = shell_output("#{opt_prefix}/bin/EpicsHostArch.pl").strip
-
     assert_match version.to_s, shell_output("#{bin}/caput -V")
 
     assert_match "Channel connect timed out", shell_output("#{bin}/caput HOMEBREW:TEST 1 2>&1", 1)
