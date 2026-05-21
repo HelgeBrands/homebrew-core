@@ -30,7 +30,7 @@ class Caqtdm < Formula
     ENV["EPICS_HOST_ARCH"] = hostarch
     ENV["EPICSINCLUDE"] = Formula["epicsbase"].opt_prefix
     ENV["EPICSINCLUDE"] += "/include"
-    ENV["EPICSLIB"] = "#{Formula["epicsbase"].opt_lib}"
+    ENV["EPICSLIB"] = Formula["epicsbase"].opt_lib.to_s
 
     ENV["CAQTDM_MODBUS"] = "1"
 
@@ -90,11 +90,11 @@ class Caqtdm < Formula
     system "make"
     system "make", "install"
     if OS.mac?
-      app_bin = "#{prefix}/caQtDM.app/Contents/MacOS/caQtDM"
+      app_bin = "#{libexec}/caQtDM.app/Contents/MacOS/caQtDM"
 
-      frameworks = "#{prefix}/caQtDM.app/Contents/Frameworks"
-      plugins =  "#{prefix}/caQtDM.app/Contents/PlugIns/controlsystems"
-      design = "#{prefix}/caQtDM.app/Contents/PlugIns/designer"
+      frameworks = "#{libexec}/caQtDM.app/Contents/Frameworks"
+      plugins =  "#{libexec}/caQtDM.app/Contents/PlugIns/controlsystems"
+      design = "#{libexec}/caQtDM.app/Contents/PlugIns/designer"
       lib_qtcontrols = "#{frameworks}/libqtcontrols.dylib"
 
       plugin_epics3 = "#{plugins}/libepics3_plugin.dylib"
@@ -152,38 +152,38 @@ class Caqtdm < Formula
       MachO::Tools.change_install_name("#{design}/libqtcontrols_utilities_plugin.dylib",
                                        "libqtcontrols.dylib", "@rpath/libqtcontrols.dylib", strict: false)
 
-      write_default="defaults write #{prefix}/caQtDM.app/Contents/Info"
-      system ("#{write_default} LSEnvironment -dict QT_PLUGIN_PATH #{prefix}/caQtDM.app/Contents/PlugIns")
+      write_default="defaults write #{libexec}/caQtDM.app/Contents/Info"
+      system ("#{write_default} LSEnvironment -dict QT_PLUGIN_PATH #{libexec}/caQtDM.app/Contents/PlugIns")
       system ("#{write_default} CFBundleIdentifier -string ch.psi.caQtDM")
 
-      system ("echo '#!/bin/sh' > #{prefix}/caQtDM.app/Contents/Resources/caqtdm")
+      system ("echo '#!/bin/sh' > #{libexec}/caQtDM.app/Contents/Resources/caqtdm")
 
-      caqtdm_resource = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm"
-      stdout_caqtdm = "-n --stdout $(tty) --stderr $(tty) #{prefix}/caQtDM.app --args "
+      caqtdm_resource = "#{libexec}/caQtDM.app/Contents/Resources/caqtdm"
+      stdout_caqtdm = "-n --stdout $(tty) --stderr $(tty) #{libexec}/caQtDM.app --args "
       system ("echo 'open #{stdout_caqtdm} \"$@\"' >> #{caqtdm_resource}")
       system ("echo ' ' >> #{caqtdm_resource}")
       system ("chmod 755 #{caqtdm_resource}")
 
-      designer_path = "#{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer"
+      designer_path = "#{libexec}/caQtDM.app/Contents/Resources/caqtdm_designer"
       system ("echo '#!/bin/bash' > #{designer_path}")
       commanddata = "'export DYLD_LIBRARY_PATH=#{prefix}/caQtDM.app/Contents/Frameworks '"
       system ("echo #{commanddata} >> #{designer_path}")
-      system ("echo 'export QT_PLUGIN_PATH=#{prefix}/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
+      system ("echo 'export QT_PLUGIN_PATH=#{libexec}/caQtDM.app/Contents/PlugIns ' >> #{designer_path}")
 
       calldesigner = "#{Formula["qttools"].libexec}/Designer.app/Contents/MacOS/Designer"
       system ("echo 'exec \"#{calldesigner}\" \"$@\"' >> #{designer_path}")
-      system ("echo ' ' >> #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
-      system ("chmod 755 #{prefix}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("echo ' ' >> #{libexec}/caQtDM.app/Contents/Resources/caqtdm_designer")
+      system ("chmod 755 #{libexec}/caQtDM.app/Contents/Resources/caqtdm_designer")
 
       system "codesign", "--force", "--sign", "-", "-vvv", "--deep", app_bin
 
-      lib.install_symlink prefix/"caQtDM.app/Contents/libqtcontrols.dylib"=> "libqtcontrols.dylib"
-      lib.install_symlink prefix/"caQtDM.app/Contents/libcaQtDM_Lib.dylib"=> "libcaQtDM_Lib.dylib"
+      lib.install_symlink libexec/"caQtDM.app/Contents/libqtcontrols.dylib"=> "libqtcontrols.dylib"
+      lib.install_symlink libexec/"caQtDM.app/Contents/libcaQtDM_Lib.dylib"=> "libcaQtDM_Lib.dylib"
 
-      bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm" => "caqtdm"
-      bin.install_symlink prefix/"caQtDM.app/Contents/Resources/caqtdm_designer" => "caqtdm_designer"
-      bin.install_symlink prefix/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
-      bin.install_symlink prefix/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
+      bin.install_symlink libexec/"caQtDM.app/Contents/Resources/caqtdm" => "caqtdm"
+      bin.install_symlink libexec/"caQtDM.app/Contents/Resources/caqtdm_designer" => "caqtdm_designer"
+      bin.install_symlink libexec/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
+      bin.install_symlink libexec/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
     else
      bin.install_symlink "#{libexec}/caQtDM"
      caqtdm_bin = "#{prefix}/caQtDM"
@@ -196,12 +196,12 @@ class Caqtdm < Formula
        #!/bin/sh
        export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
        export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-       export EPICS_BASE="#{Formula["epicsbase"].opt_prefix}"
+       export EPICS_BASE="#{Formula["epicsbase"].prefix}"
        export EPICS_HOST_ARCH="#{ENV["EPICS_HOST_ARCH"]}"
        exec "#{caqtdm_bin}" "$@"
      EOS
      (bin/"caqtdm").chmod 0755
-     calldesigner = "#{Formula["qttools"].opt_bin}/designer"
+     calldesigner = "#{Formula["qttools"].bin}/designer"
           (bin/"caqtdm_designer").write <<~EOS
             #!/bin/sh
             export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
