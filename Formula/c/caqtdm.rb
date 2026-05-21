@@ -41,6 +41,9 @@ class Caqtdm < Formula
     ENV["QWTHOME"] = Formula["qwt"].opt_prefix
     ENV["CAQTDM_COLLECT"] = libexec.to_s
     ENV["QTCONTROLS_LIBS"] = libexec.to_s
+    # there is a wrong usage in the config
+    ENV["QTBASE"] = libexec.to_s
+    #
     ENV["QWTVERSION"] = "6.1"
     ENV["QWTLIBNAME"] = "qwt"
     ENV["QWTLIB"] = Formula["qwt"].opt_prefix
