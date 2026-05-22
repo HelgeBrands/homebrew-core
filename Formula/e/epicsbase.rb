@@ -33,7 +33,7 @@ class Epicsbase < Formula
       src = prefix/"libexec/bin"/hostarch/t
       bin.install_symlink src => t
     end
-    user_libs = Dir["#{libexec}/lib/#{hostarch}/*.{dylib,so}"]
+    user_libs = Dir["#{libexec}/lib/#{hostarch}/*.{dylib,so}*"]
     user_libs.each do |t|
       lib.install_symlink t
     end
