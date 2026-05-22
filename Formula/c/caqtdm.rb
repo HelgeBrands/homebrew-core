@@ -11,11 +11,11 @@ class Caqtdm < Formula
   depends_on "python3"
   depends_on "qt"
   depends_on "qt5compat"
-  depends_on "qttools"
   depends_on "qtimageformats"
   depends_on "qtnetworkauth"
   depends_on "qtpositioning"
   depends_on "qtserialbus"
+  depends_on "qttools"
   depends_on "qwt"
   depends_on "zeromq"
 
@@ -41,9 +41,9 @@ class Caqtdm < Formula
     ENV["QWTHOME"] = Formula["qwt"].opt_prefix
     ENV["CAQTDM_COLLECT"] = libexec.to_s
     ENV["QTCONTROLS_LIBS"] = libexec.to_s
-    # there is a wrong usage in the config
+    # there is a wrong usage in the config will be fixed in the next release 4.6.1
     ENV["QTBASE"] = libexec.to_s
-    #
+    # this is in caqtdm only a switch and not a version setting
     ENV["QWTVERSION"] = "6.1"
     ENV["QWTLIBNAME"] = "qwt"
     ENV["QWTLIB"] = Formula["qwt"].opt_prefix
@@ -65,14 +65,13 @@ class Caqtdm < Formula
       ENV["PYTHONINCLUDE"] += "/include/python"
       ENV["PYTHONINCLUDE"] += ENV["PYTHONVERSION"].to_s
     else
-        python3 = Formula["python@3"].opt_bin/"python3"
-        ENV["PYTHONINCLUDE"] = Utils.safe_popen_read(
-          python3, "-c", "import sysconfig; print(sysconfig.get_path('include'))"
-        ).strip
-        ENV["PYTHONLIB"] = Utils.safe_popen_read(
-          python3, "-c", "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"
-        ).strip
-
+      python3 = Formula["python@3"].opt_bin/"python3"
+      ENV["PYTHONINCLUDE"] = Utils.safe_popen_read(
+        python3, "-c", "import sysconfig; print(sysconfig.get_path('include'))"
+      ).strip
+      ENV["PYTHONLIB"] = Utils.safe_popen_read(
+        python3, "-c", "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"
+      ).strip
 
     end
     puts ">> Detected QWTLIB: #{ENV["QWTLIB"]}"
@@ -84,9 +83,7 @@ class Caqtdm < Formula
     puts ">> Detected PYTHONINCLUDE: #{ENV["PYTHONINCLUDE"]} "
     os = OS.mac? ? "macx" : OS.kernel_name.downcase
     compiler = ENV.compiler.to_s.match?("clang") ? "clang" : "g++"
-    if OS.mac?
-      ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path
-    end
+    ENV["SDKROOT"] = MacOS.sdk_for_formula(self).path if OS.mac?
 
     # system "qmake", "PREFIX=#{prefix} release -spec #{os}-#{compiler}"
     system Formula["qtbase"].bin/"qmake", "all.pro", "PREFIX=#{prefix} release -spec #{os}-#{compiler}"
@@ -188,30 +185,30 @@ class Caqtdm < Formula
       bin.install_symlink libexec/"adl2ui.app/Contents/MacOS/adl2ui" => "adl2ui"
       bin.install_symlink libexec/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
     else
-     bin.install_symlink "#{libexec}/caQtDM"
-     caqtdm_bin = "#{bin}/caQtDM"
+      bin.install_symlink "#{libexec}/caQtDM"
+      caqtdm_bin = "#{bin}/caQtDM"
 
-     Dir["#{libexec}/lib*.so*"].each do |so|
-             lib.install_symlink so => File.basename(so)
-     end
-     plugin_path = "#{prefix}"
-     (bin/"caqtdm").write <<~EOS
-       #!/bin/sh
-       export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
-       export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-       export EPICS_BASE="#{Formula["epicsbase"].prefix}"
-       export EPICS_HOST_ARCH="#{ENV["EPICS_HOST_ARCH"]}"
-       exec "#{caqtdm_bin}" "$@"
-     EOS
-     (bin/"caqtdm").chmod 0755
-     calldesigner = "#{Formula["qttools"].bin}/designer"
-          (bin/"caqtdm_designer").write <<~EOS
-            #!/bin/sh
-            export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
-            export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
-            exec "#{calldesigner}" "$@"
-          EOS
-     (bin/"caqtdm_designer").chmod 0755
+      Dir["#{libexec}/lib*.so*"].each do |so|
+        lib.install_symlink so => File.basename(so)
+      end
+      plugin_path = prefix.to_s
+      (bin/"caqtdm").write <<~EOS
+        #!/bin/sh
+        export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
+        export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        export EPICS_BASE="#{Formula["epicsbase"].prefix}"
+        export EPICS_HOST_ARCH="#{ENV["EPICS_HOST_ARCH"]}"
+        exec "#{caqtdm_bin}" "$@"
+      EOS
+      (bin/"caqtdm").chmod 0755
+      calldesigner = "#{Formula["qttools"].bin}/designer"
+      (bin/"caqtdm_designer").write <<~EOS
+        #!/bin/sh
+        export QT_PLUGIN_PATH="#{plugin_path}${QT_PLUGIN_PATH:+:$QT_PLUGIN_PATH}"
+        export LD_LIBRARY_PATH="#{lib}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+        exec "#{calldesigner}" "$@"
+      EOS
+      (bin/"caqtdm_designer").chmod 0755
 
     end
   end
