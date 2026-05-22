@@ -189,7 +189,7 @@ class Caqtdm < Formula
       bin.install_symlink libexec/"edl2ui.app/Contents/MacOS/edl2ui" => "edl2ui"
     else
      bin.install_symlink "#{libexec}/caQtDM"
-     caqtdm_bin = "#{prefix}/caQtDM"
+     caqtdm_bin = "#{bin}/caQtDM"
 
      Dir["#{libexec}/lib*.so*"].each do |so|
              lib.install_symlink so => File.basename(so)
