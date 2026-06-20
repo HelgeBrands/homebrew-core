@@ -26,9 +26,11 @@ class Adaptivecpp < Formula
 
   on_linux do
     depends_on "lld@21"
-    depends_on "llvm@21"
+    depends_on "llvm@21" # TODO: LLVM 22: https://github.com/AdaptiveCpp/AdaptiveCpp/pull/1986
     depends_on "numactl"
   end
+
+  deny_network_access!
 
   def install
     args = if OS.mac?

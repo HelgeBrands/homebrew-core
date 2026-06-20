@@ -48,6 +48,7 @@ class PhpAT82 < Formula
   # Security Support Until 31 Dec 2026
   # https://www.php.net/supported-versions.php
   deprecate! date: "2026-12-31", because: :unsupported
+  disable! date: "2027-12-31", because: :unsupported
 
   depends_on "httpd" => [:build, :test]
   depends_on "pkgconf" => :build
@@ -219,7 +220,7 @@ class PhpAT82 < Formula
     if OS.mac?
       args << "--enable-dtrace"
       args << "--with-ldap-sasl"
-      args << "--with-os-sdkpath=#{MacOS.sdk_path_if_needed}"
+      args << "--with-os-sdkpath=#{MacOS.sdk_path}"
     else
       args << "--disable-dtrace"
       args << "--without-ldap-sasl"
@@ -382,7 +383,7 @@ class PhpAT82 < Formula
       var_dump(ldap_connect());
     PHP
 
-    main_config = <<~EOS
+    main_config = <<~CONF
       Listen #{port}
       ServerName localhost:#{port}
       DocumentRoot "#{testpath}"
@@ -393,16 +394,16 @@ class PhpAT82 < Formula
       LoadModule unixd_module lib/httpd/modules/mod_unixd.so
       LoadModule dir_module lib/httpd/modules/mod_dir.so
       DirectoryIndex index.php
-    EOS
+    CONF
 
-    (testpath/"httpd.conf").write <<~EOS
+    (testpath/"httpd.conf").write <<~CONF
       #{main_config}
       LoadModule mpm_prefork_module lib/httpd/modules/mod_mpm_prefork.so
       LoadModule php_module #{lib}/httpd/modules/libphp.so
       <FilesMatch \\.(php|phar)$>
         SetHandler application/x-httpd-php
       </FilesMatch>
-    EOS
+    CONF
 
     (testpath/"fpm.conf").write <<~INI
       [global]
@@ -416,7 +417,7 @@ class PhpAT82 < Formula
       pm.max_spare_servers = 3
     INI
 
-    (testpath/"httpd-fpm.conf").write <<~EOS
+    (testpath/"httpd-fpm.conf").write <<~CONF
       #{main_config}
       LoadModule mpm_event_module lib/httpd/modules/mod_mpm_event.so
       LoadModule proxy_module lib/httpd/modules/mod_proxy.so
@@ -424,7 +425,7 @@ class PhpAT82 < Formula
       <FilesMatch \\.(php|phar)$>
         SetHandler "proxy:fcgi://127.0.0.1:#{port_fpm}"
       </FilesMatch>
-    EOS
+    CONF
 
     begin
       pid = spawn Formula["httpd"].opt_bin/"httpd", "-X", "-f", testpath/"httpd.conf"

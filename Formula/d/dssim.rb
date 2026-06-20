@@ -1,6 +1,6 @@
 class Dssim < Formula
   desc "RGBA Structural Similarity Rust implementation"
-  homepage "https://github.com/kornelski/dssim"
+  homepage "https://kornel.ski/dssim"
   url "https://github.com/kornelski/dssim/archive/refs/tags/3.4.0.tar.gz"
   sha256 "5267e79f4604558d9f24ce02aa20597396a9b052d0ad1b2f8000d4d6bd162126"
   license "AGPL-3.0-or-later"
@@ -16,8 +16,11 @@ class Dssim < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:  "9cf26940ab54503cb8be6c091610aa90b2e12cd46b05c9a5b8a7a15298ecb190"
   end
 
-  depends_on "nasm" => :build
   depends_on "rust" => :build
+
+  on_intel do
+    depends_on "nasm" => :build
+  end
 
   def install
     system "cargo", "install", *std_cargo_args

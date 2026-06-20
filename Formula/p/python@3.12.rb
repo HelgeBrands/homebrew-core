@@ -4,7 +4,7 @@ class PythonAT312 < Formula
   url "https://www.python.org/ftp/python/3.12.13/Python-3.12.13.tgz"
   sha256 "0816c4761c97ecdb3f50a3924de0a93fd78cb63ee8e6c04201ddfaedca500b0b"
   license "Python-2.0"
-  revision 2
+  revision 4
   compatibility_version 1
 
   livecheck do
@@ -13,14 +13,14 @@ class PythonAT312 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "bb198d273ef41a95d48aa16e330864608f103a58ef7c0a6c167e07866e32eeb0"
-    sha256 arm64_sequoia: "c378b0875288fc0490603e4ccece8f289a230c4068c27ea9dfa7a9a69d3c3b12"
-    sha256 arm64_sonoma:  "7becd6da101c7f3f406cac1a3350384618520f5b3fab5d46c57bf62b740d460b"
-    sha256 tahoe:         "3ff89a0955bfece8fe97f17d90f45d92fc87d5391d821294d6409795cd264ebb"
-    sha256 sequoia:       "b41f94ee7704c74be76d1a54fc9e394dd356770d13aa29be023cc1c33387f82a"
-    sha256 sonoma:        "3f2d37fb95ed10cd050222c174d642e04178e1da23538ed5f3a9d142381027b6"
-    sha256 arm64_linux:   "31924f4cc9d1d71638a231185e1c74a9a5e1919198d332b1ccb10f6a2ad31c92"
-    sha256 x86_64_linux:  "1375b78e136989dfbea7b7e6cc8c54a70e2ddcd9bbeab8eb04b7d3b250b8f2d4"
+    sha256 arm64_tahoe:   "c72a33bdd21a08ee0531b6acfe8bda91527410112ae1cef1e177aea5bdd74fde"
+    sha256 arm64_sequoia: "99438a041a9c1cb8762fbcd4afa03d04cacc3650fa1e2fe4631cca5d054f7000"
+    sha256 arm64_sonoma:  "ef30f3d6f5bb1bf50202545ed16e8bd5190db60409c932f8a42f9e85d78a89b9"
+    sha256 tahoe:         "bc2cecf221ab3fb3e73ed98cbf89e3156ad781ab751d9349a622a66ae868181b"
+    sha256 sequoia:       "bc41deb6f92940f2c74bc3fdd42397f9aa4e612fb59a7b40f6973d9cf5c6ff39"
+    sha256 sonoma:        "0e0141c5f78f41e5a7471a81fd6be63af781fe7abfe19dd4ddb2173d73e8a3fa"
+    sha256 arm64_linux:   "bc942a1d5c7b91b8d596aefc3dd4bcca4c76afa4b465e5903de56f41f68cd43d"
+    sha256 x86_64_linux:  "e754f146350ac35585336b7b415257e317fbb472614e758577f9115738736575"
   end
 
   depends_on "pkgconf" => :build
@@ -38,7 +38,6 @@ class PythonAT312 < Formula
   uses_from_macos "unzip"
 
   on_linux do
-    depends_on "berkeley-db@5"
     depends_on "libnsl"
     depends_on "libtirpc"
     depends_on "zlib-ng-compat"
@@ -61,8 +60,8 @@ class PythonAT312 < Formula
   end
 
   resource "pip" do
-    url "https://files.pythonhosted.org/packages/73/7e/d2b04004e1068ad4fdfa2f227b839b5d03e602e47cdbbf49de71137c9546/pip-26.1.tar.gz"
-    sha256 "81e13ebcca3ffa8cc85e4deff5c27e1ee26dea0aa7fc2f294a073ac208806ff3"
+    url "https://files.pythonhosted.org/packages/01/91/47e7d486260f618783899587af63ccf7980fb60245c3e63dd4571c6b57ad/pip-26.1.2.tar.gz"
+    sha256 "f49cd134c61cf2fd75e0ce2676db03e4054504a5a4986d00f8299ae632dc4605"
   end
 
   resource "wheel" do
@@ -152,7 +151,7 @@ class PythonAT312 < Formula
       args << "MACOSX_DEPLOYMENT_TARGET=#{MacOS.version}"
     else
       args << "--enable-shared"
-      args << "--with-dbmliborder=bdb"
+      args << "--with-dbmliborder="
     end
 
     if OS.linux?
@@ -449,6 +448,11 @@ class PythonAT312 < Formula
   end
 
   def caveats
+    dbm_is = "`dbm.gnu` is"
+    on_linux do
+      dbm_is = "`dbm.gnu` and `dbm.ndbm` are"
+    end
+
     <<~EOS
       Python is installed as
         #{HOMEBREW_PREFIX}/bin/python#{version.major_minor}
@@ -463,7 +467,10 @@ class PythonAT312 < Formula
       `idle#{version.major_minor}` requires tkinter, which is available separately:
         brew install python-tk@#{version.major_minor}
 
-      See: https://docs.brew.sh/Homebrew-and-Python
+      #{dbm_is} available separately:
+        brew install python-gdbm@#{version.major_minor}
+
+      For more information about Homebrew and Python, see: https://docs.brew.sh/Homebrew-and-Python
     EOS
   end
 
@@ -492,7 +499,8 @@ class PythonAT312 < Formula
     assert_match "ModuleNotFoundError: No module named '_gdbm'",
                  shell_output("#{python3} -Sc 'import dbm.gnu' 2>&1", 1)
 
-    # Verify that the selected DBM interface works
+    # Verify that the selected DBM interface works on macOS.
+    # Linux requires installing python-gdbm formula
     (testpath/"dbm_test.py").write <<~PYTHON
       import dbm
 
@@ -503,7 +511,7 @@ class PythonAT312 < Formula
           assert b"foo \\xbd" in db
           assert db[b"foo \\xbd"] == b"bar \\xbd"
     PYTHON
-    system python3, "dbm_test.py"
+    system python3, "dbm_test.py" if OS.mac?
 
     system bin/"pip#{version.major_minor}", "list", "--format=columns"
 

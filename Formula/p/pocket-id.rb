@@ -1,18 +1,18 @@
 class PocketId < Formula
   desc "Open-source identity provider for secure user authentication"
   homepage "https://pocket-id.org"
-  url "https://github.com/pocket-id/pocket-id/archive/refs/tags/v2.7.0.tar.gz"
-  sha256 "843ed4c393feeeec548b5f3deba82f794bb9fc64c20b25bd69cfa3526c8e906a"
+  url "https://github.com/pocket-id/pocket-id/archive/refs/tags/v2.9.0.tar.gz"
+  sha256 "5938a9aed5d41c75ff0d58bdf43c4f63eaf2f479783a09ee301dd38e7c9d3bcf"
   license "BSD-2-Clause"
   head "https://github.com/pocket-id/pocket-id.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1605f4e4e91566db57398ff36878391ef79c65b72956f0200cd1714b7fe6c954"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0950a9c8cca0d8808d6b364af773ddecfe9b717def30dd8dc440aa2eb81f7303"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2404008ac7d1f7dcb1540520136d7795d4b8ef8a6025737a11bbb8f64418df34"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c4cd64f8b6b0cef363597dfef216b818e3a39f0f9ed935813cfb6c4472f5c5c4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ab895dec6092abaa53948d0a1e418ae01e1d9e1fa3a0e8754bbbd424e7199a83"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "91760b5423b47bfc2c06517854faace046856f77d90d3f2f3620dd2d095281b5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fa462fbeedb01a10c5aee89fb321b3d0e149f6081924bbf95a5c6f5567309431"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1fa645a38443ead1fce06a6db91f3164a9d0bd8efcc94cacf87b1d03311dd949"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1805849d2263c0eb9cecaf8c795f994b82bad47ff976390584e652f2ca22d4f7"
+    sha256 cellar: :any_skip_relocation, sonoma:        "21119bb67b3f77c47a589f171dd08184030e29b813bc2c093f1f5eb1bfb7abb7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a3b39ab62279013d2ea1edaae68006b72c6ffabd7015a184fce9965e68afa19e"
+    sha256 cellar: :any,                 x86_64_linux:  "6bd1d45ef40c0578419543d0f7be07c8dfe4d5799cd0f64813734d21d8a582d6"
   end
 
   depends_on "go" => :build
@@ -31,8 +31,6 @@ class PocketId < Formula
     cd "backend/cmd" do
       system "go", "build", *std_go_args(output: bin/"pocket-id", ldflags: "-s -w")
     end
-
-    (var/"pocket-id").mkpath
   end
 
   service do

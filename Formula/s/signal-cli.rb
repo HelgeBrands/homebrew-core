@@ -1,10 +1,9 @@
 class SignalCli < Formula
   desc "CLI and dbus interface for WhisperSystems/libsignal-service-java"
   homepage "https://github.com/AsamK/signal-cli"
-  url "https://github.com/AsamK/signal-cli/archive/refs/tags/v0.14.3.tar.gz"
-  sha256 "feb98997af67eddba4a7284334aabae381ca26aede85d9e5703098b76f8779ef"
+  url "https://github.com/AsamK/signal-cli/archive/refs/tags/v0.14.5.tar.gz"
+  sha256 "eddf9dc10958b920fcd145ad0767db6e6c56997d984b914ec37052415ab9d837"
   license "GPL-3.0-or-later"
-  revision 1
 
   livecheck do
     url :stable
@@ -12,11 +11,11 @@ class SignalCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3263da635b6dfad191f2585ffe8ab0d89de37f6a7c836e4a73a8a87a86c202bf"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6f2258461eb057e99c19016eae1e3c29b38a3c2bf90d5ee58947aebc438cf666"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8064cf779d575d8b3372fc72a245e1971f992b1f4e7fef4dd96536e4cdfa9ed6"
-    sha256                               arm64_linux:   "3b3b54dbd33f30fab99c84f20ffc5a84db4b6d82a303b4b7da0c59f0136f9284"
-    sha256                               x86_64_linux:  "97592edc978ed20508f9175c386eb85e87b8035f8d57cf5fe0b9ad61c247e421"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "08b04c930f521d55880e224b1490cf0e8514c1bdacd554fc10f08c6345af7fa7"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9c3bc15fcdc6ff8009db67ed475ef50e3fc67e184db5a9bc063a60a07c577d62"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6b711b449ae0caee34693df678b80ce3b49af830e15aaa296eac93400feb34fd"
+    sha256                               arm64_linux:   "96a09bdc04e577ed68f2d46dc3dd0674422359434f9379db7a0be8b1541c9c14"
+    sha256                               x86_64_linux:  "8af7d86205dde6f8b1332c4186a15e09ca2a87668f2e196f80b937a6f186bec2"
   end
 
   depends_on "asciidoc" => :build
@@ -37,8 +36,8 @@ class SignalCli < Formula
   end
 
   resource "libsignal-client" do
-    url "https://github.com/signalapp/libsignal/archive/refs/tags/v0.92.1.tar.gz"
-    sha256 "5ad152a5eec8789f8e7a3b9d85d1e356cdb6177bd273b4e174e2e477b5930502"
+    url "https://github.com/signalapp/libsignal/archive/refs/tags/v0.94.4.tar.gz"
+    sha256 "ca8fb5fb3437c083263138079f512988581a94c65e407c8fe1c7c9c6310e60fa"
 
     livecheck do
       url "https://raw.githubusercontent.com/AsamK/signal-cli/refs/tags/v#{LATEST_VERSION}/libsignal-version"

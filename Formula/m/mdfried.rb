@@ -1,8 +1,8 @@
 class Mdfried < Formula
   desc "Terminal markdown viewer"
   homepage "https://github.com/benjajaja/mdfried"
-  url "https://github.com/benjajaja/mdfried/archive/refs/tags/v0.20.2.tar.gz"
-  sha256 "19b74f8289e7311287b1b951da623255110394c8a8424145d41c8ec814946270"
+  url "https://github.com/benjajaja/mdfried/archive/refs/tags/v0.22.2.tar.gz"
+  sha256 "e49fb7cf7fa5d88b0b1147094c9b1eb541bf7b7bf8f314d1d2efab47755dd092"
   license "GPL-3.0-or-later"
   head "https://github.com/benjajaja/mdfried.git", branch: "master"
 
@@ -12,12 +12,12 @@ class Mdfried < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "5f58aaaa9e3c4152e0cdf0d0b82b577aead9adeb2823b44685d1dd93d0f72d9a"
-    sha256 cellar: :any,                 arm64_sequoia: "fab162ba7f563a512e7194ba5f017edf560e6411feeab29c0fdc794c1d45f037"
-    sha256 cellar: :any,                 arm64_sonoma:  "510dd71ce417314b4deb780af0fa41b046b6450757041891952be093b5ccd78f"
-    sha256 cellar: :any,                 sonoma:        "07b074edc604e802699bc4c3c94c456fc9b987def8fbc234429f8952921bc5d0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c0022a5592497f9b6d52f315d5997a65bc0d98d8f1be11a76892a7f4064ec2e5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dd4c7e0cede480a2c77aeced486a5f1de546105153cd3b120df4fe23a870831f"
+    sha256 cellar: :any, arm64_tahoe:   "9ae3a106e6a79d8fa52fb613e811ab7bdb3ed3b419b11adada247e1665cf7c97"
+    sha256 cellar: :any, arm64_sequoia: "20e6760f72d1830af9a8773ae5abda9a5ab3a7c48530a39830780063c6e8ed97"
+    sha256 cellar: :any, arm64_sonoma:  "b022b1671533e4e79994dc26d32cc70cb686931161e5a673b7cbf4d9eca67c3a"
+    sha256 cellar: :any, sonoma:        "f17ede50daab8f784bcb450441f132442ca8c98a1ac09a3f821fd644fe420738"
+    sha256 cellar: :any, arm64_linux:   "efd5a197521d1c44ed26f737fed8c71719d5f2ef96277839c57d41d6cd6c6da3"
+    sha256 cellar: :any, x86_64_linux:  "b8b70ec33d3018bc500611e331ece28ca22200c4d6fb1c768cf886a27603e688"
   end
 
   depends_on "pkgconf" => :build

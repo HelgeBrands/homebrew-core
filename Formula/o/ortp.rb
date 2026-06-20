@@ -1,42 +1,25 @@
 class Ortp < Formula
   desc "Real-time transport protocol (RTP, RFC3550) library"
   homepage "https://linphone.org/"
-  # TODO: Switch to monorepo in 5.5.x
-  url "https://gitlab.linphone.org/BC/public/ortp/-/archive/5.4.116/ortp-5.4.116.tar.bz2"
-  sha256 "f5e234199a86c435fe4fb99688ae541e0428d3b19b0783f3c1c37e830304e4d0"
+  url "https://gitlab.linphone.org/BC/public/linphone-sdk/-/archive/5.5.4/linphone-sdk-5.5.4.tar.bz2"
+  sha256 "b9ef0b4b975b1273d6b4e4ce221621bb79148d3bae67bd2d3e51de18e37418d2"
   license all_of: ["AGPL-3.0-or-later", "GPL-3.0-or-later"]
   head "https://gitlab.linphone.org/BC/public/linphone-sdk.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "d4ce99727bdbb2d251d0d29774af58012b5be6ab835b66c0d9c2c14ac2fe5ce5"
-    sha256 cellar: :any,                 arm64_sequoia: "0adc83417c3b8ce13dec5f4139ac8208b92412d0a91df0a22201d72fd9198a21"
-    sha256 cellar: :any,                 arm64_sonoma:  "ff1307e7ad45702203e89846146de488831efb0a51b8b83287f7635901d93376"
-    sha256 cellar: :any,                 sonoma:        "106af3521c6d3fbc341c2904b68802c38dacaf1d53332a1cbb534df663bbf6a9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "199d60be5204c5f1f5aa2fd38ab12630e13ba87165d3e649d610aa50d7c54c5c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c6bb87771b4cdfe4f53a6d32c475a3f8cf46ddd30045a42c850d13ae5f53174e"
+    sha256 cellar: :any, arm64_tahoe:   "86f85b98b5e7433bed89dc7eea531546cea1b91546056a78b4dd4d4d49ed0ddf"
+    sha256 cellar: :any, arm64_sequoia: "dc98b7d14212b8fa6cf2654f03b8b863dd19c58e26ef1c8b12af611734ae3c69"
+    sha256 cellar: :any, arm64_sonoma:  "459ffff336980d36fcddff671af8afc99041cacfc6b1ed885f446a90a97dd557"
+    sha256 cellar: :any, sonoma:        "ffe151c67d09b6d2254975f70a7e0b56d4f725703a4758f53646de354d012992"
+    sha256 cellar: :any, arm64_linux:   "2e2dc14a1677d179f59de995969cf920b9796fd5a116b3ccfb0e4966a63f0db2"
+    sha256 cellar: :any, x86_64_linux:  "471875d224027f9d177d4cf1b9df26769a44074f8eb5234c5ffad8eacefa2577"
   end
 
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
-  depends_on "openssl@4"
-
-  resource "bctoolbox" do
-    url "https://gitlab.linphone.org/BC/public/bctoolbox/-/archive/5.4.116/bctoolbox-5.4.116.tar.bz2"
-    sha256 "0e8f7b0d3e3b8a1b018f42ec601bd9cd7197d4ceb026212d30fc3d5f8232cb5c"
-
-    livecheck do
-      formula :parent
-    end
-  end
+  depends_on "openssl@3" # OpenSSL 4 is not supported in monorepo
 
   def install
-    if build.stable?
-      odie "bctoolbox resource needs to be updated" if version != resource("bctoolbox").version
-      (buildpath/"bctoolbox").install resource("bctoolbox")
-    else
-      rm_r("external")
-    end
-
     args = %w[
       -DBUILD_SHARED_LIBS=ON
       -DENABLE_MBEDTLS=OFF
@@ -56,7 +39,7 @@ class Ortp < Formula
     ]
     args << "-DCMAKE_INSTALL_RPATH=#{frameworks}" if OS.mac?
 
-    system "cmake", "-S", (build.head? ? "ortp" : "."), "-B", "build_ortp", *args, *std_cmake_args
+    system "cmake", "-S", "ortp", "-B", "build_ortp", *args, *std_cmake_args
     system "cmake", "--build", "build_ortp"
     system "cmake", "--install", "build_ortp"
   end

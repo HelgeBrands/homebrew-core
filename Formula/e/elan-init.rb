@@ -1,8 +1,8 @@
 class ElanInit < Formula
   desc "Lean Theorem Prover installer and version manager"
   homepage "https://github.com/leanprover/elan"
-  url "https://github.com/leanprover/elan/archive/refs/tags/v4.2.1.tar.gz"
-  sha256 "637cf1d0746d05979ec9f97f577ac57f38f1606fc5c596d10579b9b367a3157d"
+  url "https://github.com/leanprover/elan/archive/refs/tags/v4.2.3.tar.gz"
+  sha256 "7094a5063378225598a420b13eded60f58c21f49fc2e009c68a6506da5d62580"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/leanprover/elan.git", branch: "master"
 
@@ -12,12 +12,12 @@ class ElanInit < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0aa3a85a551759132834cafd244eabdc65d9f35bdcfb769367e20eeddd0a94ef"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6227c7aecf02311c895a073da058c6b3e3bdcef838e5d8388e7fd83ed0af8b1c"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "46647e6a334a182e45624b61624b6c775efbdefe5e75cabc801f6673d2c6b278"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8f3638369e2d18a4c0b319d88acf822ed8c1e846192141783b4d131be09e4f13"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cde639ce235924aee6b5714aaf28e037f9a18f7fe3e41e4554bcc074dc8b188f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b0e4b69d9f53afd63c0e62acda5e7fef1f821eee0ecf40b754c6997f0bc97e9f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d56c9a2feed740f0eb61e5e45c18f350057649ab70904a0639ce621864c40bdd"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "95c6059bf4969b891585eab9d96b179d4ca2e2d3f08fe6f0f8531cf55fece429"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "303a5825d263d9348a699aa3d3b1f1a6fb6ba8f73a12bcf1d1397385aaf2e4f3"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9eab0dffe139cc8316551030634f0ca89dd743e3eabe825e9b9237d2064d5b4b"
+    sha256 cellar: :any,                 arm64_linux:   "9b5f98d89886f0beff1eb92baaf3ef2a3f9c79befe8ba996ab4e1b0d1ef1d9f9"
+    sha256 cellar: :any,                 x86_64_linux:  "f2f6c3b396202085ab6e7eb4b95b8a7cdc4b87bb15d81fee436e11c653c1f177"
   end
 
   depends_on "pkgconf" => :build
@@ -51,7 +51,7 @@ class ElanInit < Formula
     ENV["ELAN_HOME"] = testpath/".elan"
 
     system bin/"elan-init", "-y", "--default-toolchain=leanprover/lean4:stable"
-    (testpath/"hello.lean").write <<~EOS
+    (testpath/"hello.lean").write <<~LEAN
       def id' {α : Type} (x : α) : α := x
 
       inductive tree {α : Type} : Type
@@ -60,7 +60,7 @@ class ElanInit < Formula
       example (a b : Prop) : a ∧ b -> b ∧ a := by
           intro h; cases h with
           | intro ha hb => constructor; exact hb; exact ha
-    EOS
+    LEAN
     system bin/"lean", testpath/"hello.lean"
     system bin/"lake", "help"
   end

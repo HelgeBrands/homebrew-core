@@ -1,8 +1,8 @@
 class FalcosecurityLibs < Formula
   desc "Core libraries for Falco and Sysdig"
   homepage "https://falcosecurity.github.io/libs/"
-  url "https://github.com/falcosecurity/libs/archive/refs/tags/0.25.1.tar.gz"
-  sha256 "fdd41357003fc8cd25dd1af03afb3a9b93b52978aef9ea7b5f242941bca11a70"
+  url "https://github.com/falcosecurity/libs/archive/refs/tags/0.25.4.tar.gz"
+  sha256 "272a5a0c05e7c10a658ed9649023e6179061a4ab29e012602893586ac64b5938"
   license all_of: [
     "Apache-2.0",
     { any_of: ["GPL-2.0-only", "MIT"] }, # driver/
@@ -15,12 +15,12 @@ class FalcosecurityLibs < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "41dbee226e045a46578c533ddb8345a616608b22436b268fd7be73549d289d98"
-    sha256 cellar: :any,                 arm64_sequoia: "7cdcf0f7e07208c5fe3d943e9aeb7e052ea2339831e15ec5495b3357a310dac7"
-    sha256 cellar: :any,                 arm64_sonoma:  "38728f4152fc02b71823da6ac325bbd65aea9e58e061c0ad479c3ff6e0c8e012"
-    sha256 cellar: :any,                 sonoma:        "c269e662560e1972255614b19e036815630885310870ba95a86224115e4b2c5f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2e73250139c32c5ef05b025ff09aa64e5b82596255a9b91c65370c755a31cc94"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c554082745be75f3e5894d2fc6c6b7307a3bb2fe5ddaa97309f434fa85827536"
+    sha256 cellar: :any, arm64_tahoe:   "c2fb9fce6c52339aecd0188eeba179ce9b892687facbd4e8ceb26d00afe21672"
+    sha256 cellar: :any, arm64_sequoia: "666d3a149e4236d5a030634d0d4c3b868a1e1c0651e945a0ff5d2426876e038d"
+    sha256 cellar: :any, arm64_sonoma:  "07c8c8fc98294c63bd51935fc20e460556305d14c2b94ffca49cae90db07db00"
+    sha256 cellar: :any, sonoma:        "c3afe8a1760123bd7a34857399f282bff14e497c3350fa1138c6f2df73d529d8"
+    sha256 cellar: :any, arm64_linux:   "a68fe882d7876b866ed31b9bb5f9b78e2b2fa2b4fdc5461935166e7c4de88e52"
+    sha256 cellar: :any, x86_64_linux:  "194c569e1d36ec07246cc6353eccad3ba3813e02c52faeab5e0b59d0c705aa5f"
   end
 
   depends_on "cmake" => :build

@@ -3,19 +3,18 @@ class Glances < Formula
 
   desc "Alternative to top/htop"
   homepage "https://nicolargo.github.io/glances/"
-  url "https://files.pythonhosted.org/packages/8a/c1/8801d7646a0fd0eea9b1afa047013b6887f29260fd5886b23d15df52c782/glances-4.5.4.tar.gz"
-  sha256 "c7fca4ff414d6a2e177fdc5998b982da8bbe8e77168ef0471d4d8f4b6d47b025"
+  url "https://files.pythonhosted.org/packages/00/f4/700e0e8472783b91532c527d3821c05c7766c7610aec69bbcce47829d19e/glances-4.5.5.tar.gz"
+  sha256 "2620a5b412611fadccde7517410aa878fede4e1297ab9c113280bc8f0a55985b"
   license "LGPL-3.0-or-later"
-  revision 1
   head "https://github.com/nicolargo/glances.git", branch: "develop"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9935bb2b24743bf4f42b476dd27f72cdba035660c96d345011222e3a768460ec"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "81ebec3b7ab21ffa9bd5edec4a8084e6a85797b254dbc38da4cd103ee7f1a6e5"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "fae0cac57fb3bc6d5c9b5b45417c99a13c2ff6c6ffe17866dbd4d203b62db9bd"
-    sha256 cellar: :any_skip_relocation, sonoma:        "722dea48003c25a6cee24d434bffa0fa1c109754461a33162d936b776255035c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5165132d390bde9ac0039313d4bcfacb33261e9fb0eb9453a8a2f62a3fd7f370"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "808b0f0425b8ab70b123fec0e835c245973e3053c389faaa1ec8f68696e6278f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "03a8d716143b676ff585edcad5d318d4e0c4d0aba763dad506b2e089acf1462f"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "10cd37acf215df6446468206bd02e0f83d22280b3338cb7b28ad92478f8b4352"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3279c9ae2036ea697a3d2321e8def6e90d5590bf4eb6f729c591026e46a904c1"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ccd08ca8825add92294b80399706f6b1ae827cf651d6602f15fe110fbeae3e2d"
+    sha256 cellar: :any,                 arm64_linux:   "4bb14bb4db5db4a5d8c0469cb825821f0292f279495a2761d0674e49ed08f6bb"
+    sha256 cellar: :any,                 x86_64_linux:  "ff8d9eeffbcac89424c6402be740eb990283d4ac41eba3b6486b7572d9a62e0e"
   end
 
   depends_on "rust" => :build # for annotated-docs
@@ -44,8 +43,8 @@ class Glances < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz"
-    sha256 "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+    url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
+    sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
   end
 
   resource "defusedxml" do
@@ -64,8 +63,8 @@ class Glances < Formula
   end
 
   resource "fastapi" do
-    url "https://files.pythonhosted.org/packages/5d/45/c130091c2dfa061bbfe3150f2a5091ef1adf149f2a8d2ae769ecaf6e99a2/fastapi-0.136.1.tar.gz"
-    sha256 "7af665ad7acfa0a3baf8983d393b6b471b9da10ede59c60045f49fbc89a0fa7f"
+    url "https://files.pythonhosted.org/packages/81/2d/ff8d91d7b564d464629a0fd50a4489c97fcb836ac230bf3a7269232a9b1f/fastapi-0.136.3.tar.gz"
+    sha256 "e487fae93ad408e6f47641ee4dfe389864fd7bec92e547ea8498fc13f43e83ab"
   end
 
   resource "h11" do
@@ -74,8 +73,8 @@ class Glances < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/05/b1/efac073e0c297ecf2fb33c346989a529d4e19164f1759102dee5953ee17e/idna-3.14.tar.gz"
-    sha256 "466d810d7a2cc1022bea9b037c39728d51ae7dad40d480fc9b7d7ecf98ba8ee3"
+    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
+    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
   end
 
   resource "jinja2" do
@@ -129,8 +128,8 @@ class Glances < Formula
   end
 
   resource "requests" do
-    url "https://files.pythonhosted.org/packages/43/b8/7a707d60fea4c49094e40262cc0e2ca6c768cca21587e34d3f705afec47e/requests-2.34.0.tar.gz"
-    sha256 "7d62fe92f50eb82c529b0916bb445afa1531a566fc8f35ffdc64446e771b856a"
+    url "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz"
+    sha256 "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
   end
 
   resource "requests-toolbelt" do
@@ -154,8 +153,8 @@ class Glances < Formula
   end
 
   resource "starlette" do
-    url "https://files.pythonhosted.org/packages/81/69/17425771797c36cded50b7fe44e850315d039f28b15901ab44839e70b593/starlette-1.0.0.tar.gz"
-    sha256 "6a4beaf1f81bb472fd19ea9b918b50dc3a77a6f2e190a12954b25e6ed5eea149"
+    url "https://files.pythonhosted.org/packages/eb/e3/7c1dc7381d9f8ab7d854328ebfa884e62cb3f3d8549ddfd37c7814f42afa/starlette-1.3.1.tar.gz"
+    sha256 "05d0213193f2fbaae60e2ecb593b4add4262ad4e46536b54abe36f11a71724e0"
   end
 
   resource "urllib3" do
@@ -164,8 +163,8 @@ class Glances < Formula
   end
 
   resource "uvicorn" do
-    url "https://files.pythonhosted.org/packages/1f/93/041fca8274050e40e6791f267d82e0e2e27dd165627bd640d3e0e378d877/uvicorn-0.46.0.tar.gz"
-    sha256 "fb9da0926999cc6cb22dc7cd71a94a632f078e6ae47ff683c5c420750fb7413d"
+    url "https://files.pythonhosted.org/packages/c4/1f/fa18009dea8469069cca78a4e877a008ab78f08b064bfc9ab891579077ff/uvicorn-0.49.0.tar.gz"
+    sha256 "ebf4271aa580d9de97f93192d4595176df6e91f9aae919ca73e4fc07df1e66a3"
   end
 
   resource "ws4py" do

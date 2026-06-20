@@ -1,8 +1,8 @@
 class Cryptominisat < Formula
   desc "Advanced SAT solver"
   homepage "https://www.msoos.org/cryptominisat5/"
-  url "https://github.com/msoos/cryptominisat/archive/refs/tags/release/v5.14.4.tar.gz"
-  sha256 "cc8ff7bd6aa72cf0ba1d4cb6aa0f430f4fc6155af4e9d29008acc06b2583087e"
+  url "https://github.com/msoos/cryptominisat/archive/refs/tags/release/v5.14.6.tar.gz"
+  sha256 "7bd66de0eb9d0e603667ab1d3db8fb54c107cc8ce1537e3400277b76864a0a6c"
   # Everything that's needed to run/build/install/link the system is MIT licensed. This allows
   # easy distribution and running of the system everywhere.
   license "MIT"
@@ -14,13 +14,12 @@ class Cryptominisat < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "b2d71c29e673f8fe425c63848154ef5e824de624268023a9e56fe9f3b99b6d0f"
-    sha256 cellar: :any,                 arm64_sequoia: "5239fb1cf825cfdfbb4a697a5c3009b1e5899c8a74ea64fcf932f9fc961fd268"
-    sha256 cellar: :any,                 arm64_sonoma:  "69bc8c2ca51ab1df9daef08ef1ed3eacd438d8d6125b1d659206e1f692381ff6"
-    sha256 cellar: :any,                 sonoma:        "a67f35b0592b480831b2463a17dab5f7d9f637eea03d27d3c469f59be807b25f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6b60138350eecaff614b7ed419457f26e4a837d2155c826c49e40e8bc5c9a50e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7c56b827004dd4770e742065676caaf01eb3cae78ef4888502ad2b42273d7b42"
+    sha256 cellar: :any, arm64_tahoe:   "dffa4ca1abb54b6e199125ae9f5f6fc149368bf37053358a5783663631080209"
+    sha256 cellar: :any, arm64_sequoia: "9400ff10a4ac2143f5b9023f361dbc7c880233ae791a3edeea598807c9f14bee"
+    sha256 cellar: :any, arm64_sonoma:  "2342a93fc71626606c5be845647013967d15067a6ff6d6ddc169003413d7ce3b"
+    sha256 cellar: :any, sonoma:        "7905bb65b1bcf74450784bb6d9c33fe4741592bae2de62dd024bfdd4544ac59e"
+    sha256 cellar: :any, arm64_linux:   "dc138c2dcc40d4bed260f28c83c16e6da65db72c1716c90b051bad45b32de6d3"
+    sha256 cellar: :any, x86_64_linux:  "443d6feee272558fe82304f674bda4270cdc9762a3fb88247102608433a545dd"
   end
 
   depends_on "cmake" => :build
@@ -34,9 +33,9 @@ class Cryptominisat < Formula
 
   # Currently using revision in flake.lock
   resource "cadical" do
-    url "https://github.com/meelgroup/cadical/archive/1652f668becc717eb14c184a727864c1937082d6.tar.gz"
-    version "1652f668becc717eb14c184a727864c1937082d6"
-    sha256 "d8abdf8a846ced6964da08118900d841d55471c2cb808b6c81cb6b8671b5671e"
+    url "https://github.com/meelgroup/cadical/archive/394c3f72858c2fe8cd35321f74f11f0f61c91123.tar.gz"
+    version "394c3f72858c2fe8cd35321f74f11f0f61c91123"
+    sha256 "68756da68674bdd689e9ac7735ab98363c9dca8ee0c7369b2083be0daabf7039"
 
     livecheck do
       url "https://raw.githubusercontent.com/msoos/cryptominisat/refs/tags/release/v#{LATEST_VERSION}/flake.lock"
@@ -48,9 +47,9 @@ class Cryptominisat < Formula
 
   # Currently using revision in flake.lock
   resource "cadiback" do
-    url "https://github.com/meelgroup/cadiback/archive/300818c10cac0053dd27650a7d9cd58dfe08b3fe.tar.gz"
-    version "300818c10cac0053dd27650a7d9cd58dfe08b3fe"
-    sha256 "07e1c2a891e0f0d8732392bb4e8c3279b1dc7947a4854d14ac3448c52530d95c"
+    url "https://github.com/meelgroup/cadiback/archive/3b6a84062b1304433eb8960a4bff6b9a80de9c54.tar.gz"
+    version "3b6a84062b1304433eb8960a4bff6b9a80de9c54"
+    sha256 "336fcaa8a205fd70230ceabb28795e24e7c91b907cd7d811056368783f0770b5"
 
     livecheck do
       url "https://raw.githubusercontent.com/msoos/cryptominisat/refs/tags/release/v#{LATEST_VERSION}/flake.lock"
@@ -67,15 +66,6 @@ class Cryptominisat < Formula
   def install
     # fix audit failure with `lib/libcryptominisat5.5.7.dylib`
     inreplace "src/GitSHA1.cpp.in", "@CMAKE_CXX_COMPILER@", ENV.cxx
-
-    # Revert msoos/cryptominisat@50b87734's PRIVATE -> PUBLIC; export leaks break consumers
-    # main.cpp uses GMP directly so link it explicitly into the binary too.
-    # Issue ref: https://github.com/msoos/cryptominisat/issues/820
-    inreplace "src/CMakeLists.txt" do |s|
-      s.sub!(/^    PUBLIC\n(        Threads)/, '\1')
-      s.sub! "target_link_libraries(cryptominisat5-bin\n    PRIVATE\n        cryptominisat5\n",
-             "\\0        PkgConfig::GMP\n"
-    end
 
     resource("cadical").stage do
       system "cmake", "-S", ".", "-B", "build", *std_cmake_args(install_prefix: buildpath/"cadical")

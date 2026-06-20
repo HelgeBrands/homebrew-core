@@ -1,18 +1,18 @@
 class Forgecode < Formula
   desc "AI-enhanced terminal development environment"
   homepage "https://forgecode.dev/"
-  url "https://github.com/tailcallhq/forgecode/archive/refs/tags/v2.12.16.tar.gz"
-  sha256 "fd1ca2db4abf0ed2090b6b2d7da7aade3c9eb762a0d839951eeb3b327f4e0724"
+  url "https://github.com/tailcallhq/forgecode/archive/refs/tags/v2.13.12.tar.gz"
+  sha256 "a7fd9f61a7b913b33b98b28c5df83454e200967bc2a620753e3aee7055eaf351"
   license "Apache-2.0"
   head "https://github.com/tailcallhq/forgecode.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "915f307ef1f72103012c61cdc2798b03ec477626f4b9ef7161de448a65f09a82"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "146d65fca3c997c03eacdeba78f5cf3bc594f8ab84d48aff9c2216d3f524e97a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8eaba9772e5dde2ce27f73b76920e4f725229dd69a7b43411c11678efe0330ce"
-    sha256 cellar: :any_skip_relocation, sonoma:        "426ca82a61965e15d174873adab269ea9c226922b9b49ee237d7d63baec46fe6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c0792adf37ef17bd554849dfa8e9c48d17ab5ceb0b63007bb6c74ac84dbd31e8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a62001099f397e74757944818580d3a2107c34956cdfac1ed90d3b2ec923ca0e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bd8ba4aada45f510071adc14ec8258b5263d485777a13f537baf810efceda57d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3a1190bb3d8d50ba7b1955059e69dea72bce5e36bce189e47fa70533a309ce39"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e62e8d932ea42ea998604f9ac1df6cdc0ffc7475b92e9f56fc7bbdec4bdee916"
+    sha256 cellar: :any_skip_relocation, sonoma:        "4722f12ec0418d48b1f9c284907abddd38d085a1cbb1f36b6c7979721e90d6e0"
+    sha256 cellar: :any,                 arm64_linux:   "5cd8a4636fd960c441e7872d01a6f3cec3ec6b0b87859757c53a600748e2b780"
+    sha256 cellar: :any,                 x86_64_linux:  "48b6c2c6f0ccabf1134899d59588b3e825730e42aed0b58b2078509ac384e32e"
   end
 
   depends_on "protobuf" => :build

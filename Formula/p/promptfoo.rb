@@ -1,28 +1,26 @@
 class Promptfoo < Formula
   desc "Test your LLM app locally"
   homepage "https://promptfoo.dev/"
-  url "https://registry.npmjs.org/promptfoo/-/promptfoo-0.121.11.tgz"
-  sha256 "094bcc44d03bb9224d0c7b8d02a01cfe0b7fdf937e0e314936596c483c9bd665"
+  url "https://registry.npmjs.org/promptfoo/-/promptfoo-0.121.17.tgz"
+  sha256 "8b0d11a60faddd0e324857d175fec2b6cf1907f25ca3b272163d4a25b2f0cd09"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "b24bb523292e3f1c768aa87189bca8d70c33a0b5392b2bd9f31a0f4596990e86"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "66e211c06d1b2b40ce347e978550d2a49a7a22b8d34b574a869c13f7ca862be3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "919991735ccb3f237b7d193150e73d803b6d47efb9da8799e399ef881d6f30a2"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c0f2e82ac25be2d19130a83c4444d3b2d4cde81437d3186ca77dbddb7d88c7aa"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "740c7dff09131a8a0310ed069003aaebc284b0c7368c50c4fc4a2e61086b9007"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a862705313e72778264e8572d6bdf0e73f2ab2a7949173fde5c486ee06dfbc35"
+    sha256 cellar: :any, arm64_tahoe:   "aabfab46403565ba279698cc08c803397d9d6642ed80a6ddfedf1c87c31c1d36"
+    sha256 cellar: :any, arm64_sequoia: "bffedfd990d1bc06ab1969cb55768d0956b0e55b40c7c432469b5e17b0a9ac5d"
+    sha256 cellar: :any, arm64_sonoma:  "78ef11e897082a2fc626899495df2adc687c4ffafe7158700ecd5b8ff56c9b39"
+    sha256 cellar: :any, sonoma:        "762e33ae9299379aa11db61afed0421f5721fe6001843966ead05389a2191691"
+    sha256 cellar: :any, arm64_linux:   "fba1f5fd81e135cbb46092b523b618597ea5dedb4e299bf337ebbea5b25ad00a"
+    sha256 cellar: :any, x86_64_linux:  "d4125df4fbcd1d0536f40be8676524ee57b01431b4479499d353f6fa870ce186"
   end
 
-  depends_on "node@24"
+  depends_on "cmake" => :build # for `libsql-js` > `libsql-ffi`
+  depends_on "rust" => :build # for `libsql-js`
+  depends_on "node"
 
-  on_macos do
-    depends_on "llvm" => :build if DevelopmentTools.clang_build_version < 1700
-  end
-
-  fails_with :clang do
-    build 1699
-    cause "better-sqlite3 fails to build"
+  resource "libsql-js" do
+    url "https://github.com/tursodatabase/libsql-js/archive/refs/tags/v0.5.29.tar.gz"
+    sha256 "e7ccf7f0ade06158bac3f5fffe69d9707741940678aadec75319713e21b57c21"
   end
 
   def install
@@ -32,7 +30,18 @@ class Promptfoo < Formula
     (libexec/"promptfoo").install buildpath.children
     cd libexec/"promptfoo" do
       system "npm", "install", "--omit=dev", "--omit=optional", *std_npm_args(prefix: false)
-      system "npm", "run", "--prefix=node_modules/better-sqlite3", "build-release"
+
+      resource("libsql-js").stage do
+        ENV.append_to_rustflags "--cfg tokio_unstable"
+        system "cargo", "build", "--lib", "--release"
+
+        arch = Hardware::CPU.arm? ? "arm64" : "x64"
+        libsql_target = OS.mac? ? "darwin-#{arch}" : "linux-#{arch}-gnu"
+        binding_dir = libexec/"promptfoo/node_modules/@libsql/#{libsql_target}"
+
+        binding_dir.install "target/release/#{shared_library("liblibsql_js")}" => "index.node"
+      end
+
       with_env(npm_config_prefix: libexec) do
         system "npm", "link"
       end

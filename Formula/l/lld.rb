@@ -1,8 +1,8 @@
 class Lld < Formula
   desc "LLVM Project Linker"
   homepage "https://lld.llvm.org/"
-  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.5/llvm-project-22.1.5.src.tar.xz"
-  sha256 "7972b87b705a003ce70ab55f9f0fb495d156887cba0eb296d284731139118e2c"
+  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.7/llvm-project-22.1.7.src.tar.xz"
+  sha256 "5cc4a3f12bba50b6bdfb4b61bdc852117a0ff2517807c3902fc13267fb93562e"
   # The LLVM Project is under the Apache License v2.0 with LLVM Exceptions
   license "Apache-2.0" => { with: "LLVM-exception" }
   compatibility_version 1
@@ -13,12 +13,12 @@ class Lld < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "31815e2ee79749d1271822e8e6314df207979f081d2f31f1aa587c01aaff7b37"
-    sha256 cellar: :any,                 arm64_sequoia: "d5f62dcdfefe3a047fe5982d12e9eefce265e9ef239d7d3a0b9cc4ed3ce9b4ce"
-    sha256 cellar: :any,                 arm64_sonoma:  "ad8b9e085e5e9167aebbd8764900d4786ca9953466287ae0b16b7730ff235637"
-    sha256 cellar: :any,                 sonoma:        "0176c8d7e1e1d81594241708c58f60c743f836dd181a8f09c90459a0d9b00cee"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9eb0c26b1a7400a4dc0b2e96d0d51dc0b1ea6e6cf5f6215b24e71096bf0ec65b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b0b5b0d6b4cd1449e67f852e41c0c7590bd4d8c72be7b46e80fab0febcd0e97c"
+    sha256 cellar: :any, arm64_tahoe:   "27313c2faf8c535fdf997a27aa9b84bdc3af4855981d4ea5e8efe6b92176ff94"
+    sha256 cellar: :any, arm64_sequoia: "b5597f79d3759e0374daff35d12264a5e51639032f7ec318bfee2014867f29ef"
+    sha256 cellar: :any, arm64_sonoma:  "680b25edaf59c89ce0a934d17db7c1d7d06d40938346399da45de751fead02cb"
+    sha256 cellar: :any, sonoma:        "427562857dd6d2a42a8c7caf60651fa5a32cb8254f3452c856228f4ab70f0c15"
+    sha256 cellar: :any, arm64_linux:   "f7e541100d50aec9da7e6a738adfcb85d575914552fb09453631d073f95668f1"
+    sha256 cellar: :any, x86_64_linux:  "44a6d5f037da5e86c222cb57ca7ff607d3fa9071e78479bc88d5b15958639183"
   end
 
   depends_on "cmake" => :build

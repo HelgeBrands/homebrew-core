@@ -1,18 +1,18 @@
 class Harsh < Formula
   desc "Habit tracking for geeks"
   homepage "https://github.com/wakatara/harsh"
-  url "https://github.com/wakatara/harsh/archive/refs/tags/v0.14.3.tar.gz"
-  sha256 "d5e12c13a049d6783354ba852d1190627cf8d5ad8067c646669de2a3f436e34e"
+  url "https://github.com/wakatara/harsh/archive/refs/tags/v0.14.5.tar.gz"
+  sha256 "37516772901d1cd31e7a9655dd3c3f522099f9c0467f3ef886d64301dd8b84a0"
   license "MIT"
   head "https://github.com/wakatara/harsh.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3542f5e35b58bf8d97a93234be085b36fe6409d7fd54c99350dd2ad63bfb413e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3542f5e35b58bf8d97a93234be085b36fe6409d7fd54c99350dd2ad63bfb413e"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3542f5e35b58bf8d97a93234be085b36fe6409d7fd54c99350dd2ad63bfb413e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "c7487ea2137ffea2d10694b2e2ae9068edd63de8f9e984272f3bcb87f0c6049d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "45f5141a8ff967102b0357a7a6075ea123af6382fd9d6dd0263fdb86dd07446d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ad4e78b485a0b7f93767dd9cc8002e22e90dcdc875d32045192d90f0cde37840"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "719d5448ca9017772ec460c7f625bea82fd5a907375bd58ad2a07b3b7396e18a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "719d5448ca9017772ec460c7f625bea82fd5a907375bd58ad2a07b3b7396e18a"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "719d5448ca9017772ec460c7f625bea82fd5a907375bd58ad2a07b3b7396e18a"
+    sha256 cellar: :any_skip_relocation, sonoma:        "a2a01c719ab02ec0ca66eaacda19efe97697960ba881be85b15d622b01b3caa7"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b4706f0b4f15463c04498a90168bb19c973e03b73e65d1d10391a9d3985bb33e"
+    sha256 cellar: :any,                 x86_64_linux:  "418289bd491051962c37e1325da682c8b128845341518fdf4335a0e8d3b43110"
   end
 
   depends_on "go" => :build

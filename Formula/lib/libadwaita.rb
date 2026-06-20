@@ -1,9 +1,10 @@
 class Libadwaita < Formula
   desc "Building blocks for modern adaptive GNOME applications"
   homepage "https://gnome.pages.gitlab.gnome.org/libadwaita/"
-  url "https://download.gnome.org/sources/libadwaita/1.9/libadwaita-1.9.0.tar.xz"
-  sha256 "817837bf06363db5bbfce66085136eff1436af6625dfabff3ca08b87bfca1b6b"
+  url "https://download.gnome.org/sources/libadwaita/1.9/libadwaita-1.9.1.tar.xz"
+  sha256 "2ae34dbb3ea56d270925707cefa36050482ec88a741f1810b7619a5377c41a66"
   license "LGPL-2.1-or-later"
+  revision 1
   compatibility_version 1
   head "https://gitlab.gnome.org/GNOME/libadwaita.git", branch: "main"
 
@@ -16,13 +17,12 @@ class Libadwaita < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_tahoe:   "881a99482118b9c5d55e837dd18d30deb5437d72b324811a0640a8503c782308"
-    sha256 arm64_sequoia: "8dd8ff82c9cffee0d1fa58f4e6e8e545b663006dc28dd1978e33490cf26de70c"
-    sha256 arm64_sonoma:  "3a60b46ebe1d02f32d5c0ee9e470947b1483c6685d03af04f2dbfd7cc6a1707d"
-    sha256 sonoma:        "3551f415600001e6fa2c2a1817c5922c94bf9fb566ea8aeffe411d183845c4f5"
-    sha256 arm64_linux:   "180e9facf4cc6736ce704e76437ba47d6e060f99024739017d29ceaaeead8b85"
-    sha256 x86_64_linux:  "af35c9ad4b433af1531f9e9a8376a2a29295357f3a8f3aa50ebccdb7042c5d9d"
+    sha256 arm64_tahoe:   "717258a871b24b835c2fd93c9d6f466e31fbddfd7a648171c1d57d7f9036ca45"
+    sha256 arm64_sequoia: "3c0ce17e10719376356271efd8a216395bad59910cc714209f43dca80d5134e4"
+    sha256 arm64_sonoma:  "d2a49bfd805c38999bf277d000e1312858206639b6abe037700f151a47a089d0"
+    sha256 sonoma:        "fdee758f46aa7f87b8cc2dd52165e4f7ebaca8f79a587dded9fa1318900acadd"
+    sha256 arm64_linux:   "5565c474102b844e716ff1cdf0a3e722614e8b9b11567b5e1fba4519469a401c"
+    sha256 x86_64_linux:  "2aa1c7e7840b9fa446e40ec1f586783f6f7f1d63ae0c63f23e803f2a5f30c239"
   end
 
   depends_on "dart-sass" => :build
@@ -54,9 +54,12 @@ class Libadwaita < Formula
 
   def install
     # Replace deprecated `sassc` with `sass` in the meson build file
+    # Use `expanded`, not `compressed`: GTK's CSS parser rejects dart-sass
+    # compressed output ("Expected ';' at end of block"). `expanded`
+    # matches upstream's `sassc -t compact`.
     inreplace "src/stylesheet/meson.build" do |s|
       s.gsub! "'sassc'", "'sass'"
-      s.gsub! "'-a', '-M', '-t', 'compact'", "'--style', 'compressed'"
+      s.gsub! "'-a', '-M', '-t', 'compact'", "'--style', 'expanded'"
     end
 
     system "meson", "setup", "build", "-Dtests=false", *std_meson_args

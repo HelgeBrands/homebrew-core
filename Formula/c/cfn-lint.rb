@@ -3,22 +3,22 @@ class CfnLint < Formula
 
   desc "Validate CloudFormation templates against the CloudFormation spec"
   homepage "https://github.com/aws-cloudformation/cfn-lint/"
-  url "https://files.pythonhosted.org/packages/5e/ea/bc4954dcbff3ecb500e2593e4b64d0e9a552973249b2a27dd22eee3fb5b0/cfn_lint-1.51.0.tar.gz"
-  sha256 "05d2a59708c99363afe3af6ac7325de95a5b37f8eef7728f41ae567d088a61f1"
+  url "https://files.pythonhosted.org/packages/05/69/d9e8f555ded51061f73aa2cfbe30b0b6d5273724f5563655f6dc8b77ecdd/cfn_lint-1.51.5.tar.gz"
+  sha256 "018a00f1f9eeadc196afbdc0ac8c6221c29411747c8dcff2f431d48d4080c83b"
   license "MIT-0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "038b9d5f1ca73593a362cb08848398d77231d6a94b1106c44b1c5f84d9adcfba"
-    sha256 cellar: :any,                 arm64_sequoia: "04e50d922967f4ff1e016b347f4f1dc7a9a957f94be548e45dde1e1fb4363ed8"
-    sha256 cellar: :any,                 arm64_sonoma:  "1da908c8effbd12e9e2decc234da0e2a79fa6dd1237b74ac3e6725fb9e104732"
-    sha256 cellar: :any,                 sonoma:        "814ff143b0139e3fe2bda372e9465bde7a8d25c1b9a443b67f4eea6137a513d9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6330fab24c87d6e5fdc70e7320bff2d6acc1189aed3f27a686964d1599fb3a30"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0465bcf1dcb98e8fe32982409117ac48c8f921e0fbaafb8147b173ed5aec8999"
+    sha256 cellar: :any, arm64_tahoe:   "99527c04651e0afdba8a480bf3dc62baba0be4853cd5bbbdb3971035662c5cfd"
+    sha256 cellar: :any, arm64_sequoia: "52ecb6dfd2ee31bcd354b30c933a598ec1d5946e60ffe16d9447cbded173c228"
+    sha256 cellar: :any, arm64_sonoma:  "d6787a689211b2a3f9fdec51e2ae262930ade522670380e18f50fe3442dc0cd8"
+    sha256 cellar: :any, sonoma:        "832db4a42bad5bd9bcfcbf1862f054e672c00f8d4727eb8fbd6bc41e8fb5e1a4"
+    sha256 cellar: :any, arm64_linux:   "d2e2019c93303dd1b8568aaa108332de7a1b1cc9b70f75717dec1948388aba70"
+    sha256 cellar: :any, x86_64_linux:  "3ab6233b8d9f96275fdc053c14ad05ad37f923e51c62b5cf533b7c8ad946f911"
   end
 
   depends_on "libyaml"
   depends_on "pydantic" => :no_linkage
-  depends_on "python@3.13" # Pydantic v1 is incompatible with Python 3.14, issue ref: https://github.com/aws/serverless-application-model/issues/3831
+  depends_on "python@3.14"
   depends_on "rpds-py" => :no_linkage
 
   pypi_packages exclude_packages: ["pydantic", "rpds-py"]
@@ -29,18 +29,18 @@ class CfnLint < Formula
   end
 
   resource "aws-sam-translator" do
-    url "https://files.pythonhosted.org/packages/e0/09/f62aa8d076f6ba85080ec6291e61af345e9be0daf8a4094101555e054ec7/aws_sam_translator-1.109.0.tar.gz"
-    sha256 "0c5e60223ae8434ce0c6bdb9a491d69ba3ec97e15c0d825d3803f7806382d804"
+    url "https://files.pythonhosted.org/packages/6e/2f/adeed2ce2bc62eca7ead7b3ae70fdd2cf84eecd582cd69a9529e6da89876/aws_sam_translator-1.110.0.tar.gz"
+    sha256 "466ee0e8200992c51b7fd5ede5e56ca2e8dd5473cc551e8495c14f2f4d636127"
   end
 
   resource "boto3" do
-    url "https://files.pythonhosted.org/packages/0a/37/78c630d1308964aa9abf44951d9c4df776546ff37251ec2434944e205c4e/boto3-1.43.6.tar.gz"
-    sha256 "e6315effaf12b890b99956e6f8e2c3000a3f64e4ee91943cec3895ce9a836afb"
+    url "https://files.pythonhosted.org/packages/f7/47/2db3e7c1317019d800a1b4181059656842b8aec69ad578ac01a73eba3b89/boto3-1.43.30.tar.gz"
+    sha256 "6b1ee360f363a457f67a8f5702f522043d8a32d67a97c362ad12075d8b5b531e"
   end
 
   resource "botocore" do
-    url "https://files.pythonhosted.org/packages/79/a7/23d0f5028011455096a1eeac0ddf3cbe147b3e855e127342f8202552194d/botocore-1.43.6.tar.gz"
-    sha256 "b1e395b347356860398da42e61c808cf1e34b6fa7180cf2b9d87d986e1a06ba0"
+    url "https://files.pythonhosted.org/packages/fb/dd/6df8586de6cc036eec2e491b1a65c489c43d9722929aef407c20b7323329/botocore-1.43.30.tar.gz"
+    sha256 "19ed560cb35ae43bf010d37da429a553c07063bf7efea0f2cb53be8a78d3e3d5"
   end
 
   resource "jmespath" do
@@ -99,8 +99,8 @@ class CfnLint < Formula
   end
 
   resource "s3transfer" do
-    url "https://files.pythonhosted.org/packages/9b/ec/7c692cde9125b77e84b307354d4fb705f98b8ccad59a036d5957ca75bfc3/s3transfer-0.17.0.tar.gz"
-    sha256 "9edeb6d1c3c2f89d6050348548834ad8289610d886e5bf7b7207728bd43ce33a"
+    url "https://files.pythonhosted.org/packages/e0/1f/12417f7f493fc45e1f9fd5d4a9b6c125cf8d2cf3f8ddbdfab3e76406e9d6/s3transfer-0.18.0.tar.gz"
+    sha256 "3760b8b7ec1315da54048b2d626276732bee4300d054d492d4e1d43e20d4ecbd"
   end
 
   resource "six" do

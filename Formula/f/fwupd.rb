@@ -3,18 +3,18 @@ class Fwupd < Formula
 
   desc "Firmware update daemon"
   homepage "https://github.com/fwupd/fwupd"
-  url "https://github.com/fwupd/fwupd/releases/download/2.1.3/fwupd-2.1.3.tar.xz"
-  sha256 "9609b75b0706265f589b9b15e9c1f986832b523b94f994d00f5284d3ff15f503"
+  url "https://github.com/fwupd/fwupd/releases/download/2.1.5/fwupd-2.1.5.tar.xz"
+  sha256 "9bde8d85ceb4ea30c92272cfe17941d8cd25ab469402864bc6981585d7eacc07"
   license "LGPL-2.1-or-later"
   head "https://github.com/fwupd/fwupd.git", branch: "main"
 
   bottle do
-    sha256 arm64_tahoe:   "e30ce856aca2a88a88825303292d01bc6567304793844053ef372a133295c8f8"
-    sha256 arm64_sequoia: "9c5f4a545c41f7e0d789e6a19ecfcb71cbae6f3c1eb6e381e2e759a6f4cfba7b"
-    sha256 arm64_sonoma:  "783b822f53a417376c2047b4a667c9f10f7a1d163e55604eda188822c469d87b"
-    sha256 sonoma:        "eb2fbbd6fa26779d950d49e76aecec741dfab9ac0572dbc63f525313d9afa7c4"
-    sha256 arm64_linux:   "621efebb83e1ab7a1b2f2fd09f4f53fca95f3cf37a4fccb735acf63e03a9d912"
-    sha256 x86_64_linux:  "792f466ab813e9b1b04564cc1130ab2450592cfe3cb27b402e674ed4bd66a9ba"
+    sha256 arm64_tahoe:   "22b19fc94b22a8301651e006744d24be16b840a1a17afb97a96b7c89fc7d70b3"
+    sha256 arm64_sequoia: "d324179c0ff617be09a88d4ba7fc8fb89449a91dedd234c162a08500a8bc9f46"
+    sha256 arm64_sonoma:  "99a2926bd803ea79fed54d5e388a4623ea82bd5a3d46ff355d3f6eda32a9629f"
+    sha256 sonoma:        "9ceeead750b48b2318382223bdba915b2dd66837673eb889f1329b8196350bb3"
+    sha256 arm64_linux:   "879672ec4e8cb8d86c65522c84e87523dfe6d9bc15a43d7911f8080839725b87"
+    sha256 x86_64_linux:  "532502ebdf1b6643a8b661478748b380f9f3334679cfb76a82b5702c0d4536ce"
   end
 
   depends_on "gettext" => :build # for msgfmt
@@ -69,17 +69,18 @@ class Fwupd < Formula
     venv.pip_install resources
     ENV.prepend_path "PYTHONPATH", venv.root/Language::Python.site_packages(python3)
 
-    system "meson", "setup", "build",
-                    "-Dbuild=standalone", # this is used as PolicyKit is not available on macOS
-                    "-Dpython=#{which(python3)}",
-                    "-Dsupported_build=enabled",
-                    "-Dplugin_flashrom=disabled",
-                    "-Dplugin_modem_manager=disabled",
-                    "-Dplugin_uefi_capsule_splash=false",
-                    "-Dtests=false",
-                    "-Ddocs=disabled",
-                    "-Dvendor_ids_dir=#{Formula["usb.ids"].opt_share}/misc/usb.ids",
-                    *std_meson_args
+    args = [
+      "-Dbuild=standalone", # this is used as PolicyKit is not available on macOS
+      "-Dpython=#{which(python3)}",
+      "-Dsupported_build=enabled",
+      "-Dplugin_modem_manager=disabled",
+      "-Dplugin_uefi_capsule_splash=false",
+      "-Dtests=false",
+      "-Ddocs=disabled",
+      "-Dvendor_ids_dir=#{Formula["usb.ids"].opt_share}/misc/usb.ids",
+    ]
+
+    system "meson", "setup", "build", *args, *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
   end

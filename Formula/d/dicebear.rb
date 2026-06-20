@@ -1,17 +1,17 @@
 class Dicebear < Formula
   desc "CLI for DiceBear - An avatar library for designers and developers"
-  homepage "https://github.com/dicebear/dicebear"
-  url "https://registry.npmjs.org/dicebear/-/dicebear-9.4.2.tgz"
-  sha256 "97592b469fe922e6978dd39bcf2c962cd8d45810cea8ca7fc491a60073b58d5e"
+  homepage "https://www.dicebear.com"
+  url "https://registry.npmjs.org/dicebear/-/dicebear-10.3.0.tgz"
+  sha256 "f5429e21cf6580e2f8624cd20aae776f4c263f5e743f5f75b5f99006c6567837"
   license "MIT"
 
   bottle do
-    sha256                               arm64_tahoe:   "746b99ccd13c7e7e271dc8cb4d0fd806abd8ba89315b23b970b184305042bdf6"
-    sha256                               arm64_sequoia: "7e479bef26b6f1ada59d1629024f7553989f29de53fa29793a602d2544822aa2"
-    sha256                               arm64_sonoma:  "7c15370ad4e3634e7f629773f4d786c58fbae1990dc7222d15025818352016a7"
-    sha256                               sonoma:        "cce0d9241ef66695946ac18f8d5a89c14b235ce7b3a11c38072c1e8f96e8731f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "6abfe6c30fadcd89090b8d01a1b0ce36015083efe352a3a8567fdcaf99000a68"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cfd673e6b9deea9d83584e853aa314debaa87c95d4e34a485ce655e485e0098b"
+    sha256               arm64_tahoe:   "2674c4965f61e4a97a51c556239433b8ee96a7996ce0ae0df9d572c00872f75b"
+    sha256               arm64_sequoia: "816f1e45cecb8cf09b1f66976cbbe991b1b07ee43e608f7583d36fbfb0793b40"
+    sha256               arm64_sonoma:  "c21822aa6268db9925be60d0cc19a3266975e981f0a4b152c8ce979751fb73f4"
+    sha256               sonoma:        "26c82f8475e7fbe4a32b595bf94b0112d30cbada4776664886cff6f9500e15ea"
+    sha256 cellar: :any, arm64_linux:   "c3a63e0374669fd207c71f8707bfce3c342d73483203dc0d9bb584bddbc9a9e2"
+    sha256 cellar: :any, x86_64_linux:  "f1fa8dec1ea89119107243ee47c940cd55eae6c49c5d892b304a5618d348da15"
   end
 
   depends_on "pkgconf" => :build
@@ -26,13 +26,13 @@ class Dicebear < Formula
   # Resources needed to build sharp from source to avoid bundled vips
   # https://sharp.pixelplumbing.com/install/#building-from-source
   resource "node-addon-api" do
-    url "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.6.0.tgz"
-    sha256 "e3029e9581015874cc794771ec9b970be83b12c456ded15cfba9371bddc42569"
+    url "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.8.0.tgz"
+    sha256 "72528f1a8235a8bc19855e21cc5ae28252c276338afa73887dc7e54515bc76c5"
   end
 
   resource "node-gyp" do
-    url "https://registry.npmjs.org/node-gyp/-/node-gyp-12.2.0.tgz"
-    sha256 "8689bbeb45a3219dfeb5b05a08d000d3b2492e12db02d46c81af0bee5c085fec"
+    url "https://registry.npmjs.org/node-gyp/-/node-gyp-12.3.0.tgz"
+    sha256 "d209963f2b21fd5f6fad1f6341897a98fc8fd53025da36b319b92ebd497f6379"
   end
 
   def install

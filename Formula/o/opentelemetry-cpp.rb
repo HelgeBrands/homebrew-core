@@ -4,15 +4,16 @@ class OpentelemetryCpp < Formula
   url "https://github.com/open-telemetry/opentelemetry-cpp/archive/refs/tags/v1.27.0.tar.gz"
   sha256 "d09c2e8dd95bbc1d6ee493a89f32a4736879948d0eb59ad58c855022d1f55cc1"
   license "Apache-2.0"
+  revision 3
   head "https://github.com/open-telemetry/opentelemetry-cpp.git", branch: "main"
 
   bottle do
-    sha256               arm64_tahoe:   "596db3ee968c83dd0db3f531f53375387e9227011e88413c1d73c330d502f6a4"
-    sha256               arm64_sequoia: "309e617c86d96be2232ffe088ad31c747624334dc7b34abaa89bbf2f3fe7b2f7"
-    sha256               arm64_sonoma:  "c3a522f1a315005fc996265ce4d5f2d9b611352a18adf4c292f3ac72f3be33ea"
-    sha256 cellar: :any, sonoma:        "ec22e27f98877a29ae5eb03f8ec5b8973d35035f4a761c2e5e756c7b007b9568"
-    sha256               arm64_linux:   "d91f99764b4127c219016d56d2134c52b0eb9c73c97231faaa9bd4d617aa8ea8"
-    sha256               x86_64_linux:  "7129932567d837a1d66c00b540d1ec9c76e35440440e6545537bd7e1f7461597"
+    sha256               arm64_tahoe:   "2700fe16c5c9b50ca3628d6f21d89ebebfb0c5f89678cb300ce96c07cf40f987"
+    sha256               arm64_sequoia: "a073a20562e095759607947a553fa5410c1100a90c0af27201af56d57db34889"
+    sha256               arm64_sonoma:  "bddce3a8ae89d76759c37c934ed632af8c7579e894a9af33cd639dfed877308c"
+    sha256 cellar: :any, sonoma:        "6b38424dd5dc1cf0942da3afe9d74e885ec3c409e1ca78c6afe08fb90d01b32d"
+    sha256               arm64_linux:   "f4a7f0d5a3203f83bd683ec53eec990915214d59b4a821f51647cdddca8de1cb"
+    sha256               x86_64_linux:  "fb08c1c0f72859d4e497be5f49d796bbd8c65918e7b2f71b969ee918aa6dea4c"
   end
 
   depends_on "cmake" => :build
@@ -30,10 +31,6 @@ class OpentelemetryCpp < Formula
     depends_on "re2"
   end
 
-  on_linux do
-    depends_on "llvm" => :build if DevelopmentTools.gcc_version < 13
-  end
-
   fails_with :gcc do
     version "12"
     cause "fails handling PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED"
@@ -45,13 +42,6 @@ class OpentelemetryCpp < Formula
   end
 
   def install
-    # TODO: Remove after moving CI to Ubuntu 24.04. Cannot use newer GCC as it
-    # will increase minimum GLIBCXX in bottle resulting in a runtime dependency.
-    if OS.linux? && deps.map(&:name).any?("llvm")
-      ENV.llvm_clang
-      ENV.append "LDFLAGS", "-Wl,--as-needed"
-    end
-
     (buildpath/"opentelemetry-proto").install resource("opentelemetry-proto")
 
     ENV.append "LDFLAGS", "-Wl,-undefined,dynamic_lookup" if OS.mac?

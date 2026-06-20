@@ -4,7 +4,7 @@ class PerconaServerAT80 < Formula
   url "https://downloads.percona.com/downloads/Percona-Server-8.0/Percona-Server-8.0.45-36/source/tarball/percona-server-8.0.45-36.tar.gz"
   sha256 "137cdb24a1f5b8afbd1fef38457b98ead8d73e3cc73c22a3c6facc94ab3871de"
   license "BSD-3-Clause"
-  revision 2
+  revision 4
 
   livecheck do
     url "https://www.percona.com/products-api.php", post_form: {
@@ -21,12 +21,12 @@ class PerconaServerAT80 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "ac0a31a73fc96d9835a962a4c050f8faea5e4df40e8ec80346799f893cffa8cb"
-    sha256 arm64_sequoia: "ba9c39d652faad5d4cfac6784e16790c257348bd87c35343e6b53858f541caba"
-    sha256 arm64_sonoma:  "6de6a293bb61a42d6e5b80d67a43a5abaa47ec04064385101afb2fa797032624"
-    sha256 sonoma:        "1133ea109fdd6939e5b1a76ae4896e0d4a193a87f5edd0807beb6afe069a1218"
-    sha256 arm64_linux:   "faa648487f16b79391ed8b6359fecc09ce7620b474600b9c4be143e6a77d2745"
-    sha256 x86_64_linux:  "e6ddf848b0a7b7c3c7d95d1ced3e646d8e84cdab45241c15b8a95c5cb8176015"
+    sha256 arm64_tahoe:   "0ec76bd0302962a6338ac42fd3abacc0de5bb02cf5da2a23c3566a3fcb6a16f9"
+    sha256 arm64_sequoia: "e97b5e831140951a484a9fb65b6d69a82734ad32c6079162dcfc1581541ab445"
+    sha256 arm64_sonoma:  "efb21c8e965f23b48e48746ae18b0d23307c995ae902c7fea91000c1ed614302"
+    sha256 sonoma:        "7fbf3acc0a8a17646743d054dbaee899f4e8789ab2a572e119b8e859e826d0a3"
+    sha256 arm64_linux:   "9801ea097b286fb2f0c30c61eb35754d475b88fbf58cacb0a50871a5d3f4f2ed"
+    sha256 x86_64_linux:  "15b6103738f30ba6f2726188a2c6f3698301210a44667aed16d86277cfacad94"
   end
 
   keg_only :versioned_formula
@@ -100,6 +100,9 @@ class PerconaServerAT80 < Formula
 
     # Disable ABI checking
     inreplace "cmake/abi_check.cmake", "RUN_ABI_CHECK 1", "RUN_ABI_CHECK 0" if OS.linux?
+
+    # Workaround for error: 'is_default_constructible' cannot be specialized
+    ENV.append_to_cflags "-Wno-invalid-specialization" if OS.mac? && MacOS.version >= :tahoe
 
     icu4c = deps.find { |dep| dep.name.match?(/^icu4c(@\d+)?$/) }
                 .to_formula

@@ -1,18 +1,18 @@
 class GoLibrespot < Formula
   desc "Spotify client"
   homepage "https://github.com/devgianlu/go-librespot"
-  url "https://github.com/devgianlu/go-librespot/archive/refs/tags/v0.7.1.tar.gz"
-  sha256 "25595b6dc1a4e030df74a2ca8ec9206052958b138f7453e75a0bb7233577df94"
+  url "https://github.com/devgianlu/go-librespot/archive/refs/tags/v0.7.4.tar.gz"
+  sha256 "9bf982c9afb8ec04bceb12a084addf5dd35ed601225bf3bfb6382a67e086b9c7"
   license "GPL-3.0-only"
   head "https://github.com/devgianlu/go-librespot.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "16b97c3c124cf7017cda09378810639238d52295dd623c0fd4ffd37f5d56f781"
-    sha256 cellar: :any,                 arm64_sequoia: "de2b905f2f6d2c1a456791254c8d4c377a3d552c98448ee9fc293a21202205f5"
-    sha256 cellar: :any,                 arm64_sonoma:  "0d5a5a962592a46e38d8653d1d6dacd6b38147ce429773df1905b07836a0f47b"
-    sha256 cellar: :any,                 sonoma:        "1fe1dc4546772e9c55f71b26eecd8914e3f7492bae1804f36b049042abb986a3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5bab75619906a8ef10a661a03f4599dd5351c6c7ab3ca5fde2ebbbfe2e2b7f71"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a4917c7564cc077bbe491d407957c123d8035c4db508fa0fa79f936f6d8ffdc2"
+    sha256 cellar: :any, arm64_tahoe:   "d80e9261c323bb58fdc94e2faae286ceca63cd799ab1804d86af867cb8ed34eb"
+    sha256 cellar: :any, arm64_sequoia: "abc36412283e507055823c5c62e63f472e5bb9be39012eba31a7ee23f375cfc1"
+    sha256 cellar: :any, arm64_sonoma:  "366e4f6623a0ae80571219afed309e04fef9a1aa8dca580fb64a52238bcd4968"
+    sha256 cellar: :any, sonoma:        "8da678d54b2d2e11327bfff24e1d92b81b9252552b7260d55f3f20a04250f7c0"
+    sha256 cellar: :any, arm64_linux:   "f70cfce7f6a273c264987cd6a5ce05f98f0449ef4006df0d9f61026920668577"
+    sha256 cellar: :any, x86_64_linux:  "6e2b28efbfe6f620db8c66ce2a6f4bfdc38c2f3aed5cb0c85977a6a5b137014d"
   end
 
   depends_on "go" => :build
@@ -35,7 +35,6 @@ class GoLibrespot < Formula
     ldflags << "-X github.com/devgianlu/go-librespot.commit=#{Utils.git_short_head(length: 8)}" if build.head?
 
     system "go", "build", *std_go_args(output: bin/"go-librespot", ldflags:), "./cmd/daemon"
-    (var/"log").mkpath
 
     # On macOS, create a minimal config that selects the correct backend.
     return unless OS.mac?

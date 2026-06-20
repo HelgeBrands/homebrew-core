@@ -1,9 +1,9 @@
 class Aflxx < Formula
   desc "American Fuzzy Lop++"
   homepage "https://aflplus.plus/"
-  url "https://github.com/AFLplusplus/AFLplusplus/archive/refs/tags/v4.40c.tar.gz"
-  version "4.40c"
-  sha256 "3343796f0b69b0bec07e44033608280c360e0e90b4ddb6bdda263d598fc3e472"
+  url "https://github.com/AFLplusplus/AFLplusplus/archive/refs/tags/v5.01c.tar.gz"
+  version "5.01c"
+  sha256 "5d33fb1eb59043a0c2b72e4ef38d235cd47bfdced503d4915f74002be6c75fb3"
   license "Apache-2.0"
 
   livecheck do
@@ -12,12 +12,12 @@ class Aflxx < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "2b6b831bae1cebc9d380d8700fc2aada2515f9d91bbcde148f6f108aad17f43d"
-    sha256 arm64_sequoia: "c00b48ccd7e9abd3a72d6152316b66e791165c5c61dacb6098bf47352cd99553"
-    sha256 arm64_sonoma:  "e648a0c06e6b1702976780aa7737a45234a77cfede13e45c2740310076f6457d"
-    sha256 sonoma:        "3c8d9f2eb1620db1a59c547ca9b3d1457e310964c9c2b2407cdb9ea1ec6cd26b"
-    sha256 arm64_linux:   "1b19ebf6978c87e5fc2a5e59dc7cd8ebfa867933ae30da3d240a61f6b60ce46d"
-    sha256 x86_64_linux:  "6e4450ab7a2346c4ec5f68594f22e9b9aadf8b5b702609f34bf887f3719fe623"
+    sha256 arm64_tahoe:   "54b9017df4bcc9086dda75eee50811b5f8e2f631079fa532d0d4023b54bca8f2"
+    sha256 arm64_sequoia: "8d90e8eec72709c1005fe217907cc1637ecfb9b7bffea0753ce15834d1f582c0"
+    sha256 arm64_sonoma:  "14941d0722efac1de4869d01ac6b9849f26826b92cb0d0be15fdfa5eb60b53c2"
+    sha256 sonoma:        "3f4b2589a59b5cc996a5e76038e2c00280d51281412c0b2d840cd89adc273155"
+    sha256 arm64_linux:   "e3c07c94a9e7b99114724611b984a513117bc05dea0f7355f3ebbe68d7509fb8"
+    sha256 x86_64_linux:  "7d19b3d80760bd0129d14db1c39e1be620f018e160f2e415bfaca25faaa082af"
   end
 
   depends_on "coreutils" => :build
@@ -32,27 +32,6 @@ class Aflxx < Formula
   # The Makefile will insist on compiling with LLVM clang even without this.
   fails_with :clang
   fails_with :gcc
-
-  # Backport macOS weak ASan runtime linking fix.
-  # https://github.com/AFLplusplus/AFLplusplus/commit/13b3c271a64a20718efb7900251c9669058a90ef
-  patch do
-    url "https://github.com/AFLplusplus/AFLplusplus/commit/13b3c271a64a20718efb7900251c9669058a90ef.patch?full_index=1"
-    sha256 "6586d49352bdf137d6152c9b86207c8e3c31cf0d05386adf45f554fd68e7e89b"
-  end
-
-  # Backport macOS aflpp_driver ASan poisoning fix.
-  # https://github.com/AFLplusplus/AFLplusplus/commit/f14ed081dd4eca99de1cecf74b45bbffc6dc4587
-  patch do
-    url "https://github.com/AFLplusplus/AFLplusplus/commit/f14ed081dd4eca99de1cecf74b45bbffc6dc4587.patch?full_index=1"
-    sha256 "fccf1d1e58c081c801905a24de44804c6fed3376caa0806eced620ca2086dec7"
-  end
-
-  # Backport macOS syscall deprecation warning fix.
-  # https://github.com/AFLplusplus/AFLplusplus/commit/1d5d7f0dd790e761dccd25efd8680b19ba2f3f7a
-  patch do
-    url "https://github.com/AFLplusplus/AFLplusplus/commit/1d5d7f0dd790e761dccd25efd8680b19ba2f3f7a.patch?full_index=1"
-    sha256 "aa995d4989e7ae3e2892a51e2539f393a209d17ae2f32bb8b7fce37ddefb5b06"
-  end
 
   def install
     ENV.prepend_path "PATH", Formula["coreutils"].libexec/"gnubin"

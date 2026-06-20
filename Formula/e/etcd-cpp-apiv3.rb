@@ -4,16 +4,19 @@ class EtcdCppApiv3 < Formula
   url "https://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3/archive/refs/tags/v0.15.4.tar.gz"
   sha256 "4516ecfa420826088c187efd42dad249367ca94ea6cdfc24e3030c3cf47af7b4"
   license "BSD-3-Clause"
-  revision 45
+  revision 48
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "bf69a21c97148bc0cf6b4f3df53d42b9cc38e572214a6c355fd93bddc8bd7112"
-    sha256 cellar: :any, arm64_sequoia: "01b35beaadec95c015c95a9ff04cefd949060f0d5d0b2e963bb0083db730863b"
-    sha256 cellar: :any, arm64_sonoma:  "87a48d2846e77c2fca83769ddec924dee30df0369881304b6b5e8a488837b78d"
-    sha256 cellar: :any, sonoma:        "6e7bce0b4f600b6eda6b5fc5841106aa68a8ac2e142157b5dd582eeca394e49f"
-    sha256               arm64_linux:   "193805dd7ffbffab1488fbf1f4b6f44252046d036214308e3f726b2e8fc6e503"
-    sha256               x86_64_linux:  "d6ef31a79b7cd6354358073d20ec41cb2b7f0a07389af19787bebd715ed4fbe2"
+    sha256 cellar: :any, arm64_tahoe:   "d6cf1aa8375f4096d05010d9ccdde7c673cd93ce14f54d005411aa74d76fa1ef"
+    sha256 cellar: :any, arm64_sequoia: "8507b637361234c6258efbbdbd5cd4c7540eec5c2f887f56219580d04c360dfb"
+    sha256 cellar: :any, arm64_sonoma:  "cd22374353e522366ed1df4df6afe477567ff18cd23c4324f844f15496f361e6"
+    sha256 cellar: :any, sonoma:        "5a4e6d37078c6ed87d4c0ac6a551e6bc543d744f66d05271f625a4d5841d198e"
+    sha256               arm64_linux:   "9fdb70c9f7187b4394585ffa43e6226e3efde6602c4117bdd168e540d2e50fb8"
+    sha256               x86_64_linux:  "eb3d8e6c5eeef80bd5034565acead7d61b93691556884a8e85d606a04b98a7d5"
   end
+
+  deprecate! date: "2026-06-12", because: "needs deprecated cpprestsdk"
+  disable! date: "2027-06-12", because: "needs deprecated cpprestsdk"
 
   depends_on "cmake" => [:build, :test]
   depends_on "etcd" => :test
@@ -45,6 +48,12 @@ class EtcdCppApiv3 < Formula
   patch do
     url "https://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3/commit/ea56cee80f441973a0149b57604e7a7874c61b65.patch?full_index=1"
     sha256 "bce8ef02bc56f2ac430d580191217ff78210cc6e261d29c7031a22e65cd05693"
+  end
+
+  # Backport GCC 13 build fix
+  patch do
+    url "https://github.com/etcd-cpp-apiv3/etcd-cpp-apiv3/commit/7c6e714f188f9576e25e0350cac4181139eec23e.patch?full_index=1"
+    sha256 "96c9e4cbadb46c9ebfc6f4f386125161b68df4c12f7c85feffda39dff41a7277"
   end
 
   def install

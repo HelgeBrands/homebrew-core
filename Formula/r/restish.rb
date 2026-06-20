@@ -1,8 +1,8 @@
 class Restish < Formula
   desc "CLI tool for interacting with REST-ish HTTP APIs"
   homepage "https://rest.sh/"
-  url "https://github.com/rest-sh/restish/archive/refs/tags/v0.21.2.tar.gz"
-  sha256 "3686e652193c976a04c96f83ee1a78571509e22169b83f7212a7380b374d24b1"
+  url "https://github.com/rest-sh/restish/archive/refs/tags/v2.2.0.tar.gz"
+  sha256 "059764fccaf8acd366184b10c88a7f0ee0ba0123c196328f156e3286811b3ec3"
   license "MIT"
   head "https://github.com/rest-sh/restish.git", branch: "main"
 
@@ -12,13 +12,12 @@ class Restish < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d9fdc528fbe2fccaca3bfab636db7872d1ede385b5709ed9c61e50085def7f66"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7ef7937e4508123101de80ff1b78a6eaaee299c73207acfd8a7979a4b9e49a4f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3d20de61133d8ea4332df51e6e452ac3ac113a7d555f95efab4840f03cbd1860"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ae17b3c10c11df3bb120154a6801e30e61a98242f9e42cf29f20e3d4fe80279b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "04054f2b8bbe4ae53bcb9a9b469d8e597f153ef2016bdf64f3982193d2b80cf1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "33df4c0eccc2dc3c8cdca8c428ac26a756eac84750f3846ca0ff871aa0ff22d6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "818a1f03b9bdc8934b5b7f6c51e1d0cfe617a10abb6386e7090a8b3292b0d368"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "818a1f03b9bdc8934b5b7f6c51e1d0cfe617a10abb6386e7090a8b3292b0d368"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "818a1f03b9bdc8934b5b7f6c51e1d0cfe617a10abb6386e7090a8b3292b0d368"
+    sha256 cellar: :any_skip_relocation, sonoma:        "76e94a42c9797128c3e3bd528213c7585d4edcba75f050c50765ff0e3d31749b"
+    sha256 cellar: :any,                 arm64_linux:   "33ab763f93415f20d2c56af75d4766fd9ae22d01983cdfb5c124c78f3b458450"
+    sha256 cellar: :any,                 x86_64_linux:  "718a8f6a694db25c934bb13326026004054722ef90496f7295fc0bdf37dfbc3c"
   end
 
   depends_on "go" => :build
@@ -31,7 +30,8 @@ class Restish < Formula
       ENV.append "GOFLAGS", "-buildmode=pie"
     end
 
-    system "go", "build", *std_go_args(ldflags: "-s -w -X main.version=#{version}")
+    ldflags = "-s -w -X github.com/rest-sh/restish/v2/internal/cli.Version=#{version}"
+    system "go", "build", *std_go_args(ldflags:), "./cmd/restish"
 
     generate_completions_from_executable(bin/"restish", shell_parameter_format: :cobra)
   end
@@ -43,6 +43,6 @@ class Restish < Formula
     assert_match "slideshow", output
 
     output = shell_output("#{bin}/restish https://httpbin.org/get?foo=bar")
-    assert_match "\"foo\": \"bar\"", output
+    assert_match '"foo": "bar"', output
   end
 end

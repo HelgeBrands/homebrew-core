@@ -1,8 +1,8 @@
 class Dagger < Formula
   desc "Portable devkit for CI/CD pipelines"
   homepage "https://dagger.io"
-  url "https://github.com/dagger/dagger/archive/refs/tags/v0.20.8.tar.gz"
-  sha256 "e1aedd95c92b5ae5179d9d3aa621157fdc11e2cc4b2a10c3cf7d9200d6d65617"
+  url "https://github.com/dagger/dagger/archive/refs/tags/v0.21.7.tar.gz"
+  sha256 "f6b5e327f0fb51f4b8407a925df1d29b1ac3b1a32ff924c65da17f04176d7f9d"
   license "Apache-2.0"
   head "https://github.com/dagger/dagger.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Dagger < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "abb37f3aab35cc6e3f3b32dcf0e73b09b053f79f49706f0d7979e2b217ca0d9b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "abb37f3aab35cc6e3f3b32dcf0e73b09b053f79f49706f0d7979e2b217ca0d9b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "abb37f3aab35cc6e3f3b32dcf0e73b09b053f79f49706f0d7979e2b217ca0d9b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "2b4d33a9bab0505347964846add9f995e252b9bc8169076874d0fba7027b4a5c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c640522177442f07ff2e996f11e3d395a528fbe02b56e5d4d98f38efa508f5f9"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4da962035b367ce4b45b1d22ef9b7cbfdf6c6029f1e25fe6a01172dc320f6a3f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5008a2d25a6c2017dc99c52f01945bbbe4c575a9d2da6a94aa6b72921f24b166"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5008a2d25a6c2017dc99c52f01945bbbe4c575a9d2da6a94aa6b72921f24b166"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5008a2d25a6c2017dc99c52f01945bbbe4c575a9d2da6a94aa6b72921f24b166"
+    sha256 cellar: :any_skip_relocation, sonoma:        "91c16369880adb29326fb4894884791540fd80af8651875a13a68f893d490949"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "d7b8a0e8beeb2eb673358e0b3642d031a98b2921f58554e8b35561b5f8245d51"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b856a9bc7fc5c29e0b48364bcac9030fbd67c8f483f2137978638e68a2963e8d"
   end
 
   depends_on "go" => :build

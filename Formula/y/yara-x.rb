@@ -1,8 +1,8 @@
 class YaraX < Formula
   desc "Tool to do pattern matching for malware research"
   homepage "https://virustotal.github.io/yara-x/"
-  url "https://github.com/VirusTotal/yara-x/archive/refs/tags/v1.16.0.tar.gz"
-  sha256 "28c60e1e7f4e60d2fca648c92da3a617ae2da7841165c309d111ac7230bd823f"
+  url "https://github.com/VirusTotal/yara-x/archive/refs/tags/v1.18.0.tar.gz"
+  sha256 "c9b42e84e2452f2cd501d18b0f7ea35a598edb9e23c6dc7b1165ccab9f04c84b"
   license "BSD-3-Clause"
   head "https://github.com/VirusTotal/yara-x.git", branch: "main"
 
@@ -12,12 +12,12 @@ class YaraX < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "7f42d97f3131b5186fa977cdd7c41fab4c379cd337541e3819c980df0b9abc0d"
-    sha256 cellar: :any,                 arm64_sequoia: "315dab4ac3fbc2446e3c8602d89d49adb8e66baa88a76e463ae5d06306667e71"
-    sha256 cellar: :any,                 arm64_sonoma:  "950cb175b70d171e442eaa6f933522bd7a666ac8fe5999af3c097fe5486fad00"
-    sha256 cellar: :any,                 sonoma:        "1c6a632bf895bd30bd0f8bcb3d6a2e2f1e8cceb4e6ee170608e280f55b0fe51e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ca0c252d1ee04161e9668e3861f20a01a5905bfcf6fe8b02ab6198217bed478d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "093277e16e1dd3b260c1c26623e9d57477a7263c83f3923c38affe958a9aa2e7"
+    sha256 cellar: :any, arm64_tahoe:   "3d1a510dd10f69d3bf0a1d3d2b460cee8f1b7a38ed4d0e66eb60ce881300f4f9"
+    sha256 cellar: :any, arm64_sequoia: "925f277b809f2b449b10755647a3d6e3be0af33b90e2f00fc18f548b10064599"
+    sha256 cellar: :any, arm64_sonoma:  "1a2f34a660a85f0b70c6336cb72685c7079f3f84613cdb42d7e4d5286fff8a82"
+    sha256 cellar: :any, sonoma:        "02242e0254b381ff65df83d56df9185ba4e2b6d75dda0aec77a312195d50bc24"
+    sha256 cellar: :any, arm64_linux:   "4540e61844a155d95ffa4f0cd902c3e89a14aa3d2fd8524a17e8280cf06b5075"
+    sha256 cellar: :any, x86_64_linux:  "d953db6b61615e9b74475ce9d5b3da571dee1671a4f5c4862433b1495064eade"
   end
 
   depends_on "cargo-c" => :build

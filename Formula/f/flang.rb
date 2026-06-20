@@ -1,8 +1,8 @@
 class Flang < Formula
   desc "LLVM Fortran Frontend"
   homepage "https://flang.llvm.org/"
-  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.5/llvm-project-22.1.5.src.tar.xz"
-  sha256 "7972b87b705a003ce70ab55f9f0fb495d156887cba0eb296d284731139118e2c"
+  url "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.7/llvm-project-22.1.7.src.tar.xz"
+  sha256 "5cc4a3f12bba50b6bdfb4b61bdc852117a0ff2517807c3902fc13267fb93562e"
   # The LLVM Project is under the Apache License v2.0 with LLVM Exceptions
   license "Apache-2.0" => { with: "LLVM-exception" }
   head "https://github.com/llvm/llvm-project.git", branch: "main"
@@ -12,12 +12,12 @@ class Flang < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "dff5c363c21117f8b3e6bd6b88afc7c313cc8f539c6b0b72995d6c7db65d6639"
-    sha256 cellar: :any,                 arm64_sequoia: "6c762f8f944c114c44012649341d5d02de21d78a7509a5f2e215c4411a4f8a94"
-    sha256 cellar: :any,                 arm64_sonoma:  "02f7189dcdec7760664dbd9c4154f47a4e48d3b816aa568e6140b6250767b033"
-    sha256 cellar: :any,                 sonoma:        "e618dc9082186dc18ed950e7027607d7be4a72ef283a4f8c4681e7625e36e207"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7cdfb83c6f2bf3b18f2cba52c5fc173bc149b80b40cd1392b2aa3dbeb48ccb2e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d3e1dad486fffb560fa2238965955d740263038bc097f980af23a3d9e15c552b"
+    sha256 cellar: :any, arm64_tahoe:   "7554e8c3fd8ddafc6904854d037d8e12e92320b7d7759a420552d0c8f957b36c"
+    sha256 cellar: :any, arm64_sequoia: "d92a20649b3d9f177debbd66fad90f9538e4e246ce634ee67ec7a6d91ae8dd67"
+    sha256 cellar: :any, arm64_sonoma:  "68ec7133c7209e3b18d829a191f59d758990539fcb3e2f328a431217a976e40e"
+    sha256 cellar: :any, sonoma:        "3ab36da2d8d28d4b6fc47c5b7a349a7a62aedc58f527d286ec8bed573c1af98e"
+    sha256 cellar: :any, arm64_linux:   "54b761fd78d3c6ad14678ad20e4e28e1e1d6eabe59b6a371b0403a9d2273bc8c"
+    sha256 cellar: :any, x86_64_linux:  "6499470317735cf2afc2860c174e9db7ccad453d03e2c0c75d96a818472d5598"
   end
 
   depends_on "cmake" => :build

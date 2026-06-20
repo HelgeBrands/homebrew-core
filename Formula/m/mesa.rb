@@ -3,8 +3,8 @@ class Mesa < Formula
 
   desc "Graphics Library"
   homepage "https://www.mesa3d.org/"
-  url "https://archive.mesa3d.org/mesa-26.0.6.tar.xz"
-  sha256 "1d3c3b8a8363b8cc354175bb4a684ad8b035211cc1d6fa17aeb9b9623c513f89"
+  url "https://archive.mesa3d.org/mesa-26.1.3.tar.xz"
+  sha256 "7725004e724b34c6d4fbaf5c48fc6c6223aa9f2741d6d7782c699b049356fc45"
   license all_of: [
     "MIT",
     "Apache-2.0", # include/{EGL,GLES*,vk_video,vulkan}, src/egl/generate/egl.xml, src/mapi/glapi/registry/gl.xml
@@ -24,12 +24,12 @@ class Mesa < Formula
   head "https://gitlab.freedesktop.org/mesa/mesa.git", branch: "main"
 
   bottle do
-    sha256 arm64_tahoe:   "335d2077f4cef9e76a4cca69f4c26e0ef1a77d229ae863dd6d1f529dfea36dd0"
-    sha256 arm64_sequoia: "186ff2d377484c6c2812f0e0f7a7811211694d713b7752ee22f2e4205b776410"
-    sha256 arm64_sonoma:  "41121311e549a7c22b40ed97e8e67fb41cbedc28921277e58531c4e09666ae90"
-    sha256 sonoma:        "6b59d53d5de07ecd7e05105cf97423284098e9b35643ca16b5e3f9b2c7d12118"
-    sha256 arm64_linux:   "372547e0b8e7fa4717ff6e26a97562bffba776143c65f9b60ef4f206765e9158"
-    sha256 x86_64_linux:  "41dc2b8413b3d874046215cc32be806f03a4abb2f977e2e29f3f2dac2ef35f57"
+    sha256 arm64_tahoe:   "3b43f88ee41037f97ec73f2ddedc7bd445cfed7817d9ec8f6bd85750328d6168"
+    sha256 arm64_sequoia: "9076d1b936317bade3e20be2cde2f96cf2334eec2804f3b3066122016b981bbd"
+    sha256 arm64_sonoma:  "6a5eaf5a2490fd159fb1ee9987b6fdbf07aba424d43db93099b796577a801845"
+    sha256 sonoma:        "aa958fb7fb1dbc695bb0700501b371cc6b9d08c2fd7d8f7dc004c583101b858a"
+    sha256 arm64_linux:   "3abb8a88a9f541a11838f6200de4efbab666cd481537f481f18ad576f2df4e61"
+    sha256 x86_64_linux:  "0727cb9065c3794bbfc85b04daf40720e1ccfb48cd12c14d0deea35e02872349"
   end
 
   depends_on "bindgen" => :build
@@ -63,6 +63,13 @@ class Mesa < Formula
 
   on_macos do
     depends_on "molten-vk"
+
+    # Apply MacPorts patch to revert change causing avoid infinite loop on macOS
+    # Issue ref: https://gitlab.freedesktop.org/mesa/mesa/-/work_items/15528
+    patch :p0 do
+      url "https://raw.githubusercontent.com/macports/macports-ports/1db035904139d7a3d0e0575f63ccd2371384956c/x11/mesa/files/patch-src-meson.diff"
+      sha256 "7390de495a94749eb3070d579aae5db79a75887d8aaa4d547b053559c1eb9aeb"
+    end
   end
 
   on_linux do

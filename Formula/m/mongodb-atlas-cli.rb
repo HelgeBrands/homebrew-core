@@ -1,8 +1,8 @@
 class MongodbAtlasCli < Formula
   desc "Atlas CLI enables you to manage your MongoDB Atlas"
   homepage "https://www.mongodb.com/docs/atlas/cli/stable/"
-  url "https://github.com/mongodb/mongodb-atlas-cli/archive/refs/tags/atlascli/v1.54.0.tar.gz"
-  sha256 "27b99d9b16fc5182f6e592742223ccedc92184e8f13ca6d9ec8d8338dd96839a"
+  url "https://github.com/mongodb/mongodb-atlas-cli/archive/refs/tags/atlascli/v1.56.0.tar.gz"
+  sha256 "d96f57047fe8cbab345f3967f13c0619eb79fd14535ad19bf112c86f98bace05"
   license "Apache-2.0"
   head "https://github.com/mongodb/mongodb-atlas-cli.git", branch: "master"
 
@@ -12,12 +12,12 @@ class MongodbAtlasCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8225220bd03e20b96fdc41a9be3613edff4b4e3e6e60bafa64375063dfaf7ed0"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fae18c7a00c095b231a4b908b2b3fcad9410bf8e85ced1adc5f36b712d2c6032"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "562ec14eb0dec1599ed32e58cf82f04be52cafa770dedbbfba9275848e576f43"
-    sha256 cellar: :any_skip_relocation, sonoma:        "2c8ab037abe96fc7dffdcd684dddc670f8286f7da3375e6fc6cd4610791e0df9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "dd23c8adc057284d5d063254dc49610b02f1be76168b8aa9a40659d1a6ef7e05"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0d8c9155ae81a66b521a58c2f2cd24c16d47acdba768797084552b067e48a0b6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "cedc9c82f96f110a57e694a17f82426339cf4695ec1c7cdae9c7881459e3bd0a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1c5e1b0fdf7ac0c6c409f93dff763a0f321857e137c65e013783db245dcbb6a1"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "33f27404698a3e542c2c93c5cb95aa18c0221eb197a8f60120e8ce9994a1ac40"
+    sha256 cellar: :any_skip_relocation, sonoma:        "921a2fae7517ea245e7a1672e483aedb0873d40637accc58065e08312ec8de76"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "cda9c8e0d7f8b90e8fbd53674cd2811f1a5b37210bdd4aa2efa7b06dd85a3499"
+    sha256 cellar: :any,                 x86_64_linux:  "fa641b5d9d34d92a11e0a853648cb455cb369fb5abd5767d3ddd1f8bd4054edb"
   end
 
   depends_on "go" => :build

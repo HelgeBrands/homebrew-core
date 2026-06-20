@@ -1,8 +1,8 @@
 class Neo4j < Formula
   desc "Robust (fully ACID) transactional property graph database"
   homepage "https://neo4j.com/"
-  url "https://neo4j.com/artifact.php?name=neo4j-community-2026.04.0-unix.tar.gz"
-  sha256 "fd750466b1247c0d1ef09a84c614f7e045793b30dfa277148e8da71646598820"
+  url "https://neo4j.com/artifact.php?name=neo4j-community-2026.05.0-unix.tar.gz"
+  sha256 "bb753b4e9bcc331e90b968edd8da445e974090867ca825cc672defdad6066f0e"
   license "GPL-3.0-or-later"
 
   livecheck do
@@ -12,7 +12,8 @@ class Neo4j < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "07905cc32e0dc3d0701316534636bfc215a9bf01236b36a0575fb5452a1008ba"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, all: "99c3b6312e312ae52f285f036c7c60b480e5c73d2c25792c731e90d4d3a1eeb0"
   end
 
   depends_on "cypher-shell"
@@ -35,14 +36,13 @@ class Neo4j < Formula
 
     # Adjust UDC props
     # Suppress the empty, focus-stealing java gui.
-    (libexec/"conf/neo4j.conf").append_lines <<~EOS
+    (libexec/"conf/neo4j.conf").append_lines <<~CONF
       server.jvm.additional=-Djava.awt.headless=true-Dunsupported.dbms.udc.source=homebrew
       server.directories.data=#{var}/neo4j/data
       server.directories.logs=#{var}/log/neo4j
-    EOS
+    CONF
 
     (var/"log/neo4j").mkpath
-    (var/"neo4j").mkpath
   end
 
   service do

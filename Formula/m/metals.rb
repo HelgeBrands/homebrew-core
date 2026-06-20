@@ -1,15 +1,15 @@
 class Metals < Formula
   desc "Scala language server"
-  homepage "https://github.com/scalameta/metals"
+  homepage "https://scalameta.org/metals/"
   url "https://github.com/scalameta/metals/archive/refs/tags/v1.6.7.tar.gz"
   sha256 "a83ab1596997720e83980b781f3d96d2753b7548415606694e15c26e93359445"
   license "Apache-2.0"
 
   # Some version tags don't become a release, so it's necessary to check the
-  # GitHub releases instead.
+  # scala-lang instead.
   livecheck do
-    url :stable
-    strategy :github_latest
+    url "https://index.scala-lang.org/api/v1/projects/scalameta/metals/versions/latest"
+    regex(/"(\d+(?:\.\d+)+)"/i)
   end
 
   bottle do

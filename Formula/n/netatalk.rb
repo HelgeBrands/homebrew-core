@@ -1,8 +1,8 @@
 class Netatalk < Formula
   desc "File server for Macs, compliant with Apple Filing Protocol (AFP)"
   homepage "https://netatalk.io"
-  url "https://github.com/Netatalk/netatalk/releases/download/netatalk-4-4-3/netatalk-4.4.3.tar.xz"
-  sha256 "863d640ecc99f4923ead6c58e8d3406ab3a1ca9dd3b0d47ccdf6fdebb6efe3ab"
+  url "https://github.com/Netatalk/netatalk/releases/download/netatalk-4-5-0/netatalk-4.5.0.tar.xz"
+  sha256 "62d77f5a491e69086c1706ff7d9e016912e0e48b43d0c3a7ae60c384b6d625b3"
   license all_of: [
     "GPL-2.0-or-later",
 
@@ -20,12 +20,13 @@ class Netatalk < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 arm64_tahoe:   "042b6b1d40fd13796fec48ffa3cc7d414bee5d57397de5e900ffa1cfcc35d9c8"
-    sha256 arm64_sequoia: "f80a29fe3c78e245cbfb5e90b924da5fa86a0e98832d667c03d6e62cbcc636f4"
-    sha256 arm64_sonoma:  "17de978a5d35cc04c6a7a1e89addb3764e47004bf640c84ff1d0d78933c5ec29"
-    sha256 sonoma:        "c66cb7e6ecc6608c1048742846737d0a7741edfc14472c1d28420d6c36ee0ba5"
-    sha256 arm64_linux:   "dbe86d95776a543d735832f1e878215a052a69c94c74e152ee240ca1b933a941"
-    sha256 x86_64_linux:  "200f9019295e1e04a107f20f34cc7966a1b680acfca5e206d58f408c73403a9b"
+    rebuild 1
+    sha256 arm64_tahoe:   "a34ddecb88d6c79ab8b1bc149a26dcf7bbd82c300f6dad2d5c604d0fafa2ada8"
+    sha256 arm64_sequoia: "d8ccfee9249cbdc7c3eb75e0d6eed1ee731b7c8c18bed51d446f62adbe5bee2c"
+    sha256 arm64_sonoma:  "6f557473b242401dda3c38c1b4bd57271e4dfdce53cd9b796880069947a18d89"
+    sha256 sonoma:        "59d535e9ad0d6ed14b30cb37931ff08f3b5952c38a71c6e60693f3b1e3ed8e2b"
+    sha256 arm64_linux:   "6e7765cb1e13aac3cd28119be04bc12716ee1d6ff8e2e4f1fb98e4afe02646d2"
+    sha256 x86_64_linux:  "d157c8e2aa8d8150f9eb114149ec9add8addcf73670d7a5cac96f7aeac153c7c"
   end
 
   depends_on "cmark-gfm" => :build
@@ -41,6 +42,7 @@ class Netatalk < Formula
   depends_on "libgcrypt"
   depends_on "mariadb-connector-c"
   depends_on "openldap" # macOS LDAP.Framework is not fork safe
+  depends_on "talloc"
 
   uses_from_macos "krb5"
   uses_from_macos "libxcrypt"
@@ -62,7 +64,6 @@ class Netatalk < Formula
     bdb5_rpath = rpath(target: Formula["berkeley-db@5"].opt_lib)
     ENV.append "LDFLAGS", "-Wl,-rpath,#{bdb5_rpath}" if OS.linux?
     args = [
-      "-Dwith-afpstats=false",
       "-Dwith-appletalk=#{OS.linux?}", # macOS doesn't have an AppleTalk stack
       "-Dwith-bdb-path=#{Formula["berkeley-db@5"].opt_prefix}",
       "-Dwith-cups-libdir-path=#{libexec}",
@@ -75,7 +76,7 @@ class Netatalk < Formula
       "-Dwith-lockfile-path=#{var}/run",
       "-Dwith-pam-config-path=#{etc}/pam.d",
       "-Dwith-pkgconfdir-path=#{pkgetc}",
-      "-Dwith-spotlight=false",
+      "-Dwith-spotlight=true",
       "-Dwith-statedir-path=#{var}",
       "-Dwith-testsuite=true",
     ]
@@ -110,13 +111,13 @@ class Netatalk < Formula
   test do
     pidfile = var/"run/netatalk#{".pid" if OS.mac?}"
     port = free_port
-    (testpath/"afp.conf").write <<~EOS
+    (testpath/"afp.conf").write <<~CONF
       [Global]
       afp port = #{port}
       log file = #{testpath}/afpd.log
       log level = default:info
       signature = 1234567890ABCDEF
-    EOS
+    CONF
     fork do
       system sbin/"netatalk", "-d", "-F", testpath/"afp.conf"
     end

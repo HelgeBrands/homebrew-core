@@ -3,7 +3,7 @@ class Aalib < Formula
   homepage "https://aa-project.sourceforge.net/aalib/"
   url "https://downloads.sourceforge.net/project/aa-project/aa-lib/1.4rc5/aalib-1.4rc5.tar.gz"
   sha256 "fbddda9230cf6ee2a4f5706b4b11e2190ae45f5eda1f0409dc4f99b35e0a70ee"
-  license "GPL-2.0-or-later"
+  license "LGPL-2.0-or-later"
   revision 2
 
   # The latest version in the formula is a release candidate, so we have to
@@ -36,6 +36,8 @@ class Aalib < Formula
     url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/aalib/1.4rc5.patch"
     sha256 "9843e109d580e7112291871248140b8657108faac6d90ce5caf66cd25e8d0d1e"
   end
+
+  deny_network_access!
 
   def install
     # Workaround for newer Clang

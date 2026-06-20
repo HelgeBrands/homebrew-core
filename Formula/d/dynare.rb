@@ -1,18 +1,11 @@
 class Dynare < Formula
   desc "Platform for economic models, particularly DSGE and OLG models"
   homepage "https://www.dynare.org/"
+  url "https://www.dynare.org/release/source/dynare-7.1.tar.xz"
+  sha256 "fdd294a99c67c81208da8d682bf12e68fdbda75012b218d8702a4de163058a4e"
   license "GPL-3.0-or-later"
-  revision 3
+  revision 1
   head "https://git.dynare.org/Dynare/dynare.git", branch: "master"
-
-  stable do
-    url "https://www.dynare.org/release/source/dynare-6.5.tar.xz"
-    sha256 "56a6f934f5d2ded57206d2f109975324b39586394f4e8ce23b3c72aadcd5cd4a"
-
-    # backport fix for finding suite-sparse
-    # https://git.dynare.org/Dynare/dynare/-/commit/b3a50696bf7b8ef97cd8900c4941b479fd27dd2e
-    patch :DATA
-  end
 
   livecheck do
     url "https://www.dynare.org/download/"
@@ -20,12 +13,12 @@ class Dynare < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "c6d06691f1df3fad95b82da06060f6b8cd0540a5a55fb595e4958078448426ea"
-    sha256 cellar: :any, arm64_sequoia: "009776e9bbe11be7d8597277dff5094340832103c2ef8c4d9005dd07019b7144"
-    sha256 cellar: :any, arm64_sonoma:  "7181da19a9b60621d78978526b20cbcba254ebac89eae8a57f0581495db4d32e"
-    sha256 cellar: :any, sonoma:        "2636ef080cdd01465419438d0c0431c5911af60bc4e66966c44cf3a162f78b9d"
-    sha256               arm64_linux:   "29de507e86be91223ed947e504ab5e801911e8a7472d13db4376bdd5806142d8"
-    sha256               x86_64_linux:  "1331b5200bc99899977aa326bd212e05502a0000a7f527a01adbca11df5ebcc9"
+    sha256 cellar: :any, arm64_tahoe:   "edb01020ea75b2549dbac94e452f57b1849c8797be344215161182e2667bb7eb"
+    sha256 cellar: :any, arm64_sequoia: "d28bb114a5897ade6fe0590fc587cc5a5a878819e475f4bcddb94b539f68e17b"
+    sha256 cellar: :any, arm64_sonoma:  "8ec14189bdf0be7d4cd327be0d7e9edb0285af4083aafbaca66cd788b730aa4f"
+    sha256 cellar: :any, sonoma:        "06fc4ff606f076fcb43365515f26e238c11bc2b4ca6e08cf9e74fb19df237a2c"
+    sha256               arm64_linux:   "7f1752b6e8b7a4d08100ccda65672294a0197855c80731b17abd382b27367580"
+    sha256               x86_64_linux:  "afbee497e701fd6e60c1984e2fc54ee5d5e400154dcc14e22bf379d1a248dae2"
   end
 
   depends_on "bison" => :build
@@ -67,15 +60,23 @@ class Dynare < Formula
     cause "needs C++20 std::jthreads"
   end
 
+  fails_with :gcc do
+    version "12"
+    cause "needs GCC >= 13 for C++20 features"
+  end
+
   def install
     # This needs a bit of extra help in finding the Octave libraries on Linux.
     octave = Formula["octave"]
-    ENV.append "LDFLAGS", "-Wl,-rpath,#{octave.opt_lib}/octave/#{octave.version.major_minor_patch}" if OS.linux?
+    if OS.linux?
+      ENV.append "LDFLAGS", "-Wl,-rpath,#{octave.opt_lib}/octave/#{octave.version.major_minor_patch}"
+      ENV["BOOST_ROOT"] = Formula["boost"].opt_prefix.to_s
+    end
 
     system "meson", "setup", "build", "-Dbuild_for=octave", *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
-    (pkgshare/"examples").install "examples/bkk.mod"
+    (pkgshare/"examples").install "tests/model_info/bkk.mod"
   end
 
   def caveats
@@ -86,6 +87,12 @@ class Dynare < Formula
   end
 
   test do
+    resource "datatypes" do
+      url "https://github.com/pr0m1th3as/datatypes/releases/download/release-1.2.3/datatypes-1.2.3.tar.gz",
+          using: :nounzip
+      sha256 "2dbd6e0140354c069227412c495cbde975d088ca71d964117371735be4646c72"
+    end
+
     resource "statistics" do
       url "https://github.com/gnu-octave/statistics/archive/refs/tags/release-1.7.3.tar.gz", using: :nounzip
       sha256 "570d52af975ea9861a6fb024c23fc0f403199e4b56d7a883ee6ca17072e26990"
@@ -94,7 +101,9 @@ class Dynare < Formula
     ENV.delete "CXX" # avoid overriding Octave flags
     ENV.delete "LDFLAGS" # avoid overriding Octave flags
 
+    datatypes = resource("datatypes")
     statistics = resource("statistics")
+    testpath.install datatypes
     testpath.install statistics
 
     cp pkgshare/"examples/bkk.mod", testpath
@@ -104,6 +113,7 @@ class Dynare < Formula
     (testpath/"dyn_test.m").write <<~MATLAB
       makeinfo_program true
       pkg prefix #{testpath}/octave
+      pkg install datatypes-#{datatypes.version}.tar.gz
       pkg install statistics-release-#{statistics.version}.tar.gz
       dynare bkk.mod console
     MATLAB
@@ -112,50 +122,3 @@ class Dynare < Formula
            "--no-history", "--path", "#{lib}/dynare/matlab", "dyn_test.m"
   end
 end
-
-__END__
-diff --git a/meson.build b/meson.build
-index 435293bae021218d63aaf5c88e7ef8d9ad0a3762..7256ff96ff5693423099ae0e4d8143ceb7266194 100644
---- a/meson.build
-+++ b/meson.build
-@@ -260,21 +260,9 @@ else # Octave build
-   lapack_dep = declare_dependency(link_args : run_command(mkoctfile_exe, '-p', 'LAPACK_LIBS', check : true).stdout().split(),
-                                   dependencies : blas_dep)
- 
--  # Create a dependency object for UMFPACK.
--  # The dependency returned by find_library('umfpack') is not enough, because we also want the define
--  # that indicates the location of umfpack.h, so we construct a new dependency object.
--  if cpp_compiler.has_header('suitesparse/umfpack.h', args : octave_incflags)
--    umfpack_def = '-DHAVE_SUITESPARSE_UMFPACK_H'
--  elif cpp_compiler.has_header('umfpack.h', args : octave_incflags)
--    umfpack_def = '-DHAVE_UMFPACK_H'
--  else
--    error('Can’t find umfpack.h')
--  endif
-   # Do not enforce static linking even if prefer_static is true, since that library is shipped
-   # with Octave.
--  # The “dirs” argument is useful when cross-compiling.
--  umfpack_dep_tmp = cpp_compiler.find_library('umfpack', dirs : octlibdir / '../..', static : false)
--  umfpack_dep = declare_dependency(compile_args : umfpack_def, dependencies : [ umfpack_dep_tmp, blas_dep ])
-+  umfpack_dep = dependency('UMFPACK', static : false)
- 
-   # This library does not exist under Octave
-   ut_dep = []
-diff --git a/mex/sources/dynumfpack.h b/mex/sources/dynumfpack.h
-index ae3e11c94be51cbf9ee7249db80526712e55e469..c73fa5f8c0b1ab50b9e1b165719e27f1278f1ca8 100644
---- a/mex/sources/dynumfpack.h
-+++ b/mex/sources/dynumfpack.h
-@@ -25,12 +25,7 @@
- #define DYNUMFPACK_H
- 
- #ifdef OCTAVE_MEX_FILE
--# ifdef HAVE_SUITESPARSE_UMFPACK_H
--#  include <suitesparse/umfpack.h>
--# endif
--# ifdef HAVE_UMFPACK_H
--#  include <umfpack.h>
--# endif
-+# include <umfpack.h>
- #else
- 
- /* Under MATLAB, we have to provide our own header file for functions in

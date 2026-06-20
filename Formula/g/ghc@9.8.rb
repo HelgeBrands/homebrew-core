@@ -27,6 +27,9 @@ class GhcAT98 < Formula
 
   keg_only :versioned_formula
 
+  deprecate! date: "2026-06-08", because: :versioned_formula
+  disable! date: "2027-06-08", because: :versioned_formula
+
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "python@3.14" => :build
@@ -138,8 +141,8 @@ class GhcAT98 < Formula
     args = []
     if OS.mac?
       # https://gitlab.haskell.org/ghc/ghc/-/issues/22595#note_468423
-      args << "--with-ffi-libraries=#{MacOS.sdk_path_if_needed}/usr/lib"
-      args << "--with-ffi-includes=#{MacOS.sdk_path_if_needed}/usr/include/ffi"
+      args << "--with-ffi-libraries=#{MacOS.sdk_path}/usr/lib"
+      args << "--with-ffi-includes=#{MacOS.sdk_path}/usr/include/ffi"
       args << "--with-system-libffi"
     end
 

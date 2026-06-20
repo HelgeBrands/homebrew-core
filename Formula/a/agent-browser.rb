@@ -1,41 +1,26 @@
 class AgentBrowser < Formula
   desc "Browser automation CLI for AI agents"
   homepage "https://agent-browser.dev/"
-  url "https://registry.npmjs.org/agent-browser/-/agent-browser-0.27.0.tgz"
-  sha256 "62ef3bc80c75fc68cd70a45ec4ce981a67a4a95737580b67e8a4709afc28d875"
+  url "https://github.com/vercel-labs/agent-browser/archive/refs/tags/v0.28.0.tar.gz"
+  sha256 "6d8e38eaca9294c7f23f556f34df084e89535417e547489476a1a5582a2824a5"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9e0f808456913dfaf48c0129c82f2438dff6e1d7aec079ce444df19c72ce0ae1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9e0f808456913dfaf48c0129c82f2438dff6e1d7aec079ce444df19c72ce0ae1"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9e0f808456913dfaf48c0129c82f2438dff6e1d7aec079ce444df19c72ce0ae1"
-    sha256 cellar: :any_skip_relocation, sonoma:        "8b73c3bfc489759cb4482d8d9d9e1168d9539b5a8c5c49a67e6ea2fe69e078f8"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "09c3bc48fdea62e01350c0ddc28eee848821cedc9d3566f65fb30064199b0730"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1a58120651050148698a8ce2934587d0838751fb17a4b4e4daf16190bb1d7450"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "366f1f879a5e2684bd37a79f6b5268b03830b7793bae192e790af112f5bd733a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0f75d475503d5d5fd112874190ce3939a214282208392e8c04c52423f26f25c5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2d633dfa840f36bcad91250e1013b5f2d94d2b06695a8d6adf88fdd0361e5b79"
+    sha256 cellar: :any_skip_relocation, sonoma:        "157d93e4923d22e6e590eeda52b201b5f7f70eab198373d9c3aa263a3c27d689"
+    sha256 cellar: :any,                 arm64_linux:   "dba96b86cf912c72cb0e78c0185fff205d7f504b1021884b4b9719cde3ecf7d7"
+    sha256 cellar: :any,                 x86_64_linux:  "3f193702eede3de8bf29dc05d67988b8c000f70023aedf3d20895eb0f2fc55e7"
   end
 
+  depends_on "rust" => :build
   depends_on "node"
 
   def install
+    system "npm", "run", "build:native"
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
-
-    # Remove non-native platform binaries and make native binary executable
-    node_modules = libexec/"lib/node_modules/agent-browser"
-    os = OS.kernel_name.downcase
-    arch = Hardware::CPU.intel? ? "x64" : "arm64"
-    (node_modules/"bin").glob("agent-browser-*").each do |f|
-      if f.basename.to_s == "agent-browser-#{os}-#{arch}"
-        f.chmod 0755
-      else
-        rm f
-      end
-    end
-
-    # Remove non-native prebuilds from dependencies
-    node_modules.glob("node_modules/*/prebuilds/*").each do |prebuild_dir|
-      rm_r(prebuild_dir) if prebuild_dir.basename.to_s != "#{os}-#{arch}"
-    end
   end
 
   def caveats

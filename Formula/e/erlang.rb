@@ -3,10 +3,10 @@ class Erlang < Formula
   homepage "https://www.erlang.org/"
   # Download tarball from GitHub; it is served faster than the official tarball.
   # Don't forget to update the documentation resource along with the url!
-  url "https://github.com/erlang/otp/releases/download/OTP-28.5/otp_src_28.5.tar.gz"
-  sha256 "2c7e8ca23e6864eb20eff5d44738bfa123aed8cd21ed6d98e533d751eee28d9c"
+  url "https://github.com/erlang/otp/releases/download/OTP-29.0.2/otp_src_29.0.2.tar.gz"
+  sha256 "b9a7714fdd282c4a7113651b1e2728a58799e60ffe20e545f5cc94c621527b15"
   license "Apache-2.0"
-  compatibility_version 1
+  compatibility_version 2
 
   livecheck do
     url :stable
@@ -14,12 +14,12 @@ class Erlang < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "daa2848108d9e6e7846fc2eef58edc6110db36fc98904848a08a449e79769c3f"
-    sha256 cellar: :any,                 arm64_sequoia: "8209918941581913927ef89e5db6ebe6e35d6effefd0ab98aa80417fef5d4ac9"
-    sha256 cellar: :any,                 arm64_sonoma:  "bc0099f5fb427c7e395ba7de4ec7cdd870ec14531d2d482d370acc7a05f1d3c1"
-    sha256 cellar: :any,                 sonoma:        "193274c7a2ec91ae253ca64bbb80515bdd508b617295c67b203790c7453c9c52"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "70ae5cbde5bb6e40a44a25fbc0d5b9d379cbb75a246d0f933bb148b6b874f1ad"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8a50091e8d4bb22531f3cf4179128d03bc9aba3d834c8324fc05511c7c663c8f"
+    sha256 cellar: :any, arm64_tahoe:   "0f7da71c72b933a27d8a6d7c6ac7d3f5c08357b19b6aade9714c54012e38ab3e"
+    sha256 cellar: :any, arm64_sequoia: "84b6898a055c982bdec98175903a60698529fc0200751f365b7e156f20993b31"
+    sha256 cellar: :any, arm64_sonoma:  "0e4f060a367416d107ed44845e9256586ca399112fc86c8524207a278475fe10"
+    sha256 cellar: :any, sonoma:        "b44a372173441e3914d425a6e9d7837e92cbd4fd8bd16c15f388de336a9ffa42"
+    sha256 cellar: :any, arm64_linux:   "2e5af7f326c479dc61c5083df691a895d241bdb3bbd8dfa6f7db738da9d6a3df"
+    sha256 cellar: :any, x86_64_linux:  "ce86f22165329276087e214faeb25b24a6e8d02e139aaa3321cd21d79b0c1c1e"
   end
 
   head do
@@ -42,9 +42,8 @@ class Erlang < Formula
   end
 
   resource "html" do
-    url "https://github.com/erlang/otp/releases/download/OTP-28.5/otp_doc_html_28.5.tar.gz"
-    mirror "https://fossies.org/linux/misc/otp_doc_html_28.5.tar.gz"
-    sha256 "f25f4d81065dfff4e778ce3631ccbe06f94ea1a6747a24b63034973b3a073ade"
+    url "https://github.com/erlang/otp/releases/download/OTP-29.0.2/otp_doc_html_29.0.2.tar.gz"
+    sha256 "7970b39288a4c697d348283058e2aa3ac2959860be4e20ea0e22e473abe73808"
 
     livecheck do
       formula :parent
@@ -53,9 +52,9 @@ class Erlang < Formula
 
   # https://github.com/erlang/otp/blob/OTP-#{version}/make/ex_doc_link
   resource "ex_doc" do
-    url "https://github.com/elixir-lang/ex_doc/releases/download/v0.40.1/ex_doc_otp_27"
-    version "0.40.1/ex_doc_otp_27"
-    sha256 "1addd95c8b3679580ec9f368c973955e6cf7b4456a30f2ec0f68e51982913495"
+    url "https://github.com/elixir-lang/ex_doc/releases/download/v0.40.3/ex_doc_otp_28"
+    version "0.40.3/ex_doc_otp_28"
+    sha256 "b7428a78cd57ac68ecadd6f2b1ae18c0ecaec4b51b8f04bfb114967c034c7596"
 
     livecheck do
       url "https://raw.githubusercontent.com/erlang/otp/refs/tags/OTP-#{LATEST_VERSION}/make/ex_doc_link"
@@ -120,7 +119,7 @@ class Erlang < Formula
   test do
     system bin/"erl", "-noshell", "-eval", "crypto:start().", "-s", "init", "stop"
 
-    (testpath/"factorial").write <<~EOS
+    (testpath/"factorial").write <<~ERLANG
       #!#{bin}/escript
       %% -*- erlang -*-
       %%! -smp enable -sname factorial -mnesia debug verbose
@@ -141,7 +140,7 @@ class Erlang < Formula
 
       fac(0) -> 1;
       fac(N) -> N * fac(N-1).
-    EOS
+    ERLANG
 
     chmod 0755, "factorial"
     assert_match "usage: factorial integer", shell_output("./factorial")

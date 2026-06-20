@@ -1,35 +1,27 @@
 class Jose < Formula
   desc "C-language implementation of Javascript Object Signing and Encryption"
   homepage "https://github.com/latchset/jose"
-  url "https://github.com/latchset/jose/releases/download/v14/jose-14.tar.xz"
-  sha256 "cee329ef9fce97c4c025604a8d237092f619aaa9f6d35fdf9d8c9052bc1ff95b"
+  url "https://github.com/latchset/jose/releases/download/v15/jose-15.tar.xz"
+  sha256 "1d055c445392aa48d709ecd6e56220384ae2b480496e270818bddf1f219c8659"
   license "Apache-2.0"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any, arm64_tahoe:   "67229f3071c21858f07f5a5f43072531c49e2397d161f8bf505f25ce0c9f2184"
-    sha256 cellar: :any, arm64_sequoia: "55060e0f494136495d66e48db57e1fc04aa2822e5b3777c7fcd44bc34be2302a"
-    sha256 cellar: :any, arm64_sonoma:  "03f0277a4eb033772af00607572e613da16fabaee01c6b7ff9e60dae8581b4da"
-    sha256 cellar: :any, sonoma:        "e381e6924862e4d6184176e9945f51465c25fbb5ec580e0e7d29cfbfab1087df"
-    sha256               arm64_linux:   "859ce789ed3684e96d57e5bf3c3146b63e5ae70fce3fc7d798a3f0af2e084286"
-    sha256               x86_64_linux:  "7cc9ebb45c81fced9dbfece96ad5007a334bff37817cdd93605dcecfe9d67c0f"
+    sha256 cellar: :any, arm64_tahoe:   "ebeacbca6fbc189e7b40371c0e6645a1a01403df4be6c4f12f073e79381332dd"
+    sha256 cellar: :any, arm64_sequoia: "0fccea7942cf37c3ada334a0edaaec4344182cba2cde93c741688d8d260e479f"
+    sha256 cellar: :any, arm64_sonoma:  "2f2a2ba153eaa7a4a0a27be387117bc111f385baf2618c9febcb775a7909fecf"
+    sha256 cellar: :any, sonoma:        "38f781c8547b8e2a03c958b9365ba886b697832036afa8aa921c0061dc94aa69"
+    sha256               arm64_linux:   "c58b5053903cf8aa825273689558d7d028be30cad22c18f7075ee554f0e07839"
+    sha256               x86_64_linux:  "bad3165cfa1980a89b0dcaa066bb8f68ef172462b337853665d70dbdba20d716"
   end
 
   depends_on "meson" => :build
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
   depends_on "jansson"
-  depends_on "openssl@3"
+  depends_on "openssl@4"
 
   on_linux do
     depends_on "zlib-ng-compat"
-  end
-
-  # Apply upstream PR to fix build on macOS to use `-exported_symbol`
-  # PR ref: https://github.com/latchset/jose/pull/163
-  patch do
-    url "https://github.com/latchset/jose/commit/228d6782235238ed0d03eb2443caf530b377ffd5.patch?full_index=1"
-    sha256 "14e147b1541a915badefa46535999c17fe3f04d2ba4754775b928e4d5e97ce1a"
   end
 
   def install

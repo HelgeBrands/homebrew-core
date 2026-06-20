@@ -1,19 +1,19 @@
 class Usage < Formula
   desc "Tool for working with usage-spec CLIs"
   homepage "https://usage.jdx.dev/"
-  url "https://github.com/jdx/usage/archive/refs/tags/v3.3.0.tar.gz"
-  sha256 "632492afeca1b86955d7779ae895085d73837bc4bfce9e4eb94b90b06c825d70"
+  url "https://github.com/jdx/usage/archive/refs/tags/v3.5.2.tar.gz"
+  sha256 "05e0ad29b451c6816e2845556c28eae46bf96f58712a8b457ef1b9907dba533f"
   license "MIT"
   compatibility_version 1
   head "https://github.com/jdx/usage.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f15b403cbef1002103d425e5548a2f79e3948015019b3a6ec35c8bc39d277819"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "fe4d86d2a237452349d103dc4418a0a4a3dfae8298bf18f042dbef40a209d3be"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "12be6f50be325f659ba2bbace15caf275208f444123a5d5f69cd81b6e276976d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1e2d7cf9cae1511d27c43ec6407d01a89d77f3568b3eb19aecb9a69010f17ee2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ec6e3a94c6e2f161c3f5badeb4121d90d0e5daf8da907e81c363759211878eb6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "68a16bfabfce5104423b286bdcf00a9831aa11434a868562fff4290aea978cf4"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5842ae4cf1e49202cac9038daa9093c906134af4cf296e8d0faae96c6b6b3355"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e2ebcc78c6fd48d956b3f2a5a4af80ebb9f8340aa1cf4718da9a4ba60cce49e6"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f32adca33b9f69180c12f2e22771d944307e28f0585efba2b3dbf7b8b2540b89"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e4ece390d2d96138bd41fbdd2895806c3fbb5d3ae16ac964f18a305aeeb83249"
+    sha256 cellar: :any,                 arm64_linux:   "7591d5139a97cd3c55051f5db83af6b0022735b9cfecf5527b42c08feba57805"
+    sha256 cellar: :any,                 x86_64_linux:  "83f9b40fd25e329422f869c4f5e5856aec09593c5dafc00d6cf6839b62c70a66"
   end
 
   depends_on "rust" => :build

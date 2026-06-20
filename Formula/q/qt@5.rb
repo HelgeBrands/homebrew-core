@@ -77,7 +77,7 @@ class QtAT5 < Formula
     depends_on "libxkbcommon"
     depends_on "mesa"
     depends_on "pulseaudio"
-    depends_on "sdl2"
+    depends_on "sdl2-compat"
     depends_on "systemd"
     depends_on "wayland"
     depends_on "xcb-util-image"
@@ -86,6 +86,12 @@ class QtAT5 < Formula
     depends_on "xcb-util-wm"
     depends_on "zlib-ng-compat"
   end
+
+  # Specify conflict due to auto-linking of keg-only versioned formulae
+  conflicts_with "qt3d", "qtbase", "qtcharts", "qtconnectivity", "qtdatavis3d", "qtdeclarative",
+                 "qtmultimedia", "qtnetworkauth", "qtpositioning", "qtquick3d", "qtremoteobjects", "qtscxml",
+                 "qtsensors", "qtserialport", "qtspeech", "qtsvg", "qttools", "qtwebchannel", "qtwebsockets",
+                 because: "both link conflicting binaries"
 
   # Fix build with ICU 75
   patch do
@@ -132,6 +138,13 @@ class QtAT5 < Formula
       sha256 "1213dc3e1b8d9cfc9ed42fc1639f10fa350f2a921d378b184c2c0a1d4936f7f3"
       directory "qtlocation/src/3rdparty/mapbox-gl-native/deps/boost/1.65.1"
     end
+  end
+
+  # Apply Debian patch to fix build with GCC 13+
+  patch do
+    url "https://salsa.debian.org/qt-kde-team/qt/qtlocation/-/raw/4ec161bda76cd4c80d2e50fff223a94594cc6b4c/debian/patches/gcc_13.diff"
+    sha256 "85ef9bb775540d639cea03894101ab2b7476f633cbb7ff49a1ea0a6bbca82168"
+    directory "qtlocation"
   end
 
   def install

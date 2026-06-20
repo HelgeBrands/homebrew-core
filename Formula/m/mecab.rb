@@ -12,36 +12,33 @@ class Mecab < Formula
   end
 
   bottle do
-    rebuild 4
-    sha256 arm64_tahoe:    "e0bafdf893f0650942b7482f0ae672094f530a37d18cc3047932b90a2a006a16"
-    sha256 arm64_sequoia:  "9a6615d4ecdf87686bcc81e8851929a24661604782f48a0626a2e74762a20fa5"
-    sha256 arm64_sonoma:   "b442dff5851dc2e529a82d84a59b135e6f79ba6af1f295589e776aa2439d71f6"
-    sha256 arm64_ventura:  "b64f24600f7e8cad0dd98a985b72a446db41af35a192261ec489fc059e9a354f"
-    sha256 arm64_monterey: "99d7d453a35685f10cc15e0135d7ec612b9d695e58a2d36032daef5b6dac9a6f"
-    sha256 sonoma:         "d91a5e1bd7fdea15cfc0469705b33a71b02ad5c2ec2a599ab49829d9a6baa916"
-    sha256 ventura:        "361bce3217483e859b5c6d364da2ea098c63058411ed5324af8bf6c018046fef"
-    sha256 monterey:       "754a860b791ac92d825d4ff6b6b1f63e7c31e8983e603e844d1e4675732f343f"
-    sha256 arm64_linux:    "8181ec221a72b26be40c3de033dd8196d70c01d776b912f90ec5effd50731d6c"
-    sha256 x86_64_linux:   "f730abd5e95a325a9e2e012ac01714e9a22e694d91e5bb026d501495d9899ff6"
+    rebuild 6
+    sha256 arm64_tahoe:   "72298458bdf93c9012a74c60fb039ad00d77ad89839274c9857743bee97e22f0"
+    sha256 arm64_sequoia: "bf11401bae781f9ff7eb147a4c1c6b563bf2f34a8322e0ed5ed4ab5b96de7056"
+    sha256 arm64_sonoma:  "a519daec0927f8e41becdb52a94b6f907a86e61876f001be545912686fe203dd"
+    sha256 sonoma:        "152e6c5b2d2c3ce712382f25ecc88f0ebad662ed77688e8e9571827883505604"
+    sha256 arm64_linux:   "aee232893d116dc8431afa796f10d449236aaf57478e76ee3af5e74665ba12da"
+    sha256 x86_64_linux:  "61a01d5c68ef43a4e630e2ba229b5ea640e4da75569a3bee24ebfc8eb9a64abb"
   end
 
   conflicts_with "mecab-ko", because: "both install mecab binaries"
 
   def install
-    args = []
-    # Help old config scripts identify arm64 linux
-    args << "--build=aarch64-unknown-linux-gnu" if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-
-    system "./configure", "--sysconfdir=#{etc}", *args, *std_configure_args
-    system "make", "install"
-
     # Put dic files in HOMEBREW_PREFIX/lib instead of lib
-    inreplace bin/"mecab-config", "#{lib}/mecab/dic", "#{HOMEBREW_PREFIX}/lib/mecab/dic"
-    inreplace etc/"mecabrc", "#{lib}/mecab/dic", "#{HOMEBREW_PREFIX}/lib/mecab/dic"
+    inreplace "mecab-config.in", "@libdir@/mecab/dic", HOMEBREW_PREFIX/"lib/mecab/dic"
+    inreplace "mecabrc.in", "@prefix@/lib/mecab/dic", HOMEBREW_PREFIX/"lib/mecab/dic"
+
+    # Help old config scripts identify arm64 linux
+    args = ["--build=aarch64-unknown-linux-gnu"] if OS.linux? && Hardware::CPU.arm64?
+
+    # Manually install etc files to avoid overwriting any existing files
+    system "./configure", "--sysconfdir=#{etc}", *args, *std_configure_args
+    system "make", "install", "sysconfdir=#{prefix}/etc"
+    etc.install (prefix/"etc").children
   end
 
-  def post_install
-    (HOMEBREW_PREFIX/"lib/mecab/dic").mkpath
+  post_install_steps do
+    mkdir_p "lib/mecab/dic", base: :homebrew_prefix
   end
 
   test do

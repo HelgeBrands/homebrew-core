@@ -1,18 +1,18 @@
 class EnpassCli < Formula
   desc "Enpass command-line client"
   homepage "https://github.com/hazcod/enpass-cli"
-  url "https://github.com/hazcod/enpass-cli/archive/refs/tags/v1.9.0.tar.gz"
-  sha256 "9880a54d3364aa2b6f51dffcbc54954ab5c23258d9c853cb322df0eaf1f18c09"
+  url "https://github.com/hazcod/enpass-cli/archive/refs/tags/v1.11.0.tar.gz"
+  sha256 "a211566965a4737d41ca5473d096df996a63ce53e45c22957db816f6d4b57ec4"
   license "MIT"
   head "https://github.com/hazcod/enpass-cli.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1ce36f144f8e8a9d5a1623cb2da4249f8299fa753f05deedf435c2060631205f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "19bcb8483cc1c6e38bb63d810655e9a1afdaf9551821e70eb2300d0539dc4dca"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a20ff3d1d80f7252e9ad0f9f792c72a761a8d0057975dfc866b60e9003c24791"
-    sha256 cellar: :any_skip_relocation, sonoma:        "638c10edcff1b0ec6198d13bd117c474f655ab3a568999069141f3b575a955e1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "bba60eb71ac340fa99101d3bbd73c307876159d2071a8270a44ef7e167a51d47"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9f1d4c5edd81420f6148dbc1a9177bb9b79ad4c1516292a01928dc9d426781bb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d4e2704fcbfa4cc85861b1a5ac098718b53965ab52a88f6cee6416da86c19d7a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "544cfbc95aaa30fd64c03e51b22f026c1038e0111b8de58c2bd613348a895b87"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "b778119d188192b1b22d2b484aa0a23cfe24ac1f36910cffc3433575b1eff9f8"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e5c0be98b3035769c5da7455c479f97fe1fcb881232f3500fec6f8a58fe08ece"
+    sha256 cellar: :any,                 arm64_linux:   "c5a65335a9f9b2766e2590369ef7298e315bfb12e8bc18f78552bd816fd368c7"
+    sha256 cellar: :any,                 x86_64_linux:  "cc76815817915195cdb40938d45d2e86cd3f3ea28316d33326e6c6ccad00cbcd"
   end
 
   depends_on "go" => :build

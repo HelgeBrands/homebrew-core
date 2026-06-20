@@ -1,26 +1,22 @@
 class Ladybug < Formula
   desc "Embedded graph database built for query speed and scalability"
   homepage "https://ladybugdb.com/"
-  url "https://github.com/LadybugDB/ladybug/archive/refs/tags/v0.16.1.tar.gz"
-  sha256 "c22417b46b895df7c25f8314cab27bc1afbf1a43b06463a023c98eac5ffe16c3"
+  url "https://github.com/LadybugDB/ladybug/archive/refs/tags/v0.17.1.tar.gz"
+  sha256 "fcd790936fe83650f6579c741fe79ce295604bbcab905fa389fdc778da83377f"
   license "MIT"
 
   bottle do
     rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "0d4155d639e169913f17d3d1344591948fce00905e8a4398f3d9074a00200da7"
-    sha256 cellar: :any,                 arm64_sequoia: "645ba24811550a2e0ebe71ee97e4255beb275d912cdaee3008ffb1d3b492ff43"
-    sha256 cellar: :any,                 arm64_sonoma:  "ec2e1557fae4914afc541d1bfafee9b5169fba4eb0d8823d4beb4e7e33ff3919"
-    sha256 cellar: :any,                 sonoma:        "86dbdd77ed809cee24b42b309c7ed5ac00ce841cb45beb27883245c2f4309e82"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f878af0aa3ca57fc97e5ade8f58d5ee46218918fbd06c7cade5eff84ef61c372"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3a709d48e720801aa916a482a7c14e70e950a3a97837e6fc8d6f8ba0f77b4f36"
+    sha256 cellar: :any, arm64_tahoe:   "b198fe97227451de96bf723be14f1c8813b3066363ca6be42f9f562faa9bee4f"
+    sha256 cellar: :any, arm64_sequoia: "a6e3492d5ee00867ff5b2abb926b43da76536109538b6541c461d6a7e98b1f75"
+    sha256 cellar: :any, arm64_sonoma:  "663f6250fad9521ed14c67f860e0a047be118fbb94b91eeb7bb4ec58f6cf21c4"
+    sha256 cellar: :any, sonoma:        "69b7769b68c458985dd59e3f6dfe5b60aa9c3ae02e41af79264b686747741eb4"
+    sha256 cellar: :any, arm64_linux:   "7d4b4668820173cf482125121d8cb4f4ebd0d1e1d1886391d3fa995dfd0a07a3"
+    sha256 cellar: :any, x86_64_linux:  "d839b21b9f05e8ec5b85ca6d739cd7d26cad332417b171a88bcd60a20d4aa4c8"
   end
 
   depends_on "cmake" => :build
   uses_from_macos "python" => :build
-
-  on_linux do
-    depends_on "gcc"
-  end
 
   fails_with :gcc do
     version "12"

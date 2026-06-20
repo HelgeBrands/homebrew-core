@@ -1,17 +1,18 @@
 class Skopeo < Formula
   desc "Work with remote images registries"
   homepage "https://github.com/containers/skopeo"
-  url "https://github.com/containers/skopeo/archive/refs/tags/v1.22.2.tar.gz"
-  sha256 "b6e1f208c1048f7a80613e8154774e6a3fdc891aeb45325c8ed905be4dee48d8"
+  url "https://github.com/containers/skopeo/archive/refs/tags/v1.23.0.tar.gz"
+  sha256 "de96bfc2bb523c852af675ffdadd934484812ce190aa8620e1d5fd6c51442e25"
   license "Apache-2.0"
 
   bottle do
-    sha256               arm64_tahoe:   "e36348d1a9b374d7e26ed244e22812b06b975c9e366dc86f062754b6e44333bd"
-    sha256               arm64_sequoia: "4d748abe26a03304db741d3d4706166761648de067f92b6dfd9b9ff9b4318cac"
-    sha256               arm64_sonoma:  "c2c419417107ef6d75bcc79cf55a0320fb3d74a8b13f6cc9c6fc2cc8b1af22d4"
-    sha256 cellar: :any, sonoma:        "7cd6c9189287dafbd5007a79ea8e9bd53809f38f13417b9bf0c29fb6a4e61b03"
-    sha256               arm64_linux:   "5055e6a401bf22ccc27841582a02214cb0c85b6d5c842424fb87728e63636c32"
-    sha256               x86_64_linux:  "a04548ac4277a5c6e144814e5e4b99d56f70b98ab779ad6e107158d6bbc1e287"
+    rebuild 1
+    sha256               arm64_tahoe:   "b9bb3aa152bc76483a65dece4a7b9b4ffc09078bb0fe6c1c470145d901792eeb"
+    sha256               arm64_sequoia: "42bd2618325948979d3d415758bbb9c237c3cc5b13c266604fcb8e3147f800d0"
+    sha256               arm64_sonoma:  "e5d87f4b7cd3a682bfb5e244fd85a525a1e65af6ef0b45bc2b2e562ce34ae6c0"
+    sha256 cellar: :any, sonoma:        "2ba12cb7f52c5935b83bc9fe3aeda780fdbbf718cb962609c8125dbc20341d79"
+    sha256               arm64_linux:   "907ddddc81dcf26d0ca0b47621fd32c57efb0ad5f942346a0858ebd621f5a7ad"
+    sha256               x86_64_linux:  "e992c01b75e47191bd4ed4c4d8cc10266a1812345374b4d987aff199e8b6b1d5"
   end
 
   depends_on "go" => :build
@@ -34,13 +35,14 @@ class Skopeo < Formula
       Utils.safe_popen_read("hack/libsubid_tag.sh").chomp,
     ].uniq
 
-    ldflag_prefix = "go.podman.io/image/v5"
+    ldflag_image_prefix = "go.podman.io/image/v5"
+    ldflag_storage_prefix = "go.podman.io/storage"
     ldflags = %W[
       -X main.gitCommit=
-      -X #{ldflag_prefix}/docker.systemRegistriesDirPath=#{etc}/containers/registries.d
-      -X #{ldflag_prefix}/internal/tmpdir.unixTempDirForBigFiles=/var/tmp
-      -X #{ldflag_prefix}/signature.systemDefaultPolicyPath=#{etc}/containers/policy.json
-      -X #{ldflag_prefix}/pkg/sysregistriesv2.systemRegistriesConfPath=#{etc}/containers/registries.conf
+      -X #{ldflag_image_prefix}/docker.systemRegistriesDirPath=#{etc}/containers/registries.d
+      -X #{ldflag_image_prefix}/internal/tmpdir.unixTempDirForBigFiles=/var/tmp
+      -X #{ldflag_storage_prefix}/pkg/configfile.systemConfigPath=#{etc}/containers
+      -X #{ldflag_image_prefix}/pkg/sysregistriesv2.systemRegistriesConfPath=#{etc}/containers/registries.conf
     ]
 
     system "go", "build", *std_go_args(ldflags:, tags:), "./cmd/skopeo"

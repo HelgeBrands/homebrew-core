@@ -1,17 +1,17 @@
 class ImessageExporter < Formula
   desc "Command-line tool to export and inspect local iMessage database"
   homepage "https://github.com/ReagentX/imessage-exporter"
-  url "https://github.com/ReagentX/imessage-exporter/archive/refs/tags/4.0.0.tar.gz"
-  sha256 "a2c036d38e71e5faf289c5e1d22b488c6168fa954bd2f8f8fef487d34fd6b86c"
+  url "https://github.com/ReagentX/imessage-exporter/archive/refs/tags/4.2.0.tar.gz"
+  sha256 "3b5edd3d3e5387c96c44bcfc5cb21702426d816339091d100323a6564c6962f0"
   license "GPL-3.0-only"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c90aa3eff74a7c7602a910b3c3c25ec343123c803c2c22c51102f8c7acfa38e8"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "53c8e0406c2405bf9cec0b5c47fd98ed4f1e300d9646d3b058553bcfaf69601b"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "074a16191c1ff8fa80c2af90ba5817ab0d70390711dd8bc3bbd71484aae9b98b"
-    sha256 cellar: :any_skip_relocation, sonoma:        "884ae14854a220c76c2ee15f675da76cfe9dfd7b08705dd9afc35148947e0884"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f45b08bd90a619e7172e35b13ebe613449ffebe13136c54cc1c15c90dd738e52"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "73c49adb1425488354eb3617cd71f5114a8f70e7643f2a77ba11a49de305bc43"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d73061b9f2c1e5141469e5db62f61a38ab947cf194c140981805dfc8188acf2b"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8e5b42547e4fed80fb089954fcc09a40ad2120be3e135329d75f90693dc6aba8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "50bfda58d4f7e6f0f6e42a93a639b18a9379dbfdd369c45ac8005d679b2f6169"
+    sha256 cellar: :any_skip_relocation, sonoma:        "38675a4d99a31f22f8aaeb035afafbd078da6325b6272df3d8bed32f75a93e3c"
+    sha256 cellar: :any,                 arm64_linux:   "7399e3b6a6e2337eeef9d45f78719d19dba2df8e6ce913b06e55ef36d5ddf670"
+    sha256 cellar: :any,                 x86_64_linux:  "cb14d97ab80246b437302d1ea2ce9a47c9b42505d020cb367aa51d3f6e29010a"
   end
 
   depends_on "rust" => :build
@@ -26,7 +26,7 @@ class ImessageExporter < Formula
 
   test do
     assert_match version.to_s, shell_output("#{bin}/imessage-exporter --version")
-    output = shell_output("#{bin}/imessage-exporter --diagnostics 2>&1")
+    output = shell_output("#{bin}/imessage-exporter --diagnostics 2>&1", 1)
     assert_match "Invalid configuration", output
   end
 end

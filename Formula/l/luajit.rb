@@ -10,14 +10,14 @@ class Luajit < Formula
   # Get the latest commit with:
   #   `git ls-remote --heads https://github.com/LuaJIT/LuaJIT.git v2.1`
   # This is a rolling release model so take care not to ignore CI failures that may be regressions.
-  url "https://github.com/LuaJIT/LuaJIT/archive/18b087cd2cd4ddc4a79782bf155383a689d5093d.tar.gz"
+  url "https://github.com/LuaJIT/LuaJIT/archive/8e6520a7aecd0517e792b359afbbfd7274791f5f.tar.gz"
   # Use the version scheme `2.1.timestamp` where `timestamp` is the Unix timestamp of the
   # latest commit at the time of updating.
   # `brew livecheck luajit` will generate the correct version for you automatically.
-  version "2.1.1774896198"
-  sha256 "88a592afa9907d6b0c6e1e7ac9b39982622e3ca086f0646d4ea89b0e4e81f093"
+  version "2.1.1781602682"
+  sha256 "9c4c370559352e0622231d5a1f28e95ff56e2dce6308238e6588b0943aac5e63"
   license "MIT"
-  compatibility_version 7
+  compatibility_version 11
   head "https://github.com/LuaJIT/LuaJIT.git", branch: "v2.1"
 
   livecheck do
@@ -31,12 +31,12 @@ class Luajit < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "0cf1bf9dc443912fe1d129c3dafd807f0862c56510a14f371ef4cce1f06cf693"
-    sha256 cellar: :any,                 arm64_sequoia: "ddb4848c243b68cebd8546fb96000fcd57f32760f4de5903ae3bc8734e785a1e"
-    sha256 cellar: :any,                 arm64_sonoma:  "2b9dd489a6f593d18a3ae38311815587217c3a503f5c3601eed1433742298295"
-    sha256 cellar: :any,                 sonoma:        "8cb8f4baf2c5a00aad2044b3de9f0273089e8c32c0522c96c109f3bc6b8bc2ca"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a97af5d4ff135e526da7da8eea141f23fc7600f5824c5545f3097f1cdb427424"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5444e91b64efa53f527302dc914aa5dfd3d08518084b4149f872badc2758c3f3"
+    sha256 cellar: :any, arm64_tahoe:   "af8b383aba997d889f375b5d60c0484c7751669b8c789d7c8d07651a4c9ad01e"
+    sha256 cellar: :any, arm64_sequoia: "a4da0399218cc8feb3d83da8fef73db60635bcd2f53fd6f084d2b626e4b7cb0e"
+    sha256 cellar: :any, arm64_sonoma:  "16d924d5c3f502923c256208001ce4eef812735641fb223b8907cae61480d722"
+    sha256 cellar: :any, sonoma:        "992678c2308674a2caa38853daeb7e11f320f928b9d7ecb0d958a8963ca1306e"
+    sha256 cellar: :any, arm64_linux:   "242b60add4e2b633f331d78d5269dc782342ea621ca7e1ef4e0eadfb0adc0513"
+    sha256 cellar: :any, x86_64_linux:  "05c64c4fa86b761986e3dd3ce3d9abebc1ccf4de5b17a1309431f2b49b286061"
   end
 
   def install
@@ -82,11 +82,11 @@ class Luajit < Formula
   test do
     assert_includes shell_output("#{bin}/luajit -v"), " #{version} "
 
-    system bin/"luajit", "-e", <<~EOS
+    system bin/"luajit", "-e", <<~LUA
       local ffi = require("ffi")
       ffi.cdef("int printf(const char *fmt, ...);")
       ffi.C.printf("Hello %s!\\n", "#{ENV["USER"]}")
-    EOS
+    LUA
 
     # Check that LuaJIT can find its own `jit.*` modules
     touch "empty.lua"

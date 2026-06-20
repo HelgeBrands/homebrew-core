@@ -1,8 +1,8 @@
 class Qsv < Formula
   desc "Ultra-fast CSV data-wrangling toolkit"
   homepage "https://qsv.dathere.com/"
-  url "https://github.com/dathere/qsv/archive/refs/tags/20.1.0.tar.gz"
-  sha256 "9e945ebcf525cef35591e5b8187dee9b9237282a1611c8ba52e650d5703dcfd0"
+  url "https://github.com/dathere/qsv/archive/refs/tags/21.1.0.tar.gz"
+  sha256 "8a1117e62779f3e47696e9091a2293240d8019b80cb8f58676ee6dbc402e1ef8"
   license any_of: ["MIT", "Unlicense"]
   head "https://github.com/dathere/qsv.git", branch: "master"
 
@@ -15,12 +15,12 @@ class Qsv < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "42d9174eeffe00b99c76b9c2d0e90c3aa39ad01cc87da768fd63b6da4ff69157"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "28e3c4f808fa4fe43d55796310cc9ae5bae0ced60270a6c4130e15a7d269b9c3"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bc4d6c26d106e794167b1fa627e20fc18771128bc7a6221027433f9123e0cc63"
-    sha256 cellar: :any_skip_relocation, sonoma:        "f9c312940b9c3156be76d0f10068645aa49443a899bd26e57e99d302bbce4968"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "7cacb3b9af8d1fc3439996002036e9b86fc31e6bf401629ec4e2db044690bb00"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d9995c55149815c5c6d427f3d58d75c38f8bf3f0ed50967ca5963c7201785e60"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "68a9a1d306dd166a0efb98e78c1874b54f87cc0fb3411b183e7e46c6c0c70bf1"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ba647d3957aeca2f7da0cec876066cab55ac4c7537e628453ce827fe0b8049de"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8e8b52f5c5753a52c4907c5ee66afad750a51409724db0ec1713c8441136e320"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9b1bb71a9a1393e18d384699f8697dbded2abff371f2bb15c453f1c66f2c352c"
+    sha256 cellar: :any,                 arm64_linux:   "5655c05d827d3103800aad81085065d4eaef69cb893185b863747452de807b94"
+    sha256 cellar: :any,                 x86_64_linux:  "a3f937de1b8f182957f0806045d17810d115acdd13bcfe5b166dfd50eab171ba"
   end
 
   depends_on "cmake" => :build # for libz-ng-sys
@@ -47,10 +47,10 @@ class Qsv < Formula
 
   test do
     (testpath/"test.csv").write("first header,second header")
-    assert_equal <<~EOS, shell_output("#{bin}/qsv stats test.csv")
+    assert_equal <<~CSV, shell_output("#{bin}/qsv stats test.csv")
       field,type,is_ascii,sum,min,max,range,sort_order,sortiness,min_length,max_length,sum_length,avg_length,stddev_length,variance_length,cv_length,mean,sem,geometric_mean,harmonic_mean,stddev,variance,cv,nullcount,n_negative,n_zero,n_positive,max_precision,sparsity
       first header,NULL,,,,,,,,,,,,,,,,,,,,,,0,,,,,
       second header,NULL,,,,,,,,,,,,,,,,,,,,,,0,,,,,
-    EOS
+    CSV
   end
 end

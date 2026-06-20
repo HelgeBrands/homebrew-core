@@ -7,7 +7,7 @@ class Mysql < Formula
   mirror "https://repo.mysql.com/apt/ubuntu/pool/mysql-innovation/m/mysql-community/mysql-community_9.6.0.orig.tar.gz"
   sha256 "240061d869d5ae188c9a333845928899e9d963ccbd67865a8a2e4b6fcb67178c"
   license "GPL-2.0-only" => { with: "Universal-FOSS-exception-1.0" }
-  revision 2
+  revision 4
 
   livecheck do
     url "https://dev.mysql.com/downloads/mysql/?tpl=files&os=src"
@@ -15,12 +15,12 @@ class Mysql < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "4589e009eb714a89c399173d43879db1437fffce1f8e8783ab3d552596a05c0a"
-    sha256 arm64_sequoia: "ae9faee2eb29541466d91d7ea6c6a0d9f0dad5dc201fcfaea002aa5c4d00b4e1"
-    sha256 arm64_sonoma:  "ef7cced36ec02fdcae4ecb5d9c727a5c343f6a087c2286e65ee6f83a5f88599d"
-    sha256 sonoma:        "c7baa68b46cf6d48a87db98511f0c72ccc1a3d5282d15bdf4b90af6e9f949335"
-    sha256 arm64_linux:   "2e7b7990c15f0ca33fc4b290a1159fb191632bfab41eefecd824b9d790016a54"
-    sha256 x86_64_linux:  "0c4d355a4ca976b25692f2aab087aee54b9b18c18000d470aacfef1bb826b3a9"
+    sha256 arm64_tahoe:   "ac165c7d5e3ef98b0077bba9b1fbf81a17746e18757d6545e645403694a1103d"
+    sha256 arm64_sequoia: "39183b9f410cb134e6c95f006577ddce1271beacff4ad93a8a8d96b59e24deac"
+    sha256 arm64_sonoma:  "b4b17068c0a5c035760ac2db0fe06322fe0bf8827ea99c02a776f818a63f2efb"
+    sha256 sonoma:        "ab8f6ced41aacda5cd0524d1318bc1f2effc5f0fe30c119d6c9b2166c3e20946"
+    sha256 arm64_linux:   "55042a30d4f98a42a449f3ed1f67a973d4c3cdcf236f071922ada5c40fcad3e6"
+    sha256 x86_64_linux:  "9060ba62f4965925d3503839e6ee95b0bdc85d46ab4043e87c510715926f9925"
   end
 
   depends_on "bison" => :build
@@ -49,7 +49,6 @@ class Mysql < Formula
   end
 
   on_linux do
-    depends_on "llvm" => :build if DevelopmentTools.gcc_version < 13
     depends_on "patchelf" => :build
     depends_on "libtirpc"
   end
@@ -78,10 +77,6 @@ class Mysql < Formula
     (buildpath/"extra").each_child { |dir| rm_r(dir) unless keep.include?(dir.basename.to_s) }
 
     if OS.linux?
-      # TODO: Remove after moving CI to Ubuntu 24.04. Cannot use newer GCC as it
-      # will increase minimum GLIBCXX in bottle resulting in a runtime dependency.
-      ENV.llvm_clang if deps.map(&:name).any?("llvm")
-
       # Disable ABI checking
       inreplace "cmake/abi_check.cmake", "RUN_ABI_CHECK 1", "RUN_ABI_CHECK 0"
     elsif MacOS.version <= :ventura

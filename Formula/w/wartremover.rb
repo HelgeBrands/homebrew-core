@@ -1,8 +1,8 @@
 class Wartremover < Formula
   desc "Flexible Scala code linting tool"
-  homepage "https://github.com/wartremover/wartremover"
-  url "https://github.com/wartremover/wartremover/archive/refs/tags/v3.5.7.tar.gz"
-  sha256 "ceda13f07ab4cad37e31dd73c199e803a10ab6e8f9081c3f77a3bf34e1f8f149"
+  homepage "https://www.wartremover.org/"
+  url "https://github.com/wartremover/wartremover/archive/refs/tags/v3.6.0.tar.gz"
+  sha256 "dbbc912106b47a8400b6513411c1a28288d021438f5a5e3b3c59165ee297ab6c"
   license "Apache-2.0"
   head "https://github.com/wartremover/wartremover.git", branch: "master"
 
@@ -12,32 +12,32 @@ class Wartremover < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f903986fd06ecfd7f0b564381baf677233c9de93e576eab0083870578e1abd34"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f903986fd06ecfd7f0b564381baf677233c9de93e576eab0083870578e1abd34"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f903986fd06ecfd7f0b564381baf677233c9de93e576eab0083870578e1abd34"
-    sha256 cellar: :any_skip_relocation, sonoma:        "f903986fd06ecfd7f0b564381baf677233c9de93e576eab0083870578e1abd34"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "32fbe3f1b44707a358770c9293319a643be3002d777413956512ed1ee5ef98ab"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "32fbe3f1b44707a358770c9293319a643be3002d777413956512ed1ee5ef98ab"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "2be56239faa201195f8874ae915f7ee17a70674c2629b46c80ccf47752cb9c1e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2be56239faa201195f8874ae915f7ee17a70674c2629b46c80ccf47752cb9c1e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2be56239faa201195f8874ae915f7ee17a70674c2629b46c80ccf47752cb9c1e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "2be56239faa201195f8874ae915f7ee17a70674c2629b46c80ccf47752cb9c1e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "f247de211ef41f922fc501ad4d986a924ac5bfbc0659c5e90bddea0557537553"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f247de211ef41f922fc501ad4d986a924ac5bfbc0659c5e90bddea0557537553"
   end
 
   depends_on "sbt" => :build
   depends_on "openjdk"
 
   def install
-    system "sbt", "assembly"
+    system "sbt", "--server", "assembly"
     libexec.install "wartremover-assembly.jar"
     bin.write_jar_script libexec/"wartremover-assembly.jar", "wartremover"
   end
 
   test do
-    (testpath/"foo").write <<~EOS
+    (testpath/"foo").write <<~SCALA
       object Foo {
         def foo() {
           var msg = "Hello World"
           println(msg)
         }
       }
-    EOS
+    SCALA
     cmd = "#{bin}/wartremover -traverser org.wartremover.warts.Unsafe foo 2>&1"
     assert_match "var is disabled", shell_output(cmd, 1)
   end

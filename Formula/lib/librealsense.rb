@@ -1,9 +1,10 @@
 class Librealsense < Formula
   desc "Intel RealSense D400 series and SR300 capture"
   homepage "https://github.com/IntelRealSense/librealsense"
-  url "https://github.com/IntelRealSense/librealsense/archive/refs/tags/v2.57.7.tar.gz"
-  sha256 "02eae8aa49d52d39ea5483836116fee2596e1146254274db6b76d7a62092d9e8"
+  url "https://github.com/IntelRealSense/librealsense/archive/refs/tags/v2.58.2.tar.gz"
+  sha256 "1e164e424b4eeb207ec05caecc6fadc1f3ecdce0d6d36f0f2e4fe6a2a9b423ab"
   license "Apache-2.0"
+  compatibility_version 1
   head "https://github.com/IntelRealSense/librealsense.git", branch: "master"
 
   livecheck do
@@ -12,12 +13,12 @@ class Librealsense < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ba740c06638228e96a74553a83e9ab3b861ed5dce1c869befeabc0c05b956f18"
-    sha256 cellar: :any,                 arm64_sequoia: "8f9b88eb42c685a7d1cbd615263c8bd22fd7aa2869090bf6c1ed407b4b6b9fc1"
-    sha256 cellar: :any,                 arm64_sonoma:  "219961d51d65f252e6f436ae6b6ee6005083d1ea1686b3774416fb6e968c3ddc"
-    sha256 cellar: :any,                 sonoma:        "7fb045dc094cae4e538727955c725c950257b39ab721f856914b791d306c17dd"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cc6cb411e5b83e2546f995da168cc081c5ad7dedaa1431a928520853b1019e4e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b894ff145cb546fa7904714bf115039ad373397e081d6e23daa07480c13837c1"
+    sha256 cellar: :any, arm64_tahoe:   "709cdc56e5de484c73854bd44f6af61abf2efc43a9992dd595bd371441c9bbad"
+    sha256 cellar: :any, arm64_sequoia: "481bb874039210fcc14c649423596677ae51d2b18a3ee46b841b7236cda625ba"
+    sha256 cellar: :any, arm64_sonoma:  "d8b8fd7790f0bbdd7c64fe59275d4f6c31511235769a87079ea3cf68db615a7d"
+    sha256 cellar: :any, sonoma:        "b5810d547153cbd46eae5750207ab3cb70425928edb2e90eaa6021a67c7785e7"
+    sha256 cellar: :any, arm64_linux:   "1dd23b89c3818c7d11f744a38fdddf44b61fa439f4a0087e1c13d1ba67fabec8"
+    sha256 cellar: :any, x86_64_linux:  "1424ca38a899811163f2248523d33c3c6c6464a747f89772d151e8d589d91182"
   end
 
   depends_on "cmake" => :build

@@ -1,18 +1,18 @@
 class Edgevpn < Formula
   desc "Immutable, decentralized, statically built p2p VPN"
   homepage "https://mudler.github.io/edgevpn"
-  url "https://github.com/mudler/edgevpn/archive/refs/tags/v0.32.2.tar.gz"
-  sha256 "9e0dec7937143d0cf1f728e3c15ef93a1d6ef1df4f19e87f5eee88d29baf0a13"
+  url "https://github.com/mudler/edgevpn/archive/refs/tags/v0.35.2.tar.gz"
+  sha256 "2e2e43d7129b0e3630b0dcb21c25c7fdccc2a3e2aca3f9f46e21c8037476ddd3"
   license "Apache-2.0"
   head "https://github.com/mudler/edgevpn.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bf99407a6b02090bd8ad5f317d0139f39837eff9cc72f5e7cc67a8addad2e82a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bf99407a6b02090bd8ad5f317d0139f39837eff9cc72f5e7cc67a8addad2e82a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bf99407a6b02090bd8ad5f317d0139f39837eff9cc72f5e7cc67a8addad2e82a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "087a826a5f114bfc080e37a27e53d14f276f3a81b0f33970b58c14ff6f4ffbbc"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "bb19556b9a7413243dca6cbfd9625e675f0646593d855534d7c1838a6a69403e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4a7dc1f3171fb98127c0c01a50c87934da2250566ab8d3db36d1959de0d9d9ba"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "631037e02c05af4c059381430031b778718a9ed26bd61285da5cb8e232825754"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "631037e02c05af4c059381430031b778718a9ed26bd61285da5cb8e232825754"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "631037e02c05af4c059381430031b778718a9ed26bd61285da5cb8e232825754"
+    sha256 cellar: :any_skip_relocation, sonoma:        "81ee6548be40edff124dd587eca0f4ebc1cfa6364f5c9402ea9cc11a695fa552"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "44ad9803b894902fd0f5807e7342191b5a0b46a23e70d1845d845fd46279f8a8"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3a91fcc4faccc05aa7ae5d0f601138d84317e49c1230ffb5a7cc7b7a0d40e107"
   end
 
   depends_on "go" => :build

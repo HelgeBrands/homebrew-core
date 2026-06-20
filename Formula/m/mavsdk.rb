@@ -5,7 +5,7 @@ class Mavsdk < Formula
       tag:      "v3.17.1",
       revision: "23fd285341dd066d5459a9c822e54c420e1299cd"
   license "BSD-3-Clause"
-  revision 1
+  revision 4
 
   livecheck do
     url :stable
@@ -13,12 +13,12 @@ class Mavsdk < Formula
   end
 
   bottle do
-    sha256               arm64_tahoe:   "146d8c6d09950dc3576c61545f289b43c03050e8f6b676cc5536f69babccdac6"
-    sha256               arm64_sequoia: "801de5ee34fa019e3f24ccb342456c96fcec9406e2e179f97e2238fcd3943fc6"
-    sha256               arm64_sonoma:  "4ce623a557e87797fcc39e9c07c021f3f13d7576da239f860cdf0ddc3222b97e"
-    sha256 cellar: :any, sonoma:        "f3913f9333774ef32cfe29911588bab4b2321b9009190e2ad300f290198df260"
-    sha256               arm64_linux:   "7eef97376aee47c012605b6336c08a1f42974fb4983351a21cd8399ae76b4330"
-    sha256               x86_64_linux:  "353d9890505a38eec0e78f63f6bf38de5a4a6d31526f5ab9de8b049ee313ca8a"
+    sha256               arm64_tahoe:   "e01becfe802b07e05e9b4196cb594d65e46368039f0e975f047da03750be6b97"
+    sha256               arm64_sequoia: "e1f805093633dff239b460723232834ad88204a161e80f9aebe94e5510271d07"
+    sha256               arm64_sonoma:  "0821c4a750ada0a9b999040079fbba56861e058a7934bb411b966f3a328a95a3"
+    sha256 cellar: :any, sonoma:        "4f2ba62025a412d1e0c37aecbd221ef302e7ccf6c189f218f37c5765e2500f55"
+    sha256               arm64_linux:   "d5a42ddc10aaf3030f142003e8ab08128a9ad6152c7f117e5321c80245b4a08a"
+    sha256               x86_64_linux:  "8e79ca5cd5257ecca5865d97d757a0224236f579d15a73b0c6e4c0874283e67f"
   end
 
   depends_on "cmake" => :build
@@ -35,20 +35,8 @@ class Mavsdk < Formula
   depends_on "tinyxml2"
   depends_on "xz"
 
-  on_macos do
-    depends_on "llvm" if DevelopmentTools.clang_build_version <= 1100
-  end
-
   on_linux do
     depends_on "zlib-ng-compat"
-  end
-
-  fails_with :clang do
-    build 1100
-    cause <<~EOS
-      Undefined symbols for architecture x86_64:
-        "std::__1::__fs::filesystem::__status(std::__1::__fs::filesystem::path const&, std::__1::error_code*)"
-    EOS
   end
 
   # Git is required to fetch submodules

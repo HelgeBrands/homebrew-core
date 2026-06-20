@@ -1,19 +1,19 @@
 class Fb303 < Formula
   desc "Thrift functions for querying information from a service"
   homepage "https://github.com/facebook/fb303"
-  url "https://github.com/facebook/fb303/archive/refs/tags/v2026.05.18.00.tar.gz"
-  sha256 "d0da2ac576f66338c8325fce1d0d3fcff11c4f87b2249d7dc27cc26b0e3615a5"
+  url "https://github.com/facebook/fb303/archive/refs/tags/v2026.06.15.00.tar.gz"
+  sha256 "b323de219913137e13ad10a752ff1c2e51882eb7229e17eb9d9512b9d362693d"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/facebook/fb303.git", branch: "main"
 
   bottle do
-    sha256                               arm64_tahoe:   "495f4e9c8e83d7194cebba9fc5c496ce7149190b4112c49c2174c51788e94e5c"
-    sha256                               arm64_sequoia: "3069f3d08cb4c7a832455589ac09b6d9e92867ee26ea94c7b1bf91f7f077bdd2"
-    sha256                               arm64_sonoma:  "fa3a65178af3b9c96886c55f2d441a6f719b6675e3f5ad3cc658a513b937e07f"
-    sha256 cellar: :any,                 sonoma:        "6b25cd1766a5dec7decf0d7894223c4bff76d851aa30a81a7e5ce0e0e3cfc548"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "63b5f0b1b65cf48a94039e65d0cbde7e689243a5b25bc988e8d27ddce59ae5df"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "60243d307d7422146aef9ac5c8b082e044307504dd5943af66078eb15733b3c9"
+    sha256               arm64_tahoe:   "1a141b966023e760e44a170f9885f6614d7f0ae7c811f396be58304c51a98804"
+    sha256               arm64_sequoia: "7c07fac13d20919194e93e84573175ecafb44277f83c272d4a7b12e88f42b209"
+    sha256               arm64_sonoma:  "1799ac25800e9366fedbd43116f1193905786bdd36d1042435b37a4918c53133"
+    sha256 cellar: :any, sonoma:        "1fa7764a752d3146af62e54a62ce3f4609d93d5ecb320c6e362cbf178876710f"
+    sha256 cellar: :any, arm64_linux:   "4f0aee0b37e8184de2f2d1723a67170373087812d11027e5142862ebaedb02e2"
+    sha256 cellar: :any, x86_64_linux:  "07329c71b8cc8761508f529006148f9c4d1ec28783b1bea089996717a9eef53b"
   end
 
   depends_on "cmake" => [:build, :test]

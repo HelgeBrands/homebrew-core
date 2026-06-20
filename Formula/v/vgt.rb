@@ -1,6 +1,6 @@
 class Vgt < Formula
   desc "Visualising Go Tests"
-  homepage "https://github.com/roblaszczak/vgt"
+  homepage "https://threedots.tech/post/go-test-parallelism/"
   url "https://github.com/roblaszczak/vgt/archive/refs/tags/v1.0.1.tar.gz"
   sha256 "c442980c2205d45d527205fc9f832f4d27f4d3e8c815f471f428266f6fcf33c6"
   license "MIT"
@@ -22,7 +22,7 @@ class Vgt < Formula
   end
 
   test do
-    (testpath/"test.go").write <<~EOS
+    (testpath/"test.go").write <<~GO
       package test
 
       import "testing"
@@ -30,7 +30,7 @@ class Vgt < Formula
       func TestExample(t *testing.T) {
         t.Log("Hello from sample test")
       }
-    EOS
+    GO
 
     output = pipe_output("#{bin}/vgt --print-html", "go test -json #{testpath}/sample_test.go", 0)
     assert_match "Test Results (0s 0 passed, 0 failed)", output

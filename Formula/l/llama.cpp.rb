@@ -1,10 +1,10 @@
 class LlamaCpp < Formula
   desc "LLM inference in C/C++"
-  homepage "https://github.com/ggml-org/llama.cpp"
+  homepage "https://llama.app"
   # CMake uses Git to generate version information.
   url "https://github.com/ggml-org/llama.cpp.git",
-      tag:      "b9240",
-      revision: "57cb35c8867fce383140d9b34a811920daed8c46"
+      tag:      "b9730",
+      revision: "e475fa2b5f9fb50c3d6fc3e7c6fdf1e004465b62"
   license "MIT"
   compatibility_version 1
   head "https://github.com/ggml-org/llama.cpp.git", branch: "master"
@@ -20,12 +20,12 @@ class LlamaCpp < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "b452f65adbcba12a754b3412c5ba851509e4867c33e021fd8167778b989846c9"
-    sha256 cellar: :any,                 arm64_sequoia: "228c6fe2c433cd833a0365df834966aca937746b711bf49bdf4429754cdcfe75"
-    sha256 cellar: :any,                 arm64_sonoma:  "043b046890c16717ec0f4f6ccd4cf676b2f98f53ddf1712ea973f8d75f0e310b"
-    sha256 cellar: :any,                 sonoma:        "0065fdb716c749217d7e038a53bdca01aa7fc717076d79190e956af31d6b34e2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d5f8874fcf0625a3d77017612a310158625c89e1d6ebb657540d3ff943d2e8fb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9b245577d7b682ce33e1ff56e213389ef6e614600c247897c9f75e9a643efe91"
+    sha256 cellar: :any, arm64_tahoe:   "611cbff07833b6cca58c141739d167dd85ee38f7018c6ada1dfbf93b22fa1fef"
+    sha256 cellar: :any, arm64_sequoia: "4e678fd6f3ab4a1b561496520bc9863e6cebc1f0fd9c36fc7831b166610ba92e"
+    sha256 cellar: :any, arm64_sonoma:  "3746afe3a5d20335b00ea0a18b78ae74ca0dd81b3861f4cc343cfd495ff93b8d"
+    sha256 cellar: :any, sonoma:        "e3851466adf03451e70604db6d46c2a70af9f4b92f094dc732b1c0a7cb23b414"
+    sha256 cellar: :any, arm64_linux:   "31fff909e9f0cbab3684c8df83dadf3dfb6a2236fd42ca00e45cefdb5c30ecd9"
+    sha256 cellar: :any, x86_64_linux:  "9ae99e415496aafa15522914acf7cd61db817da26a48a4b034f1ff7a0017c048"
   end
 
   depends_on "cmake" => [:build, :test]
@@ -61,6 +61,8 @@ class LlamaCpp < Formula
     system "cmake", "-S", ".", "-B", "build", *std_cmake_args
     system "cmake", "--build", "build"
     system "./build/test-sampling"
+
+    assert_match "Available commands", shell_output("#{bin}/llama 2>&1")
 
     # The test below is flaky on slower hardware.
     return if OS.mac? && Hardware::CPU.intel? && MacOS.version <= :monterey

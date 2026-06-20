@@ -1,8 +1,8 @@
 class Dolt < Formula
   desc "Git for Data"
-  homepage "https://github.com/dolthub/dolt"
-  url "https://github.com/dolthub/dolt/archive/refs/tags/v2.0.4.tar.gz"
-  sha256 "26b896d95bcc075067913f13f42a46b6deff7ce1548a2b78bb23ced324cd50af"
+  homepage "https://www.dolthub.com"
+  url "https://github.com/dolthub/dolt/archive/refs/tags/v2.1.8.tar.gz"
+  sha256 "7e0b1668427c53ce568d32ae274c4a38a027c2ddd6b49332a3fef69b8d83b75d"
   license "Apache-2.0"
   version_scheme 1
   head "https://github.com/dolthub/dolt.git", branch: "main"
@@ -13,12 +13,12 @@ class Dolt < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "65eeef4c7e3719f89fef432eb53b4532362094d1d105724e1dedbacecfb07f50"
-    sha256 cellar: :any,                 arm64_sequoia: "a09651efd3aa63f0cdda83d8132729142883ffb0703fb500484066f017970e59"
-    sha256 cellar: :any,                 arm64_sonoma:  "ee9cfae9173a47e3e64729a55ece5b226574a9e602ca6c149a1eef24bdc73e48"
-    sha256 cellar: :any,                 sonoma:        "3da55ce466a6e6d5c25b46f0bc4910ee9b92abac0c3fb4724337e260d735b17f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "51d0a80fb59bd6588e35449cb3d5bd9689b8a7fef72b6bd441b487a73773be3d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "45151a8ee3efb5af312eadc235d9bc409b60ac81a660f590b9aa5fb7160acc3e"
+    sha256 cellar: :any, arm64_tahoe:   "bc77568b1875a0eb4bafe93c913e7cc42a20175347ac1a423fdb143c35d1f085"
+    sha256 cellar: :any, arm64_sequoia: "4f399753a8341f46ebb58ebc1d09bd47fcdfd33028d24a4347eb1a3df1108e6c"
+    sha256 cellar: :any, arm64_sonoma:  "94527733b1d23c2e81e84639b48215b53d5a594f6ea57f5a61caec94f3794edd"
+    sha256 cellar: :any, sonoma:        "feab76c81c26725006a8dbebaacf5e7acae4782776f90f14172529e904b7c15a"
+    sha256 cellar: :any, arm64_linux:   "6a8761876a829c6afd2b34a48c1837b58c9cabf3d1b65fb8ac394966f79b6349"
+    sha256 cellar: :any, x86_64_linux:  "94d0fc3e8dfe8887d3ec51996e08ad90cfa97bb3413e182beca72c812a11acd2"
   end
 
   depends_on "go" => :build
@@ -29,8 +29,6 @@ class Dolt < Formula
 
     system "go", "build", "-C", "go", *std_go_args(ldflags: "-s -w"), "./cmd/dolt"
 
-    (var/"log").mkpath
-    (var/"dolt").mkpath
     (etc/"dolt").mkpath
     touch etc/"dolt/config.yaml"
   end

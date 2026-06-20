@@ -1,20 +1,21 @@
 class Sugarjar < Formula
   desc "Helper utility for a better Git/GitHub experience"
   homepage "https://github.com/jaymzh/sugarjar/"
-  url "https://github.com/jaymzh/sugarjar/archive/refs/tags/v2.0.2.tar.gz"
-  sha256 "b6db88d6539e662749a7cb78804bcdf89feac188310b87ab55d791aa18475ee3"
+  url "https://github.com/jaymzh/sugarjar/archive/refs/tags/v3.0.1.tar.gz"
+  sha256 "67c3a9475e6a37df5447a8346c51f5d62b9993b751280611dca8f05cd36403ad"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1ea59ae258cb0a280477db2508df2f70645df8860d1713d34f1c3c7304e60d70"
-    sha256 cellar: :any,                 arm64_sequoia: "701a642c86fa408018f6c4431c6b108667b177d46ea29db2bc31faf7568f02d8"
-    sha256 cellar: :any,                 arm64_sonoma:  "2b66f25d655ae20cca9104a9b6ae6f3c19d7fe8bc82b3a86136e6c35e5693086"
-    sha256 cellar: :any,                 sonoma:        "faa748b8acbc999bae3834785abfa3ee835bedd5c5ed1e11cd1a8d61b794e55b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a518760f0fae7fe19353cfa1ebcf304eb18dd15f60f362d28ebaef1cc2196256"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5e3a13b8ac77471cf1ff034b5edb50ba9d77aba8856b45a82c57645647efdf78"
+    sha256 cellar: :any, arm64_tahoe:   "f8bffb7b3a57f0d7d21ea75d3c4b394fe30311292df9d84cc684fbd250393eb0"
+    sha256 cellar: :any, arm64_sequoia: "43f8a2bcaa0d3663104070f9ce92874bc44b69e384a6dbbde13b1c0f0b815e5b"
+    sha256 cellar: :any, arm64_sonoma:  "de1a25e1931a3eea78cd0de537e67e3a66180828cce6a9fff97abea1f39f6934"
+    sha256 cellar: :any, sonoma:        "8250db93c1bfe795aad302b8e35be60ea33a31868a258d73217622425d376312"
+    sha256 cellar: :any, arm64_linux:   "0bd49a2bcd1c49358460f8707f0ae388bba3305bc6fdcc6fa5f9657600b8499c"
+    sha256 cellar: :any, x86_64_linux:  "01e78fffb1af9e45e2d75fb2de9d6cb06b6676a41b72398915c707358570b2d2"
   end
 
   depends_on "gh"
+  depends_on "glab"
   depends_on "ruby"
 
   uses_from_macos "libffi"
@@ -27,14 +28,14 @@ class Sugarjar < Formula
 
     system "bundle", "install"
     system "gem", "build", "#{name}.gemspec"
-    system "gem", "install", "#{name}-#{version}.gem"
+    system "gem", "install", "--ignore-dependencies", "#{name}-#{version}.gem"
 
     bin.install libexec/"bin/sj"
     bin.env_script_all_files(libexec/"bin", GEM_HOME: ENV["GEM_HOME"])
     bash_completion.install "extras/sugarjar_completion.bash" => "sj"
 
     # Remove mkmf.log files to avoid shims references
-    rm Dir["#{libexec}/extensions/*/*/*/mkmf.log"]
+    rm libexec.glob("extensions/*/*/*/mkmf.log")
   end
 
   test do

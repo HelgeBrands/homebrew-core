@@ -26,7 +26,7 @@ class Sdlpop < Formula
   end
 
   depends_on "pkgconf" => :build
-  depends_on "sdl2"
+  depends_on "sdl2-compat"
   depends_on "sdl2_image"
 
   def install
@@ -39,10 +39,10 @@ class Sdlpop < Formula
     pkgvar = var/"sdlpop"
     pkgvar.install "SDLPoP.ini" unless (pkgvar/"SDLPoP.ini").exist?
 
-    (bin/"prince").write <<~EOS
+    (bin/"prince").write <<~BASH
       #!/bin/bash
       cd "#{pkgvar}" && exec "#{libexec}/prince" $@
-    EOS
+    BASH
   end
 
   def caveats

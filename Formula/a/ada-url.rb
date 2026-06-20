@@ -1,6 +1,6 @@
 class AdaUrl < Formula
   desc "WHATWG-compliant and fast URL parser written in modern C++"
-  homepage "https://github.com/ada-url/ada"
+  homepage "https://ada-url.com"
   url "https://github.com/ada-url/ada/archive/refs/tags/v3.4.4.tar.gz"
   sha256 "77bc5bbc383ed098cc60266ad6ee912de2431bb62d89248c0e17c4e712dcdaf9"
   license any_of: ["Apache-2.0", "MIT"]
@@ -35,6 +35,8 @@ class AdaUrl < Formula
     version "11"
     cause "Requires C++20"
   end
+
+  deny_network_access!
 
   def install
     # ld: unknown options: --gc-sections

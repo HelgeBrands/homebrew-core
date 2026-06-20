@@ -6,15 +6,15 @@ class LueReader < Formula
   url "https://files.pythonhosted.org/packages/a0/02/492383eb53224831f2f5ccbbc3f7aca9ba051b89e7df03233d3c41856ec3/lue_reader-0.4.0.tar.gz"
   sha256 "eb44619754938f8a1c2c2bde0f5deed9909e0f8b089f61514c7f751e1edd6ae9"
   license "GPL-3.0-only"
-  revision 3
+  revision 5
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0b2814d918b5560ee8a3d74aeffdabeb41617d37ee00bf1e8b79aa83775e9d82"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a883c2b626124e6c52a0edbdfeffff76a5a8511b6c27c5386bd897c5d5c09318"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "557998ca5e7f0ecb4cfd986d2554aedb0db00c7bd6b50574ef8e0ed7939c7fc8"
-    sha256 cellar: :any_skip_relocation, sonoma:        "41971889171b1201abe69b5a97eb09675ce89b32b6eece3c4afe56b0a07b9301"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0634222b80338a02f2553d4116c6b9a8464decbcf1b17025b9203ebf13d5f0ea"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2a8962c34552f10824a497050d7bd20e8dba2bdce08b03cd242eecc2aab28274"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "1f91780afd5c22096e63fbb4257fbe6a5e206db89b11ff6b29315c31ea8fc7da"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "63ad736f8a9def119fbacc53ffc90c130fc596681ce652c60b20a84f3bb8445b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "99f3f54179195d5e338dd54998a79e3da19d400e5c14ace764a074d1d0a516bb"
+    sha256 cellar: :any_skip_relocation, sonoma:        "effb6aba43c67b4c7840a43ce36c86fe940ce809ffb2293296dd60d0bd3a7052"
+    sha256 cellar: :any,                 arm64_linux:   "da294ca221743e0144dacc4ef909efbc564d09df870bb302d3f978aa87084ecd"
+    sha256 cellar: :any,                 x86_64_linux:  "d4102371f8e64fa8edd85a347615acce01a6a30415f6e15c93f499e084fe4197"
   end
 
   depends_on "certifi" => :no_linkage
@@ -28,13 +28,13 @@ class LueReader < Formula
   pypi_packages exclude_packages: %w[certifi pymupdf]
 
   resource "aiohappyeyeballs" do
-    url "https://files.pythonhosted.org/packages/26/30/f84a107a9c4331c14b2b586036f40965c128aa4fee4dda5d3d51cb14ad54/aiohappyeyeballs-2.6.1.tar.gz"
-    sha256 "c3f9d0113123803ccadfdf3f0faa505bc78e6a72d1cc4806cbd719826e943558"
+    url "https://files.pythonhosted.org/packages/33/c6/61a2d7b7572279226bb2e7f61d7a19ca7c90da0329c93fa0d560cbf288d8/aiohappyeyeballs-2.6.2.tar.gz"
+    sha256 "e202810ee718bd01fc6ef49e8ea53d023d5cb6b581076d7925aa499fa55dbe64"
   end
 
   resource "aiohttp" do
-    url "https://files.pythonhosted.org/packages/77/9a/152096d4808df8e4268befa55fba462f440f14beab85e8ad9bf990516918/aiohttp-3.13.5.tar.gz"
-    sha256 "9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209dbb7d1"
+    url "https://files.pythonhosted.org/packages/82/78/8ea7308cac6934de8c74a14f3d5f65d1c89287426688be79538d0e5c013d/aiohttp-3.14.1.tar.gz"
+    sha256 "307f2cff90a764d329e77040603fa032db89c5c24fdad50c4c15334cba744035"
   end
 
   resource "aiosignal" do
@@ -58,13 +58,13 @@ class LueReader < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/6f/6d/0703ccc57f3a7233505399edb88de3cbd678da106337b9fcde432b65ed60/idna-3.11.tar.gz"
-    sha256 "795dafcc9c04ed0c1fb032c2aa73654d8e8c5023a7df64a53f39190ada629902"
+    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
+    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
   end
 
   resource "lxml" do
-    url "https://files.pythonhosted.org/packages/28/30/9abc9e34c657c33834eaf6cd02124c61bdf5944d802aa48e69be8da3585d/lxml-6.1.0.tar.gz"
-    sha256 "bfd57d8008c4965709a919c3e9a98f76c2c7cb319086b3d26858250620023b13"
+    url "https://files.pythonhosted.org/packages/05/3b/aab6728cae887456f409b4d75e8a01856e4f04bd510de38052a47768b680/lxml-6.1.1.tar.gz"
+    sha256 "ba96ae44888e0185281e937633a743ea90d5a196c6000f82565ebb0580012d40"
   end
 
   resource "markdown" do
@@ -73,8 +73,8 @@ class LueReader < Formula
   end
 
   resource "markdown-it-py" do
-    url "https://files.pythonhosted.org/packages/5b/f5/4ec618ed16cc4f8fb3b701563655a69816155e79e24a17b651541804721d/markdown_it_py-4.0.0.tar.gz"
-    sha256 "cb0a2b4aa34f932c007117b194e945bd74e0ec24133ceb5bac59009cda1cb9f3"
+    url "https://files.pythonhosted.org/packages/06/ff/7841249c247aa650a76b9ee4bbaeae59370dc8bfd2f6c01f3630c35eb134/markdown_it_py-4.2.0.tar.gz"
+    sha256 "04a21681d6fbb623de53f6f364d352309d4094dd4194040a10fd51833e418d49"
   end
 
   resource "mdurl" do
@@ -88,13 +88,13 @@ class LueReader < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/9f/4a/0883b8e3802965322523f0b200ecf33d31f10991d0401162f4b23c698b42/platformdirs-4.9.6.tar.gz"
-    sha256 "3bfa75b0ad0db84096ae777218481852c0ebc6c727b3168c1b9e0118e458cf0a"
+    url "https://files.pythonhosted.org/packages/d7/47/e4501f49c178ae1d9f4a75073fda4204f52647993f075a9db4d14930e0c5/platformdirs-4.10.0.tar.gz"
+    sha256 "31e761a6a0ca04faf7353ea759bdba55652be214725111e5aac52dfa29d4bef7"
   end
 
   resource "propcache" do
-    url "https://files.pythonhosted.org/packages/9e/da/e9fc233cf63743258bff22b3dfa7ea5baef7b5bc324af47a0ad89b8ffc6f/propcache-0.4.1.tar.gz"
-    sha256 "f48107a8c637e80362555f37ecf49abe20370e557cc4ab374f04ec4423c97c3d"
+    url "https://files.pythonhosted.org/packages/ec/44/c87281c333769159c50594f22610f77398a47ccbfbbf23074e744e86f87c/propcache-0.5.2.tar.gz"
+    sha256 "01c4fc7480cd0598bb4b57022df55b9ca296da7fc5a8760bd8451a7e63a7d427"
   end
 
   resource "pygments" do
@@ -113,8 +113,8 @@ class LueReader < Formula
   end
 
   resource "striprtf" do
-    url "https://files.pythonhosted.org/packages/f3/86/7154b7c625a3ff704581dab70c05389e1de90233b7a751f79f712c2ca0e9/striprtf-0.0.29.tar.gz"
-    sha256 "5a822d075e17417934ed3add6fc79b5fc8fb544fe4370b2f894cdd28f0ddd78e"
+    url "https://files.pythonhosted.org/packages/86/f9/b3ecbd2e0abb9c29edd2913482f0c5df47a098221444ccd50cc5cd3f9b91/striprtf-0.0.32.tar.gz"
+    sha256 "7f375a375d99a2700842173168c90c9b545cb244241ffc5d868ed9f6baf9155f"
   end
 
   resource "tabulate" do
@@ -128,8 +128,8 @@ class LueReader < Formula
   end
 
   resource "yarl" do
-    url "https://files.pythonhosted.org/packages/23/6e/beb1beec874a72f23815c1434518bfc4ed2175065173fb138c3705f658d4/yarl-1.23.0.tar.gz"
-    sha256 "53b1ea6ca88ebd4420379c330aea57e258408dd0df9af0992e5de2078dc9f5d5"
+    url "https://files.pythonhosted.org/packages/79/12/1e8f37460ea0f7eb59c221fdaf0ed75e7ac43e97f8093b9c6f411df50a78/yarl-1.24.2.tar.gz"
+    sha256 "9ac374123c6fd7abf64d1fec93962b0bd4ee2c19751755a762a72dd96c0378f8"
   end
 
   def install

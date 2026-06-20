@@ -1,8 +1,8 @@
 class Nanoflann < Formula
   desc "Header-only library for Nearest Neighbor search with KD-trees"
   homepage "https://github.com/jlblancoc/nanoflann"
-  url "https://github.com/jlblancoc/nanoflann/archive/refs/tags/v1.9.0.tar.gz"
-  sha256 "14dc863ec47d52ec3272b4fd409fd198a52e6cab58ece70b1da9c3dc2e478942"
+  url "https://github.com/jlblancoc/nanoflann/archive/refs/tags/1.10.1.tar.gz"
+  sha256 "9ce16ab66c9d61a529c704a913dc41947a47e29928482105cd39f3436cdb92a1"
   license "BSD-3-Clause"
   head "https://github.com/jlblancoc/nanoflann.git", branch: "master"
 
@@ -12,22 +12,13 @@ class Nanoflann < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "056957181cd417f850903953ae174fd716f26e1e349ff965cfb89956a146ddc7"
+    sha256 cellar: :any_skip_relocation, all: "c521c37b345e2fb9cd47027b02454c915cf7f8dae9e122f2ab57edbaf56893f3"
   end
 
   depends_on "cmake" => :build
 
-  on_macos do
-    depends_on "gcc" => [:build, :test] if DevelopmentTools.clang_build_version <= 1200
-  end
-
-  fails_with :clang do
-    build 1200
-    cause "https://bugs.llvm.org/show_bug.cgi?id=23029"
-  end
-
   def install
-    system "cmake", "-S", ".", "-B", "build", *std_cmake_args, "-DNANOFLANN_BUILD_EXAMPLES=OFF"
+    system "cmake", "-S", ".", "-B", "build", "-DNANOFLANN_BUILD_EXAMPLES=OFF", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end

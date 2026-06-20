@@ -1,19 +1,25 @@
 class Runc < Formula
   desc "CLI tool for spawning and running containers according to the OCI specification"
   homepage "https://github.com/opencontainers/runc"
-  url "https://github.com/opencontainers/runc/releases/download/v1.4.2/runc.tar.xz"
-  sha256 "cc7b4630a2940cc844f01da81765a3fe6713ceb7f0dbf287f6b20fd89f55d05f"
+  url "https://github.com/opencontainers/runc/releases/download/v1.5.0/runc-1.5.0.tar.xz"
+  sha256 "12a3c1c97483e105d7b9bfe9c9e7186c94c9dec59b820a6c31934f522f2557cb"
   license "Apache-2.0"
   head "https://github.com/opencontainers/runc.git", branch: "main"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "19363a75c36317ef5dafbfb85310994d7e182daccf5b02248c6e9cdbf3aa377c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "4e949d68f7b462085b7e76c3079e982f5b0e5591fa4f902cc3eed960d7d13200"
+    sha256 cellar: :any, arm64_linux:  "0e73a2c47dc91563d76d57372a774bd9b8ffa46f428b72ac1e416dce1cf36d64"
+    sha256 cellar: :any, x86_64_linux: "aa378bd3b68e139355dabd79f98366fbfa3effbe5097fd2d1a1438869507662a"
   end
 
   depends_on "go" => :build
   depends_on "go-md2man" => :build
   depends_on "pkgconf" => :build
+  depends_on "libpathrs"
   depends_on "libseccomp"
   depends_on :linux
 

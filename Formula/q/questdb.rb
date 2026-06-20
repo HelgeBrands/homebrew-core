@@ -1,8 +1,8 @@
 class Questdb < Formula
   desc "Time Series Database"
   homepage "https://questdb.io"
-  url "https://github.com/questdb/questdb/releases/download/9.4.0/questdb-9.4.0-no-jre-bin.tar.gz"
-  sha256 "96a5b77c60c07498190cb2deef4dc79c6ae2db518ae4ff0bf2023fd8f4ce34cc"
+  url "https://github.com/questdb/questdb/releases/download/9.4.3/questdb-9.4.3-no-jre-bin.tar.gz"
+  sha256 "7fc11a03b8e2ab85314226b7b10bed54dfefe1d87c7ec836e85c8ad6175e7d5c"
   license "Apache-2.0"
 
   livecheck do
@@ -11,7 +11,7 @@ class Questdb < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "939d88ab62b9f7ba6a0327733261865489ced1d8eaed7f0121b7b4a8aaa2c39d"
+    sha256 cellar: :any_skip_relocation, all: "dde501ece69f7c3e04e82aebf207fa6f8e4663edca872d9b07ddf82b1f66b046"
   end
 
   depends_on "openjdk"
@@ -23,7 +23,6 @@ class Questdb < Formula
     inreplace libexec/"questdb.sh", "/usr/local/var/questdb", var/"questdb"
 
     # Make sure the var/questdb directory exists
-    (var/"questdb").mkpath
   end
 
   service do

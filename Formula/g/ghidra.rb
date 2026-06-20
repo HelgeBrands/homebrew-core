@@ -1,8 +1,8 @@
 class Ghidra < Formula
   desc "Multi-platform software reverse engineering framework"
   homepage "https://github.com/NationalSecurityAgency/ghidra"
-  url "https://github.com/NationalSecurityAgency/ghidra/archive/refs/tags/Ghidra_12.1_build.tar.gz"
-  sha256 "bbe3cf874db010516c5170db0a206dce3496680cec3460890271c6a1ed4f6719"
+  url "https://github.com/NationalSecurityAgency/ghidra/archive/refs/tags/Ghidra_12.1.2_build.tar.gz"
+  sha256 "c30fe709ec5d5e68bf799a6c1f4dfc6853dacb189d10203eb882ecbb408db216"
   license "Apache-2.0"
 
   livecheck do
@@ -11,12 +11,12 @@ class Ghidra < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "321b2e627762f4b19e859d1336eedba4db7fcef384aff2a50e5a3f6ab0dbfafb"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f8df8af6ed06ecfb53b470566d2e1311d22e77111a973504281fed991932775d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "850b27189d2acbb24e9ad02b629b0ee4ee772f0ea74993045d4def039762965f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4b5ff189b715423c2275a31b5d1c8f18c35e088355b39f5eac3e50f459165c1a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ad5e79ee64986bc805a76ad4bcdd22d3cff6012bb1ac61a333876f5db59a7fb0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b575ceb6616db277b7355f82eb4d86a1fb2e659e3f0a9e0a9b23b32d5481d585"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "079007d8a3a477c8d5901e6596947612d86c8641956424a2bcb71ecd798bedcc"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "90aa942184fca2337ad0a123f818f37372ea642e8e69e969d45cc144a6f26fdf"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "40f68357d6b62a08429c36228907c995e3449283b6d2e08ba5a4e30b53a09725"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e30f8c84b64331f87f6ef1890cbdded6672bb7fcc8b674794ac93e4b3e62ad2b"
+    sha256 cellar: :any,                 arm64_linux:   "95bb260cc1a7986a7c25135f4c78b51ff5c604474aa41b77466323a40ee03ea5"
+    sha256 cellar: :any,                 x86_64_linux:  "038f29e336c2e2a796abb10f62ecf58d3e1d6af3ee36af710d5254f7494b51eb"
   end
 
   depends_on "gradle" => :build

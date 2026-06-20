@@ -1,18 +1,18 @@
 class Worktrunk < Formula
   desc "CLI for Git worktree management, designed for parallel AI agent workflows"
   homepage "https://worktrunk.dev"
-  url "https://github.com/max-sixty/worktrunk/archive/refs/tags/v0.52.0.tar.gz"
-  sha256 "904311d08c49f6eedefde3e56f4370a8fee3c3c7aacd367010ea5cff6087892c"
+  url "https://github.com/max-sixty/worktrunk/archive/refs/tags/v0.60.0.tar.gz"
+  sha256 "ac729d37c2ad195cef3aee056bc38d9f8250eb3ec953e2493cb6b091d41a793d"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/max-sixty/worktrunk.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "7fa9cd5f61e250a09965a24fc9bc98e4ec8437d5ad1eb6abc5aa6e2fa4cdbda7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "41833110ef8971c844030a99d89ba44bfaf9c68b9e170f4bcebeffee7da65d9d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ca74eee8111e5d9fea12cc27e8bb52eecab23215a2ce8a8492dde4e99fd3d67a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "37d416c332dfa27d0edbc4d2c2422fc1de134fccf9d37a44124fdd6c963cf1b7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "460e97969c96edd5f50e216c5980199679931c7e0bc9096e159d841dd3afe08e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d6c17417809bc56a899cf47f95653874e3e1827a2353dcac660e45e3b60857e5"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "29316c00c16ce3d6392a724f121f22ca07aaf31e3b45a4e32d4981036421b832"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "24097e2a2d1cd26718ce7cff5fd853b77d48ea72f2018c423e6b206fb1978451"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6b7268d28703172f7839c7164cb620d9fb8a5eca90eb3180cf6c00baf6ddc8f6"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e2bf3e911a527b24cf29d81b160640b075cbceeda06c3107393af5b09d5484e5"
+    sha256 cellar: :any,                 arm64_linux:   "a6e934d58aade4db06aba4bf7ec7e80d08788bb795258e802b72585fc96b566f"
+    sha256 cellar: :any,                 x86_64_linux:  "959692649e65b5ddeb0bec45cfb30618d99f63cf397832232cb7c96af98ff4a5"
   end
 
   depends_on "rust" => :build
@@ -20,6 +20,8 @@ class Worktrunk < Formula
   conflicts_with "wiredtiger", because: "both install `wt` binaries"
 
   def install
+    ENV["VERGEN_GIT_DESCRIBE"] = "v#{version}"
+
     system "cargo", "install", *std_cargo_args
     generate_completions_from_executable(bin/"wt", "config", "shell", "completions")
   end

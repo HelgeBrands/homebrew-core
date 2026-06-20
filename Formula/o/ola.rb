@@ -1,8 +1,8 @@
 class Ola < Formula
   desc "Open Lighting Architecture for lighting control information"
-  homepage "https://github.com/OpenLightingProject/ola"
+  homepage "https://www.openlighting.org/ola/"
   license all_of: ["GPL-2.0-or-later", "LGPL-2.1-or-later"]
-  revision 11
+  revision 13
   head "https://github.com/OpenLightingProject/ola.git", branch: "master"
 
   stable do
@@ -24,12 +24,12 @@ class Ola < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "6074a5dfc02e9b35399c20da37ad2a6a29002f0f7eb99fe26fa8fac750457232"
-    sha256 arm64_sequoia: "7d09f7b9f7b8c21850e551f9778ee1bd6f1633e8366ce8832c65cb6cf0cc693a"
-    sha256 arm64_sonoma:  "362d0e219205a25cf91d77203ce8b06d4a41a9f74f13db0ffad6e5fd121b158a"
-    sha256 sonoma:        "8fa7950770478519b25f4f6a76d88a0ae22897e3ba99bb86024cbdaad1dfd945"
-    sha256 arm64_linux:   "50475abc4a68d26c3423576e0916abef0b9ac76083295e2fca5d005f7d923deb"
-    sha256 x86_64_linux:  "9c5cb14f93b7ce7fa255205b6d56d48064d5d82d6ee233ff726c38eed7eda06f"
+    sha256 arm64_tahoe:   "49f8e9d921d3510d5ba440292ee0d398f5392fab2136f702207ee67a88e9f165"
+    sha256 arm64_sequoia: "27e28e301cab69c4e13a788eb85d31b30124a6d1de3670040dc0c5afdfeabbb9"
+    sha256 arm64_sonoma:  "a98134c49b27609f159855648c27f6bbfa96c956dc03cdf7bce43ce8aab0d989"
+    sha256 sonoma:        "75d962355b58aa5afe34bb5c09762c50ac154941d8d2241b6f911068ed52975d"
+    sha256 arm64_linux:   "7cb34d317e5fdac23e6606168b2c18f39aade8bc073b7ce2d123e33fa8011f61"
+    sha256 x86_64_linux:  "2a69894823d046dcb0bfc79392141e6017197b2eac8c04c2246b22d68b4edca8"
   end
 
   depends_on "autoconf" => :build

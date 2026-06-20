@@ -1,20 +1,20 @@
 class Noir < Formula
   desc "Attack surface detector that identifies endpoints by static analysis"
   homepage "https://owasp.org/www-project-noir/"
-  url "https://github.com/owasp-noir/noir/archive/refs/tags/v0.30.0.tar.gz"
-  sha256 "d88ec9836e9d314a05bd5aff27759015af8f0897e16171b21fe1390785be64a3"
+  url "https://github.com/owasp-noir/noir/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "1ebd3e81cf9afc332bcc35eb871d5c8fb70704dd6bd4025aca14148a8bfbdf73"
   license "MIT"
   head "https://github.com/owasp-noir/noir.git", branch: "main"
 
   no_autobump! because: :bumped_by_upstream
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "cc19a051850f4e958ebb8c9d22539e64fd81a3b905ff13a74446984e7913956b"
-    sha256 cellar: :any,                 arm64_sequoia: "1f1971dcb7f0aa7703680799d448632a96e9cb376f5c6662f5f977e3588c3dda"
-    sha256 cellar: :any,                 arm64_sonoma:  "6b3b962d3fdd11530162c6db8f5a6cb1c7e8e219a5051283d03767a76090cdb2"
-    sha256 cellar: :any,                 sonoma:        "92af5d10fc48fb241bf458b5bc894e92aac6dd0adc32984aa60a25bdf5221ea6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "80abb14cf38e0903880a8ade1ec1d58e0879b0138cebf7adc0051f86a82f974d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3590f5571b8e9fa51909da488b449f14b59b056c9cfb091092454cf5cf60d2b5"
+    sha256 cellar: :any, arm64_tahoe:   "7012c56b552f1559fe9f1af5b254eb54eab996640c8fd046534c8ac962f9c283"
+    sha256 cellar: :any, arm64_sequoia: "e085cd689af4db4cc2c7a82c479b56fc7f0a2e92d617ad2c1f61f685c5a9835f"
+    sha256 cellar: :any, arm64_sonoma:  "c50d724736eb3f8c3971b433d16192d631942816c2f38b02a251915fda3052d8"
+    sha256 cellar: :any, sonoma:        "dfb47c5a42d67e7a8bc1e4605f06956edf74373bb16ef4c28a707c28b36d077b"
+    sha256 cellar: :any, arm64_linux:   "17c394b41b0196577f058ac38574563f3338d6a06eda1813e6a1eb0941721e2d"
+    sha256 cellar: :any, x86_64_linux:  "a8beb85f7e8f0a38f1cc2aaff57170f98a46831ce7a2aa05c760d786311e3201"
   end
 
   depends_on "crystal" => :build
@@ -24,6 +24,8 @@ class Noir < Formula
   depends_on "libyaml"
   depends_on "openssl@3"
   depends_on "pcre2"
+
+  uses_from_macos "libxml2"
 
   on_linux do
     depends_on "zlib-ng-compat"
@@ -49,7 +51,7 @@ class Noir < Formula
           return {"Hello": "World"}
     PYTHON
 
-    output = shell_output("#{bin}/noir --no-color --base-path . 2>&1")
+    output = shell_output("#{bin}/noir scan --no-color . 2>&1")
     assert_match "Generating Report.", output
     assert_match "GET /hello", output
   end

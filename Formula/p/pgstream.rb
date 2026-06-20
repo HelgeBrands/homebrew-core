@@ -1,17 +1,17 @@
 class Pgstream < Formula
   desc "PostgreSQL replication with DDL changes"
   homepage "https://github.com/xataio/pgstream"
-  url "https://github.com/xataio/pgstream/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "2328fd33f99cf0d1ab6322f1e44dad1b2a14de1479c11a85ba04b4e5f7f4afed"
+  url "https://github.com/xataio/pgstream/archive/refs/tags/v1.1.0.tar.gz"
+  sha256 "8800a4889fd8d062a45117bbc57434bb46d873e3c7db631520a4373c5d1c3684"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "44a99755475cfbb0137f25e203dfed538d799481ee3120e54c0fd0850b2ef69f"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "44a99755475cfbb0137f25e203dfed538d799481ee3120e54c0fd0850b2ef69f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "44a99755475cfbb0137f25e203dfed538d799481ee3120e54c0fd0850b2ef69f"
-    sha256 cellar: :any_skip_relocation, sonoma:        "133f74ebf9232f365ca5ca7f6b14c358ed75ce8b50196617e5b1a5c80ac3d9b1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "ed7d6a04c7239c9560e26c61ec832a6b886f2ec99009eaecfaab619a9e92def1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bbc23c2915077d730a526d62c8856d657c42fc2a3fb6d750e81ceedb426e0182"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "712249f75dfbe96ad904a53441e9ef32907dd0f21d26a096996731c7dcfbae15"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "712249f75dfbe96ad904a53441e9ef32907dd0f21d26a096996731c7dcfbae15"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "712249f75dfbe96ad904a53441e9ef32907dd0f21d26a096996731c7dcfbae15"
+    sha256 cellar: :any_skip_relocation, sonoma:        "6a59feaeedaf5d7f2b5a6210065f0915a27ad5ffb89af35f0213490b2a1b70ac"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "7ee451e366e111df4cd6640015088caa29e6f28f5cf6f490f02e0b6c845ed30c"
+    sha256 cellar: :any,                 x86_64_linux:  "e88c0836a5e76017e51aabfc6d78090ac7e3234e74b93d534723fca8bc4d8dca"
   end
 
   depends_on "go" => :build
@@ -35,11 +35,11 @@ class Pgstream < Formula
     port = free_port
 
     system pg_ctl, "initdb", "-D", testpath/"test"
-    (testpath/"test/postgresql.conf").write <<~EOS, mode: "a+"
+    (testpath/"test/postgresql.conf").write <<~CONF, mode: "a+"
       port = #{port}
       shared_preload_libraries = 'wal2json'
       wal_level = logical
-    EOS
+    CONF
     system pg_ctl, "start", "-D", testpath/"test", "-l", testpath/"log"
 
     begin

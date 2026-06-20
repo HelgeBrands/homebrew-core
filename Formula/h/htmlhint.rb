@@ -1,6 +1,6 @@
 class Htmlhint < Formula
   desc "Static code analysis tool you need for your HTML"
-  homepage "https://github.com/htmlhint/HTMLHint"
+  homepage "https://htmlhint.com"
   url "https://registry.npmjs.org/htmlhint/-/htmlhint-1.9.2.tgz"
   sha256 "c32775c6abf4ed12bbb87c7310ff76802270989f4880a25196d196b7c7fe7c17"
   license "MIT"
@@ -19,7 +19,7 @@ class Htmlhint < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/htmlhint --version")
 
-    (testpath/"invalid.html").write <<~EOS
+    (testpath/"invalid.html").write <<~HTML
       <!DOCTYPE html>
       <html>
       <head>
@@ -31,20 +31,20 @@ class Htmlhint < Formula
         <a href="#" target="_blank">Link</a>
       </body>
       </html>
-    EOS
+    HTML
 
     output = shell_output("#{bin}/htmlhint #{testpath}/invalid.html", 1)
     assert_match "Tag must be paired", output
     assert_match "Scanned 1 files, found 2 errors in 1 files", output
 
-    (testpath/"valid.html").write <<~EOS
+    (testpath/"valid.html").write <<~HTML
       <!DOCTYPE html>
       <html>
       <head>
         <title>Test</title>
       </head>
       </html>
-    EOS
+    HTML
 
     output = shell_output("#{bin}/htmlhint #{testpath}/valid.html")
     assert_match "Scanned 1 files, no errors found", output

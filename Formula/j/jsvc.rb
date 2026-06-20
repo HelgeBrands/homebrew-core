@@ -1,21 +1,25 @@
 class Jsvc < Formula
   desc "Wrapper to launch Java applications as daemons"
   homepage "https://commons.apache.org/daemon/jsvc.html"
-  url "https://www.apache.org/dyn/closer.lua?path=commons/daemon/source/commons-daemon-1.5.1-src.tar.gz"
-  mirror "https://archive.apache.org/dist/commons/daemon/source/commons-daemon-1.5.1-src.tar.gz"
-  sha256 "48f9c4e63af0d73032eef2331ab8e9d3e0784b008ba2e7cb79fdd751c5202ba6"
+  url "https://www.apache.org/dyn/closer.lua?path=commons/daemon/source/commons-daemon-1.6.1-src.tar.gz"
+  mirror "https://archive.apache.org/dist/commons/daemon/source/commons-daemon-1.6.1-src.tar.gz"
+  sha256 "15ea9386b760ba74f2926fbc0a6853c1088a4c0dd5c46d0d1866f9ff091a6364"
   license "Apache-2.0"
+  compatibility_version 1
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f249e20ad4469f4ead87053e4b77bf2dd32a0712bb0e6f0b8885a4a8c89ad522"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e1c9d7698febe85919a990afbeb5b5c83ef68ae746bfc2dd1e82ba3a20d2d02a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2e4383b343f7eabf185019e7482033ca39569844de405155330d39b032f69043"
-    sha256 cellar: :any_skip_relocation, sonoma:        "25f297011a334d4f40bd35135383f3063b2c4fc8fb73083e3a36c88c3d77ab1e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a4086828985d6a77620eebdfc4008bfdac0d9eb6224e128f6db5a3f7eac252d1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f72edc6d6177e9f50e67fdb4b3a5ba38fd324137c5c904a5a95f4f14ec3ca232"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bfb95067226cb4e693882972be5e517fa75fa82eb1d5593a64ac849b2661291a"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aea93d34c2841c28e484ee9a9c12ab8ed6512c8ce1aca82f1d6436d7edb64de8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "096291cdc0d0335ed80a5b15249f975282f535d72cef0a3e8f49a16a5c6ed826"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ec4e8730bd147c2dea34d9f64774ca9fbb65ec70f1e70197e78b4f5ff9e86f0c"
+    sha256 cellar: :any,                 arm64_linux:   "215c20075db1e372de2e4a8e842f57b3688304b1dfb557ebe74d53831e7bca8b"
+    sha256 cellar: :any,                 x86_64_linux:  "8d7c506feafa56783dab019856bcf495f3ee5836791e8a6eae748ce155c33764"
   end
 
-  depends_on "openjdk@21"
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
+  depends_on "openjdk"
 
   def install
     prefix.install %w[NOTICE.txt LICENSE.txt RELEASE-NOTES.txt]
@@ -24,11 +28,12 @@ class Jsvc < Formula
       # https://github.com/Homebrew/homebrew-core/pull/168294#issuecomment-2104388230
       ENV.append_to_cflags "-Wno-incompatible-function-pointer-types" if DevelopmentTools.clang_build_version >= 1500
 
-      system "./configure", "--with-java=#{Formula["openjdk@21"].opt_prefix}"
+      system "autoreconf", "--force", "--install", "--verbose"
+      system "./configure", "--with-java=#{Formula["openjdk"].opt_prefix}"
       system "make"
 
       libexec.install "jsvc"
-      (bin/"jsvc").write_env_script libexec/"jsvc", Language::Java.overridable_java_home_env("21")
+      (bin/"jsvc").write_env_script libexec/"jsvc", Language::Java.overridable_java_home_env
     end
   end
 

@@ -1,19 +1,19 @@
 class Fbthrift < Formula
   desc "Facebook's branch of Apache Thrift, including a new C++ server"
   homepage "https://github.com/facebook/fbthrift"
-  url "https://github.com/facebook/fbthrift/archive/refs/tags/v2026.05.18.00.tar.gz"
-  sha256 "831144b631f018e81c3daff160169b353a65cb4999e25b26e668369969e5f692"
+  url "https://github.com/facebook/fbthrift/archive/refs/tags/v2026.06.15.00.tar.gz"
+  sha256 "722bce97ef9c753958caa9b014e047802607748842f7cb25a6a2d002b4fc5c13"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/facebook/fbthrift.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "73472ebd13e61d6c072b38bc9f6ed8060a53e296dc956b2fcf8cc16e74f86eb0"
-    sha256 cellar: :any,                 arm64_sequoia: "8df2ff162ccc636798f6203a6816ee74aac52048f0022c316b8ac744581223f2"
-    sha256 cellar: :any,                 arm64_sonoma:  "29d8362bbb4126980ddbf16b970680cabb12e9b3523eb4c1bbd3f1ee88bd2a64"
-    sha256 cellar: :any,                 sonoma:        "43f0102ae128cfa3a1fcc59d01b7d272698e4fe2c4151387af4a3b4447f609ed"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "df98945dd6d9923e158f0913be225d773fc42b03b335c8e8230d130bd7795714"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "56a596d9ca0d028f05b72bab1f67b89f121acf5da47f2cf896026b1ab46c6439"
+    sha256 cellar: :any, arm64_tahoe:   "b9c1120c07ebd22a1fd062fafc8fdb635150c733333ebfeaf2b66c3e549b3c69"
+    sha256 cellar: :any, arm64_sequoia: "0a2562203a71deec4f8f2f9007dc22ebe1ee817bd1af721d217719cdd0479277"
+    sha256 cellar: :any, arm64_sonoma:  "49b791a0dfdad109fbf46a43593571cf6c62718f5441fcc6f94a54ab35712166"
+    sha256 cellar: :any, sonoma:        "4307187a3e5a642eaea34db1d6693b9b74e6e7821d554f02e3a8c6d37c80b9e7"
+    sha256 cellar: :any, arm64_linux:   "77dd05737c3e406b2343476ecae3a46de60b92de1496cb896672a1461bb835d4"
+    sha256 cellar: :any, x86_64_linux:  "2840be8eab488b94e0352130746665f959c2a74bc62881a1adf96941ace940b7"
   end
 
   depends_on "bison" => :build # Needs Bison 3.1+
@@ -33,18 +33,9 @@ class Fbthrift < Formula
   uses_from_macos "flex" => :build
   uses_from_macos "python" => :build
 
-  on_macos do
-    depends_on "llvm" if DevelopmentTools.clang_build_version <= 1100
-  end
-
   on_linux do
     depends_on "boost"
     depends_on "zlib-ng-compat"
-  end
-
-  fails_with :clang do
-    build 1100
-    cause "error: 'asm goto' constructs are not supported yet"
   end
 
   def install

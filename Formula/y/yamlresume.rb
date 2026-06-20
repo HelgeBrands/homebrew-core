@@ -1,20 +1,24 @@
 class Yamlresume < Formula
   desc "Resumes as code in YAML"
   homepage "https://github.com/yamlresume/yamlresume"
-  url "https://registry.npmjs.org/yamlresume/-/yamlresume-0.12.3.tgz"
-  sha256 "cabc5a4b1803ef2be2187592f5db8958281ea3f109b2f8b34cac9d26be8eaa0b"
+  url "https://registry.npmjs.org/yamlresume/-/yamlresume-0.13.1.tgz"
+  sha256 "e540edb16b1d56ee86e137a9ae6fdf0c970775c4d5c41cb8b8c5f0fc95209f2f"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "179aa559d9ca0ace8e863b9cecf4bf814b9d74b73258ff5ece8b424091678f20"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "46634dba92489f94d9d9f48c10375915db153d90c2999aeb7d502a514b495406"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "46634dba92489f94d9d9f48c10375915db153d90c2999aeb7d502a514b495406"
-    sha256 cellar: :any_skip_relocation, sonoma:        "764737e0409d3efda699e3c624276bbc036ae84248078a6f6077110dd93c1011"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "32820c313fbaf01bc313a06476dee01e400bf219f46954212c0ace858a9fc112"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "32820c313fbaf01bc313a06476dee01e400bf219f46954212c0ace858a9fc112"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "16fdc8f567d961850918f0afcea8a00e9df8d126eb56b0a6710eea8c419fba60"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9e9b149cc16de137f4d7df2acae0602fb4418dccd031a06b8e65d66604797177"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "38c5a01405596f42aa7c5581e81c89d63a9ef51011f398a79089a27e133ee9a0"
+    sha256 cellar: :any_skip_relocation, sonoma:        "024ea842581ed9f6e07eb13e0897403cca6e526733d2fa5c9f6a4657e7d93073"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "21bc5e0baf1e30ef89ab1eb3900c7a095126bd3bf67f247a5aadc117a1334c33"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "21bc5e0baf1e30ef89ab1eb3900c7a095126bd3bf67f247a5aadc117a1334c33"
   end
 
   depends_on "node"
+
+  on_linux do
+    depends_on "fontconfig" # for font-list to run fc-list
+  end
 
   def install
     system "npm", "install", *std_npm_args
@@ -22,9 +26,11 @@ class Yamlresume < Formula
 
     return unless OS.mac?
 
-    node_modules = libexec/"lib/node_modules/yamlresume/node_modules"
-    %w[fontlist fontlist2].each do |file|
-      deuniversalize_machos node_modules/"font-list/libs/darwin"/file
+    # Replace prebuilt binary by compiling based on upstream build script:
+    # https://github.com/oldj/node-font-list/blob/master/scripts/build-darwin.sh
+    cd libexec/"lib/node_modules/yamlresume/node_modules/font-list/libs/darwin" do
+      rm("fontlist")
+      system ENV.cc, "fontlist.m", "-framework", "AppKit", "-framework", "Foundation", "-o", "fontlist"
     end
   end
 

@@ -1,21 +1,17 @@
 class Sonic < Formula
   desc "Fast, lightweight & schema-less search backend"
   homepage "https://github.com/valeriansaliou/sonic"
-  url "https://github.com/valeriansaliou/sonic/archive/refs/tags/v1.4.9.tar.gz"
-  sha256 "68f9336cd63e8f4171073be89e37ed6688812281207c3f70567b28fbe37be63b"
+  url "https://github.com/valeriansaliou/sonic/archive/refs/tags/v1.6.0.tar.gz"
+  sha256 "52fb402422dfc8cbf42826309f0836bd255916b9caab1eb8990424d1ca603147"
   license "MPL-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:    "d426d6e74b06d8dd5b8fa28861740bb68d4f4141a1b950b1cf91817d6cfefcb2"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia:  "c2963b66aad27cd0805154f10287f226de7c3845c3c032b3a86f42bd0aa34c26"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:   "9eeac83f672962725f3217370f12b06582da32f38ac31198fff2dc0c3358f572"
-    sha256 cellar: :any_skip_relocation, arm64_ventura:  "51c1a32ae3da2966e4f943baf0b7553e2802f1354eae2029d6c840424531a697"
-    sha256 cellar: :any_skip_relocation, arm64_monterey: "0e35da6261442351069d3195082219065dc61e269cab9265cebfca2c57d94e97"
-    sha256 cellar: :any_skip_relocation, sonoma:         "dd0f9672179042b93dc1df50bdb4833f92a0fefe1085c37794748385fea62410"
-    sha256 cellar: :any_skip_relocation, ventura:        "70c609372b8a30d3d6cbcd96dad191f60dd412dc9d787bcf64e0ce956b6cecb0"
-    sha256 cellar: :any_skip_relocation, monterey:       "16e5f7de38eb2a531e7b844330dfcae8579f8602f71daec7050f9e9d1be5deb2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "7579cfbac1bc541ac4333adbb22a10395bb2fe2f6b687751ad4dc5e39bd109e5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "686d7ff993a9ee79e10de1fbf250c0a9eeb67048efaaff042bbc8b579e497524"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e628ba0b3fd23ff4f6437130f74327f8d4837214f12722fdc8bd80c13b1a2300"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "dc876ad1a89d8e5620e74ca54dbe31daa28996c1df0aab8b1a4abc1cde1cf4e1"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8f555e6a5d85c4d4129d75e33fdc185ca502adc9c4faaaf081ef372395e56a76"
+    sha256 cellar: :any_skip_relocation, sonoma:        "eafc2c84ce00855eda2a20c3a0b52a60ae040286919ecf9e6c162dafd6bdbed6"
+    sha256 cellar: :any,                 arm64_linux:   "7aa741fba67bf375b8df82e790ecd5045bd240b80421a4489f2de71bd75239a7"
+    sha256 cellar: :any,                 x86_64_linux:  "d5e833de13dd121136808bcd6f3f163962c9b065be7dcf523139c473c6e3ea79"
   end
 
   depends_on "rust" => :build
@@ -23,7 +19,7 @@ class Sonic < Formula
   uses_from_macos "llvm" => :build
 
   def install
-    system "cargo", "install", *std_cargo_args
+    system "cargo", "install", *std_cargo_args(path: "server")
     inreplace "config.cfg", "./", var/"sonic/"
     etc.install "config.cfg" => "sonic.cfg"
   end

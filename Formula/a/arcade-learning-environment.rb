@@ -1,36 +1,26 @@
 class ArcadeLearningEnvironment < Formula
   desc "Platform for AI research"
   homepage "https://github.com/Farama-Foundation/Arcade-Learning-Environment"
+  url "https://files.pythonhosted.org/packages/96/f2/4256e8074df976edd3ba28be9b6a2f4b3fc47632134dabfead41d32b51be/ale_py-0.12.0.tar.gz"
+  sha256 "6030416b6a049d399bf95420ad2fdbf0ea8f83051b502774d27b477a06000dbc"
   license "GPL-2.0-only"
-  revision 3
-  head "https://github.com/Farama-Foundation/Arcade-Learning-Environment.git", branch: "master"
-
-  stable do
-    url "https://github.com/Farama-Foundation/Arcade-Learning-Environment/archive/refs/tags/v0.11.2.tar.gz"
-    sha256 "d6ac9406690bb3533b37a99253bdfc59bc27779c5e1b6855c763d0b367bcbf96"
-
-    # Backport fix to run without Gymnasium
-    patch do
-      url "https://github.com/Farama-Foundation/Arcade-Learning-Environment/commit/237f9c294d2ef95da28f8b74fa3ade54e89fe0c2.patch?full_index=1"
-      sha256 "49d70dff3264138c344bb5f5fa10bcce0be8ba75d25ef3d981114ef15f9b30be"
-    end
-  end
+  head "https://github.com/Farama-Foundation/Arcade-Learning-Environment.git", branch: "main"
 
   bottle do
-    rebuild 3
-    sha256 cellar: :any,                 arm64_tahoe:   "030f3a605e34e6b60b10839b1495a7b580db1e64359723caef9e0d74e7779628"
-    sha256 cellar: :any,                 arm64_sequoia: "ec092011cc6cc187c51ef2f3f0e1900e26513b803219e565e07dd1d3af81e41a"
-    sha256 cellar: :any,                 arm64_sonoma:  "3b2b8f74114e24b713d3916082532bf83d19cf6e5947834c0af5d91720c490fe"
-    sha256 cellar: :any,                 sonoma:        "4be81a1eece247bba32478aca5ceabacf37652e9fe55b75c26835dec5bc937bf"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "68785193e0acb8c0cf72098612143bc40b03ff2dba0628108459d5240f4c00db"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f54e86c30ee14e86982e9699b2eac0eba2fae8480d03ce23a65b70fb30395a24"
+    rebuild 1
+    sha256 cellar: :any, arm64_tahoe:   "93c2116408dec539ac099675d9e8247a448efa0d1606b346e363b0d5bde5b843"
+    sha256 cellar: :any, arm64_sequoia: "9fbe9df4b54fa9a43abfe51209a406ccd4a7d64447327d06bff381ef83998b8b"
+    sha256 cellar: :any, arm64_sonoma:  "0be9c8aabc25649ec64a7080990ecc3a69f3cb3a2ca0aeb0c046c5c6c57a370f"
+    sha256 cellar: :any, sonoma:        "92c4560f1a4747f7e69cd0598e508800a1f98195112f802c5b9b92d34ea51a4c"
+    sha256 cellar: :any, arm64_linux:   "27eb967b8f7c951b8e4ed93e41e3c4ab69f9f9bf1d1a086595bfc0fad332bb06"
+    sha256 cellar: :any, x86_64_linux:  "2bea153cc0c1b7e4c4cdbf39cfc8e4cc23ca118523f5121b313259546321faff"
   end
 
   depends_on "cmake" => :build
   depends_on "ninja" => :build
   depends_on "numpy"
   depends_on "python@3.14"
-  depends_on "sdl2"
+  depends_on "sdl2-compat"
 
   on_linux do
     depends_on "zlib-ng-compat"
@@ -84,12 +74,8 @@ class ArcadeLearningEnvironment < Formula
     # We build without XLA and jax has no sdists
     inreplace "pyproject.toml", '"jax >= 0.4.31', "#"
 
-    if build.stable?
-      inreplace "setup.py", /"-D(BUILD_VECTOR_LIB|BUILD_VECTOR_XLA_LIB|SDL_DYNLOAD)=ON"/, '"-D\1=OFF"'
-    else
-      cmake_args << "-DCMAKE_INSTALL_RPATH=#{rpath(source: prefix/Language::Python.site_packages(python3)/"ale_py")}"
-      ENV["CMAKE_ARGS"] = cmake_args.join(" ")
-    end
+    cmake_args << "-DCMAKE_INSTALL_RPATH=#{rpath(source: prefix/Language::Python.site_packages(python3)/"ale_py")}"
+    ENV["CMAKE_ARGS"] = cmake_args.join(" ")
     system python3, "-m", "pip", "install", *std_pip_args(build_isolation: true), "."
   end
 

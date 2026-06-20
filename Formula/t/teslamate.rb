@@ -1,23 +1,23 @@
 class Teslamate < Formula
   desc "Self-hosted data logger for your Tesla"
   homepage "https://docs.teslamate.org"
-  url "https://github.com/teslamate-org/teslamate/archive/refs/tags/v3.0.0.tar.gz"
-  sha256 "a4a7267df27982cf5844e453d59ff866c6daf3ae126bcda05c0abe87dee43b45"
+  url "https://github.com/teslamate-org/teslamate/archive/refs/tags/v4.0.1.tar.gz"
+  sha256 "508dea91bfcd331d3acfbde90b3e7fe4c5755bb4b8080577053cd8f111f4c3d1"
   license "AGPL-3.0-or-later"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "365e32212184579cd3ad2e8645994e88d5a2d19e5bf46ac32ebcab53ff0f1b99"
-    sha256 cellar: :any,                 arm64_sequoia: "a009b56e79cab4ad8ab6cc93a724009b905fedc6c16b719ab99355105d7be9bd"
-    sha256 cellar: :any,                 arm64_sonoma:  "051fee5157e21481b9365da64058189babfb80efe0f53a15110244734b42913d"
-    sha256 cellar: :any,                 sonoma:        "c761eaccdc2122fb4544aa9521e9b7d5d4e411a34907228fd60c13e8966cf03e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "44b5037040201b926c88283fa5f582fbd638f78744fbd66586aa3b4b477097d2"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "15897cb1032f908f271565db40062499ee6fb30b4793a657600c559470ec242b"
+    sha256 cellar: :any, arm64_tahoe:   "c2b6b81913b478919a272635f32cb49b1a3f42b2ad32973788245625763c522c"
+    sha256 cellar: :any, arm64_sequoia: "8708c52ad2195f401ae551fda328d243526ef8d7da20ac9bdf7435b7e373fbf3"
+    sha256 cellar: :any, arm64_sonoma:  "62db33e7bd1cb265b103838a28f5199cbd8c5a6a914b2c2f8724e6172fdb4158"
+    sha256 cellar: :any, sonoma:        "7104643be2adf2f809e4809ce12b5e5fe45c89ad696761ff1d7b77319184a755"
+    sha256 cellar: :any, arm64_linux:   "773309a92574ff0eadeac2f6c9350a0b1a6382a2441eb34ef5fa036ac050db53"
+    sha256 cellar: :any, x86_64_linux:  "34d227f71557a1ff5d4ec89241a75fdf10606b76593dfe8e27a34efb986ce520"
   end
 
+  depends_on "elixir" => :build
+  depends_on "erlang" => :build
   depends_on "node" => :build
   depends_on "postgresql@18" => :test
-  depends_on "elixir"
-  depends_on "erlang"
   depends_on "openssl@3"
 
   uses_from_macos "ncurses"
@@ -44,13 +44,13 @@ class Teslamate < Formula
     bin.install_symlink Dir["#{libexec}/bin/teslamate"]
 
     # Corresponds to https://github.com/teslamate-org/teslamate/blob/main/entrypoint.sh
-    (bin/"teslamate_brew_services").write <<~EOS
+    (bin/"teslamate_brew_services").write <<~BASH
       #!/bin/bash
       set -e
       source #{etc}/teslamate.env
       #{bin}/teslamate eval "TeslaMate.Release.migrate"
       exec #{bin}/teslamate start
-    EOS
+    BASH
   end
 
   service do

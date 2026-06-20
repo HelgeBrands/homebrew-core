@@ -1,8 +1,8 @@
 class Ryelang < Formula
   desc "Rye is a homoiconic programming language focused on fluid expressions"
   homepage "https://ryelang.org/"
-  url "https://github.com/refaktor/rye/archive/refs/tags/v0.2.8.tar.gz"
-  sha256 "59e9cf98ba9335691bda8d2eea5d1133e1ceb7c960b8de7c9e8cf64108663e03"
+  url "https://github.com/refaktor/rye/archive/refs/tags/v0.2.11.tar.gz"
+  sha256 "67f9e7727598ef81c6bb7ccb25a1f274d6cc773b1a0897dd6117b4e6db9fc92a"
   license "BSD-3-Clause"
   head "https://github.com/refaktor/rye.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Ryelang < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "dc478a9c3191fa93d577b26e3e0a7c5ede1d9b1184891127d1e96d6e9460db3c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aa87ab56e928dcf49b4cf9be4af39b6f838f6135cfa7cef1702b0c6787feba68"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "2ec54cea9631a9857b6b24d5fce3214658d76c51b718582beec71e9efc99048d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "12ce7fe1e0aa058fa00d16dc885473f309f203bf9ad44c43cb10ba423828be87"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f4083ed799fff9e95711ff51318009c7e8376a4fc90b8eccd5eeaa0e838b813e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9221df7cb765529b4fdb2e930e5db8a7f4fcd350c5eaf5c1837fde41507fd5e2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "cdb0a33fde032c05d91673941c5483d5b2eca39b79b5d45919438757669103ce"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "dafea8bad7c6d3cea20c5ff1a4be427d065809bb804585526e6235b2c0bc0319"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "f4fd6beff5d5c9cd4cd069ca072a69dd7c3cc8024e80206afdeeceb5252f7128"
+    sha256 cellar: :any_skip_relocation, sonoma:        "61af22b2c1585f5ab5b95b41af4e20b2d5eed97f5a3eef884032a997d869948b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c68932b793de27e80e645b24290be26ba70cb5829b4719d4c57932d32529b71e"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5f954b0d63df31e7aa1df802dccbe66d6047b5f9d45080130bbc6a238adcc140"
   end
 
   depends_on "go" => :build
@@ -39,10 +39,10 @@ class Ryelang < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/rye --version")
 
-    (testpath/"hello.rye").write <<~EOS
+    (testpath/"hello.rye").write <<~RYE
       "Hello World" .replace "World" "Mars" |print
       "12 8 12 16 8 6" .load .unique .sum |print
-    EOS
+    RYE
     assert_path_exists testpath/"hello.rye"
     output = shell_output("#{bin}/rye hello.rye 2>&1")
     assert_match "Hello Mars\n42", output.strip

@@ -1,10 +1,10 @@
 class Protobuf < Formula
   desc "Protocol buffers (Google's data interchange format)"
   homepage "https://protobuf.dev/"
-  url "https://github.com/protocolbuffers/protobuf/releases/download/v34.1/protobuf-34.1.tar.gz"
-  sha256 "e4e6ff10760cf747a2decd1867741f561b216bd60cc4038c87564713a6da1848"
+  url "https://github.com/protocolbuffers/protobuf/releases/download/v35.1/protobuf-35.1.tar.gz"
+  sha256 "f0b6838e7522a8da96126d487068c959bc624926368f3024ac8fd03abd0a1ac4"
   license "BSD-3-Clause"
-  compatibility_version 2
+  compatibility_version 4
 
   livecheck do
     url :stable
@@ -12,12 +12,12 @@ class Protobuf < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "052999e2596cd873392cfc3e9b351892d5dc839776dfb8a115eddf638c6baf04"
-    sha256 cellar: :any, arm64_sequoia: "a6779ffa7ee2bc25076bc0338b558387ac18136d455ee822a6123c4bb76b8d3b"
-    sha256 cellar: :any, arm64_sonoma:  "ba01f35bd0814496dc1d8b92aa519984da76decd084ef7dcfa145f6e952fa5e9"
-    sha256 cellar: :any, sonoma:        "06892ef0f54c26fbbca4a01e8620079b1b83bcce53a82ffe04f19290f7df35a2"
-    sha256               arm64_linux:   "ed890928c4ce477d2ea2ac38e44a253d161882ac2545eab91b974fde89592336"
-    sha256               x86_64_linux:  "c439d6602fb48906ddd0f1adc80a49b51f71c23b03815de740fdf8b7e13934d4"
+    sha256 cellar: :any, arm64_tahoe:   "24d73dd02d4ddf3b105b546c61d0c9f7756888b2b5b8bb1418cf4fc77095c560"
+    sha256 cellar: :any, arm64_sequoia: "9b74e450c90504c3b47ec1ca70a323629479d48f53087505551f44b72ba14568"
+    sha256 cellar: :any, arm64_sonoma:  "411b5cb1a7f1ce1208a216f438e104261fc16cbd479056590894279e8877980c"
+    sha256 cellar: :any, sonoma:        "9f59f5c925b02ccceb0bb5d46b4be264304f3f92129f9eff0ee41e43f3734aac"
+    sha256               arm64_linux:   "617db35b8b198d451490a1d00f76bca3bf9d794d05615fdff2c5c2de6cecf61f"
+    sha256               x86_64_linux:  "a17904ab37005493b8af32bba4d05682a421b35cf00783f0166b7d5d50ef3c42"
   end
 
   depends_on "cmake" => :build
@@ -31,7 +31,6 @@ class Protobuf < Formula
   end
 
   on_linux do
-    depends_on "llvm" => :build if DevelopmentTools.gcc_version < 13
     depends_on "zlib-ng-compat"
   end
 
@@ -41,10 +40,6 @@ class Protobuf < Formula
   end
 
   def install
-    # TODO: Remove after moving CI to Ubuntu 24.04. Cannot use newer GCC as it
-    # will increase minimum GLIBCXX in bottle resulting in a runtime dependency.
-    ENV.llvm_clang if OS.linux? && deps.map(&:name).any?("llvm")
-
     # Keep `CMAKE_CXX_STANDARD` in sync with the same variable in `abseil.rb`.
     abseil_cxx_standard = 17
     cmake_args = %W[

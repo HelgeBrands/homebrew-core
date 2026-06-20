@@ -1,18 +1,18 @@
 class Nom < Formula
   desc "RSS reader for the terminal"
   homepage "https://github.com/guyfedwards/nom"
-  url "https://github.com/guyfedwards/nom/archive/refs/tags/v3.3.0.tar.gz"
-  sha256 "27e33b618e223d433a99161b3e401958a510cd5a4298ed77a6553c2a42d59d70"
+  url "https://github.com/guyfedwards/nom/archive/refs/tags/v3.3.2.tar.gz"
+  sha256 "b462d343e81f1382f38a9bd829be38f6b89ed2457f7bdbac2f8849078b9b094d"
   license "GPL-3.0-only"
   head "https://github.com/guyfedwards/nom.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a706a7b6c85b7a40ffb0fff9f86830b789ae58bbeab60d7ee3c9d9bf0166e30b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1d3eea104317b7f35229620fbe22a9e77ee1f8ad1016812ec6cc1efef5bfe20d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "60a8282c6004b3fdd11db933825359a526d6876a02ef869eb45287efb138242d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "6b7912e34f9a5e6771f020d7bc29ceb6d855a9487e11a3144cc097541f3088cc"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c1617468cfcb21474d39d55b80495c8c4021f902172028ecf6693d56297a2170"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3846bd8d4cfcd4a2c6e40fee09d4e6cff5817f68748665cb89bbe3cdfa777663"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6606809ac89b4bff1f4811f26fa0ce0553bd030f13bb13692119587a13afa0fc"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "657437e8944d5ab1a2c7d5139d4704ca8ca678e27e1c72e101f68cdc77c1ad0b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "76669832db3be14724d7e1b33ea6bc048bfa7410843cd277c8ace7cd6d9ef93d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c93a832f8cf5a33b738388076ff17ebc802979b7e3224b392afeae6a098153cc"
+    sha256 cellar: :any,                 arm64_linux:   "5253dd715423a5e17eb095fa08ceba10a3b2fadf4e1b50d9f3b3de98a7063cca"
+    sha256 cellar: :any,                 x86_64_linux:  "7c416ae3f203503aac0d3beb258cbbfbad4ef0d4787cdfa22af106f0d6e5f054"
   end
 
   depends_on "go" => :build

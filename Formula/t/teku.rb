@@ -2,29 +2,29 @@ class Teku < Formula
   desc "Java Implementation of the Ethereum 2.0 Beacon Chain"
   homepage "https://docs.teku.consensys.net/"
   url "https://github.com/ConsenSys/teku.git",
-      tag:      "26.4.0",
-      revision: "c5add450714feaf941dc666ab7bb35ad544e56fd"
+      tag:      "26.6.1",
+      revision: "6c8bd1265548e13f0e3cf1767bab152c10f6714b"
   license "Apache-2.0"
   head "https://github.com/ConsenSys/teku.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "ffd8afb5660a42d31c79a06659f7a63e9e40298e7f9607b49c557ca66ae16752"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ffd8afb5660a42d31c79a06659f7a63e9e40298e7f9607b49c557ca66ae16752"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "ffd8afb5660a42d31c79a06659f7a63e9e40298e7f9607b49c557ca66ae16752"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ffd8afb5660a42d31c79a06659f7a63e9e40298e7f9607b49c557ca66ae16752"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1f3cd3bfcd0468bccd927dce2310a62544bd22d6785e9e8e3a05149f27363e6d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1f3cd3bfcd0468bccd927dce2310a62544bd22d6785e9e8e3a05149f27363e6d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "744001660edf3f41f8dbe6d3d8c1ca4248954b8c5c36af3be5ae904198432d70"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "744001660edf3f41f8dbe6d3d8c1ca4248954b8c5c36af3be5ae904198432d70"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "744001660edf3f41f8dbe6d3d8c1ca4248954b8c5c36af3be5ae904198432d70"
+    sha256 cellar: :any_skip_relocation, sonoma:        "744001660edf3f41f8dbe6d3d8c1ca4248954b8c5c36af3be5ae904198432d70"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e665b5b7b622f1e173f3e7f276a64ea8cbe16686b3af9c51a7e5e566b7251aa4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e665b5b7b622f1e173f3e7f276a64ea8cbe16686b3af9c51a7e5e566b7251aa4"
   end
 
-  depends_on "gradle@8" => :build
-  depends_on "openjdk"
+  depends_on "gradle" => :build
+  depends_on "openjdk@25"
 
   def install
-    system "gradle", "installDist"
+    ENV["JAVA_HOME"] = Language::Java.java_home("25")
 
+    system "gradle", "installDist", "--no-daemon"
     libexec.install Dir["build/install/teku/*"]
-
-    (bin/"teku").write_env_script libexec/"bin/teku", Language::Java.overridable_java_home_env
+    (bin/"teku").write_env_script libexec/"bin/teku", Language::Java.overridable_java_home_env("25")
   end
 
   test do

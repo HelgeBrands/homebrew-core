@@ -1,17 +1,17 @@
 class Pake < Formula
   desc "Turn any webpage into a desktop app with Rust with ease"
   homepage "https://github.com/tw93/Pake"
-  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.11.6.tgz"
-  sha256 "417868e20fee1b782182f6666be0d937634e731f03f6e958bb873b3ceb05841c"
-  license "MIT"
+  url "https://registry.npmjs.org/pake-cli/-/pake-cli-3.11.10.tgz"
+  sha256 "c4d06423d6be7c51eb11274dda39fe3b0eafe68c268fdd8e77fdc1507fd56fb3"
+  license "GPL-3.0-or-later"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "7fa7753ddc4df9c5f1905f3455522464565a812fd4dbd02082c12c290bfe4427"
-    sha256 cellar: :any,                 arm64_sequoia: "b7925af1651e072d788b3d6660e8c3cbad34ddb66cee0734a25ee1351140ffc8"
-    sha256 cellar: :any,                 arm64_sonoma:  "b7925af1651e072d788b3d6660e8c3cbad34ddb66cee0734a25ee1351140ffc8"
-    sha256 cellar: :any,                 sonoma:        "4f0c08d1fb99a3a72bfc25bb91bdfd53be812cbfdbcc9a58796328a51bec1781"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e3be0e462653c6847425c66fd3e0b7a912a399c7df68b3d87e31b3dfa0f35c31"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0bf9a2b91f1273ae6125e93b664779e63596779100d664b717b30b103f89f561"
+    sha256 cellar: :any, arm64_tahoe:   "fa1d30cd97cc3cc60e983950776a9d49501afed844885ddfb9eb55c39d69314f"
+    sha256 cellar: :any, arm64_sequoia: "aec249f8ad9d062aab8b32a9c0b9e8ad117bb9a0de0054db1cc6932d54c786c6"
+    sha256 cellar: :any, arm64_sonoma:  "aec249f8ad9d062aab8b32a9c0b9e8ad117bb9a0de0054db1cc6932d54c786c6"
+    sha256 cellar: :any, sonoma:        "f1ec83dba3c765d25084652261f10cda79690e05fddd16a20c55618c529b0cb8"
+    sha256 cellar: :any, arm64_linux:   "fc196400b3e1d10ea51f0b06a4b67eaede4987705b532f8299b8bde637e94ddd"
+    sha256 cellar: :any, x86_64_linux:  "e5a4325efaed1f920cee5641b0c58ea0b74e83681b92814d5d11ee2533a6249f"
   end
 
   depends_on "node"
@@ -22,13 +22,13 @@ class Pake < Formula
   # Resources needed to build sharp from source to avoid bundled vips
   # https://sharp.pixelplumbing.com/install/#building-from-source
   resource "node-addon-api" do
-    url "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.7.0.tgz"
-    sha256 "06cdc368599c65b996003ac5d71fe594a78d3d94fc51600b2085d5a325a3d930"
+    url "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.8.0.tgz"
+    sha256 "72528f1a8235a8bc19855e21cc5ae28252c276338afa73887dc7e54515bc76c5"
   end
 
   resource "node-gyp" do
-    url "https://registry.npmjs.org/node-gyp/-/node-gyp-12.3.0.tgz"
-    sha256 "d209963f2b21fd5f6fad1f6341897a98fc8fd53025da36b319b92ebd497f6379"
+    url "https://registry.npmjs.org/node-gyp/-/node-gyp-13.0.0.tgz"
+    sha256 "10e45f33997680c9ea6ebfb8c575aba66bfbe8ad9c782a7426a37440b28b62a6"
   end
 
   def install

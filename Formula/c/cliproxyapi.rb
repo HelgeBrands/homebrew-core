@@ -1,8 +1,8 @@
 class Cliproxyapi < Formula
   desc "Wrap Gemini CLI, Codex, Claude Code, Qwen Code as an API service"
   homepage "https://github.com/router-for-me/CLIProxyAPI"
-  url "https://github.com/router-for-me/CLIProxyAPI/archive/refs/tags/v7.1.15.tar.gz"
-  sha256 "08ed9e6cb3b1c63f7a9b2b0f314350101b3b7673211d24c949e8a5820fb4e6ba"
+  url "https://github.com/router-for-me/CLIProxyAPI/archive/refs/tags/v7.2.20.tar.gz"
+  sha256 "edeb3024fe1791910b7e550b498541f7d65129508ad89fd0c13c59ec0bf61e04"
   license "MIT"
   head "https://github.com/router-for-me/CLIProxyAPI.git", branch: "main"
 
@@ -13,12 +13,12 @@ class Cliproxyapi < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "e380dff95cedf0814039d9172755b8cf7374bd79f0548ba13d6c934671d86242"
-    sha256 arm64_sequoia: "e380dff95cedf0814039d9172755b8cf7374bd79f0548ba13d6c934671d86242"
-    sha256 arm64_sonoma:  "e380dff95cedf0814039d9172755b8cf7374bd79f0548ba13d6c934671d86242"
-    sha256 sonoma:        "60547df5f8dd1da498405ba576ee78c61f88796801373d10bd287dededc4aef1"
-    sha256 arm64_linux:   "1120d1e9fd0e52355ac78d750c61438879bf6a4905d1b8312e2a15cea877f76b"
-    sha256 x86_64_linux:  "ba6b1a3538f6d94ccada98015be9c353965b65fb1a89992eb5110d39fe680e18"
+    sha256 arm64_tahoe:   "e47103311fcfa9b47e37efac3d7d5d1c19beeee1892d0e57f489270f4c0d7dea"
+    sha256 arm64_sequoia: "207af6b5042de987a0e974933893c4f65c698d6e226faf22042d9a47431416c7"
+    sha256 arm64_sonoma:  "ed46b64135d8d50b259b7baf40e1c394b77a442b3e8aa4318396a1df78e83e18"
+    sha256 sonoma:        "5006b79353c3cc9d6abd3654ea42105de70b3cd80e032eaf6b74f122ce9d6673"
+    sha256 arm64_linux:   "d9771f7157ea619ee3b507a67e062f6a5101b70877ccb5f456093ec00c4e3dab"
+    sha256 x86_64_linux:  "0c1c8740e61a9f8958f1ceebd74da4e6053c9ef7d05c5dd5f793f542bb930471"
   end
 
   depends_on "go" => :build
@@ -43,7 +43,7 @@ class Cliproxyapi < Formula
 
   test do
     require "pty"
-    PTY.spawn(bin/"cliproxyapi", "-login", "-no-browser") do |r, _w, pid|
+    PTY.spawn(bin/"cliproxyapi", "-antigravity-login", "-no-browser") do |r, _w, pid|
       sleep 5
       Process.kill "TERM", pid
       assert_match "accounts.google.com", r.read_nonblock(1024)

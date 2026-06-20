@@ -273,6 +273,8 @@ jobs:
       fromJson(needs.check.outputs.requires_merge) &&
       fromJson(needs.check.outputs.bottles) &&
       !fromJson(needs.check.outputs.replace)
+    outputs:
+      portable_ruby: ${{ steps.portable-ruby.outputs.fire }}
     runs-on: ${{inputs.large_runner && 'homebrew-large-bottle-upload' || 'ubuntu-latest'}}
     container:
       image: ghcr.io/homebrew/brew:main
@@ -328,8 +330,9 @@ jobs:
         id: pr-pull
         working-directory: ${{steps.set-up-homebrew.outputs.repository-path}}
         env:
-          BREWTESTBOT_NAME_EMAIL: "BrewTestBot <1589480+BrewTestBot@users.noreply.github.com>"
           HOMEBREW_GITHUB_API_TOKEN: ${{secrets.HOMEBREW_CORE_PUBLIC_REPO_EMAIL_TOKEN}}
+          HOMEBREW_GIT_COMMITTER_NAME: BrewTestBot
+          HOMEBREW_GIT_COMMITTER_EMAIL: 1589480+BrewTestBot@users.noreply.github.com
           EXPECTED_SHA: ${{needs.check.outputs.head_sha}}
           LARGE_RUNNER: ${{inputs.large_runner}}
           WARN_ON_UPLOAD_FAILURE_FLAG: ${{inputs.warn_on_upload_failure && '--warn-on-upload-failure' || ''}}
@@ -362,12 +365,23 @@ jobs:
             --clean \
             --no-cherry-pick \
             --workflows=tests.yml \
-            --committer="$BREWTESTBOT_NAME_EMAIL" \
             --root-url="https://ghcr.io/v2/homebrew/core" \
             --retain-bottle-dir \
             ${WARN_ON_UPLOAD_FAILURE_FLAG:+"${WARN_ON_UPLOAD_FAILURE_FLAG}"} \
             ${MESSAGE:+"--message=${MESSAGE}"} \
             "$PR"
+
+      - name: Detect `portable-ruby` publish
+        id: portable-ruby
+        env:
+          BOTTLE_PATH: ${{ steps.pr-pull.outputs.bottle_path }}
+        run: |
+          if [[ -n "$(find "$BOTTLE_PATH" -name 'portable-ruby--*.bottle.tar.gz' -print -quit)" ]]
+          then
+            echo "fire=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "fire=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Generate build provenance
         uses: actions/attest@59d89421af93a897026c735860bf21b6eb4f7b26 # v4.1.0
@@ -385,9 +399,10 @@ jobs:
         id: pr-upload
         working-directory: ${{steps.pr-pull.outputs.bottle_path}}
         env:
-          BREWTESTBOT_NAME_EMAIL: "BrewTestBot <1589480+BrewTestBot@users.noreply.github.com>"
           HOMEBREW_GITHUB_PACKAGES_USER: brewtestbot
           HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{secrets.HOMEBREW_CORE_GITHUB_PACKAGES_TOKEN}}
+          HOMEBREW_GIT_COMMITTER_NAME: BrewTestBot
+          HOMEBREW_GIT_COMMITTER_EMAIL: 1589480+BrewTestBot@users.noreply.github.com
           REPO_PATH: ${{steps.set-up-homebrew.outputs.repository-path}}
           WARN_ON_UPLOAD_FAILURE_FLAG: ${{inputs.warn_on_upload_failure && '--warn-on-upload-failure' || ''}}
         run: |
@@ -395,7 +410,6 @@ jobs:
           # interprets them as empty arguments when we want `brew` to ignore them instead.
           brew pr-upload \
             --debug \
-            --committer="$BREWTESTBOT_NAME_EMAIL" \
             --root-url="https://ghcr.io/v2/homebrew/core" \
             ${WARN_ON_UPLOAD_FAILURE_FLAG:+"${WARN_ON_UPLOAD_FAILURE_FLAG}"}
 
@@ -594,3 +608,128 @@ jobs:
           rm -f executables.txt
           oras pull ghcr.io/homebrew/command-not-found/executables:latest
           shasum --algorithm=256 --check executables.txt.sha256
+
+  bump-portable-ruby:
+    needs: [check, upload]
+    if: >
+      github.repository_owner == 'Homebrew' &&
+      needs.upload.result == 'success' &&
+      needs.upload.outputs.portable_ruby == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          core: true
+          cask: false
+
+      - name: Configure Git user
+        id: git-user-config
+        uses: Homebrew/actions/git-user-config@main
+        with:
+          username: BrewTestBot
+
+      - name: Set up commit signing
+        uses: Homebrew/actions/setup-commit-signing@main
+        with:
+          signing_key: ${{ secrets.BREWTESTBOT_SSH_SIGNING_KEY }}
+
+      - name: Check out portable-ruby PR branch
+        working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr checkout "$PR" --repo "$GITHUB_REPOSITORY"
+
+      - name: Resolve target version
+        id: resolve
+        run: |
+          brew_repo="$(brew --repository)"
+          pkg_version="$(brew ruby -- -e 'puts Homebrew.with_no_api_env { Formulary.factory("portable-ruby") }.pkg_version.to_s')"
+          {
+            echo "brew_repo=${brew_repo}"
+            echo "pkg_version=${pkg_version}"
+            echo "branch=bump-portable-ruby-${pkg_version}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create branch in Homebrew/brew
+        working-directory: ${{ steps.resolve.outputs.brew_repo }}
+        env:
+          BRANCH: ${{ steps.resolve.outputs.branch }}
+        run: git checkout -b "${BRANCH}"
+
+      - name: Run `brew update-portable-ruby`
+        working-directory: ${{ steps.resolve.outputs.brew_repo }}
+        run: brew update-portable-ruby
+
+      - name: Commit changes
+        id: commit
+        working-directory: ${{ steps.resolve.outputs.brew_repo }}
+        env:
+          PKG_VERSION: ${{ steps.resolve.outputs.pkg_version }}
+        run: |
+          git add \
+            Library/Homebrew/.ruby-version \
+            Library/Homebrew/Gemfile.lock \
+            Library/Homebrew/utils/ruby.sh \
+            Library/Homebrew/vendor/portable-ruby-version \
+            Library/Homebrew/vendor/portable-ruby-*-darwin \
+            Library/Homebrew/vendor/portable-ruby-*-linux \
+            Library/Homebrew/vendor/bundle \
+            Library/Homebrew/sorbet
+          if git diff --cached --quiet
+          then
+            echo "::notice::No changes to commit; portable-ruby ${PKG_VERSION} is already vendored."
+            echo "changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Bump portable-ruby to ${PKG_VERSION}." \
+                     -m "Autogenerated by the [publish-commit-bottles]($RUN_URL) workflow."
+          echo "changes=true" >> "$GITHUB_OUTPUT"
+
+      - name: Generate push token
+        if: steps.commit.outputs.changes == 'true'
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.BREW_COMMIT_APP_ID }}
+          private-key: ${{ secrets.BREW_COMMIT_APP_KEY }}
+          owner: Homebrew
+          repositories: brew
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Push branch
+        if: steps.commit.outputs.changes == 'true'
+        uses: Homebrew/actions/git-try-push@main
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          directory: ${{ steps.resolve.outputs.brew_repo }}
+          branch: ${{ steps.resolve.outputs.branch }}
+        env:
+          GIT_COMMITTER_NAME: ${{ steps.git-user-config.outputs.name }}
+          GIT_COMMITTER_EMAIL: ${{ steps.git-user-config.outputs.email }}
+
+      - name: Open pull request
+        if: steps.commit.outputs.changes == 'true'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PKG_VERSION: ${{ steps.resolve.outputs.pkg_version }}
+          BRANCH: ${{ steps.resolve.outputs.branch }}
+        run: |
+          cat <<MESSAGE > body.txt
+          Bumps the vendored \`portable-ruby\` to ${PKG_VERSION}.
+
+          Source: Homebrew/homebrew-core#${PR}
+
+          Autogenerated by the [publish-commit-bottles]($RUN_URL) workflow.
+          MESSAGE
+
+          gh pr create \
+            --repo Homebrew/brew \
+            --base main \
+            --head "${BRANCH}" \
+            --title "Bump vendored portable-ruby to ${PKG_VERSION}" \
+            --body-file body.txt

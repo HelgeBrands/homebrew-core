@@ -9,6 +9,7 @@
   "gcc@12",
   "gcc@13",
   "gcc@14",
+  "gcc@15",
   "glibc@2.13",
   "glibc@2.17",
   "glibmm@2.66",

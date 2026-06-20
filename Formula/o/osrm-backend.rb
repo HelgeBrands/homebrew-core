@@ -1,8 +1,8 @@
 class OsrmBackend < Formula
   desc "High performance routing engine"
   homepage "https://project-osrm.org/"
-  url "https://github.com/Project-OSRM/osrm-backend/archive/refs/tags/v26.5.0.tar.gz"
-  sha256 "3e4f5ed09ac0c77158314ef99b5f8c9e336a80339b3f0e62da48abd06acafef9"
+  url "https://github.com/Project-OSRM/osrm-backend/archive/refs/tags/v26.6.5.tar.gz"
+  sha256 "fc007a189704dda8527158ad6aab38ccfd2a9533042c3c80f41f7a0659e924fb"
   license "BSD-2-Clause"
   head "https://github.com/Project-OSRM/osrm-backend.git", branch: "master"
 
@@ -12,12 +12,12 @@ class OsrmBackend < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "84138f03e657f278268fec3452528a0a16ae00d2bf1a379c0a36b00d291e0336"
-    sha256 cellar: :any,                 arm64_sequoia: "f304c8b3b0cf01f32755c7f472cd928ccbf1a49a7e8c4b30fa98a4f1646b39d0"
-    sha256 cellar: :any,                 arm64_sonoma:  "eeb8842755930eacd3d118fc2c063ab681bc6b4e6aa46d59c5fa560dab7540b3"
-    sha256 cellar: :any,                 sonoma:        "b31a1876ed038d5c877406d3c97a9886889e0966b166809f4e09e9c01f314efb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d055964b2f1e882312880082a475cc8c25bdf8297605e2a828b6f721964d005e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3bdece55d0dd9e5d1b482c0b309d9847f47dea5276320acd9649923541e22108"
+    sha256 cellar: :any, arm64_tahoe:   "c54bd191da7ff283d722d9137621d7df5960069a82b12be9d1f5ce869ff065b8"
+    sha256 cellar: :any, arm64_sequoia: "f67fecec3ba4f7bd4db0dc4413b8228aa41faf3a48230ea51c8f312c509eb73d"
+    sha256 cellar: :any, arm64_sonoma:  "de82c8f0c91e47ab5318b0871e8f17fd483fe88339d7a20d14e808e6d4a01c56"
+    sha256 cellar: :any, sonoma:        "2bbf0127bf286e0429b1064a405c60546e5d2bf30f85d334101bde0c22ab61e7"
+    sha256 cellar: :any, arm64_linux:   "eb9c3b0a822bf9830aef21afc94a015e9120f375a21e7323256a070743f9b2a2"
+    sha256 cellar: :any, x86_64_linux:  "ff56b2480852bbdaef80f6249e1d8af33322335ec3d3e2de100fb32e1ec7264c"
   end
 
   depends_on "cmake" => :build

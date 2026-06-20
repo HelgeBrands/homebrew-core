@@ -1,8 +1,8 @@
 class Postgrest < Formula
   desc "Serves a fully RESTful API from any existing PostgreSQL database"
   homepage "https://github.com/PostgREST/postgrest"
-  url "https://github.com/PostgREST/postgrest/archive/refs/tags/v14.11.tar.gz"
-  sha256 "876f29cd3826d44b73cff3f49bf85e653650cd76cfb1f9cf6feaf3af3b3a4721"
+  url "https://github.com/PostgREST/postgrest/archive/refs/tags/v14.13.tar.gz"
+  sha256 "fa8efaface8008e4565ee79695d3ea2d9f1647640156adc705095d82f225f0e2"
   license "MIT"
   head "https://github.com/PostgREST/postgrest.git", branch: "main"
 
@@ -12,12 +12,12 @@ class Postgrest < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "9da8cf8329cdad2c37a7ffb604b5cec0f0d022cc51f53bc89bc28af1a1181e59"
-    sha256 cellar: :any,                 arm64_sequoia: "29212a0e544f7684075e666893b8504c16949067dbcdaa0336c4624cfe8d1cb8"
-    sha256 cellar: :any,                 arm64_sonoma:  "dabaf5d3920fbff4c49ec114160dd0e029e952287043e5ff7cc33d5233c17b5d"
-    sha256 cellar: :any,                 sonoma:        "9db3f887fd13cfeec00a51a9da1de4febd5cd9308964c160e23faca20649c94e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cbf3715361f66de61630ac5818db485ba1c394c56c437c4a828055ee7bc05149"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5bd4f564149828617b0b4234306644c686cfbe2c575542c6e42ce25f8e38865a"
+    sha256 cellar: :any, arm64_tahoe:   "d5377af6b6c45bb473ff58ffc45c677125e9822fd2512d0e69af5a803b91eae4"
+    sha256 cellar: :any, arm64_sequoia: "82fe07f53522257d56180e132859e5fc8009aad49778b5520255a3ad48511120"
+    sha256 cellar: :any, arm64_sonoma:  "f05ea23408b8a535d8e3c945c28c9b93bafd79c4c6a40cfa251537bdd2689dc2"
+    sha256 cellar: :any, sonoma:        "858a51f14b5b246b739368d54022e8b4e5d6d9c53facea71a6075b2ceeac5bd1"
+    sha256 cellar: :any, arm64_linux:   "781bc67901e8382714fbe33941ea7b7377aaf5f376af7d162ee172b6315c5c63"
+    sha256 cellar: :any, x86_64_linux:  "79c30104c66320bf863b2bdb7027af60c9030aca449a832506c989fef3403e63"
   end
 
   depends_on "cabal-install" => :build

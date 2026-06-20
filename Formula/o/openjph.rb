@@ -1,19 +1,19 @@
 class Openjph < Formula
   desc "Open-source implementation of JPEG2000 Part-15 (or JPH or HTJ2K)"
   homepage "https://github.com/aous72/OpenJPH"
-  url "https://github.com/aous72/OpenJPH/archive/refs/tags/0.27.3.tar.gz"
-  sha256 "f96808ef72cf3acca73a52123bda3e680f6550dfb4774ad7de57eb3ce26de57a"
+  url "https://github.com/aous72/OpenJPH/archive/refs/tags/0.29.0.tar.gz"
+  sha256 "1302a296308996af4c023b7f104133f0d48e89e18b86da999973c476b5e8b584"
   license "BSD-2-Clause"
-  compatibility_version 2
+  compatibility_version 4
   head "https://github.com/aous72/OpenJPH.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1017ceff9efe338afe41d3457605873b38a4f64051a67e79dc129d6178b4b5b9"
-    sha256 cellar: :any,                 arm64_sequoia: "ed56deb929a1d39ececb4f471e89c7043ea9a7f0f1e0aef8622f5217c559eae5"
-    sha256 cellar: :any,                 arm64_sonoma:  "88271d81447d931c1b6150fe372b8787e7524fd16e965b64658db8468ef638ec"
-    sha256 cellar: :any,                 sonoma:        "70728b71d49d15add086d75bfdcf0802dc39817bbfbb4e09501dd94476fe4c49"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "bdf747bdc76a1151087b1c7efe1db18e1fd7e938e078333d23a52280fc6d992e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6b9fa791196bd379fa3a8d0d1ee9c852096073895d57d2f10d05968ddd2f47cf"
+    sha256 cellar: :any, arm64_tahoe:   "a0b7e332c215868bd797495fb621b7d01ba4cd33205af1b7ced1cc79a167f6a5"
+    sha256 cellar: :any, arm64_sequoia: "776303873e27fff17f397ce96e36e8d31a9fdb1f18a025436512d1dd497c9e0c"
+    sha256 cellar: :any, arm64_sonoma:  "587a5669842a72082b5588143378e5467aa1f2120b8ab09325fedbc6d07ca331"
+    sha256 cellar: :any, sonoma:        "9ed030b8bca1eef42575c5b24eca8255f823a8e7d756c64a131e4216f7220911"
+    sha256 cellar: :any, arm64_linux:   "e45b10c4947ee27c0b33c3ef756d97ff35ba93b0722c8221df273815fbdae91f"
+    sha256 cellar: :any, x86_64_linux:  "b143573a446f585fa73baf388637c132a7eca06f85ddd69fdcb465db7ce31a69"
   end
 
   depends_on "cmake" => :build

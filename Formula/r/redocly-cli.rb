@@ -1,12 +1,12 @@
 class RedoclyCli < Formula
   desc "Your all-in-one OpenAPI utility"
   homepage "https://redocly.com/docs/cli"
-  url "https://registry.npmjs.org/@redocly/cli/-/cli-2.31.2.tgz"
-  sha256 "3fe665cf169b290181370f20fa04cb853a26990b8385b7197dd2fd111abc473c"
+  url "https://registry.npmjs.org/@redocly/cli/-/cli-2.34.0.tgz"
+  sha256 "9d46b18a6badb2746eba7701ba62b068e8817961c598b6d071deb5082ee3d4fb"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "c48b4fa89c06eff09b6d1060c4e8ee5d144d100d4cfeae186b0bdd605126f671"
+    sha256 cellar: :any_skip_relocation, all: "26c49231622f1f62f59832643edbd6d2b140104d3bde83a22e89e6059d017947"
   end
 
   depends_on "node"
@@ -20,7 +20,7 @@ class RedoclyCli < Formula
     assert_match version.to_s, shell_output("#{bin}/redocly --version")
 
     test_file = testpath/"openapi.yaml"
-    test_file.write <<~YML
+    test_file.write <<~YAML
       openapi: '3.0.0'
       info:
         version: 1.0.0
@@ -77,7 +77,7 @@ class RedoclyCli < Formula
                     operationId: getUserAddress
                     parameters:
                       userId: $request.path.id
-    YML
+    YAML
 
     assert_match "Woohoo! Your API description is valid. 🎉",
       shell_output("#{bin}/redocly lint --extends=minimal #{test_file} 2>&1")

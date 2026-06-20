@@ -1,8 +1,8 @@
 class Libupnp < Formula
   desc "Portable UPnP development kit"
   homepage "https://pupnp.sourceforge.io/"
-  url "https://github.com/pupnp/pupnp/releases/download/release-1.18.5/libupnp-1.18.5.tar.bz2"
-  sha256 "fe17522c605752f9f522d8cceab2a4601d75c2b701288a3bdbd9926e1bd9a9a1"
+  url "https://github.com/pupnp/pupnp/releases/download/release-2.0.2/libupnp-2.0.2.tar.bz2"
+  sha256 "4a79edb812397e38b85bb95344a7fda4a17f54fbf53fdb828cc23ddb7e695f77"
   license "BSD-3-Clause"
 
   livecheck do
@@ -11,15 +11,21 @@ class Libupnp < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "30b918b8cd888c12902dbcdd0e319144a9266b8d872ce9b11537cc765aac1128"
-    sha256 cellar: :any,                 arm64_sequoia: "529a307bcde0f98cfb407dc7387946793cd95ff4cee2d8c7def931727f29a0ea"
-    sha256 cellar: :any,                 arm64_sonoma:  "0ee2e57bba5d8ee8470f510acbf6680b8999d932362e97b9e6ee7d5f3134e94c"
-    sha256 cellar: :any,                 sonoma:        "d96216f345b05655855840b6550aed30b122affdfae72ac8f681b19cf9170044"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "945e39e6484fd9e2c0d73091e5e5b61873d9b25712e77e0d1183523b9e32c186"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7b733a51a72820a6d9a3f47b32b4fe718bbfbf43ff3291a38c79e39d1d7e9939"
+    sha256 cellar: :any, arm64_tahoe:   "87b39b9c80a49ae61e8176ccea3d588a5190cb6c32cc7607b3a01812ecdaa50a"
+    sha256 cellar: :any, arm64_sequoia: "2410c851735b65c032baf1874624a58bab632582fd75d7ea73ac7562e82219de"
+    sha256 cellar: :any, arm64_sonoma:  "d573ee0380c0b6d801da2831db8d660e26f2886ff227e7e0764c27fc71188dfe"
+    sha256 cellar: :any, sonoma:        "b8241aedaca02f45e6ee2e8e7937ea4694ae99d6aa8bbba9c7303d8336b688c1"
+    sha256 cellar: :any, arm64_linux:   "a83866dcb0cbea7253a313f8c70bc0115fc7c0d0ed31e25ec826a94f3ed28011"
+    sha256 cellar: :any, x86_64_linux:  "ad43292c09cd1335de976363ea15498691096a28080232a43b74ba1393a270de"
   end
 
   def install
+    # https://github.com/llvm/llvm-project/issues/65557
+    if OS.mac? && DevelopmentTools.clang_build_version < 1700
+      inreplace "upnp/src/genlib/miniserver/miniserver.c", "switch (gMServState)",
+                                                           "switch ((MiniServerState)gMServState)"
+    end
+
     system "./configure", "--enable-ipv6", *std_configure_args
     system "make", "install"
     pkgshare.install "upnp/test/test_init.c"

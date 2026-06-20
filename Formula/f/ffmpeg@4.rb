@@ -25,7 +25,6 @@ class FfmpegAT4 < Formula
 
   keg_only :versioned_formula
 
-  depends_on "nasm" => :build
   depends_on "pkgconf" => :build
 
   depends_on "aom"
@@ -48,7 +47,7 @@ class FfmpegAT4 < Formula
   depends_on "opus"
   depends_on "rav1e"
   depends_on "rubberband"
-  depends_on "sdl2"
+  depends_on "sdl2-compat"
   depends_on "snappy"
   depends_on "speex"
   depends_on "srt"
@@ -78,6 +77,10 @@ class FfmpegAT4 < Formula
     depends_on "libxext"
     depends_on "libxv"
     depends_on "zlib-ng-compat"
+  end
+
+  on_intel do
+    depends_on "nasm" => :build
   end
 
   def install

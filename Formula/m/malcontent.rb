@@ -1,18 +1,18 @@
 class Malcontent < Formula
   desc "Supply Chain Attack Detection, via context differential analysis and YARA"
   homepage "https://github.com/chainguard-dev/malcontent"
-  url "https://github.com/chainguard-dev/malcontent/archive/refs/tags/v1.23.1.tar.gz"
-  sha256 "636d20cc90b3816b02ea80c4f107deb7a296b183d0ff624368ba5e86c8ff2205"
+  url "https://github.com/chainguard-dev/malcontent/archive/refs/tags/v1.24.1.tar.gz"
+  sha256 "6a72c0071dc2e9f4379a5dce3129d2ce1fe880de0c7f80007e058c8dcd7cb9cf"
   license "Apache-2.0"
   head "https://github.com/chainguard-dev/malcontent.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "0173ad54d1b91168d05ffc45f4d60ea90f042d68d7876a1b98f12ee637392901"
-    sha256 cellar: :any,                 arm64_sequoia: "161f980adb92be46f68b42f126d534040fd533383f1686d586b825ca675ddcce"
-    sha256 cellar: :any,                 arm64_sonoma:  "b4599f45fe7b07df758e69a394817c73bb7900a12d549641fefea6c0a273f74a"
-    sha256 cellar: :any,                 sonoma:        "751d4f44b65def7b8bacf3c9dae930a84abf6361d872e2ce10969cba4fabadaf"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "307b206025069c06b60d87e78aa3e3cace8040ab863e757ddda4d721247d0582"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1cafbcfbdd00780deb277ab1a36a1691b750e8f78b69cc7c847edad8b25e862b"
+    sha256 cellar: :any, arm64_tahoe:   "7d72b5eba0479af4b968de12746f0fba70184b4c82fbf2af250be12e76e05be5"
+    sha256 cellar: :any, arm64_sequoia: "b82c279f30157e519f1f9add1be3c9095fdd321eb4302b1488daf1a5972c7f73"
+    sha256 cellar: :any, arm64_sonoma:  "8ea9e94db67537c02d898b6cde994a3a32ffa2d83245491765c5079112ecd241"
+    sha256 cellar: :any, sonoma:        "bb882f742e0d641abfb2f7250e3abab9ca78e3df2e3a055790ccdb0936927f80"
+    sha256 cellar: :any, arm64_linux:   "2be07734c45ea37c9b4f6d24b723c168c08b7f43270cbe2cc37a660eddcf0c43"
+    sha256 cellar: :any, x86_64_linux:  "a2f307c7895d29bb2a2e912b0673658b57115e2646812c19abcaa1bde5627a8b"
   end
 
   depends_on "go" => :build

@@ -1,7 +1,7 @@
 class AcesContainer < Formula
   desc "Reference implementation of SMPTE ST2065-4"
-  homepage "https://github.com/ampas/aces_container"
-  url "https://github.com/ampas/aces_container/archive/refs/tags/v1.0.2.tar.gz"
+  homepage "https://github.com/aces-aswf/aces_container"
+  url "https://github.com/aces-aswf/aces_container/archive/refs/tags/v1.0.2.tar.gz"
   sha256 "cbbba395d2425251263e4ae05c4829319a3e399a0aee70df2eb9efb6a8afdbae"
   license "AMPAS"
 
@@ -21,8 +21,13 @@ class AcesContainer < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "b73f4e399a8e1e405f0f0fc0c3e514e52a22abe17b8e518868074c118cd1116a"
   end
 
+  deprecate! date: "2026-06-05", because: :repo_archived, replacement_formula: "openimageio"
+  disable! date: "2027-06-05", because: :repo_archived, replacement_formula: "openimageio"
+
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
+
+  deny_network_access!
 
   def install
     # Workaround for newer Clang

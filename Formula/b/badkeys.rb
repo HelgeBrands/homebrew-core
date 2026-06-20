@@ -3,18 +3,18 @@ class Badkeys < Formula
 
   desc "Tool to find common vulnerabilities in cryptographic public keys"
   homepage "https://badkeys.info"
-  url "https://files.pythonhosted.org/packages/5b/b8/9c5fdec4eb0b0a8b2e6a5a7a2d6da0fa5a905601a5e6a8c1f2aecb22f5c7/badkeys-0.0.17.tar.gz"
-  sha256 "5562f2276a0343c5cfa5ecc54dc0e658e1b65fd36016858c04af9f33f7e9f826"
+  url "https://files.pythonhosted.org/packages/bd/a7/b222a5f0db2bc9e765252a109da1ab1baeed0da6e0b050e2baa3208650c4/badkeys-0.0.19.tar.gz"
+  sha256 "dc3c3431b79c11dbe54bcfbbdc1e263098136585a4f6f497d81636e55a5b7b5e"
   license "MIT"
   head "https://github.com/badkeys/badkeys.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ff514f83c3e336777e658ed4113ae33d55003a5ea623aa3ace810e94fa9d00fe"
-    sha256 cellar: :any,                 arm64_sequoia: "bfb4ee029aa483e8e65bfe142d9b8a69587fad6fd7e81a4152d62e635e506a95"
-    sha256 cellar: :any,                 arm64_sonoma:  "65f571cbfb9b3f9a5b7152bce08edfb7f4b794a317636d24e9b6d4c0c1b592ac"
-    sha256 cellar: :any,                 sonoma:        "c4d385ff9e584c3289891e8eb78f4b35158995da701895458ff8e9fab6d4b0d4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "342bf80dcfc695ac6fe4ee708ebad245ed26211cd4bbba4345b262d20ecc8680"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "449c92c21e80fed4714358834e26b652047fdd9865bf75c53e8f494328f0afac"
+    sha256 cellar: :any, arm64_tahoe:   "8e6d799c2deb61c1100c0680b025fa512160d444a038a487386959f807292f0f"
+    sha256 cellar: :any, arm64_sequoia: "ff8d118bed85799682f42a5b0fb7f8cd85d720c6fb757ffd2f2287c8e1528d30"
+    sha256 cellar: :any, arm64_sonoma:  "cdccb77c8d6f9635065689d456238497a721942aa5277555bdd325f378993a7e"
+    sha256 cellar: :any, sonoma:        "6aa397ecb8a0ff1c7ce69388567a23f02c209a194d25c9ebc6a8b7c2211e4d37"
+    sha256 cellar: :any, arm64_linux:   "26435059f9d064ce89dcc7eb89e711813d63ef05d83d4a2bfb0749c635ab6d06"
+    sha256 cellar: :any, x86_64_linux:  "9666be3c4976a406928617d3458763c6a28fde11c88d1f0a50886e50fc096b0e"
   end
 
   depends_on "cryptography" => :no_linkage
