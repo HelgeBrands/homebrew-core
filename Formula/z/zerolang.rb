@@ -1,18 +1,23 @@
 class Zerolang < Formula
   desc "Programming language for agents with explicit effects and predictable memory"
   homepage "https://zerolang.ai/"
-  url "https://github.com/vercel-labs/zero/archive/refs/tags/v0.1.3.tar.gz"
-  sha256 "0e8f91f9e5abc490488504f7e878a1b042c6dd432e693ec3bbcd5acb248f83e4"
+  url "https://github.com/vercel-labs/zero/archive/refs/tags/v0.3.4.tar.gz"
+  sha256 "222c6ca439103441c7c2169351b0aeb841c6f5eca985c07dc53f131173e5c2a7"
   license "Apache-2.0"
   head "https://github.com/vercel-labs/zero.git", branch: "main"
 
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "da1cfa5aca3344756822c28dc22498afbb7154614e9491dc9c5ef2bc7cef9016"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e33138bae9a70b0d1ebe60bf037af026a4e1b1392608a8ef7f5d7be09e1dbb6c"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "032262ceefe35d4ea4dfaefa812b7dc52fb196f52af1358157dbe85c0ea68fda"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4de78f2a38a57bcb28ccca908dc3d7a16c6208812a386e43b9b3234443274c5a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9e6d401a21f4705dfb6833efc1e3aefac4c77b676ea2e61a3039577d7270d43b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d28835d6e392a2899069c9247bd2be90226aad08f2eb064987991f481acce1d9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "60063d4a31c92fff77c14731b9374bc1ef0523b637da04bcebaf8d347a747916"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "867c3a8ef068fa0860d6cc658a9ece38a8ccee47d4292d5350f51575d88526fa"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "913cbe4f52c8917813b02fa1bee325d612d6086983c3fb3b13a44724a699e57e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c07375f38c2871a8ef30df5d868bc8f9178461c30747d7f83b1bc20a1fa8f440"
+    sha256 cellar: :any,                 arm64_linux:   "c66fed44abee535dbb20d4b1b45b3bd83b7104afbdb5d5c76d869939112b9281"
+    sha256 cellar: :any,                 x86_64_linux:  "9ad8d2ce3afd8b7ee43eb254431fbd455a056abcff17482376d9ad7357b24e88"
   end
 
   def install
@@ -23,11 +28,14 @@ class Zerolang < Formula
   test do
     assert_match version.to_s, shell_output("#{bin}/zero --version")
 
-    (testpath/"hello.0").write <<~'ZERO'
-      pub fun main(world: World) -> Void raises {
-          check world.out.write("hello\n")
+    (testpath/"src/main.0").write <<~ZERO
+      pub fn main(world: World) -> Void raises {
+        check world.out.write("hello")
       }
     ZERO
-    system bin/"zero", "check", testpath/"hello.0"
+    system bin/"zero", "init"
+    system bin/"zero", "import"
+    system bin/"zero", "check"
+    assert_match "hello", shell_output("#{bin}/zero run")
   end
 end

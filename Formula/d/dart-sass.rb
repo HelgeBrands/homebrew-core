@@ -1,8 +1,8 @@
 class DartSass < Formula
   desc "Reference implementation of Sass, written in Dart"
   homepage "https://sass-lang.com/dart-sass"
-  url "https://github.com/sass/dart-sass/archive/refs/tags/1.99.0.tar.gz"
-  sha256 "5f969b2eedf86384d90a9a339824b6652a4600e9e5f32784a7e48e453e145016"
+  url "https://github.com/sass/dart-sass/archive/refs/tags/1.101.0.tar.gz"
+  sha256 "2af48b186eb895f5e70a2fd29e001b0dcb98d51382dd95117ad1be68f600788f"
   license "MIT"
 
   # Some tags are used for sass-api/sass-parser
@@ -12,12 +12,12 @@ class DartSass < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "04b68917e5fa15257e4015a7464bd866627c4676c48f0c9c4f42cbdff47c8f10"
-    sha256 cellar: :any,                 arm64_sequoia: "504e7c9ab687facfd63978bb335f3bc3cddaedb5c0494093e13b503a0f055d21"
-    sha256 cellar: :any,                 arm64_sonoma:  "d0ea9ce1bd01db3b76a7c64edb75da8716883d1eca1e7d9e62a11ebcb4e28b6b"
-    sha256 cellar: :any,                 sonoma:        "74939be86282ef7692b4d0460af6a819aebe8de9efa2ca53d4bff5641bbeb485"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "c1452e98b3a7c6bfd511cb657a9e91e709bfc60da565c18b77b6ef8f17c70858"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cedfbfb2a3ac93d3a27c965fe8b235ad56d5b17e3a5396660dac891a01e99ec6"
+    sha256 cellar: :any,                 arm64_tahoe:   "dd56e48f7b6b5f431eedb7748c243600561361306b4e01339c4bdfb318f11853"
+    sha256 cellar: :any,                 arm64_sequoia: "c7110799ec47c0a41d5d0a167bb0899d5627781a649778648f25a9549973e1e8"
+    sha256 cellar: :any,                 arm64_sonoma:  "ed046bf044f14c8a9e2a504e2cec9100b895a9a9aa7d8cdf3a394c958e79aaeb"
+    sha256 cellar: :any,                 sonoma:        "cff3394ae49a55ff71c01faef336a9317b5b125abb8a9161adfe83b75515d043"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "455a3e31b77d0f7d5ee22deb7a29c52787700cbe78f461ee91a57fee805b9a55"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fd7d12bbcc0fae52d46a75e50426fa9caff7060b7af14c453fd3de7b244b6eeb"
   end
 
   depends_on "buf" => :build
@@ -27,6 +27,11 @@ class DartSass < Formula
   resource "language" do
     url "https://github.com/sass/sass/archive/refs/tags/embedded-protocol-3.2.0.tar.gz"
     sha256 "4e1f81684bc1666f03e52ddc790d0c2c22d99a5313fa2efe1dde4a5b5733c186"
+
+    livecheck do
+      url :url
+      regex(/embedded-protocol[._-]v?(\d+(?:\.\d+)+)/i)
+    end
   end
 
   def install
@@ -61,13 +66,13 @@ class DartSass < Formula
     (testpath/"test.scss").write(".class {property: 1 + 1}")
     assert_match "property: 2;", shell_output("#{bin}/sass test.scss 2>&1")
 
-    (testpath/"input.scss").write <<~EOS
+    (testpath/"input.scss").write <<~SCSS
       div {
         img {
           border: 0px;
         }
       }
-    EOS
+    SCSS
 
     assert_equal "div img{border:0px}",
     shell_output("#{bin}/sass --style compressed input.scss").strip

@@ -13,12 +13,13 @@ class Languagetool < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d6f1f9c9689a9c44484d7bdaeebec9bd9c5ade21f2d0a31bc229cf8862564a0c"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8d8adb5386f04909c226e5655817e944b05c888608e032ded305c3f99618b8c2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e22c41d9a141788580600f4e5296c9ea75e41f24bb55f3501c3a330fd7e07ae2"
-    sha256 cellar: :any_skip_relocation, sonoma:        "6f7f36ab6f9345d9c0b76e550fdf36b2d3162ebcea8ff93f1f189d4b3142db75"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f0c7bc609cc7f0f1a820a3726de8b5c768e44035834209ab3d3d3d30e755a1a1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "62426512fa454101a223b9a178e4983f43b48aed3782352c268b04f4e9859273"
+    rebuild 2
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "09bf7415e9ada06b02609681d2d8e1ac5a16cfddebaee979fd8a3eff45022cc5"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "68783053c71a4a16dfc6a7fc977340ad4feaedbdfb92e606830003548ff00249"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5b3e15a9e42fbab0702c40b20cd350e4fa8d1429b044b4763a918c676b88f6fc"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9d74c89ed15f1bcd9b6b5cfdda2b880ea43d2be6a2c7fc4f28a1744bd5ee00de"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "c026514d9e1f0cfc8e413f6806a7b1251e9a0ecbdc51b43f57b0b281c41f29cd"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "683743c0118447b8eef14156e601d585cca8e907f99b92ddc2a63db79e2f13b8"
   end
 
   depends_on "maven" => :build
@@ -38,18 +39,14 @@ class Languagetool < Formula
 
     bin.write_jar_script(libexec/"languagetool-commandline.jar", "languagetool", java_version:)
     bin.write_jar_script(libexec/"languagetool.jar", "languagetool-gui", java_version:)
-    (bin/"languagetool-server").write <<~EOS
+    (bin/"languagetool-server").write <<~BASH
       #!/bin/bash
       export JAVA_HOME="#{Language::Java.overridable_java_home_env(java_version)[:JAVA_HOME]}"
       exec "${JAVA_HOME}/bin/java" -cp "#{libexec}/languagetool-server.jar" org.languagetool.server.HTTPServer "$@"
-    EOS
+    BASH
 
     touch buildpath/"server.properties"
     pkgetc.install "server.properties"
-  end
-
-  def post_install
-    (var/"log/languagetool").mkpath
   end
 
   service do

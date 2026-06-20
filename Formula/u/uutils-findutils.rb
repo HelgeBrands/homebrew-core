@@ -1,19 +1,18 @@
 class UutilsFindutils < Formula
   desc "Cross-platform Rust rewrite of the GNU findutils"
   homepage "https://uutils.github.io/findutils/"
-  url "https://github.com/uutils/findutils/archive/refs/tags/0.8.0.tar.gz"
-  sha256 "932f153d256f7a4cf40255a948689bf59a10f14c8804151817ab50fa1b46429a"
+  url "https://github.com/uutils/findutils/archive/refs/tags/0.9.1.tar.gz"
+  sha256 "ac60fa34c09110a386c3782e94f5ca3f9294f64edf82855637c630c36de65ed3"
   license "MIT"
   head "https://github.com/uutils/findutils.git", branch: "main"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "6eb3e88da89772a813c0147b7c3a0f62832b7661ff428c6c2fdbf52a03d63593"
-    sha256 cellar: :any,                 arm64_sequoia: "0a7c3c5b37302609771a28be11cc84443a759ecd8825c3ee1532f578d3428ba6"
-    sha256 cellar: :any,                 arm64_sonoma:  "1e2926212ba80f571e8a9c9a4e240e2418c828d28a4c73afd11263771c78f522"
-    sha256 cellar: :any,                 sonoma:        "4504ecdf9e500e9bc9c56ebacd087bd056fab8d0e039e7cdc6021e9d3ac82afb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1a3d9faebb6fa34813ab9f17a87f2a10e68a5f08267791487d70e1a09376da5e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2edddc168292e0f75bde8380d1e6ff5f11c053f9aeb9d25752ce327410083bd2"
+    sha256 cellar: :any, arm64_tahoe:   "3ad05549b7514c55b367f56b3f6bc6d34b29f854d604989fe8fc5159fb554ec9"
+    sha256 cellar: :any, arm64_sequoia: "48234236e97ec3b23a125571f8e97f4b47b19fb79fa5bdf1e3b5c29c7aed200c"
+    sha256 cellar: :any, arm64_sonoma:  "a6b024849ec54e2d910f7890d8d9826cb1ab6e47f059e3e5828e8179a7082a7c"
+    sha256 cellar: :any, sonoma:        "9a88974f86159b84dd5620ea0f101405e196edcd9bbbe5d17568f662f5c17f2a"
+    sha256 cellar: :any, arm64_linux:   "ba6c49a8944492a4fb4004014db33229d5b1c1e6e261939e04be128b52e7e7f0"
+    sha256 cellar: :any, x86_64_linux:  "98829d94828c779fe9e466de878002b00df91493acb92aa2121a592da8ad1d6d"
   end
 
   depends_on "pkgconf" => :build
@@ -69,10 +68,7 @@ class UutilsFindutils < Formula
     assert_match "HOMEBREW", shell_output("#{opt_libexec}/uubin/find .")
 
     expected_linkage = {
-      libexec/"uubin/find"  => [
-        Formula["oniguruma"].opt_lib/shared_library("libonig"),
-      ],
-      libexec/"uubin/xargs" => [
+      libexec/"uubin/find" => [
         Formula["oniguruma"].opt_lib/shared_library("libonig"),
       ],
     }

@@ -1,23 +1,26 @@
 class Kiota < Formula
   desc "OpenAPI based HTTP Client code generator"
   homepage "https://aka.ms/kiota/docs"
-  url "https://github.com/microsoft/kiota/archive/refs/tags/v1.30.0.tar.gz"
-  sha256 "826d22b65abcc01f86b781019635a7ecf1a9aa79417eb6adb10ce9a5d0f2a04b"
+  url "https://github.com/microsoft/kiota/archive/refs/tags/v1.32.2.tar.gz"
+  sha256 "2008cc39f0f3201cad3bc77030b3d5be58b73efab21bcc345268880cd2339191"
   license "MIT"
   head "https://github.com/microsoft/kiota.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9c5500ff8a56608219d158610e26dab90aeb9f53ea3a3f5140fc142fb39f4587"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0cdc292c3952ddc65e3cd3c162300c48b8629d13bf761048e0957e6349bacd0f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "874246ba9c5aad57364ace1e2c764ab8767a2fbecde992826838e266e5aa5827"
-    sha256 cellar: :any_skip_relocation, sonoma:        "88746020930e45e44a550802b00916b63ea908c95be49018b0af018cf38b87a7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "32d80309a623dea753c02a76f67c19ec5cce37d67c22a52ec1efe26297734bdb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6fd24d5f53bfbc3bd56db1e4df2641974685e5d270f1e50faad5072eb9576e9c"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0ae3f671acf6f0be46c023174f50f51631b007f4bac8e38002db3406d88eb335"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1594f47830380645dce4ccc847b8e8ecc254c79f26c5613fd7d333103414cd39"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "93add8482c7b35d6e5cbcd5f98998e9a2f231927db34aad2be35820114e5b866"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9789cb030adff2cbc59a573fd8edd343db3b032630dc32a69119c47bc7348a11"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "91c4b442f6eab050a4c9a558d3e043135eb56e5691c20f2dbac80abfd2870993"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ba4ba5ca470ef0a11ad8b12bf7fbf23894b9600f8b0ba69c6b6b758833fc56d4"
   end
 
   depends_on "dotnet"
 
   def install
+    # Ignore dotnet version specification and use homebrew one
+    rm "global.json"
+
     dotnet = Formula["dotnet"]
 
     args = %W[
@@ -39,10 +42,10 @@ class Kiota < Formula
     assert_match version.to_s, shell_output("#{bin}/kiota --version")
 
     info_output = shell_output("#{bin}/kiota info")
-    assert_match "Go          Stable", info_output
-    assert_match "Python      Stable", info_output
+    assert_match "Go         Stable", info_output
+    assert_match "Python     Stable", info_output
 
     search_output = shell_output("#{bin}/kiota search github")
-    assert_match "apisguru::github.com                            GitHub v3 REST API", search_output
+    assert_match(/apisguru::github.com\s+GitHub v3 REST API/, search_output)
   end
 end

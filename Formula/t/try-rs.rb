@@ -1,18 +1,18 @@
 class TryRs < Formula
   desc "Temporary workspace manager for fast experimentation in the terminal"
   homepage "https://try-rs.org/"
-  url "https://github.com/tassiovirginio/try-rs/archive/refs/tags/v1.7.8.tar.gz"
-  sha256 "27c9f9662bd053cafa7e2b52ef86a1cd7aa81ef8838eb6bcee49c04383c55db7"
+  url "https://github.com/tassiovirginio/try-rs/archive/refs/tags/v1.7.11.tar.gz"
+  sha256 "39c9c5dbc2eb9153048e7801d756bdf1d38fc2a0d32bff8e52eb05ef342fac10"
   license "MIT"
   head "https://github.com/tassiovirginio/try-rs.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "995d8ff20b34caabf1f99a019b0e2429834ea1a194aa2196b20e2189c3fc003e"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "1ed7f0c7e9c0c3cc88f9a9187a871966adc831a81f436a8be6afefff1e5afb42"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c16e4a5fd761aa992a0f43c716614fd4a7817278188673014d96f452a4c83fa6"
-    sha256 cellar: :any_skip_relocation, sonoma:        "a3ac0dafa8de33c1f6383b4850472888967ec52b2ebb4f6c03f9f6c4b2fe3434"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f9cf267da76fc8c57308583d9a14cec6da750611ce9473b60c745540c24af170"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "653cf5c1e67d2be14e4f27b28ec584a523b336b7856ec36d7225dd70a899d54f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "629432a8e55484285e55415c0d3433c645484df302425c0b798c4372e05f51a2"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "983894930d210a059f4864963c960d745677d0395582b659e0c3f50ffe270115"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "88c709eb5f863b5f3da24ff343296d65f3b5c4b543c9912213148c661ed4f48f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "afa22b6a00502092fb623a0fb9def23dbb38d59669da7fe9db7da9960ab0aa66"
+    sha256 cellar: :any,                 arm64_linux:   "46f8824577d9fcb76e2a7a311f4db145546226dc92081a8a2e0c21468985ddf5"
+    sha256 cellar: :any,                 x86_64_linux:  "cac7d7538156c49d787fc177e8d035cf1cbfbc5756482b419270ae9c723781c6"
   end
 
   depends_on "rust" => :build

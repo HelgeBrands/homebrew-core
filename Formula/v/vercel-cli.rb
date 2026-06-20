@@ -1,17 +1,17 @@
 class VercelCli < Formula
   desc "Command-line interface for Vercel"
   homepage "https://vercel.com/home"
-  url "https://registry.npmjs.org/vercel/-/vercel-54.1.0.tgz"
-  sha256 "9336d49b024e15da0db1ff5d467bf9d9c2c39639a9b94fcb73b30863c7f1801d"
+  url "https://registry.npmjs.org/vercel/-/vercel-54.14.2.tgz"
+  sha256 "9e7a91ad5c30e86779cb32f12d5b30aaab81d99f0c45545d8795633eb8b32674"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "84e8ac3aa4a4ed263a18ed8e5660d6fca583e2b685b87247239c188dda9733cb"
-    sha256 cellar: :any,                 arm64_sequoia: "0300fd85b4fceeb13e512e53aa385dac47be3cafb37b52e6fce2e891fb7848ae"
-    sha256 cellar: :any,                 arm64_sonoma:  "0300fd85b4fceeb13e512e53aa385dac47be3cafb37b52e6fce2e891fb7848ae"
-    sha256 cellar: :any,                 sonoma:        "ef447b84b065f43de02795d322a262ce991b1dd224832108d1cda121f744c993"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f7a72bbd69531ec949939fa5a972e915ed158bbda2ce957dd3f93dbc75fd5c43"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e12f847f7ec2cf9ca7324f4ccac0ea89a2cf440bd302219dec3d47761c780ae4"
+    sha256 cellar: :any,                 arm64_tahoe:   "4a0deaed43866affb4d8057e87f0705ac84cd70c132cdef3e83997ea05e1de57"
+    sha256 cellar: :any,                 arm64_sequoia: "75458c21e09cf532b9d66d684bd93d2ecefe0fa3ae153d9ab22abacc6f976215"
+    sha256 cellar: :any,                 arm64_sonoma:  "75458c21e09cf532b9d66d684bd93d2ecefe0fa3ae153d9ab22abacc6f976215"
+    sha256 cellar: :any,                 sonoma:        "65e42c8d41f53dd0631cbc778d92521ba49dd1be70b2cd1949950861d0161cfb"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5e368f0d75e62954dcb78f4c3da592dd0da1355488a18fc27fad8378f731aa8f"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f1ed7108e1d264b577687aa0cd48e6a29ab00c3b1249c1a1dbfe1105b4ad9115"
   end
 
   depends_on "node"
@@ -26,6 +26,13 @@ class VercelCli < Formula
     rm_r node_modules/"sandbox/dist/pty-server-linux-x86_64"
 
     deuniversalize_machos node_modules/"fsevents/fsevents.node" if OS.mac?
+
+    (node_modules/"@vercel/go/bin").glob("**/proxy-*").each do |f|
+      next if OS.linux? && f.arch == Hardware::CPU.arch
+
+      rm f
+    end
+
     bin.install_symlink libexec.glob("bin/*")
   end
 

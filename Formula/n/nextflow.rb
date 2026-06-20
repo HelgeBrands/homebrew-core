@@ -1,8 +1,8 @@
 class Nextflow < Formula
   desc "Reproducible scientific workflows"
   homepage "https://nextflow.io"
-  url "https://github.com/nextflow-io/nextflow/archive/refs/tags/v26.04.1.tar.gz"
-  sha256 "c3dc720e3ff8377d8b8ff95d9afa4239922a86abe1da45b269c49ec7368dbc4b"
+  url "https://github.com/nextflow-io/nextflow/archive/refs/tags/v26.04.4.tar.gz"
+  sha256 "9c191514b7edc5285d1bd029e913da775bde61ad57586aba062ca85d29ff991b"
   license "Apache-2.0"
 
   livecheck do
@@ -11,12 +11,12 @@ class Nextflow < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fd5b78bef096060b3f39948e71d1242b3e4c4800de18fe8c5bc6a2280ba4d9b1"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ea1e59f2ffb195599aca043feb54942654c7f4de72148c041a082a1ba8604315"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5add0fdd7c47f5ea03556725af570a34a397f0b462baf5808efae32ac1b91119"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0d38335d567bcf75a3600c9c8ffc103389f959510ad9213099ea171d07fc720f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5b2fc26ab23da7d3bc8e200c5fa7833210095348d779290ab71e66e8aa03322d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "89a8169b409dd53c33b59b48aeb23089fa6eb82c071a4ef01851e74f41bc34db"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4c959d30dd55f435d157d71e11eaeb039c0220fb97fc44300583169178201320"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "ebed4ace175fb9eac2d885dd400a813fe3c93499138676a50650c0f8f995a09e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d2a42c43f85c2296df3010c4ac2325b390c774f1153d254eb17590ad1bc1d0b6"
+    sha256 cellar: :any_skip_relocation, sonoma:        "577a05bbfb2cad36071a3c6c71ed00bab23e83cfa2c50e090d3eef528405721c"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "100ee07c925bb4f3ca52867fa62ab198629e32a4edccad0ab28605052f869f6c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "39ba2584deee6bd146c534ebef99f14ec0d363be630acb38f84f38ee6e7d7157"
   end
 
   depends_on "gradle" => :build
@@ -32,7 +32,7 @@ class Nextflow < Formula
   end
 
   test do
-    (testpath/"hello.nf").write <<~EOS
+    (testpath/"hello.nf").write <<~NF
       process hello {
         publishDir "results", mode: "copy"
 
@@ -47,7 +47,7 @@ class Nextflow < Formula
       workflow {
         hello()
       }
-    EOS
+    NF
 
     system bin/"nextflow", "run", "hello.nf"
 

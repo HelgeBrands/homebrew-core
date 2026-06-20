@@ -1,8 +1,8 @@
 class Cdo < Formula
   desc "Climate Data Operators"
   homepage "https://code.mpimet.mpg.de/projects/cdo"
-  url "https://code.mpimet.mpg.de/attachments/download/30182/cdo-2.6.0.tar.gz"
-  sha256 "752d5cda6fa3fdb8a04dcea16af5918e5f9f54657d9a5d2e35ae34f5755c31d8"
+  url "https://code.mpimet.mpg.de/attachments/download/30213/cdo-2.6.2.tar.gz"
+  sha256 "d59f57a3b33a063023b2b0ef8f38165e0bcf426d3b843031c5078e76832e957b"
   license "BSD-3-Clause"
 
   livecheck do
@@ -13,12 +13,12 @@ class Cdo < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "6ba8a2f9742d13f5aa6a7cff08f8ba6e27df53a3f535762f0fafc432cf72150f"
-    sha256 cellar: :any,                 arm64_sequoia: "3ef898f47d4050e5d68d584494c426990bac21004927e5aa90d79638d464f212"
-    sha256 cellar: :any,                 arm64_sonoma:  "120b0a3bde18f4bff97d86858bebae0eb4d5cbd1af15260c6a2c2dfe64133789"
-    sha256 cellar: :any,                 sonoma:        "fe86c49e27d75e036471845bbbbf26239fabcd7cd52d0f7df0471bcb9b214add"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "fe3e3ca55382e51cc4d7ffefbe2cd9a073da639aefa05f289c2293a3de88d8e7"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1a73f6c3ce13ff500639aa8905e35415bdc28e5a0161d3518f0f3f33c5e41b04"
+    sha256 cellar: :any, arm64_tahoe:   "511e8f6de6a080cbf5a6bfabb9e1937f7e9fcfc79b39bc78fbbc9cf2283795ae"
+    sha256 cellar: :any, arm64_sequoia: "78ba07d4cecf2a552ea96a050e6ac3c6860c9da9522a4c4415cb9b0a679a9ec6"
+    sha256 cellar: :any, arm64_sonoma:  "e8c58b8c95859d8473c0ecf3cad8d7e59781ac17ccab902f00383545bdac74d4"
+    sha256 cellar: :any, sonoma:        "bf520a35b60a24374dba4d0b0fa426823f8e0c81a64a30ce3e9ce9da5a638266"
+    sha256 cellar: :any, arm64_linux:   "47f43c779e92d1a42d70ab22f8ae03ac16c29e5e132c085942c038c672561bba"
+    sha256 cellar: :any, x86_64_linux:  "59dc7ce3668a303860b80cb66465191e96d821a388e7fd90e9b52bd3a769a0f2"
   end
 
   depends_on "eccodes"
@@ -30,7 +30,11 @@ class Cdo < Formula
   uses_from_macos "python" => :build
 
   on_macos do
-    depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1500
+    depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1699
+  end
+
+  on_sequoia do
+    depends_on xcode: ["26.0", :build] if DevelopmentTools.clang_build_version >= 1700
   end
 
   on_linux do
@@ -38,8 +42,8 @@ class Cdo < Formula
   end
 
   fails_with :clang do
-    build 1500
-    cause "Requires C++20 support"
+    build 1699
+    cause "needs C++20 std::jthreads"
   end
 
   def install

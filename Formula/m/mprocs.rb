@@ -1,18 +1,18 @@
 class Mprocs < Formula
   desc "Run multiple commands in parallel"
   homepage "https://github.com/pvolok/mprocs"
-  url "https://github.com/pvolok/mprocs/archive/refs/tags/v0.9.2.tar.gz"
-  sha256 "1eefc5346f3c8b24ee6bf74582312fc61284ea54d4d384a4a8226d4b75ddb98b"
+  url "https://github.com/pvolok/mprocs/archive/refs/tags/v0.9.6.tar.gz"
+  sha256 "62488726fc5539772a41863428026f51b4c03d5ac27c56191775e5a721ae90c2"
   license "MIT"
   head "https://github.com/pvolok/mprocs.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c869339d62813971e67d8f884c12fedd6a97e32a2abdd3ca4857fca92eb6b35a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "98308e0626104774fc560cba95bdc6508ccd618ec195d3b8433aeeccc8401837"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1af5c10c627a687a41443f8d7d0a116eea05c23bb03dcf11ea21114afd060ee6"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b9ac96d9aa27c7e627d2e5a7860670c6114be2e879b8c545a8768fc588b4919e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "719870a0ac991acfa4730e1ac474e7c2dab96ee3fbfa51273d0d9463076aa0f6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "238de7c5d39519ea7b25cd5848d74698600ed8ff18a01502fd8b39ba8bb21b55"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f394b0b592afda66436defbe72b0995a7471ad92bb8839d34158f1d2fa570854"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "526b3adb479f79436d72e7ad163fb596124e4d57d7ef528b55241b43003ca6fe"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "1f59490acf88577eb898b54d1eb234f8da47d04e53ef3cfe031b1ad593613cf2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "23c84d9dac182c973b49e4021347ecf3272930b098aac8d0ed79d6dd2b2852b7"
+    sha256 cellar: :any,                 arm64_linux:   "f8c9637453f3b78582dca1d2d580a71ea247b99e282539581cce5524de6a36a1"
+    sha256 cellar: :any,                 x86_64_linux:  "35aff5529f3a2c7e5263a59046edd602cdaa77648eac82cea5d8c2ba22009936"
   end
 
   depends_on "rust" => :build

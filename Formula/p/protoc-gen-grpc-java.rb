@@ -1,17 +1,18 @@
 class ProtocGenGrpcJava < Formula
   desc "Protoc plugin for gRPC Java"
   homepage "https://grpc.io/docs/languages/java/"
-  url "https://github.com/grpc/grpc-java/archive/refs/tags/v1.81.0.tar.gz"
-  sha256 "8ba174657d86acae7978b0f4eea14a73e74b1d25ba4dee65315fab4ec9f2c041"
+  url "https://github.com/grpc/grpc-java/archive/refs/tags/v1.82.0.tar.gz"
+  sha256 "079bdef3cb6343e5036e3dd86ce2f535a667e5df540e2b51284b47bfd00a359f"
   license "Apache-2.0"
+  revision 1
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "638426ffda4e175e08102d82e30453297aad616010d2e0659d511747d65b0df2"
-    sha256 cellar: :any,                 arm64_sequoia: "434b01d7d5dd45df30875a7d6e8cd6685b4ffca64cb18a63e01c0a7db9df86f0"
-    sha256 cellar: :any,                 arm64_sonoma:  "f32c764aebef425ce1a57bb07ffbf5ccdacb646dca419edb95d4cdb3a7b11c0c"
-    sha256 cellar: :any,                 sonoma:        "755d2b42460eb184100250f3132782b9dab1349103ba3a9e989019c8b4b7f2e0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "b04ab6fe7f31c32e33786e0f84414200f264119dfd8153805a3d330ceb1ddca7"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6f3f1caf8133c6b7f602b35dc21f5b51ed6ea4728e4d29a3f2c66a5729c18cf0"
+    sha256 cellar: :any, arm64_tahoe:   "e9eee8bba47ca232a9593f9ad8ee44fe5421d6eaefdd57916167f19c7555731c"
+    sha256 cellar: :any, arm64_sequoia: "62a0febcd7ad0b695ba914e640eb5ff15abcd3b8a80c7cf829402303ba2637d6"
+    sha256 cellar: :any, arm64_sonoma:  "26f165ade573dc3df69a963a7c9ffd4ce590764a94481533350943861123408f"
+    sha256 cellar: :any, sonoma:        "f83e7717a667bc6c23bf067e89d27954e8c6c6a6c873ff05c2d0ef9fcf784f2b"
+    sha256 cellar: :any, arm64_linux:   "3788f0beb822af4bf85f94ef41226e7734e3ddcf1c52313360d49016c78cf5c7"
+    sha256 cellar: :any, x86_64_linux:  "a5a9ecc1665fb475494836741a442bb7791cc5cd38f44f6ddb423c440e25cff8"
   end
 
   depends_on "gradle@8" => :build

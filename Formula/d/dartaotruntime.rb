@@ -2,21 +2,22 @@ class Dartaotruntime < Formula
   desc "Command-line tool for running AOT-compiled snapshots of Dart code"
   homepage "https://dart.dev/tools/dartaotruntime"
   # NOTE: Using a placeholder file because the build source is fetched by gclient
-  url "https://raw.githubusercontent.com/dart-lang/sdk/refs/tags/3.11.6/README.md"
+  url "https://raw.githubusercontent.com/dart-lang/sdk/refs/tags/3.12.2/README.md"
   sha256 "ff4301ec8e5c1259c5778c4abc947e303308cd31af30acd55575f5ca7ed6f405"
   license "BSD-3-Clause"
+  compatibility_version 2
 
   livecheck do
     formula "dart-sdk"
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4c054f2d5300ce770854225afbe9f2d8c580afea89c4e25efd4af233641a2566"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "2164aed8e19788b8ced3d412a3ada024e1f199b0018411e16759480f289789a0"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8bb3415f29dfefae1979948a3f05da1c74016354148626eaff10d9c219b6a012"
-    sha256 cellar: :any_skip_relocation, sonoma:        "5c6dce0fbccdeb79f4d7fbd53080073f1b723ec5c427bb8b2bccffaa456321a2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "22a1077aa0af980837cc9d25d29339d313ab2d491afd8d8beb4b92ffc29f31c3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f761bb72bea202529c42e397eaa21a4235ae6cc819e1ca0602bbd2999fe0200d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e669e98842c8f645835ae1efe428fcebb49b912b5f5adbdc680f995bd85cce04"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b30143d30f2e21e7f7ef4db123ef1af58b3867fbedca242d71ed01c0eb4bf3f6"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9171b78a8a9a9f0fd9b6c00767b0a4cf5fa479820a304fe812ab5e2655f3ccbf"
+    sha256 cellar: :any_skip_relocation, sonoma:        "aa258e768473403a6ed77448830b5405722c054ae9e76a1478008907ae620477"
+    sha256 cellar: :any,                 arm64_linux:   "392c146fd6ece31992b92847d6f6cc4cb466b171af0945295f7ccb727e580990"
+    sha256 cellar: :any,                 x86_64_linux:  "257b274af739934c2cfedcb5a62c882a1fe9c3715c708e943b69f141dfa1bfd3"
   end
 
   depends_on "ninja" => :build

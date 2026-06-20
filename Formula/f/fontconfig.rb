@@ -1,8 +1,8 @@
 class Fontconfig < Formula
   desc "XML-based font configuration API for X Windows"
   homepage "https://wiki.freedesktop.org/www/Software/fontconfig/"
-  url "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.17.1/fontconfig-2.17.1.tar.gz"
-  sha256 "82e73b26adad651b236e5f5d4b3074daf8ff0910188808496326bd3449e5261d"
+  url "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/2.18.1/fontconfig-2.18.1.tar.gz"
+  sha256 "e9309564717b6301230112b173f36c288489479d381d2f0add1210ca5b16ba7e"
   license all_of: [
     "HPND-sell-variant",
     "Unicode-3.0",        # fc-case/CaseFolding.txt
@@ -19,15 +19,12 @@ class Fontconfig < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_tahoe:   "20f30c771e40a924e423a9652080c7097e16782ffb236344c368721c001b78a0"
-    sha256 arm64_sequoia: "357516db5db5eb0cf5936333ef5845e600a0e01fbe80909b994f159b9d18bb22"
-    sha256 arm64_sonoma:  "d3d81ce82b7fafa924ca50adb5199b952f9f6706303d599e6bee0c476ece908b"
-    sha256 arm64_ventura: "8f07f7c568de41b1229cc5d437763739d4f3e892e9aa17b94fe9415c80ea40c0"
-    sha256 sonoma:        "ca0deb10e43960476c8c417e78f14e81bc2d0674c7860db8efb842d206093137"
-    sha256 ventura:       "71ec3020d8de2aebed88452f49748554e318b1dd0054a5d540820586b2488ac0"
-    sha256 arm64_linux:   "e85111ea1b81f0bf5505a3319187b3b2ede73aad67b9142ceb86132bdece1a61"
-    sha256 x86_64_linux:  "2c1073429bebddfa34e272928799517b246e6a44722ac567a1be66692750d99b"
+    sha256 arm64_tahoe:   "3e5fe5ced46e677b036a434f33bfad015b26ec599896e13431f90880fefc2db2"
+    sha256 arm64_sequoia: "1538844d9dcd7ace123b4c55220506782726cb6803ad96a132a30e85720b3699"
+    sha256 arm64_sonoma:  "f4854307ce84898d35564e9a7027cd200973736c74bc9b783a8b34cc1fffd821"
+    sha256 sonoma:        "30bdb67e3e52cdd396a19668313a580850ae94ca1a6fb355d2320cd803dd1be6"
+    sha256 arm64_linux:   "b78fd19a27aa988fb4b22f5381ed0a0a75010708a636a1a5c5e110d5009e212e"
+    sha256 x86_64_linux:  "1006f26b98bfe4b9c032e8b93842ce5ef8b0342b7582915b5aafcb17e53a3518"
   end
 
   depends_on "gettext" => :build
@@ -61,7 +58,8 @@ class Fontconfig < Formula
       -Dtests=disabled
       -Dtools=enabled
       -Dcache-build=disabled
-      -Dadditional-fonts-dirs=#{font_dirs}
+      -Ddefault-fonts-dirs=#{font_dirs}
+      -Dadditional-fonts-dirs=no
     ]
     system "meson", "setup", "build", *args, *std_meson_args
     system "meson", "compile", "-C", "build", "--verbose"

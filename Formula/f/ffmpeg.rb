@@ -1,8 +1,8 @@
 class Ffmpeg < Formula
   desc "Play, record, convert, and stream select audio and video codecs"
   homepage "https://ffmpeg.org/"
-  url "https://ffmpeg.org/releases/ffmpeg-8.1.1.tar.xz"
-  sha256 "b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3"
+  url "https://ffmpeg.org/releases/ffmpeg-8.1.2.tar.xz"
+  sha256 "464beb5e7bf0c311e68b45ae2f04e9cc2af88851abb4082231742a74d97b524c"
   # None of these parts are used by default, you have to explicitly pass `--enable-gpl`
   # to configure to activate them. In this case, FFmpeg's license changes to GPL v2+.
   # Passing `--enable-version3` changes the license to GPL v3+.
@@ -16,12 +16,12 @@ class Ffmpeg < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "77ffdd3eb03f079eaf2a815143ca4bc6352ad694c88d03e4e5798d6d1f3c881d"
-    sha256 arm64_sequoia: "8d0e790194705d684e7baba9d75f24aa220811600861061e9121df7b5db7e3f7"
-    sha256 arm64_sonoma:  "dbc651c6f6b4e9dce0980e29dceab9672bb676d1266447b5b1aecb24d90d0ef8"
-    sha256 sonoma:        "2651703294b954a745b5dfb93d20537b92b86d6e6fc8c15cb27dd1d626ba1dfc"
-    sha256 arm64_linux:   "9e11c2041abb2877b5770e4493e37f9fbe78562b3854c93b107f3978bb091a29"
-    sha256 x86_64_linux:  "865d382f79f56d505703c903769459c8d6ce6e4c2b1dfa32f3fd3b389bb66310"
+    sha256 arm64_tahoe:   "be65357f2b6fe927a656242e0f01a1515ec313513ef3ba5ae4fe7e78b8776f2e"
+    sha256 arm64_sequoia: "3c342b94ee4784979403c01577a332ad5eeae7f15447bff76458ea41153bbdbb"
+    sha256 arm64_sonoma:  "aff085f726852bf7c41bc77722e0d43b3405bd79f7670a729db705b99ec52908"
+    sha256 sonoma:        "bfa9fd31495a1e38f7be2d45274fc878c7a45771675ea354e96ff99c66ba62cf"
+    sha256 arm64_linux:   "4f134fce043a828fb02bd0768ab80ad2f64b450cfefab0e1ce5f7784c61282a6"
+    sha256 x86_64_linux:  "51560fcded6c80e4d9be2da32cca0b2bbb0a49b844db593a6143d8ac736aaa42"
   end
 
   depends_on "pkgconf" => :build
@@ -37,7 +37,7 @@ class Ffmpeg < Formula
   depends_on "libvpx"
   depends_on "openssl@3"
   depends_on "opus"
-  depends_on "sdl2"
+  depends_on "sdl2-compat"
   depends_on "svt-av1"
   depends_on "x264"
   depends_on "x265"
@@ -55,6 +55,8 @@ class Ffmpeg < Formula
   on_intel do
     depends_on "nasm" => :build
   end
+
+  deny_network_access!
 
   def install
     # The new linker leads to duplicate symbol issue https://github.com/homebrew-ffmpeg/homebrew-ffmpeg/issues/140

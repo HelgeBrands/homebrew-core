@@ -4,15 +4,15 @@ class Mosh < Formula
   url "https://github.com/mobile-shell/mosh/releases/download/mosh-1.4.0/mosh-1.4.0.tar.gz"
   sha256 "872e4b134e5df29c8933dff12350785054d2fd2839b5ae6b5587b14db1465ddd"
   license "GPL-3.0-or-later"
-  revision 38
+  revision 40
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c6c29798f55a07c404fcb9e6a8ea09941fda9d547f39852b7588ac319b3da456"
-    sha256 cellar: :any,                 arm64_sequoia: "cdd1ac12f9a2feffeeed69391613b727cfa75f010f886509ef63e4b929eeb08b"
-    sha256 cellar: :any,                 arm64_sonoma:  "4d3d806753e0de1128ffaa8dc28cc59a44e545c245c0f6e1d0c1dfa9cb7d0b43"
-    sha256 cellar: :any,                 sonoma:        "b496ca4f94d0e55024faa7f9c7897b2ac53c6d1d527cf072089907e08a89ed33"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d9efbabcdb8f49a096181811e0a86ae9737352313209d0461db3d09d8548f93c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ff450a5a79e77fda8c435059d4bd3e1c1441fbcf30d7a973278f82a6725a8d4e"
+    sha256 cellar: :any, arm64_tahoe:   "c81b37cf39a518c0b1e97bca97df97c5d5e3c1320ae981a5ef814c53ca3229ac"
+    sha256 cellar: :any, arm64_sequoia: "d366345719c9d83df17cb55a1e110876aefd1d0afbc787a40b5b360c3ffba79c"
+    sha256 cellar: :any, arm64_sonoma:  "aa7054dae929ec1f0af71d88b814051b80aa97f2893dc99d4e26dd3cefc45e5e"
+    sha256 cellar: :any, sonoma:        "0b938101edf7cb093c2ee91829ecb7c2a1907d8b4fa7ea5336082bd6ad08ae48"
+    sha256 cellar: :any, arm64_linux:   "6161ff24867c9dcb0b493d90f4cc0b93ee70680510958b1f0c24845c3c240772"
+    sha256 cellar: :any, x86_64_linux:  "1ecc304757533a045e320cfc8fef55933576a94804a4e868b15ce786103dc049"
   end
 
   head do

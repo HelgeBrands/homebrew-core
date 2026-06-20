@@ -2,10 +2,11 @@ class Grpc < Formula
   desc "Next generation open source RPC library and framework"
   homepage "https://grpc.io/"
   url "https://github.com/grpc/grpc.git",
-      tag:      "v1.80.0",
-      revision: "f5e2d6e856176c2f6b7691032adfefe21e5f64c1"
+      tag:      "v1.81.1",
+      revision: "e84a8a2f04095f2772ba42a4abccde4f9243e75b"
   license "Apache-2.0"
-  compatibility_version 2
+  revision 1
+  compatibility_version 3
   head "https://github.com/grpc/grpc.git", branch: "master"
 
   # There can be a notable gap between when a version is tagged and a
@@ -20,12 +21,12 @@ class Grpc < Formula
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "e07f534a474548118ba1879799be8e560678911b0e91bbd52a27e3d6abfde6cb"
-    sha256 cellar: :any, arm64_sequoia: "19e1c98632a105338cffbb308dd587cc04ef3cacee688ff4892af2861602f5d8"
-    sha256 cellar: :any, arm64_sonoma:  "06e533173dfe0d814cee4f83324c43fd5d8dec9b694e1574fe1fd67d438bb21f"
-    sha256 cellar: :any, sonoma:        "97db373cd4f8f885a4ebd22f1e8328a26d6918a2f128c6fc6886de4ea3d39456"
-    sha256               arm64_linux:   "19c584caa0b6853cf6d67c271d3e524826aaea629a3adcfe520f7e65e5c9aec3"
-    sha256               x86_64_linux:  "c7c4c58471157c69b9faf935d2e9d91846af8c68b39015fbcff5670211718bb7"
+    sha256 cellar: :any, arm64_tahoe:   "69e9ed75948ae8d06b60ca50c75f1d95bb640589b3f866c58caee1b0380e892a"
+    sha256 cellar: :any, arm64_sequoia: "9416a34dfb04498dacd3375794072038551aebcd9c1de4e0ba56002b15031ca6"
+    sha256 cellar: :any, arm64_sonoma:  "afbf33db6b990e3041e2298143794c52dd499821f1a43a1f44498330ce2c5c3b"
+    sha256 cellar: :any, sonoma:        "ddc7f406e760d587de70b97349dee0f1ba2e10f5d36cd221276d63e3b27cf08e"
+    sha256               arm64_linux:   "be6e581fc6d29901e102bfd4d94f234740407706d0d249c511dd29938fbdc062"
+    sha256               x86_64_linux:  "61779a5c4209950a457db49ab6b353275c52fd668cd6082c459ddb1ea9f27c3c"
   end
 
   depends_on "cmake" => :build
@@ -36,17 +37,8 @@ class Grpc < Formula
   depends_on "protobuf"
   depends_on "re2"
 
-  on_macos do
-    depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1100
-  end
-
   on_linux do
     depends_on "zlib-ng-compat"
-  end
-
-  fails_with :clang do
-    build 1100
-    cause "Requires C++17 features not yet implemented"
   end
 
   def install

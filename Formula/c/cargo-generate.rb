@@ -1,18 +1,18 @@
 class CargoGenerate < Formula
   desc "Use pre-existing git repositories as templates"
   homepage "https://github.com/cargo-generate/cargo-generate"
-  url "https://github.com/cargo-generate/cargo-generate/archive/refs/tags/v0.23.9.tar.gz"
-  sha256 "c02da6b831aa5b80eb7b3b23589664db41037dbf487aaef989db6e8a2044af26"
+  url "https://github.com/cargo-generate/cargo-generate/archive/refs/tags/v0.23.12.tar.gz"
+  sha256 "de3aac69feb0085bda238344521c2289e757d2211c5950ab8af8ae826908ad0c"
   license any_of: ["Apache-2.0", "MIT"]
   head "https://github.com/cargo-generate/cargo-generate.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "2aa914b3aa8fb66d7f7901402d1063d417a587c42ce5fd76e3c539e37eb491cf"
-    sha256 cellar: :any,                 arm64_sequoia: "0a61c0ee158b06020418e804c5328c9a1c198f08946dc0c1d8fc0581f1f50a21"
-    sha256 cellar: :any,                 arm64_sonoma:  "c632bbaf644fbe5e0d6aacf95a4730f02dee6796d86cf3522c7bd3c51716ba6c"
-    sha256 cellar: :any,                 sonoma:        "2a6bff9c66c505651dcce00dc8ec8be4f94f7935e3c3638d48d7ec8b3a8c193c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e264007dd9432106ce7ceac3c29c43d47ebf5c59e2aa3f74d01139fa28b70126"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fea1903b4e2dbe113512791adf90b3ec11952953143336de15b0fc3f1c0ff4d5"
+    sha256 cellar: :any, arm64_tahoe:   "2d964462dbd0ad1a4e450d57f9ad12d6686242638b3c25bf42592f5a9cf5832c"
+    sha256 cellar: :any, arm64_sequoia: "49d60366d1322794c8094b5781fde746eb2c793a13a0b7e329cfd1526184d109"
+    sha256 cellar: :any, arm64_sonoma:  "0168c58898c3b26e540d37db5c1cecce2060993d4fa3490644e886c6e6fa40f4"
+    sha256 cellar: :any, sonoma:        "e4e0f2e4fbe99e5d85e4fadf092d328763da19879dba1c9699e945979d10b7ae"
+    sha256 cellar: :any, arm64_linux:   "74a74a320439234013b2591f1bdee76d45f3b4a8ef252f4fd5ac9e2809ab8e37"
+    sha256 cellar: :any, x86_64_linux:  "ef90d127b3bd3e36aef5ed09e93b33f12aa3d7bb0d090e4b3ed62c5bc33b96a0"
   end
 
   depends_on "pkgconf" => :build

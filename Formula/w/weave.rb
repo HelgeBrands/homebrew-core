@@ -1,18 +1,18 @@
 class Weave < Formula
   desc "Entity-level semantic merge driver for Git using tree-sitter"
-  homepage "https://github.com/Ataraxy-Labs/weave"
-  url "https://github.com/Ataraxy-Labs/weave/archive/refs/tags/v0.3.3.tar.gz"
-  sha256 "8f99012d2860587c5cbbc59c79c6f547eeabe3890575a3bec8eda25691df0ed9"
+  homepage "https://ataraxy-labs.github.io/weave/"
+  url "https://github.com/Ataraxy-Labs/weave/archive/refs/tags/v0.3.6.tar.gz"
+  sha256 "3795fcc28ada8b522fb0081a1b8f3ace6e4f61d7be46fdb3cf588777b5f0608f"
   license any_of: ["MIT", "Apache-2.0"]
   head "https://github.com/Ataraxy-Labs/weave.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "dd28a249b3c5841e904fe2b7513fe9e525a4ac3d8969f7574edff7c1db4d9bd8"
-    sha256 cellar: :any,                 arm64_sequoia: "fbdb2b1f5256874628b5bb5d5f1a610c1a138b045b09c7d61d8ebdda32cfc1ac"
-    sha256 cellar: :any,                 arm64_sonoma:  "51027f799e33595eaa7f6a3666f2346eafe127782e60bf3a26e40f6e7b4e9a2b"
-    sha256 cellar: :any,                 sonoma:        "48e095f33810f19fd155f4304610f48f26bcdbbef871ddb2a36e572be8a90f0e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a751b80e2552d936e0e2e962da30e7834c8ee584f3b9c7d138fddf13407dd280"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4bfcd326d8bd1f84b6b366f8aed4a35917f67b615fe02f429a0a456e2a2f015f"
+    sha256 cellar: :any, arm64_tahoe:   "eb079cf08f69a75c497116a47d3819a5f281321484a9c319e440d72871a4b691"
+    sha256 cellar: :any, arm64_sequoia: "abf4ba376ddea9c2ffabd2d7d85a76a9d6a28ed67e2ca47377c9bc9c211322a2"
+    sha256 cellar: :any, arm64_sonoma:  "939a7a987580f91d21c2f5f8e35cba4a3a3773e6a408a407efd3b692f97ed930"
+    sha256 cellar: :any, sonoma:        "4b9143760b2dbd574d05fc61ce794f052e799677a522a470fd96cdb99ecafb24"
+    sha256 cellar: :any, arm64_linux:   "885faf28efaef1b93f8eb623b863553b7ddae4fda1b47326dcf78614e3967a81"
+    sha256 cellar: :any, x86_64_linux:  "d2da3f1e3a12401c147af121d879eddfce1064d7b8f1fc49d05000b98b75e1c2"
   end
 
   depends_on "pkgconf" => :build
@@ -23,6 +23,8 @@ class Weave < Formula
   on_linux do
     depends_on "zlib-ng-compat"
   end
+
+  conflicts_with "texlive", because: "both install a `weave` binary"
 
   def install
     system "cargo", "install", *std_cargo_args(path: "crates/weave-cli")

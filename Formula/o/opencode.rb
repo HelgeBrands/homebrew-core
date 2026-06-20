@@ -1,21 +1,22 @@
 class Opencode < Formula
   desc "AI coding agent, built for the terminal"
   homepage "https://opencode.ai"
-  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.15.5.tgz"
-  sha256 "a277fd68112e5392ea8630a40ba0694327310984d9909929bd7aa0de587ff55d"
+  url "https://registry.npmjs.org/opencode-ai/-/opencode-ai-1.17.5.tgz"
+  sha256 "05165ae40c9b222db275c8482300c948e881a6767aed2e67056223f43069f99c"
   license "MIT"
 
   livecheck do
-    throttle 10, days: 1
+    throttle 5
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "fbd7c676f8816eeaec15946fc175b26cb45911229966132be47e4b6794df7b85"
-    sha256                               arm64_sequoia: "fbd7c676f8816eeaec15946fc175b26cb45911229966132be47e4b6794df7b85"
-    sha256                               arm64_sonoma:  "fbd7c676f8816eeaec15946fc175b26cb45911229966132be47e4b6794df7b85"
-    sha256 cellar: :any_skip_relocation, sonoma:        "6b705f6a323e897eca8d024a7997c2f92778ccc966b8573638ead87f017f714b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d5335a24ae530bb05fabced9ca4454fcf8392a6e6ec0ae2edb4a0c39a7e3a57f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b85e9d136ab5a51cfd1ef27fe5137c801fe8b04323cdc1acccaf27b6ee2aa3f8"
+    rebuild 1
+    sha256                               arm64_tahoe:   "ca653eb8c0a682d6d18fccfdeff1294768df49a617a3d7c799948fe4d4f1467a"
+    sha256                               arm64_sequoia: "ca653eb8c0a682d6d18fccfdeff1294768df49a617a3d7c799948fe4d4f1467a"
+    sha256                               arm64_sonoma:  "ca653eb8c0a682d6d18fccfdeff1294768df49a617a3d7c799948fe4d4f1467a"
+    sha256 cellar: :any_skip_relocation, sonoma:        "18f5988198e1c8804fb1f14358b59c9ae87a39940613a4dc7d6021266882ca26"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "984002edcfa2b6cd6e1a9aac60fa633c405ba7c84eb4db30177a69a6dabfd09b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "7b94552644a7fa937b46efbdc86707969caa898a8131aa79561d8412ccc806da"
   end
 
   depends_on "node"
@@ -33,6 +34,8 @@ class Opencode < Formula
 
       rm_r d if d.basename.to_s != "opencode-#{os}-#{arch}"
     end
+
+    generate_completions_from_executable(bin/"opencode", "completion", shell_parameter_format: :none, shells: [:zsh])
   end
 
   test do

@@ -2,18 +2,18 @@ class Specify < Formula
   include Language::Python::Virtualenv
 
   desc "Toolkit to help you get started with Spec-Driven Development"
-  homepage "https://github.com/github/spec-kit"
-  url "https://github.com/github/spec-kit/archive/refs/tags/v0.8.11.tar.gz"
-  sha256 "d4c45b7331ee1a66d00331c6f54fe71fcda5a9eae9021e0871ddcab97c3894e5"
+  homepage "https://github.github.com/spec-kit/"
+  url "https://github.com/github/spec-kit/archive/refs/tags/v0.11.3.tar.gz"
+  sha256 "78b37dbcda69648ab648f82b6af83da4b56e34b2a6c9b2027c0152819d6e0646"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "f51fcb3dd32243c1effe638a4e3cf90013c27aa3880bf05649e2ba280cae6993"
-    sha256 cellar: :any,                 arm64_sequoia: "972e561f1d2e831d979b23527f4ebe38ec3199a06e8f22f8a78606839525f92c"
-    sha256 cellar: :any,                 arm64_sonoma:  "1b1cbc5f7fe04c68f6a28c262d160eced982d8646f0320a67cde4b61b6a99554"
-    sha256 cellar: :any,                 sonoma:        "dbd72b51f173978bcc04d48e8cd8217c69e9b4105c2ae1037f9662d86c7c2bb1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "5f2ee774bf1d845c7b2f80886dfff842140d70af5296ed7ffc88d9bc5442cb5f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bc4ec90d529217de73e728ab6194276c156c0345151a5fa13f74c77e16e6665c"
+    sha256 cellar: :any, arm64_tahoe:   "0934268136a8adcc9ed03f64569d99b55256221d645659dae325fb9440ffe7e5"
+    sha256 cellar: :any, arm64_sequoia: "043dc27f8deb1846ea853d46283ccf607eb8b518ef288c0d5b70c6c5ee1fbd69"
+    sha256 cellar: :any, arm64_sonoma:  "64b7c2fe568d6566a015d9e0a68209f6b8102278683e62fcc70b68c348d6a6f7"
+    sha256 cellar: :any, sonoma:        "608fbe41a16fb5225a6b5d0fd269d8e45824f49d251d62ed51e05f0cceb58e73"
+    sha256 cellar: :any, arm64_linux:   "be0761bf3143e44d8d241224da9a4633c73d1fc96517e63246cdee4f5f62550e"
+    sha256 cellar: :any, x86_64_linux:  "1f4d374debe8c72a95d828d00248a3cc0d8d0a457a2419d44fd7de622e25600a"
   end
 
   depends_on "certifi" => :no_linkage
@@ -28,13 +28,13 @@ class Specify < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz"
-    sha256 "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+    url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
+    sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
   end
 
   resource "json5" do
-    url "https://files.pythonhosted.org/packages/9c/4b/6f8906aaf67d501e259b0adab4d312945bb7211e8b8d4dcc77c92320edaa/json5-0.14.0.tar.gz"
-    sha256 "b3f492fad9f6cdbced8b7d40b28b9b1c9701c5f561bef0d33b81c2ff433fefcb"
+    url "https://files.pythonhosted.org/packages/e4/7d/05c46a96a78147ae3bf99c2f4169ce144a70220b8d6fcd56f6ec368b8ce9/json5-0.15.0.tar.gz"
+    sha256 "7424d1f1eb1d56da6e3d70643f53619862b4ce81440bdb8ecfd6f875e5ba4a71"
   end
 
   resource "markdown-it-py" do
@@ -58,8 +58,8 @@ class Specify < Formula
   end
 
   resource "platformdirs" do
-    url "https://files.pythonhosted.org/packages/9f/4a/0883b8e3802965322523f0b200ecf33d31f10991d0401162f4b23c698b42/platformdirs-4.9.6.tar.gz"
-    sha256 "3bfa75b0ad0db84096ae777218481852c0ebc6c727b3168c1b9e0118e458cf0a"
+    url "https://files.pythonhosted.org/packages/d7/47/e4501f49c178ae1d9f4a75073fda4204f52647993f075a9db4d14930e0c5/platformdirs-4.10.0.tar.gz"
+    sha256 "31e761a6a0ca04faf7353ea759bdba55652be214725111e5aac52dfa29d4bef7"
   end
 
   resource "pygments" do
@@ -88,8 +88,8 @@ class Specify < Formula
   end
 
   resource "typer" do
-    url "https://files.pythonhosted.org/packages/e4/51/9aed62104cea109b820bbd6c14245af756112017d309da813ef107d42e7e/typer-0.25.1.tar.gz"
-    sha256 "9616eb8853a09ffeabab1698952f33c6f29ffdbceb4eaeecf571880e8d7664cc"
+    url "https://files.pythonhosted.org/packages/5e/ed/ef06584ccdd5c410df0837951ecd7e15d9a6144ea1bd4c73cecab1a89891/typer-0.26.7.tar.gz"
+    sha256 "e314a34c617e419c091b2830dda3ea1f257134ff593061a8f5b9717ab8dddb3a"
   end
 
   def install
@@ -102,7 +102,7 @@ class Specify < Formula
   end
 
   test do
-    system bin/"specify", "init", "test-project", "--ai", "copilot", "--script", "sh", "--ignore-agent-tools"
+    system bin/"specify", "init", "test-project", "--integration", "copilot", "--script", "sh", "--ignore-agent-tools"
     assert_path_exists testpath/"test-project/.specify/memory/constitution.md"
 
     assert_match "Specify CLI is ready to use", shell_output("#{bin}/specify check")

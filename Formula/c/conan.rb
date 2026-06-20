@@ -3,19 +3,18 @@ class Conan < Formula
 
   desc "Distributed, open source, package manager for C/C++"
   homepage "https://conan.io"
-  url "https://files.pythonhosted.org/packages/54/89/5b9d6cca677e57b67560aa3b7f82728127889ce74bb91171ded6f28e42b8/conan-2.28.1.tar.gz"
-  sha256 "e4ed10123751bf2931c32c33cadafe4881c72e1c22a1c97b19cb75780692fae5"
+  url "https://files.pythonhosted.org/packages/1d/89/4bc94f3736d1b0a0f2d639b152192bb036afb6186af1ed246710b109e6e0/conan-2.29.1.tar.gz"
+  sha256 "3a3bc1bfda462237c537d0dd8baa9dd68f6ac29c3ecc98dbb4a668ccc943ff33"
   license "MIT"
-  revision 2
   head "https://github.com/conan-io/conan.git", branch: "develop2"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "bbae3059aaf68e700f9cb5d95401500780a89f8fc605286b365a749dd179afca"
-    sha256 cellar: :any,                 arm64_sequoia: "c6d3fe47e24338ea74c004cb7821581f1e3a3bdeea7c1ccc5fa24a77631a7c39"
-    sha256 cellar: :any,                 arm64_sonoma:  "af83f8d95b9558e4d99f668cf9d0d75d233e3c259c5acd654832120b6d754261"
-    sha256 cellar: :any,                 sonoma:        "62a34dfe440e8fc104b71e40b952f4e95572bed05e1465764ff0350c4505bbe7"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f6cc68d020cb98337adb4e8b13b67de8565ec1294699072b43b6d2ee698fa89f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bebe368fa0d1edb72f3f1899cc896c090285f768fa7a98c91cf57391eec46f73"
+    sha256 cellar: :any, arm64_tahoe:   "04d431c61234b04718dde3c5cc0d4b731b4785c38994601e92d61dae525bc2dd"
+    sha256 cellar: :any, arm64_sequoia: "0d026ffecfa90cf1f78c68b2d589edf0a6006ecb51a1ff573c68cf7e04be6365"
+    sha256 cellar: :any, arm64_sonoma:  "94eb610b840012f804d40ed1dac8ffa04d34396cfffc7ee2ecd95c3b8cb5d154"
+    sha256 cellar: :any, sonoma:        "0787aae7764944f423e6addf8027d1bfaabd8dce417a8fb5429742c58d736b0e"
+    sha256 cellar: :any, arm64_linux:   "d1173d2cfb96cc1ff9c88de0bfebc2e9813f0cc03bc1148e71ce4385b16c118b"
+    sha256 cellar: :any, x86_64_linux:  "c3dd8f41c597b7b614271227dbc599c388a64a45639cbf277617827726c4c6cd"
   end
 
   depends_on "pkgconf" => :build
@@ -48,8 +47,8 @@ class Conan < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz"
-    sha256 "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc"
+    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
+    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
   end
 
   resource "jinja2" do

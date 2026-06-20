@@ -5,18 +5,20 @@ class Cassandra < Formula
   desc "Eventually consistent, distributed key-value store"
   homepage "https://cassandra.apache.org"
   # TODO: Switch to `python@3.13` after https://github.com/apache/cassandra/pull/4628
+  # TODO: Switch to `openjdk@21` in 6.0, https://issues.apache.org/jira/browse/CASSANDRA-18831
   url "https://www.apache.org/dyn/closer.lua?path=cassandra/5.0.8/apache-cassandra-5.0.8-bin.tar.gz"
   mirror "https://archive.apache.org/dist/cassandra/5.0.8/apache-cassandra-5.0.8-bin.tar.gz"
   sha256 "1579d7d3f2d812741a28cd2c2cbe29e83541bb4d25fb21ec2c00c1e4fb3b9a8f"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "bfc15cd9d3db17f3e089661c454a51bb8bbc32cb2798d4464876c5952496a47e"
-    sha256 cellar: :any,                 arm64_sequoia: "180a63e5ab13dd22aaa55c5654a36ee5771a20f4b2265a0abe9f3c7e9ffea1b3"
-    sha256 cellar: :any,                 arm64_sonoma:  "0d26ad45cdbd0b9ec88140e0339a3d34e82549cd74537b8e4ccdf1f67d942aea"
-    sha256 cellar: :any,                 sonoma:        "7908dbaed8ac61780a35650ffb9d4b2d09bf37dabed214495c8bcd5c0f753fc2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "e31b3645edc4d63c9aa0190827b809b02d8b033edb29d6217951b058518e981c"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1330aa5402dd4782daa30d206ceb4b2dfc97e080952db83cb58d168fb2d011e8"
+    rebuild 1
+    sha256 cellar: :any, arm64_tahoe:   "cb4559cf042bd2687e7395e553b00173ab666e54edc9ae9ed69d36060c80641e"
+    sha256 cellar: :any, arm64_sequoia: "eb5a8f9e7f9e4c3b1e44c16750040387f698b5dc7617185a9fad5dfba9518117"
+    sha256 cellar: :any, arm64_sonoma:  "db4989989ecfd605b284c96fb7d94e0c47f3e355a43f07b50d93b930a5d1fefa"
+    sha256 cellar: :any, sonoma:        "cb0bd5a7df73e1c5fa667b72b399c93bef11c55338a5489455a1956cda629e3a"
+    sha256 cellar: :any, arm64_linux:   "a05bf40cd730f8ae05e8d03574a681e92be1770bff8b243f7d2f3848b0d6135e"
+    sha256 cellar: :any, x86_64_linux:  "297d639039fe125abf191f65c26a1d38815accc2023e8da2bf915b6c33f950d5"
   end
 
   depends_on "libev"
@@ -68,7 +70,6 @@ class Cassandra < Formula
   end
 
   def install
-    (var/"lib/cassandra").mkpath
     (var/"log/cassandra").mkpath
 
     python3 = "python3.11"

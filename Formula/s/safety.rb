@@ -3,19 +3,18 @@ class Safety < Formula
 
   desc "Checks Python dependencies for known vulnerabilities and suggests remediations"
   homepage "https://safetycli.com/product/safety-cli"
-  url "https://files.pythonhosted.org/packages/6f/e8/1cfffa0d8836de8aa31f4fa7fdeb892c7cfa97cd555039ad5df71ce0e968/safety-3.7.0.tar.gz"
-  sha256 "daec15a393cafc32b846b7ef93f9c952a1708863e242341ab5bde2e4beabb54e"
+  url "https://files.pythonhosted.org/packages/c2/7b/8e1d580c5178f0736b806b7199827e61e2a2569eec5b49ec75da6273bbdf/safety-3.8.1.tar.gz"
+  sha256 "e646123b976bbb6707cfaacae8c926e2f886b744a60e0f410e8610a3a4eaf7be"
   license "MIT"
-  revision 11
   head "https://github.com/pyupio/safety.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f34cbecd173d13418d2e14e4e7717f7387b1328e44ce7e8aa5bf48dde77262eb"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "38fd9e599a38fdb03f06d7a2b51735fde2771a1500967a51940868eb62542721"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4396f8be0b2dc8a3a904044ddb686ad04e0da26e6231cb070ceeded5695132a5"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b9a4e1f0a7567df3042faac17a5fca4c9c687c3bf0ed4ecd08310e64aafd5635"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "70e0eff650c4e1de2db9c3da39df573523074a23ca6c597c5a28074a22415b61"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0393111515eb6524d14fedb2cf255ff4c915483b6f4fe649c20b8c3934a2140b"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c539eec5462c9aaa6cc6bcc271f4b04f9bdbef2af15dd5b1573a6f8244bd5cba"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "b5308a76f4d01a34f28463af39f23d4c269bf4cea0c4b9ee0e6cbaec44228f4b"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a4c4d3d75f04996ad53f2ce5b1b01fd797362814101ec4285243d37f625aa31b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "1543a9d884d941edeb2ae79388fe98e41ff99c8e75b04582231e55f187367600"
+    sha256 cellar: :any,                 arm64_linux:   "7143ef2da07fb48af6cf9ebd5b30cd7499b4b0e9f75035c498eedc4e9107bb67"
+    sha256 cellar: :any,                 x86_64_linux:  "01335f7bd650ee401441c2a744431a403a22d28bd3d7fae6abe948228fac33a5"
   end
 
   depends_on "certifi" => :no_linkage
@@ -40,14 +39,9 @@ class Safety < Formula
     sha256 "2cea25fefcd4e7173bdf1372c0afc265c8034b23a8cd5dcb6a9164b826c64231"
   end
 
-  resource "charset-normalizer" do
-    url "https://files.pythonhosted.org/packages/e7/a1/67fe25fac3c7642725500a3f6cfe5821ad557c3abb11c9d20d12c7008d3e/charset_normalizer-3.4.7.tar.gz"
-    sha256 "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5"
-  end
-
   resource "click" do
-    url "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz"
-    sha256 "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+    url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
+    sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
   end
 
   resource "dparse" do
@@ -76,8 +70,8 @@ class Safety < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz"
-    sha256 "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc"
+    url "https://files.pythonhosted.org/packages/b9/28/99c51f664567218d824af024c0251650fb27e4ca066df188dab0769c5b91/idna-3.17.tar.gz"
+    sha256 "5eb0cb53bc467c12eadcf6de83163ad8527cec9416f44b9b61b19caedad2b87f"
   end
 
   resource "jinja2" do
@@ -91,8 +85,8 @@ class Safety < Formula
   end
 
   resource "joserfc" do
-    url "https://files.pythonhosted.org/packages/3b/dc/5f768c2e391e9afabe5d18e3221346deb5fb6338565f1ccc9e7c6d7befdd/joserfc-1.6.5.tar.gz"
-    sha256 "1482a7db78fb4602e44ed89e51b599d052e091288c7c532c5b694e20149dec48"
+    url "https://files.pythonhosted.org/packages/5d/ac/d4fd5b30f82900eac60d765f179f0ba005825ac462cc8ced6e13ec685ab3/joserfc-1.6.8.tar.gz"
+    sha256 "878620c553a6ebdd76ccdc356782fee3f735f21a356d079a546b42a4670ace5f"
   end
 
   resource "markdown-it-py" do
@@ -135,11 +129,6 @@ class Safety < Formula
     sha256 "a8234aa23ec39894bfe4a3f1b85616a7032481964a13ac6fc9f10de4f6fca270"
   end
 
-  resource "requests" do
-    url "https://files.pythonhosted.org/packages/43/b8/7a707d60fea4c49094e40262cc0e2ca6c768cca21587e34d3f705afec47e/requests-2.34.0.tar.gz"
-    sha256 "7d62fe92f50eb82c529b0916bb445afa1531a566fc8f35ffdc64446e771b856a"
-  end
-
   resource "rich" do
     url "https://files.pythonhosted.org/packages/c0/8f/0722ca900cc807c13a6a0c696dacf35430f72e0ec571c4275d2371fca3e9/rich-15.0.0.tar.gz"
     sha256 "edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36"
@@ -175,14 +164,14 @@ class Safety < Formula
     sha256 "7d825f03f89244ef73f1d4ce193cb1774a8179fd96f31d7e1dcde62092b960bb"
   end
 
+  resource "truststore" do
+    url "https://files.pythonhosted.org/packages/53/a3/1585216310e344e8102c22482f6060c7a6ea0322b63e026372e6dcefcfd6/truststore-0.10.4.tar.gz"
+    sha256 "9d91bd436463ad5e4ee4aba766628dd6cd7010cf3e2461756b3303710eebc301"
+  end
+
   resource "typer" do
     url "https://files.pythonhosted.org/packages/e4/51/9aed62104cea109b820bbd6c14245af756112017d309da813ef107d42e7e/typer-0.25.1.tar.gz"
     sha256 "9616eb8853a09ffeabab1698952f33c6f29ffdbceb4eaeecf571880e8d7664cc"
-  end
-
-  resource "urllib3" do
-    url "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz"
-    sha256 "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c"
   end
 
   def install

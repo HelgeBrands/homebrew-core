@@ -1,14 +1,14 @@
 class Passt < Formula
   desc "User-mode networking daemons for virtual machines and namespaces"
   homepage "https://passt.top/passt/about/"
-  url "https://passt.top/passt/snapshot/passt-2026_05_07.1afd4ed.tar.xz"
-  sha256 "5a65b43c43c5d401835cb1432be169d1a9e32b0b55923562aad9d14f82825620"
+  url "https://passt.top/passt/snapshot/passt-2026_06_11.a9c61ff.tar.xz"
+  sha256 "b94b235cb96ce1b7aeab6552b7e0b4c9a780e5d700ced500c65e429b2d8b8450"
   license all_of: ["GPL-2.0-or-later", "BSD-3-Clause"]
   head "git://passt.top/passt", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_linux:  "7e9cdf57ec3ceab0b75c854774dcdecacaa88d577ed4c52ed58ae1e26a42e44b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux: "e678f5a9628ca0a225c644c894a0550a6852fc4b9cfcaa58bde4fd918bbc07c1"
+    sha256 cellar: :any, arm64_linux:  "2866debf7ebd4a6869eb8f4e676bafab5b3310ead5c2a8277fe43585a69dec62"
+    sha256 cellar: :any, x86_64_linux: "3086a4a7337f4fee93fa9be4868d07ca69b378b57dbc2760974e315a3b61d7a9"
   end
 
   depends_on :linux

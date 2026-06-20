@@ -1,8 +1,8 @@
 class Rumdl < Formula
   desc "Markdown Linter and Formatter written in Rust"
   homepage "https://github.com/rvben/rumdl"
-  url "https://github.com/rvben/rumdl/archive/refs/tags/v0.1.95.tar.gz"
-  sha256 "7e1ae62bb55406adcf80f8dfcd072d96879a11d71d1555e8d18d9d874ad6f6c7"
+  url "https://github.com/rvben/rumdl/archive/refs/tags/v0.2.20.tar.gz"
+  sha256 "d0a5a110dc2c1fc153d3bdd6624886dc08cd33ed0094eee6c2bef896ace99e59"
   license "MIT"
 
   livecheck do
@@ -11,12 +11,12 @@ class Rumdl < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3ca352f961991e4a6286bbf469fdca2d626ca5ad66f395d1dfd34e4b15e46815"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "16691c94dfa61133a04415ab185236b8772df26e2950e00ee1e8aed72e42f28d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "9be9b9659e54514e6966c24d9fd3187d884b467bf1b07f75203d9f57640c77ab"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b5744f246f97cb93d706ae4af74c659047761e5c7cf85ccd0c48aa77841fd905"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "bb358fa5e2e96a73358761e20cde027de76759541d0e235e0c80cef3770bb5bd"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "810afb6968f6d91fbe4d681354cca621c11a16f403628db6fa96c34838373b45"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "48e61a1c60215f358ef5b91f609a1b8e334ee71dab07cd4d4f8946200bf5eacc"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "710f96ade96df87dd915f786034b2c8f4ba7b7718b0ceceaef176cff5155b76c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "0d35b39d5ec5eaba922f135d9589533db23efc1dd63ee030fe1cab89b80ff217"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f890364c81a135c3891b861469f0fa226d3747be27149bbd14f3f1f6dd91a541"
+    sha256 cellar: :any,                 arm64_linux:   "2c7a89080e8f8500543651dfc6f71ca135bb2785b43988e0cbf2756c20e154fb"
+    sha256 cellar: :any,                 x86_64_linux:  "f3343725fb01f8638e82b2037b5f203673d856ba4f0bc36922fc898120fb39d6"
   end
 
   depends_on "rust" => :build

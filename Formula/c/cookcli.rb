@@ -1,18 +1,18 @@
 class Cookcli < Formula
   desc "CLI-tool for cooking recipes formated using Cooklang"
   homepage "https://cooklang.org"
-  url "https://github.com/cooklang/cookcli/archive/refs/tags/v0.30.0.tar.gz"
-  sha256 "9a44b378b7e09e6e41a829e2bfd666f4da1809b281501fe5a2ea14851a01a338"
+  url "https://github.com/cooklang/cookcli/archive/refs/tags/v0.32.0.tar.gz"
+  sha256 "f68d3714b42f6b67ae5b6f4d047b5d724bc5a22bc3064725b45140bfcda69142"
   license "MIT"
   head "https://github.com/cooklang/cookcli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "0269f50e5b7ca22272dc340a05bc2e601d76447deff7497904ab6644ffc6be3b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "f8135cd1eb9bb656139279e2ee54eee6bfe07c6a800ea9e90aa64eb3013a0f5f"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6b491ea1202807f52a385115c1266f7f5c59b080c16d361d07b64788e9e6e967"
-    sha256 cellar: :any_skip_relocation, sonoma:        "71215553f9fd4adbc704f0130c9983505d2dd2ca8fe10bc733827c23b2e89a6c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "2273908070259c1ab3b4dbe7511ea090bf5ee76d5f994921c063a7400a789adf"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "6b989d88f6908530b7e135b46f0aeaf2d6149aca05df54e6fbfbd444b1bc1904"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c990c214dc6cadd16a4c452519bfd79661119a53ceb07cc84689ded6936433f8"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d9cb1382fd0c41ffd8035d7e3aad3a98cbd6a712ffb9740b9a765d71894a47b0"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8cf5198ccce318b0613c0671fa475458b7e283d3387fef1b2e84e6ff6b5bed76"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9749507214de1c9d7f36e499a532978c84a7829c57bfde03a64bf73e2516697c"
+    sha256 cellar: :any,                 arm64_linux:   "cfc5c229815c1cbf664856e61eb0246735f7388f657b5692f5208ba3fb7bb440"
+    sha256 cellar: :any,                 x86_64_linux:  "5f0dbd4d2c7a9d8fc0eb38a4408778cfb572e8656763dede137fc5edc7ffc203"
   end
 
   depends_on "node" => :build

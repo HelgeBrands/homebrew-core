@@ -3,18 +3,18 @@ class Remarshal < Formula
 
   desc "Convert between TOML, YAML and JSON"
   homepage "https://github.com/remarshal-project/remarshal"
-  url "https://files.pythonhosted.org/packages/16/0b/ad91623d00c9b362604ad9c4244143f706c48db6e768e2cd26d1fe56dd79/remarshal-2.0.0.tar.gz"
-  sha256 "42669d5cf9efad98050ea6fcf5aa22780ef8dc2399e8ead34776397e7d01fd3d"
+  url "https://files.pythonhosted.org/packages/93/56/9bfde1ba8cf586033357275457203af7b9f5d8df770e9858737809c9e40f/remarshal-2.1.2.tar.gz"
+  sha256 "032437222e612469a36b39a6c48983a80589c52d5da20677d5087c09e3c2ff0e"
   license "MIT"
   head "https://github.com/remarshal-project/remarshal.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "298a87cb16e889df7a7f34c1772878977ede8e94ce1ce273755b7b06908eddf8"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e658b8c806dc2bb51fe9291fce13306f427ebed10cb25867a446fab7446dc529"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7ab1125ec9c44e678f67003dc34e17902e380256cb987db86f1acf6467d57ca0"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e47f8e5bc37545ed7acfcdea3540e36c3ce9f1d1d1aa99f0755c2a3481e00e2a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1f53e8124184c2f04053dba979f801eee518b69124a02f4a8117312319f3c1fd"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "81576440a6eb0d0f79dffb05b4ee87d0ffe4176c7061f88cb7618fc5cb8740e1"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "01613eb623949168659946c34ec2221db95500b3c751f37e5418da502d650499"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "70ad350d648261f919df99d05b39a7d8e43814a5d1a0f47b3672420ac35e488c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8cfab698b062cfb11a76a4ed882341c5c6708e7aa3b3cdaa95552979258df2a5"
+    sha256 cellar: :any_skip_relocation, sonoma:        "552dc178b98eb8cb7769c446ab310cb7dbb1b1bf28f04979381d60fc06f460a2"
+    sha256 cellar: :any,                 arm64_linux:   "65e1976c4dc2dab51c2bb9455746143b563e623cae60eae80b188a61ef0bc1fc"
+    sha256 cellar: :any,                 x86_64_linux:  "cbbfb591b329c94500b35b0b739cf689d46505fe35059d99d9327f2a0c497e8f"
   end
 
   depends_on "python@3.14"
@@ -33,39 +33,19 @@ class Remarshal < Formula
     sha256 "08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"
   end
 
-  resource "markdown-it-py" do
-    url "https://files.pythonhosted.org/packages/06/ff/7841249c247aa650a76b9ee4bbaeae59370dc8bfd2f6c01f3630c35eb134/markdown_it_py-4.2.0.tar.gz"
-    sha256 "04a21681d6fbb623de53f6f364d352309d4094dd4194040a10fd51833e418d49"
-  end
-
-  resource "mdurl" do
-    url "https://files.pythonhosted.org/packages/d6/54/cfe61301667036ec958cb99bd3efefba235e65cdeb9c84d24a8293ba1d90/mdurl-0.1.2.tar.gz"
-    sha256 "bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"
-  end
-
-  resource "pygments" do
-    url "https://files.pythonhosted.org/packages/c3/b2/bc9c9196916376152d655522fdcebac55e66de6603a76a02bca1b6414f6c/pygments-2.20.0.tar.gz"
-    sha256 "6757cd03768053ff99f3039c1a36d6c0aa0b263438fcab17520b30a303a82b5f"
-  end
-
-  resource "rich" do
-    url "https://files.pythonhosted.org/packages/c0/8f/0722ca900cc807c13a6a0c696dacf35430f72e0ec571c4275d2371fca3e9/rich-15.0.0.tar.gz"
-    sha256 "edd07a4824c6b40189fb7ac9bc4c52536e9780fbbfbddf6f1e2502c31b068c36"
-  end
-
-  resource "rich-argparse" do
-    url "https://files.pythonhosted.org/packages/6a/e5/1064c43203a357d668cd42435f7a15fe6af51512d85b2104fecb937aa861/rich_argparse-1.8.0.tar.gz"
-    sha256 "679df3d832fa94ad6e4bdb07ded088cd7ea2dddc58ae9b2b46346a40b06cbc0c"
-  end
-
   resource "ruamel-yaml" do
     url "https://files.pythonhosted.org/packages/c7/3b/ebda527b56beb90cb7652cb1c7e4f91f48649fbcd8d2eb2fb6e77cd3329b/ruamel_yaml-0.19.1.tar.gz"
     sha256 "53eb66cd27849eff968ebf8f0bf61f46cdac2da1d1f3576dd4ccee9b25c31993"
   end
 
   resource "starlark" do
-    url "https://files.pythonhosted.org/packages/39/5d/153396eecab3d698fbaece5be2e049607b7eb8eb5bdf8955d58751f3e18f/starlark-0.2.0.tar.gz"
-    sha256 "998e67a80a717344d601acb4e9de392f111b82e78c58e6a7bfeb0534c50f3f54"
+    url "https://files.pythonhosted.org/packages/0c/1c/f7bd41150c9ab4aa4bd02de46a0af88afa8d4da7af73e76aeb209e473ac2/starlark-0.5.0.tar.gz"
+    sha256 "321e1d07dffc8c89eb37945573a59e8e4a965a6f88cb87141010fdf52478eb91"
+  end
+
+  resource "termcolor" do
+    url "https://files.pythonhosted.org/packages/46/79/cf31d7a93a8fdc6aa0fbb665be84426a8c5a557d9240b6239e9e11e35fc5/termcolor-3.3.0.tar.gz"
+    sha256 "348871ca648ec6a9a983a13ab626c0acce02f515b9e1983332b17af7979521c5"
   end
 
   resource "tomli" do
@@ -74,8 +54,8 @@ class Remarshal < Formula
   end
 
   resource "tomlkit" do
-    url "https://files.pythonhosted.org/packages/c3/af/14b24e41977adb296d6bd1fb59402cf7d60ce364f90c890bd2ec65c43b5a/tomlkit-0.14.0.tar.gz"
-    sha256 "cf00efca415dbd57575befb1f6634c4f42d2d87dbba376128adb42c121b87064"
+    url "https://files.pythonhosted.org/packages/51/db/03eaf4331631ef6b27d6e3c9b68c54dc6f0d63d87201fed600cc409307fd/tomlkit-0.15.0.tar.gz"
+    sha256 "7d1a9ecba3086638211b13814ea79c90dd54dd11993564376f3aa92271f5c7a3"
   end
 
   resource "u-msgpack-python" do

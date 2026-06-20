@@ -1,17 +1,17 @@
 class Patchpal < Formula
   desc "AI Assisted Patch Backporting Tool Frontend"
   homepage "https://gitlab.com/patchpal-ai/patchpal-gui"
-  url "https://gitlab.com/patchpal-ai/patchpal-gui/-/archive/v0.7.1/patchpal-gui-v0.7.1.tar.bz2"
-  sha256 "cfc7ac868a7ad917aacd362b04b0bda10d5dcf83cf92f1a5171cc30f8e877609"
+  url "https://gitlab.com/patchpal-ai/patchpal-gui/-/archive/v0.8.1/patchpal-gui-v0.8.1.tar.bz2"
+  sha256 "3bee167d923999f6a616ab2025d16e73641638d2237565f8f39eb28d35930c8a"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "e9a475810e8411ec3754d137282cb6a95f0b38b4a941f9f964f8bf74c973f692"
-    sha256 cellar: :any,                 arm64_sequoia: "3373399d757e5e9085d5c835fc28c92c0bdc15a07b627704a6efd6730a74d9dc"
-    sha256 cellar: :any,                 arm64_sonoma:  "51077fe5336f64606f9dfd1152dcb2c2935fe145bb811efc981300876953e80d"
-    sha256 cellar: :any,                 sonoma:        "064c1542ebff12a3b0e787da2e76f4ce8a48cf1c0c6987939813cf54ba629899"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "d5313d5e3b77ee9a60037f850d081dba81d9904b5ea655e3f75f8d19f9c4ba13"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "1111812901527caac9bae653b5520fab630c98d971ed1e4983b6feab240b03c4"
+    sha256 cellar: :any, arm64_tahoe:   "c3a7bc18acdeb0e644b3580ed109fe9a0c57a43afa7e1a7026c0d8bed737372d"
+    sha256 cellar: :any, arm64_sequoia: "e04418ee7052ba37dfde718c5cc1b0f0b7fcba29fd2d67a6058f2ffd7f03e204"
+    sha256 cellar: :any, arm64_sonoma:  "9734accbb9c6897a3eb41e1c2c6e1258b8bf5361e88288d8f8c0a451eb4a5dcb"
+    sha256 cellar: :any, sonoma:        "4998c08724fa8ae7ae2f798d22006bf2bd5092d00f826fad448f142eaf9a89aa"
+    sha256 cellar: :any, arm64_linux:   "ab9aa474a70cb6b4561b60f3c413f620228666600ef23ef34df5d5b8ae20941a"
+    sha256 cellar: :any, x86_64_linux:  "50f52d4441b81965edf8ca1b1dde7c69aab1324a305c9263e0a7e95d6356603d"
   end
 
   depends_on "pkgconf" => :build

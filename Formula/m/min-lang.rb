@@ -1,18 +1,17 @@
 class MinLang < Formula
   desc "Small but practical concatenative programming language and shell"
   homepage "https://min-lang.org"
-  url "https://github.com/h3rald/min/archive/refs/tags/v0.46.0.tar.gz"
-  sha256 "017178f88bd923862b64f316098772c1912f2eef9304c1164ba257829f1bbfc2"
+  url "https://github.com/h3rald/min/archive/refs/tags/v0.48.0.tar.gz"
+  sha256 "20b836d87a99a801859b99e5f08ef39fe1b787d642f053926db5e39955ddf4d4"
   license "MIT"
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any,                 arm64_tahoe:   "2ef803c82853b1b321beeafc765188f15dbec742127101fec848307fd3fe98d2"
-    sha256 cellar: :any,                 arm64_sequoia: "71000cdcf6ff4197db8463e2bcdcfdbe06aeca5015b5d99bc2540bc586203a03"
-    sha256 cellar: :any,                 arm64_sonoma:  "d2c9b6fa074041130942ce3d6920b72fbcafa19cdd430d3cb7d5aa587c472145"
-    sha256 cellar: :any,                 sonoma:        "1b6a74a5d1854800edb8eab49013a818352c7f9b081324de871aa82adf49da21"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "eb035bc0b1423297e5f251ae2ad2c3833f03ae343fda90867668eb73ea6f0b43"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8eb616acafc4d01b6a464c3d034ab13990837c1a0a2f7b808892fe877988ea82"
+    sha256 cellar: :any, arm64_tahoe:   "ea94a2c1f41db54447f306f26bba8bcfea7e163083cf8f68ce29818a36efb54f"
+    sha256 cellar: :any, arm64_sequoia: "f9bc539aa6b39e96d6d796c5011922ad488556370190d2c333561fdc305168a8"
+    sha256 cellar: :any, arm64_sonoma:  "6bc01f2fafa372cd6f80600e639cdea1b5952eee18a51ab286c4339879b59736"
+    sha256 cellar: :any, sonoma:        "f8163ffea30e28d48bf203dd80da5711b30f338cc9626340fd4a3cc5d6303245"
+    sha256 cellar: :any, arm64_linux:   "6378198c85520572b86c5dba8d33696cb143e11730f1f5e9bc16cce0cdbf3a99"
+    sha256 cellar: :any, x86_64_linux:  "95f14a18f33b0921984b0104232f015d67ed5a5069ca814bf1677ac47554dab1"
   end
 
   depends_on "nim"

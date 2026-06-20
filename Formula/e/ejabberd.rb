@@ -4,6 +4,7 @@ class Ejabberd < Formula
   url "https://github.com/processone/ejabberd/archive/refs/tags/26.04.tar.gz"
   sha256 "77deb1053978ae9790f909b7b573ac61c6b94d7c465a84c5b56568292d49e47d"
   license "GPL-2.0-or-later"
+  revision 2
   head "https://github.com/processone/ejabberd.git", branch: "master"
 
   # There can be a notable gap between when a version is tagged and a
@@ -15,12 +16,12 @@ class Ejabberd < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "cf0674ca2aa17c798ac60e86f0068a88894e9dfb9978cb687865054826eabdc5"
-    sha256 cellar: :any,                 arm64_sequoia: "cf0a301efd94385a5e6e738068e7681e21e608e0a62e5dbaf6e772a13524fef5"
-    sha256 cellar: :any,                 arm64_sonoma:  "f88dc66e2e13e23c6370882ed7569cf29d68db732d86a4104249feabacca9051"
-    sha256 cellar: :any,                 sonoma:        "3cc15ca3bb936daa310e87f2fb08e8361140db3e2689c02c5002e97d16fb4013"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a95ecbe57c11772a48c521719684a8b17a3c6319081977f9407cf5edd1a1348b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2e43c4b9834b95958ae4f7671f6d09f13ad985ac95567e3bcab734f92790fe0f"
+    sha256 cellar: :any, arm64_tahoe:   "03f174dd628778ecb6301a3dfbb6da50753b0eaf54d0dbc560e25c68c5a7a7e1"
+    sha256 cellar: :any, arm64_sequoia: "e091fb3b4fe98311e3f797f3d9398536b5ab6881b0a62eedab54416776e45f7b"
+    sha256 cellar: :any, arm64_sonoma:  "6399db0bfe396459c5ebcce340eebb75d2e3387c1acd17f1ea6caecc3d67ee87"
+    sha256 cellar: :any, sonoma:        "0fc0e824efa7fae1687994fe2dc80eb9b3cb16e7711eae6eebc2e6f88cb3df65"
+    sha256 cellar: :any, arm64_linux:   "d73d165f77d6a257b906fe80288bf14c7df6b378eae281cbf9965b892fc7abb7"
+    sha256 cellar: :any, x86_64_linux:  "6bba2d33d568059eb7b91e7669b02216db9f7e46cad9226722720ca5f39e129e"
   end
 
   depends_on "autoconf" => :build

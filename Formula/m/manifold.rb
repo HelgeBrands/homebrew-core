@@ -1,17 +1,17 @@
 class Manifold < Formula
   desc "Geometry library for topological robustness"
   homepage "https://github.com/elalish/manifold"
-  url "https://github.com/elalish/manifold/releases/download/v3.4.1/manifold-3.4.1.tar.gz"
-  sha256 "c0283695648886df3a0ab35ead473622338782a05a247664925eb3c41ced0181"
+  url "https://github.com/elalish/manifold/releases/download/v3.5.1/manifold-3.5.1.tar.gz"
+  sha256 "ed24f72b97beb18e05a14539febbb850dfa8d4f3f67127ebeca5ff68f6a00a5b"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "aa1b6aaf8f53281c221c85243a4857958878b5c438cf394e1f9148bde3c95dbc"
-    sha256 cellar: :any,                 arm64_sequoia: "bd78a4a16e4367941bab70bf3b838ee256235ef3f241f704b05f10f0af24821a"
-    sha256 cellar: :any,                 arm64_sonoma:  "523b788337489adc047b5a754a1863bb1095383c3ddea2970bcad1f3b6cf3e13"
-    sha256 cellar: :any,                 sonoma:        "69af5b7f329fd5921321da5d0711c01a80fb2c4591111dc5d3937763e58cab00"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3ca61fbcfb6a53c3ba4ec5f3d7c8deed9c2787abe870f8e38b2946ddae75f5b6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "79739a087311fa1e90f161f8bcfb53fe2eae82a13fced9e4db37a5d5cc970d14"
+    sha256 cellar: :any, arm64_tahoe:   "2dfea46a6fbd8ac654883a5197aa342000b95bc3d1b5ed5809000ce928ff7793"
+    sha256 cellar: :any, arm64_sequoia: "bf91d2eb4b6f19670db3e1c8a51f85973f3f546ff3c14f4436355ca836c30eec"
+    sha256 cellar: :any, arm64_sonoma:  "27a5f82c21f876211ecc6c955e6f3fce04526a3e0610f2d41c6d68b860b03f58"
+    sha256 cellar: :any, sonoma:        "e25ccebd664e977d5f547bfec0bbaecee749e2ea6fb901a2805d20beb5d02722"
+    sha256 cellar: :any, arm64_linux:   "6829ef35f75a54ac0c361e446c1ac66589a23d60ca7d48d295d39b926f5382fd"
+    sha256 cellar: :any, x86_64_linux:  "3b091fc96d146fb9e57d2aac79103fdc8feb9cfeb3a2706170d04f42abe58706"
   end
 
   depends_on "cmake" => :build

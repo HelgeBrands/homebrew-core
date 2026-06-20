@@ -1,8 +1,8 @@
 class GithubMcpServer < Formula
   desc "GitHub Model Context Protocol server for AI tools"
   homepage "https://github.com/github/github-mcp-server"
-  url "https://github.com/github/github-mcp-server/archive/refs/tags/v1.0.5.tar.gz"
-  sha256 "f986278faf7fcd58a3386ca59ff5fb770cde5fb37389508199563ff40e5e81fa"
+  url "https://github.com/github/github-mcp-server/archive/refs/tags/v1.4.0.tar.gz"
+  sha256 "1cf05d7ffa73e43e7d35cbee0dbafcc3722d451926e4cb87c231acbd6a943c40"
   license "MIT"
   head "https://github.com/github/github-mcp-server.git", branch: "main"
 
@@ -12,12 +12,12 @@ class GithubMcpServer < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8f8c98596d9934c77f418755898cd4ee8e9cfcf0b5993a0db806621911a5178a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8f8c98596d9934c77f418755898cd4ee8e9cfcf0b5993a0db806621911a5178a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8f8c98596d9934c77f418755898cd4ee8e9cfcf0b5993a0db806621911a5178a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ba47defc89d4d5fdab5e3c173bb37494386ae9f487b3a4f86e598d1f1158630a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "011c213ed0f1b374283a52afc272893e2448fa39476735913cbc88346a791d55"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "91bc1df6e94ebf9a5ded096e37441a6eb9565b9520c35585e5aab82391f8f6a6"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "83b0e0b4f5e92d2ef59ceaa2c66a683b2ddacb0098c1c78fce557f9f31ad150e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "83b0e0b4f5e92d2ef59ceaa2c66a683b2ddacb0098c1c78fce557f9f31ad150e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "83b0e0b4f5e92d2ef59ceaa2c66a683b2ddacb0098c1c78fce557f9f31ad150e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ff78b9951490e6ce99771b8c20b33290891967680721d2c47f0094297199cb1b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a09a43d19412ac208cc4c16bd39d2185f9bc5885d0371d085ea178a163346ff1"
+    sha256 cellar: :any,                 x86_64_linux:  "31dbfa5c885b1da1d10333ba4557b06134461a0a3d84856cee9a492da11913aa"
   end
 
   depends_on "go" => :build

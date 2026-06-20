@@ -1,18 +1,18 @@
 class Cloudflared < Formula
   desc "Cloudflare Tunnel client (formerly Argo Tunnel)"
   homepage "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/"
-  url "https://github.com/cloudflare/cloudflared/archive/refs/tags/2026.5.0.tar.gz"
-  sha256 "21d57fc7da8d83ba9633f79f7593f5898a027f8410fecf5a8c33661090aa7063"
+  url "https://github.com/cloudflare/cloudflared/archive/refs/tags/2026.6.1.tar.gz"
+  sha256 "c3619a29cc529a5bc43ba99e1b298483ac0b8d8c412f69575c089a6bd4a7867d"
   license "Apache-2.0"
   head "https://github.com/cloudflare/cloudflared.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a27a6819f37f0ae763838b24ec40853c90a0d2d6e1a0229fe293b6fcd1582c8d"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bfe28e5b147dd6af1d45c0eb55ef9da90ffff2148043a8f3e081f9180dc7659d"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "4e4c018af8a83e94fc3c9736f670768ac55af718d9e6ed0ab342550defc48071"
-    sha256 cellar: :any_skip_relocation, sonoma:        "4ce9403ebd962c7b986a4ac4b4b49cb2226265ec21c0dc4026acafea55c6baaa"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3ac25644fed4a5006791435b799a60370fef6367e8185400780db065e1c4153d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "154f69e263b13e81738363f14a7417fb7916030fcec8d3705b22021af509651e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "4c912992963b9ed7a51e76c66eb484466071cda83f2899b3c3548330fe7bb64d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "96799ce2388be581e3f825bc7fbb8b74c5b833e30086802c3b48b5a022356b1d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5c5e934d8982515416b38e72d8459585255e302638ec645b1dcff44d2db43f7f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "bf86fee39081042b8d9b635bde75296aa0b6a3cbf33964c11782ff45a1dd4157"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "6be21be0b7e4c06ba2870eaea19d8a36a2877f97e83d7010ddd326cb6f5ed6e7"
+    sha256 cellar: :any,                 x86_64_linux:  "e5cf1b373200ec130a1a1e3ea7c7b805b6d293658e04799bbcac5276f0181c50"
   end
 
   depends_on "go" => :build

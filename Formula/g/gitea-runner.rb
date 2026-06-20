@@ -1,17 +1,18 @@
 class GiteaRunner < Formula
   desc "Official Actions runner for Gitea"
   homepage "https://gitea.com/gitea/runner"
-  url "https://gitea.com/gitea/runner/archive/v1.0.4.tar.gz"
-  sha256 "2e4c72773d8374ea8c44c91480e9a337d3d55e2c7c08f37b0ba555ee6e0dfdd2"
+  url "https://gitea.com/gitea/runner/archive/v1.0.8.tar.gz"
+  sha256 "9d5b1c79149ecbf8f985f36295e766487cb2e22b0a43f778e276286e0b4cf95a"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8af4851e0ccd40fc196bb6002e87316e1e8d7ca39c856bb5ff7972f14d3f4303"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "638a4b5b90748a72fa6a7cedef373a858e2ed664aab54e033ee66a1ff6a72525"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c129b103120204e678b82ce7e8c7ecaef33625297cda72347265b6b19d75b62d"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0697931633682c806b768175af2a7d901115e0bf5a601c37fd3ca96d87757f44"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f78c0941daf508a947ca33201195019c88a7143053f6cf226d22e57f826dfbfe"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "dfff30d32779c5b3103b4383eaa3e09a19de74bbf17e94eb293a804a7e4639d8"
+    rebuild 1
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "f08c33e64e94c385154207e3f931667420d124392c13dd29589ad58b3ed1a7c3"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a6786fc030ca8fc7e95c8f0268840863fa7cd7d9976e5ec50fb7ed2d06f829e5"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "aeaa464da219a87b5ccbd6001a31383a7f6ee851a4a770a9c7dc1c1753cfd90e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "b978f156ecfe7cb6948feefbd4f619f4d3a3fdd88564de6a569038b10fd514e4"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "393f98826e795d8f92992c5c67423d81e0ddf8c7e357ae744a06b530523a13c9"
+    sha256 cellar: :any,                 x86_64_linux:  "2649b7b58b59be0e0814a492f36b0894b2839ee5b14affe5691d7fd75008c3b9"
   end
 
   depends_on "go" => :build
@@ -27,7 +28,6 @@ class GiteaRunner < Formula
     (buildpath/"config.yaml").write Utils.safe_popen_read(bin/"gitea-runner", "generate-config")
     pkgetc.install "config.yaml"
     # Create working dir for services
-    (var/"lib/gitea-runner").mkpath
   end
 
   def caveats

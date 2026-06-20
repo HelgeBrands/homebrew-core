@@ -1,12 +1,12 @@
 class Portless < Formula
   desc "Replace port numbers with stable, named local URLs for humans and agents"
-  homepage "https://port1355.dev"
-  url "https://registry.npmjs.org/portless/-/portless-0.13.0.tgz"
-  sha256 "f4dba587b6cc4c117aa069d6b6de917622776492ae98782729fd922a403ea268"
+  homepage "https://portless.sh"
+  url "https://registry.npmjs.org/portless/-/portless-0.14.0.tgz"
+  sha256 "7d104fcd05aae1a29440f65b936db6391e8c3a857b8ab1b4066b0c2342833197"
   license "Apache-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "93d60cb50ad8a762e0a158f02e67e633f1e737266bcaa2531ad2e4dd1033886e"
+    sha256 cellar: :any_skip_relocation, all: "e806b2b0565036c5b7fb2943a2804617a0abe292fa01245512551880d32b228f"
   end
 
   depends_on "node"

@@ -1,8 +1,8 @@
 class Yek < Formula
   desc "Fast Rust based tool to serialize text-based files for LLM consumption"
   homepage "https://github.com/mohsen1/yek"
-  url "https://github.com/mohsen1/yek/archive/refs/tags/v0.25.2.tar.gz"
-  sha256 "9e8dc80daafcadff586cff6d1e3f586e25cd43cd60bc7bbec1ac8b1a96a359da"
+  url "https://github.com/mohsen1/yek/archive/refs/tags/v0.25.4.tar.gz"
+  sha256 "337e126814f745c6ec5d948d7aec33bd1d42066e764e17b6482679f77927e102"
   license "MIT"
   head "https://github.com/mohsen1/yek.git", branch: "main"
 
@@ -12,13 +12,12 @@ class Yek < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any,                 arm64_tahoe:   "7c708d2466411a06f586155d5fcd3b2a2a8047280d82eb2f8b8475370b47dce9"
-    sha256 cellar: :any,                 arm64_sequoia: "ea895a535de86d4aa18601d5334e7f26e525448f5945ffc7d2eda186caa1a2e9"
-    sha256 cellar: :any,                 arm64_sonoma:  "75686e073310efef5eed37caf9b515ea48e290f8f7273ce73e3c36ec060ed823"
-    sha256 cellar: :any,                 sonoma:        "50f16ea3b12bda86ae072fd28bac2bc6294868bafc92184e5639729d41b24ca5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "70c00518e83711b7ba8b1a9c3f6fab4fa87f4aeb6200620bc647832715b2bb1a"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "482dd8f60fe32a2a7c8f3611757d343b3e7ab0e6c503683b52446a9c94c14324"
+    sha256 cellar: :any, arm64_tahoe:   "59107fb3fed6bb1932d97063fdf0947d93e627226c67b3466d2217a3118ae1e1"
+    sha256 cellar: :any, arm64_sequoia: "6b7307433a733c29ab866e3f6935daf3e49dfb650da6df3819e431097ed30873"
+    sha256 cellar: :any, arm64_sonoma:  "52a480c9d5c26edb14c98b2cd3ef159b9012e8ad86feab593be35e48c00ec9c4"
+    sha256 cellar: :any, sonoma:        "1d2a61cef60b1cc3a104004b9b312e24eb0b967666c71867969c14c6c690d6eb"
+    sha256 cellar: :any, arm64_linux:   "4539e527afb3f67939b87abf6f50a20de4c54092786f7ee26c1d30f34e764a89"
+    sha256 cellar: :any, x86_64_linux:  "b30777bfc5feafdaab3802bf5de4a4e3611c83ca4a5e7d8e2bbb11a33cbf2e18"
   end
 
   depends_on "pkgconf" => :build

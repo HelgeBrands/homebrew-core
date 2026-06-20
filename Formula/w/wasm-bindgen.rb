@@ -1,17 +1,17 @@
 class WasmBindgen < Formula
   desc "Facilitating high-level interactions between Wasm modules and JavaScript"
   homepage "https://wasm-bindgen.github.io/wasm-bindgen/"
-  url "https://github.com/wasm-bindgen/wasm-bindgen/archive/refs/tags/0.2.121.tar.gz"
-  sha256 "2bf077c86b73d3cc4bfe01b9e944469a6fe228d9c1f38b20d6fc8b3e0e9dbe3a"
+  url "https://github.com/wasm-bindgen/wasm-bindgen/archive/refs/tags/0.2.125.tar.gz"
+  sha256 "f7b665c49e5dc74654714d7551ef44974c62070e668baed337e551ef0c29fc36"
   license any_of: ["Apache-2.0", "MIT"]
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "e43341aee63ff4117ce07097fd4a21a122362eb1a5c8f03da83d74a3940674c5"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c1c1f2076f5aadd46fc8fa6ffc19a1a07741aa4256ab15141c6c80a55170e92c"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "67b20b4be137835b61a312cbe844973a1edcee313bdccef27a56f4e39c4c1436"
-    sha256 cellar: :any_skip_relocation, sonoma:        "362acc9a54e928fea581e9135796e967ab9701c86873e06080085c2b96e63ea2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "709cfa111c8337917bbf6b3f9f75db2f3cfe6233b461dfe3a31745296f4eb2b7"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cfb62d95044c6a7a75130695d8d3adf4b5c22909af2838a07b435e969fe32b7f"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "75cce1492dd0ad09cde1d1ba8296862718da5e7d5d57f6cdf3b4469d79523e79"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e3884e7e456f91f34af13f04da47d844ef0f82edc2599cf26f8c28fd716c7a58"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "06dd3d9129c095a9414654dd97e75aa4c1ac8e851d7005298ad259b438f4912f"
+    sha256 cellar: :any_skip_relocation, sonoma:        "0f1755f293fde49978dbbd25997126b43c8daaf0147d4ae4977dbafdb5a5706d"
+    sha256 cellar: :any,                 arm64_linux:   "8db2de725de887f5e5e11e67267d371996e752afb9c8ef5dde651d4658fade22"
+    sha256 cellar: :any,                 x86_64_linux:  "a049ca1db5ead6ad6bbb77f8e9b85bbf0bf278bab7c7199a961aac24f27b94dd"
   end
 
   depends_on "rust" => :build
@@ -78,7 +78,7 @@ class WasmBindgen < Formula
     ENV.delete "CARGO_ENCODED_RUSTFLAGS"
 
     # Explicitly enable reference-types to resolve "failed to find intrinsics" error
-    ENV["RUSTFLAGS"] = "-C target-feature=+reference-types"
+    ENV.append_to_rustflags "-C target-feature=+reference-types"
     system "cargo", "build", "--target", "wasm32-unknown-unknown", "--manifest-path", "Cargo.toml"
     system bin/"wasm-bindgen", "target/wasm32-unknown-unknown/debug/hello_world.wasm",
                               "--out-dir", "pkg", "--reference-types"

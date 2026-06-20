@@ -1,18 +1,18 @@
 class CloudflareSpeedCli < Formula
   desc "Cloudflare-based speed test with optional TUI"
   homepage "https://github.com/kavehtehrani/cloudflare-speed-cli"
-  url "https://github.com/kavehtehrani/cloudflare-speed-cli/archive/refs/tags/v0.6.13.tar.gz"
-  sha256 "1ac2f5e2b5ac44b0c9ec21143a1ef4888ac9e655e3a97cc6a829cf29eda67e80"
+  url "https://github.com/kavehtehrani/cloudflare-speed-cli/archive/refs/tags/v1.0.6.tar.gz"
+  sha256 "5e846dbbc50200fd75542bd68159f322fc2e3b1b7ffa43e4e7c6c8f9b6e4d34e"
   license "GPL-3.0-only"
   head "https://github.com/kavehtehrani/cloudflare-speed-cli.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "9743a931334281381c0d09565e50bb3f0da96236221f97ee81d5f786a5bbb390"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "a168a015e300427d8585c0d426ff34436167722db614fba691e44ad06c0b1ed5"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "18140711cacd403f182f11bfe0edd45aa17e845725f49628b4559c5e7735cd11"
-    sha256 cellar: :any_skip_relocation, sonoma:        "0b09f5df7d85dbd82af9a78d20e4f5f4edea6a30e21052c36ca7c9b2bcd3e6de"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3b30f3673d1665e4175385ece741405c0718e8ee6923743d07a8188cf10aeadc"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2ed6413f06ac86bcacdafaf00226d09a98127a94a5e86003f2b02e7db0db0d36"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c5f0d32eccf7e416d3f93c9df2f5532d942c26701e82ca6166ac6a09a6bfc1f7"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "52b2427be88d9bba7c591da87c5d95f4c59d839bba0b832a23fa5636b42bb8fe"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a4daf9c46d1fcd3e7230292bbc4cd2eb8678a9e0d18b49685b6bad82d1135c0b"
+    sha256 cellar: :any_skip_relocation, sonoma:        "f2d537e9961cd913993831b6d38dc011e7f41389dc5cc39baedb89696e8c8857"
+    sha256 cellar: :any,                 arm64_linux:   "63237263a83596997a13d50cdd5a582f6c1702db4fdb17551c5812620b2288d4"
+    sha256 cellar: :any,                 x86_64_linux:  "781af333778d9c4bda79331acb8a389bba4ab677374347c619a524fc461ce69e"
   end
 
   depends_on "rust" => :build

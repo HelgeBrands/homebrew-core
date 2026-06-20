@@ -4,7 +4,7 @@ class ClawsMail < Formula
   url "https://www.claws-mail.org/releases/claws-mail-4.4.0.tar.gz"
   sha256 "642d78309b7b153699c417bcfdf505a735b19c57fd731a0bbb5752ad6adbdb52"
   license "GPL-3.0-or-later"
-  revision 1
+  revision 3
 
   livecheck do
     url "https://www.claws-mail.org/releases.php"
@@ -12,12 +12,12 @@ class ClawsMail < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "6831e9be76de893a5d79834b3822145fd085a3c44c8a5e65d9b7e4969a51a3a9"
-    sha256 arm64_sequoia: "dda17bbeb1dc14d1473f6dd19c4d20b22a17b0d7253c53fbd810bf8461d32c51"
-    sha256 arm64_sonoma:  "e0bd89dc66d75a171cc1237e852184ebcd4e77fac035055990b8b6e61cb1e9e8"
-    sha256 sonoma:        "d990f303124905661817b91f64b5273ba14fa62e6bdcf4bd0de2b18bddb97535"
-    sha256 arm64_linux:   "6a0866128ab5395b64c9a7cdffbc72dbe87c481b525b5447763c3351576e1cf0"
-    sha256 x86_64_linux:  "3c507d478e0d9609d483bfcbddda06b57f1cc48910766dd73cf577488a1a4fa9"
+    sha256 arm64_tahoe:   "802a84e17c8e82c3b7794785d56f92e862c335c184525aa8437448e507e68ab0"
+    sha256 arm64_sequoia: "5c4648384fea31d7c9ebe5116656e119b752ee0eddd86b3ad305fa4827d4c51d"
+    sha256 arm64_sonoma:  "037137457f0cad56a06a0ac87bc003dd9a9f8120ec4585ce3093ce1e79e12d0c"
+    sha256 sonoma:        "444debd26e80fa85dac3b1a5019ce26c2a22ee933be8a810c6454dd6d5c728d4"
+    sha256 arm64_linux:   "117612a79662d6f2241bf6e14a5aa149af5d2b055e632643cdf7bdc399bac776"
+    sha256 x86_64_linux:  "9cfb9bccb094e86849d6add6c7e6af8e6b621354963a9fda130cbcc6090547d6"
   end
 
   depends_on "pkgconf" => :build
@@ -28,6 +28,7 @@ class ClawsMail < Formula
   depends_on "gtk+3"
   depends_on "libetpan"
   depends_on "nettle"
+  depends_on "openssl@3"
   depends_on "pango"
 
   on_macos do
@@ -43,10 +44,6 @@ class ClawsMail < Formula
   end
 
   def install
-    if OS.mac?
-      ENV["LIBETPAN_CFLAGS"] = "-I#{Formula["libetpan"].opt_include}"
-      ENV["LIBETPAN_LIBS"] = "-F#{Formula["libetpan"].opt_frameworks} -framework libetpan"
-    end
     system "./configure", "--disable-silent-rules",
                           "--disable-archive-plugin",
                           "--disable-dillo-plugin",

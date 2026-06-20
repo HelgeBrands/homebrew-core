@@ -3,18 +3,18 @@ class Uvicorn < Formula
 
   desc "ASGI web server"
   homepage "https://uvicorn.dev/"
-  url "https://files.pythonhosted.org/packages/f6/b1/8e7077a8641086aea449e1b5752a570f1b5906c64e0a33cd6d93b63a066b/uvicorn-0.47.0.tar.gz"
-  sha256 "7c9a0ea1a9414106bbab7324609c162d8fa0cdcdcb703060987269d77c7bb533"
+  url "https://files.pythonhosted.org/packages/c4/1f/fa18009dea8469069cca78a4e877a008ab78f08b064bfc9ab891579077ff/uvicorn-0.49.0.tar.gz"
+  sha256 "ebf4271aa580d9de97f93192d4595176df6e91f9aae919ca73e4fc07df1e66a3"
   license "BSD-3-Clause"
   head "https://github.com/encode/uvicorn.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "a71205519f1760991f8ad27c8ace439c11491faffcec435d6227ceb3d66ecd4c"
-    sha256 cellar: :any,                 arm64_sequoia: "5836e18244d1507fe879433cbdc6ef3246d749d0eecce15da343bcc0ac81ddc9"
-    sha256 cellar: :any,                 arm64_sonoma:  "330505ba10d70c458bdf1eedd50b4074a454734435fe2c26579e8da2275e9290"
-    sha256 cellar: :any,                 sonoma:        "a08610ac9c4a8bf70a646b707eac7cd7d301e0424abc05bb16d9f4cd61cc94a5"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "573603516689e2ad77a898316a2c5bbd821152e59b85ad3fdd41487c96206ee5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "90cc4ef959b5b0e0c31e6eb2b779dcfd2d2ce7c7196328ea36263985986f1571"
+    sha256 cellar: :any, arm64_tahoe:   "cdd84ddd51ec75d0f09c7d5d0ff12a3618014bc4d8706aa9a447c14ba99ae0ca"
+    sha256 cellar: :any, arm64_sequoia: "caa7105cff383b74e066a550129f96255218cbe79e4b3e3eb5fbfd601144bd40"
+    sha256 cellar: :any, arm64_sonoma:  "b2c4627a3556ade055e1deb7b8ca5158c0f536940786c36bd5c6c02f7d8a0d9b"
+    sha256 cellar: :any, sonoma:        "330db1cc870d299f57e30f66b576e15339e50911aa34e195ff3d68e053e98cc5"
+    sha256 cellar: :any, arm64_linux:   "87cbb241ac21443f2787bfd68f5eebf0151acf91fa9c7602c225ec92a93f84c9"
+    sha256 cellar: :any, x86_64_linux:  "ce91e79e352ac7fc76464d83be4e678154d68ce26417d36438b36fa48d7954e1"
   end
 
   depends_on "rust" => :build
@@ -29,8 +29,8 @@ class Uvicorn < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/bb/63/f9e1ea081ce35720d8b92acde70daaedace594dc93b693c869e0d5910718/click-8.3.3.tar.gz"
-    sha256 "398329ad4837b2ff7cbe1dd166a4c0f8900c3ca3a218de04466f38f6497f18a2"
+    url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
+    sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
   end
 
   resource "h11" do
@@ -39,13 +39,13 @@ class Uvicorn < Formula
   end
 
   resource "httptools" do
-    url "https://files.pythonhosted.org/packages/b5/46/120a669232c7bdedb9d52d4aeae7e6c7dfe151e99dc70802e2fc7a5e1993/httptools-0.7.1.tar.gz"
-    sha256 "abd72556974f8e7c74a259655924a717a2365b236c882c3f6f8a45fe94703ac9"
+    url "https://files.pythonhosted.org/packages/43/e5/d471fcb0e14523fe1c3f4ba58ca52480e7bd70ad7109a3846bc75892f7fb/httptools-0.8.0.tar.gz"
+    sha256 "6b2a32f18d97e16e90827d7a819ffa8dbd8cc245fc4e1fa9d1095b54ef4bd999"
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz"
-    sha256 "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc"
+    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
+    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
   end
 
   resource "python-dotenv" do
@@ -64,8 +64,8 @@ class Uvicorn < Formula
   end
 
   resource "watchfiles" do
-    url "https://files.pythonhosted.org/packages/c2/c9/8869df9b2a2d6c59d79220a4db37679e74f807c559ffe5265e08b227a210/watchfiles-1.1.1.tar.gz"
-    sha256 "a173cb5c16c4f40ab19cecf48a534c409f7ea983ab8fed0741304a1c0a31b3f2"
+    url "https://files.pythonhosted.org/packages/cd/41/5e1a4bb12aac5f1493fa1bdc11154eca3b258ca4eba65d39c473fe19d8e9/watchfiles-1.2.0.tar.gz"
+    sha256 "c995fba777f1ea992f090f9236e9284cf7a5d1a0130dd5a3d82c598cacd76838"
   end
 
   resource "websockets" do

@@ -5,16 +5,15 @@ class Libgccjit < Formula
   head "https://gcc.gnu.org/git/gcc.git", branch: "master"
 
   stable do
-    url "https://ftpmirror.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz"
-    mirror "https://ftp.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz"
-    sha256 "438fd996826b0c82485a29da03a72d71d6e3541a83ec702df4271f6fe025d24e"
+    url "https://ftpmirror.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz"
+    mirror "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz"
+    sha256 "50efb4d94c3397aff3b0d61a5abd748b4dd31d9d3f2ab7be05b171d36a510f79"
 
     # Branch from the Darwin maintainer of GCC, with a few generic fixes and
-    # Apple Silicon support, located at https://github.com/iains/gcc-14-branch
+    # Apple Silicon support, located at https://github.com/iains/gcc-16-branch
     patch do
       on_macos do
-        url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/gcc/gcc-15.1.0.diff"
-        sha256 "360fba75cd3ab840c2cd3b04207f745c418df44502298ab156db81d41edf3594"
+        file "Patches/gcc/gcc-16.1.0.diff"
       end
     end
   end
@@ -24,15 +23,14 @@ class Libgccjit < Formula
   end
 
   bottle do
-    rebuild 1
-    sha256 arm64_tahoe:   "e25a101a9c694e6414fd821fb92081c9eee03f23de41cc1ad691ac06369f6e70"
-    sha256 arm64_sequoia: "52c78f1896d08bb5b30a2d63e73ce1d43046ba0844a56b1b8af75816571f4aea"
-    sha256 arm64_sonoma:  "e89c26e4a61f1def2a7febc62298949938fc1859f195f0c882f76ca82bc1c0ea"
-    sha256 tahoe:         "4ad10d772c3ff17360cd4e0800c804acc6ed3bd0ccff03da05805e5673256117"
-    sha256 sequoia:       "c7acde534e2ce4975bd5f56ff80a27e1deb12f97a7d260bb0ee5734aa914a616"
-    sha256 sonoma:        "19bb523cfdd273b2564c67fd3ecf617c2526a67b8393260e653bb18819fdc1ef"
-    sha256 arm64_linux:   "ff1091b71f82a9f6c670ca7c2ea711f7f69c20a01805ba282e688db81a195b06"
-    sha256 x86_64_linux:  "d6545f11da7e51ee8b9b798dc116855a40b7ca9ab46b5a0c80765c19209a3db4"
+    sha256 arm64_tahoe:   "97505cedf1e502c3b948e69cd48b9a3b78e4f61011cf275c4c963f76e34e933d"
+    sha256 arm64_sequoia: "a444a8d15c975b6bacc110928b80be9f9649547e325e71abbaeae64dcf03ce4f"
+    sha256 arm64_sonoma:  "f9a76ab97d22ad3c17d7d6cafa4566c18ab7009ccecec65c724098548e4e1fa3"
+    sha256 tahoe:         "45beaae24bfc185cf533177261ce568aafe975f4b3a5710d21fec94a987d56e5"
+    sha256 sequoia:       "bee819aabaf0c215d85ac6e3b14bab37ee9d61e9f888391aba2fbed1e94dcb27"
+    sha256 sonoma:        "326bd8002f8468200000f0081f2627c5cf5acb7b2013ff96dd9b993320de07cd"
+    sha256 arm64_linux:   "94c7d6b0162d06915340e852a51c43c7406427f4d323fc8a1908a78b1d62c7a4"
+    sha256 x86_64_linux:  "ce69005d6f81130017f8a503a1dda2dd1c07a433988741c0bf774ce409ae6629"
   end
 
   # The bottles are built on systems with the CLT installed, and do not work
@@ -53,6 +51,7 @@ class Libgccjit < Formula
   end
 
   on_linux do
+    depends_on "binutils"
     depends_on "zlib-ng-compat"
   end
 
@@ -106,6 +105,9 @@ class Libgccjit < Formula
       # https://stackoverflow.com/a/54038769
       inreplace "gcc/config/i386/t-linux64", "m64=../lib64", "m64="
       inreplace "gcc/config/aarch64/t-aarch64-linux", "lp64=../lib64", "lp64="
+
+      # Use our own (recent) binutils
+      args << "--with-as=#{Formula["binutils"].opt_bin}/as"
 
       ENV.append_path "CPATH", Formula["zlib-ng-compat"].opt_include
       ENV.append_path "LIBRARY_PATH", Formula["zlib-ng-compat"].opt_lib

@@ -2,41 +2,41 @@ class Backgroundremover < Formula
   include Language::Python::Virtualenv
 
   desc "Remove background from images and video using AI"
-  homepage "https://github.com/nadermx/backgroundremover"
-  url "https://files.pythonhosted.org/packages/f5/8d/ebc742ef2c427bfec9047096b28ed380d390a566bf294fe0772a2b044940/backgroundremover-0.4.1.tar.gz"
-  sha256 "3afa098d4538f44fd0bb44f9b77b63c29716fe7860dc79a3d51053d8cba2f753"
+  homepage "https://backgroundremoverai.com"
+  url "https://files.pythonhosted.org/packages/b1/59/5713f3ddedb43b65c7bef017b5d46b586d2af2af9e31f6c0e2e618bcc35f/backgroundremover-0.4.4.tar.gz"
+  sha256 "b10da99c69cac0c4f5076d3ae5ca3ad28353fbb541e6924ace9bfe05b2756a5b"
   license "MIT"
-  revision 4
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "92247c82af2c24d42be9d0c8b131f8655fa54fb28c20acef748701bba6d256f3"
-    sha256 cellar: :any,                 arm64_sequoia: "fea7fd39ea2ec934112a116e534a085e81112355f7d9c1c0c3df15bfa434a78e"
-    sha256 cellar: :any,                 arm64_sonoma:  "07b87c6f6957849940aac423966577dabf5ff7073fc55659d5601a60e937f44e"
-    sha256 cellar: :any,                 sonoma:        "c2e5b482562580b3a712b1f994738e17d9df3bff60453ccebdeff80829868189"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "002195e384bbb9469364d2d9d1ab9f1d0a7bd5fda3e864191ff82fe16cdc7370"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "ef8ffd31a40163f550bca19c71a123718fc043ae4ce37a0fc49cc1925090bfbc"
+    rebuild 1
+    sha256 cellar: :any, arm64_tahoe:   "c12c71758bfc3449a3b8e301b1e54391633eb4ca21be82cd75c76331bb40cbbf"
+    sha256 cellar: :any, arm64_sequoia: "d687555694ff22f454d9dcba7747e5b1d619b5445212f390a562b3457ab53b06"
+    sha256 cellar: :any, arm64_sonoma:  "5843f14ac8b3e4bb262e8a69b57301a529718a516b9013bd93ec136b1301ed86"
+    sha256 cellar: :any, sonoma:        "4299460afd307bdd0db7ac58199cf5e3843271711a140599136b47b606214fa4"
+    sha256 cellar: :any, arm64_linux:   "f6536a26206105c79c79288eb4912d46494387a741d286f28df89ad041a8016c"
+    sha256 cellar: :any, x86_64_linux:  "1769bac54914c175f04395961c6ca383ef5200e4077735a7a49be2289784de32"
   end
 
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
-  depends_on "certifi"
+  depends_on "certifi" => :no_linkage
   depends_on "ffmpeg"
   depends_on "libheif"
   depends_on "llvm@20"
-  depends_on "pillow"
+  depends_on "numpy"
+  depends_on "pillow" => :no_linkage
   depends_on "python@3.14"
-  depends_on "scikit-image"
-  depends_on "scipy"
-  depends_on "torchvision"
+  depends_on "scikit-image" => :no_linkage
+  depends_on "scipy" => :no_linkage
+  depends_on "torchvision" => :no_linkage
 
   on_linux do
     depends_on "patchelf" => :build
     depends_on "openblas"
   end
 
-  # numba 0.63.1 does not support numpy 2.4.x, see https://github.com/numba/numba/issues/10263
   pypi_packages exclude_packages: %w[certifi torch torchvision pillow scipy scikit-image],
-                extra_packages:   %w[imageio numpy]
+                extra_packages:   %w[imageio]
 
   resource "blinker" do
     url "https://files.pythonhosted.org/packages/21/28/9b3f50ce0e048515135495f198351908d99540d69bfdc8c1d15b73dc55ce/blinker-1.9.0.tar.gz"
@@ -49,8 +49,8 @@ class Backgroundremover < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/23/e4/796662cd90cf80e3a363c99db2b88e0e394b988a575f60a17e16440cd011/click-8.4.0.tar.gz"
-    sha256 "638f1338fe1235c8f4e008e4a8a254fb5c5fbdcbb40ece3c9142ebb78e792973"
+    url "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz"
+    sha256 "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96"
   end
 
   resource "commandlines" do
@@ -89,8 +89,8 @@ class Backgroundremover < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz"
-    sha256 "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc"
+    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
+    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
   end
 
   resource "imageio" do
@@ -114,8 +114,8 @@ class Backgroundremover < Formula
   end
 
   resource "more-itertools" do
-    url "https://files.pythonhosted.org/packages/a2/f7/139d22fef48ac78127d18e01d80cf1be40236ae489769d17f35c3d425293/more_itertools-11.0.2.tar.gz"
-    sha256 "392a9e1e362cbc106a2457d37cabf9b36e5e12efd4ebff1654630e76597df804"
+    url "https://files.pythonhosted.org/packages/de/1d/f4da6f02cdffe04d6362210b807146a26044c88d839208aec273bb0d9184/more_itertools-11.1.0.tar.gz"
+    sha256 "48e8f4d9e7e5878571ecf6f2b4e57634f93cd474cc8cfbd2376f2d11b396e30d"
   end
 
   resource "moviepy" do
@@ -128,14 +128,9 @@ class Backgroundremover < Formula
     sha256 "19357146c32fe9ed25059ab915e8465fb13951cf6b0aace3826b76886373ab23"
   end
 
-  resource "numpy" do
-    url "https://files.pythonhosted.org/packages/d0/ad/fed0499ce6a338d2a03ebae59cd15093910c8875328855781952abf6c2fe/numpy-2.4.6.tar.gz"
-    sha256 "f3a3570c4a2a16746ac2c31a7c7c7b0c186b95ce902e33db6f28094ed7387dda"
-  end
-
   resource "pillow-heif" do
-    url "https://files.pythonhosted.org/packages/cd/58/2df4fc42840633e01c97b75965cb1bc6e14425973b92382391650e97e4b7/pillow_heif-1.3.0.tar.gz"
-    sha256 "af8d2bda85e395677d5bb50d7bda3b5655c946cc95b913b5e7222fabacbb467f"
+    url "https://files.pythonhosted.org/packages/e3/5f/4753689400e657ca5d984f5e897657dab12d91b62f1bb6a1e73487b59a97/pillow_heif-1.4.0.tar.gz"
+    sha256 "55a7c0cb5321538d1ca74037be54b48d147017735a766eb29bcca4761253a1f1"
   end
 
   resource "proglog" do
@@ -169,8 +164,8 @@ class Backgroundremover < Formula
   end
 
   resource "tqdm" do
-    url "https://files.pythonhosted.org/packages/09/a9/6ba95a270c6f1fbcd8dac228323f2777d886cb206987444e4bce66338dd4/tqdm-4.67.3.tar.gz"
-    sha256 "7d825f03f89244ef73f1d4ce193cb1774a8179fd96f31d7e1dcde62092b960bb"
+    url "https://files.pythonhosted.org/packages/85/05/0d5260f1f1ca784f4a4a0def9cbe6affe587f5b4025328d446c3d67765f4/tqdm-4.68.2.tar.gz"
+    sha256 "89c230e8dbc67c7615c142487111222f878c77427ea09549960f62389e258add"
   end
 
   resource "urllib3" do

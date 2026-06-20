@@ -2,8 +2,8 @@ class Mimirtool < Formula
   desc "CLI for interacting with Grafana Mimir"
   homepage "https://grafana.com/docs/mimir/latest/operators-guide/tools/mimirtool/"
   url "https://github.com/grafana/mimir.git",
-        tag:      "mimir-3.0.6",
-        revision: "25026e726c2add35575740d9732804c61bc70f73"
+        tag:      "mimir-3.1.1",
+        revision: "a3d6c90f25a97bf16545334ad20e08223ee89d92"
   license "AGPL-3.0-only"
   head "https://github.com/grafana/mimir.git", branch: "main"
 
@@ -17,12 +17,12 @@ class Mimirtool < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bbed1ed905503687e4d11c856ba3120fb987fd163df874b5308228fedf2d9792"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "671b3698e7686775aa106b41d3a44014f81e62ff6d365fd07f247da55387d863"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "7f62c1eb5bdfd0caef7853f84f932ec3fdcc206a6592214f81bafcff1ef33d60"
-    sha256 cellar: :any_skip_relocation, sonoma:        "d1ac81153196c7cba37e4be04a7dfda78dce0dc87f2dd64f24cbc20ee0214ecb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "92d7c86b6cb8ce3ac38d580c5f616208bb9cba41b39f41fad982ad8d714283e2"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "2f212d853fad97940245cbfc9da6bb82047dc49623e59d3f3ec91a2f9c5a1f82"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fc15f0f760be4de379a7535d858b0e041631f879c776a8b68506942e0dd78cfa"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "94a1ff23d4fec508e9179b958a00e18f0d27eef9d511fb6956bc4fdfc32ebbaf"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "99434b9276aa0526ffd57d18de1b8c1950fa1cff1e0e592089586bdb36e8ac2d"
+    sha256 cellar: :any_skip_relocation, sonoma:        "49e0ab7fc0676aa0e4d1041fa90d5cd364ba9a420cbbb3243242b91bfadcdb7d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b00e951f6706e1db43d47d7ee047b5118a91312f352ee3960e80cb6eee1f9957"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "89f8c96facd461a1f2991ad2ce4d2ec8fe8ffc7a9e1b5d086b5738626fa033fb"
   end
 
   depends_on "go" => :build

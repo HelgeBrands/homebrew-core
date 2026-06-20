@@ -1,27 +1,25 @@
 class AwsCIo < Formula
   desc "Event driven framework for implementing application protocols"
   homepage "https://github.com/awslabs/aws-c-io"
-  url "https://github.com/awslabs/aws-c-io/archive/refs/tags/v0.26.3.tar.gz"
-  sha256 "521fd0848fca661130bbb7278a414d7a38bdcb9bc8ffa89f6660d84e5838a303"
+  url "https://github.com/awslabs/aws-c-io/archive/refs/tags/v0.27.2.tar.gz"
+  sha256 "42caef5ef624ca8f5046d4e9f21c8dcaf1c4d7d0b2d46d965357b13079f2d2d3"
   license "Apache-2.0"
   compatibility_version 1
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "f96cf4e4319785524c71a88e1cb2f1d065bf5f4b0111c77887115777fbd8dc38"
-    sha256 cellar: :any,                 arm64_sequoia: "3fa6c3a84abe7104e2161f822f6a653ba5b825c4d6f69ac829e61d2dd26257fd"
-    sha256 cellar: :any,                 arm64_sonoma:  "4daec1224842c5e4cf4406c8ed9a04d331533e1107e0d192bde1f370035b7109"
-    sha256 cellar: :any,                 sonoma:        "a2076fe1abd39e628ea7e796d1fea5595585e52ffa7e0884a5ebee3b419e599f"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4a16bcbe7b75b407602af6e23e84bcb9cbb96d6780d0f7c9642fcfbb8957bbc3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "3c2b99161cba1c51c6562c0959ede8b4a9d2b468da23dc672aa1428c0ae5ce5a"
+    sha256 cellar: :any, arm64_tahoe:   "047ca86439e4aedaa13ec16c2ef4fcc148052c818ed03ace8dffe5832cfefe3e"
+    sha256 cellar: :any, arm64_sequoia: "a15620e07e6186e8539f1d5cd90d27ee5b5aca906f67f4f35ee401690e25a0fe"
+    sha256 cellar: :any, arm64_sonoma:  "9fbdc7f22913bb02d3ef7b794d530189a47b66235d382e66cef59f55d6c2111d"
+    sha256 cellar: :any, sonoma:        "5d662d42b6c340b21f666687ea210986b2a9182448000e12a9a04a8869b314dc"
+    sha256 cellar: :any, arm64_linux:   "ce802693acb4b0ba791ab8ddefc6af0bb63e1d9e26460fe2c3ef25faf9fa7c33"
+    sha256 cellar: :any, x86_64_linux:  "52fb201477fd730551f827ae3de9778f69cf333006605bfb0dc29c7ec99b7bb9"
   end
 
   depends_on "cmake" => :build
   depends_on "aws-c-cal"
   depends_on "aws-c-common"
-
-  on_linux do
-    depends_on "s2n"
-  end
+  depends_on "openssl@3"
+  depends_on "s2n"
 
   def install
     system "cmake", "-S", ".", "-B", "build", "-DBUILD_SHARED_LIBS=ON", *std_cmake_args

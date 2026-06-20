@@ -23,6 +23,7 @@ class RubyAT32 < Formula
 
   # EOL: 2026-03-31
   deprecate! date: "2026-05-07", because: :unsupported
+  disable! date: "2027-05-07", because: :unsupported
 
   depends_on "autoconf" => :build
   depends_on "bison" => :build
@@ -271,10 +272,10 @@ class RubyAT32 < Formula
     ENV["GEM_HOME"] = testpath
     system bin/"gem", "install", "json"
 
-    (testpath/"Gemfile").write <<~EOS
+    (testpath/"Gemfile").write <<~RUBY
       source 'https://rubygems.org'
       gem 'github-markup'
-    EOS
+    RUBY
     system bin/"bundle", "exec", "ls" # https://github.com/Homebrew/homebrew-core/issues/53247
     system bin/"bundle", "install", "--binstubs=#{testpath}/bin"
     assert_path_exists testpath/"bin/github-markup", "github-markup is not installed in #{testpath}/bin"

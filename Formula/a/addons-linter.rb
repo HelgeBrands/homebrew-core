@@ -1,15 +1,17 @@
 class AddonsLinter < Formula
   desc "Firefox Add-ons linter, written in JavaScript"
   homepage "https://github.com/mozilla/addons-linter"
-  url "https://registry.npmjs.org/addons-linter/-/addons-linter-10.5.0.tgz"
-  sha256 "7526bba496af8a0e02d87991b704159191713b1c02e87da0aa2ff5bbd63cb444"
+  url "https://registry.npmjs.org/addons-linter/-/addons-linter-10.7.0.tgz"
+  sha256 "ecda2311fbf95cea6a17b1fb24482c7de31525457bb766af87db42b7cb0a52cb"
   license "MPL-2.0"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "8a13ab1505c1c67e8da07bec7353b003def0d0aab39b3ddf5996c392bdd7be5c"
+    sha256 cellar: :any_skip_relocation, all: "9f83bf57868ca5daaf931f7407d2b3df39c05f7af43aeb00ea923d0caf593f14"
   end
 
   depends_on "node"
+
+  deny_network_access! [:postinstall, :test]
 
   def install
     system "npm", "install", *std_npm_args

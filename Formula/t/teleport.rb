@@ -1,8 +1,8 @@
 class Teleport < Formula
   desc "Modern SSH server for teams managing distributed infrastructure"
   homepage "https://goteleport.com/"
-  url "https://github.com/gravitational/teleport/archive/refs/tags/v18.8.1.tar.gz"
-  sha256 "ec182a6c5cef4452529700d857fe921aac530b1a32b1da1201bc660007ba5396"
+  url "https://github.com/gravitational/teleport/archive/refs/tags/v18.9.0.tar.gz"
+  sha256 "4fa55291972767286af81ee4e0e682e38d27eb5541d222f7f288e59f257ac2bf"
   license all_of: ["AGPL-3.0-or-later", "Apache-2.0"]
   head "https://github.com/gravitational/teleport.git", branch: "master"
 
@@ -18,12 +18,12 @@ class Teleport < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "3ee6aa44146eb1ab513f5846c4c319478666459ecf4f33ce82f86b398c555c52"
-    sha256 cellar: :any,                 arm64_sequoia: "e75e4a5cc7c3354f4e4db62a7bb2ee02da9fc0f8bfa21e454dd5d388428d2879"
-    sha256 cellar: :any,                 arm64_sonoma:  "6f3a3fa785485a98d9fa9282caf446e628d8512147b97145f9cd1313dd797c4e"
-    sha256 cellar: :any,                 sonoma:        "478c2225317f48e0923922c1b6421d7d501c36cbc1e4ce8c16c3e61e2e49c9e3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "683198dd3f6d3ca282726a1d72ab7170f91c1b794b807d48c4e4f5986f1fdd45"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "73c06d4a2209950804154ee84274c7375cfab68dbd15ee3150a4730fb34bcf3a"
+    sha256 cellar: :any, arm64_tahoe:   "ce78c62d581f6ef140a8b0599b8426951b21e48926c3d0b006a97823a5942004"
+    sha256 cellar: :any, arm64_sequoia: "2c940495cb1f39938fd8d972322b70a3407074f39b16e4b9e6be608d15642a78"
+    sha256 cellar: :any, arm64_sonoma:  "5a9ae5b376dfd416721481122141e1f0bdaab02cb9646aae1cef8149f9ff2fef"
+    sha256 cellar: :any, sonoma:        "9f150a8e0c644af04b246e0ac0cffff9ae453268b7e95659b083de543fc53eb4"
+    sha256 cellar: :any, arm64_linux:   "9c43c39cc8b99d8ed644d752e1adc6d390ae0f18b4ac02f92d623c17a0e51f1c"
+    sha256 cellar: :any, x86_64_linux:  "8b6c56f04c32919aa1765a69f30df6875de68234e9e625da46bd57eb991f5205"
   end
 
   depends_on "binaryen" => :build

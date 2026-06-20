@@ -3,12 +3,13 @@ class Llvm < Formula
   homepage "https://llvm.org/"
   # The LLVM Project is under the Apache License v2.0 with LLVM Exceptions
   license "Apache-2.0" => { with: "LLVM-exception" }
+  revision 1
   compatibility_version 1
   head "https://github.com/llvm/llvm-project.git", branch: "main"
 
   stable do
-    url "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.5/llvm-project-22.1.5.src.tar.xz"
-    sha256 "7972b87b705a003ce70ab55f9f0fb495d156887cba0eb296d284731139118e2c"
+    url "https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.7/llvm-project-22.1.7.src.tar.xz"
+    sha256 "5cc4a3f12bba50b6bdfb4b61bdc852117a0ff2517807c3902fc13267fb93562e"
 
     # Fix triple config loading for clang-cl
     # https://github.com/llvm/llvm-project/pull/111397
@@ -24,12 +25,12 @@ class Llvm < Formula
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "056c3fff4f53e62b97d1d14de2f4c3e006c050e15cf54110f3b066bcc0cc821c"
-    sha256                               arm64_sequoia: "d015345b004d9d090b659ac4f8f4587246121e2df7db0e7db564abafcad31d16"
-    sha256                               arm64_sonoma:  "1e5b5a94fcab4d5be1b9c3da5181698b26b87ed544ac8cccd06e0167b3e5ef07"
-    sha256 cellar: :any,                 sonoma:        "a46a5d67c80894c1bf5865419206a611e00c74b4110539188586685ee7af43cb"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a1e2d7733a6917741b205d6bcdc352d261e7b5bb1b8c859ef172ea812fba616d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "38a0dc07518847d174c870d05e5007152fd7e06c03e9d34e25da7ea9bca493ad"
+    sha256               arm64_tahoe:   "a15e0d2475fb1dc25325b66cc2a67eff63f6f174928db29aa95baaceaabccf49"
+    sha256               arm64_sequoia: "8178470cbbcd260dc7bf48126676130360f31735af1ff6f4c3824ed121c08d27"
+    sha256               arm64_sonoma:  "4a706c8342804c2e0a528d0f6bf3658c69fef34bf0494a666412198c72aad08f"
+    sha256 cellar: :any, sonoma:        "01f5ebe8da18be14b5dd805b27ac5096417e99c65f030aee4610bd5ae8f945d3"
+    sha256 cellar: :any, arm64_linux:   "dfe04855e86297f37ebf11c49a4d92eeca63f36b851e0ff4ef0c11eb2136371f"
+    sha256 cellar: :any, x86_64_linux:  "f873ad8cad9b67e1a8df486e0bcd0388f9387fc0a06d8d0c1aba2bb800e9123c"
   end
 
   keg_only :provided_by_macos
@@ -40,12 +41,17 @@ class Llvm < Formula
   depends_on "swig" => :build # for lldb
   depends_on "python@3.14"
   depends_on "xz" # for lldb
-  depends_on "z3"
   depends_on "zstd"
 
   uses_from_macos "libedit"
   uses_from_macos "libffi"
   uses_from_macos "ncurses" # for lldb
+
+  # Z3 needs C++20 std::format which is only available in Xcode 15.3 or later.
+  # To avoid a dependency loop, we disable Z3 support on older macOS.
+  on_system :linux, macos: :sonoma_or_newer do
+    depends_on "z3"
+  end
 
   on_linux do
     depends_on "binutils" => :build # needed for LLVMgold plugin
@@ -81,6 +87,7 @@ class Llvm < Formula
     ]
 
     unless versioned_formula?
+      enable_z3 = deps.map(&:name).include?("z3")
       projects << "lldb"
 
       if OS.mac?
@@ -117,7 +124,7 @@ class Llvm < Formula
       -DLLVM_INCLUDE_DOCS=OFF
       -DLLVM_INCLUDE_TESTS=OFF
       -DLLVM_INSTALL_UTILS=ON
-      -DLLVM_ENABLE_Z3_SOLVER=#{versioned_formula? ? "OFF" : "ON"}
+      -DLLVM_ENABLE_Z3_SOLVER=#{enable_z3 ? "ON" : "OFF"}
       -DLLVM_OPTIMIZED_TABLEGEN=ON
       -DLLVM_TARGETS_TO_BUILD=all
       -DLLVM_USE_RELATIVE_PATHS_IN_FILES=ON

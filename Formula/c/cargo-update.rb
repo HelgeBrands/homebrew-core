@@ -1,18 +1,18 @@
 class CargoUpdate < Formula
   desc "Cargo subcommand for checking and applying updates to installed executables"
   homepage "https://github.com/nabijaczleweli/cargo-update"
-  url "https://github.com/nabijaczleweli/cargo-update/archive/refs/tags/v20.0.0.tar.gz"
-  sha256 "7e9898ae686fe64c4cf75be5c4e9e6d5f6141371182a12e4bdaa806cfe321806"
+  url "https://github.com/nabijaczleweli/cargo-update/archive/refs/tags/v20.0.3.tar.gz"
+  sha256 "379920d1b124cf58865258be0cef3da6199da9de0705d6c31c41eda862ce2138"
   license "MIT"
   head "https://github.com/nabijaczleweli/cargo-update.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "fe4438edd2b0ad384e385bfbb32f460ccad51413b7f80c0a1024ea194aaf31a5"
-    sha256 cellar: :any,                 arm64_sequoia: "4892acbd6dcb1f707c16d96e20c38bb99c5e58eedec66a3136cdb7e063247f26"
-    sha256 cellar: :any,                 arm64_sonoma:  "f2d8d6e3acd8dfcbaacae64d47c2f5c62a4d9c8ab56d714b58e34c147904ca17"
-    sha256 cellar: :any,                 sonoma:        "54b3b6fdffd16d8801b31091058a99f3868f824620686e7e875067744fc8951a"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "983090fde7ee534126ef080f10eac11643ca76b4ff40d4422c5bd809d22265c4"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cd00fe026dc90276e90e94c76c7e7e2bcd3f5cc361e3321f72bfa67eed3ce9cf"
+    sha256 cellar: :any, arm64_tahoe:   "c880f395a198994817ad4b735105368a99b40d0729fde242a2e7f43d4031cd15"
+    sha256 cellar: :any, arm64_sequoia: "2d12c86eb685b07bba26ec8008e2afc9923a8f6fcad044d212701b1920410d77"
+    sha256 cellar: :any, arm64_sonoma:  "e22f4f67f2ad18a658983165c12764f28becb1d22f239f301c5b409326b61429"
+    sha256 cellar: :any, sonoma:        "edd9d0432dda41e22ddb7919e01508d98a1ee8bd027996250cee78dce50f6eab"
+    sha256 cellar: :any, arm64_linux:   "a8d7b51611d0f6976c706ea3fffaddd06a22be23a4d10d78bbeab8d04563e781"
+    sha256 cellar: :any, x86_64_linux:  "0eb99eb8eaa95f43c658ae15820a9c5e2d566f0f767edc390117091474f921c3"
   end
 
   depends_on "pkgconf" => :build

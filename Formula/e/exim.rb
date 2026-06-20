@@ -1,8 +1,9 @@
 class Exim < Formula
   desc "Complete replacement for sendmail"
   homepage "https://exim.org"
-  url "https://ftp.exim.org/pub/exim/exim4/exim-4.99.3.tar.xz"
-  sha256 "663e76d2a0d9b8fc5b373d0008e44ae044f10feb22bc9dbae8c7f21345ebfb3b"
+  url "https://ftp.exim.org/pub/exim/exim4/exim-4.99.4.tar.xz"
+  mirror "https://ftp.exim.org/pub/exim/exim4/old/exim-4.99.4.tar.xz"
+  sha256 "87ff38815700dfb1ee4eb7e8dba7916df7a755905354d2d0faa1ae1790c4fd9d"
   license "GPL-2.0-or-later"
 
   # Maintenance releases are kept in a `fixes` subdirectory, so it's necessary
@@ -29,12 +30,12 @@ class Exim < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "0b683f9e446133795b69d5c73452e7b5cb2fd7870239c285bac2ad8b342a2567"
-    sha256 arm64_sequoia: "11fa32e4965b7f009f3b1ad8e026318956073d293f6520f06ebd4a0c6f01d86b"
-    sha256 arm64_sonoma:  "84135e0de59b9aec71e9081de5af58dd1eb0463fb75009b482e5321255041d5e"
-    sha256 sonoma:        "43c0bc8de5106c05d3071ae6ec4e018af6220eb7930311bbceffe8a956947e33"
-    sha256 arm64_linux:   "2fbd7c7da2f78e8a0ada30497a03df17d97ef8fc77f2d85e32826c8c474005da"
-    sha256 x86_64_linux:  "255d5ee31f35c74694d5e098c10602f3b2abbe9a1968c185ff4a1596fdbf9758"
+    sha256 arm64_tahoe:   "f9d2e5994908b5ace1811de4fddb13052ee70dc2d591ba2218bc585756302fa5"
+    sha256 arm64_sequoia: "6955e79637f1c3fd63df6328b33aed4b35271cedaaad2f93e2cc3ed51b396938"
+    sha256 arm64_sonoma:  "c56b874ca13b2f53120d99ff6511d8d687faf1e6978616037da356184f1df2e1"
+    sha256 sonoma:        "99ea459d96cb16628af6ebbfe8714b1efafea56c9386d933b36b70fabae4fb8c"
+    sha256 arm64_linux:   "5b60bb90c9da8b1573181b57a8b27c8f223b70162cbe3bb3f280c8527c87f0c8"
+    sha256 x86_64_linux:  "44d2a774b0ea201e5cd2cc6b21bfc217fe7dc77ab6cafcda75157a2d9696c77c"
   end
 
   depends_on "openssl@3"
@@ -44,14 +45,13 @@ class Exim < Formula
   uses_from_macos "perl"
   uses_from_macos "sqlite"
 
-  resource "File::Next" do
-    url "https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/File-Next-1.18.tar.gz"
-    sha256 "f900cb39505eb6e168a9ca51a10b73f1bbde1914b923a09ecd72d9c02e6ec2ef"
-  end
-
   resource "File::FcntlLock" do
     url "https://cpan.metacpan.org/authors/id/J/JT/JTT/File-FcntlLock-0.22.tar.gz"
     sha256 "9a9abb2efff93ab73741a128d3f700e525273546c15d04e7c51c704ab09dbcdf"
+
+    livecheck do
+      url :url
+    end
   end
 
   def install
@@ -73,7 +73,11 @@ class Exim < Formula
 
     cp "src/EDITME", "Local/Makefile"
     inreplace "Local/Makefile" do |s|
-      s.change_make_var! "EXIM_USER", ENV["USER"]
+      # Defer uid lookup on Linux to runtime
+      exim_user = ENV["USER"]
+      exim_user = "ref:#{exim_user}" if build.bottle? && OS.linux?
+
+      s.change_make_var! "EXIM_USER", exim_user
       s.change_make_var! "SYSTEM_ALIASES_FILE", etc/"aliases"
       s.gsub! "/usr/exim/configure", etc/"exim.conf"
       s.gsub! "/usr/exim", prefix
@@ -119,7 +123,7 @@ class Exim < Formula
 
   # Inspired by MacPorts startup script. Fixes restart issue due to missing setuid.
   def startup_script
-    <<~EOS
+    <<~SH
       #!/bin/sh
       PID=#{var}/spool/exim/exim-daemon.pid
       case "$1" in
@@ -140,7 +144,7 @@ class Exim < Formula
         exit 1
         ;;
       esac
-    EOS
+    SH
   end
 
   def caveats

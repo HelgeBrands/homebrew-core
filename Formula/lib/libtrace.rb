@@ -1,9 +1,9 @@
 class Libtrace < Formula
   desc "Library for trace processing supporting multiple inputs"
   homepage "https://github.com/LibtraceTeam/libtrace"
-  url "https://github.com/LibtraceTeam/libtrace/archive/refs/tags/4.0.31-1.tar.gz"
-  version "4.0.31"
-  sha256 "a84209ea928d113a2c26078eb833fc0c973c53216bbef8cb0333972d5ba95a2d"
+  url "https://github.com/LibtraceTeam/libtrace/archive/refs/tags/4.0.33-1.tar.gz"
+  version "4.0.33"
+  sha256 "fb8cb15a3411ee8100c07d5c719309e6a0bb8e3a729b1b812fe7989b0bbe8c9c"
   license all_of: ["GPL-2.0-or-later", "LGPL-3.0-or-later"]
 
   livecheck do
@@ -15,12 +15,12 @@ class Libtrace < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "e57d8acabf4b31eadb453dfdd5fe3cbd73ff9f46a10a2428fd8a595b8a95ce3e"
-    sha256 cellar: :any,                 arm64_sequoia: "63b1e096f7a97694d9d9768dedde24367fa34886be218ecc51f855011af09ee5"
-    sha256 cellar: :any,                 arm64_sonoma:  "133a82aa444dd672b9993ca171e2ecb6eceb5c110cdf48f192687f1814746746"
-    sha256 cellar: :any,                 sonoma:        "fd9fb0d02a390957faf05ec46de551962d3c3b9fa1dea83481f55b39b69cda69"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "62a5586ce2976124b2d41f1c86b2274921721237cbbe6e57c6a5bf534d42dac3"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4fe7055c590a8de8ec46a40cce222e56b71dbd0be37e50eda9cf31beb5394c49"
+    sha256 cellar: :any, arm64_tahoe:   "23df8c589a9cae7c3453118292aff407ac9b83350cfb11b4e529c2b16ec8c6e3"
+    sha256 cellar: :any, arm64_sequoia: "511460467e7cc7db556874bbf8ac6bdacd11538be67d7823043ebc3c19efaba1"
+    sha256 cellar: :any, arm64_sonoma:  "f8bf558325e4eb6484ebdf429ad05a487ef4f876becc701449482a32796a3ae8"
+    sha256 cellar: :any, sonoma:        "67b3bc6ff60c084766272d4a745fd3ef60621f89cbca51ebf095d2e6821f7202"
+    sha256 cellar: :any, arm64_linux:   "2230061e26263889ff2780062fdbc2f8e1bafd445c057cce1f99d5f5ebe68fa1"
+    sha256 cellar: :any, x86_64_linux:  "0371cb54dbd31f06abfbb07a33c5a556e056a303093cb605292bf160712ffab6"
   end
 
   depends_on "autoconf" => :build

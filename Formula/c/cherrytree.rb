@@ -1,8 +1,8 @@
 class Cherrytree < Formula
   desc "Hierarchical note taking application featuring rich text and syntax highlighting"
   homepage "https://www.giuspen.com/cherrytree/"
-  url "https://www.giuspen.com/software/cherrytree_1.6.3.tar.xz"
-  sha256 "448cbdf190396f3c59896f4fc7c7fff98e4bb0f6080ea2b7d6e65d0d570e1e4f"
+  url "https://www.giuspen.com/software/cherrytree_1.7.0.tar.xz"
+  sha256 "5a015cb3af54a096a41795e42f9e41288f7189709046f81717f89d40a16f799b"
   license "GPL-3.0-or-later"
   head "https://github.com/giuspen/cherrytree.git", branch: "master"
 
@@ -12,29 +12,35 @@ class Cherrytree < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "32cc28244cd2c9e8c24ced7c15d4e038e3af003d242af4d70a2c47de8d2ea10d"
-    sha256 arm64_sequoia: "ce43841bbdb70b12e6cfd1900055cc2f82c362a25f529ffe7fdf52b158211287"
-    sha256 arm64_sonoma:  "c78ec49f68fbfdb7312fb9aeb8058a89cfd050e71b256652afda238787c41290"
-    sha256 sonoma:        "f8052e875e197ce58ae2eb967c7bf63507ceb7fbd013bbdff474a1c1cabd9a0e"
-    sha256 arm64_linux:   "9f1406c250a34526ecde1d997418fee615b725dc5c0c0cb4720406316b23d04a"
-    sha256 x86_64_linux:  "d9c28d31786e0c45daf2ede507ee1d616f8da2a411dd7dbadafdb2c34d72f478"
+    rebuild 1
+    sha256 arm64_tahoe:   "69028fccdb4940366e4899b076b72c06394c46584f31396ac6ff3a3100b5c4b8"
+    sha256 arm64_sequoia: "d2d959e8f6ea6e2995a6d2b3f1a51a9aba46e4b81711e04500ec4d3fa4a97bd5"
+    sha256 arm64_sonoma:  "5b6c0e37f75eb06117d5341136123aef89dc1c5816a7d9e6c0fa4acdf33a9452"
+    sha256 sonoma:        "4c8cdcb77ac393abe7dd37ab91ce4a44064f4e8ad8588f2a954656e6e38853ac"
+    sha256 arm64_linux:   "816176b3d3e80e7665dec6f9828b5fcaaf20152556ccedc79b519e2662f8fa31"
+    sha256 x86_64_linux:  "4b3c44433183760324c412060c37edc5a039fc52b0e565ad57f3700124c7e585"
   end
 
   depends_on "cmake" => :build
   depends_on "gettext" => :build
   depends_on "pkgconf" => :build
   depends_on "adwaita-icon-theme"
+  depends_on "at-spi2-core"
   depends_on "atkmm@2.28"
   depends_on "cairo"
   depends_on "cairomm@1.14"
+  depends_on "enchant"
   depends_on "fmt"
   depends_on "fribidi"
+  depends_on "gdk-pixbuf"
   depends_on "glib"
   depends_on "glibmm@2.66"
   depends_on "gspell"
   depends_on "gtk+3"
   depends_on "gtkmm3"
   depends_on "gtksourceview4"
+  depends_on "harfbuzz"
+  depends_on "librsvg" => :no_linkage # for SVG icon support
   depends_on "libsigc++@2"
   depends_on "libxml++"
   depends_on "pango"
@@ -49,14 +55,14 @@ class Cherrytree < Formula
   uses_from_macos "libxml2"
 
   on_macos do
-    depends_on "at-spi2-core"
-    depends_on "enchant"
-    depends_on "gdk-pixbuf"
     depends_on "gettext"
-    depends_on "harfbuzz"
   end
 
   def install
+    # Link libxml2 directly: cherrytree uses its C API but CMake only links libxml++
+    ENV.append "LDFLAGS", "-Wl,--no-as-needed" if OS.linux?
+    ENV.append "LDFLAGS", "-lxml2"
+
     system "cmake", "-S", ".", "-B", "build", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"

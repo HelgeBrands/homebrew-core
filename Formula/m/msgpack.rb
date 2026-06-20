@@ -1,8 +1,8 @@
 class Msgpack < Formula
   desc "Library for a binary-based efficient data interchange format"
   homepage "https://msgpack.org/"
-  url "https://github.com/msgpack/msgpack-c/releases/download/c-6.1.0/msgpack-c-6.1.0.tar.gz"
-  sha256 "674119f1a85b5f2ecc4c7d5c2859edf50c0b05e0c10aa0df85eefa2c8c14b796"
+  url "https://github.com/msgpack/msgpack-c/releases/download/c-7.0.1/msgpack-c-7.0.1.tar.gz"
+  sha256 "2d80f190ab89b73b513025d8aef09b144e5c07b3734dfe99dd0137725d355504"
   license "BSL-1.0"
   head "https://github.com/msgpack/msgpack-c.git", branch: "c_master"
 
@@ -12,16 +12,12 @@ class Msgpack < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:    "5a412a93e8367e656022e5c0810632cba0d5c924e1cdf5f5bc64f1a0501a6aa9"
-    sha256 cellar: :any,                 arm64_sequoia:  "fef7b080476f8c2ea5d3478775fb8ba7861cb2c5b25a5c06a575eabf303d6085"
-    sha256 cellar: :any,                 arm64_sonoma:   "7a4291f35809d557ff65bdec687fc12468b557d8c27499fad634b84fc27c6a65"
-    sha256 cellar: :any,                 arm64_ventura:  "9798f9eb15c335c663271387feedb42a24953c8a869d657e1b3d58868fb97177"
-    sha256 cellar: :any,                 arm64_monterey: "eb59d97db589ebe5afa0c0ae7f8ac4f07ae39433c323e6d90532301ff19a6c69"
-    sha256 cellar: :any,                 sonoma:         "f8a10c653f0e071f725866c790eebef4161f4c172315388aefdada07682c46bd"
-    sha256 cellar: :any,                 ventura:        "c7e8c2eddc2b55a71e6e6a6a3f63c90cb66369727b990cc553470b7b91ceb599"
-    sha256 cellar: :any,                 monterey:       "0c0c337dad512678ec60426c448aded9965daef3b4ee89eec9f98faad1789012"
-    sha256 cellar: :any_skip_relocation, arm64_linux:    "07097acd7e8f4e885cf3917b684a45721344db7aa38edea9ad01c8c6acdbe141"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:   "95d7d9a41f1c13c5ce0e1a2ec77f119a3b55e2ad88f0f98d3e5a04d323896171"
+    sha256 cellar: :any, arm64_tahoe:   "18a3e8c60e3c9df37207ebc335a72bc59aafb905285e6a59b0dc99e057643adf"
+    sha256 cellar: :any, arm64_sequoia: "4588765193c757f81374fbdb7e024364bbf8529d82e85bbcc6feb329a022240a"
+    sha256 cellar: :any, arm64_sonoma:  "bb5d2a471c69fefdd5f4bb1cd8f4b56b211f6408091ac1c0ee586a1cf68a63b1"
+    sha256 cellar: :any, sonoma:        "fd5a092650d378550f34ff8f7fce9caa98509a7e5543d1b38b654ebf5ddbb18d"
+    sha256 cellar: :any, arm64_linux:   "44a1dfbe8973a63b47c248fdb13c9c7afec231283569b83354f77ac30995639c"
+    sha256 cellar: :any, x86_64_linux:  "4b29c4f5cc173b3153388bfd01e85dac8ad54fc0915bd29cc88100faef391b7b"
   end
 
   depends_on "cmake" => :build

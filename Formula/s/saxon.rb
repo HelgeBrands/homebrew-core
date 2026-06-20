@@ -1,9 +1,9 @@
 class Saxon < Formula
   desc "XSLT and XQuery processor"
   homepage "https://github.com/Saxonica/Saxon-HE"
-  url "https://github.com/Saxonica/Saxon-HE/releases/download/SaxonHE12-9/SaxonHE12-9J.zip"
-  version "12.9"
-  sha256 "f2895bef3794112c650a158be27c39a86e88c1717ebb8e0e88067d1f07635d12"
+  url "https://github.com/Saxonica/Saxon-HE/releases/download/SaxonHE13-0/SaxonHE13-0J.zip"
+  version "13.0"
+  sha256 "4a08ac02d8ea26b769bf14274bef27b3c8bbf2557b20b7e4258d172e99638163"
   license all_of: ["BSD-3-Clause", "MIT", "MPL-2.0"]
 
   livecheck do
@@ -20,7 +20,7 @@ class Saxon < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "694718b25706ab34c48a5b3916841c3f45c391f4202e6b4c15d30ed486e46974"
+    sha256 cellar: :any_skip_relocation, all: "2b7a415763330016dde1427ac8308a61bfe0d642b13ebeb9ad819c302adb6b37"
   end
 
   depends_on "openjdk"
@@ -28,18 +28,18 @@ class Saxon < Formula
   def install
     libexec.install Dir["*.jar", "doc", "lib", "notices"]
     bin.write_jar_script libexec/"saxon-he-#{version.major_minor}.jar", "saxon"
-    (bin/"gizmo").write <<~EOS
+    (bin/"gizmo").write <<~BASH
       #!/bin/bash
-      export JAVA_HOME="#{Language::Java.overridable_java_home_env("11+")[:JAVA_HOME]}"
+      export JAVA_HOME="#{Language::Java.overridable_java_home_env[:JAVA_HOME]}"
       exec "${JAVA_HOME}/bin/java" -cp "#{libexec}/saxon-he-#{version.major_minor}.jar" net.sf.saxon.Gizmo "$@"
-    EOS
+    BASH
   end
 
   test do
     (testpath/"test.xml").write <<~XML
       <test>It works!</test>
     XML
-    (testpath/"test.xsl").write <<~XSL
+    (testpath/"test.xsl").write <<~XML
       <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0">
         <xsl:template match="/">
           <html>
@@ -49,7 +49,7 @@ class Saxon < Formula
           </html>
         </xsl:template>
       </xsl:stylesheet>
-    XSL
+    XML
     assert_equal <<~HTML.chop, shell_output("#{bin}/saxon test.xml test.xsl")
       <!DOCTYPE HTML>
       <html>

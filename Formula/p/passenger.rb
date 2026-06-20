@@ -1,18 +1,19 @@
 class Passenger < Formula
   desc "Server for Ruby, Python, and Node.js apps via Apache/NGINX"
   homepage "https://www.phusionpassenger.com/"
-  url "https://github.com/phusion/passenger/releases/download/release-6.1.3/passenger-6.1.3.tar.gz"
-  sha256 "98c56592769b95bd63b579be4ec3f71af6e9cf377717545c529e0163f95ed722"
+  url "https://github.com/phusion/passenger/releases/download/release-6.1.5/passenger-6.1.5.tar.gz"
+  sha256 "f5e7ba5f811dcc7dcf9d06c29a580db6f991f51275debf233b6302d283d28cab"
   license "MIT"
+  revision 1
   head "https://github.com/phusion/passenger.git", branch: "stable-6.1"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "2a455260f978cab3d196ee0802486c64f5c9e7547e9cef87da1dd0a3d64e68c3"
-    sha256 cellar: :any,                 arm64_sequoia: "16dda47d543797ff7b54feeba1f0050a6a52769f7be1c2aab4acdaff12e6650b"
-    sha256 cellar: :any,                 arm64_sonoma:  "f0a52503920324f36b524dc3bb3dbf026ef526e7b20afbb4ec254d0a4ac18151"
-    sha256 cellar: :any,                 sonoma:        "ea2e4e1b81edd3e28eca2fc87a7f234e0a4c0fe3ecbe6e8b421f486b523d269b"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a0be7be922b3b4858a304c521174d62b1c6709270e7e7503e71e10f60d713ad1"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "225eed5100eba0ed32487a53034c142f6c8fe23d765b1f291005597aa0fbc6da"
+    sha256 cellar: :any, arm64_tahoe:   "c74ff5a8d89871305a18fd19847215cb2f1ffc49b38c2163dd040c75a0f21f13"
+    sha256 cellar: :any, arm64_sequoia: "7b65f90e32fc2cf8fb02068251cd25d86fecec7ac446e80d8d4d72a8f6ca88f8"
+    sha256 cellar: :any, arm64_sonoma:  "83203a030fbf8e539de0436353d9284ba8ef78a9a4eb70d8709b78ecebd7eb67"
+    sha256 cellar: :any, sonoma:        "6afa5d191b3686006461e66a765130f29c53da50ec02f0f732d902b88ede8d21"
+    sha256 cellar: :any, arm64_linux:   "22259050e7fded30ffcfc74334d60558be1f95fb2080ad7de4780f0e7bbb4809"
+    sha256 cellar: :any, x86_64_linux:  "cd344e81d5b5ec5c6e02bbc98004233c51fb34ad1e680863e5f15c1f85374301"
   end
 
   depends_on "httpd" => :build # to build the apache2 module
@@ -126,7 +127,7 @@ class Passenger < Formula
     ruby_libdir = `#{HOMEBREW_PREFIX}/bin/passenger-config --ruby-libdir`.strip
     assert_equal "#{libexec}/src/ruby_supportlib", ruby_libdir
 
-    (testpath/"nginx.conf").write <<~EOS
+    (testpath/"nginx.conf").write <<~CONF
       load_module #{opt_libexec}/modules/ngx_http_passenger_module.so;
       worker_processes 4;
       error_log #{testpath}/error.log;
@@ -154,7 +155,7 @@ class Passenger < Formula
           error_log #{testpath}/error.log;
         }
       }
-    EOS
+    CONF
     system "#{Formula["nginx"].opt_bin}/nginx", "-t", "-c", testpath/"nginx.conf"
   end
 end

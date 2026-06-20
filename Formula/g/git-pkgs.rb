@@ -1,18 +1,18 @@
 class GitPkgs < Formula
   desc "Track package dependencies across git history"
-  homepage "https://github.com/git-pkgs/git-pkgs"
-  url "https://github.com/git-pkgs/git-pkgs/archive/refs/tags/v0.16.0.tar.gz"
-  sha256 "cfebf88109f69a659787844e53e3b4e566f3da292fad738b70cf3c76dc20e34b"
+  homepage "https://git-pkgs.dev"
+  url "https://github.com/git-pkgs/git-pkgs/archive/refs/tags/v0.16.2.tar.gz"
+  sha256 "0fddf934169e7cdcc03b9bbee3358f3dbef2582d72bb9f4eddc56611ee9c1df6"
   license "MIT"
   head "https://github.com/git-pkgs/git-pkgs.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "5c854211300ceb517ff5e1a2ebb4b9fd873d8dbde43ac0fbf8f3b8cbed52f7ec"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "5c854211300ceb517ff5e1a2ebb4b9fd873d8dbde43ac0fbf8f3b8cbed52f7ec"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "5c854211300ceb517ff5e1a2ebb4b9fd873d8dbde43ac0fbf8f3b8cbed52f7ec"
-    sha256 cellar: :any_skip_relocation, sonoma:        "b604f42f062006a4e4036b9444a0ecea8d962511f57a78f4e2de23b28a74d317"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "1bda9ca6aeb41ae6baf585a7f92d14f8c8f331bfdaa9745a9abac6cc6ea7fe44"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "26a0eb527dc6893c70cfe1da16407c58384218733ab4b46f84bffb50a504adbb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d29ddd8510863231c8122f863c8c7a515c464702822aec333ecc1c4f71876cbd"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "d29ddd8510863231c8122f863c8c7a515c464702822aec333ecc1c4f71876cbd"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "d29ddd8510863231c8122f863c8c7a515c464702822aec333ecc1c4f71876cbd"
+    sha256 cellar: :any_skip_relocation, sonoma:        "114f67bf82aaf3b523d549787d4339197d9c4e4c50c11427cde4e2d8ae4eb74d"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "e1203ef1402287eb3544a7f6eaebca247fb481bbd12ae0d83b32021e4fe02ab4"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "b38661cc5e398fc8613763aa87db97da5e5a1b8c79a01c5028b450dfaa06676d"
   end
 
   depends_on "go" => :build

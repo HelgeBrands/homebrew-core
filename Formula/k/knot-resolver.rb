@@ -3,8 +3,8 @@ class KnotResolver < Formula
 
   desc "Minimalistic, caching, DNSSEC-validating DNS resolver"
   homepage "https://www.knot-resolver.cz"
-  url "https://secure.nic.cz/files/knot-resolver/knot-resolver-6.3.0.tar.xz"
-  sha256 "b87306197f7436b49079c633364bc5df71a393236fb25e9fce7d04480bc7518e"
+  url "https://secure.nic.cz/files/knot-resolver/knot-resolver-6.4.0.tar.xz"
+  sha256 "4f4bfe09f8d73b0ee7d670dd1c90f5f2ac0e9060f9b1478355f26f273746ac80"
   license all_of: ["CC0-1.0", "GPL-3.0-or-later", "LGPL-2.1-or-later", "MIT"]
   head "https://gitlab.labs.nic.cz/knot/knot-resolver.git", branch: "master"
 
@@ -14,12 +14,12 @@ class KnotResolver < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "f1fd52d337afe9aca1610dfbd0c6cb99e97baab56d6c0646e4de2a7a6b31e18b"
-    sha256 arm64_sequoia: "1e8451ffdd19fed73a06ef06dc7765b46a2301e8efef2f8478a19a16ce52f1f2"
-    sha256 arm64_sonoma:  "baee416c5509faf5facad958749aba9a9aec61b91a016b987d1ee5421ac27f36"
-    sha256 sonoma:        "0eb382b2809cc20eb1cf36fa4c1a3103fcf4164a75c276f93974f4dab30cb716"
-    sha256 arm64_linux:   "2a133f172581f8b1b0c6d523c775fbc11242bba0f7134d281c947bc0fb468c7d"
-    sha256 x86_64_linux:  "ad36b3192b33b7b89dc95550ce3eab75e062fab072db163a2f408ed346951880"
+    sha256 arm64_tahoe:   "fbd5c0e35c82dfc1137bfe286d9e1a11c4c00123eeb1dd73ea0c1cceebb08726"
+    sha256 arm64_sequoia: "bc327fdcf4b8775e77a5c2d279603e39de86de1c353a1b7948ec9c092e4b3790"
+    sha256 arm64_sonoma:  "0c268f0d0dbc155e205f42379f4261bbbaec323a5e5cfe48d0dd4959b69d398b"
+    sha256 sonoma:        "73418879dc4a3772221049bc9216e178fa73445cb01d148997bb9ed9f15cb335"
+    sha256 arm64_linux:   "9ec1ef89f88d932103b66d20f873f1573c359d8922c18aeec92dc3b2222b378c"
+    sha256 x86_64_linux:  "2299a71b71ead35d3c5df779c076e2ab0b0af6dfeda1b1443848c8e0e1688051"
   end
 
   depends_on "meson" => :build
@@ -48,13 +48,13 @@ class KnotResolver < Formula
                 extra_packages: %w[aiohttp jinja2 prometheus-client pyyaml supervisor typing-extensions watchdog]
 
   resource "aiohappyeyeballs" do
-    url "https://files.pythonhosted.org/packages/26/30/f84a107a9c4331c14b2b586036f40965c128aa4fee4dda5d3d51cb14ad54/aiohappyeyeballs-2.6.1.tar.gz"
-    sha256 "c3f9d0113123803ccadfdf3f0faa505bc78e6a72d1cc4806cbd719826e943558"
+    url "https://files.pythonhosted.org/packages/33/c6/61a2d7b7572279226bb2e7f61d7a19ca7c90da0329c93fa0d560cbf288d8/aiohappyeyeballs-2.6.2.tar.gz"
+    sha256 "e202810ee718bd01fc6ef49e8ea53d023d5cb6b581076d7925aa499fa55dbe64"
   end
 
   resource "aiohttp" do
-    url "https://files.pythonhosted.org/packages/77/9a/152096d4808df8e4268befa55fba462f440f14beab85e8ad9bf990516918/aiohttp-3.13.5.tar.gz"
-    sha256 "9d98cc980ecc96be6eb4c1994ce35d28d8b1f5e5208a23b421187d1209dbb7d1"
+    url "https://files.pythonhosted.org/packages/82/78/8ea7308cac6934de8c74a14f3d5f65d1c89287426688be79538d0e5c013d/aiohttp-3.14.1.tar.gz"
+    sha256 "307f2cff90a764d329e77040603fa032db89c5c24fdad50c4c15334cba744035"
   end
 
   resource "aiosignal" do
@@ -73,8 +73,8 @@ class KnotResolver < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/ce/cc/762dfb036166873f0059f3b7de4565e1b5bc3d6f28a414c13da27e442f99/idna-3.13.tar.gz"
-    sha256 "585ea8fe5d69b9181ec1afba340451fba6ba764af97026f92a91d4eef164a242"
+    url "https://files.pythonhosted.org/packages/cd/63/9496c57188a2ee585e0f1db071d75089a11e98aa86eb99d9d7618fc1edce/idna-3.18.tar.gz"
+    sha256 "ffb385a7e039654cef1ab9ef32c6fafe283c0c0467bba1d9029738ce4a14a848"
   end
 
   resource "jinja2" do
@@ -98,8 +98,8 @@ class KnotResolver < Formula
   end
 
   resource "propcache" do
-    url "https://files.pythonhosted.org/packages/9e/da/e9fc233cf63743258bff22b3dfa7ea5baef7b5bc324af47a0ad89b8ffc6f/propcache-0.4.1.tar.gz"
-    sha256 "f48107a8c637e80362555f37ecf49abe20370e557cc4ab374f04ec4423c97c3d"
+    url "https://files.pythonhosted.org/packages/ec/44/c87281c333769159c50594f22610f77398a47ccbfbbf23074e744e86f87c/propcache-0.5.2.tar.gz"
+    sha256 "01c4fc7480cd0598bb4b57022df55b9ca296da7fc5a8760bd8451a7e63a7d427"
   end
 
   resource "pyyaml" do
@@ -123,8 +123,8 @@ class KnotResolver < Formula
   end
 
   resource "yarl" do
-    url "https://files.pythonhosted.org/packages/23/6e/beb1beec874a72f23815c1434518bfc4ed2175065173fb138c3705f658d4/yarl-1.23.0.tar.gz"
-    sha256 "53b1ea6ca88ebd4420379c330aea57e258408dd0df9af0992e5de2078dc9f5d5"
+    url "https://files.pythonhosted.org/packages/79/12/1e8f37460ea0f7eb59c221fdaf0ed75e7ac43e97f8093b9c6f411df50a78/yarl-1.24.2.tar.gz"
+    sha256 "9ac374123c6fd7abf64d1fec93962b0bd4ee2c19751755a762a72dd96c0378f8"
   end
 
   def install
@@ -150,7 +150,6 @@ class KnotResolver < Formula
     pkgetc.install "etc/config/config.yaml"
 
     (var/"cache/knot-resolver").mkpath
-    (var/"run/knot-resolver").mkpath
   end
 
   service do
@@ -163,7 +162,6 @@ class KnotResolver < Formula
   end
 
   test do
-    assert_path_exists var/"run/knot-resolver"
     system sbin/"kresd", "--version"
 
     assert_match "Basic validation was successful", shell_output("#{bin}/kresctl validate")

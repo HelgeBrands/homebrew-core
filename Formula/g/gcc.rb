@@ -2,30 +2,19 @@ class Gcc < Formula
   desc "GNU compiler collection"
   homepage "https://gcc.gnu.org/"
   license "GPL-3.0-or-later" => { with: "GCC-exception-3.1" }
-  revision 1
-  compatibility_version 1
+  compatibility_version 2
   head "https://gcc.gnu.org/git/gcc.git", branch: "master"
 
   stable do
-    url "https://ftpmirror.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz"
-    mirror "https://ftp.gnu.org/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz"
-    sha256 "438fd996826b0c82485a29da03a72d71d6e3541a83ec702df4271f6fe025d24e"
+    url "https://ftpmirror.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz"
+    mirror "https://ftp.gnu.org/gnu/gcc/gcc-16.1.0/gcc-16.1.0.tar.xz"
+    sha256 "50efb4d94c3397aff3b0d61a5abd748b4dd31d9d3f2ab7be05b171d36a510f79"
 
     # Branch from the Darwin maintainer of GCC, with a few generic fixes and
-    # Apple Silicon support, located at https://github.com/iains/gcc-14-branch
+    # Apple Silicon support, located at https://github.com/iains/gcc-16-branch
     patch do
       on_macos do
-        url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/gcc/gcc-15.1.0.diff"
-        sha256 "360fba75cd3ab840c2cd3b04207f745c418df44502298ab156db81d41edf3594"
-      end
-    end
-
-    # Fix pthread_incomplete_struct_argument incorrectly applied on modern glibc
-    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=118009
-    patch do
-      on_linux do
-        url "https://gcc.gnu.org/cgit/gcc/patch/?id=ea2798892de373b14f9fc7ae8a0d820eaddca98c"
-        sha256 "9c0d8abe93398320b9c69a21d3925c131d45d850fc1c1620df7919464db04af8"
+        file "Patches/gcc/gcc-16.1.0.diff"
       end
     end
   end
@@ -36,14 +25,15 @@ class Gcc < Formula
   end
 
   bottle do
-    sha256                               arm64_tahoe:   "e208fa3a5ea6887bb9a81cee5ca629230f1f24eff3970f0d69f7dcf5dd5b7b80"
-    sha256                               arm64_sequoia: "49b6841a2b7af55b29db5d63ee47a433bd75f85e3c5620c6615e7528252ffd63"
-    sha256                               arm64_sonoma:  "31240b1bccad45ed8f17009c0c5c6f0018b8d7695e826d2d79e417c15fb88e4e"
-    sha256                               tahoe:         "6def38300e2044dbbe17801485f0a959fb05b408545f5c6c0ccc160d7e9e40c2"
-    sha256                               sequoia:       "04ffbfaa63efe558b4b782b200e0eab4f1e472ed1780862972bb3702a730a611"
-    sha256                               sonoma:        "893b6a357fdb8bce2dc15f827117247e4d719e4cfbd0f29b3adee68e794a4d49"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "cf5774859ce6ff3958bb987ff07d9308d3d72da4d9afda38085d4c9379b5887f"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "606c8f502852d586f85fba5754e255fa8bf8b81d371c1f75cf7edae19d852f0c"
+    rebuild 1
+    sha256 arm64_tahoe:   "39faa08c413c043b9f44a6be5beb260d5acf7fd0bf035688c2579d3be48a8463"
+    sha256 arm64_sequoia: "083223989b47d242c7c42366abaf3e8509f7bdde84a370cb7381c9267a199847"
+    sha256 arm64_sonoma:  "9d4be966090f2585d27a717c96208077059e43c5ab5b510f1525b0efc2a21bb7"
+    sha256 tahoe:         "e60ded6de95e31669e493a2fa327bd308b205c272d696f61954ed860a7709bde"
+    sha256 sequoia:       "e47fbf21a46d5143dee9f944a6ae0059a40968460fd767c3693cc9cd8119c68f"
+    sha256 sonoma:        "b1d7ab5a739178d4b475438c128646256c1759205a4047cd83b7b53c87c8b9e4"
+    sha256 arm64_linux:   "235350076566b5b4db7e0bb1acf08c06f2ef4eff6a9a5879d0ceb3e2c48deafe"
+    sha256 x86_64_linux:  "c03913f7c701d33bb1faad0c8e576c8ee4e6af410eb4951bb89258b239d55be5"
   end
 
   # The bottles are built on systems with the CLT installed, and do not work
@@ -124,7 +114,10 @@ class Gcc < Formula
       # Avoid this semi-random failure:
       # "Error: Failed changing install name"
       # "Updated load commands do not fit in the header"
-      make_args = %w[BOOT_LDFLAGS=-Wl,-headerpad_max_install_names]
+      make_args = %w[
+        BOOT_LDFLAGS=-Wl,-headerpad_max_install_names
+        LDFLAGS_FOR_TARGET=-Wl,-headerpad_max_install_names
+      ]
     else
       # Fix Linux error: gnu/stubs-32.h: No such file or directory.
       args << "--disable-multilib"
@@ -136,6 +129,9 @@ class Gcc < Formula
       # https://stackoverflow.com/a/54038769
       inreplace "gcc/config/i386/t-linux64", "m64=../lib64", "m64="
       inreplace "gcc/config/aarch64/t-aarch64-linux", "lp64=../lib64", "lp64="
+
+      # Use our own (recent) binutils for as
+      args << "--with-as=#{Formula["binutils"].opt_bin}/as"
 
       ENV.append_path "CPATH", Formula["zlib-ng-compat"].opt_include
       ENV.append_path "LIBRARY_PATH", Formula["zlib-ng-compat"].opt_lib
@@ -309,14 +305,14 @@ class Gcc < Formula
     # Modula-2 is temporarily disabled on macOS 15
     return if OS.mac? && MacOS.version >= :sequoia
 
-    (testpath/"hello.mod").write <<~EOS
+    (testpath/"hello.mod").write <<~MODULA2
       MODULE hello;
       FROM InOut IMPORT WriteString, WriteLn;
       BEGIN
            WriteString("Hello, world!");
            WriteLn;
       END hello.
-    EOS
+    MODULA2
     system bin/"gm2", "-o", "hello-m2", "hello.mod"
     assert_equal "Hello, world!\n", shell_output("./hello-m2")
   end

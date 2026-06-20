@@ -1,8 +1,8 @@
 class Lesspipe < Formula
   desc "Input filter for the pager less"
-  homepage "https://www-zeuthen.desy.de/~friebel/unix/lesspipe.html"
-  url "https://github.com/wofr06/lesspipe/archive/refs/tags/v2.25.tar.gz"
-  sha256 "fb9d026bdeb81ccdb054c31e292112805ec48b7463978a4cf2af556c7a63487a"
+  homepage "https://lesspipe.org"
+  url "https://github.com/wofr06/lesspipe/archive/refs/tags/v2.27.tar.gz"
+  sha256 "75ed4ee02d90080636c069a33861701af0af23753bd5ce422830b06f9102f548"
   license all_of: [
     "GPL-2.0-only",
     "GPL-2.0-or-later", # sxw2txt
@@ -11,7 +11,7 @@ class Lesspipe < Formula
   ]
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "e8265110f7141aa5664f5a72b4da3b360c10665ae09ac9b8b644e0f66632085a"
+    sha256 cellar: :any_skip_relocation, all: "abba8ccdd31b492a79aa62f3a0db760646b321c0db86c105363a256ef95e19cb"
   end
 
   uses_from_macos "zsh" => :build # needed to guarantee installation of zsh completions

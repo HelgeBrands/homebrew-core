@@ -4,6 +4,7 @@ class Onnxruntime < Formula
   url "https://github.com/microsoft/onnxruntime/archive/refs/tags/v1.26.0.tar.gz"
   sha256 "2a90eb9a306c1eeb29213f5b165a55008ac5cb7d27e0935c4458c51a49ef091d"
   license "MIT"
+  revision 2
   compatibility_version 3
 
   livecheck do
@@ -12,12 +13,12 @@ class Onnxruntime < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "831843bea0300335f07c39c9b9139756697ab47082fa3efdf57e83f20500dc01"
-    sha256 cellar: :any,                 arm64_sequoia: "7277ec9ef6a1e03cfd7c415244c7e450da689e769108f5962e58ec9a055a0964"
-    sha256 cellar: :any,                 arm64_sonoma:  "ea961e27650c78011fcca60c45c257fcee6d0241ffc5786950d767702ee66ae8"
-    sha256 cellar: :any,                 sonoma:        "aabe111237ae6a3d4f8f93a8a2a18d8a419adc3b86655a0754492f5ec0e58db2"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "282dd949d0a507a9d29488b861680f8f93fbd1c4d6e35fd5d20683244a678feb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "cfb43bbe323ca05da117610e27e588b154b009cc53f69c9df1ab40e15997e033"
+    sha256 cellar: :any, arm64_tahoe:   "b651376489f609daee9f0028501bc054212754e71bc478e70d7b71d87a137fc0"
+    sha256 cellar: :any, arm64_sequoia: "aff7ad3cd29e7a3c763087eed5da9cfdddf176fe13c374342c4d0e45dfb50abe"
+    sha256 cellar: :any, arm64_sonoma:  "c3bdc7c080ed9073a45535f9fbf73008ee53d4d31b8f9ff0fcd57abd343ccae7"
+    sha256 cellar: :any, sonoma:        "e1d2b7952d0a809a0e0ab7cb7737a7c4bf544bef3a4fd028cf15e6bb7bcd934d"
+    sha256 cellar: :any, arm64_linux:   "8bbaf1edd109ba704320897bbd4f94e1cc880007f146a80a7055eddc70984435"
+    sha256 cellar: :any, x86_64_linux:  "d9ac46667e2ce289ab8587df96ca86e5f537be12af9abf78fd95217ff8ed9379"
   end
 
   depends_on "boost" => :build

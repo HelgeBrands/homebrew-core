@@ -6,16 +6,16 @@ class Forbidden < Formula
   url "https://files.pythonhosted.org/packages/9b/aa/98fc3ee28aac41cae341a197858ff6af5d79e40dcd45c8a6e37b1fdbfd19/forbidden-13.4.tar.gz"
   sha256 "dc987150b71515810d7ae252895b3ca6e077a8d9b3cbb0d09dfc9797c933a14d"
   license "MIT"
-  revision 5
+  revision 7
   head "https://github.com/ivan-sincek/forbidden.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "0881fc47716912c4b0c25be505764954bc5755cb9e23fd6b9a491eb4fb78353f"
-    sha256 cellar: :any,                 arm64_sequoia: "21480abd52501feefc5baab6b4feee0bb951a63a7e2d922eb784ab699a7bac94"
-    sha256 cellar: :any,                 arm64_sonoma:  "996ae612eb49346ead8b5d74bdd575e36797632041d8cd60603447f191b78294"
-    sha256 cellar: :any,                 sonoma:        "8b6e2906c9cdb016bf326b7271fcf67d7e9d41b29c6bbfa893b8363f4258d29d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "525d3b0c8391f04f2c376445fd4990d752c6b42dd9c375f867289a2d312edd15"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "fc284ba555bc81563f13be68f9f448c9ed5adf609d1e1db66cc109a755f0b9fe"
+    sha256 cellar: :any, arm64_tahoe:   "6c78f46743a663c83ed0ed740bb456e5d13eba4e4ce999441d0b41d6922c7da3"
+    sha256 cellar: :any, arm64_sequoia: "326e5f8bccaea76435ee581f550835ec29cc265d70068fc892510688ba9ce58e"
+    sha256 cellar: :any, arm64_sonoma:  "c5cb0dcdf023197c1fefdcd8b76dff45fe284ed389474997b9d471b6ecb10deb"
+    sha256 cellar: :any, sonoma:        "df2bccb30c6c1abf7fe28d5131c861db966076c72617cbf2b7623d3aa9ab6beb"
+    sha256 cellar: :any, arm64_linux:   "aedbcbbb725f1e38e4e9167c730ea2420f733a21950ee55d023a63c36697c20b"
+    sha256 cellar: :any, x86_64_linux:  "ec8650dcd08b92e15a9debec459a772e27e6d8accedf4b0b2eee06f18d952114"
   end
 
   depends_on "certifi" => :no_linkage
@@ -59,8 +59,8 @@ class Forbidden < Formula
   end
 
   resource "idna" do
-    url "https://files.pythonhosted.org/packages/05/b1/efac073e0c297ecf2fb33c346989a529d4e19164f1759102dee5953ee17e/idna-3.14.tar.gz"
-    sha256 "466d810d7a2cc1022bea9b037c39728d51ae7dad40d480fc9b7d7ecf98ba8ee3"
+    url "https://files.pythonhosted.org/packages/b9/28/99c51f664567218d824af024c0251650fb27e4ca066df188dab0769c5b91/idna-3.17.tar.gz"
+    sha256 "5eb0cb53bc467c12eadcf6de83163ad8527cec9416f44b9b61b19caedad2b87f"
   end
 
   resource "pycurl" do
@@ -69,8 +69,8 @@ class Forbidden < Formula
   end
 
   resource "pyjwt" do
-    url "https://files.pythonhosted.org/packages/c2/27/a3b6e5bf6ff856d2509292e95c8f57f0df7017cf5394921fc4e4ef40308a/pyjwt-2.12.1.tar.gz"
-    sha256 "c74a7a2adf861c04d002db713dd85f84beb242228e671280bf709d765b03672b"
+    url "https://files.pythonhosted.org/packages/3b/81/58d0ac84e1ef3a3843791d6954d94c0b33d526c75eeb1efbce9d0a4c4077/pyjwt-2.13.0.tar.gz"
+    sha256 "41571c89ca91598c79e8ef18a2d07367d4810fbbd6f637794879baf1b7703423"
   end
 
   resource "regex" do
@@ -79,8 +79,8 @@ class Forbidden < Formula
   end
 
   resource "requests" do
-    url "https://files.pythonhosted.org/packages/43/b8/7a707d60fea4c49094e40262cc0e2ca6c768cca21587e34d3f705afec47e/requests-2.34.0.tar.gz"
-    sha256 "7d62fe92f50eb82c529b0916bb445afa1531a566fc8f35ffdc64446e771b856a"
+    url "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz"
+    sha256 "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed"
   end
 
   resource "tabulate" do

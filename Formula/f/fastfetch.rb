@@ -1,8 +1,8 @@
 class Fastfetch < Formula
   desc "Like neofetch, but much faster because written mostly in C"
   homepage "https://github.com/fastfetch-cli/fastfetch"
-  url "https://github.com/fastfetch-cli/fastfetch/archive/refs/tags/2.63.1.tar.gz"
-  sha256 "6e124699ea20fb02c5bc402c0012543303ee75ca55ad664f96bc6cd414d7e6b3"
+  url "https://github.com/fastfetch-cli/fastfetch/archive/refs/tags/2.64.2.tar.gz"
+  sha256 "28db81d6568f28281d9aab9e88d5a4c7892d519c54b8739eef17953cce6802d0"
   license "MIT"
   head "https://github.com/fastfetch-cli/fastfetch.git", branch: "dev"
 
@@ -12,12 +12,12 @@ class Fastfetch < Formula
   end
 
   bottle do
-    sha256               arm64_tahoe:   "05e04aa4951f18f6c3807d74a4b9795f2069da5fb1a9d63ff85dae5701ca8ba2"
-    sha256               arm64_sequoia: "45b13ab7aadfc1afe69f63d4cc945e96d05802eaa411ebc9de44e8b34f08e35b"
-    sha256               arm64_sonoma:  "880f2cc9e2327f706bca1bf48d6aefc560f49e863a4ac2b46218634c0b048d51"
-    sha256 cellar: :any, sonoma:        "ce8f425ed61aaed00c21f6e0b84f6b739901c48163dfc52779244a1a5af56de7"
-    sha256               arm64_linux:   "d7a6052dad08e890e06fdc9100fee1906931b37feeb4cc76abdba735dc71253a"
-    sha256               x86_64_linux:  "167aa53d88c52b1e54d3fd4a1b90eec3b26b69235d050920bb6a2031e3380a47"
+    sha256               arm64_tahoe:   "2efd2ba5f2b5c939bcbbc757161c841de3735067b60f0027447329a4546ea1b0"
+    sha256               arm64_sequoia: "aa1cf991d864c264534888fd78574c3d9c2fc6ff3a07c6d28249f819a9b3d47f"
+    sha256               arm64_sonoma:  "0dab8f7ae987468bcb638e850c9ec9780559b56a8076b718da7c92c758cf52ad"
+    sha256 cellar: :any, sonoma:        "580290bd45bca5f0d472bdc74ede2bfccfbe098af69563a3dc2cfad7dc12e216"
+    sha256               arm64_linux:   "f90a11a0de9db052a2c87ecf751b9e557afa1fc11349e1bb46a8377505ac0eb2"
+    sha256               x86_64_linux:  "fab53ef1771ddef1c5d52224ecf4e92cb3279bf6c7ba73f224efc9e31dee008c"
   end
 
   depends_on "chafa" => :build
@@ -27,6 +27,7 @@ class Fastfetch < Formula
   depends_on "pkgconf" => :build
   depends_on "python@3.14" => :build
   depends_on "vulkan-loader" => :build
+  depends_on "lua"
   depends_on "yyjson"
 
   uses_from_macos "sqlite" => :build

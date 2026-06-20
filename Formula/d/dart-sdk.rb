@@ -1,17 +1,18 @@
 class DartSdk < Formula
   desc "Dart Language SDK, including the VM, dart2js, core libraries, and more"
   homepage "https://dart.dev"
-  url "https://github.com/dart-lang/sdk/archive/refs/tags/3.11.6.tar.gz"
-  sha256 "107d24efcf88be96ceea9045465bc4c6f90a230d09b48511a45447145db01946"
+  url "https://github.com/dart-lang/sdk/archive/refs/tags/3.12.2.tar.gz"
+  sha256 "e84861c0a725990b6efbec1ec3be7cbf38352983871f8e74c3d42bc259a0a0d8"
   license "BSD-3-Clause"
+  compatibility_version 2
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "aa1a7a1fed0fc1e45100cd150f216d628e3b4adaef2e3179489fdfe70830f28b"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "6e614dda7ccce558bd0a4d0bcd1afc45da8e5f5ec42f68b868eb251a57c764c0"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "273e37381eaa45041d40ad962b9b628e0ca0d7797d9d7790eaf988aab6173d00"
-    sha256 cellar: :any_skip_relocation, sonoma:        "da4b254c7ad3ef401a61e626bc53d3a5452c1abbd3c64e420b4c3ba204d9a9c9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f5cb46426872b161c7b69b32758cb72800317f51214e12752f03aefa0976394e"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c87a03f33559d69cfb418b7d682da15af9ee5a5a019ad074bb2a9e9e056182ab"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "d98d388dfe2b2af3b1888fa5fd4ec4f722b4e8fc09dd6fb5df45fc5e338f7795"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "577e003e50e2735ca3cde53b2a1b51938b26c01098f6e82b2c57293f0d4e7c44"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a922f73ab00ffea950699afabaa91673fb0e88c9831123680a963138c6e24584"
+    sha256 cellar: :any_skip_relocation, sonoma:        "e2d9edd7488c0659e4b39d45f09e450bac870cea68204cac2c90c7645a6e4aa7"
+    sha256 cellar: :any,                 arm64_linux:   "391cd9ba088a5b24372ec0613b7dde2785bf125a2b60b48f12b026720a1a4fb6"
+    sha256 cellar: :any,                 x86_64_linux:  "8393459aa9cada1b4a07cd5b12e0f4faa53ed358e84b02f5dac621e885bab05a"
   end
 
   depends_on "ninja" => :build
@@ -41,12 +42,6 @@ class DartSdk < Formula
 
     system "gclient", "config", "--name", "sdk", "https://dart.googlesource.com/sdk.git@#{version}"
     system "gclient", "sync", "--no-history"
-
-    # Workaround for error: 'readdir_r' is deprecated
-    # Issue ref: https://github.com/dart-lang/sdk/issues/63089
-    inreplace "sdk/build/config/compiler/BUILD.gn",
-              "\"-Wno-tautological-constant-compare\",",
-              "\\0\n      \"-Wno-deprecated-declarations\","
 
     # Workaround for dependants audit failure: Libraries were compiled with a flat namespace.
     # Issue ref: https://github.com/dart-lang/sdk/issues/63115

@@ -2,7 +2,7 @@ class Bloaty < Formula
   desc "Size profiler for binaries"
   homepage "https://github.com/google/bloaty"
   license "Apache-2.0"
-  revision 48
+  revision 50
   head "https://github.com/google/bloaty.git", branch: "main"
 
   stable do
@@ -12,18 +12,17 @@ class Bloaty < Formula
     # Support system Abseil. Needed for Protobuf 22+.
     # Backport of: https://github.com/google/bloaty/pull/347
     patch do
-      url "https://raw.githubusercontent.com/Homebrew/homebrew-core/1cf441a0/Patches/bloaty/system-abseil.patch"
-      sha256 "d200e08c96985539795e13d69673ba48deadfb61a262bdf49a226863c65525a7"
+      file "Patches/bloaty/system-abseil.patch"
     end
   end
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "32254b4c4924ba2518de4a49ff20c09c75850a0d06ef6405c8fe7195f7bd3f37"
-    sha256 cellar: :any, arm64_sequoia: "1782d9c4fa2d9b57319420d86b337c92ce492aa6b6d2df589c0b4031a7a1e344"
-    sha256 cellar: :any, arm64_sonoma:  "5d3323a27b65db08d16708fa7674be40c92b4e334fad958b39c4667c63aad24b"
-    sha256 cellar: :any, sonoma:        "1e620084aa2982d41a72f7a82020d18f4cc6f46b2cfe9fbb3307b76444a27959"
-    sha256               arm64_linux:   "cec8c5b040ed277f3675b45deb5de562ffba21b6ddc690750723104725095172"
-    sha256               x86_64_linux:  "07e25a07890dcbab914482dc37430f5d2cf826870b897b6db117f23162399ae0"
+    sha256 cellar: :any, arm64_tahoe:   "3da17902794a0a9d9c35a9b94f5484f8ce226aeaee52765c9ee99f8f7b688cc6"
+    sha256 cellar: :any, arm64_sequoia: "ef227a8332f3b1200222d3ba359c100c8b94d0e52ac219e0a2edd39344ecb89b"
+    sha256 cellar: :any, arm64_sonoma:  "32acc63bf8bc25be295e072546ba45dda7fd8f816fc0b951c7585fc92cce5df1"
+    sha256 cellar: :any, sonoma:        "34f48572e6af7408a219675ea1bd49cfee3bc807766bd0e399d1f14eac01e843"
+    sha256               arm64_linux:   "62f8d27cc364dfc6c2788698226a2318f7a2b08e8f1a8bdaa0a688bfad83da91"
+    sha256               x86_64_linux:  "d11b1cd1ae55f23b268cae986810e48b12b95974adda543cca78cba368195f9d"
   end
 
   depends_on "cmake" => :build

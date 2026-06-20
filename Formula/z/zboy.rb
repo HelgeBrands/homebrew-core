@@ -27,13 +27,10 @@ class Zboy < Formula
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "e2baaf6491fe70279c22f669b2a64bd5467506ea9be7aa86807a06519f0b9311"
   end
 
-  depends_on "sdl2"
+  depends_on "sdl2-compat"
 
   def install
-    sdl2 = Formula["sdl2"]
-    ENV.append_to_cflags "-std=gnu89 -D__zboy4linux__ -DNETPLAY -DLFNAVAIL -I#{sdl2.include} -L#{sdl2.lib}"
-    inreplace "Makefile.linux", "zboy.o", "zboy.o drv_sdl2.o"
-    system "make", "-f", "Makefile.linux", "CFLAGS=#{ENV.cflags}"
+    system "make", "-f", "Makefile.linux"
     bin.install "zboy"
   end
 

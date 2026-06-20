@@ -19,12 +19,13 @@ class Git < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "0907a55ddd94935d16e13351e3238892d7a57f4ccaa58e20ba2609c4f2a1c4c0"
-    sha256 arm64_sequoia: "d12f1bafed785a94c45d0bffb303c28cbc0aaec5ab9a8b4939c51f216de1f2d9"
-    sha256 arm64_sonoma:  "538bdc752f5a51e98124b0cdce5493339e5821a50a03fd3a78fe7754038ea1c4"
-    sha256 sonoma:        "7286fead4972e9e8374dd85a420d7e55da5bbba9e4b34fa90cb6c183d31663bb"
-    sha256 arm64_linux:   "67e05269b64b7cbcb24739519817b56a081696e350fe1913282b08bbfe90368e"
-    sha256 x86_64_linux:  "81874ce3bd63063dc77f6d1cc85e30c52108e172f32b232ae865f9b2e55001e1"
+    rebuild 2
+    sha256 arm64_tahoe:   "631dd8d46c16e37e827638953b00009741e6ef6007dc287e49dd904d7fb17ad5"
+    sha256 arm64_sequoia: "247e29b9be076e75b8f1c294665bc20eaf93ebdb9a0b2a6ba8ed79bfa189d8cb"
+    sha256 arm64_sonoma:  "18464d0dfa49ca25903f1aea3be66c1c0739b0af8096036b113137a7d0fc3a97"
+    sha256 sonoma:        "b1b54c9acd9777bfca354740fcf3e05179e57bb38a23a446ff8641dbe717d921"
+    sha256 arm64_linux:   "44ed639210d6d5edeeed420ce33f1612e123f93334af1cc6d6d84b3b1827ecf5"
+    sha256 x86_64_linux:  "edc8e8f1a7b3861e06e66ec3b337968a3c9e2c206da52cfd1e4f950d36ebfb30"
   end
 
   depends_on "gettext" => :build
@@ -73,6 +74,8 @@ class Git < Formula
     url "https://cpan.metacpan.org/authors/id/R/RJ/RJBS/Net-SMTP-SSL-1.04.tar.gz"
     sha256 "7b29c45add19d3d5084b751f7ba89a8e40479a446ce21cfd9cc741e558332a00"
   end
+
+  deny_network_access! [:build, :postinstall]
 
   def install
     odie "html resource needs to be updated" if build.stable? && version != resource("html").version
@@ -170,6 +173,7 @@ class Git < Formula
     bash_completion.install "contrib/completion/git-prompt.sh"
     zsh_completion.install "contrib/completion/git-completion.zsh" => "_git"
     cp "#{bash_completion}/git-completion.bash", zsh_completion
+    cp "#{bash_completion}/git-prompt.sh", zsh_completion
 
     (share/"git-core").install "contrib"
 

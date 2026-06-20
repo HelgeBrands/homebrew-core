@@ -1,19 +1,19 @@
 class Pomerium < Formula
   desc "Identity and context-aware access proxy"
   homepage "https://www.pomerium.com"
-  url "https://github.com/pomerium/pomerium/archive/refs/tags/v0.32.7.tar.gz"
-  sha256 "7a3fd6d8b3b1ff49645a82da1a83a6713afb1b631cf45bb2dab56eeb0c2dfaeb"
+  url "https://github.com/pomerium/pomerium/archive/refs/tags/v0.32.9.tar.gz"
+  sha256 "ca69ae564e584be021dd2af85b8ccda0f791842dff9488f1e463cb26916f1d7c"
   license "Apache-2.0"
 
   head "https://github.com/pomerium/pomerium.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "359351d6d7bbef54208dec2927c040f6c694a3d021430bafb3aedcde528abf21"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "e985e0dcac9f8d5e1e3f08e191f2104908858c6a62071edf975e885cea924db2"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c9c2ea344a15e126e2aad853ef3b0f075db90051f50708b3ea72562e2b988a5a"
-    sha256 cellar: :any_skip_relocation, sonoma:        "397c02fe28c198df73e787337db66636a9472f2d667f43b062151112837aa0cd"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "9d4f2510bfc6e2d755ec0f5a0750abb09860f582fa5c6e351e1f507b32781160"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "56ec9764b51ef67287ba0df71b514192129ce8afdc2f5c0cfb2c231475a7b112"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "a36c0e70c802bf7e598d12c783338ef41c411ce71574458d73f915cc2a8ae4fb"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "30250e49bfe09c22294a8731496699dc669d6870c53a5d00f461a9786a6a58eb"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "6ef778a9b3227b213406edd4143589e0ef0ea30040ede12a689b5b4aef8caac9"
+    sha256 cellar: :any_skip_relocation, sonoma:        "39215da8c9c3db1b847155a29d16844a20444e8403e4a348e63f31893c9bc838"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4240ccd459019798d79772be5c02ebf3ff7d7c94df5033568b8592f2a2a63507"
+    sha256 cellar: :any,                 x86_64_linux:  "e468cd072e1fc71e1c5135b322647989c88fca1886b1d43463386db5e59ad304"
   end
 
   depends_on "go" => :build

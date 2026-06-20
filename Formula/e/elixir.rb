@@ -1,10 +1,10 @@
 class Elixir < Formula
   desc "Functional metaprogramming aware language built on Erlang VM"
   homepage "https://elixir-lang.org/"
-  url "https://github.com/elixir-lang/elixir/archive/refs/tags/v1.19.5.tar.gz"
-  sha256 "10750b8bd74b10ac1e25afab6df03e3d86999890fa359b5f02aa81de18a78e36"
+  url "https://github.com/elixir-lang/elixir/archive/refs/tags/v1.20.1.tar.gz"
+  sha256 "baed8756da722c1b8d71613655c7223ab952051bc391a965cd79e320a93aaf77"
   license "Apache-2.0"
-  compatibility_version 1
+  compatibility_version 3
   head "https://github.com/elixir-lang/elixir.git", branch: "main"
 
   livecheck do
@@ -13,12 +13,12 @@ class Elixir < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "786c67ab9d62cbc12fa8d4f82ba793deb6e1709ae17893e56052b3898b242b9a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "7ee758eff7bf952f2ce1e9d185e7e282da61a3f820442ba274584ef27e001d8a"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "33b2ef7a55e6baa0333700bc147f9d463f70cee44b045d6d6f4264710889d588"
-    sha256 cellar: :any_skip_relocation, sonoma:        "472c46ab5c968e22076c4fae7d1bd1a532dd476707eea57c4b5f0ee04eff7aaa"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0301eddeaf80ff83bdf56b419c5e176914cd8b0e620ba309c65b3f182bd12f35"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8443035821fa8345ad64183634b17e8945736331c8d9692e28424341a3058cbc"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "689920df4f1dd9b1b44e256499abd178aa7e132118eb23bb982301b3db9251ac"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "54a6bb2575d376ee06da20c14d4379e9a6273e2750c49c383c4460da60b2542c"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a882e18eb4132d47f7d96d934c358027fd60d58df01a8c18796d2b64093362c2"
+    sha256 cellar: :any_skip_relocation, sonoma:        "4096f17dd4a47a23806da39cbd0288c800d58f8ab19df964dd0e1b3c29d8b02e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "5b4a86f48c68d98b1509d2025425bf45d2b2bfb63064205d4301fb6398e906e5"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "c315926e28272cea56ff675f835cb095390ff69f384f5030fd949454be3fe49f"
   end
 
   depends_on "erlang"

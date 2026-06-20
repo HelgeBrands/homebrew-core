@@ -47,7 +47,7 @@ class Ghc < Formula
       # R_AARCH64_JUMP26 against symbol `ghczm9zi12zi2zminplace_GHCziUtilsziPanic_showGhcException_info'
       # defined in .text.ghczm9zi12zi2zminplace_GHCziUtilsziPanic_showGhcException_info section in
       # _build/stage1/compiler/build/GHC/Utils/Panic.p_dyn_o
-      depends_on "gcc@12" => :build
+      depends_on "binutils" => :build
     end
   end
 
@@ -136,8 +136,8 @@ class Ghc < Formula
 
     if OS.mac?
       # https://gitlab.haskell.org/ghc/ghc/-/issues/22595#note_468423
-      args << "--with-ffi-libraries=#{MacOS.sdk_path_if_needed}/usr/lib"
-      args << "--with-ffi-includes=#{MacOS.sdk_path_if_needed}/usr/include/ffi"
+      args << "--with-ffi-libraries=#{MacOS.sdk_path}/usr/lib"
+      args << "--with-ffi-includes=#{MacOS.sdk_path}/usr/include/ffi"
     end
 
     system "./configure", "--prefix=#{prefix}", "--disable-numa", "--with-system-libffi", *args

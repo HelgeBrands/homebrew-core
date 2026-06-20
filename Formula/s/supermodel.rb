@@ -1,22 +1,23 @@
 class Supermodel < Formula
   desc "Sega Model 3 arcade emulator"
   homepage "https://github.com/trzy/Supermodel"
-  url "https://github.com/trzy/Supermodel/archive/refs/tags/v0.3a-20260506-git-9c9e7b7.tar.gz"
-  version "0.3a-20260506-git-9c9e7b7"
-  sha256 "74a6310ebe080b1de08ae92bbe6b4f5ca73babb7ef184e90b23079700133b710"
+  url "https://github.com/trzy/Supermodel/archive/refs/tags/v0.3a-20260528-git-77d28ee.tar.gz"
+  version "0.3a-20260528-git-77d28ee"
+  sha256 "80085bbcb1451ae0f921e434c953639f9884e6acedf526fa7c8384e7f69995e1"
   license "GPL-3.0-or-later"
   head "https://github.com/trzy/Supermodel.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "acf16b3d615cef9aa94cd26e0a5ddc5c855453849484ccf8f50d19ead6e70e15"
-    sha256 cellar: :any,                 arm64_sequoia: "0fa184087dae96b7825269d7fa0c22521030172f02cb38b6d3f60eaeadea4e3f"
-    sha256 cellar: :any,                 arm64_sonoma:  "c1bf21115566f1ac068b51949a762526e7d4acc5e88a6430deeba27886821122"
-    sha256 cellar: :any,                 sonoma:        "2ea25164409f2a1cd59c6e64b3915b98e4f066248019bad63e217f0ef8af1248"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "4c01e14c0679bfd75640f4f4b6d91c5a01a7c5c5424d5fa3e7250af0a516f989"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8e0565487f846c020248075c50867c18c76f99d35351d1258f7ff7d04f62b4a7"
+    rebuild 1
+    sha256 cellar: :any, arm64_tahoe:   "8caefa29784e10bec7b0d5c2b56224c335fd17cb108c30a71ad0484839d4f361"
+    sha256 cellar: :any, arm64_sequoia: "30a0c3e5fcb08ea841e4e02532cfa3502ed76b1a09fc763fd78693b4456cb033"
+    sha256 cellar: :any, arm64_sonoma:  "4fccf349cd37905cde410dd78c971284bdd8dfc9057ac7446dcc9ac521adf17c"
+    sha256 cellar: :any, sonoma:        "bad3083a9e53bc18a86cc1b25f8930b28bcc8defccc5c254347ec15b5c76ffd6"
+    sha256 cellar: :any, arm64_linux:   "7942ee2e3317ff8f134b3a102644782dc1ec17f2720110727355728a38f80e9d"
+    sha256 cellar: :any, x86_64_linux:  "d743cefb87a3c9a5c3c0b27a161e31925a7353666752c65caaecf96f72c7ad49"
   end
 
-  depends_on "sdl2"
+  depends_on "sdl2-compat"
   depends_on "sdl2_net"
 
   on_linux do
@@ -25,28 +26,16 @@ class Supermodel < Formula
     depends_on "zlib-ng-compat"
   end
 
+  deny_network_access!
+
   def install
-    os = OS.mac? ? "OSX" : "UNIX"
-    makefile_dir = "Makefiles/Makefile.#{os}"
+    # Workaround for build environment as sdl2-config uses paths relative to executable.
+    # TODO: Remove after moving to `sdl2-compat` which uses paths set at build-time.
+    ENV.remove "PATH", Formula["sdl2"].opt_bin
+    ENV.append_path "PATH", HOMEBREW_PREFIX/"bin"
 
-    ENV.deparallelize
-    # Set up SDL2 library correctly
-    inreplace makefile_dir, "-framework SDL2", "`sdl2-config --libs`" if OS.mac?
-    inreplace "Src/OSD/SDL/SDLIncludes.h", "SDL_net.h", "SDL2/SDL_net.h" if OS.linux?
-
-    system "make", "-f", makefile_dir
-    bin.install "bin/supermodel"
-
-    (var/"supermodel/Saves").mkpath
-    (var/"supermodel/NVRAM").mkpath
-    (var/"supermodel/Logs").mkpath
-  end
-
-  def caveats
-    <<~EOS
-      Config, Saves, and NVRAM are located in the following directory:
-        #{var}/supermodel/
-    EOS
+    # Not using Makefile.OSX as it uses prebuilt frameworks
+    system "make", "-f", "Makefiles/Makefile.UNIX", "BIN_DIR=#{bin}"
   end
 
   test do

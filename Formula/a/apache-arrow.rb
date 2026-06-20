@@ -5,17 +5,17 @@ class ApacheArrow < Formula
   mirror "https://archive.apache.org/dist/arrow/arrow-24.0.0/apache-arrow-24.0.0.tar.gz"
   sha256 "9a8094d24fa33b90c672ab77fdda253f29300c8b0dd3f0b8e55a29dbd98b82c9"
   license "Apache-2.0"
-  revision 1
+  revision 5
   compatibility_version 2
   head "https://github.com/apache/arrow.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any, arm64_tahoe:   "725827052d5622205be5a22b584fa371dd54dc4ed0ffb910c7c121900eee18cf"
-    sha256 cellar: :any, arm64_sequoia: "f06e7d05526ea26d23ee2b4cf89e42deb65e8dd19c56e266103cef2537555d51"
-    sha256 cellar: :any, arm64_sonoma:  "59e94b6daa2a495130d5f4239ae4c3e83f0a5ee0f8baa5c0f702559959bf85fe"
-    sha256 cellar: :any, sonoma:        "0198edd477ebbd5b384c7d022b1b14a1ff2edb5710fa9e2081be2c12d13bf430"
-    sha256               arm64_linux:   "07e853a572a9224f5a62359549546a3343843776302ff09fed91c7cfc6c970bc"
-    sha256               x86_64_linux:  "7efac2027b0854793553b57a46609ee1a7da6f40eea1c81aaac58214846133ef"
+    sha256 cellar: :any, arm64_tahoe:   "d8c5bf5041801d9d0c988734922e02158e344e04bec184447efa2b6191a7de07"
+    sha256 cellar: :any, arm64_sequoia: "5c7987f9e65c389d7a06487f34cf60fdc16595b95f50f3156b67cee7d385c96d"
+    sha256 cellar: :any, arm64_sonoma:  "e99985a2d388790a34ad133d4c8dac9e74112df804847b1f97e1cdd46407d5e5"
+    sha256 cellar: :any, sonoma:        "548771f930c45ce950200d5fe74ec6638a85c778dc72e9ed7d309a2e1629386d"
+    sha256               arm64_linux:   "7580b1800a1cb903443ffe2ef76daacae3856e5b827fbbfe8bb00c3810ab5ab2"
+    sha256               x86_64_linux:  "57233aaa923672e343f5d4fca5cab5c3aaee71b10bb9de4d172f6a6d4316bd94"
   end
 
   depends_on "boost" => :build
@@ -80,14 +80,7 @@ class ApacheArrow < Formula
       -DPARQUET_BUILD_EXECUTABLES=ON
     ]
     args << "-DARROW_MIMALLOC=ON" unless Hardware::CPU.arm?
-    args << if OS.mac?
-      "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-dead_strip_dylibs" # Reduce overlinking
-    else
-      # TODO: Remove after moving CI to Ubuntu 24.04. Cannot use newer GCC as it
-      # will increase minimum GLIBCXX in bottle resulting in a runtime dependency.
-      ENV.llvm_clang
-      "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,--as-needed"
-    end
+    args << "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-dead_strip_dylibs" if OS.mac? # Reduce overlinking
     # ARROW_SIMD_LEVEL sets the minimum required SIMD. Since this defaults to
     # SSE4.2 on x86_64, we need to reduce level to match oldest supported CPU.
     # Ref: https://arrow.apache.org/docs/cpp/env_vars.html#envvar-ARROW_USER_SIMD_LEVEL

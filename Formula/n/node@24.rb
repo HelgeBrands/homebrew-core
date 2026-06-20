@@ -1,8 +1,8 @@
 class NodeAT24 < Formula
   desc "Open-source, cross-platform JavaScript runtime environment"
   homepage "https://nodejs.org/"
-  url "https://nodejs.org/dist/v24.15.0/node-v24.15.0.tar.xz"
-  sha256 "a4f653d79ed140aaad921e8c22a3b585ca85cfdab80d4030f6309e4663a8a1c8"
+  url "https://nodejs.org/dist/v24.17.0/node-v24.17.0.tar.xz"
+  sha256 "a7ab562ed2369a29c68b72fa00e3103bcdfe37063dff799c6acc8e404e275fcd"
   license "MIT"
   compatibility_version 1
 
@@ -12,12 +12,12 @@ class NodeAT24 < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "f08293c7e6496ffe8191d051d5cf8786b614ecab5825b824ba8e9031aa517d25"
-    sha256 cellar: :any,                 arm64_sequoia: "85e36590cd3944b672a2257d13bc342e14aba780bdac15dbcdaf33fc93fda370"
-    sha256 cellar: :any,                 arm64_sonoma:  "82f8ec8f619ff5e5f2c62febb9962d5c6fc09ffae1b9f0a18190ae5b3b6c7e27"
-    sha256 cellar: :any,                 sonoma:        "afc81a9ee3c219d3054da056b19d653dc39e6fc396c9d531b0d03988f56b1884"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "420f56970527dc9e47f1024edc47435ccf389532e0fde6a6b1e6b14ffefc70c8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "5fac5be0f58fd355c54dd71ebce48b49309c078b4f15098e201054611ea7be3a"
+    sha256 cellar: :any, arm64_tahoe:   "3848d1d8ded8c2a314793be335a2ff009426bfd8a69a4f446b9d11b4ee983f2e"
+    sha256 cellar: :any, arm64_sequoia: "107a243667b44ff520411808d1de3ceeafbd1eaee57622ad49f947e12dd3041a"
+    sha256 cellar: :any, arm64_sonoma:  "220de3a0bcb40c59a884e5f488a00e36af28eea7849129fb3f728d7363c6ba3d"
+    sha256 cellar: :any, sonoma:        "4bf84731154f21c5be01918c8c766d4049cccc38f87c572fb7c39c6eba29f241"
+    sha256 cellar: :any, arm64_linux:   "daca2b97dae26d5b99b18510525568981e8db399de4dfd31a80eea6d9b489724"
+    sha256 cellar: :any, x86_64_linux:  "9c3cb5a617e2bed0644040d6d1d86332ab6b3c4da5726928294e79b24556b5ae"
   end
 
   keg_only :versioned_formula
@@ -153,9 +153,7 @@ class NodeAT24 < Formula
 
     system "./configure", *args
     system "make", "install"
-  end
 
-  def post_install
     (lib/"node_modules/npm/npmrc").atomic_write("prefix = #{HOMEBREW_PREFIX}\n")
   end
 
@@ -183,6 +181,8 @@ class NodeAT24 < Formula
     assert_path_exists bin/"npx", "npx must exist"
     assert_predicate bin/"npx", :executable?, "npx must be executable"
     assert_match "< hello >", shell_output("#{bin}/npx --yes cowsay hello")
+
+    assert_equal HOMEBREW_PREFIX.to_s, shell_output("#{bin}/npm config get prefix").chomp
 
     # Test `uvwasi` is linked correctly
     (testpath/"wasi-smoke-test.mjs").write <<~JAVASCRIPT

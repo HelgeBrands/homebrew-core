@@ -3,19 +3,18 @@ class Scdl < Formula
 
   desc "Command-line tool to download music from SoundCloud"
   homepage "https://github.com/scdl-org/scdl"
-  url "https://files.pythonhosted.org/packages/29/68/602ea370bb383a043f577787a4bbfd9f4e193ffcbe1a7b6325e37f126a08/scdl-3.0.4.tar.gz"
-  sha256 "afb72fb28293584d16fe96e399b686aab6bdfaa6f5303c5fd81e42feb76b09d5"
+  url "https://files.pythonhosted.org/packages/2d/99/7b7d8e7f287dfe968e28c34811db7002a65b07bb49fee7072098b5c82008/scdl-3.0.6.tar.gz"
+  sha256 "900bcad4aa9f54ae9ac505d3901b5c33173b3872cf60d7c8cb2da7fbdecb841e"
   license "GPL-2.0-only"
-  revision 1
   head "https://github.com/scdl-org/scdl.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bedf56a49242445e29dd8532b82072961600aef585880c60af3b2dbce4afdd06"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "aaabc5d3ed7fdc4674f318026b78089b7f6d506ab777ae096a4b39af2008c4c0"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "a44b9ca4cba3a884df506e0ccd0819e48dadce74b24272a1f4a02564597bdc2e"
-    sha256 cellar: :any_skip_relocation, sonoma:        "d5261a07cecbd1bd2fc7487731a95447856a2e7138c64ba63797e182597807a4"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3b06207959802c04b92bba716e86931905afe82e9590e4cd59d0b4916e8f9191"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "579f7ee9d57f8738215fb8e10cc0859f129b2b52d97cf5149f9c28adf477c42e"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8945269a1e2a4945cf0591bd47177d5a42ad11086847dc931d9507aa987a020d"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "9405afe9afe3a04096715c9c3a1560ebf1ebe74d132e4fd345d67949a3f0a6b1"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c47fe6103d6dbf70a45330e1de543beaa261505cd458a919848d90aae49c05f7"
+    sha256 cellar: :any_skip_relocation, sonoma:        "d976045d49abc0a2cb20fc4a29e7bdf66b2ba35ab6aecfb3fe6afb486d5fc03b"
+    sha256 cellar: :any,                 arm64_linux:   "e533f109f48a5eac51a9be2c005f6486c67e7f5f5d17e4c48965be59b62f71bc"
+    sha256 cellar: :any,                 x86_64_linux:  "8db6d40cd16e250d111e8d2aef3b7529c1b56e49a06a059b64e09cfc7afa8cc7"
   end
 
   depends_on "certifi" => :no_linkage
@@ -81,8 +80,8 @@ class Scdl < Formula
   end
 
   resource "yt-dlp" do
-    url "https://files.pythonhosted.org/packages/8b/34/7c6b4e3f89cb6416d2cd7ab6dab141a1df97ab0fb22d15816db2c92148c9/yt_dlp-2026.3.17.tar.gz"
-    sha256 "ba7aa31d533f1ffccfe70e421596d7ca8ff0bf1398dc6bb658b7d9dec057d2c9"
+    url "https://files.pythonhosted.org/packages/88/a4/1b0979d28f87774bb67fbbc66bce44f9dd1aa0e547a99e22985fac945c33/yt_dlp-2026.6.9.tar.gz"
+    sha256 "d50fcb95f48d61bedde33e408c1881d4c279e51c31354a599ce09e96ba0f4b86"
   end
 
   def install

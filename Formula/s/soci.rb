@@ -1,8 +1,8 @@
 class Soci < Formula
   desc "Database access library for C++"
   homepage "https://soci.sourceforge.net/"
-  url "https://downloads.sourceforge.net/project/soci/soci/soci-4.1.2/soci-4.1.2.zip"
-  sha256 "ac51bf6accbfae17066c8f9535cdd7827589381117254bc9c92ea2483abfa153"
+  url "https://downloads.sourceforge.net/project/soci/soci/soci-4.1.4/soci-4.1.4.zip"
+  sha256 "2fa7f41391101cd8d8ebdf870188030934fa6122f47063dc03c195d8135a746f"
   license "BSL-1.0"
 
   livecheck do
@@ -11,14 +11,12 @@ class Soci < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "d31676b530369e902ca7ef093254b8651d457d608d5fc3f043af44f399cfac1d"
-    sha256 arm64_sequoia: "d743ca216502631c357219d8e9062147831f2f5de3d20e18e8707e0fda86b9fc"
-    sha256 arm64_sonoma:  "b54a46e8519d45c7cdaf573d0744206603c4858aeaeeba7edfd982af15ae8eed"
-    sha256 arm64_ventura: "2816ca114d5b253b1a2910275280335e342ceaa9b5fc37b029c7b3c794e7789a"
-    sha256 sonoma:        "b470aff1683dacca56bd59826456c815feba82c68876f937dfe5a36b4c63a10e"
-    sha256 ventura:       "bf622c8bb7659153f4414864eb3243274c6e96ee892132ad67e918c68a4eeb63"
-    sha256 arm64_linux:   "7bdaa9f509b7eda5c845454d1a64cd0620f400fa0bceab65273433da986a6551"
-    sha256 x86_64_linux:  "bd1e51bb043843736d53493af5b7c84f5937a9a2bcd79b19336a69aecddb3061"
+    sha256 arm64_tahoe:   "7b15200b32688aea452fd6808e3302f76ada2145ff7bc86f15f473ce58b5b6d1"
+    sha256 arm64_sequoia: "83e193d6a298caf352f0fed677a1f6cf39e3aa7960388bec1c9a10d2c15b7347"
+    sha256 arm64_sonoma:  "1ed9ad9e65400ef19501d345a69a7701df40093e12c54cd1e44b9af2febff587"
+    sha256 sonoma:        "ad52bcaeed7c55109ca42125ff8f998add6a8a23d6e89907bec3251dc43289a7"
+    sha256 arm64_linux:   "6c178205c0d2ab24ec398838b377348eac6b03a36e8fb970e4f847063d4b5a11"
+    sha256 x86_64_linux:  "8a768b3f34b125668ac0d2329f1ad2eba14dce75c076bf3db1120918ad2bf24e"
   end
 
   depends_on "cmake" => :build

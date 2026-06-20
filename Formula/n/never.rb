@@ -33,7 +33,7 @@ class Never < Formula
   uses_from_macos "libffi"
 
   def install
-    ENV.append_to_cflags "-I#{MacOS.sdk_path_if_needed}/usr/include/ffi" if OS.mac?
+    ENV.append_to_cflags "-I#{MacOS.sdk_path}/usr/include/ffi" if OS.mac?
 
     # Workaround for CMake 4 compatibility
     args = %w[-DCMAKE_POLICY_VERSION_MINIMUM=3.5]
@@ -45,13 +45,13 @@ class Never < Formula
   end
 
   test do
-    (testpath/"hello.nev").write <<~EOS
+    (testpath/"hello.nev").write <<~NEV
       func main() -> int
       {
         prints("Hello World!\\n");
         0
       }
-    EOS
+    NEV
     assert_match "Hello World!", shell_output("#{bin}/never -f hello.nev")
 
     (testpath/"test.c").write <<~C

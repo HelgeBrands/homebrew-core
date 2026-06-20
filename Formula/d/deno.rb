@@ -1,19 +1,19 @@
 class Deno < Formula
   desc "Secure runtime for JavaScript and TypeScript"
   homepage "https://deno.com/"
-  url "https://github.com/denoland/deno/releases/download/v2.7.14/deno_src.tar.gz"
-  sha256 "617bc7247da4c8b031e3f155e10bfcb085ddd8f51625a73318dfd02fa5e939d0"
+  url "https://github.com/denoland/deno/releases/download/v2.8.3/deno_src.tar.gz"
+  sha256 "f5aad48de4230de51a3c4125e325c798d49bc1543a7cd1ad9662eff39dc510e5"
   license "MIT"
   compatibility_version 1
   head "https://github.com/denoland/deno.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "c173b2146fa9e32723bdaa17d09064effc6983e49ae43ece4f3ac7d01dad403a"
-    sha256 cellar: :any,                 arm64_sequoia: "d88372bf695f4379cbc8cd060c5c523cb2f83e67cbfd6065a19d7579dbde5eec"
-    sha256 cellar: :any,                 arm64_sonoma:  "54d8559067a5d4cdcc31a67b9d75f2476ce25db00ab4d33d530347f279c47fb2"
-    sha256 cellar: :any,                 sonoma:        "dfb4f1efc615757e5ece82ec58aae9443ba44592edd095e2fe105ae42f5b6158"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "97993bdecbd458f1abca22c1031883e25f90f60c1cf866536e350d9c098a0752"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "921b5f93391c4995d9b853100a10a35403fa57e1b646fd718ed1a11e7ee942cc"
+    sha256 cellar: :any, arm64_tahoe:   "af1718603e81e988c6a51fd02fcaa08fbe5b0365a23047f7ca4ddc38f911cca8"
+    sha256 cellar: :any, arm64_sequoia: "d4aeaf675cce2cbf390c53e972467388badf1b644fafd8bd505b59fe92d416d1"
+    sha256 cellar: :any, arm64_sonoma:  "2e96a62f4bcef1d6007b4a8fa44336921c824b57b03f47e1649467389bb118bd"
+    sha256 cellar: :any, sonoma:        "83907724e02bd27c26354a1e8324e9b0a3e4eab0d8203d7756f8aa6e0281f74c"
+    sha256 cellar: :any, arm64_linux:   "51159c83fab163162e5da4cd2d45badf365b1691cacbbb0de6cbab7595e155fd"
+    sha256 cellar: :any, x86_64_linux:  "d0ef3f2c2a827492e4632bcb9c30c01fd1b9c27d4c88e6eb18cb34c2feada07a"
   end
 
   depends_on "cmake" => :build
@@ -47,8 +47,7 @@ class Deno < Formula
       s.gsub!(/^lto = true$/, 'lto = "thin"')
 
       # Avoid vendored dependencies.
-      s.gsub!(/^libffi-sys = "(.+)"$/,
-              'libffi-sys = { version = "\\1", features = ["system"] }')
+      s.gsub!(/^libffi = "(.+)"$/, 'libffi = { version = "\\1", features = ["system"] }')
       s.gsub!(/^rusqlite = { version = "(.+)", features = \["unlock_notify", "bundled", "session"/,
               'rusqlite = { version = "\\1", features = ["unlock_notify", "session"')
     end

@@ -1,19 +1,18 @@
 class Circumflex < Formula
   desc "Hacker News in your terminal"
   homepage "https://github.com/bensadeh/circumflex"
-  url "https://github.com/bensadeh/circumflex/archive/refs/tags/4.1.1.tar.gz"
-  sha256 "c5900e13c41d2e5a1da2d45e0d63b38d345dca584edfbf8e60b4daa7cda88cae"
+  url "https://github.com/bensadeh/circumflex/archive/refs/tags/4.3.tar.gz"
+  sha256 "92d4061252ad3fa625df15c5b22d746222ab82f65e42bb91acc54c01d3189a19"
   license "MIT"
   head "https://github.com/bensadeh/circumflex.git", branch: "main"
 
   bottle do
-    rebuild 1
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "950e2d99874688e36c1b0950dacbca36068b0d22a8b2be58fa49761de5461b70"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "950e2d99874688e36c1b0950dacbca36068b0d22a8b2be58fa49761de5461b70"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "950e2d99874688e36c1b0950dacbca36068b0d22a8b2be58fa49761de5461b70"
-    sha256 cellar: :any_skip_relocation, sonoma:        "a34efb5434e33d6f180906091ffbf36f6d8ae97f5f3ec5ea23b31797f96f4fe6"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "110ac9e04a50ca218c7590a158608d23babc29001f90a942d568183e1a613280"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9045e704896543669129c725e4aae147a51e49b516126ce7960163164f8b670d"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "bdc2dee44dc40c676e064aab5796165bfe1d820142929345ef53b8845e2bacf8"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "bdc2dee44dc40c676e064aab5796165bfe1d820142929345ef53b8845e2bacf8"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "bdc2dee44dc40c676e064aab5796165bfe1d820142929345ef53b8845e2bacf8"
+    sha256 cellar: :any_skip_relocation, sonoma:        "8ad764e1cf808ddb2c61c51f25a92313acfd811c8e1eff0e9a2f5474c2a1a697"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "4ea6320d40215f8a4f6400fcbd813cfee509bb12ff6a0e6ed1e8ae7bd29b0aec"
+    sha256 cellar: :any,                 x86_64_linux:  "8763e14e11fba93370502ab1ee8d2192e80ab84a3738b12ef07c42e275da4019"
   end
 
   depends_on "go" => :build

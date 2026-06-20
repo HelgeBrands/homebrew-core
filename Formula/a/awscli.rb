@@ -3,19 +3,19 @@ class Awscli < Formula
 
   desc "Official Amazon AWS command-line interface"
   homepage "https://aws.amazon.com/cli/"
-  url "https://github.com/aws/aws-cli/archive/refs/tags/2.34.50.tar.gz"
-  sha256 "1be45d2b68a1d2107388816b851981ca2891ffd77271be236565b0cb5dd1a49b"
+  url "https://github.com/aws/aws-cli/archive/refs/tags/2.35.9.tar.gz"
+  sha256 "6e9e5bcd9a644b7d1cc6e4d5eec5c86b00a2fd2fd9ea0dc29cacf0971e401189"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/aws/aws-cli.git", branch: "v2"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "03c711f83aa3bf07010f5ef30d18d7dc94914c0a72082f937cd5a0508dd6b794"
-    sha256 cellar: :any,                 arm64_sequoia: "d02c9193c92f8d71bf4498c9e141f7a7dd8bb6e52cc6411e740d03751137daed"
-    sha256 cellar: :any,                 arm64_sonoma:  "060b2d0ecf10eb66a2debdc36a76122c4c165e7398aeaf5a8dd3d51ac1ddcd21"
-    sha256 cellar: :any,                 sonoma:        "8aa104308a2e60e2900944a4237d52fd2e5be68e9499da6c12d4ac0e4775baef"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "df749dbec25111474520676ada61d9e106c16b1ee56afa391c214781cafbf85d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "d5e2967a18a2aa20f756991b1b715196422f7774d646c09b5dba736f7c44e173"
+    sha256 cellar: :any, arm64_tahoe:   "59521e35d3c73ca0eeaae39f648c50aa6d3955dbc8134053d1bc76a4450e16c5"
+    sha256 cellar: :any, arm64_sequoia: "48072de5bf1c86ad01e437a1f9c5312227ce38be3cd72152205f1ed8d80e6159"
+    sha256 cellar: :any, arm64_sonoma:  "6ef4c53cd9bf09e22aabcdd7cb35b7049e234df70c54ae1bd9baf5336712fa8b"
+    sha256 cellar: :any, sonoma:        "a46c5dd7ca1f0e6336d2f126093e431d652374c33c0cbcbc87a41577ce2ab58a"
+    sha256 cellar: :any, arm64_linux:   "25bc110ce8919bc906907d9347f8fc1ee68c4c3a8eb7de9147d3190d229077dd"
+    sha256 cellar: :any, x86_64_linux:  "95868e98cf68cd0a80cff876de49ea7647b575c60c979c9cc5101339dd5c4f22"
   end
 
   depends_on "cmake" => :build
@@ -115,14 +115,14 @@ class Awscli < Formula
     rm bin.glob("{aws.cmd,aws_bash_completer,aws_zsh_completer.sh}")
     bash_completion.install "bin/aws_bash_completer"
     zsh_completion.install "bin/aws_zsh_completer.sh"
-    (zsh_completion/"_aws").write <<~EOS
+    (zsh_completion/"_aws").write <<~ZSH
       #compdef aws
       _aws () {
         local e
         e=$(dirname ${funcsourcetrace[1]%:*})/aws_zsh_completer.sh
         if [[ -f $e ]]; then source $e; fi
       }
-    EOS
+    ZSH
   end
 
   def caveats

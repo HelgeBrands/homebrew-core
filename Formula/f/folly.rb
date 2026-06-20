@@ -1,19 +1,19 @@
 class Folly < Formula
   desc "Collection of reusable C++ library artifacts developed at Facebook"
   homepage "https://github.com/facebook/folly"
-  url "https://github.com/facebook/folly/archive/refs/tags/v2026.05.18.00.tar.gz"
-  sha256 "331b3cb88253d5ebd059cbb42e0418d1e32decb51e76f7073ab084a184713e5f"
+  url "https://github.com/facebook/folly/archive/refs/tags/v2026.06.15.00.tar.gz"
+  sha256 "50c9140edea532bc3762c5615eaa5fb908796d4ff7dc99a4d8a1b0aae0ee90e2"
   license "Apache-2.0"
   compatibility_version 1
   head "https://github.com/facebook/folly.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "60c9d04683feee4fc5e40d11dfb5017aa31a324644f7522695ee318fd361b0c5"
-    sha256 cellar: :any,                 arm64_sequoia: "01c81eb4e969fed7b1aa482d315f5ad3a6466d6ea9edcd2813f9511f2f127b0c"
-    sha256 cellar: :any,                 arm64_sonoma:  "4806ded5651f77336e46e9cd8f3e75de66abda49b77bb2f4fd4cd7b7875b6932"
-    sha256 cellar: :any,                 sonoma:        "91835d29cc393004e73d15c6cafa1b38d55ee01b71ec107dd38ea6bd34a193f0"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0e73a63c0be222d9d5627501cac6984467d75c4c3d90cae53902cbdfb400d216"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "363eddb5bc5cfbefc78bf9c9132a9ff31c7d0c8e5f908e571c37dea159858662"
+    sha256 cellar: :any, arm64_tahoe:   "f8fd81795aa7f46c8a597a5c26b04c0669d2a84fe55fa5f5493efa2a4ba37136"
+    sha256 cellar: :any, arm64_sequoia: "b0b2d11a06bb47b748c667ebb174b88811f548d6d9d1d0746453246570cb500f"
+    sha256 cellar: :any, arm64_sonoma:  "4ec9cf6b8cf1de806c98e362ba9928b2ab23646b24ae21265b99820ea27a13fe"
+    sha256 cellar: :any, sonoma:        "aee1480815f01cc7a70c50d7cb7397d6120fc621e8463e1d2e7629fdd07f03e9"
+    sha256 cellar: :any, arm64_linux:   "2ff746a2c3735e647c871f26fc6fc4db57bfebdbb7eda4245e303e0504df016a"
+    sha256 cellar: :any, x86_64_linux:  "6b721d2a1b44ebf8fb46c2ac3e9eb71636fbd6692e747ef8775cb2559542e3b9"
   end
 
   depends_on "cmake" => :build
@@ -34,21 +34,8 @@ class Folly < Formula
 
   uses_from_macos "bzip2"
 
-  on_macos do
-    depends_on "llvm" if DevelopmentTools.clang_build_version <= 1100
-  end
-
   on_linux do
     depends_on "zlib-ng-compat"
-  end
-
-  fails_with :clang do
-    build 1100
-    # https://github.com/facebook/folly/issues/1545
-    cause <<~EOS
-      Undefined symbols for architecture x86_64:
-        "std::__1::__fs::filesystem::path::lexically_normal() const"
-    EOS
   end
 
   # Workaround for arm64 Linux error "Missing variable is: CMAKE_ASM_CREATE_SHARED_LIBRARY"

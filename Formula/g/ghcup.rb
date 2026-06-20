@@ -2,8 +2,8 @@ class Ghcup < Formula
   desc "Installer for the general purpose language Haskell"
   homepage "https://www.haskell.org/ghcup/"
   # There is a tarball at Hackage, but that doesn't include the shell completions.
-  url "https://github.com/haskell/ghcup-hs/archive/refs/tags/v0.1.50.2.tar.gz"
-  sha256 "ba2a2ef799fa7810970e09b19a7fdd7b2360ddd64d8e9b0624ab640cca627b89"
+  url "https://github.com/haskell/ghcup-hs/archive/refs/tags/v0.2.6.2.tar.gz"
+  sha256 "a8b4657d235bb14fb8c4ed33cc3059297fbbb2dd98e239f4629c1ed1632041ed"
   license "LGPL-3.0-only"
   head "https://github.com/haskell/ghcup-hs.git", branch: "master"
 
@@ -14,13 +14,12 @@ class Ghcup < Formula
   end
 
   bottle do
-    rebuild 2
-    sha256 cellar: :any,                 arm64_tahoe:   "811917322d97837106d12170b91163432ae7c85aa638d1d96f029f9dec0cbb0e"
-    sha256 cellar: :any,                 arm64_sequoia: "ec991d6ddea9fbcb3c419543dfccaab1bb6d1d0902ba195f1e42f1a37241ee0a"
-    sha256 cellar: :any,                 arm64_sonoma:  "78dc9e2eaaf35e85f6d5a11a3bf1ea93bdc7288f614bb81eeafb162942eeebbb"
-    sha256 cellar: :any,                 sonoma:        "198abd421c4cc7e9aaa9274920e01306f42d98946ac6c87266a810048eb542db"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "515f3d49492075a8d3d9c54442061f468485701be58045c3e2f19da055e10a43"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8cf4e303d7c63d8dc7094cb14558d753ca914f5b71515b26dae21a4c20004df3"
+    sha256 cellar: :any, arm64_tahoe:   "9327efca408425c3dc66ee2dcfa158ea15c7f44982a5c07ab06103eaf67a2fdb"
+    sha256 cellar: :any, arm64_sequoia: "afa78521778bbe8c86685bbb5e778a42e4b077ad48ce8ef62d8de19a5c1fa936"
+    sha256 cellar: :any, arm64_sonoma:  "ff1bab0922639100dc171a2db067787779ca87ac18f556e013fed82fe799b90f"
+    sha256 cellar: :any, sonoma:        "8775022f9037d4290f6b9801ddc64798ed25d98a71bee33bbafea6351a7a7585"
+    sha256 cellar: :any, arm64_linux:   "e2533fbbf02b03241aa9f9a10d554f280330100b8cee70062aca1047b8765e36"
+    sha256 cellar: :any, x86_64_linux:  "8387bae857f457db7fa3ba137395a5e6bf385cd2453ed4198e46d8f33c253708"
   end
 
   depends_on "cabal-install" => :build

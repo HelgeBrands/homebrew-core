@@ -1,22 +1,22 @@
 class Ormolu < Formula
   desc "Formatter for Haskell source code"
-  homepage "https://github.com/tweag/ormolu"
-  url "https://hackage.haskell.org/package/ormolu-0.8.0.2/ormolu-0.8.0.2.tar.gz"
-  sha256 "4d89f82ee87c3e4b4cafa490a1a8260ed3f5af1a81a48a43ddfd6fe435a902ba"
+  homepage "https://ormolu-live.tweag.io"
+  url "https://hackage.haskell.org/package/ormolu-0.8.1.1/ormolu-0.8.1.1.tar.gz"
+  sha256 "152ece29b91e79f25d2c7aca3da1a15aba3251c5a751e680c3cbcf95b8681476"
   license "BSD-3-Clause"
   head "https://github.com/tweag/ormolu.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "455d08345efdd35bd58fbc526d4fbeaa8591537350e526728340bf5df683e29e"
-    sha256 cellar: :any,                 arm64_sequoia: "1217747b904943cb0fe3c5c8925fd1c384df538b1f578defc9d9dbb3458a5a54"
-    sha256 cellar: :any,                 arm64_sonoma:  "2ea9791458ca9d85d257a6e6048772303b102ede366a7c58b8cc2d4908ac68c7"
-    sha256 cellar: :any,                 sonoma:        "6be2df16ae9c2f99a69a414352b65edf125df8864ca4e0dfba63adde85c5698c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "312a416de29164e83c1fd85910ecf0d3568f27e4f9bdee3b7bde2b0ec103d7bb"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e633c8de861af86457fb1af18577f7cdadca5fa8ca247e66803d38966c50350e"
+    sha256 cellar: :any, arm64_tahoe:   "7ee24c452fa91ca3cbfee3a413439c40601b91d75a29042a5b84015a264f0913"
+    sha256 cellar: :any, arm64_sequoia: "85db5a65b36e35e8732fadd720a271640c61759b94b3bed5e99200711d78993a"
+    sha256 cellar: :any, arm64_sonoma:  "60bb6a3bb60956311284eaf177b03df7ac531a758b7f7ef2604e974377b9d6c0"
+    sha256 cellar: :any, sonoma:        "9f4776fc068def179afd79e064fdda9c5ed49d2e3b0716899d7886b5dfe22150"
+    sha256 cellar: :any, arm64_linux:   "875f3c6225f1b1f25532b1dcb8f3d90e8339b1ec637e0e3f0eb7f8de4bc4b7e3"
+    sha256 cellar: :any, x86_64_linux:  "698f8f59a9d87fa859a37d3b6b523e9a9c1a5b3fc72d1db862f5d082e27ffc58"
   end
 
   depends_on "cabal-install" => :build
-  depends_on "ghc@9.12" => :build # GHC 9.14 PR: https://github.com/tweag/ormolu/pull/1175
+  depends_on "ghc" => :build
   depends_on "gmp"
 
   uses_from_macos "libffi"

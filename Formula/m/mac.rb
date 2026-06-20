@@ -1,9 +1,9 @@
 class Mac < Formula
   desc "Monkey's Audio lossless codec"
   homepage "https://www.monkeysaudio.com"
-  url "https://monkeysaudio.com/files/MAC_1295_SDK.zip"
-  version "12.95"
-  sha256 "dfed316cb4aeecfdbc2d28d32a0dbe54785cc737982a97d3fcf85849b343188b"
+  url "https://monkeysaudio.com/files/MAC_1306_SDK.zip"
+  version "13.06"
+  sha256 "d8a6483dd011e481930beaaa360951a03fea9764e2c7755feb4a67f3564c6d86"
   license "BSD-3-Clause"
 
   livecheck do
@@ -14,12 +14,12 @@ class Mac < Formula
   no_autobump! because: :incompatible_version_format
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "1b4ba86071a0b69ba927318bcc662a9c99da0257f4eed0bcd557c6d7109ba285"
-    sha256 cellar: :any,                 arm64_sequoia: "eccb122ee49d7639e213c2980dbffc04b527e82dbaacefcaf797eec996a21d2b"
-    sha256 cellar: :any,                 arm64_sonoma:  "958e64caa5b2e6171ee320a8c281cefb86055f94d200edc1adeed9fe11e3fc4a"
-    sha256 cellar: :any,                 sonoma:        "dfc88061c88a92500a2b0783df37a47029f481b92f7a3677dc0a30e3c469493d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "0afd7b9bea5b92d1a75c9ab714260a9735baf77bc652ad9da736be6f986454ed"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "4483aee70c32de5634541d01f2aba82316cf441a7f35ed42473001b656cab78f"
+    sha256 cellar: :any, arm64_tahoe:   "fe5af28b6f1c32be486b6c1fc9b3903b25d6a5b9bd5a56b1b141ddcde00376db"
+    sha256 cellar: :any, arm64_sequoia: "32e66f125572185e77399b597309a1b2c452100ca417c08f69a0de12681b8a2f"
+    sha256 cellar: :any, arm64_sonoma:  "d754ee18818b2905004591750979a1b8e1fc8e1b2a663911975ca6d53d955858"
+    sha256 cellar: :any, sonoma:        "5840e4665238618f2e1fdbbb8bac8459b675b7f8ba37ce13252ae0db80056b70"
+    sha256 cellar: :any, arm64_linux:   "f0515bc0be564dd18850d21226cbd5b009dcf3db9637b4ddffaa7cf08ccbe917"
+    sha256 cellar: :any, x86_64_linux:  "3b7502126deb3e83235efca320b3e5ffb3643a92013217e619925baa8263a874"
   end
 
   depends_on "cmake" => :build

@@ -1,8 +1,8 @@
 class PythonAT314 < Formula
   desc "Interpreted, interactive, object-oriented programming language"
   homepage "https://www.python.org/"
-  url "https://www.python.org/ftp/python/3.14.5/Python-3.14.5.tgz"
-  sha256 "9c22bfe9939a6c5418fc74b289a5f1cc41859ae82ac6b163016b5844bd0a86bc"
+  url "https://www.python.org/ftp/python/3.14.6/Python-3.14.6.tgz"
+  sha256 "74d0d71d0600e477651a077101d6e62d1e2e69b8e992ba18c993dd643b7ba222"
   license "Python-2.0"
   compatibility_version 1
 
@@ -12,14 +12,14 @@ class PythonAT314 < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "fbdf4ab07fa7cf3acd10aa15f59198f8a156660c7456108ad142bbea02f6404a"
-    sha256 arm64_sequoia: "f35b53b5191334456d8e28bccde0762d3c9f212325d0014a5351eace83ff21fe"
-    sha256 arm64_sonoma:  "7c837e923154cd311ea1ca49e79508f00ef2cc8f554deb111d594c297493e2dc"
-    sha256 tahoe:         "42f56660bdfc64b7b00d3fbd751efd2cfe748d5a27d908997312ba598dc5d46a"
-    sha256 sequoia:       "598e9450029cca8630774cd67cfd598e94d7d2dea01224da8250fbc5afc4f346"
-    sha256 sonoma:        "def3965c68e321b5d5cd8754bbdfb5ffa8647d722fe1d42676b99611c51c8638"
-    sha256 arm64_linux:   "fb78ff7e4f774ce10db10273ec5f3f68ab0d6c6307e22701329cf9ad101734ed"
-    sha256 x86_64_linux:  "414894dbed9e3caee6c6819a8174161b370d9199f06a8b8b10d9cc4fd3980940"
+    sha256 arm64_tahoe:   "92810d5e3f7e47b9b49c1bca6fb4d9f3cefbb90c77669f4e6785d0babcc1c1b9"
+    sha256 arm64_sequoia: "76505a94aa16b62f002671c0a81c64b4704adcdf05411f3e0a386b3c8610c477"
+    sha256 arm64_sonoma:  "41f0fac6d489a149fd99687d96832a9b2b3948a1924140cec812a98752584109"
+    sha256 tahoe:         "82e86b7276eeaf4cf1f336d2732be2ab8915bb92b71ee63609b9cb3a022f9a93"
+    sha256 sequoia:       "7e04ab45b53a87720413627558e8c72ee44aa6991a300903b6b600a49b793c17"
+    sha256 sonoma:        "564b57b5759f74940b826353d37b9e0c0767ff0a663d321330a673e0138b136a"
+    sha256 arm64_linux:   "c7bc359fda22b9bd1083e2b23b2a0e5f235a7ee71aa02751d2d11287d423cd33"
+    sha256 x86_64_linux:  "4bdc2a2fda5f6c7c5307a3bb9d8d33d5fb79d5d1c72c79a7fb1b32a53e68bd1b"
   end
 
   depends_on "pkgconf" => :build
@@ -71,8 +71,8 @@ class PythonAT314 < Formula
   end
 
   resource "pip" do
-    url "https://files.pythonhosted.org/packages/b6/48/cb9b7a682f6fe01a4221e1728941dd4ac3cd9090a17db3779d6ff490b602/pip-26.1.1.tar.gz"
-    sha256 "d36762751d156a4ee895de8af39aa0abeeeb577f93a2eca6ab62467bbf0f8a78"
+    url "https://files.pythonhosted.org/packages/01/91/47e7d486260f618783899587af63ccf7980fb60245c3e63dd4571c6b57ad/pip-26.1.2.tar.gz"
+    sha256 "f49cd134c61cf2fd75e0ce2676db03e4054504a5a4986d00f8299ae632dc4605"
   end
 
   resource "wheel" do
@@ -105,6 +105,8 @@ class PythonAT314 < Formula
   def altinstall? = name != Formula["python3"].name
 
   def python3 = bin/"python#{version.major_minor}"
+
+  deny_network_access!
 
   def install
     # Unset these so that installing pip and setuptools puts them where we want
@@ -450,6 +452,11 @@ class PythonAT314 < Formula
   end
 
   def caveats
+    dbm_is = "`dbm.gnu` is"
+    on_linux do
+      dbm_is = "`dbm.gnu` and `dbm.ndbm` are"
+    end
+
     <<~EOS
       Python is installed as
         #{HOMEBREW_PREFIX}/bin/python3
@@ -461,7 +468,10 @@ class PythonAT314 < Formula
       `idle#{version.major_minor}` requires tkinter, which is available separately:
         brew install python-tk@#{version.major_minor}
 
-      See: https://docs.brew.sh/Homebrew-and-Python
+      #{dbm_is} available separately:
+        brew install python-gdbm@#{version.major_minor}
+
+      For more information about Homebrew and Python, see: https://docs.brew.sh/Homebrew-and-Python
     EOS
   end
 

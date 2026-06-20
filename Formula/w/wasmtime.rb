@@ -2,8 +2,8 @@ class Wasmtime < Formula
   desc "Standalone JIT-style runtime for WebAssembly, using Cranelift"
   homepage "https://wasmtime.dev/"
   url "https://github.com/bytecodealliance/wasmtime.git",
-      tag:      "v44.0.1",
-      revision: "f302ebd6be3b452eff175f8af6ae792b1d703330"
+      tag:      "v45.0.2",
+      revision: "a7c209dfb4fd584c65b532f82d98a19031cd49ec"
   license "Apache-2.0" => { with: "LLVM-exception" }
   head "https://github.com/bytecodealliance/wasmtime.git", branch: "main"
 
@@ -16,12 +16,12 @@ class Wasmtime < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "66f07fe1f8684fdd8d514e745168ab8926a7dda1f5d55365b36d756e5b546113"
-    sha256 cellar: :any,                 arm64_sequoia: "222cba2be8476847d63fdc184657fe692bbb34b9951065477a860a3275d67fc1"
-    sha256 cellar: :any,                 arm64_sonoma:  "f68b12839e86b4322fd4147b37131c255f84a48977badd46460d9416123ca3b5"
-    sha256 cellar: :any,                 sonoma:        "2495fbfde2573efe9f95fb609db27ee7fb79f16d6d8f12777702cfe7ea9ce63d"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "798e4e8a86c4ad9538e345a7e032289a280b207a881adfb3751ffa35c72ab72d"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "e79de315acd8e7e768417e45e5865f8a3df3fd83314a9444543cbdd2fdebed4c"
+    sha256 cellar: :any, arm64_tahoe:   "81f85ec4d3c1802fe00f33249256699b624a2e4462e5f60d98bd6cab418bcd2c"
+    sha256 cellar: :any, arm64_sequoia: "f0fc00b3d2106a5e89af768c1b69e8a5eda63c9ddf129edc72b09dd223170a20"
+    sha256 cellar: :any, arm64_sonoma:  "28e30c39009b382197d9de0e79f64327534ce24bac860448742beb78c8ed56a5"
+    sha256 cellar: :any, sonoma:        "1faf9f41fdf8da573a190a50d04c914bc05b7caca93bb1f670f029f6d150ebaa"
+    sha256 cellar: :any, arm64_linux:   "e4dc56201ec2bf1494dc67c4017276956d6160308a8da0d3b5a3bd14bec1b883"
+    sha256 cellar: :any, x86_64_linux:  "4b2d566c7a4de464fef4e6e1d5a80a80f6d752382653b134ea17c4c91842b481"
   end
 
   depends_on "cmake" => :build
@@ -43,12 +43,12 @@ class Wasmtime < Formula
     assert_equal "3\n",
       shell_output("#{bin}/wasmtime --invoke sum #{testpath/"sum.wasm"} 1 2")
 
-    (testpath/"hello.wat").write <<~EOS
+    (testpath/"hello.wat").write <<~WASM
       (module
         (func $hello (import "" "hello"))
         (func (export "run") (call $hello))
       )
-    EOS
+    WASM
 
     # Example from https://docs.wasmtime.dev/examples-c-hello-world.html to test C library API,
     # with comments removed for brevity

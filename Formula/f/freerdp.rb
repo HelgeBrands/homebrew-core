@@ -1,17 +1,18 @@
 class Freerdp < Formula
   desc "X11 implementation of the Remote Desktop Protocol (RDP)"
   homepage "https://www.freerdp.com/"
-  url "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.26.0.tar.gz"
-  sha256 "ae3b1c0b8e334ecbc2c784bce266249309fad32a0ef41947ce5c059eb18e2059"
+  url "https://github.com/FreeRDP/FreeRDP/archive/refs/tags/3.27.1.tar.gz"
+  sha256 "929ac6a5a8651fcf524e0f061aa7e0186e25eae5af2096525f99f6f7a376fc86"
   license "Apache-2.0"
 
   bottle do
-    sha256 arm64_tahoe:   "fbea718f7ab8ff079bec6454352eac06ef63dd4435ed16c9dc4c33ca85882fc6"
-    sha256 arm64_sequoia: "a386d5e58d51589baad7a06c5ff25a378a861a8565781c4916bb11d5d8c451a4"
-    sha256 arm64_sonoma:  "50059b194cb6a583a670ee7c26bfd9613d326c2277130fdf9fce4e02eb1ca367"
-    sha256 sonoma:        "91ab2326a3b6aec3ff5f9ac1ec56abc4f67857f16909ea7071fd70934ff81754"
-    sha256 arm64_linux:   "ee91dc6adaaa0139a3cab3703e4d39c3d5a8eb25fd4170a9b9dc75783a12cb51"
-    sha256 x86_64_linux:  "94f05d652572ad07f5e61c21fe21aad1659a32e28a62611ab0c85fa7f9a06069"
+    rebuild 2
+    sha256 arm64_tahoe:   "ac70a9135a54e403bd549bcccd30a09311f6078e963424699626fb595967e2d8"
+    sha256 arm64_sequoia: "ebbf0738e4dc87d57fa743677796a25f589125b16a1883d51a9fbe92c4874d19"
+    sha256 arm64_sonoma:  "995c50609d84d23efc997fa3be5d814c5c3b3cf1ac8df4b8d7c7243c4352381b"
+    sha256 sonoma:        "10a4468f28bced415ab62acb4c1a5233d404dfe056d0718252e37464c6a9c34c"
+    sha256 arm64_linux:   "e8e4f6cf5785b3b248a8faa2ed7cc9cd38e22bad3494e0a1bc7fe63643c33f44"
+    sha256 x86_64_linux:  "f7816d32c8817eaa24d3e8b84c36d3270d9f6ff9e741ec40a14280281b81aa5a"
   end
 
   head do
@@ -25,6 +26,8 @@ class Freerdp < Formula
   depends_on "ffmpeg"
   depends_on "jansson"
   depends_on "jpeg-turbo"
+  depends_on "libcbor"
+  depends_on "libfido2"
   depends_on "libusb"
   depends_on "libx11"
   depends_on "libxcursor"
@@ -65,6 +68,7 @@ class Freerdp < Formula
       -DWITH_CLIENT_SDL=ON
       -DWITH_CLIENT_SDL2=OFF
       -DWITH_CLIENT_SDL3=ON
+      -DCHANNEL_RDPEWA=ON
     ]
 
     # Native macOS client and server implementations are unmaintained and use APIs that are obsolete on Sequoia.

@@ -1,26 +1,25 @@
 class Ty < Formula
   desc "Extremely fast Python type checker, written in Rust"
   homepage "https://docs.astral.sh/ty/"
-  url "https://files.pythonhosted.org/packages/c7/c3/60bc4829e0c1a8ff80b592067e1185a7b5ea64608acb0c676c44d5137d52/ty-0.0.37.tar.gz"
-  sha256 "f873f69627bd7f4ef8d57f716c63e5c63d7d1b7327ab3de185c7287a75223011"
+  url "https://files.pythonhosted.org/packages/7e/ce/352fcdba5c72ea20e5d2e46e28809cdb617575b71209d971eff2ace8e6c4/ty-0.0.51.tar.gz"
+  sha256 "b90172d46365bb9d51a7011cbb5c60cc4f514f42c86635df6c092b717f85e1ac"
   license "MIT"
   head "https://github.com/astral-sh/ty.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "aa0fe301815baf466081887a0df54d2cce82c0e301f95d85ad36289d120014d4"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "652638bc14c8a8efbaacb7c1a341d6566f158ea08339988ea6982e2eaf0de24e"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "cd63f904d0709d35b60ce6f9198d1883b2a28c0f2cea66d8a8c7c5b05c3ca562"
-    sha256 cellar: :any_skip_relocation, sonoma:        "ce7ae786d4484f739e97cc59796b874c3c482fd160f3ea8d5d236b687eef0512"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a1d7e3871483c6bec50c307c0d6b7438224972eb9fbf9be47584629240c107d0"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "53f1e19d5e6460670b7fada6bf5a9e3019ede22690325a2c49eaef74c6911bfb"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "56e580bf2d34364133f716b1dfe0462b035a5360fc0aa511855ccd6e56bf33be"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "71ea153397eb32a7b828444e99e9d8aa6659ccabad3f12d265d5fa0d500e2908"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "e953c66c30cb5c43a6ad62bd9d3c397efa6800a17aae6f6a5392ca88f500ea51"
+    sha256 cellar: :any_skip_relocation, sonoma:        "ed9775606ebe7c497707d814a3aa2bf1e9398e009fd49dae2a52ff2997d71eb3"
+    sha256 cellar: :any,                 arm64_linux:   "68461aaf392b5eea6da4f69b74b6f6d50d6d7424f900d368996f033adedc8d02"
+    sha256 cellar: :any,                 x86_64_linux:  "624d8e7d6bf6055a2292f4c1ce1b896446d7aec92e3be67621043df5fc3665fc"
   end
 
   depends_on "rust" => :build
 
   def install
     ENV["TY_COMMIT_SHORT_HASH"] = tap.user
-    # Not using `time` since SOURCE_DATE_EPOCH is set to 2006
-    ENV["TY_COMMIT_DATE"] = Time.now.utc.strftime("%F")
+    ENV["TY_COMMIT_DATE"] = time.strftime("%F")
     system "cargo", "install", *std_cargo_args(path: "ruff/crates/ty")
     generate_completions_from_executable(bin/"ty", "generate-shell-completion")
   end
@@ -28,10 +27,10 @@ class Ty < Formula
   test do
     assert_match version.major_minor_patch.to_s, shell_output("#{bin}/ty --version")
 
-    (testpath/"bad.py").write <<~PY
+    (testpath/"bad.py").write <<~PYTHON
       def f(x: int) -> str:
           return x
-    PY
+    PYTHON
 
     output = shell_output("#{bin}/ty check #{testpath} 2>&1", 1)
     assert_match "error[invalid-return-type]: Return type does not match returned value", output

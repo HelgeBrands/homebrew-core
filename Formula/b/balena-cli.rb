@@ -1,8 +1,8 @@
 class BalenaCli < Formula
   desc "Command-line tool for interacting with the balenaCloud and balena API"
   homepage "https://docs.balena.io/reference/balena-cli/latest/"
-  url "https://registry.npmjs.org/balena-cli/-/balena-cli-25.1.6.tgz"
-  sha256 "1f526868af152797136a680d76096ad3e48f0dac6e45411b0c5cc426ffcede47"
+  url "https://registry.npmjs.org/balena-cli/-/balena-cli-25.1.9.tgz"
+  sha256 "dfdebd70b689620a80b79677b57b3deb2a8f4997890103980d496b3256c74661"
   license "Apache-2.0"
 
   livecheck do
@@ -13,14 +13,15 @@ class BalenaCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "d549ecd48c8b1bc19e35a53c2a2ecad2bd3fe35a3d85aeeab8569cd4306fc156"
-    sha256 cellar: :any,                 arm64_sequoia: "57b4937c4f51ebd621d1b3c7d435fbda194f1cf1658b29bdd24a363da4ed7025"
-    sha256 cellar: :any,                 arm64_sonoma:  "57b4937c4f51ebd621d1b3c7d435fbda194f1cf1658b29bdd24a363da4ed7025"
-    sha256 cellar: :any,                 sonoma:        "971057bd1f085ce25748495de792e1ec37ca308e2e29b8be26a3bed521a6e763"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "11af051e822fa9af09e4cb6b9e1a220547dc9b2add60d33ba6ea3e48e72fabf6"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "8ba992739437f046667a1e0620c1c3ce9e3e609496c2045fd1c86ddc01c7cc7d"
+    sha256 cellar: :any, arm64_tahoe:   "34bc4d72cbb4935c734f8aad63fb4aa4a5b50fcc08ee2841afd31a50635d5571"
+    sha256 cellar: :any, arm64_sequoia: "6c7a4ef4dc1fa198be66b572e6901527110e9ea66c5c6f506a35c758de8bd6a8"
+    sha256 cellar: :any, arm64_sonoma:  "6c7a4ef4dc1fa198be66b572e6901527110e9ea66c5c6f506a35c758de8bd6a8"
+    sha256 cellar: :any, sonoma:        "9f8d2b3ec5a4d83c7f1f1a92a4264b4c0e0c97a554eee71fb29a0d549befbb7a"
+    sha256 cellar: :any, arm64_linux:   "245cb4c06ddbdbb5966fb9588244d66a4a3f401d7f16da259c1c098d2b0b61b4"
+    sha256 cellar: :any, x86_64_linux:  "8508fff523b6e76a230ca3f82f8c9495e820bb816639ab453bb753ebac62fbbd"
   end
 
+  depends_on "go" => :build
   depends_on "node"
 
   on_linux do
@@ -34,6 +35,13 @@ class BalenaCli < Formula
 
     system "npm", "install", *std_npm_args
     bin.install_symlink libexec.glob("bin/*")
+
+    # Build dependency @balena/compose-parser from vendored Go source
+    compose_parser = libexec/"lib/node_modules/balena-cli/node_modules/@balena/compose-parser"
+    cd compose_parser do
+      ENV["CGO_ENABLED"] = "0"
+      system "go", "build", "-C", "lib", *std_go_args(output: "../bin/balena-compose-parser")
+    end
 
     # Remove incompatible pre-built binaries
     os = OS.kernel_name.downcase

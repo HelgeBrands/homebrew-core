@@ -2,8 +2,8 @@ class AliyunCli < Formula
   desc "Universal Command-Line Interface for Alibaba Cloud"
   homepage "https://github.com/aliyun/aliyun-cli"
   url "https://github.com/aliyun/aliyun-cli.git",
-      tag:      "v3.3.15",
-      revision: "39c8ddbaf09fd7563325e52d4e406d7ada9235f3"
+      tag:      "v3.3.23",
+      revision: "9eed7202cf6659c08c0cf223e2707d7888b054bc"
   license "Apache-2.0"
   head "https://github.com/aliyun/aliyun-cli.git", branch: "master"
 
@@ -13,12 +13,12 @@ class AliyunCli < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "74c91d4e3dae2f8b6d699b6f3fa5185541854ca1316c9014221a36b0fe8fc424"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "74c91d4e3dae2f8b6d699b6f3fa5185541854ca1316c9014221a36b0fe8fc424"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "74c91d4e3dae2f8b6d699b6f3fa5185541854ca1316c9014221a36b0fe8fc424"
-    sha256 cellar: :any_skip_relocation, sonoma:        "e387ce667d6b80fed8012660e913f5279ca81f760dfe9f713cd3d287cc4677ce"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "a844c285e231501acb467c3ab6fc141582b0c5b5494927a0ea843dcc5216c299"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "81639ea08706aae0d23cac4892714a44413aa876dd7781c4a8f83403b1252869"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "31ef3a91608627825464ee7cff1a82a92b1d27d8f5411e02ca6999ad8c44b835"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "31ef3a91608627825464ee7cff1a82a92b1d27d8f5411e02ca6999ad8c44b835"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "31ef3a91608627825464ee7cff1a82a92b1d27d8f5411e02ca6999ad8c44b835"
+    sha256 cellar: :any_skip_relocation, sonoma:        "9e21b84e2c54e74a5fe9798fc4edd40e7c465d25798be3d93d3ba8dc4cfad4e2"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "72498868287db7473ce0065346d5e344c689fc36cdbc31a2a72c2eb9d73056c5"
+    sha256 cellar: :any,                 x86_64_linux:  "48f20c3f9ca136335038979e3225f308995edc91ec301d31b5bf0254193168b4"
   end
 
   depends_on "go" => :build

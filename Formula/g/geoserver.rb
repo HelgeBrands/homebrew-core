@@ -1,8 +1,8 @@
 class Geoserver < Formula
   desc "Java server to share and edit geospatial data"
   homepage "https://geoserver.org/"
-  url "https://downloads.sourceforge.net/project/geoserver/GeoServer/2.28.3/geoserver-2.28.3-bin.zip"
-  sha256 "8d7bee210be93981a745371d1f06bea7c95b31a6aa8850cc2d1473a71b3ac0b8"
+  url "https://downloads.sourceforge.net/project/geoserver/GeoServer/3.0.0/geoserver-3.0.0-bin.zip"
+  sha256 "c5b3dc96a2e1656f8efce371b373b55dfd5c3d215c4abbfefb4716102e1a84fe"
   license "GPL-2.0-or-later"
 
   # GeoServer releases contain a large number of files for each version, so the
@@ -15,19 +15,19 @@ class Geoserver < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "b327834f032f6526ce651e66a3af14da83c9e1b21ff7bb0c8df502655a31affc"
+    sha256 cellar: :any_skip_relocation, all: "174aa805d8e31f352d930bee8158f99d7f8d0d3cea345d0252f43b49d959434a"
   end
 
   def install
     libexec.install Dir["*"]
-    (bin/"geoserver").write <<~EOS
+    (bin/"geoserver").write <<~SH
       #!/bin/sh
       if [ -z "$1" ]; then
         echo "Usage: $ geoserver path/to/data/dir"
       else
         cd "#{libexec}" && java -DGEOSERVER_DATA_DIR=$1 -jar start.jar
       fi
-    EOS
+    SH
   end
 
   def caveats

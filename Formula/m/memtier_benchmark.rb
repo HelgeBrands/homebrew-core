@@ -1,8 +1,8 @@
 class MemtierBenchmark < Formula
   desc "Redis and Memcache traffic generation and benchmarking tool"
   homepage "https://github.com/RedisLabs/memtier_benchmark"
-  url "https://github.com/RedisLabs/memtier_benchmark/archive/refs/tags/2.3.1.tar.gz"
-  sha256 "e278695435920c30203ceb0b561f2cbc08f6977935936a5f28c9864c0b76ddb0"
+  url "https://github.com/RedisLabs/memtier_benchmark/archive/refs/tags/2.4.2.tar.gz"
+  sha256 "906163dce897c1d94dbe4611ec0425f709a96d59eb7a42997b838b7c18b2b292"
   # https://github.com/redis/memtier_benchmark/blob/master/debian/copyright
   license all_of: [
     "GPL-2.0-or-later" => { with: "cryptsetup-OpenSSL-exception" },
@@ -10,12 +10,12 @@ class MemtierBenchmark < Formula
   ]
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ce08831abdd10ddc2cb1561006fbbbca6354be54a0677b7dbb094e4548bdbd1e"
-    sha256 cellar: :any,                 arm64_sequoia: "dbc93842e4c09136bcfaa56de091071ceab0392f806fba60fe009f4f9acdfa2b"
-    sha256 cellar: :any,                 arm64_sonoma:  "f3d3f5685f902e5e48787cb9175723648fdfd3fc39cb30b261137af58cc1f5c3"
-    sha256 cellar: :any,                 sonoma:        "fea16c0d730681376799a7de3057f2fe6dcadd519dac8eb5bc00b1f243d675c9"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "3748336d1da7af83430aa694e7cbff85b3054d1a1b297c9d181b63fcd556ecaf"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "a7c70e85800beb9da78f6b89851d7d251c25f5cfd980417a178b6b7fbc9d33d9"
+    sha256 cellar: :any, arm64_tahoe:   "a8281315d42980cc137c256ea3f30e9e2769cd2401ab95d0113507f94d9a0177"
+    sha256 cellar: :any, arm64_sequoia: "e3d26f318408390e3186ced57a507bb4c73a083139638d92835679d4d6bbaadb"
+    sha256 cellar: :any, arm64_sonoma:  "948d8355128c38d26eb8b54ed57987cb7e31f7f9208e69d2f31ebb10366c4d02"
+    sha256 cellar: :any, sonoma:        "cf2120997e57419bf24092b8fa32b4618ecf93e536f6a7a2515e197e950e1954"
+    sha256 cellar: :any, arm64_linux:   "d1afa7553451f3c8ceceb6be1e238c79fd400236327a156ebb6c8df0ce73c0bd"
+    sha256 cellar: :any, x86_64_linux:  "92ce9ffcb0cfc4c5cf03a5d0b0fcf781e8e45eb1a4f4e1233281256ebddfafdc"
   end
 
   depends_on "autoconf" => :build

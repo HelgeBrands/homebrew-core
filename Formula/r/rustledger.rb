@@ -1,25 +1,28 @@
 class Rustledger < Formula
   desc "Fast, pure Rust implementation of Beancount double-entry accounting"
   homepage "https://rustledger.github.io"
-  url "https://github.com/rustledger/rustledger/archive/refs/tags/v0.15.0.tar.gz"
-  sha256 "b9e1289a32aa4f21064a54f8d2fbbc2011b93dc32e5dda5c91f5ffbdf1e00e7b"
+  url "https://github.com/rustledger/rustledger/archive/refs/tags/v0.16.5.tar.gz"
+  sha256 "68beaaee5cb11f622f60ed3ec97df33e819c358f1d815031b25c14483758f04c"
   license "GPL-3.0-only"
   head "https://github.com/rustledger/rustledger.git", branch: "main"
 
+  livecheck do
+    url :stable
+    regex(/^v?(\d+(?:\.\d+)+)$/i)
+  end
+
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3721fe47964dd533229fe15cabb7fd202dd779e2289be8ff845b504ae05f979a"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "02e1615620285b37657efcaacaa67e5daeec04861635907b2bf99361cb8070ac"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "551cdbd7b4df447f5034dbacfb3b16fde8820ad5ecfe02d4e66aa81248b9da86"
-    sha256 cellar: :any_skip_relocation, sonoma:        "f83a882d77859c8943ad3aa982d74d349f0f3a96cb871653379970a23d7e27b3"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "421ace1864d34ad7ec3d812587dedc296e4b076c25eac7b22eb6cf078516f803"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "28a0557322e3aced63781f4a69ac1747e80b0c40d28822cc0335708b4dcc8ec9"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "fb21d26a736e312697d2337a1d4e9ea56896fcfd506b525f5e03eda0558ca400"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "0904b09fcef544e03fdb29e3ee47d8ecb9a8917ed5cb074e35d75bb6a7b87a3d"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "32784a93a8487e3434c98dbc8cc6d63e18dbd59d0cceba466c56a9196bc96b92"
+    sha256 cellar: :any_skip_relocation, sonoma:        "3eb58f2ef0d51d2a26d17932090d3f3b0e6520118d28b4a2a1f8a1b01e1cf96b"
+    sha256 cellar: :any,                 arm64_linux:   "093087704c6a5d670b77f8c94fe16d50ea6a8d4997137461015273f2597cecd2"
+    sha256 cellar: :any,                 x86_64_linux:  "7fc98dd718c8ad0082732d6dbc1dc397e007d736fc5b015e14797c5654a407f6"
   end
 
   depends_on "rust" => :build
 
   def install
-    ENV.append "RUSTFLAGS", "-C link-arg=-Wl,-ld_classic" if OS.mac?
-
     system "cargo", "install", *std_cargo_args(path: "crates/rustledger")
     system "cargo", "install", *std_cargo_args(path: "crates/rustledger-lsp")
 

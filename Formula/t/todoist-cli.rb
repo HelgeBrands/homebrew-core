@@ -1,39 +1,39 @@
 class TodoistCli < Formula
-  desc "CLI for Todoist"
-  homepage "https://github.com/sachaos/todoist"
-  url "https://github.com/sachaos/todoist/archive/refs/tags/v0.24.0.tar.gz"
-  sha256 "1993d51b1d6fe85c521bc215584674631bef59fe1e9a4e29cf19d921e8df303f"
+  desc "Official command-line interface for Todoist"
+  homepage "https://github.com/Doist/todoist-cli"
+  url "https://registry.npmjs.org/@doist/todoist-cli/-/todoist-cli-1.75.0.tgz"
+  sha256 "99608a6a0f926f5a14829b75787608f7a95ff45ae631f5b12301633536225e4e"
   license "MIT"
-  head "https://github.com/sachaos/todoist.git", branch: "master"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "3e76e81f52e18234babc96982bcb2610cf65931d5ecd6b8ca64a49f67e586e28"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "3e76e81f52e18234babc96982bcb2610cf65931d5ecd6b8ca64a49f67e586e28"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "3e76e81f52e18234babc96982bcb2610cf65931d5ecd6b8ca64a49f67e586e28"
-    sha256 cellar: :any_skip_relocation, sonoma:        "1c94087d6916eb0664300379de1872d977f5653a785faacfc00d18b09516d08e"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "81e1f3ffdf796e7ea5df27e49f35348878c618cfc774caf2f77529029d19e133"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "12308761800834d8f19f565a017031928153aa376e31ccbca57efc73f7673911"
+    sha256 cellar: :any,                 arm64_tahoe:   "989d136419099f327d8c9b7f0fbaf4f38c0b1fad5d02ad291f0dc9591064c967"
+    sha256 cellar: :any,                 arm64_sequoia: "f018c82e10725b8e032ac8725d44cf2a510403cdca166ffb60862ee2a9c1f411"
+    sha256 cellar: :any,                 arm64_sonoma:  "f018c82e10725b8e032ac8725d44cf2a510403cdca166ffb60862ee2a9c1f411"
+    sha256 cellar: :any,                 sonoma:        "1b23c23bde7d5648d61a87e0b1412d908e5e512ca8edbf540203cce1e150095f"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "a85f9c6cca6ef67304f1d29b9950ab05f298a431b0ff3976aef25c087ab96e5d"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "54858391a2abe1930c8f7366a02d97f6b13ec247a97b35dda2a589ddb5483349"
   end
 
-  depends_on "go" => :build
+  depends_on "node"
 
   def install
-    ldflags = "-s -w -X main.version=#{version}"
-    system "go", "build", *std_go_args(output: bin/"todoist", ldflags:)
+    system "npm", "install", *std_npm_args
+    bin.install_symlink libexec.glob("bin/*")
+
+    return unless OS.mac?
+
+    deuniversalize_machos libexec/"lib/node_modules/@doist/todoist-cli/node_modules/app-path/main"
+  end
+
+  def caveats
+    <<~EOS
+      Looking for the third-party Go CLI previously published under this
+      name (by sachaos)? It has been renamed. Install it with:
+        brew install todoist-cli-go
+    EOS
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/todoist --version")
-
-    test_config = testpath/".config/todoist/config.json"
-    test_config.write <<~JSON
-      {
-        "token": "test_token"
-      }
-    JSON
-    chmod 0600, test_config
-
-    output = shell_output("#{bin}/todoist list 2>&1")
-    assert_match "There is no task.", output
+    assert_match version.to_s, shell_output("#{bin}/td --version")
   end
 end

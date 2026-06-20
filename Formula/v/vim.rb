@@ -2,8 +2,8 @@ class Vim < Formula
   desc "Vi 'workalike' with many additional features"
   homepage "https://www.vim.org/"
   # vim should only be updated every 50 releases on multiples of 50
-  url "https://github.com/vim/vim/archive/refs/tags/v9.2.0500.tar.gz"
-  sha256 "c4d73c2f16f6a20ecba82f6e1d2586f4aaf66a4dc13f45d686b292be7768cd62"
+  url "https://github.com/vim/vim/archive/refs/tags/v9.2.0650.tar.gz"
+  sha256 "de9be55e39f7da67b3871974952d7cf61bab9d362434d9ff22d46fb2855a6dac"
   license "Vim"
   compatibility_version 1
   head "https://github.com/vim/vim.git", branch: "master"
@@ -26,12 +26,12 @@ class Vim < Formula
   end
 
   bottle do
-    sha256 arm64_tahoe:   "c7f6e961e74cf900840c9bccd3260c3718f7c1e7d40eb23d8fce079e5f081943"
-    sha256 arm64_sequoia: "525b1f386fa5fec8418ae4650246546e18a32b9a252b64d1b3ff3b56905678a2"
-    sha256 arm64_sonoma:  "405f1821c311bd809d2aaf7770dcd183ece668f938acfc4e6d3053d7043f9828"
-    sha256 sonoma:        "b66b031816bc8c6160485c94b29292457c80720f95c685afa391bd85ed6cd586"
-    sha256 arm64_linux:   "3e0293005d6f07e7f9cce89b8a59e3103bed6ba230a12e2d1af7d906de510590"
-    sha256 x86_64_linux:  "5c9680bb59a9be2daa9d2f5e288640789c166ea20f3466663fdef61a81e041f4"
+    sha256 arm64_tahoe:   "da180237836700a7c12044b6f79214bc567e8a26522162d2bebca758bd4a58ca"
+    sha256 arm64_sequoia: "128cd809848721689a60cdbbced98d5100fdeb41c2ddee2fc62755328f32d746"
+    sha256 arm64_sonoma:  "aba8e3862841bd7773385f934dc160b6bccf21447aea9c793614189ad9c5e48c"
+    sha256 sonoma:        "451cbe994c53231d10decbae5b638d2b5bfa5e013d3d31371205adbe5aa02c1a"
+    sha256 arm64_linux:   "94db734821eb92630c4f953ce979834c873bce9ae4090fc2e890ac27fc2f833f"
+    sha256 x86_64_linux:  "fa3f7c2d4ce662ead54726bd6008f1ebe73185ec5d0bdb2744105b93af2636c1"
   end
 
   depends_on "gettext" => :build
@@ -53,13 +53,12 @@ class Vim < Formula
 
   conflicts_with "ex-vi", because: "vim and ex-vi both install bin/ex and bin/view"
   conflicts_with "macvim", because: "vim and macvim both install vi* binaries"
+  conflicts_with "vim-classic", because: "vim and vim-classic both install vi* binaries"
 
   def extra_deps = deps.select { |dep| dep.build? && dep.test? }
 
   def install
     ENV.prepend_path "PATH", Formula["python@3.14"].opt_libexec/"bin"
-
-    ENV.append_to_cflags "-mllvm -enable-constraint-elimination=0" if DevelopmentTools.clang_build_version == 1600
 
     # Allow dynamically loading formulae libraries when not linked
     extra_deps.each do |dep|

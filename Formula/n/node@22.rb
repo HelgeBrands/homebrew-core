@@ -1,8 +1,8 @@
 class NodeAT22 < Formula
   desc "Open-source, cross-platform JavaScript runtime environment"
   homepage "https://nodejs.org/"
-  url "https://nodejs.org/dist/v22.22.3/node-v22.22.3.tar.xz"
-  sha256 "f3e6a578db1ab335a4a72785c1e87ad18a2cf6d2fc25747a1d741fb34af0bd0f"
+  url "https://nodejs.org/dist/v22.23.0/node-v22.23.0.tar.xz"
+  sha256 "3acfae100c7b855a4c76520ee0f95cadcace3f4254f16b7d4887f178fc95d4a0"
   license "MIT"
   compatibility_version 1
 
@@ -12,12 +12,12 @@ class NodeAT22 < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "02324491602549ef17b82677db2d4b662d7940c9ff1040400f2ac9826edc0415"
-    sha256 cellar: :any,                 arm64_sequoia: "6caf12083a7b916b4c8d758546eab03e92ab423b621468897d9f462c1d9509ee"
-    sha256 cellar: :any,                 arm64_sonoma:  "b14e0f06928ef072e8a55761cb4e067f1965821f2fa0e65005a850b32785a1d8"
-    sha256 cellar: :any,                 sonoma:        "1d9aec34dfa3fd8ee6fa25a184234524e20537fea71697b9b7b761c38de3b4e1"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "da5c9cdb6cbbea3ccdc77aa3b44869dfbd06618b5cc5bceb650c246f55a30df5"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f76e8ef91851f01b80cc5f17b2c9b5b1d12baa2968b468eec72bfaf591d15788"
+    sha256 cellar: :any, arm64_tahoe:   "70efb6937730bb750defeba3385b34d76fca9bd4fb3cb15c94ec7762b7843c7b"
+    sha256 cellar: :any, arm64_sequoia: "97c9846101ae74f2d7a8f17ce91acddeab6ebe859535a248acedd79576fdd0de"
+    sha256 cellar: :any, arm64_sonoma:  "234179957bae030209bda9038cd8bf2a3a42477a93f07938f0c38e6bd8bff6ba"
+    sha256 cellar: :any, sonoma:        "fdb7fdd317fa2e3dee65db5dedebe10a9beb77ba531087342fa39962047f781d"
+    sha256 cellar: :any, arm64_linux:   "add8c5ac654bc12116b2e001df9df7a5861ab44a7ef71bc4fc5a8a8bb7715888"
+    sha256 cellar: :any, x86_64_linux:  "de7e4fb1edbc328bc2f8054369ca69360bd44ebaa73660e7926849819b3bb27f"
   end
 
   keg_only :versioned_formula
@@ -44,19 +44,8 @@ class NodeAT22 < Formula
 
   uses_from_macos "python"
 
-  on_macos do
-    depends_on "llvm" => :build if DevelopmentTools.clang_build_version <= 1100
-  end
-
   on_linux do
     depends_on "zlib-ng-compat"
-  end
-
-  fails_with :clang do
-    build 1100
-    cause <<~EOS
-      error: calling a private constructor of class 'v8::internal::(anonymous namespace)::RegExpParserImpl<uint8_t>'
-    EOS
   end
 
   def install
@@ -132,16 +121,11 @@ class NodeAT22 < Formula
 
     system "./configure", *args
     system "make", "install"
-  end
 
-  def post_install
     (lib/"node_modules/npm/npmrc").atomic_write("prefix = #{HOMEBREW_PREFIX}\n")
   end
 
   test do
-    # Make sure Mojave does not have `CC=llvm_clang`.
-    ENV.clang if OS.mac?
-
     path = testpath/"test.js"
     path.write "console.log('hello');"
 
@@ -165,5 +149,7 @@ class NodeAT22 < Formula
     assert_path_exists bin/"npx", "npx must exist"
     assert_predicate bin/"npx", :executable?, "npx must be executable"
     assert_match "< hello >", shell_output("#{bin}/npx --yes cowsay hello")
+
+    assert_equal HOMEBREW_PREFIX.to_s, shell_output("#{bin}/npm config get prefix").chomp
   end
 end

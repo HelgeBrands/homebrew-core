@@ -2,15 +2,14 @@ class Audacious < Formula
   desc "Lightweight and versatile audio player"
   homepage "https://audacious-media-player.org/"
   license "BSD-2-Clause"
-  revision 1
 
   stable do
-    url "https://distfiles.audacious-media-player.org/audacious-4.5.1.tar.bz2"
-    sha256 "7194743a0a41b1d8f582c071488b77f7b917be47ca5e142dd76af5d81d36f9cd"
+    url "https://distfiles.audacious-media-player.org/audacious-4.6.1.tar.bz2"
+    sha256 "62a5a609267eca7f6e3ce52ef6f42d5618d2961e3b4ddc227c6a5859026965d9"
 
     resource "plugins" do
-      url "https://distfiles.audacious-media-player.org/audacious-plugins-4.5.1.tar.bz2"
-      sha256 "f4feedc32776acfa9d24701d3b794fc97822f76da6991e91e627e70e561fdd3b"
+      url "https://distfiles.audacious-media-player.org/audacious-plugins-4.6.1.tar.bz2"
+      sha256 "22e58a8a2c3f3caa9687434353618c822963cc8846cd239de36d4e8e5bd166a6"
 
       livecheck do
         formula :parent
@@ -24,13 +23,12 @@ class Audacious < Formula
   end
 
   bottle do
-    rebuild 3
-    sha256 arm64_tahoe:   "ffdfc68f4754dbaa320a933bc7be5962b1c01d80502419b0186826c270aeafbb"
-    sha256 arm64_sequoia: "cc3f88588abc2ae5f77b94d48c906d4f054d395deff705b674c67a779f2143f1"
-    sha256 arm64_sonoma:  "98dd0b14fd0830c27791b7b20258a8fba82fc94eeb0477d853b871df636f6c67"
-    sha256 sonoma:        "273c80c6e3c195716502702bbbf8db483f28543d81953d367d719cf5fc1ddfc8"
-    sha256 arm64_linux:   "c0baaca63ec22d339a797b4be872cdd047cdcc0e0316c311ee841a5fa6bad978"
-    sha256 x86_64_linux:  "b97e762b2657955a9f6c8494cb29d6b2dfba66c0b70bbaea88eaaa4d45a29011"
+    sha256 arm64_tahoe:   "04cde63b7247dccdeb11b5b3e308ed067c81815b8bf4cf7826341b05e7585ce7"
+    sha256 arm64_sequoia: "f0c2565c9c49186b656d1e301bfcbca37cbdd105a70ddd602b6a5b5129473446"
+    sha256 arm64_sonoma:  "13decdae5843a78ee442b4c25ca790a6eec08f565dd4e4a762ba249af49a9944"
+    sha256 sonoma:        "14a74c3c1abe1f6e9ec8e2508283599951ff92c28f91b99216fb9ec4c1a0982d"
+    sha256 arm64_linux:   "c73ddbc98ea710461e86f986c17cc5397e1bace4f84f869d7840c8ae5b723f2b"
+    sha256 x86_64_linux:  "66e656d2e30eb02c64fbae93ba946e5ecd8e1b6c525f99224cefff70d1c66379"
   end
 
   head do
@@ -89,12 +87,6 @@ class Audacious < Formula
     depends_on "zlib-ng-compat"
   end
 
-  # Remove `libsidplayfp`, which is actually Windows only dependency, remove in next release
-  patch do
-    url "https://github.com/audacious-media-player/audacious/commit/61fae600af7e71c5dc03c74f45dee6edc4889611.patch?full_index=1"
-    sha256 "b5e6fa094fa5db30b1154e30a6372d89006803f4f4069b0f219d8d086007a05d"
-  end
-
   def install
     odie "plugins resource needs to be updated" if build.stable? && version != resource("plugins").version
 
@@ -109,7 +101,6 @@ class Audacious < Formula
     resource("plugins").stage do
       args += %w[
         -Dmpris2=false
-        -Dmac-media-keys=true
       ]
 
       ENV.prepend_path "PKG_CONFIG_PATH", lib/"pkgconfig"

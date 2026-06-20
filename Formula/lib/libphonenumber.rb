@@ -1,9 +1,10 @@
 class Libphonenumber < Formula
   desc "C++ Phone Number library by Google"
   homepage "https://github.com/google/libphonenumber"
-  url "https://github.com/google/libphonenumber/archive/refs/tags/v9.0.30.tar.gz"
-  sha256 "677dd2a555e467073e5c6ef7eaa75ecd7d0d6b2c0e71a231d0a70b730bd0f0c6"
+  url "https://github.com/google/libphonenumber/archive/refs/tags/v9.0.32.tar.gz"
+  sha256 "fef1a587ff4793d02cf10dc87d083e7a230e0caf56e8dfdf0da6a15f78420ed8"
   license "Apache-2.0"
+  revision 1
 
   livecheck do
     url :stable
@@ -11,12 +12,12 @@ class Libphonenumber < Formula
   end
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "27a1c498b6179acd6ecd5cfe6684ef4d32303cfde521341a569a3ea412d4c5c4"
-    sha256 cellar: :any,                 arm64_sequoia: "f8cb682c1c1d9f52b1b6f50c47c481d965c9716ae30ba4fce75c595457d03292"
-    sha256 cellar: :any,                 arm64_sonoma:  "c9a9956c82a97cfdde027a5329fa69a3f414164a19bb8fc6100492e9e5002877"
-    sha256 cellar: :any,                 sonoma:        "c4f644cb3286752f8a2151d5162ddc4db57ddc13316d899aaafd2955e16c769c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "13ceef19ea39ad0e324afa94b5501c80d28d6ba1beba8310fc4557eff669d2cf"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "bd5872d3b4eaf871494a06191f45eadfd0ed237b171d383a5877af04ef1cbacf"
+    sha256 cellar: :any, arm64_tahoe:   "069cddaa694100c77a1fd142a52c377ac622ce23a577978c03be50ee39d270a1"
+    sha256 cellar: :any, arm64_sequoia: "ec75d5e73ac1d4dfec71f30945cac6c13ff986ea9bcd1d9cec627a401ecaf371"
+    sha256 cellar: :any, arm64_sonoma:  "5a3a3cde0536c68a0e6501bf0ad9d7807eb2b3e90c2c7b89372cf68dcc5eafb4"
+    sha256 cellar: :any, sonoma:        "c1ba6ba8ec2e8a452294339214d21577cc9f508919ccd5eb33424540fb235b07"
+    sha256 cellar: :any, arm64_linux:   "5d8cf170611d4fd09b8bdd821ae6578b6893c250a25600a27fb5cff34f06284d"
+    sha256 cellar: :any, x86_64_linux:  "8cc9ad98e22cc0efabe3ebc021b511e99f1d6a405599c41d19f64a5c6e8bbb8d"
   end
 
   depends_on "cmake" => [:build, :test]

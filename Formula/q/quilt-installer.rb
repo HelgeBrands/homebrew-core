@@ -1,8 +1,8 @@
 class QuiltInstaller < Formula
   desc "Installer for Quilt for the vanilla launcher"
   homepage "https://quiltmc.org/"
-  url "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.12.1/quilt-installer-0.12.1.jar"
-  sha256 "8b716edc692a2fa1fb78dbc2f432643be1bc6c867e5605f36f691f44257120ca"
+  url "https://maven.quiltmc.org/repository/release/org/quiltmc/quilt-installer/0.14.1/quilt-installer-0.14.1.jar"
+  sha256 "4d016064beecd85e28b841ebaf7bfee45576dfe494a791de6ddc2aba1d10b8e5"
   license "Apache-2.0"
 
   livecheck do
@@ -11,7 +11,12 @@ class QuiltInstaller < Formula
   end
 
   bottle do
-    sha256 cellar: :any_skip_relocation, all: "c2c3e3aa829bedf8617e2a6159dd32b8f80177f6ad1035e9a5fc51bef91330ab"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "c6ce48f15024fcbb72e5bb64d7fe3064e8c1e25e801dafae2c867bc936c6e80e"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "c6ce48f15024fcbb72e5bb64d7fe3064e8c1e25e801dafae2c867bc936c6e80e"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "c6ce48f15024fcbb72e5bb64d7fe3064e8c1e25e801dafae2c867bc936c6e80e"
+    sha256 cellar: :any_skip_relocation, sonoma:        "c6ce48f15024fcbb72e5bb64d7fe3064e8c1e25e801dafae2c867bc936c6e80e"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "b9f5988ff049eb25c4042d38455d0e7b4a3eecc56227a24fa982521e6237f235"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "0e18e840f6bc009cd007cab530765509e42d73b4059d21eecd38bd4ced460061"
   end
 
   depends_on "openjdk"

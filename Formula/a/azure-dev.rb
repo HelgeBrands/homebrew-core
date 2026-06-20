@@ -1,18 +1,18 @@
 class AzureDev < Formula
   desc "Developer CLI that provides commands for working with Azure resources"
   homepage "https://aka.ms/azd"
-  url "https://github.com/Azure/azure-dev/archive/refs/tags/azure-dev-cli_1.25.1.tar.gz"
-  sha256 "a22e3ba558aeab89d793433dfad69159bb22473885f87bad37e20d9f3b08a7ac"
+  url "https://github.com/Azure/azure-dev/archive/refs/tags/azure-dev-cli_1.25.6.tar.gz"
+  sha256 "2b70998f38c137ba66f223c99c20291edc1fa25cbdb5fc6ae9b7902f52de8ace"
   license "MIT"
   head "https://github.com/Azure/azure-dev.git", branch: "main"
 
   bottle do
-    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "8f27ea17eb1f3dc405841df8608c21d539255e1583ba26ebc513f5b7bb83b1b7"
-    sha256 cellar: :any_skip_relocation, arm64_sequoia: "8f27ea17eb1f3dc405841df8608c21d539255e1583ba26ebc513f5b7bb83b1b7"
-    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "8f27ea17eb1f3dc405841df8608c21d539255e1583ba26ebc513f5b7bb83b1b7"
-    sha256 cellar: :any_skip_relocation, sonoma:        "f76344541880b50905b67dd2f4a43ed08ba174c0d095de2ca83f23bb0d7b5b0c"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "00102077bc52e1e499ce5246862824f16170b3affb2329ef3fd657c690a4409b"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "65591d45df48c194197a2e71cbf7a185466dd13ed109e1ee95989072f5c31be2"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "79020e64dc84fa63e2f952fc073e92b12e8d00c47a9d614424035ab14adfe399"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "79020e64dc84fa63e2f952fc073e92b12e8d00c47a9d614424035ab14adfe399"
+    sha256 cellar: :any_skip_relocation, arm64_sonoma:  "79020e64dc84fa63e2f952fc073e92b12e8d00c47a9d614424035ab14adfe399"
+    sha256 cellar: :any_skip_relocation, sonoma:        "5150468957def6ada4664e799c36b3e62312bb7a6bdc37e11061d85323721c94"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "8ca12fb596ee0a969e5f12e3628077362548c751433dbd04ffbe0d0d4dc5dfe6"
+    sha256 cellar: :any,                 x86_64_linux:  "a33c7d8b98e08fb6ae4eec5ef6c89a69f762f5f725d53486c2c8725b41e281e3"
   end
 
   depends_on "go" => :build
@@ -25,7 +25,11 @@ class AzureDev < Formula
               'Join(exeDir, "..", "libexec", ".installed-by.txt")'
 
     # Version should be in the format "<version> (commit <commit_hash>)"
-    azd_version = "#{version} (commit 0000000000000000000000000000000000000000)"
+    azd_version = if build.stable?
+      "#{version} (commit 0000000000000000000000000000000000000000)"
+    else
+      "#{File.read("cli/version.txt").strip} (commit #{Utils.git_head})"
+    end
     ldflags = %W[
       -s -w
       -X "github.com/azure/azure-dev/cli/azd/internal.Version=#{azd_version}"

@@ -1,17 +1,17 @@
 class PiCodingAgent < Formula
   desc "AI agent toolkit"
   homepage "https://pi.dev/"
-  url "https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-0.75.3.tgz"
-  sha256 "6992c0a32f0185126e2551ecacae782b622def9422021ba2e7ef75381b74168c"
+  url "https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-0.79.7.tgz"
+  sha256 "2cda1beb3c80d451ce5db5dab8276f222d9d1c3c34b2dc46f2afde71c71d4841"
   license "MIT"
 
   bottle do
-    sha256 cellar: :any,                 arm64_tahoe:   "ec1650a277207296b426d3c09c50f6a546364396ef3c2af2ef609452bcb630f4"
-    sha256 cellar: :any,                 arm64_sequoia: "2da53bd401944cbe96922b577f28c2a2a07d8a97439c2f8c63534d0d2f2a9545"
-    sha256 cellar: :any,                 arm64_sonoma:  "2da53bd401944cbe96922b577f28c2a2a07d8a97439c2f8c63534d0d2f2a9545"
-    sha256 cellar: :any,                 sonoma:        "4067d41212ef079817967caa9dc445bd277652c8f3816d01f817aa75b3764770"
-    sha256 cellar: :any_skip_relocation, arm64_linux:   "f19f8a93c276a65c4210701462e5e15bd5f427aea4808e9dbdc686805b5444c8"
-    sha256 cellar: :any_skip_relocation, x86_64_linux:  "9343745a4f96408875a7c62ecd311dd92c144fbb38c2e6e61a899ec157706e98"
+    sha256 cellar: :any,                 arm64_tahoe:   "8383db1285a0ad65b4ae7c5cd1bfebc4ea9e78da00cb08d22d6a5054f1e5192a"
+    sha256 cellar: :any,                 arm64_sequoia: "191879fdf90704e9396a192767740f562693e8c7f10f3ca2217e96f9624b8371"
+    sha256 cellar: :any,                 arm64_sonoma:  "191879fdf90704e9396a192767740f562693e8c7f10f3ca2217e96f9624b8371"
+    sha256 cellar: :any,                 sonoma:        "c0a6e8e4d50fabf8afc973616bd6ea6edf985e2ea620f2ade0fb6a22aad1f73b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "12a31be32b21384a46feda1c79e536c0d30b29bb39b1f0c6095767a8c5fa0d5c"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "f374c9bea133927ddc44b4ad92662d3c1d9912803a34592b0371d97475772a5f"
   end
 
   depends_on "node"
@@ -28,6 +28,11 @@ class PiCodingAgent < Formula
     node_modules.glob("koffi/build/koffi/*").each do |dir|
       basename = dir.basename.to_s
       rm_r(dir) if basename != "#{os}_#{arch}"
+    end
+
+    node_modules.glob("@earendil-works/pi-tui/native/**/prebuilds/*").each do |dir|
+      basename = dir.basename.to_s
+      rm_r(dir) if basename != "#{os}-#{arch}"
     end
   end
 
