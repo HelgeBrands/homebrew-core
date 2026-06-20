@@ -45,8 +45,6 @@ class Epicsbase < Formula
 
   def caveats
     <<~EOS
-      EPICS Base is installed
-
       To use EPICS in the shell you have to put this here into shell configuration:
         export EPICS_BASE=#{opt_prefix}/libexec
         export EPICS_HOST_ARCH=$(#{opt_prefix}/bin/EpicsHostArch.pl)
